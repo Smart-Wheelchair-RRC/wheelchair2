@@ -128,7 +128,7 @@ controller_server:
         time_step: 3
       AckermannConstraints:
         min_turning_r: 0.4
-      critics: ["ConstraintCritic", "ObstaclesCritic", "GoalCritic", "GoalAngleCritic", "PathAlignCritic", "PathFollowCritic", "PathAngleCritic", "PreferForwardCritic"]
+      critics: ["ConstraintCritic", "CostCritic", "GoalCritic", "GoalAngleCritic", "PathAlignCritic", "PathFollowCritic", "PathAngleCritic", "PreferForwardCritic"]
       ConstraintCritic:
         enabled: true
         cost_power: 1
@@ -148,31 +148,31 @@ controller_server:
         cost_power: 1
         cost_weight: 5.0
         threshold_to_consider: 0.5
-      ObstaclesCritic:
-        enabled: true
-        cost_power: 1
-        repulsion_weight: 1.5
-        critical_weight: 20.0
-        consider_footprint: true
-        collision_cost: 10000.0
-        collision_margin_distance: 0.2
-        near_goal_distance: 0.5
-        inflation_radius: 1.75 #1
-        cost_scaling_factor: 2.58 #10
-      # CostCritic:
+      # ObstaclesCritic:
       #   enabled: true
       #   cost_power: 1
-      #   cost_weight: 3.81
-      #   critical_cost: 300.0
+      #   repulsion_weight: 2.5
+      #   critical_weight: 20.0
       #   consider_footprint: true
-      #   collision_cost: 1000000.0
-      #   near_goal_distance: 1.0
-      #   trajectory_point_step: 2
+      #   collision_cost: 100000.0
+      #   collision_margin_distance: 0.2
+      #   near_goal_distance: 0.5
+      #   inflation_radius: 1.75 #1
+      #   cost_scaling_factor: 2.58 #10
+      CostCritic:
+        enabled: true
+        cost_power: 2
+        cost_weight: 10.0
+        critical_cost: 1000.0
+        consider_footprint: true
+        collision_cost: 10000000.0
+        near_goal_distance: 0.5
+        trajectory_point_step: 3
       PathAlignCritic:
         enabled: true
         cost_power: 1
         cost_weight: 10.0
-        max_path_occupancy_ratio: 0.05
+        max_path_occupancy_ratio: 0.005 #0.05
         trajectory_point_step: 4
         threshold_to_consider: 0.5
         offset_from_furthest: 20
@@ -190,7 +190,7 @@ controller_server:
         offset_from_furthest: 4
         threshold_to_consider: 0.5
         max_angle_to_furthest: 1.0
-        mode: 2
+        mode: 1
       # VelocityDeadbandCritic:
       #   enabled: true
       #   cost_power: 1
@@ -295,7 +295,8 @@ local_costmap:
       width: 5
       height: 5
       resolution: 0.05
-      footprint: "[[-0.5,-0.31],[0.5,-0.31],[0.5,0.31],[-0.5,0.31]]"
+      # robot_radius: 0.50
+      footprint: "[[-0.54,-0.33],[0.74,-0.33],[0.74,0.33],[-0.54,0.33]]"
       plugins: ["inflation_layer", "lidar_obstacle_layer"]
       inflation_layer:
         enabled: True
@@ -364,7 +365,8 @@ global_costmap:
       global_frame: map
       robot_base_frame: base_link
       use_sim_time: False
-      footprint: "[[-0.5,-0.31],[0.5,-0.31],[0.5,0.31],[-0.5,0.31]]"
+      # robot_radius: 0.50
+      footprint: "[[-0.54,-0.33],[0.74,-0.33],[0.74,0.33],[-0.54,0.33]]"
       resolution: 0.05
       track_unknown_space: true
       plugins:
