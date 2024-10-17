@@ -227,7 +227,7 @@ namespace wheelchair2_kangaroo_x2_driver
             }
         }
 
-        return evaluate_kangaroo_response(address, header, data, ok);
+        return evaluate_kangaroo_response(address, header, data, crc, ok);
     }
 
     unsigned char Kangaroo::read_one_byte(bool &ok)
@@ -268,7 +268,7 @@ namespace wheelchair2_kangaroo_x2_driver
         return buffer;
     }
 
-    int Kangaroo::evaluate_kangaroo_response(unsigned char address, unsigned char *header, unsigned char *data, bool &ok)
+    int Kangaroo::evaluate_kangaroo_response(unsigned char address, unsigned char *header, unsigned char *data, unsigned char *, bool &ok)
     {
         size_t data_size = header[2];
         size_t value_size = data_size - 3; // there are 3 bits that aren't the value
@@ -406,6 +406,8 @@ namespace wheelchair2_kangaroo_x2_driver
         config_.mixed_mode = info_.hardware_parameters["mixed_mode"] == "true";
 
         termios_file_descriptor_ = -1;
+
+        return hardware_interface::CallbackReturn::SUCCESS;
     }
 
     std::vector<hardware_interface::StateInterface> Kangaroo::export_state_interfaces()

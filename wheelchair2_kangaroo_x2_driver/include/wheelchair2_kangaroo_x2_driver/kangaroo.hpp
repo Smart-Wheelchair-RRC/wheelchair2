@@ -42,7 +42,7 @@ namespace wheelchair2_kangaroo_x2_driver
         };
 
     public:
-        RCLCPP_SHARED_PTR_DEFINITIONS(Kangaroo);
+        RCLCPP_SHARED_PTR_DEFINITIONS(Kangaroo)
 
         hardware_interface::CallbackReturn on_init(const hardware_interface::HardwareInfo &info) override;
 
@@ -72,7 +72,7 @@ namespace wheelchair2_kangaroo_x2_driver
         bool send_get_request(unsigned char address, char channel, unsigned char desired_parameter);
         int read_message(unsigned char address, bool &ok);
         unsigned char read_one_byte(bool &ok);
-        int evaluate_kangaroo_response(unsigned char address, unsigned char *header, unsigned char *data, bool &ok);
+        int evaluate_kangaroo_response(unsigned char address, unsigned char *header, unsigned char *data, unsigned char *crc, bool &ok);
         void handle_errors(unsigned char address, int error_code);
         double encoder_lines_to_drive(int encoder_lines); // Convert encoder lines to meters
         int drive_to_encoder_lines(double linear);        // Convert meters to encoder lines
