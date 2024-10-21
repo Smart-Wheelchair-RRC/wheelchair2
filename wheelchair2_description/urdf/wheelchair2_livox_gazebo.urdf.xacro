@@ -20,30 +20,27 @@
 
 	<!--Gazebo
 	related physics values of left wheel joint-->
-	<gazebo reference="chassis_to_left_wheel">
-		<mu1 value="10000.0" />
-		<mu2 value="10000.0" />
-		<fdir1 value="0 0 1" />
-		<kp value="300" />
-		<!--500000-->
-		<kd value="10" />
-		<!--10-->
-		<ki value="200" />
-		<maxVel value="2.0" />
-		<minDepth value="0.0001" />
-	</gazebo>
-	<!-- Gazebo related physics values of right wheel joint-->
-	<gazebo reference="chassis_to_right_wheel">
-		<mu1 value="10000.0" />
-		<mu2 value="10000.0" />
-		<fdir1 value="0 0 1" />
-		<kp value="300" />
-		<kd value="10" />
-		<ki value="200" />
-		<maxVel value="2.0" />
-		<minDepth value="0.0001" />
-	</gazebo>
-
+	<!-- <gazebo reference="chassis_to_left_wheel"> -->
+	<!-- 	<mu1 value="10000.0" /> -->
+	<!-- 	<mu2 value="10000.0" /> -->
+	<!-- 	<fdir1 value="0 0 1" /> -->
+	<!-- 	<kp value="300" /> -->
+	<!-- 	<kd value="10" /> -->
+	<!-- 	<ki value="200" /> -->
+	<!-- 	<maxVel value="2.0" /> -->
+	<!-- 	<minDepth value="0.0001" /> -->
+	<!-- </gazebo> -->
+	<!-- <gazebo reference="chassis_to_right_wheel"> -->
+	<!-- 	<mu1 value="10000.0" /> -->
+	<!-- 	<mu2 value="10000.0" /> -->
+	<!-- 	<fdir1 value="0 0 1" /> -->
+	<!-- 	<kp value="300" /> -->
+	<!-- 	<kd value="10" /> -->
+	<!-- 	<ki value="200" /> -->
+	<!-- 	<maxVel value="2.0" /> -->
+	<!-- 	<minDepth value="0.0001" /> -->
+	<!-- </gazebo> -->
+	<!---->
 	<gazebo reference="chassis">
 		<material>Gazebo/FlatBlack</material>
 	</gazebo>
@@ -85,46 +82,4 @@
 	<gazebo reference="lidar_base_rod">
 		<material>Gazebo/Grey</material>
 	</gazebo>
-
-	<!-- <gazebo reference="rplidar"> -->
-	<!-- 	<material>Gazebo/DarkGrey</material> -->
-	<!---->
-	<!-- 	<sensor name="laser" type="ray"> -->
-	<!-- 		<pose> 0 0 0 0 0 0 </pose> -->
-	<!-- 		<visualize>false</visualize> -->
-	<!-- 		<update_rate>15</update_rate> -->
-	<!-- 		<ray> -->
-	<!-- 			<scan> -->
-	<!-- 				<horizontal> -->
-	<!-- 					<samples>720</samples> -->
-	<!-- 					<min_angle>-1.57</min_angle> -->
-	<!-- 					<max_angle>1.57</max_angle> -->
-	<!-- 				</horizontal> -->
-	<!-- 			</scan> -->
-	<!-- 			<range> -->
-	<!-- 				<min>0.1</min> -->
-	<!-- 				<max>25</max> -->
-	<!-- 			</range> -->
-	<!-- 			<noise> -->
-	<!-- 				<type>gaussian</type> -->
-	<!-- Noise parameters based on published spec for Hokuyo laser -->
-	<!--               achieving "+-30mm" accuracy at range < 10m.  A mean of 0.0m and -->
-	<!--               stddev of 0.01m will put 99.7% of samples within 0.03m of the true -->
-	<!--               reading. -->
-	<!-- 				<mean>0.0</mean> -->
-	<!-- 				<stddev>0.01</stddev> -->
-	<!-- 			</noise> -->
-	<!-- 		</ray> -->
-	<!-- 		<plugin name="laser_controller" filename="libgazebo_ros_ray_sensor.so"> -->
-	<!-- 			<ros> -->
-	<!-- <namespace>/gpu_ray</namespace> -->
-	<!-- 				<argument>~/out:=scan_raw</argument> -->
-	<!-- 			</ros> -->
-	<!-- 			<output_type>sensor_msgs/LaserScan</output_type> -->
-	<!-- 			<frame_name>rplidar</frame_name> -->
-	<!-- 		</plugin> -->
-	<!-- 	</sensor> -->
-	<!-- </gazebo> -->
-
-
 </robot>
