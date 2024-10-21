@@ -4,14 +4,11 @@
 	<!-- Include Files-->
 	<xacro:include filename="$(find wheelchair2_description)/urdf/links_joints.urdf.xacro" />
 	<xacro:include filename="$(find wheelchair2_description)/urdf/wheelchair2_livox_gazebo.urdf.xacro" />
-<xacro:include filename="$(find wheelchair2_description)/urdf/wheelchair2_livox_gazebo.urdf.xacro" />
+<!-- <xacro:include filename="$(find wheelchair2_description)/urdf/wheelchair2_livox_gazebo.urdf.xacro" /> -->
 <xacro:include filename="$(find wheelchair2_description)/urdf/kangaroo_ros2_control.urdf.xacro" />
 
 	<xacro:include filename="$(find ros2_livox_simulation)/urdf/mid360.xacro" />
 
-	<xacro:arg name="use_nominal_extrinsics" default="false" />
-	<xacro:arg name="add_plug" default="false" />
-	<xacro:arg name="use_mesh" default="true" />
 <xacro:arg name="is_sim" default="true" />
 <xacro:arg name="gazebo_controllers" default="$(find wheelchair2_bringup)/config/wheelchair2_controllers.yaml" />
 
