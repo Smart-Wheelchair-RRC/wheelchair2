@@ -16,7 +16,8 @@ def generate_launch_description():
 
     wheelchair2_description_path = FindPackageShare("wheelchair2_description")
     default_model_path = PathJoinSubstitution(
-        [wheelchair2_description_path, "urdf", "wheelchair2_livox.urdf.xacro"]
+        [wheelchair2_description_path, "urdf",
+            "wheelchair2_camera_lidar.urdf.xacro"]
     )
 
     gui_arg = DeclareLaunchArgument(

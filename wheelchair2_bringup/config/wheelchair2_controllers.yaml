@@ -10,12 +10,12 @@ controller_manager:
 
 wheelchair2_base_controller:
   ros__parameters:
-    left_wheel_names: ["left_wheel_joint"]
-    right_wheel_names: ["right_wheel_joint"]
+    left_wheel_names: ["chassis_to_left_wheel"]
+    right_wheel_names: ["chassis_to_right_wheel"]
 
-    wheel_separation: 0.10
-    #wheels_per_side: 1  # actually 2, but both are controlled by 1 signal
-    wheel_radius: 0.015
+    wheel_separation: 0.55
+    wheels_per_side: 1  
+    wheel_radius: 0.16
 
     wheel_separation_multiplier: 1.0
     left_wheel_radius_multiplier: 1.0

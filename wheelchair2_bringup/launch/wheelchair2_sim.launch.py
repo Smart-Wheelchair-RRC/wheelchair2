@@ -13,12 +13,14 @@
 # limitations under the License.
 
 from launch import LaunchDescription
-from launch.actions import RegisterEventHandler
+from launch.actions import RegisterEventHandler, IncludeLaunchDescription
 from launch.event_handlers import OnProcessExit
 from launch.substitutions import Command, FindExecutable, PathJoinSubstitution
-
+import launch_ros
 from launch_ros.actions import Node
+import launch_ros.parameter_descriptions
 from launch_ros.substitutions import FindPackageShare
+from launch.launch_description_sources import PythonLaunchDescriptionSource
 
 
 def generate_launch_description():
@@ -28,11 +30,20 @@ def generate_launch_description():
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
             PathJoinSubstitution(
-                [FindPackageShare("wheelchair2_description"), "urdf", "wheelchair2_livox.urdf.xacro"]
+                [
+                    FindPackageShare("wheelchair2_description"),
+                    "urdf",
+                    "wheelchair2_livox.urdf.xacro",
+                ]
             ),
+            " is_sim:=true",
         ]
     )
-    robot_description = {"robot_description": robot_description_content}
+    robot_description = {
+        "robot_description": launch_ros.parameter_descriptions.ParameterValue(
+            robot_description_content, value_type=str
+        )
+    }
 
     robot_controllers = PathJoinSubstitution(
         [
@@ -61,13 +72,15 @@ def generate_launch_description():
     joint_state_broadcaster_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["joint_state_broadcaster", "--controller-manager", "/controller_manager"],
+        arguments=["joint_state_broadcaster",
+                   "--controller-manager", "/controller_manager"],
     )
 
     robot_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["wheelchair2_base_controller", "--controller-manager", "/controller_manager"],
+        arguments=["wheelchair2_base_controller",
+                   "--controller-manager", "/controller_manager"],
     )
 
     # Delay start of robot_controller after `joint_state_broadcaster`
@@ -77,10 +90,25 @@ def generate_launch_description():
             on_exit=[robot_controller_spawner],
         )
     )
+    gazebo = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            PathJoinSubstitution(
+                [FindPackageShare("gazebo_ros"), "launch", "gazebo.launch.py"]
+            ),
+        )
+    )
 
+    spawn_robot = Node(
+        package="gazebo_ros",
+        executable="spawn_entity.py",
+        arguments=["-entity", "wheelchair2", "-topic", "robot_description"],
+        output="screen",
+    )
     nodes = [
-        control_node,
         robot_state_pub_node,
+        # gazebo,
+        # spawn_robot,
+        # control_node,
         joint_state_broadcaster_spawner,
         delay_robot_controller_spawner_after_joint_state_broadcaster_spawner,
     ]
