@@ -20,7 +20,7 @@ def generate_launch_description():
                     "xacro ",
                     PathJoinSubstitution(
                         [pkg_wheelchair2_description, "urdf",
-                            "wheelchair2_livox.xacro"]
+                            "wheelchair2_livox.urdf.xacro"]
                     ),
                 ]
             ),
