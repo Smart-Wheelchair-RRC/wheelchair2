@@ -16,9 +16,10 @@ from launch import LaunchDescription
 from launch.actions import RegisterEventHandler, IncludeLaunchDescription
 from launch.event_handlers import OnProcessExit
 from launch.substitutions import Command, FindExecutable, PathJoinSubstitution
-from launch_ros.actions import Node
-from launch_ros.substitutions import FindPackageShare
 import launch_ros
+from launch_ros.actions import Node
+import launch_ros.parameter_descriptions
+from launch_ros.substitutions import FindPackageShare
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 
 
@@ -26,17 +27,23 @@ def generate_launch_description():
     # Get URDF via xacro
     robot_description_content = Command(
         [
-            "xacro",
+            PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
             PathJoinSubstitution(
-                [FindPackageShare("wheelchair2_description"),
-                 "urdf", "wheelchair2_camera_lidar.urdf.xacro"]
+                [
+                    FindPackageShare("wheelchair2_description"),
+                    "urdf",
+                    "wheelchair2_livox.urdf.xacro",
+                ]
             ),
-            " is_sim:=false"
+            " is_sim:=true",
         ]
     )
-    robot_description = {"robot_description": launch_ros.descriptions.ParameterValue(
-        robot_description_content, value_type=str)}
+    robot_description = {
+        "robot_description": launch_ros.parameter_descriptions.ParameterValue(
+            robot_description_content, value_type=str
+        )
+    }
 
     robot_controllers = PathJoinSubstitution(
         [
@@ -74,7 +81,6 @@ def generate_launch_description():
         executable="spawner",
         arguments=["wheelchair2_base_controller",
                    "--controller-manager", "/controller_manager"],
-        output="screen"
     )
 
     # Delay start of robot_controller after `joint_state_broadcaster`
@@ -85,25 +91,24 @@ def generate_launch_description():
         )
     )
     gazebo = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(PathJoinSubstitution(
-            [FindPackageShare('gazebo_ros'), 'launch', 'gazebo.launch.py']),
+        PythonLaunchDescriptionSource(
+            PathJoinSubstitution(
+                [FindPackageShare("gazebo_ros"), "launch", "gazebo.launch.py"]
+            ),
         )
     )
 
     spawn_robot = Node(
-        package='gazebo_ros',
-        executable='spawn_entity.py',
-        arguments=['-entity',
-                   'wheelchair',
-                   '-topic',
-                   'robot_description'],
-        output='screen',
+        package="gazebo_ros",
+        executable="spawn_entity.py",
+        arguments=["-entity", "wheelchair2", "-topic", "robot_description"],
+        output="screen",
     )
     nodes = [
-        gazebo,
-        spawn_robot,
-        control_node,
         robot_state_pub_node,
+        # gazebo,
+        # spawn_robot,
+        # control_node,
         joint_state_broadcaster_spawner,
         delay_robot_controller_spawner_after_joint_state_broadcaster_spawner,
     ]
