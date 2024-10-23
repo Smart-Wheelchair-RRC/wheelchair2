@@ -27,7 +27,7 @@ namespace wheelchair2_kangaroo_x2_driver
             std::string port;
             bool mixed_mode;
             int hz;
-            int wheel_center_distance;
+            double wheel_center_distance;
             int encoder_lines_per_revolution;
             double wheel_diameter;
             std::string left_wheel_name;
@@ -81,6 +81,9 @@ namespace wheelchair2_kangaroo_x2_driver
         double encoder_lines_to_radians(int encoder_lines);
         int radians_to_encoder_lines(double radians);
         bool set_channel_speed(double speed, unsigned char address, char channel);
+
+        char channel_1_ = '1';
+        char channel_2_ = '2';
 
         boost::mutex output_mutex_;
         boost::mutex input_mutex_;

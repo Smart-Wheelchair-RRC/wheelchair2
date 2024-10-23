@@ -8,6 +8,7 @@
 #include <vector>
 #include <termios.h>
 #include <fcntl.h>
+#include <cerrno>
 
 #include "hardware_interface/types/hardware_interface_type_values.hpp"
 #include "rclcpp/rclcpp.hpp"
@@ -36,7 +37,8 @@ namespace wheelchair2_kangaroo_x2_driver
 
         if (termios_file_descriptor_ < 0)
         {
-            RCLCPP_FATAL(rclcpp::get_logger("Kangaroo"), "Failed to open port %s", config_.port.c_str());
+            RCLCPP_FATAL(rclcpp::get_logger("Kangaroo"), "Failed to open port %s", strerror( errno ));
+            // RCLCPP_FATAL(rclcpp::get_logger("Kangaroo"), "Failed to open port %s", config_.port.c_str());
             return false;
         }
 
@@ -108,18 +110,8 @@ namespace wheelchair2_kangaroo_x2_driver
     bool Kangaroo::send_start_signals(unsigned char address)
     {
         unsigned char buffer[7];
-        char channel;
 
-        if (config_.mixed_mode)
-        {
-            channel = '3';
-        }
-        else
-        {
-            channel = '1';
-        }
-
-        size_t bytes_written_to_channel_3 = write_kangaroo_start_command(address, channel, buffer);
+        size_t bytes_written_to_channel_3 = write_kangaroo_start_command(address, channel_1_, buffer);
         if (::write(termios_file_descriptor_, buffer, bytes_written_to_channel_3) < 0)
         {
             RCLCPP_ERROR(rclcpp::get_logger("Kangaroo"), "Failed to send start signal to channel 1/3");
@@ -127,16 +119,7 @@ namespace wheelchair2_kangaroo_x2_driver
             return false;
         }
 
-        if (config_.mixed_mode)
-        {
-            channel = '4';
-        }
-        else
-        {
-            channel = '2';
-        }
-
-        size_t bytes_written_to_channel_4 = write_kangaroo_start_command(address, '4', buffer);
+        size_t bytes_written_to_channel_4 = write_kangaroo_start_command(address, channel_2_, buffer);
         if (::write(termios_file_descriptor_, buffer, bytes_written_to_channel_4) < 0)
         {
             RCLCPP_ERROR(rclcpp::get_logger("Kangaroo"), "Failed to send start signal to channel 2/4");
@@ -217,6 +200,18 @@ namespace wheelchair2_kangaroo_x2_driver
             }
         }
 
+        for (size_t i = 0; i < header[2]; i++)
+        {
+            data[i] = read_one_byte(ok);
+            // bail if reading one byte fails
+            if (!ok)
+            {
+                RCLCPP_ERROR(rclcpp::get_logger("Kangaroo"), "Failed to get data");
+                return 0;
+            }
+            //std::cout << (int)data[i] << ", ";
+        }
+
         for (size_t i = 0; i < 2; i++)
         {
             crc[i] = read_one_byte(ok);
@@ -295,6 +290,7 @@ namespace wheelchair2_kangaroo_x2_driver
         }
 
         int value = un_bitpack_number(&data[value_offset], value_size);
+
         // std::cout << "The value is: " << value << std::endl;
         if (data[1] & 1) // testing the flag to see if there is an error
         {
@@ -375,9 +371,14 @@ namespace wheelchair2_kangaroo_x2_driver
             return false;
         }
 
+        output_mutex_.lock();
+
         // send
         unsigned char buffer[18];
         int num_of_bytes = write_kangaroo_speed_command(address, channel, speed, buffer);
+
+        output_mutex_.unlock();
+
         if (::write(termios_file_descriptor_, buffer, num_of_bytes) < 0)
         {
             RCLCPP_ERROR(rclcpp::get_logger("Kangaroo"), "Failed to update channel %c: %s", channel, strerror(errno));
@@ -396,14 +397,21 @@ namespace wheelchair2_kangaroo_x2_driver
         }
 
         // Get the parameters
-        config_.port = info_.hardware_parameters["port"];
+        config_.port = (std::string)info_.hardware_parameters["port"];
         config_.hz = std::stoi(info_.hardware_parameters["hz"]);
         config_.encoder_lines_per_revolution = std::stoi(info_.hardware_parameters["encoder_lines_per_revolution"]);
-        config_.wheel_center_distance = std::stoi(info_.hardware_parameters["wheel_center_distance"]);
+        config_.wheel_center_distance = std::stod(info_.hardware_parameters["wheel_center_distance"]);
         config_.wheel_diameter = std::stod(info_.hardware_parameters["wheel_diameter"]);
         config_.left_wheel_name = info_.hardware_parameters["left_wheel_name"];
         config_.right_wheel_name = info_.hardware_parameters["right_wheel_name"];
         config_.mixed_mode = info_.hardware_parameters["mixed_mode"] == "true";
+
+        if (config_.mixed_mode)
+        {
+            RCLCPP_INFO(rclcpp::get_logger("Kangaroo"), "Mixed Mode is on.");
+            channel_1_ = '3';
+            channel_2_ = '4';
+        }
 
         termios_file_descriptor_ = -1;
 
@@ -476,39 +484,53 @@ namespace wheelchair2_kangaroo_x2_driver
 
     hardware_interface::return_type Kangaroo::read(const rclcpp::Time &, const rclcpp::Duration &)
     {
+        // RCLCPP_INFO(rclcpp::get_logger("Kangaroo"), "Reading...");
+
         if (!is_connection_open())
         {
             return hardware_interface::return_type::ERROR;
         }
 
-        if (config_.mixed_mode)
-        {
-            double linear_position = encoder_lines_to_drive(get_parameter((unsigned char)128, '3', (unsigned char)1));
-            double angular_position = encoder_lines_to_turn(get_parameter((unsigned char)128, '4', (unsigned char)1));
-            // Convert to individual wheel positions
-            left_wheel_.position = (linear_position - (angular_position * config_.wheel_center_distance / 2)) / (config_.wheel_diameter / 2);
-            right_wheel_.position = (linear_position + (angular_position * config_.wheel_center_distance / 2)) / (config_.wheel_diameter / 2);
+        try{
+            if (config_.mixed_mode)
+            {
+                double linear_position = encoder_lines_to_drive(get_parameter((unsigned char)128, channel_1_, (unsigned char)1));
+                double angular_position = encoder_lines_to_turn(get_parameter((unsigned char)128, channel_2_, (unsigned char)1));
+                
+                // Convert to individual wheel positions
+                left_wheel_.position = (linear_position - (angular_position * config_.wheel_center_distance / 2)) / (config_.wheel_diameter / 2);
+                right_wheel_.position = (linear_position + (angular_position * config_.wheel_center_distance / 2)) / (config_.wheel_diameter / 2);
 
-            double linear_velocity = encoder_lines_to_drive(get_parameter((unsigned char)128, '3', (unsigned char)2));
-            double angular_velocity = encoder_lines_to_turn(get_parameter((unsigned char)128, '4', (unsigned char)2));
-            // Convert to individual wheel velocities
-            left_wheel_.velocity = (linear_velocity - (angular_velocity * config_.wheel_center_distance / 2)) / (config_.wheel_diameter / 2);
-            right_wheel_.velocity = (linear_velocity + (angular_velocity * config_.wheel_center_distance / 2)) / (config_.wheel_diameter / 2);
+                double linear_velocity = encoder_lines_to_drive(get_parameter((unsigned char)128, channel_1_, (unsigned char)2));
+                double angular_velocity = encoder_lines_to_turn(get_parameter((unsigned char)128, channel_2_, (unsigned char)2));
+                
+                // Convert to individual wheel velocities
+                left_wheel_.velocity = (linear_velocity - (angular_velocity * config_.wheel_center_distance / 2)) / (config_.wheel_diameter / 2);
+                right_wheel_.velocity = (linear_velocity + (angular_velocity * config_.wheel_center_distance / 2)) / (config_.wheel_diameter / 2);
+            }
+            else
+            {
+                left_wheel_.position = encoder_lines_to_radians(get_parameter((unsigned char)128, channel_1_, (unsigned char)1));
+                right_wheel_.position = encoder_lines_to_radians(get_parameter((unsigned char)128, channel_2_, (unsigned char)1));
+
+                left_wheel_.velocity = encoder_lines_to_radians(get_parameter((unsigned char)128, channel_1_, (unsigned char)2));
+                right_wheel_.velocity = encoder_lines_to_radians(get_parameter((unsigned char)128, channel_2_, (unsigned char)2));
+            }
         }
-        else
+        catch (std::string error)
         {
-            left_wheel_.position = encoder_lines_to_radians(get_parameter((unsigned char)128, '1', (unsigned char)1));
-            right_wheel_.position = encoder_lines_to_radians(get_parameter((unsigned char)128, '2', (unsigned char)1));
-
-            left_wheel_.velocity = encoder_lines_to_radians(get_parameter((unsigned char)128, '1', (unsigned char)2));
-            right_wheel_.velocity = encoder_lines_to_radians(get_parameter((unsigned char)128, '2', (unsigned char)2));
+            RCLCPP_ERROR(rclcpp::get_logger("Kangaroo"), "Error: %s", error.c_str());
+            return hardware_interface::return_type::ERROR;
         }
 
+        // RCLCPP_INFO(rclcpp::get_logger("Kangaroo"), "Read: %s %s %s %s", std::to_string(left_wheel_.position).c_str(), std::to_string(left_wheel_.velocity).c_str(), std::to_string(right_wheel_.position).c_str(), std::to_string(right_wheel_.velocity).c_str());
         return hardware_interface::return_type::OK;
     }
 
     hardware_interface::return_type Kangaroo::write(const rclcpp::Time &, const rclcpp::Duration &)
     {
+        // RCLCPP_INFO(rclcpp::get_logger("Kangaroo"), "Writing %s %s", std::to_string(left_wheel_.command_velocity).c_str(), std::to_string(right_wheel_.command_velocity).c_str());
+
         if (!is_connection_open())
         {
             return hardware_interface::return_type::ERROR;
@@ -528,22 +550,22 @@ namespace wheelchair2_kangaroo_x2_driver
             linear_velocity_command = drive_to_encoder_lines(linear_velocity_command);
             angular_velocity_command = turn_to_encoder_lines(angular_velocity_command);
 
-            boost::mutex::scoped_lock output_lock(output_mutex_);
-
-            set_channel_speed(linear_velocity_command, (unsigned char)128, '3');
-            set_channel_speed(angular_velocity_command, (unsigned char)128, '4');
+            set_channel_speed(linear_velocity_command, (unsigned char)128, channel_1_);
+            set_channel_speed(angular_velocity_command, (unsigned char)128, channel_2_);
         }
         else
         {
             double left_wheel_velocity = radians_to_encoder_lines(left_wheel_.command_velocity);
             double right_wheel_velocity = radians_to_encoder_lines(right_wheel_.command_velocity);
 
-            boost::mutex::scoped_lock output_lock(output_mutex_);
-
-            set_channel_speed(left_wheel_velocity, (unsigned char)128, '1');
-            set_channel_speed(right_wheel_velocity, (unsigned char)128, '2');
+            set_channel_speed(left_wheel_velocity, (unsigned char)128, channel_1_);
+            set_channel_speed(right_wheel_velocity, (unsigned char)128, channel_2_);
         }
 
         return hardware_interface::return_type::OK;
     }
 }
+
+#include "pluginlib/class_list_macros.hpp"
+PLUGINLIB_EXPORT_CLASS(
+  wheelchair2_kangaroo_x2_driver::Kangaroo, hardware_interface::SystemInterface)

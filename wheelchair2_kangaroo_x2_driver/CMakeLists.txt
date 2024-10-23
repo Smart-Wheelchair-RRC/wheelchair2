@@ -24,6 +24,7 @@ add_library(
   wheelchair2_kangaroo_x2_driver
   SHARED
   src/kangaroo.cpp
+  src/kangaroo_library.cpp
 )
 target_compile_features(wheelchair2_kangaroo_x2_driver PUBLIC cxx_std_17)
 target_include_directories(wheelchair2_kangaroo_x2_driver PUBLIC
