@@ -17,6 +17,10 @@
 
 namespace wheelchair2_kangaroo_x2_driver
 {
+    /* ---------------------------------------- */
+    /* --------- KANGAROO IO FUNCTIONS -------- */
+    /* ---------------------------------------- */
+
     bool Kangaroo::is_connection_open() const
     {
         return termios_file_descriptor_ >= 0;
@@ -24,7 +28,7 @@ namespace wheelchair2_kangaroo_x2_driver
 
     bool Kangaroo::open_connection()
     {
-        RCLCPP_INFO(rclcpp::get_logger("Kangaroo"), "Opening connection");
+        RCLCPP_INFO(rclcpp::get_logger("Kangaroo"), "Opening connection...");
         struct termios port_options;
 
         if (is_connection_open())
@@ -37,7 +41,7 @@ namespace wheelchair2_kangaroo_x2_driver
 
         if (termios_file_descriptor_ < 0)
         {
-            RCLCPP_FATAL(rclcpp::get_logger("Kangaroo"), "Failed to open port %s", strerror( errno ));
+            RCLCPP_FATAL(rclcpp::get_logger("Kangaroo"), "Failed to open port %s", strerror(errno));
             // RCLCPP_FATAL(rclcpp::get_logger("Kangaroo"), "Failed to open port %s", config_.port.c_str());
             return false;
         }
@@ -98,13 +102,15 @@ namespace wheelchair2_kangaroo_x2_driver
             return false;
         }
 
+        RCLCPP_INFO(rclcpp::get_logger("Kangaroo"), "Connection opened.");
         return true;
     }
 
     void Kangaroo::close_connection()
     {
-        RCLCPP_INFO(rclcpp::get_logger("Kangaroo"), "Closing connection");
+        RCLCPP_INFO(rclcpp::get_logger("Kangaroo"), "Closing connection...");
         ::close(termios_file_descriptor_);
+        RCLCPP_INFO(rclcpp::get_logger("Kangaroo"), "Connection closed.");
     }
 
     bool Kangaroo::send_start_signals(unsigned char address)
@@ -114,7 +120,7 @@ namespace wheelchair2_kangaroo_x2_driver
         size_t bytes_written_to_channel_3 = write_kangaroo_start_command(address, channel_1_, buffer);
         if (::write(termios_file_descriptor_, buffer, bytes_written_to_channel_3) < 0)
         {
-            RCLCPP_ERROR(rclcpp::get_logger("Kangaroo"), "Failed to send start signal to channel 1/3");
+            RCLCPP_ERROR(rclcpp::get_logger("Kangaroo"), "Failed to send start signal to channel 1 or 3/D");
             close_connection();
             return false;
         }
@@ -122,7 +128,7 @@ namespace wheelchair2_kangaroo_x2_driver
         size_t bytes_written_to_channel_4 = write_kangaroo_start_command(address, channel_2_, buffer);
         if (::write(termios_file_descriptor_, buffer, bytes_written_to_channel_4) < 0)
         {
-            RCLCPP_ERROR(rclcpp::get_logger("Kangaroo"), "Failed to send start signal to channel 2/4");
+            RCLCPP_ERROR(rclcpp::get_logger("Kangaroo"), "Failed to send start signal to channel 2 or 4/T");
             close_connection();
             return false;
         }
@@ -388,8 +394,13 @@ namespace wheelchair2_kangaroo_x2_driver
         return true;
     }
 
+    /* ---------------------------------------- */
+    /* ---------- HARDWARE INTERFACE ---------- */
+    /* ---------------------------------------- */
+
     hardware_interface::CallbackReturn Kangaroo::on_init(const hardware_interface::HardwareInfo &info)
     {
+        RCLCPP_INFO(rclcpp::get_logger("Kangaroo"), "Initializing...");
         // Check if the requested resources are available
         if (hardware_interface::SystemInterface::on_init(info) != hardware_interface::CallbackReturn::SUCCESS)
         {
@@ -415,6 +426,7 @@ namespace wheelchair2_kangaroo_x2_driver
 
         termios_file_descriptor_ = -1;
 
+        RCLCPP_INFO(rclcpp::get_logger("Kangaroo"), "Initialized");
         return hardware_interface::CallbackReturn::SUCCESS;
     }
 
