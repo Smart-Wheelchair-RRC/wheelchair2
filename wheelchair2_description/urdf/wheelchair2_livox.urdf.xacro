@@ -4,17 +4,13 @@
 	<!-- Include Files-->
 	<xacro:include filename="$(find wheelchair2_description)/urdf/links_joints.urdf.xacro" />
 	<xacro:include filename="$(find wheelchair2_description)/urdf/wheelchair2_livox_gazebo.urdf.xacro" />
-	<!-- <xacro:include filename="$(find
-	wheelchair2_description)/urdf/wheelchair2_livox_gazebo.urdf.xacro" /> -->
 	<xacro:include filename="$(find wheelchair2_description)/urdf/kangaroo_ros2_control.urdf.xacro" />
 
 	<xacro:include filename="$(find ros2_livox_simulation)/urdf/mid360.xacro" />
 
 
 	<xacro:arg name="is_sim" default="true" />
-	<xacro:arg name="gazebo_controllers"
-		default="$(find wheelchair2_bringup)/config/wheelchair2_controllers.yaml" />
-
+	<xacro:arg name="gazebo_controllers" default="$(find wheelchair2_bringup)/config/wheelchair2_controllers.yaml" />
 
 	<link name="base_link" />
 
@@ -154,15 +150,18 @@
 	<xacro:mid360 name="livox" parent="camera_base_rod" topic="mid360">
 		<origin xyz="0 0 0.1" rpy="0 0 0" />
 	</xacro:mid360>
+
 	<xacro:kangaroo_x2_driver name="kangaroo_ros2_control" prefix="" is_sim="$(arg is_sim)"></xacro:kangaroo_x2_driver>
-	<!-- Gazebo Plugin-->
+	
 	<xacro:if value="$(arg is_sim)">
 		<gazebo>
 			<plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
 				<parameters>$(arg gazebo_controllers)</parameters>
+				<ros>
+					<remapping>/wheelchair2_base_controller/cmd_vel_unstamped:=/cmd_vel</remapping>
+					<remapping>/wheelchair2_base_controller/odom:=/odom</remapping>
+				</ros>
 			</plugin>
 		</gazebo>
 	</xacro:if>
-
-
 </robot>

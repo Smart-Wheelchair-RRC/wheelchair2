@@ -1,30 +1,17 @@
-# Copyright 2020 ros2_control Development Team
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 from launch import LaunchDescription
-from launch.actions import RegisterEventHandler, IncludeLaunchDescription, TimerAction
-from launch.event_handlers import OnProcessExit
+from launch.actions import RegisterEventHandler
+from launch.event_handlers import OnProcessExit, OnProcessStart
 from launch.substitutions import Command, FindExecutable, PathJoinSubstitution
 import launch_ros
 from launch_ros.actions import Node
 import launch_ros.parameter_descriptions
 from launch_ros.substitutions import FindPackageShare
-from launch.launch_description_sources import PythonLaunchDescriptionSource
 
 
 def generate_launch_description():
-    # Get URDF via xacro
+    launch_description = LaunchDescription()
+
+    # ROBOT DESCRIPTION
     robot_description_content = Command(
         [
             PathJoinSubstitution([FindExecutable(name="xacro")]),
@@ -45,76 +32,85 @@ def generate_launch_description():
         )
     }
 
-    robot_controllers = PathJoinSubstitution(
+    # ROBOT STATE PUBLISHER
+    robot_state_publisher_node = Node(
+        package="robot_state_publisher",
+        executable="robot_state_publisher",
+        output="both",
+        parameters=[robot_description],
+    )
+    launch_description.add_action(robot_state_publisher_node)
+
+    # CONTROLLER MANAGER
+    #   CONTROLLER CONFIGURATION
+    robot_controller_configuration = PathJoinSubstitution(
         [
             FindPackageShare("wheelchair2_bringup"),
             "config",
             "wheelchair2_controllers.yaml",
         ]
     )
-
-    control_node = Node(
+    #   NODE
+    controller_manager_node = Node(
         package="controller_manager",
         executable="ros2_control_node",
-        parameters=[robot_description, robot_controllers],
+        parameters=[robot_description, robot_controller_configuration],
         output="both",
-    )
-
-    robot_state_pub_node = Node(
-        package="robot_state_publisher",
-        executable="robot_state_publisher",
-        output="both",
-        parameters=[robot_description],
         remappings=[
-            ("/diff_drive_controller/cmd_vel_unstamped", "/cmd_vel"),
+            ("/wheelchair2_base_controller/cmd_vel_unstamped", "/cmd_vel"),
+            ("/wheelchair2_base_controller/odom", "/odom"),
         ],
     )
+    #   Delay controller manager start to when robot state publisher is ready
+    launch_description.add_action(
+        RegisterEventHandler(
+            event_handler=OnProcessStart(
+                target_action=robot_state_publisher_node,
+                on_start=[controller_manager_node],
+            )
+        )
+    )
 
+    #   JOINT STATE BROADCASTER
     joint_state_broadcaster_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["joint_state_broadcaster",
-                   "--controller-manager", "/controller_manager"],
+        arguments=[
+            "joint_state_broadcaster",
+            "--controller-manager",
+            "/controller_manager",
+        ],
+        output="screen",
+    )
+    #   Delay launch of joint state broadcaster after controller manager has started
+    launch_description.add_action(
+        RegisterEventHandler(
+            event_handler=OnProcessStart(
+                target_action=controller_manager_node,
+                on_start=[joint_state_broadcaster_spawner],
+            )
+        )
     )
 
+    #   WHEELCHAIR2 CONTROLLER
     robot_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["wheelchair2_base_controller",
-                   "--controller-manager", "/controller_manager"],
-    )
-
-    # Delay start of robot_controller after `joint_state_broadcaster`
-    delay_robot_controller_spawner_after_joint_state_broadcaster_spawner = RegisterEventHandler(
-        event_handler=OnProcessExit(
-            target_action=joint_state_broadcaster_spawner,
-            on_exit=[robot_controller_spawner],
-        )
-    )
-    gazebo = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            PathJoinSubstitution(
-                [FindPackageShare("gazebo_ros"), "launch", "gazebo.launch.py"]
-            ),
-        )
-    )
-
-    spawn_robot = Node(
-        package="gazebo_ros",
-        executable="spawn_entity.py",
-        arguments=["-entity", "wheelchair2", "-topic", "robot_description"],
+        arguments=[
+            "wheelchair2_base_controller",
+            "--controller-manager",
+            "/controller_manager",
+        ],
         output="screen",
     )
+    #   Delay start of robot_controller after `joint_state_broadcaster`
+    launch_description.add_action(
+        RegisterEventHandler(
+            event_handler=OnProcessExit(
+                target_action=joint_state_broadcaster_spawner,
+                on_exit=[robot_controller_spawner],
+            )
+        )
+    )
 
-    delayed_controller_manager = TimerAction(period=3.0,actions=[control_node])
-
-    nodes = [
-        # gazebo,
-        # spawn_robot,
-        robot_state_pub_node,
-        delayed_controller_manager,
-        joint_state_broadcaster_spawner,
-        delay_robot_controller_spawner_after_joint_state_broadcaster_spawner,
-    ]
-
-    return LaunchDescription(nodes)
+    return launch_description
