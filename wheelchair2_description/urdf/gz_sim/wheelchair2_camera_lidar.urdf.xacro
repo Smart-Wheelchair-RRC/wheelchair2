@@ -7,7 +7,6 @@
 		filename="$(find wheelchair2_description)/urdf/gz_sim/wheelchair2_camera_lidar_gz.urdf.xacro" />
 	<xacro:include filename="$(find wheelchair2_description)/urdf/gz_sim/realsense.urdf.xacro" />
 	<xacro:arg name="use_nominal_extrinsics" default="false" />
-	<xacro:arg name="add_plug" default="false" />
 	<xacro:arg name="use_mesh" default="true" />
 
 	<link name="base_link" />
@@ -17,7 +16,6 @@
 		<child link="chassis" />
 		<origin xyz="0.22 0.0 0.2" rpy="0 0 0" />
 	</joint>
-
 	<link name='chassis'>
 		<pose>0 0 0.1 0 0 0</pose>
 
@@ -26,7 +24,8 @@
 			<mass value="8.96" />
 			<origin xyz="0 0 0" rpy=" 0 0 0" />
 			<!-- ALL INERTIA VALUES IN KILOGRAM PER SQUARE METER-->
-			<inertia ixx="2.83" ixy="-0.12" ixz="-1.17" iyy="3.47" iyz="0.29" izz="0.73" />
+			<!-- NOTE: z=c x=b y=a -->
+			<inertia ixx="6.47" ixy="-0.12" ixz="-1.17" iyy="8.54" iyz="0.29" izz="8.54" />
 		</inertial>
 
 		<collision>

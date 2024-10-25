@@ -28,6 +28,11 @@ setup(
             os.path.join("share", package_name, "meshes"),
             glob(os.path.join("meshes", "*.[ds][at]*")),
         ),
+        (
+            os.path.join("share", package_name, "models"),
+            glob(os.path.join(
+                "models",  "model.[sc][do]*")),
+        ),
     ],
     install_requires=["setuptools"],
     zip_safe=True,

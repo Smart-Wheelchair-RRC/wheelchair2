@@ -39,7 +39,6 @@
 			<frame_id>odom</frame_id> <!-- from <odometry_frame> -->
 			<child_frame_id>base_link</child_frame_id> <!-- from <robot_base_frame> -->
 			<odom_publisher_frequency>30</odom_publisher_frequency> <!-- from <update_rate>-->
-
 			<tf_topic>/tf</tf_topic> <!-- Short topic name for tf output -->
 
 		</plugin>
@@ -116,7 +115,7 @@
 
 		<sensor name="laser" type="gpu_lidar">
 			<pose> 0 0 0 0 0 0 </pose>
-			<visualize>false</visualize>
+			<visualize>true</visualize>
 			<update_rate>15</update_rate>
 			<topic>scan</topic>
 			<gz_frame_id>rplidar</gz_frame_id>
