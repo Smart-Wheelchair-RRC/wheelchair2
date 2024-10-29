@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0"?>
 <robot name="wheelchair2"
 	xmlns:xacro="http://www.ros.org/wiki/xacro">
 	<!-- Include Files-->
@@ -18,13 +18,11 @@
 	</joint>
 	<link name='chassis'>
 		<pose>0 0 0.1 0 0 0</pose>
-
 		<inertial>
 			<!-- ALL MASSES IN KILOGRAM-->
 			<mass value="8.96" />
 			<origin xyz="0 0 0" rpy=" 0 0 0" />
 			<!-- ALL INERTIA VALUES IN KILOGRAM PER SQUARE METER-->
-			<!-- NOTE: z=c x=b y=a -->
 			<inertia ixx="6.47" ixy="-0.12" ixz="-1.17" iyy="8.54" iyz="0.29" izz="8.54" />
 		</inertial>
 
@@ -54,8 +52,6 @@
 	<xacro:w_joint name="chassis_to_left_wheel" type="continuous" axis_xyz="0 0 1" axis_rpy="0 0 0"
 		limit_e="100" limit_v="20" damping="1.0" friction="200000.0" origin_rpy="-1.57 0 0"
 		origin_xyz="-0.22 0.28 -0.285" parent="chassis" child="left_wheel" />
-	<!--  inertia values are added by 0.1 in both left and right wheel to avoid collapsing of model in
-	gazebo-->
 
 	<!-- joint between chassis and Right Wheel-->
 	<!-- Right Wheel-->
@@ -126,11 +122,5 @@
 		<origin xyz="0.20 -0.24 0.50" rpy="0 -0.01 0" />
 	</xacro:realsense>
 
-	<!-- Gazebo Plugin-->
-	<!-- <gazebo> -->
-	<!-- 	<plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so"> -->
-	<!-- 		<legacyModeNS>true</legacyModeNS> -->
-	<!-- 	</plugin> -->
-	<!-- </gazebo> -->
 
 </robot>

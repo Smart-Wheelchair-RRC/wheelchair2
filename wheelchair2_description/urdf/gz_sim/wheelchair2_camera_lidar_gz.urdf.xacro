@@ -3,20 +3,6 @@
 	xmlns:xacro="http://www.ros.org/wiki/xacro">
 
 	<gazebo>
-		<!-- 	<plugin name='diff_drive' filename='libgazebo_ros_diff_drive.so'> -->
-		<!-- 		<left_joint>chassis_to_left_wheel</left_joint> -->
-		<!-- 		<right_joint>chassis_to_right_wheel</right_joint> -->
-		<!-- 		<wheel_separation>0.48</wheel_separation> -->
-		<!-- 		<wheel_diameter>0.31</wheel_diameter> -->
-		<!-- 		<max_wheel_torque>40</max_wheel_torque> -->
-		<!-- 		<max_wheel_acceleration>1.0</max_wheel_acceleration> -->
-		<!-- 		<odometry_frame>odom</odometry_frame> -->
-		<!-- 		<robot_base_frame>base_link</robot_base_frame> -->
-		<!-- 		<publish_odom>true</publish_odom> -->
-		<!-- 		<publish_odom_tf>true</publish_odom_tf> -->
-		<!-- 		<publish_wheel_tf>false</publish_wheel_tf> -->
-		<!-- 	</plugin> -->
-		<!-- </gazebo> -->
 		<plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive">
 			<!-- Remove <ros> tag. -->
 
@@ -26,14 +12,12 @@
 
 			<!-- kinematics -->
 			<wheel_separation>0.48</wheel_separation>
-			<wheel_radius>0.155</wheel_radius> <!-- computed from <wheel_diameter> in the original
-			plugin-->
+			<wheel_radius>0.155</wheel_radius>
+			<!-- computed from <wheel_diameter> in the original plugin -->
 
 			<!-- limits -->
-			<max_linear_acceleration>0.155</max_linear_acceleration> <!-- computed from
-		<max_linear_acceleration> in the original plugin-->
-
-			<topic>cmd_vel</topic> <!-- from <commant_topic> -->
+			<max_linear_acceleration>0.155</max_linear_acceleration>
+			<topic>cmd_vel</topic>
 
 			<odom_topic>odom</odom_topic> <!-- from <odometry_topic> -->
 			<frame_id>odom</frame_id> <!-- from <odometry_frame> -->
@@ -43,8 +27,6 @@
 
 		</plugin>
 	</gazebo>
-	<!--Gazebo
-	related physics values of left wheel joint-->
 	<gazebo reference="chassis_to_left_wheel">
 		<mu1 value="10000.0" />
 		<mu2 value="10000.0" />
@@ -57,7 +39,6 @@
 		<maxVel value="2.0" />
 		<minDepth value="0.0001" />
 	</gazebo>
-	<!-- Gazebo related physics values of right wheel joint-->
 	<gazebo reference="chassis_to_right_wheel">
 		<mu1 value="10000.0" />
 		<mu2 value="10000.0" />

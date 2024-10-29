@@ -22,8 +22,7 @@
 					<mesh filename="${filename}" scale="${scale}" />
 				</geometry>
 			</collision>
-			<visual>				<!-- Visual valuse include origin, material and mesh to make model look similar to
-				real robot-->
+			<visual>
 				<origin rpy="${origin_rpy}" xyz="${origin_xyz}" />
 				<geometry>
 					<mesh filename="${filename}" scale="${scale}" />
