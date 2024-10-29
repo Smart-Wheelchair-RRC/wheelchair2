@@ -9,7 +9,6 @@ from ament_index_python.packages import get_package_share_directory
 def generate_launch_description():
 
     # Get wheelchair2_description_path
-
     pkg_wheelchair2_description = get_package_share_directory(
         "wheelchair2_description")
     # Get URDF via xacro

@@ -27,7 +27,7 @@ def generate_launch_description():
         DeclareLaunchArgument(
             "in_simulation",
             choices=["true", "false"],
-            default_value="false",
+            default_value="true",
         )
     )
     in_simulation = LaunchConfiguration("in_simulation")
@@ -41,7 +41,7 @@ def generate_launch_description():
                 [
                     FindPackageShare("wheelchair2_description"),
                     "urdf",
-                    "wheelchair2_livox.urdf.xacro",
+                    "wheelchair2_camera_lidar.urdf.xacro",
                 ]
             ),
             " is_sim:=",
