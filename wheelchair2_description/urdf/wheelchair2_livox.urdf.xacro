@@ -10,7 +10,8 @@
 
 
 	<xacro:arg name="is_sim" default="true" />
-	<xacro:arg name="gazebo_controllers" default="$(find wheelchair2_bringup)/config/wheelchair2_controllers.yaml" />
+	<xacro:arg name="gazebo_controllers"
+		default="$(find wheelchair2_bringup)/config/wheelchair2_controllers.yaml" />
 
 	<link name="base_link" />
 
@@ -152,7 +153,7 @@
 	</xacro:mid360>
 
 	<xacro:kangaroo_x2_driver name="kangaroo_ros2_control" prefix="" is_sim="$(arg is_sim)"></xacro:kangaroo_x2_driver>
-	
+
 	<xacro:if value="$(arg is_sim)">
 		<gazebo>
 			<plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
