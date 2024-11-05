@@ -186,7 +186,8 @@ def generate_launch_description():
 
     #   RVIZ2
     rviz_config_file = PathJoinSubstitution(
-        [FindPackageShare("wheelchair2_bringup"), "rviz", "wheelchair2.rviz"]
+        [FindPackageShare("wheelchair2_bringup"),
+         "rviz", "wheelchair2_nav.rviz"]
     )
     rviz_node = Node(
         package="rviz2",

@@ -3,7 +3,9 @@ from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
 from launch.substitutions import LaunchConfiguration
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from ament_index_python.packages import get_package_share_directory
+from launch_ros.actions import Node
 import os
+
 
 ARGUMENTS = [
     DeclareLaunchArgument(
@@ -36,6 +38,22 @@ def generate_launch_description():
     map_yaml = os.path.join(get_package_share_directory(
         "wheelchair2_navigation"), "maps", "hospital", "hospital.yaml")
 
+    static_tf_publisher = Node(
+        package="tf2_ros",
+        executable="static_transform_publisher",
+        name="map_to_odom_broadcaster",
+        output="screen",
+        arguments=["--ros-args",
+                   '--x', '0.0',
+                   '--y', '0.0',
+                   '--z', '0.0',
+                   '--roll', '0.0',
+                   '--pitch', '0.0',
+                   '--yaw', '0.0',
+                   '--parent', 'map',
+                   '--child', 'odom']
+    )
+
     nav2_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(get_package_share_directory("nav2_bringup"),
@@ -49,6 +67,7 @@ def generate_launch_description():
     )
 
     ld = LaunchDescription(ARGUMENTS)
+    ld.add_action(static_tf_publisher)
     ld.add_action(nav2_launch)
 
     return ld
