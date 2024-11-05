@@ -18,7 +18,6 @@ from launch_ros.actions import Node
 import launch_ros.parameter_descriptions
 from launch_ros.substitutions import FindPackageShare
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from ament_index_python.packages import get_package_share_directory
 
 
 def generate_launch_description():
@@ -36,12 +35,14 @@ def generate_launch_description():
     launch_description.add_action(
         DeclareLaunchArgument(
             "world",
-            default_value="office"
+            default_value=PathJoinSubstitution(
+                [FindPackageShare("wheelchair2_simulation"),
+                 "worlds", "hospital.world"]
+            ),
+            description='Gazebo world file'
         )
     )
-    world_name = LaunchConfiguration("world")
-    world_files_path = get_package_share_directory(
-        "wheelchair2_simulation") + "worlds/"
+    world = LaunchConfiguration("world")
 
     # ROBOT DESCRIPTION
     robot_description_content = Command(
@@ -98,6 +99,7 @@ def generate_launch_description():
     )
 
     #   GAZEBO
+    source_gazebo_command = Command(["source ", "/usr/share/gazebo/setup.sh"])
     gazebo_launcher = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             PathJoinSubstitution(
@@ -106,9 +108,8 @@ def generate_launch_description():
 
         ),
         launch_arguments={
-            "world": f"{world_files_path}/{world_name}.world",
-            "verbose": "true"
-
+            "world": world,
+            # "verbose": "true"
         }.items(),
         condition=IfCondition(in_simulation)
     )
