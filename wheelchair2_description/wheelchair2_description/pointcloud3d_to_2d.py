@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
+
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import PointCloud2, PointField
-import sensor_msgs_py.point_cloud2 as point_cloud2
+import sensor_msgs_py.point_cloud2 as pc2
 from std_msgs.msg import Header
-from tf2_ros.buffer import Buffer
-from tf2_ros.transform_listener import TransformListener
+from tf2_ros import Buffer, TransformListener
+from geometry_msgs.msg import Transform
 import numpy as np
-from geometry_msgs.msg import TransformStamped
-from transforms3d.affines import compose
-from transforms3d.quaternions import quat2mat
+from scipy.spatial.transform import Rotation
 from rclpy.time import Time
 from rclpy.duration import Duration
+from rclpy.qos import QoSProfile, ReliabilityPolicy, DurabilityPolicy, HistoryPolicy
 
 
 class Pointcloud3Dto2D(Node):
@@ -20,12 +20,9 @@ class Pointcloud3Dto2D(Node):
 
         self.target_frame = target_frame
         self.z_range = z_range
-
-        # TF2 setup
         self.tf_buffer = Buffer()
         self.tf_listener = TransformListener(self.tf_buffer, self)
 
-        # Define point cloud fields
         self.fields = [
             PointField(name="x", offset=0,
                        datatype=PointField.FLOAT32, count=1),
@@ -35,128 +32,86 @@ class Pointcloud3Dto2D(Node):
                        datatype=PointField.FLOAT32, count=1),
         ]
 
-        # Create publisher and subscriber
         self.pub = self.create_publisher(
             PointCloud2,
-            '/livox/pcd_2d',
-            1
+            '/pcd_2d',
+            10
         )
         self.sub = self.create_subscription(
             PointCloud2,
-            '/livox/lidar',
+            '/mid360_PointCloud2',
             self.pointcloud_callback,
-            1
+            10
         )
 
-        self.get_logger().info('Pointcloud 3D to 2D node initialized')
+        self.get_logger().info('Pointcloud 3D to 2D node started...')
 
-    def transform_to_matrix(self, transform: TransformStamped) -> np.ndarray:
-        """Convert a TransformStamped to a 4x4 transformation matrix."""
-        translation = [
-            transform.transform.translation.x,
-            transform.transform.translation.y,
-            transform.transform.translation.z
-        ]
+    def transform_pointcloud(self, msg: PointCloud2):
 
-        rotation = [
-            transform.transform.rotation.w,  # quat format: w, x, y, z
-            transform.transform.rotation.x,
-            transform.transform.rotation.y,
-            transform.transform.rotation.z
-        ]
+        try:
+            tf = self.tf_buffer.lookup_transform(
+                self.target_frame,
+                msg.header.frame_id,
+                Time(),
+                Duration(seconds=1)
+            )
 
-        # Convert quaternion to rotation matrix
-        rotation_matrix = quat2mat(rotation)
+            # Transformation Matrix
+            t = np.eye(4)
+            q = tf.transform.rotation
+            x = tf.transform.translation
+            t[:3, :3] = Rotation.from_quat([q.x, q.y, q.z, q.w]).as_matrix()
+            t[:3, 3] = [x.x, x.y, x.z]
 
-        # Create transformation matrix
-        transform_matrix = compose(translation, rotation_matrix, np.ones(3))
-        return transform_matrix
+            # Transform
+            points_msg = pc2.read_points_numpy(msg)
+            points_map = np.ones((len(points_msg), 4))
+            points_map[:, :3] = points_msg
+            points_map = np.dot(t, points_map.T).T
 
-    def transform_points(self, points: np.ndarray, transform_matrix: np.ndarray) -> np.ndarray:
-        """Transform points using the transformation matrix."""
-        # Add homogeneous coordinate (1) to each point
-        homogeneous_points = np.hstack((points, np.ones((points.shape[0], 1))))
+            mask = (points_map[:, 2] >= self.z_range[0]) & (
+                points_map[:, 2] <= self.z_range[1])
+            filtered_points = points_map[mask]
 
-        # Transform points
-        transformed_points = (transform_matrix @ homogeneous_points.T).T
+            # Remove z-axis
+            filtered_points[:, 2] = 0.0
 
-        # Return to 3D coordinates
-        return transformed_points[:, :3]
+            header = Header()
+            header.frame_id = self.target_frame
+            header.stamp = self.get_clock().now().to_msg()
 
-    def transform_pointcloud(self, pointcloud_msg: PointCloud2):
-        # Wait for the transform between frames
-        trans = self.tf_buffer.lookup_transform(
-            self.target_frame,
-            pointcloud_msg.header.frame_id,  # Source frame
-            Time(),  # Get the latest available transform
-            Duration(seconds=1)  # Timeout
-        )
+            cloud_msg = pc2.create_cloud(
+                header, self.fields, filtered_points[:, :3])
 
-        # Convert transform to matrix
-        transform_matrix = self.transform_to_matrix(trans)
+            return cloud_msg
 
-        # Get points from PointCloud2
-        points = point_cloud2.read_points(
-            pointcloud_msg,
-            field_names=["x", "y", "z"],
-            skip_nans=True
-        )
-        points_array = np.array(list(points))
-
-        if points_array.size == 0:
+        except Exception as e:
+            self.get_logger().error(f'Transform failed: {str(e)}')
             return None
 
-        # Transform points
-        transformed_points = self.transform_points(
-            points_array, transform_matrix)
-
-        return transformed_points, pointcloud_msg.header.frame_id
-
-    def pointcloud_callback(self, pcd_msg: PointCloud2):
-        transform_result = self.transform_pointcloud(pcd_msg)
-
-        if transform_result is not None:
-            xyz_array, original_frame = transform_result
-
-            if xyz_array.size == 0:
-                self.get_logger().warn('Empty point cloud received')
-                return
-
-            self.get_logger().debug(f'Point cloud shape: {xyz_array.shape}')
-
-            # Filter points based on z-range
-            mask = np.where(
-                (xyz_array[:, 2] >= self.z_range[0]) &
-                (xyz_array[:, 2] <= self.z_range[1])
-            )
-            xyz_array = xyz_array[mask]
-
-            if xyz_array.size == 0:
-                self.get_logger().warn('No points remaining after z-range filter')
-                return
-
-            # Set z coordinates to 0
-            xyz_array[:, 2] = 0
-
-            # Create and publish the 2D point cloud
-            header = Header()
-            header.stamp = self.get_clock().now().to_msg()
-            header.frame_id = self.target_frame
-
-            out_pcd_msg = point_cloud2.create_cloud_xyz32(header, xyz_array)
-            self.pub.publish(out_pcd_msg)
+    def pointcloud_callback(self, msg: PointCloud2) -> None:
+        """
+        Process incoming pointcloud messages
+        """
+        transformed_msg = self.transform_pointcloud(msg)
+        if transformed_msg is not None:
+            self.pub.publish(transformed_msg)
 
 
 def main(args=None):
     rclpy.init(args=args)
-    node = Pointcloud3Dto2D()
 
     try:
-        rclpy.spin(node)
-    except KeyboardInterrupt:
-        pass
+        node = Pointcloud3Dto2D()
+        try:
+            rclpy.spin(node)
+        except KeyboardInterrupt:
+            pass
+        finally:
+            node.destroy_node()
+    except Exception as e:
+        print(f'Error initializing node: {str(e)}')
     finally:
-        node.destroy_node()
         rclpy.shutdown()
 
 
