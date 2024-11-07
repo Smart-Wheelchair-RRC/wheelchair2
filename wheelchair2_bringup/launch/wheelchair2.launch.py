@@ -53,7 +53,7 @@ def generate_launch_description():
                 [
                     FindPackageShare("wheelchair2_description"),
                     "urdf",
-                    "wheelchair2_camera_lidar.urdf.xacro",
+                    "wheelchair2_livox.urdf.xacro",
                 ]
             ),
             " is_sim:=",
