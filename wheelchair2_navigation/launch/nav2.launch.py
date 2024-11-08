@@ -11,63 +11,86 @@ ARGUMENTS = [
     DeclareLaunchArgument(
         "in_simulation",
         choices=["true", "false"],
-        default_value="true",
+        default_value="false",
     ),
     DeclareLaunchArgument(
-        "world",
-        default_value="hospital",
-        description='Gazebo world name'
+        "world", default_value="hospital", description="Gazebo world name"
     ),
     DeclareLaunchArgument(
-        'params_file',
+        "params_file",
         default_value=os.path.join(
-            get_package_share_directory(
-                "wheelchair2_navigation"), "config", "nav2_params.yaml"
+            get_package_share_directory("wheelchair2_navigation"),
+            "config",
+            "nav2_params.yaml",
         ),
-        description='Path for nav2 config file'
-    )
+        description="Path for nav2 config file",
+    ),
 ]
 
 
 def generate_launch_description():
-
     in_simulation = LaunchConfiguration("in_simulation")
     use_sim_time = in_simulation
-    params_file = LaunchConfiguration('params_file')
+    params_file = LaunchConfiguration("params_file")
     # world = LaunchConfiguration('world')
-    map_yaml = os.path.join(get_package_share_directory(
-        "wheelchair2_navigation"), "maps", "hospital", "hospital.yaml")
+    map_yaml = os.path.join(
+        get_package_share_directory("wheelchair2_navigation"),
+        "maps",
+        "rrc",
+        "rrc.yaml",
+    )
 
     static_tf_publisher = Node(
         package="tf2_ros",
         executable="static_transform_publisher",
         name="map_to_odom_broadcaster",
         output="screen",
-        arguments=["--ros-args -p",
-                   '--x', '0.0',
-                   '--y', '0.0',
-                   '--z', '0.0',
-                   '--roll', '0.0',
-                   '--pitch', '0.0',
-                   '--yaw', '0.0',
-                   '--frame_id', 'map',
-                   '--child_frame_id', 'odom']
+        arguments=[
+            "--ros-args -p",
+            "--x",
+            "0.0",
+            "--y",
+            "0.0",
+            "--z",
+            "0.0",
+            "--roll",
+            "0.0",
+            "--pitch",
+            "0.0",
+            "--yaw",
+            "0.0",
+            "--frame_id",
+            "map",
+            "--child_frame_id",
+            "odom",
+        ],
     )
 
     nav2_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            os.path.join(get_package_share_directory("nav2_bringup"),
-                         "launch/bringup_launch.py")
+            os.path.join(
+                get_package_share_directory("nav2_bringup"),
+                "launch/navigation_launch.py",
+            )
         ),
         launch_arguments={
-            'map': map_yaml,
-            'use_sim_time': use_sim_time,
-            'params_file': params_file,
+            "map": map_yaml,
+            "use_sim_time": use_sim_time,
+            "params_file": params_file,
         }.items(),
     )
 
+    map_server_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(
+                get_package_share_directory("wheelchair2_navigation"),
+                "launch/map_server.launch.py",
+            )
+        )
+    )
     ld = LaunchDescription(ARGUMENTS)
     ld.add_action(static_tf_publisher)
     ld.add_action(nav2_launch)
+    ld.add_action(map_server_launch)
 
     return ld

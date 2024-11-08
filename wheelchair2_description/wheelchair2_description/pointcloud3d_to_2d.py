@@ -14,7 +14,7 @@ from rclpy.duration import Duration
 
 class Pointcloud3Dto2D(Node):
     def __init__(self, target_frame="chassis", z_range=[-0.3, 1.5]):
-        super().__init__('pointcloud_3d_to_2d')
+        super().__init__("pointcloud_3d_to_2d")
 
         self.target_frame = target_frame
         self.z_range = z_range
@@ -22,36 +22,22 @@ class Pointcloud3Dto2D(Node):
         self.tf_listener = TransformListener(self.tf_buffer, self)
 
         self.fields = [
-            PointField(name="x", offset=0,
-                       datatype=PointField.FLOAT32, count=1),
-            PointField(name="y", offset=4,
-                       datatype=PointField.FLOAT32, count=1),
-            PointField(name="z", offset=8,
-                       datatype=PointField.FLOAT32, count=1),
+            PointField(name="x", offset=0, datatype=PointField.FLOAT32, count=1),
+            PointField(name="y", offset=4, datatype=PointField.FLOAT32, count=1),
+            PointField(name="z", offset=8, datatype=PointField.FLOAT32, count=1),
         ]
 
-        self.pub = self.create_publisher(
-            PointCloud2,
-            '/pcd_2d',
-            10
-        )
+        self.pub = self.create_publisher(PointCloud2, "/pcd_2d", 10)
         self.sub = self.create_subscription(
-            PointCloud2,
-            '/mid360_PointCloud2',
-            self.pointcloud_callback,
-            10
+            PointCloud2, "/livox/lidar", self.pointcloud_callback, 10
         )
 
-        self.get_logger().info('Pointcloud 3D to 2D node started...')
+        self.get_logger().info("Pointcloud 3D to 2D node started...")
 
     def transform_pointcloud(self, msg: PointCloud2):
-
         try:
             tf = self.tf_buffer.lookup_transform(
-                self.target_frame,
-                msg.header.frame_id,
-                Time(),
-                Duration(seconds=1)
+                self.target_frame, msg.header.frame_id, Time(), Duration(seconds=1)
             )
 
             # Transformation Matrix
@@ -62,13 +48,16 @@ class Pointcloud3Dto2D(Node):
             t[:3, 3] = [x.x, x.y, x.z]
 
             # Transform
-            points_msg = pc2.read_points_numpy(msg)
+            points_msg = pc2.read_points_numpy(
+                msg, field_names=["x", "y", "z", "intensity"]
+            )
             points_map = np.ones((len(points_msg), 4))
             points_map[:, :3] = points_msg
             points_map = np.dot(t, points_map.T).T
 
             mask = (points_map[:, 2] >= self.z_range[0]) & (
-                points_map[:, 2] <= self.z_range[1])
+                points_map[:, 2] <= self.z_range[1]
+            )
             filtered_points = points_map[mask]
 
             # Remove z-axis
@@ -78,13 +67,12 @@ class Pointcloud3Dto2D(Node):
             header.frame_id = self.target_frame
             header.stamp = self.get_clock().now().to_msg()
 
-            cloud_msg = pc2.create_cloud(
-                header, self.fields, filtered_points[:, :3])
+            cloud_msg = pc2.create_cloud(header, self.fields, filtered_points[:, :3])
 
             return cloud_msg
 
         except Exception as e:
-            self.get_logger().error(f'Transform failed: {str(e)}')
+            self.get_logger().error(f"Transform failed: {str(e)}")
             return None
 
     def pointcloud_callback(self, msg: PointCloud2) -> None:
@@ -108,10 +96,10 @@ def main(args=None):
         finally:
             node.destroy_node()
     except Exception as e:
-        print(f'Error initializing node: {str(e)}')
+        print(f"Error initializing node: {str(e)}")
     finally:
         rclpy.shutdown()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

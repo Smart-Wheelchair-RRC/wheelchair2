@@ -27,7 +27,7 @@ def generate_launch_description():
         DeclareLaunchArgument(
             "in_simulation",
             choices=["true", "false"],
-            default_value="true",
+            default_value="false",
         )
     )
     in_simulation = LaunchConfiguration("in_simulation")
@@ -36,10 +36,9 @@ def generate_launch_description():
         DeclareLaunchArgument(
             "world",
             default_value=PathJoinSubstitution(
-                [FindPackageShare("wheelchair2_simulation"),
-                 "worlds", "hospital.world"]
+                [FindPackageShare("wheelchair2_simulation"), "worlds", "hospital.world"]
             ),
-            description='Gazebo world file'
+            description="Gazebo world file",
         )
     )
     world = LaunchConfiguration("world")
@@ -53,7 +52,7 @@ def generate_launch_description():
                 [
                     FindPackageShare("wheelchair2_description"),
                     "urdf",
-                    "wheelchair2_livox.urdf.xacro",
+                    "wheelchair2_camera_lidar.urdf.xacro",
                 ]
             ),
             " is_sim:=",
@@ -105,13 +104,12 @@ def generate_launch_description():
             PathJoinSubstitution(
                 [FindPackageShare("gazebo_ros"), "launch", "gazebo.launch.py"]
             ),
-
         ),
         launch_arguments={
             "world": world,
             # "verbose": "true"
         }.items(),
-        condition=IfCondition(in_simulation)
+        condition=IfCondition(in_simulation),
     )
     launch_description.add_action(gazebo_launcher)
 
@@ -186,8 +184,7 @@ def generate_launch_description():
 
     #   RVIZ2
     rviz_config_file = PathJoinSubstitution(
-        [FindPackageShare("wheelchair2_bringup"),
-         "rviz", "wheelchair2_nav.rviz"]
+        [FindPackageShare("wheelchair2_bringup"), "rviz", "wheelchair2_nav.rviz"]
     )
     rviz_node = Node(
         package="rviz2",
