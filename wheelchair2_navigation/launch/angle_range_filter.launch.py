@@ -19,7 +19,7 @@ def generate_launch_description():
                         ]
                     )
                 ],
-                remappings=[("scan", "/scan"), ("/scan_filtered", "/scan_out")],
+                remappings=[("scan", "/scan_raw"), ("/scan_filtered", "/scan")],
             )
         ]
     )

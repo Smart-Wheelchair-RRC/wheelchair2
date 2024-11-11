@@ -70,7 +70,7 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(
             os.path.join(
                 get_package_share_directory("nav2_bringup"),
-                "launch/navigation_launch.py",
+                "launch/bringup_launch.py",
             )
         ),
         launch_arguments={
@@ -91,6 +91,6 @@ def generate_launch_description():
     ld = LaunchDescription(ARGUMENTS)
     ld.add_action(static_tf_publisher)
     ld.add_action(nav2_launch)
-    ld.add_action(map_server_launch)
+    # ld.add_action(map_server_launch)
 
     return ld

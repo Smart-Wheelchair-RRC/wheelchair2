@@ -203,4 +203,20 @@ def generate_launch_description():
         )
     )
 
+    angle_range_filter_node = Node(
+        package="laser_filters",
+        executable="scan_to_scan_filter_chain",
+        parameters=[
+            PathJoinSubstitution(
+                [
+                    FindPackageShare("wheelchair2_navigation"),
+                    "config",
+                    "angle_range_filter.yaml",
+                ]
+            )
+        ],
+        remappings=[("scan", "/scan"), ("/scan_filtered", "/scan_out")],
+    )
+    # launch_description.add_action(angle_range_filter_node)
+
     return launch_description
