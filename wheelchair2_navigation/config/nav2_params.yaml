@@ -6,7 +6,7 @@ amcl:
     alpha3: 0.2
     alpha4: 0.2
     alpha5: 0.2
-    base_frame_id: "base_link"
+    base_frame_id: "chassis"
     beam_skip_distance: 0.5
     beam_skip_error_threshold: 0.9
     beam_skip_threshold: 0.3
@@ -16,7 +16,7 @@ amcl:
     laser_likelihood_max_dist: 4.0
     laser_max_range: 3.7
     laser_min_range: 0.15
-    laser_model_type: "likelihood_field_prob"
+    laser_model_type: "likelihood_field"
     max_beams: 180
     max_particles: 5000
     min_particles: 500
@@ -117,7 +117,7 @@ controller_server:
     min_y_velocity_threshold: 0.5
     min_theta_velocity_threshold: 0.001
     failure_tolerance: 0.3
-    progress_checker_plugin: "progress_checker_plugin"
+    progress_checker_plugin: "progress_checker"
     goal_checker_plugins: ["general_goal_checker"] # "precise_goal_checker"
     controller_plugins: ["FollowPath"]
 
@@ -192,10 +192,10 @@ controller_server:
 local_costmap:
   local_costmap:
     ros__parameters:
-      update_frequency: 10.0
-      publish_frequency: 10.0
+      update_frequency: 5.0
+      publish_frequency: 2.0
       global_frame: odom
-      robot_base_frame: base_link
+      robot_base_frame: chassis
       use_sim_time: False
       rolling_window: true
       width: 5
@@ -238,7 +238,7 @@ global_costmap:
       update_frequency: 5.0
       publish_frequency: 5.0
       global_frame: map
-      robot_base_frame: base_link
+      robot_base_frame: chassis
       use_sim_time: False
       robot_radius: 0.25
       resolution: 0.05
