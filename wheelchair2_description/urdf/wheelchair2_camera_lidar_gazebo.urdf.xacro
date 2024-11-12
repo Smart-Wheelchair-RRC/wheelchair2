@@ -86,7 +86,7 @@
 		<material>Gazebo/Grey</material>
 	</gazebo>
 
-	<gazebo reference="rplidar">
+	<gazebo reference="laser">
 		<material>Gazebo/DarkGrey</material>
 
 		<sensor name="laser" type="ray">
@@ -121,7 +121,7 @@
 					<argument>~/out:=scan</argument>
 				</ros>
 				<output_type>sensor_msgs/LaserScan</output_type>
-				<frame_name>rplidar</frame_name>
+				<frame_name>laser</frame_name>
 			</plugin>
 		</sensor>
 	</gazebo>
