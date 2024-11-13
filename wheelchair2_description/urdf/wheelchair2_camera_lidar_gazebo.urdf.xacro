@@ -20,7 +20,7 @@
 	<!---->
 	<!--Gazebo
 	related physics values of left wheel joint-->
-	<gazebo reference="chassis_to_left_wheel">
+	<gazebo reference="base_link_to_left_wheel">
 		<mu1 value="10000.0" />
 		<mu2 value="10000.0" />
 		<fdir1 value="0 0 1" />
@@ -33,7 +33,7 @@
 		<minDepth value="0.0001" />
 	</gazebo>
 	<!-- Gazebo related physics values of right wheel joint-->
-	<gazebo reference="chassis_to_right_wheel">
+	<gazebo reference="base_link_to_right_wheel">
 		<mu1 value="10000.0" />
 		<mu2 value="10000.0" />
 		<fdir1 value="0 0 1" />
@@ -44,7 +44,7 @@
 		<minDepth value="0.0001" />
 	</gazebo>
 
-	<gazebo reference="chassis">
+	<gazebo reference="base_link">
 		<material>Gazebo/FlatBlack</material>
 	</gazebo>
 
