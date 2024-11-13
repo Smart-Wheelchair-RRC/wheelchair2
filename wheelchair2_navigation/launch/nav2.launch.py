@@ -36,8 +36,8 @@ def generate_launch_description():
     map_yaml = os.path.join(
         get_package_share_directory("wheelchair2_navigation"),
         "maps",
-        "hospital",
-        "hospital.yaml",
+        "rrc",
+        "rrc.yaml",
     )
 
     static_tf_publisher = Node(
