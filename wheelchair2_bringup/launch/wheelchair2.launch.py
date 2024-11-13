@@ -32,6 +32,17 @@ def generate_launch_description():
     )
     in_simulation = LaunchConfiguration("in_simulation")
 
+    launch_description.add_action(
+        DeclareLaunchArgument(
+            "world",
+            default_value=PathJoinSubstitution(
+                [FindPackageShare("wheelchair2_simulation"), "worlds", "hospital.world"]
+            ),
+            description="Gazebo world file",
+        )
+    )
+    world = LaunchConfiguration("world")
+
     # ROBOT DESCRIPTION
     robot_description_content = Command(
         [
@@ -87,12 +98,17 @@ def generate_launch_description():
     )
 
     #   GAZEBO
+    source_gazebo_command = Command(["source ", "/usr/share/gazebo/setup.sh"])
     gazebo_launcher = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             PathJoinSubstitution(
                 [FindPackageShare("gazebo_ros"), "launch", "gazebo.launch.py"]
             ),
         ),
+        launch_arguments={
+            "world": world,
+            # "verbose": "true"
+        }.items(),
         condition=IfCondition(in_simulation),
     )
     launch_description.add_action(gazebo_launcher)
@@ -168,7 +184,7 @@ def generate_launch_description():
 
     #   RVIZ2
     rviz_config_file = PathJoinSubstitution(
-        [FindPackageShare("wheelchair2_bringup"), "rviz", "wheelchair2.rviz"]
+        [FindPackageShare("wheelchair2_bringup"), "rviz", "wheelchair2_nav.rviz"]
     )
     rviz_node = Node(
         package="rviz2",
@@ -186,5 +202,21 @@ def generate_launch_description():
             )
         )
     )
+
+    angle_range_filter_node = Node(
+        package="laser_filters",
+        executable="scan_to_scan_filter_chain",
+        parameters=[
+            PathJoinSubstitution(
+                [
+                    FindPackageShare("wheelchair2_navigation"),
+                    "config",
+                    "angle_range_filter.yaml",
+                ]
+            )
+        ],
+        remappings=[("scan", "/scan_raw"), ("scan_filtered", "/scan")],
+    )
+    launch_description.add_action(angle_range_filter_node)
 
     return launch_description

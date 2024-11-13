@@ -1,6 +1,6 @@
 controller_manager:
   ros__parameters:
-    update_rate: 10  # Hz
+    update_rate: 10 # Hz
 
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
@@ -10,11 +10,11 @@ controller_manager:
 
 wheelchair2_base_controller:
   ros__parameters:
-    left_wheel_names: ["chassis_to_left_wheel"]
-    right_wheel_names: ["chassis_to_right_wheel"]
+    left_wheel_names: ["base_link_to_left_wheel"]
+    right_wheel_names: ["base_link_to_right_wheel"]
 
     wheel_separation: 0.55
-    wheels_per_side: 1  
+    wheels_per_side: 1
     wheel_radius: 0.16
 
     wheel_separation_multiplier: 1.0
@@ -23,8 +23,8 @@ wheelchair2_base_controller:
 
     publish_rate: 50.0
     odom_frame_id: odom
-    base_frame_id: base_link
-    pose_covariance_diagonal : [0.001, 0.001, 0.001, 0.001, 0.001, 0.01]
+    base_frame_id: base_footprint
+    pose_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.001, 0.01]
     twist_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.001, 0.01]
 
     open_loop: true
@@ -55,3 +55,4 @@ wheelchair2_base_controller:
     angular.z.min_acceleration: -1.0
     angular.z.max_jerk: 0.0
     angular.z.min_jerk: 0.0
+
