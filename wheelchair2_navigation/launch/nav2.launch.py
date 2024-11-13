@@ -45,25 +45,7 @@ def generate_launch_description():
         executable="static_transform_publisher",
         name="map_to_odom_broadcaster",
         output="screen",
-        arguments=[
-            "--ros-args -p",
-            "--x",
-            "0.0",
-            "--y",
-            "0.0",
-            "--z",
-            "0.0",
-            "--roll",
-            "0.0",
-            "--pitch",
-            "0.0",
-            "--yaw",
-            "0.0",
-            "--frame_id",
-            "map",
-            "--child_frame_id",
-            "odom",
-        ],
+        arguments="0 0 0 0 0 0 map odom".split(" "),
     )
 
     nav2_launch = IncludeLaunchDescription(
