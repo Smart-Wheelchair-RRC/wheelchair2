@@ -21,7 +21,7 @@ ARGUMENTS = [
         default_value=os.path.join(
             get_package_share_directory("wheelchair2_navigation"),
             "config",
-            "nav2_params.yaml",
+            "nav2_turtlebot.yaml",
         ),
         description="Path for nav2 config file",
     ),
@@ -36,8 +36,8 @@ def generate_launch_description():
     map_yaml = os.path.join(
         get_package_share_directory("wheelchair2_navigation"),
         "maps",
-        "rrc",
-        "rrc.yaml",
+        "hospital",
+        "hospital.yaml",
     )
 
     static_tf_publisher = Node(

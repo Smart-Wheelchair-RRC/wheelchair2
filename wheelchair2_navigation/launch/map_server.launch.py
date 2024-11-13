@@ -13,7 +13,8 @@ def generate_launch_description():
 
     # map file
     map_file_path = os.path.join(
-        get_package_share_directory("wheelchair2_navigation"), "maps", "rrc", "rrc.yaml"
+        get_package_share_directory(
+            "wheelchair2_navigation"), "maps", "hospital", "hospital.yaml"
     )
 
     map_server_cmd = Node(
