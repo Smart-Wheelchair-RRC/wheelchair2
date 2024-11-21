@@ -14,6 +14,7 @@
 #include "rclcpp/rclcpp.hpp"
 
 #define RAD_2_DEG 180.0 / 3.14159265359
+#define DEG_2_RAD 3.14159265359 / 180.0
 
 namespace wheelchair2_kangaroo_x2_driver
 {
@@ -360,12 +361,12 @@ namespace wheelchair2_kangaroo_x2_driver
 
     double Kangaroo::encoder_lines_to_turn(int encoder_lines)
     {
-        return (encoder_lines * (360.0 / ((config_.encoder_lines_per_revolution * config_.wheel_center_distance) / config_.wheel_diameter))) / 2;
+        return ((encoder_lines * (360.0 / ((config_.encoder_lines_per_revolution * config_.wheel_center_distance) / config_.wheel_diameter))) / 4) * DEG_2_RAD;
     }
 
     int Kangaroo::turn_to_encoder_lines(double angular)
     {
-        return 2 * (angular * RAD_2_DEG) * (((config_.encoder_lines_per_revolution * config_.wheel_center_distance) / config_.wheel_diameter) / 360.0);
+        return 4 * (angular * RAD_2_DEG) * (((config_.encoder_lines_per_revolution * config_.wheel_center_distance) / config_.wheel_diameter) / 360.0);
     }
 
     bool Kangaroo::set_channel_speed(double speed, unsigned char address, char channel)
@@ -510,8 +511,8 @@ namespace wheelchair2_kangaroo_x2_driver
                 double angular_position = encoder_lines_to_turn(get_parameter((unsigned char)128, channel_2_, (unsigned char)1));
                 
                 // Convert to individual wheel positions
-                left_wheel_.position = (linear_position - (angular_position * config_.wheel_center_distance / 2)) / (config_.wheel_diameter / 2);
-                right_wheel_.position = (linear_position + (angular_position * config_.wheel_center_distance / 2)) / (config_.wheel_diameter / 2);
+                left_wheel_.position = ((linear_position - (angular_position * config_.wheel_center_distance / 2)) / (config_.wheel_diameter / 2));
+                right_wheel_.position = ((linear_position + (angular_position * config_.wheel_center_distance / 2)) / (config_.wheel_diameter / 2));
 
                 double linear_velocity = encoder_lines_to_drive(get_parameter((unsigned char)128, channel_1_, (unsigned char)2));
                 double angular_velocity = encoder_lines_to_turn(get_parameter((unsigned char)128, channel_2_, (unsigned char)2));
