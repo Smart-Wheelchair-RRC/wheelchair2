@@ -1,7 +1,8 @@
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
-from launch.substitutions import LaunchConfiguration
+from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch_ros.substitutions import FindPackageShare
 from ament_index_python.packages import get_package_share_directory
 from launch_ros.actions import Node
 import os
@@ -70,6 +71,22 @@ def generate_launch_description():
             )
         )
     )
+
+    angle_range_filter_node = Node(
+        package="laser_filters",
+        executable="scan_to_scan_filter_chain",
+        parameters=[
+            PathJoinSubstitution(
+                [
+                    FindPackageShare("wheelchair2_navigation"),
+                    "config",
+                    "angle_range_filter.yaml",
+                ]
+            )
+        ],
+        remappings=[("scan", "/scan_raw"), ("scan_filtered", "/scan")],
+    )
+    ld.add_action(angle_range_filter_node)
     ld = LaunchDescription(ARGUMENTS)
     ld.add_action(static_tf_publisher)
     ld.add_action(nav2_launch)

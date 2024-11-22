@@ -43,6 +43,18 @@ def generate_launch_description():
     )
     world = LaunchConfiguration("world")
 
+    # Launch rviz
+    rviz_config_file = PathJoinSubstitution(
+        [FindPackageShare("wheelchair2_bringup"), "rviz", "wheelchair2_nav.rviz"]
+    )
+    rviz_node = Node(
+        package="rviz2",
+        executable="rviz2",
+        name="rviz2",
+        output="log",
+        arguments=["-d", rviz_config_file],
+    )
+
     # ROBOT DESCRIPTION
     robot_description_content = Command(
         [
@@ -74,8 +86,7 @@ def generate_launch_description():
     )
     launch_description.add_action(robot_state_publisher_node)
 
-    # CONTROLLER MANAGER
-    #   NODE
+    # CONTROLLER MANAGER NODE (Invoke only irl)
     controller_manager_node = Node(
         package="controller_manager",
         executable="ros2_control_node",
@@ -97,8 +108,8 @@ def generate_launch_description():
         condition=IfCondition(NotSubstitution(in_simulation)),
     )
 
-    #   GAZEBO
-    source_gazebo_command = Command(["source ", "/usr/share/gazebo/setup.sh"])
+    # GAZEBO
+    source_gazebo_command = Command(["source ", "/usr/share/gazebo/setup.sh"]) 
     gazebo_launcher = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             PathJoinSubstitution(
@@ -161,7 +172,7 @@ def generate_launch_description():
         )
     )
 
-    #   WHEELCHAIR2 CONTROLLER
+    #   WHEELCHAIR CONTROLLER
     robot_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
@@ -182,41 +193,22 @@ def generate_launch_description():
         )
     )
 
-    #   RVIZ2
-    rviz_config_file = PathJoinSubstitution(
-        [FindPackageShare("wheelchair2_bringup"), "rviz", "wheelchair2_nav.rviz"]
-    )
-    rviz_node = Node(
-        package="rviz2",
-        executable="rviz2",
-        name="rviz2",
-        output="log",
-        arguments=["-d", rviz_config_file],
+    # Launches nav2
+    nav2_launcher = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            PathJoinSubstitution(
+                [FindPackageShare("wheelchair2_navigation"), "launch", "nav2.launch.py"]
+            ),
+        ),
     )
 
     launch_description.add_action(
         RegisterEventHandler(
             event_handler=OnProcessExit(
                 target_action=joint_state_broadcaster_spawner,
-                on_exit=[rviz_node],
+                on_exit=[rviz_node, nav2_launcher],
             )
         )
     )
-
-    angle_range_filter_node = Node(
-        package="laser_filters",
-        executable="scan_to_scan_filter_chain",
-        parameters=[
-            PathJoinSubstitution(
-                [
-                    FindPackageShare("wheelchair2_navigation"),
-                    "config",
-                    "angle_range_filter.yaml",
-                ]
-            )
-        ],
-        remappings=[("scan", "/scan_raw"), ("scan_filtered", "/scan")],
-    )
-    launch_description.add_action(angle_range_filter_node)
 
     return launch_description
