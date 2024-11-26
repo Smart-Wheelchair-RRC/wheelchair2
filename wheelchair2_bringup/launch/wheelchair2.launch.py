@@ -66,6 +66,7 @@ def generate_launch_description():
                     "wheelchair2_controllers.yaml",
                 ]
             ),
+            {"use_sim_time": in_simulation},
         ],
         output="screen",
         remappings=[
@@ -78,7 +79,9 @@ def generate_launch_description():
     # GAZEBO (SIMULATION)
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            PathJoinSubstitution([FindPackageShare("gazebo_ros"), "launch", "gazebo.launch.py"]),
+            PathJoinSubstitution(
+                [FindPackageShare("gazebo_ros"), "launch", "gazebo.launch.py"]
+            ),
         ),
         launch_arguments={"world": world}.items(),
         condition=IfCondition(in_simulation),
@@ -128,7 +131,11 @@ def generate_launch_description():
             DeclareLaunchArgument(
                 "world",
                 default_value=PathJoinSubstitution(
-                    [FindPackageShare("wheelchair2_simulation"), "worlds", "hospital.world"]
+                    [
+                        FindPackageShare("wheelchair2_simulation"),
+                        "worlds",
+                        "hospital.world",
+                    ]
                 ),
                 description="Gazebo world file",
             ),
