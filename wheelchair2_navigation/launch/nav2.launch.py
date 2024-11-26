@@ -1,95 +1,71 @@
-from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
-from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
-from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch_ros.substitutions import FindPackageShare
-from ament_index_python.packages import get_package_share_directory
-from launch_ros.actions import Node
 import os
 
-
-ARGUMENTS = [
-    DeclareLaunchArgument(
-        "in_simulation",
-        choices=["true", "false"],
-        default_value="false",
-    ),
-    DeclareLaunchArgument(
-        "world", default_value="hospital", description="Gazebo world name"
-    ),
-    DeclareLaunchArgument(
-        "params_file",
-        default_value=os.path.join(
-            get_package_share_directory("wheelchair2_navigation"),
-            "config",
-            "nav2_params.yaml",
-        ),
-        description="Path for nav2 config file",
-    ),
-]
+from ament_index_python.packages import get_package_share_directory
+from launch import LaunchDescription
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
+from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch.substitutions import LaunchConfiguration
 
 
 def generate_launch_description():
-    in_simulation = LaunchConfiguration("in_simulation")
-    use_sim_time = in_simulation
-    params_file = LaunchConfiguration("params_file")
-    # world = LaunchConfiguration('world')
-    map_yaml = os.path.join(
-        get_package_share_directory("wheelchair2_navigation"),
-        "maps",
-        "rrc",
-        "rrc.yaml",
+    use_sim_time = LaunchConfiguration("use_sim_time", default="false")
+    map_yaml = LaunchConfiguration(
+        "map",
+        default=os.path.join(
+            get_package_share_directory("wheelchair2_navigation"),
+            "maps",
+            "hospital",
+            "hospital.yaml",
+        ),
+    )
+    nav2_parameters_file = LaunchConfiguration(
+        "params_file",
+        default=os.path.join(get_package_share_directory("wheelchair2_navigation"), "config", "nav2_params.yaml"),
     )
 
-    static_tf_publisher = Node(
-        package="tf2_ros",
-        executable="static_transform_publisher",
-        name="map_to_odom_broadcaster",
-        output="screen",
-        arguments="0 0 0 0 0 0 map odom".split(" "),
-    )
-
-    nav2_launch = IncludeLaunchDescription(
+    nav2 = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            os.path.join(
-                get_package_share_directory("nav2_bringup"),
-                "launch/bringup_launch.py",
-            )
+            [os.path.join(get_package_share_directory("nav2_bringup"), "launch"), "/bringup_launch.py"]
         ),
         launch_arguments={
             "map": map_yaml,
             "use_sim_time": use_sim_time,
-            "params_file": params_file,
+            "params_file": nav2_parameters_file,
         }.items(),
     )
 
-    map_server_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(
-                get_package_share_directory("wheelchair2_navigation"),
-                "launch/map_server.launch.py",
-            )
-        )
-    )
+    # angle_range_filter_node = Node(
+    #     package="laser_filters",
+    #     executable="scan_to_scan_filter_chain",
+    #     parameters=[
+    #         PathJoinSubstitution(
+    #             [
+    #                 FindPackageShare("wheelchair2_navigation"),
+    #                 "config",
+    #                 "angle_range_filter.yaml",
+    #             ]
+    #         )
+    #     ],
+    #     remappings=[("scan", "/scan_raw"), ("scan_filtered", "/scan")],
+    # )
 
-    angle_range_filter_node = Node(
-        package="laser_filters",
-        executable="scan_to_scan_filter_chain",
-        parameters=[
-            PathJoinSubstitution(
-                [
-                    FindPackageShare("wheelchair2_navigation"),
-                    "config",
-                    "angle_range_filter.yaml",
-                ]
-            )
-        ],
-        remappings=[("scan", "/scan_raw"), ("scan_filtered", "/scan")],
+    return LaunchDescription(
+        [
+            DeclareLaunchArgument(
+                "use_sim_time",
+                default_value="false",
+                description="Use simulation (Gazebo) clock if true",
+            ),
+            DeclareLaunchArgument(
+                "map",
+                default_value=map_yaml,
+                description="Full path to map file to load",
+            ),
+            DeclareLaunchArgument(
+                "params_file",
+                default_value=nav2_parameters_file,
+                description="Path for nav2 config file",
+            ),
+            nav2,
+        ]
     )
-    ld.add_action(angle_range_filter_node)
-    ld = LaunchDescription(ARGUMENTS)
-    ld.add_action(static_tf_publisher)
-    ld.add_action(nav2_launch)
-    # ld.add_action(map_server_launch)
-
-    return ld
