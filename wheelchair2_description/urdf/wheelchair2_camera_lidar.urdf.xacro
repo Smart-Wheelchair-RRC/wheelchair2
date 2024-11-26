@@ -165,6 +165,7 @@
 		<gazebo>
 			<plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
 				<parameters>$(arg gazebo_controllers)</parameters>
+				<parameters>$(find wheelchair2_bringup)/config/gazebo_ros2_control.yaml</parameters>
 				<ros>
 					<remapping>/wheelchair2_base_controller/cmd_vel_unstamped:=/cmd_vel</remapping>
 					<remapping>/wheelchair2_base_controller/odom:=/odom</remapping>
