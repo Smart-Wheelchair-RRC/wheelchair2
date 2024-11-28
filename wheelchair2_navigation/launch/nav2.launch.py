@@ -37,7 +37,8 @@ def generate_launch_description():
     nav2 = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             [
-                os.path.join(get_package_share_directory("nav2_bringup"), "launch"),
+                os.path.join(get_package_share_directory(
+                    "nav2_bringup"), "launch"),
                 "/bringup_launch.py",
             ]
         ),
@@ -47,22 +48,6 @@ def generate_launch_description():
             "params_file": nav2_parameters_file,
         }.items(),
     )
-
-    angle_range_filter_node = Node(
-        package="laser_filters",
-        executable="scan_to_scan_filter_chain",
-        parameters=[
-            PathJoinSubstitution(
-                [   
-                    FindPackageShare("wheelchair2_navigation"),
-                    "config",
-                    "angle_range_filter.yaml",
-                ]
-            )
-        ],
-        remappings=[("scan", "/scan_raw"), ("scan_filtered", "/scan")],
-    )
-
     return LaunchDescription(
         [
             DeclareLaunchArgument(
@@ -80,13 +65,6 @@ def generate_launch_description():
                 default_value=nav2_parameters_file,
                 description="Path for nav2 config file",
             ),
-            angle_range_filter_node,
-            RegisterEventHandler(
-                event_handler=OnProcessStart(
-                    target_action=angle_range_filter_node,
-                    on_start=[nav2],
-                )
-            ),
-            # nav2,
+            nav2,
         ]
     )
