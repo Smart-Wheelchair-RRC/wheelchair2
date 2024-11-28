@@ -150,7 +150,7 @@
 
 
 	<!-- joint between base_link and lidar -->
-	<xacro:f_joint name="base_link_to_rplidar" type="fixed" axis_xyz="0 0 0" origin_rpy="0 0 0"
+	<xacro:f_joint name="base_link_to_laser" type="fixed" axis_xyz="0 0 0" origin_rpy="0 0 0"
 		origin_xyz="0.53 0 -0.15" parent="base_link" child="laser_frame" />
 
 
