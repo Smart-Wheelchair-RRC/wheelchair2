@@ -21,8 +21,8 @@ def generate_launch_description():
         default=os.path.join(
             get_package_share_directory("wheelchair2_navigation"),
             "maps",
-            "hospital",
-            "hospital.yaml",
+            "rrc",
+            "rrc.yaml",
         ),
     )
     nav2_parameters_file = LaunchConfiguration(
@@ -53,7 +53,7 @@ def generate_launch_description():
         executable="scan_to_scan_filter_chain",
         parameters=[
             PathJoinSubstitution(
-                [
+                [   
                     FindPackageShare("wheelchair2_navigation"),
                     "config",
                     "angle_range_filter.yaml",
