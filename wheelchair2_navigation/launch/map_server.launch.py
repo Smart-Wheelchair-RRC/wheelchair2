@@ -1,31 +1,33 @@
 import os
+
+import launch_ros.actions
 import yaml
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch_ros.actions import Node
-from launch.actions import ExecuteProcess
+from launch.actions import DeclareLaunchArgument, ExecuteProcess
 from launch.substitutions import LaunchConfiguration
-import launch_ros.actions
+from launch_ros.actions import Node
+
+ARGUMENTS = [DeclareLaunchArgument("in_simulation", default_value="false", description="Flag to set use_sim_time")]
 
 
 def generate_launch_description():
-    ld = LaunchDescription()
+    ld = LaunchDescription(ARGUMENTS)
+    use_sim_time = LaunchConfiguration("in_simulation")
 
     # map file
     map_file_path = os.path.join(
-        get_package_share_directory(
-            "wheelchair2_navigation"), "maps", "hospital", "hospital.yaml"
+        get_package_share_directory("wheelchair2_navigation"), "maps", "hospital", "hospital.yaml"
     )
 
     map_server_cmd = Node(
         package="nav2_map_server",
         executable="map_server",
         output="screen",
-        parameters=[{"yaml_filename": map_file_path}],
+        parameters=[{"yaml_filename": map_file_path, "use_sim_time": use_sim_time}],
     )
 
     lifecycle_nodes = ["map_server"]
-    use_sim_time = True
     autostart = True
 
     start_lifecycle_manager_cmd = launch_ros.actions.Node(

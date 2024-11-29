@@ -143,15 +143,15 @@
 
 
 	<!--Lidar-->
-	<xacro:m_link_cylinder name="laser" origin_rpy="0 0 0" origin_xyz="0 0 0" mass="0.10441"
+	<xacro:m_link_cylinder name="laser_frame" origin_rpy="0 0 0" origin_xyz="0 0 0" mass="0.10441"
 		ixx="0.1000000042" ixy="0" ixz="0" iyy="0.1000000042" iyz="0" izz="0.1000000040"
 		material="black" filename="file://$(find wheelchair2_description)/meshes/rplidar.dae"
 		scale="1 1 1" />
 
 
 	<!-- joint between base_link and lidar -->
-	<xacro:f_joint name="base_link_to_rplidar" type="fixed" axis_xyz="0 0 0" origin_rpy="0 0 0"
-		origin_xyz="0.53 0 -0.15" parent="base_link" child="laser" />
+	<xacro:f_joint name="base_link_to_laser" type="fixed" axis_xyz="0 0 0" origin_rpy="0 0 0"
+		origin_xyz="0.53 0 -0.15" parent="base_link" child="laser_frame" />
 
 
 	<xacro:realsense parent="base_link" name="camera">
@@ -165,6 +165,7 @@
 		<gazebo>
 			<plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
 				<parameters>$(arg gazebo_controllers)</parameters>
+				<parameters>$(find wheelchair2_bringup)/config/gazebo_ros2_control.yaml</parameters>
 				<ros>
 					<remapping>/wheelchair2_base_controller/cmd_vel_unstamped:=/cmd_vel</remapping>
 					<remapping>/wheelchair2_base_controller/odom:=/odom</remapping>
