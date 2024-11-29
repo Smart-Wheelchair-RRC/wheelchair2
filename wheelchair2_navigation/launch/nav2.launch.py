@@ -5,13 +5,9 @@ from launch import LaunchDescription
 from launch.actions import (
     DeclareLaunchArgument,
     IncludeLaunchDescription,
-    RegisterEventHandler,
 )
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
-from launch_ros.substitutions import FindPackageShare
-from launch_ros.actions import Node
-from launch.event_handlers import OnProcessStart
+from launch.substitutions import LaunchConfiguration
 
 
 def generate_launch_description():
@@ -37,8 +33,7 @@ def generate_launch_description():
     nav2 = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             [
-                os.path.join(get_package_share_directory(
-                    "nav2_bringup"), "launch"),
+                os.path.join(get_package_share_directory("nav2_bringup"), "launch"),
                 "/bringup_launch.py",
             ]
         ),
