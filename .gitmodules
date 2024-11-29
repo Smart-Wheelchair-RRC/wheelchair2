@@ -1,0 +1,3 @@
+[submodule "dependencies/realsense-ros"]
+	path = dependencies/realsense-ros
+	url = https://github.com/rtarun1/realsense-ros.git
