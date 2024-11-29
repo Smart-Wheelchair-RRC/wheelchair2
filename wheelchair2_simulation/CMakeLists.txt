@@ -10,8 +10,6 @@ find_package(ament_cmake REQUIRED)
 # uncomment the following section in order to fill in further dependencies
 # manually. find_package(<dependency> REQUIRED)
 install(DIRECTORY launch DESTINATION share/${PROJECT_NAME})
-install(DIRECTORY worlds/models DESTINATION share/${PROJECT_NAME}/worlds)
-install(DIRECTORY models DESTINATION share/${PROJECT_NAME})
 install(DIRECTORY worlds DESTINATION share/${PROJECT_NAME})
 
 if(BUILD_TESTING)

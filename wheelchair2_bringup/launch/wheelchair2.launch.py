@@ -32,13 +32,33 @@ def generate_launch_description():
     )
     in_simulation = LaunchConfiguration("in_simulation")
 
+    world_dic = {
+        "house": PathJoinSubstitution(
+            [FindPackageShare("aws_robomaker_small_house_world"),
+             "worlds", "small_house.world"]
+        ),
+        "warehouse": PathJoinSubstitution(
+            [FindPackageShare("aws_robomaker_small_warehouse_world"),
+             "worlds", "no_roof_small_warehouse", "no_roof_small_warehouse.world"]
+        ),
+        "bookstore": PathJoinSubstitution(
+            [FindPackageShare("aws_robomaker_bookstore_world"),
+             "worlds", "bookstore.world"]
+        ),
+        "hospital": PathJoinSubstitution(
+            [FindPackageShare("wheelchair2_simulation"),
+             "worlds", "hospital.world"]
+        ),
+        "empty": PathJoinSubstitution(
+            [FindPackageShare("wheelchair2_simulation"),
+             "worlds", "empty.world"]
+        )
+    }
+
     launch_description.add_action(
         DeclareLaunchArgument(
             "world",
-            default_value=PathJoinSubstitution(
-                [FindPackageShare("wheelchair2_simulation"),
-                 "worlds", "house.world"]
-            ),
+            default_value=world_dic["hospital"],
             description="Gazebo world file",
         )
     )
