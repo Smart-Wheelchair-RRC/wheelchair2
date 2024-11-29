@@ -12,11 +12,17 @@ ros2 launch wheelchair2_bringup wheelchair2.launch.py
 ```
 Set the `in_simulation` argument based on whether you are in simulation or not.
 
-2. Start Navigation2
+2. If running IRL, start LIDAR:
+
+```bash
+ros2 launch wheelchair2_bringup lidar.launch.py
+```
+
+3. Start Navigation2
 ```bash
 ros2 launch wheelchair2_navigation nav2.launch.py
 ```
-Set the `in_simulation` argument based on whether you are in simulation or not.
+Set the `use_sim_time` argument based on whether you are in simulation or not.
 
 ### Configuration
 The parameters are located in the `wheelchair2_navigation/config/nav2_params.yaml` file.
