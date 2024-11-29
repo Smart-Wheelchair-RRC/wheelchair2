@@ -36,8 +36,7 @@ def generate_launch_description():
         DeclareLaunchArgument(
             "world",
             default_value=PathJoinSubstitution(
-                [FindPackageShare("wheelchair2_simulation"),
-                 "worlds", "house.world"]
+                [FindPackageShare("wheelchair2_simulation"), "worlds", "hospital.world"]
             ),
             description="Gazebo world file",
         )
@@ -185,8 +184,7 @@ def generate_launch_description():
 
     #   RVIZ2
     rviz_config_file = PathJoinSubstitution(
-        [FindPackageShare("wheelchair2_bringup"),
-         "rviz", "wheelchair2_nav.rviz"]
+        [FindPackageShare("wheelchair2_bringup"), "rviz", "wheelchair2_nav.rviz"]
     )
     rviz_node = Node(
         package="rviz2",
@@ -218,7 +216,6 @@ def generate_launch_description():
             )
         ],
         remappings=[("scan", "/scan_raw"), ("scan_filtered", "/scan")],
-
     )
     launch_description.add_action(angle_range_filter_node)
 
