@@ -6,8 +6,10 @@ In this we implement the RTABMap using the RGBD realsense camera, 2D LiDAR and W
 
 ### Dependencies 
 
-- Make sure to build [Realsense SDK](https://github.com/IntelRealSense/librealsense/blob/master/doc/installation.md) 
-###### Note that the included realsence ros wrapper is for kernal verion 6.8. If you are using < 6.8 please do delete the existing deps and follow the realsense official guide. CUDA version 12.6
+Tested using Kernal 6.8 and CUDA 12.6
+- Build [Realsense SDK](https://github.com/IntelRealSense/librealsense/blob/master/doc/installation.md) (Make sure to install realsence SDK version 2.56.2.)
+
+- Install [RPLiDAR ROS2 Wrapper](https://github.com/Slamtec/sllidar_ros2)
 
 - Install RTABMap using `sudo apt-get install ros-humble-rtabmap*`
 
