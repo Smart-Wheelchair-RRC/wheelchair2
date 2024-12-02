@@ -70,7 +70,7 @@ def generate_launch_description():
         ],
         output="screen",
         remappings=[
-            ("/wheelchair2_base_controller/cmd_vel_unstamped", "/cmd_vel"),
+            # ("/wheelchair2_base_controller/cmd_vel_unstamped", "/cmd_vel"),
             ("/wheelchair2_base_controller/odom", "/odom"),
         ],
         condition=IfCondition(NotSubstitution(in_simulation)),
@@ -107,7 +107,6 @@ def generate_launch_description():
         ],
         output="screen",
     )
-
     # WHEELCHAIR CONTROLLER
     robot_controller_spawner = Node(
         package="controller_manager",
@@ -119,14 +118,25 @@ def generate_launch_description():
         ],
         output="screen",
     )
-
+    #JOYSTICK TELEOP
+    joystick = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(PathJoinSubstitution(
+        [FindPackageShare("wheelchair2_control"), 'launch', 'wheelchair_teleop.launch.py'])))
+    #twist_mux
+    twist_mux_params = PathJoinSubstitution([FindPackageShare('wheelchair2_control'), 'config', 'twist_mux.yaml'])
+    twist_mux = Node(
+        package="twist_mux",
+        executable="twist_mux",
+        parameters=[twist_mux_params],
+        remappings=[('/cmd_vel_out','/wheelchair2_base_controller/cmd_vel_unstamped')],
+    ) 
     return LaunchDescription(
         [
             # ARGUMENTS
             DeclareLaunchArgument(
                 "in_simulation",
                 choices=["true", "false"],
-                default_value="true",
+                default_value="false",
             ),
             DeclareLaunchArgument(
                 "world",
@@ -141,6 +151,9 @@ def generate_launch_description():
             ),
             robot_state_publisher,
             gazebo,
+            joystick,
+            twist_mux,
+
             # URDF/ROS2 CONTROL
             RegisterEventHandler(
                 event_handler=OnProcessStart(
