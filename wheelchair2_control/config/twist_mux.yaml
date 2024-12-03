@@ -1,5 +1,5 @@
-twist mux:
-  ros_parameters:
+twist_mux:
+  ros__parameters:
    topics:
     navigation:
      topic    : cmd_vel
