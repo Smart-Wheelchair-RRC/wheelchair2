@@ -70,7 +70,7 @@ def generate_launch_description():
         ],
         output="screen",
         remappings=[
-            # ("/wheelchair2_base_controller/cmd_vel_unstamped", "/cmd_vel"),
+            ("/wheelchair2_base_controller/cmd_vel_unstamped", "/cmd_vel"),
             ("/wheelchair2_base_controller/odom", "/odom"),
         ],
         condition=IfCondition(NotSubstitution(in_simulation)),
