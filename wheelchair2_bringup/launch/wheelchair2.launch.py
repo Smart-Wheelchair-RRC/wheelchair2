@@ -123,13 +123,13 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(PathJoinSubstitution(
         [FindPackageShare("wheelchair2_control"), 'launch', 'wheelchair_teleop.launch.py'])))
     #twist_mux
-    twist_mux_params = PathJoinSubstitution([FindPackageShare('wheelchair2_control'), 'config', 'twist_mux.yaml'])
-    twist_mux = Node(
-        package="twist_mux",
-        executable="twist_mux",
-        parameters=[twist_mux_params],
-        remappings=[('/cmd_vel_out','/wheelchair2_base_controller/cmd_vel_unstamped')],
-    ) 
+    # twist_mux_params = PathJoinSubstitution([FindPackageShare('wheelchair2_control'), 'config', 'twist_mux.yaml'])
+    # twist_mux = Node(
+    #     package="twist_mux",
+    #     executable="twist_mux",
+    #     parameters=[twist_mux_params],
+    #     remappings=[('/cmd_vel_out','/wheelchair2_base_controller/cmd_vel_unstamped')],
+    # ) 
     return LaunchDescription(
         [
             # ARGUMENTS
