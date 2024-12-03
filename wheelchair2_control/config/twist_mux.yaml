@@ -1,5 +1,5 @@
-twist_mux:
-  ros__parameters:
+twist mux:
+  ros_parameters:
    topics:
     navigation:
      topic    : cmd_vel
@@ -9,3 +9,4 @@ twist_mux:
       topic   : cmd_vel_joy
       timeout : 0.5
       priority: 100
+    
