@@ -10,7 +10,6 @@ def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time')
 
     joy_params = os.path.join(get_package_share_directory('wheelchair2_control'),'config','joystick.yaml')
-    twist_mux_params = os.path.join(get_package_share_directory('wheelchair2_control'),'config','twist_mux.yaml')
 
     joy_node = Node(
             package='joy',
@@ -25,13 +24,16 @@ def generate_launch_description():
             parameters=[joy_params, {'use_sim_time': use_sim_time}],
             remappings=[('/cmd_vel','/cmd_vel_joy')]
          )
- 
-    twist_mux = Node(
-        package="twist_mux",
-        executable="twist_mux",
-        parameters=[twist_mux_params],
-        remappings=[('/cmd_vel_out','/wheelchair2_base_controller/cmd_vel_unstamped')],
-    ) 
+
+    # twist_stamper = Node(
+    #         package='twist_stamper',
+    #         executable='twist_stamper',
+    #         parameters=[{'use_sim_time': use_sim_time}],
+    #         remappings=[('/cmd_vel_in','/diff_cont/cmd_vel_unstamped'),
+    #                     ('/cmd_vel_out','/diff_cont/cmd_vel')]
+    #      )
+
+
     return LaunchDescription([
         DeclareLaunchArgument(
             'use_sim_time',
@@ -39,5 +41,5 @@ def generate_launch_description():
             description='Use sim time if true'),
         joy_node,
         teleop_node,
-        twist_mux,     
+        # twist_stamper       
     ])
