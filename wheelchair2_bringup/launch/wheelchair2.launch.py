@@ -152,7 +152,7 @@ def generate_launch_description():
             robot_state_publisher,
             gazebo,
             joystick,
-            twist_mux,
+            #twist_mux,
 
             # URDF/ROS2 CONTROL
             RegisterEventHandler(
