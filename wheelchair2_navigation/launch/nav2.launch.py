@@ -18,7 +18,7 @@ def generate_launch_description():
             get_package_share_directory("wheelchair2_navigation"),
             "maps",
             "rrc",
-            "rrc.yaml",
+            "rrc_corridor.yaml",
         ),
     )
     nav2_parameters_file = LaunchConfiguration(
