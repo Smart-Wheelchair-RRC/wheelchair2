@@ -117,8 +117,8 @@ controller_server:
     general_goal_checker:
       stateful: True
       plugin: "nav2_controller::SimpleGoalChecker"
-      xy_goal_tolerance: 0.25
-      yaw_goal_tolerance: 0.25
+      xy_goal_tolerance: 0.55
+      yaw_goal_tolerance: 0.55
 
     # DWB parameters
     FollowPath:
@@ -126,9 +126,9 @@ controller_server:
       debug_trajectory_details: True
       min_vel_x: 0.0
       min_vel_y: 0.0
-      max_vel_x: 0.22
+      max_vel_x: 0.25
       max_vel_y: 0.0
-      max_vel_theta: 1.0
+      max_vel_theta: 0.25
       min_speed_xy: 0.0
       max_speed_xy: 0.22
       min_speed_theta: 0.0
@@ -147,7 +147,7 @@ controller_server:
       linear_granularity: 0.05
       angular_granularity: 0.025
       transform_tolerance: 0.2
-      xy_goal_tolerance: 0.05
+      xy_goal_tolerance: 0.55
       trans_stopped_velocity: 0.25
       short_circuit_trajectory_evaluation: True
       stateful: True
@@ -188,11 +188,12 @@ local_costmap:
       width: 3
       height: 3
       resolution: 0.05
-      robot_radius: 0.22
-      plugins: ["obstacle_layer", "voxel_layer", "inflation_layer"]
+      #robot_radius: 0.22
+      footprint: "[[-0.475,-0.4],[0.475,-0.4],[0.475,0.4],[-0.475,0.4]]"
+      plugins: ["obstacle_layer", "inflation_layer", "rgbd_obstacle_layer"]
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
-        inflation_radius: 1.0
+        inflation_radius: 1.0 #1
         cost_scaling_factor: 3.0
       obstacle_layer:
         plugin: "nav2_costmap_2d::ObstacleLayer"
@@ -204,26 +205,49 @@ local_costmap:
           clearing: True
           marking: True
           data_type: "LaserScan"
-      voxel_layer:
-        plugin: "nav2_costmap_2d::VoxelLayer"
-        enabled: True
-        publish_voxel_map: True
-        origin_z: 0.0
-        z_resolution: 0.05
-        z_voxels: 16
-        max_obstacle_height: 2.0
-        mark_threshold: 0
-        observation_sources: scan
-        scan:
-          topic: /scan
-          max_obstacle_height: 2.0
-          clearing: True
-          marking: True
-          data_type: "LaserScan"
-          raytrace_max_range: 3.0
-          raytrace_min_range: 0.0
-          obstacle_max_range: 2.5
-          obstacle_min_range: 0.0
+      rgbd_obstacle_layer:
+        plugin: "spatio_temporal_voxel_layer/SpatioTemporalVoxelLayer"
+        enabled:                  true
+        voxel_decay:              15.0  # seconds if linear, e^n if exponential
+        decay_model:              0     # 0=linear, 1=exponential, -1=persistent
+        voxel_size:               0.05  # meters
+        track_unknown_space:      true  # default space is known
+        mark_threshold:           0     # voxel height
+        update_footprint_enabled: true
+        combination_method:       1     # 1=max, 0=override
+        origin_z:                 0.0   # meters
+        publish_voxel_map:        true # default off
+        transform_tolerance:      0.2   # seconds
+        mapping_mode:             false # default off, saves map not for navigation
+        map_save_duration:        60.0  # default 60s, how often to autosave
+        observation_sources:      rgbd1_mark rgbd1_clear
+        rgbd1_mark:
+          data_type: PointCloud2
+          topic: /livox/lidar
+          marking: true
+          clearing: false
+          obstacle_range: 3.0          # meters
+          min_obstacle_height: 0.1     # default 0, meters
+          max_obstacle_height: 2.0     # default 3, meters
+          expected_update_rate: 0.0    # default 0, if not updating at this rate at least, remove from buffer
+          observation_persistence: 0.0 # default 0, use all measurements taken during now-value, 0=latest
+          inf_is_valid: false          # default false, for laser scans
+          filter: "voxel"        # default passthrough, apply "voxel", "passthrough", or no filter to sensor data, recommend on     voxel_min_points: 0          # default 0, minimum points per voxel for voxel filter
+          clear_after_reading: true    # default false, clear the buffer after the layer gets readings from it
+        rgbd1_clear:
+          enabled: true                #default true, can be toggled on/off with associated service call
+          data_type: PointCloud2
+          topic: /livox/lidar
+          marking: false
+          clearing: true
+          max_z: 8.0                  # default 0, meters
+          min_z: 1.0                  # default 10, meters
+          vertical_fov_angle: 0.523   # default 0.7, radians. For 3D lidars it's the symmetric FOV about the planar axis.
+          vertical_fov_padding: 0.05    # 3D Lidar only. Default 0, in meters 
+          horizontal_fov_angle: 6.29  # 3D lidar scanners like the VLP16 have 360 deg horizontal FOV.
+          decay_acceleration: 5.0     # default 0, 1/s^2. 
+          model_type: 1               # default 0, model type for frustum. 0=depth camera, 1=3d lidar like VLP16 or similar
+
       static_layer:
         map_subscribe_transient_local: True
       always_send_full_costmap: True
@@ -242,11 +266,12 @@ global_costmap:
       global_frame: map
       robot_base_frame: base_link
       use_sim_time: True
-      robot_radius: 0.22
+      #robot_radius: 0.22
+      footprint: "[[-0.475,-0.4],[0.475,-0.4],[0.475,0.4],[-0.475,0.4]]"
       resolution: 0.05
       track_unknown_space: true
       plugins:
-        ["static_layer", "obstacle_layer", "voxel_layer", "inflation_layer"]
+        ["static_layer", "obstacle_layer", "inflation_layer", "rgbd_obstacle_layer"]
       obstacle_layer:
         plugin: "nav2_costmap_2d::ObstacleLayer"
         enabled: True
@@ -261,33 +286,56 @@ global_costmap:
           raytrace_min_range: 0.0
           obstacle_max_range: 2.5
           obstacle_min_range: 0.0
-      voxel_layer:
-        plugin: "nav2_costmap_2d::VoxelLayer"
-        enabled: True
-        publish_voxel_map: True
-        origin_z: 0.0
-        z_resolution: 0.05
-        z_voxels: 16
-        max_obstacle_height: 2.0
-        mark_threshold: 0
-        observation_sources: scan
-        scan:
-          topic: /scan
-          max_obstacle_height: 2.0
-          clearing: True
-          marking: True
-          data_type: "LaserScan"
-          raytrace_max_range: 3.0
-          raytrace_min_range: 0.0
-          obstacle_max_range: 2.5
-          obstacle_min_range: 0.0
+      rgbd_obstacle_layer:
+        plugin: "spatio_temporal_voxel_layer/SpatioTemporalVoxelLayer"
+        enabled:                  true
+        voxel_decay:              15.0  # seconds if linear, e^n if exponential
+        decay_model:              0     # 0=linear, 1=exponential, -1=persistent
+        voxel_size:               0.05  # meters
+        track_unknown_space:      true  # default space is known
+        mark_threshold:           0     # voxel height
+        update_footprint_enabled: true
+        combination_method:       1     # 1=max, 0=override
+        origin_z:                 0.0   # meters
+        publish_voxel_map:        true # default off
+        transform_tolerance:      0.2   # seconds
+        mapping_mode:             false # default off, saves map not for navigation
+        map_save_duration:        60.0  # default 60s, how often to autosave
+        observation_sources:      rgbd1_mark rgbd1_clear
+        rgbd1_mark:
+          data_type: PointCloud2
+          topic: /livox/lidar
+          marking: true
+          clearing: false
+          obstacle_range: 3.0          # meters
+          min_obstacle_height: 0.1     # default 0, meters
+          max_obstacle_height: 2.0     # default 3, meters
+          expected_update_rate: 0.0    # default 0, if not updating at this rate at least, remove from buffer
+          observation_persistence: 0.0 # default 0, use all measurements taken during now-value, 0=latest
+          inf_is_valid: false          # default false, for laser scans
+          filter: "voxel"        # default passthrough, apply "voxel", "passthrough", or no filter to sensor data, recommend on     voxel_min_points: 0          # default 0, minimum points per voxel for voxel filter
+          clear_after_reading: true    # default false, clear the buffer after the layer gets readings from it
+        rgbd1_clear:
+          enabled: true                #default true, can be toggled on/off with associated service call
+          data_type: PointCloud2
+          topic: /livox/lidar
+          marking: false
+          clearing: true
+          max_z: 8.0                  # default 0, meters
+          min_z: 1.0                  # default 10, meters
+          vertical_fov_angle: 0.523   # default 0.7, radians. For 3D lidars it's the symmetric FOV about the planar axis.
+          vertical_fov_padding: 0.05    # 3D Lidar only. Default 0, in meters 
+          horizontal_fov_angle: 6.29  # 3D lidar scanners like the VLP16 have 360 deg horizontal FOV.
+          decay_acceleration: 5.0     # default 0, 1/s^2. 
+          model_type: 1               # default 0, model type for frustum. 0=depth camera, 1=3d lidar like VLP16 or similar
+
       static_layer:
         plugin: "nav2_costmap_2d::StaticLayer"
         map_subscribe_transient_local: True
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         cost_scaling_factor: 3.0
-        inflation_radius: 0.55
+        inflation_radius: 0.55 #0.55
       always_send_full_costmap: True
   global_costmap_client:
     ros__parameters:
