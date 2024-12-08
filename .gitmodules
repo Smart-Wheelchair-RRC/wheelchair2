@@ -4,3 +4,6 @@
 [submodule "dependencies/pointcloud_to_laserscan"]
 	path = dependencies/pointcloud_to_laserscan
 	url = https://github.com/rtarun1/pointcloud_to_laserscan.git
+[submodule "dependencies/livox_laser_simulation_RO2"]
+	path = dependencies/livox_laser_simulation_RO2
+	url = https://github.com/stm32f303ret6/livox_laser_simulation_RO2.git
