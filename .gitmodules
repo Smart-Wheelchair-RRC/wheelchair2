@@ -10,3 +10,6 @@
 [submodule "livox_ros_driver2"]
 	path = livox_ros_driver2
 	url = https://github.com/rtarun1/livox_ros_driver2.git
+[submodule "dependencies/kinematic-icp"]
+	path = dependencies/kinematic-icp
+	url = https://github.com/rtarun1/kinematic-icp.git
