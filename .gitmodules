@@ -7,3 +7,6 @@
 [submodule "dependencies/livox_laser_simulation_RO2"]
 	path = dependencies/livox_laser_simulation_RO2
 	url = https://github.com/stm32f303ret6/livox_laser_simulation_RO2.git
+[submodule "livox_ros_driver2"]
+	path = livox_ros_driver2
+	url = https://github.com/rtarun1/livox_ros_driver2.git
