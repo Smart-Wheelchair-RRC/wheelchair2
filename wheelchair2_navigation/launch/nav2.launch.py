@@ -6,11 +6,13 @@ from launch.actions import (
     DeclareLaunchArgument,
     IncludeLaunchDescription,
 )
+from launch_ros.actions import Node
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 
 
 def generate_launch_description():
+    
     use_sim_time = LaunchConfiguration("use_sim_time", default="false")
     map_yaml = LaunchConfiguration(
         "map",
@@ -29,7 +31,13 @@ def generate_launch_description():
             "nav2_params.yaml",
         ),
     )
-
+    # rviz_config_path = os.path.join(("rviz"), 'voxel.rviz')
+    # nav2_rviz = Node(
+    #         package='rviz2',
+    #         executable='rviz2',
+    #         output='screen',
+    #         arguments=['--display-config', rviz_config_path]
+    #     )
     nav2 = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             [
@@ -43,6 +51,7 @@ def generate_launch_description():
             "params_file": nav2_parameters_file,
         }.items(),
     )
+    
     return LaunchDescription(
         [
             DeclareLaunchArgument(
@@ -61,5 +70,6 @@ def generate_launch_description():
                 description="Path for nav2 config file",
             ),
             nav2,
+            # nav2_rviz,
         ]
     )
