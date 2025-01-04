@@ -34,7 +34,7 @@ def generate_launch_description():
                         [
                             FindPackageShare("wheelchair2_description"),
                             "urdf",
-                            "wheelchair2_camera_lidar.urdf.xacro",
+                            "wheelchair2_camera_livox.urdf.xacro",
                         ]
                     ),
                     " is_sim:=",
@@ -122,7 +122,7 @@ def generate_launch_description():
     joystick = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(PathJoinSubstitution(
         [FindPackageShare("wheelchair2_control"), 'launch', 'wheelchair_teleop.launch.py'])))
-    
+
     return LaunchDescription(
         [
             # ARGUMENTS
