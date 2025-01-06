@@ -151,10 +151,10 @@ controller_server:
       ObstaclesCritic:
         enabled: true
         cost_power: 1
-        repulsion_weight: 10.5
-        critical_weight: 25.0
+        repulsion_weight: 1.5
+        critical_weight: 20.0
         consider_footprint: true
-        collision_cost: 100000.0
+        collision_cost: 10000.0
         collision_margin_distance: 0.2
         near_goal_distance: 0.5
         inflation_radius: 1.75 #1
