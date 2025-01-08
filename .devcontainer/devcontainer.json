@@ -36,7 +36,8 @@
                 "streetsidesoftware.code-spell-checker",
                 "twxs.cmake",
                 "yzhang.markdown-all-in-one",
-                "zachflower.uncrustify"
+                "zachflower.uncrustify",
+                "akhail.save-typing"
             ]
         }
     },
