@@ -16,7 +16,10 @@ ROS2 Humble setup to operate the RRC wheelchair
 
 ## Docker Setup
 The docker is set up for both development and just running for demo purposes.
-
+- Login to GHCR using the following command
+  ```bash
+  echo "$YOUR_GITHUB_PAT" | docker login ghcr.io -u <$YOUR_GITHUB_USERID> --password-stdin
+  ```
 #### Docker for Development
 ##### Prerequisites
 - VSCode
@@ -29,14 +32,15 @@ The docker is set up for both development and just running for demo purposes.
     ```
 - Clone the repo with submodules
     ```bash
-    git clone https://github.com/Smart-Wheelchair-RRC/wheelchair2.git --recurse-submodules
+    git clone https://github.com/Smart-Wheelchair-RRC/wheelchair2.git --recurse-submodules .
     ```
 - To start container
     - Open Command Pallete with `Ctrl+Shift+P`
-    - Select Option to Rebuild and Reopen Container
+    - Select Option to DevContainer: Rebuild and Reopen Container (the process takes some time during the first time)
+      >Note: If there is an error related to gpu, comment the line 53 in the devcontainer.json and try to build again
     - Use `Build WS` button to build workspace
   
-  >Note: To access these buttons you may need to enable [VSCode Action Button Extension](https://marketplace.visualstudio.com/items?itemName=seunlanlege.action-buttons) through the Extensions Tab in VSCode, the extension should download automatically on container startup
+      >Note: To access these buttons you may need to enable [VSCode Action Button Extension](https://marketplace.visualstudio.com/items?itemName=seunlanlege.action-buttons) through the Extensions Tab in VSCode, the extension should download automatically on container startup
   
 - To run the Navigation stack inside the container
   ```
@@ -120,6 +124,6 @@ The repository has currently been setup with
   ros2 launch wheelchair2_navigation nav2.launch.py use_sim_time:=False
   ros2 run rviz2 rviz2 -d $(ros2 pkg prefix nav2_bringup)/share/nav2_bringup/rviz/nav2_default_view.rviz
   ```
-  *Note:* You can also navigate to the src/wheelchair2_navigation/rviz and run `rviz2 -d navigation.rviz` For visualizing with the camera PoV. 
+  >Note: You can also navigate to the src/wheelchair2_navigation/rviz and run `rviz2 -d navigation.rviz` For visualizing with the camera PoV. 
 - A few launch option are available with above command
   - `in_simulation` and `use_sim_time:=True/False` : False to run the hardware setup ,True to run Gazebo
