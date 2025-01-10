@@ -6,21 +6,46 @@ ROS2 Humble setup to operate the RRC wheelchair
 - [Wheelchair2](#wheelchair2)
   - [Table of contents](#table-of-contents)
   - [Docker Setup](#docker-setup)
-      - [Docker for Development](#docker-for-development)
+      - [Install and setup Docker](#install-and-setup-docker)
+      - [Option 1: Docker for Development](#option-1-docker-for-development)
         - [Prerequisites](#prerequisites)
         - [Wheelchair Development](#wheelchair-development)
-    - [Docker for demo runs](#docker-for-demo-runs)
+      - [Option 2: Docker for demo runs](#option-2-docker-for-demo-runs)
   - [Hardware Setup](#hardware-setup)
   - [How to Use Locally](#how-to-use-locally)
 
 
 ## Docker Setup
-The docker is set up for both development and just running for demo purposes.
-- Login to GHCR using the following command
+- The docker can be used in two different setting. 
+  - Option 1: Docker for development 
+  - Option 2: Docker for demo runs
+>
+#### Install and setup Docker
+- Install using simple bash script
   ```bash
-  echo "$YOUR_GITHUB_PAT" | docker login ghcr.io -u <$YOUR_GITHUB_USERID> --password-stdin
+  curl -fsSL https://get.docker.com -o get-docker.sh
+  sudo sh ./get-docker.sh
   ```
-#### Docker for Development
+- Post-Install setup
+  ```bash
+  sudo groupadd docker
+  sudo usermod -aG docker $USER
+  ```
+- Configure Docker to start on boot with systemd
+  ```bash
+  sudo systemctl enable docker.service
+  sudo systemctl enable containerd.service
+  ```
+- Check if it is enabled 
+  ```bash
+  sudo systemctl is-enabled docker
+  ```
+- **Reboot before proceeding further**
+- Login to GHCR using your GitHub  
+  ```bash
+  echo "<YOUR_GITHUB_PAT>" | docker login ghcr.io -u <YOUR_GITHUB_USERID> --password-stdin
+  ```
+#### Option 1: Docker for Development
 ##### Prerequisites
 - VSCode
 - Remote Development Extension by Microsoft
@@ -47,7 +72,7 @@ The docker is set up for both development and just running for demo purposes.
   source install/setup.bash && cd src/wheelchair2_navigation/rviz && ./navigation.sh
   ```
 
-### Docker for demo runs
+#### Option 2: Docker for demo runs
 - To pull latest docker image
     ```bash
     docker pull ghcr.io/smart-wheelchair-rrc/wheelchair2_navigation:v1.0.0
