@@ -3,11 +3,11 @@
 	xmlns:xacro="http://www.ros.org/wiki/xacro">
 	<!-- Include Files-->
 	<xacro:include filename="$(find wheelchair2_description)/urdf/links_joints.urdf.xacro" />
-	<xacro:include
-		filename="$(find wheelchair2_description)/urdf/wheelchair2_camera_lidar_gazebo.urdf.xacro" />
+	<!-- <xacro:include -->
+		<!-- filename="$(find wheelchair2_description)/urdf/wheelchair2_camera_lidar_gazebo.urdf.xacro" /> -->
 	<xacro:include filename="$(find wheelchair2_description)/urdf/kangaroo_ros2_control.urdf.xacro" />
 	<xacro:include filename="$(find wheelchair2_description)/urdf/realsense.urdf.xacro" />
-	<xacro:include filename="$(find ros2_livox_simulation)/urdf/mid360.xacro" />
+	<xacro:include filename="$(find wheelchair2_description)/urdf/mid360.xacro" />
 	<!-- <xacro:include filename="$(find wheelchair2_description)/urdf/wheelchair2_livox_gazebo.urdf.xacro" /> -->
 
 	<xacro:arg name="use_nominal_extrinsics" default="false" />
