@@ -101,9 +101,9 @@ controller_server:
     controller_frequency: 30.0
     FollowPath:
       plugin: "nav2_mppi_controller::MPPIController"
-      time_steps: 56
+      time_steps: 60
       model_dt: 0.05
-      batch_size: 2000
+      batch_size: 10000
       vx_std: 0.25
       vy_std: 0.25
       wz_std: 0.25
@@ -147,8 +147,8 @@ controller_server:
       ObstaclesCritic:
         enabled: true
         cost_power: 1
-        repulsion_weight: 1.0
-        critical_weight: 10.0
+        repulsion_weight: 4.0
+        critical_weight: 15.0
         consider_footprint: true
         collision_cost: 10000.0
         collision_margin_distance: 0.32
@@ -303,7 +303,7 @@ local_costmap:
       lidar_obstacle_layer:
         plugin: "spatio_temporal_voxel_layer/SpatioTemporalVoxelLayer"
         enabled:                  true
-        voxel_decay:              1.0  # seconds if linear, e^n if exponential 5
+        voxel_decay:              1.5  # seconds if linear, e^n if exponential 5
         decay_model:              0     # 0=linear, 1=exponential, -1=persistent
         voxel_size:               0.05  # meters
         track_unknown_space:      true  # default space is known
@@ -373,7 +373,7 @@ global_costmap:
       lidar_obstacle_layer:
         plugin: "spatio_temporal_voxel_layer/SpatioTemporalVoxelLayer"
         enabled:                  true
-        voxel_decay:              1.0  # seconds if linear, e^n if exponential 15
+        voxel_decay:              5.0  # seconds if linear, e^n if exponential 15
         decay_model:              0     # 0=linear, 1=exponential, -1=persistent
         voxel_size:               0.05  # meters
         track_unknown_space:      true  # default space is known
