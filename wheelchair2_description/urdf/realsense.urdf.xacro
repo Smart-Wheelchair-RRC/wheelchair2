@@ -9,7 +9,8 @@ aluminum peripherial evaluation case.
 
 <robot name="realsense"
 	xmlns:xacro="http://ros.org/wiki/xacro">
-	<xacro:macro name="realsense" params="name:=camera topics_ns:=camera pointcloud:=false parent *origin">
+	<xacro:macro name="realsense"
+		params="name:=camera topics_ns:=camera pointcloud:=false parent *origin">
 		<xacro:property name="M_PI" value="3.1415926535897931" />
 
 		<!-- The following values are approximate, and the camera node
@@ -53,11 +54,13 @@ aluminum peripherial evaluation case.
 
 		<link name="${name}_link">
 			<visual>
-				<origin xyz="${d435_cam_mount_from_center_offset} ${-d435_cam_depth_py} 0" rpy="${M_PI/2} 0 ${M_PI/2}" />
+				<origin xyz="${d435_cam_mount_from_center_offset} ${-d435_cam_depth_py} 0"
+					rpy="${M_PI/2} 0 ${M_PI/2}" />
 				<geometry>
 					<!-- <box size="${d435_cam_width} ${d435_cam_height} ${d435_cam_depth}"/> -->
 					<mesh filename="file://$(find wheelchair2_description)/meshes/d435.dae" />
-					<!--<mesh filename="file://$(find realsense2_description)/meshes/d435/d435.dae" />-->
+					<!--<mesh
+					filename="file://$(find realsense2_description)/meshes/d435/d435.dae" />-->
 				</geometry>
 				<material name="${name}_aluminum" />
 			</visual>
