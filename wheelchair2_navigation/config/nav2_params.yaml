@@ -123,7 +123,7 @@ controller_server:
         time_step: 3
       AckermannConstraints:
         min_turning_r: 0.1
-      critics: ["ConstraintCritic", "ObstaclesCritic", "GoalCritic", "GoalAngleCritic", "PathAlignCritic", "PathFollowCritic", "PathAngleCritic", "PreferForwardCritic"]
+      critics: ["ConstraintCritic", "ObstaclesCritic", "GoalCritic", "GoalAngleCritic", "PathAlignCritic", "PathFollowCritic", "PathAngleCritic", "PreferForwardCritic", "VelocityDeadbandCritic", "TwirlingCritic"]
       ConstraintCritic:
         enabled: true
         cost_power: 1
@@ -147,11 +147,11 @@ controller_server:
       ObstaclesCritic:
         enabled: true
         cost_power: 1
-        repulsion_weight: 4.0
-        critical_weight: 20.0
+        repulsion_weight: 1.0
+        critical_weight: 10.0
         consider_footprint: true
         collision_cost: 10000.0
-        collision_margin_distance: 0.1
+        collision_margin_distance: 0.32
         near_goal_distance: 0.5
       # CostCritic:
       #   enabled: true
@@ -185,15 +185,16 @@ controller_server:
         threshold_to_consider: 0.5
         max_angle_to_furthest: 1.0
         forward_preference: true
-      # VelocityDeadbandCritic:
-      #   enabled: true
-      #   cost_power: 1
-      #   cost_weight: 35.0
-      #   deadband_velocities: [0.05, 0.05, 0.05]
-      # TwirlingCritic:
-      #   enabled: true
-      #   twirling_cost_power: 1
-      #   twirling_cost_weight: 10.0
+        mode: 2
+      VelocityDeadbandCritic:
+        enabled: true
+        cost_power: 1
+        cost_weight: 35.0
+        deadband_velocities: [0.05, 0.05, 0.05]
+      TwirlingCritic:
+        enabled: true
+        twirling_cost_power: 1
+        twirling_cost_weight: 10.0
 
 # controller_server:
 #   ros__parameters:
@@ -291,7 +292,8 @@ local_costmap:
       height: 6 #5
       resolution: 0.05
       # robot_radius: 0.50
-      footprint: "[[-0.30,-0.32],[0.80,-0.32],[0.80,0.32],[-0.30,0.32]]"
+      footprint: "[[-0.30,-0.32],[0.70,-0.32],[0.70,0.32],[-0.30,0.32]]"
+      # footprint: "[[-0.30,-0.32],[0.80,-0.32],[0.80,0.32],[-0.30,0.32]]"
       plugins: ["inflation_layer", "lidar_obstacle_layer"]
       inflation_layer:
         enabled: True
@@ -361,7 +363,9 @@ global_costmap:
       robot_base_frame: base_link
       use_sim_time: False
       # robot_radius: 0.50
-      footprint: "[[-0.54,-0.36],[0.74,-0.36],[0.74,0.36],[-0.54,0.36]]"
+      footprint: "[[-0.30,-0.32],[0.70,-0.32],[0.70,0.32],[-0.30,0.32]]"
+      # footprint: "[[-0.30,-0.32],[0.80,-0.32],[0.80,0.32],[-0.30,0.32]]"
+      # footprint: "[[-0.54,-0.36],[0.74,-0.36],[0.74,0.36],[-0.54,0.36]]"
       resolution: 0.05
       track_unknown_space: true
       plugins:
@@ -501,9 +505,9 @@ recoveries_server:
     transform_timeout: 0.1
     use_sim_time: False
     simulate_ahead_time: 2.0
-    max_rotational_vel: 0.25
+    max_rotational_vel: 0.1
     min_rotational_vel: 0.1
-    rotational_acc_lim: 0.25
+    rotational_acc_lim: 0.1
 
 robot_state_publisher:
   ros__parameters:
