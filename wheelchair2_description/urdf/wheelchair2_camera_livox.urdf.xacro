@@ -85,7 +85,7 @@
 
 	<xacro:w_joint name="base_link_to_right_wheel" type="continuous" axis_xyz="0 0 1" axis_rpy="0 0 0"
 		limit_e="100" limit_v="20" damping="1.0" friction="0.01" origin_rpy="-1.57 0 0"
-		origin_xyz="-0.22 -0.32 -0.285" parent="base_link" child="right_wheel" />
+		origin_xyz="-0.22 -0.28 -0.285" parent="base_link" child="right_wheel" />
 
 
 	<!-- Caster 1,2 and there joints with Base Link-->
