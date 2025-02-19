@@ -101,7 +101,7 @@ controller_server:
     controller_frequency: 30.0
     FollowPath:
       plugin: "nav2_mppi_controller::MPPIController"
-      time_steps: 60
+      time_steps: 56
       model_dt: 0.05
       batch_size: 10000
       vx_std: 0.25
@@ -292,15 +292,14 @@ local_costmap:
       height: 6 #5
       resolution: 0.05
       # robot_radius: 0.50
-      # footprint: "[[-0.30,-0.32],[0.75,-0.32],[0.75,0.32],[-0.30,0.32]]"
+      # footprint: "[[-0.40,-0.32],[0.70,-0.32],[0.70,0.32],[-0.40,0.32]]"
       footprint: "[[-0.30,-0.32],[0.80,-0.32],[0.80,0.32],[-0.30,0.32]]"
-      # footprint: "[[-0.54,-0.36],[0.74,-0.36],[0.74,0.36],[-0.54,0.36]]"
       plugins: ["inflation_layer", "lidar_obstacle_layer"]
       inflation_layer:
         enabled: True
         plugin: "nav2_costmap_2d::InflationLayer"
-        inflation_radius: 0.55 #1 1.75
-        cost_scaling_factor: 10.0 #10 2.58
+        inflation_radius: 0.15 #1 1.75
+        cost_scaling_factor: 5.0 #10 2.58
       lidar_obstacle_layer:
         plugin: "spatio_temporal_voxel_layer/SpatioTemporalVoxelLayer"
         enabled:                  true
@@ -364,9 +363,8 @@ global_costmap:
       robot_base_frame: base_link
       use_sim_time: False
       # robot_radius: 0.50
-      # footprint: "[[-0.30,-0.32],[0.75,-0.32],[0.75,0.32],[-0.30,0.32]]"
-      # footprint: "[[-0.30,-0.32],[0.80,-0.32],[0.80,0.32],[-0.30,0.32]]"
-      footprint: "[[-0.54,-0.36],[0.74,-0.36],[0.74,0.36],[-0.54,0.36]]"
+      # footprint: "[[-0.40,-0.32],[0.70,-0.32],[0.70,0.32],[-0.40,0.32]]"
+      footprint: "[[-0.30,-0.32],[0.80,-0.32],[0.80,0.32],[-0.30,0.32]]"
       resolution: 0.05
       track_unknown_space: true
       plugins:
