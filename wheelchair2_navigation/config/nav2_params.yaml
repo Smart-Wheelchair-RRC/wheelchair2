@@ -101,7 +101,7 @@ controller_server:
     controller_frequency: 30.0
     FollowPath:
       plugin: "nav2_mppi_controller::MPPIController"
-      time_steps: 30 #56
+      time_steps: 55 #56
       model_dt: 0.05
       batch_size: 10000
       vx_std: 0.25
@@ -122,7 +122,7 @@ controller_server:
         trajectory_step: 5
         time_step: 3
       AckermannConstraints:
-        min_turning_r: 0.1
+        min_turning_r: 0.4
       critics: ["ConstraintCritic", "ObstaclesCritic", "GoalCritic", "GoalAngleCritic", "PathAlignCritic", "PathFollowCritic", "PathAngleCritic", "PreferForwardCritic", "VelocityDeadbandCritic", "TwirlingCritic"]
       ConstraintCritic:
         enabled: true
@@ -148,7 +148,7 @@ controller_server:
         enabled: true
         cost_power: 1
         repulsion_weight: 1.5
-        critical_weight: 20.0
+        critical_weight: 10.0
         consider_footprint: true
         collision_cost: 10000.0
         collision_margin_distance: 0.32
@@ -165,18 +165,18 @@ controller_server:
       PathAlignCritic:
         enabled: true
         cost_power: 1
-        cost_weight: 10.0
+        cost_weight: 10.0 #14
         max_path_occupancy_ratio: 0.05
         trajectory_point_step: 4
-        threshold_to_consider: 0.85
-        offset_from_furthest: 20
+        threshold_to_consider: 0.5 #0.85
+        offset_from_furthest: 10 #20
         use_path_orientations: false
       PathFollowCritic:
         enabled: true
         cost_power: 1
-        cost_weight: 5.0
-        offset_from_furthest: 7
-        threshold_to_consider: 1.4
+        cost_weight: 5.0 #5
+        offset_from_furthest: 7 #7
+        threshold_to_consider: 0.5 #1.4
       PathAngleCritic:
         enabled: true
         cost_power: 1
@@ -357,8 +357,8 @@ local_costmap:
 global_costmap:
   global_costmap:
     ros__parameters:
-      update_frequency: 1.0
-      publish_frequency: 0.5
+      update_frequency: 20.0 #1.0
+      publish_frequency: 20.0 #0.5
       global_frame: map
       robot_base_frame: base_link
       use_sim_time: False
@@ -465,7 +465,7 @@ planner_server:
       reverse_penalty: 1.0 #1.3                # Penalty to apply if motion is reversing, must be => 1
       change_penalty: 0.0                 # Penalty to apply if motion is changing directions (L to R), must be >= 0
       non_straight_penalty: 1.0 #1.3           # Penalty to apply if motion is non-straight, must be => 1
-      cost_penalty: 6.0 #2                   # Penalty to apply to higher cost areas when adding into the obstacle map dynamic programming distance expansion heuristic. This drives the robot more towards the center of passages. A value between 1.3 - 3.5 is reasonable.
+      cost_penalty: 6.0 #2 #6                   # Penalty to apply to higher cost areas when adding into the obstacle map dynamic programming distance expansion heuristic. This drives the robot more towards the center of passages. A value between 1.3 - 3.5 is reasonable.
       retrospective_penalty: 0.015
       lookup_table_size: 20.0             # Size of the dubin/reeds-sheep distance window to cache, in meters.
       cache_obstacle_heuristic: false     # Cache the obstacle map dynamic programming distance expansion heuristic between subsequent replannings of the same goal location. Dramatically speeds up replanning performance (40x) if costmap is largely static.
