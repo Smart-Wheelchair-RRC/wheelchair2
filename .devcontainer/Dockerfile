@@ -1,4 +1,4 @@
-FROM ghcr.io/smart-wheelchair-rrc/wheelchair2_base:latest
+FROM ghcr.io/smart-wheelchair-rrc/wheelchair2_base_jetson:v1.0
 
 # Add the following labels
 LABEL org.opencontainers.image.description="Wheelchair2"
