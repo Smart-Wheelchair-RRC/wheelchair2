@@ -17,7 +17,7 @@
                             "cwd": "/home/wheelchair2/wheelchair2",
                             "color": "green",
                             "singleInstance": true,
-                            "command": "colcon build --cmake-args -DROS_EDITION=ROS2 -DHUMBLE_ROS=humble" // This is executed in the terminal.
+                            "command": "colcon build --cmake-args -DROS_EDITION=ROS2 -DHUMBLE_ROS=humble && source install/setup.bash" 
                         }
                     ]
                 }
