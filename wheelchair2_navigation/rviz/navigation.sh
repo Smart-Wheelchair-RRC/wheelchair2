@@ -23,7 +23,6 @@ sleep 5
 # Launch RViz with the specified configuration
 xterm -e "rviz2 -d navigation.rviz" &
 
-sleep 5
+# sleep 5
 
-# Launch RViz with the specified configuration
-xterm -e "ros2 launch foxglove_bridge foxglove_bridge_launch.xml" &
+xterm -e "ros2 run wheelchair2_control keyboard_teleop.py" &
