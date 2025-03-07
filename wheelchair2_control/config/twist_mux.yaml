@@ -12,5 +12,6 @@ twist_mux:
     keyboard:
       topic   : cmd_vel_keyboard
       timeout : 0.5
-      priority: 100
+    
+      priority: 9
     

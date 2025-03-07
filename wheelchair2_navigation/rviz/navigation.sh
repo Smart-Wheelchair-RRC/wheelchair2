@@ -23,6 +23,6 @@ sleep 5
 # Launch RViz with the specified configuration
 xterm -e "rviz2 -d navigation.rviz" &
 
-# sleep 5
+sleep 7
 
 xterm -e "ros2 run wheelchair2_control keyboard_teleop.py" &
