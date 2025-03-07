@@ -43,7 +43,7 @@ def constrain(value, min_val, max_val):
 class KeyboardTeleop(Node):
     def __init__(self):
         super().__init__('keyboard_teleop')
-        self.publisher = self.create_publisher(Twist, 'cmd_vel', 10)
+        self.publisher = self.create_publisher(Twist, 'cmd_vel_keyboard', 10)
         self.timer = self.create_timer(0.1, self.publish_twist)
         self.target_linear_vel = 0.0
         self.target_angular_vel = 0.0
