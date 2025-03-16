@@ -17,7 +17,7 @@ def generate_launch_description():
               'approx_sync':True,
               'wait_for_transform':0.2,
               'use_sim_time':use_sim_time,
-              'queue_size':10,
+              'sync_queue_size':10,
               
               # RTAB-Map's internal parameters are strings:
               'RGBD/NeighborLinkRefining': 'true', #Correct odometry using the input lidar topic using ICP
