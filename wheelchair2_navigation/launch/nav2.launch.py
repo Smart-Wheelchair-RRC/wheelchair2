@@ -17,7 +17,7 @@ def generate_launch_description():
             get_package_share_directory("wheelchair2_navigation"),
             "maps",
             "rrc",
-            "KRB_block.yaml",
+            "rrc_lab.yaml",
         ),
     )
     nav2_parameters_file = LaunchConfiguration(
@@ -45,7 +45,7 @@ def generate_launch_description():
             get_package_share_directory("wheelchair2_navigation"),
             "maps",
             "rrc",
-            "KRB_block_mask.yaml",
+            "rrc_lab_mask.yaml",
         ),
     )
 
