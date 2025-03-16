@@ -12,4 +12,4 @@ filter_mask_server:
     use_sim_time: true
     frame_id: "map"
     topic_name: "/keepout_filter_mask"
-    yaml_filename: "keepout_mask.yaml"
+    yaml_filename: "KRB_block_mask.yaml"
