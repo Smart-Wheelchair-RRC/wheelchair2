@@ -62,5 +62,5 @@
         "--net=host",
         "--ipc=host"
     ],
-    "postStartCommand": "sudo chown -R wheelchair2 /home/wheelchair2/wheelchair2 /run"
+    "postStartCommand": "sudo chown -R wheelchair2:wheelchair2 /home/wheelchair2/wheelchair2 /run"
 }
