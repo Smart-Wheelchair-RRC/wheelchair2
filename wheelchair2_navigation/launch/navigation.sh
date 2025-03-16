@@ -15,6 +15,11 @@ xterm -e "ros2 launch wheelchair2_bringup livox.launch.py" &
 
 sleep 5
 
+#launch the realsense 
+# xterm -e "ros2 launch realsense2_camera rs_launch.py" &
+
+# sleep 5
+
 # Launch navigation stack
 xterm -e "ros2 launch wheelchair2_navigation nav2.launch.py use_sim_time:=False" &
 
