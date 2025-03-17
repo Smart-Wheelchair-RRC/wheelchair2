@@ -55,7 +55,7 @@ def generate_launch_description():
         executable="map_server",
         name="filter_mask_server",
         output="screen",
-        parameters=[{"use_sim_time": use_sim_time, "yaml_filename": configured_params}],
+        parameters=[{"use_sim_time": use_sim_time, "yaml_filename": keepout_mask_yaml}],
     )
 
     costmap_filter_info_server = Node(
@@ -63,7 +63,7 @@ def generate_launch_description():
         executable="costmap_filter_info_server",
         name="costmap_filter_info_server",
         output="screen",
-        parameters=[{"use_sim_time": use_sim_time, "yaml_filename": configured_params}],
+        parameters=[{"use_sim_time": use_sim_time, "yaml_filename": keepout_mask_yaml}],
     )
 
     lifecycle_manager_costmap_filters = Node(
