@@ -20,6 +20,11 @@ sleep 5
 
 # sleep 5
 
+# Launch keepout zone
+xterm -e "ros2 launch wheelchair2_navigation keepout.launch.py" &
+
+sleep 7 
+
 # Launch navigation stack
 xterm -e "ros2 launch wheelchair2_navigation nav2.launch.py use_sim_time:=False" &
 
