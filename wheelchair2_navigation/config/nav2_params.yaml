@@ -101,12 +101,12 @@ controller_server:
     controller_frequency: 30.0
     FollowPath:
       plugin: "nav2_mppi_controller::MPPIController"
-      time_steps: 56 #56
+      time_steps: 54 #56
       model_dt: 0.05 #prediction horizon = time_steps * model_dt
       batch_size: 1000 #10000
-      vx_std: 0.22
+      vx_std: 0.25
       vy_std: 0.2
-      wz_std: 0.26
+      wz_std: 0.21
       vx_max: 0.35
       vx_min: -0.25
       vy_max: 0.35
@@ -123,7 +123,7 @@ controller_server:
         time_step: 3
       AckermannConstraints:
         min_turning_r: 0.4
-      critics: ["ConstraintCritic", "ObstaclesCritic", "GoalCritic", "GoalAngleCritic", "PathAlignCritic", "PathFollowCritic", "PathAngleCritic", "PreferForwardCritic", "VelocityDeadbandCritic", "TwirlingCritic"]
+      critics: ["ConstraintCritic", "ObstaclesCritic", "GoalCritic", "GoalAngleCritic", "PathAlignCritic", "PathFollowCritic", "PathAngleCritic", "PreferForwardCritic"]
       ConstraintCritic:
         enabled: true
         cost_power: 1
@@ -151,7 +151,7 @@ controller_server:
         critical_weight: 20.0
         consider_footprint: true
         collision_cost: 10000.0
-        collision_margin_distance: 0.32
+        collision_margin_distance: 0.2
         near_goal_distance: 0.5
       # CostCritic:
       #   enabled: true
@@ -165,7 +165,7 @@ controller_server:
       PathAlignCritic:
         enabled: true
         cost_power: 1
-        cost_weight: 5.0 #14
+        cost_weight: 10.0 #10
         max_path_occupancy_ratio: 0.05
         trajectory_point_step: 4
         threshold_to_consider: 0.5 #0.85
@@ -174,27 +174,27 @@ controller_server:
       PathFollowCritic:
         enabled: true
         cost_power: 1
-        cost_weight: 3.0 #5
+        cost_weight: 5.0 #5
         offset_from_furthest: 6 #17
-        threshold_to_consider: 0.5 #1.4
+        threshold_to_consider: 1.4 #1.4
       PathAngleCritic:
         enabled: true
         cost_power: 1
-        cost_weight: 2.2
+        cost_weight: 2.0 #2.2
         offset_from_furthest: 4
-        threshold_to_consider: 0.5 #0.8
-        max_angle_to_furthest: 1.0
+        threshold_to_consider: 0.3 #0.8
+        max_angle_to_furthest: 0.785398
         # forward_preference: true
-        # mode: 2
-      VelocityDeadbandCritic:
-        enabled: true
-        cost_power: 1
-        cost_weight: 35.0
-        deadband_velocities: [0.0, 0.0, 0.0]
-      TwirlingCritic:
-        enabled: true
-        twirling_cost_power: 1
-        twirling_cost_weight: 10.0
+        mode: 2
+      # VelocityDeadbandCritic:
+      #   enabled: true
+      #   cost_power: 1
+      #   cost_weight: 35.0
+      #   deadband_velocities: [0.0, 0.0, 0.0]
+      # TwirlingCritic:
+      #   enabled: true
+      #   twirling_cost_power: 1
+      #   twirling_cost_weight: 10.0
 
 # controller_server:
 #   ros__parameters:
