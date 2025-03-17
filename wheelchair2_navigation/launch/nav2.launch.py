@@ -120,9 +120,9 @@ def generate_launch_description():
                 default_value=keepout_mask_yaml,
                 description="Path to keepout mask file",
             ),
-            nav2,
             filter_mask_server,
             costmap_filter_info_server,
             lifecycle_manager_costmap_filters,
+            nav2,
         ]
     )
