@@ -22,7 +22,7 @@ def generate_launch_description():
             get_package_share_directory("wheelchair2_navigation"),
             "maps",
             "rrc",
-            "rrc_lab.yaml",
+            "himalaya_kcis.yaml",
         ),
     )
     nav2_parameters_file = LaunchConfiguration(
