@@ -5,6 +5,7 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
+        - /TF1
         - /TF1/Frames1
         - /TF1/Tree1
         - /Path1
@@ -77,53 +78,53 @@ Visualization Manager:
       Frames:
         All Enabled: false
         base_footprint:
-          Value: true
+          Value: false
         base_link:
           Value: true
         camera_base_rod:
-          Value: true
+          Value: false
         camera_bottom_screw_frame:
-          Value: true
+          Value: false
         camera_color_frame:
-          Value: true
+          Value: false
         camera_color_optical_frame:
-          Value: true
+          Value: false
         camera_depth_frame:
-          Value: true
+          Value: false
         camera_depth_optical_frame:
-          Value: true
+          Value: false
         camera_left_ir_frame:
-          Value: true
+          Value: false
         camera_left_ir_optical_frame:
-          Value: true
+          Value: false
         camera_link:
-          Value: true
+          Value: false
         camera_right_ir_frame:
-          Value: true
+          Value: false
         camera_right_ir_optical_frame:
-          Value: true
+          Value: false
         caster1:
-          Value: true
+          Value: false
         caster2:
-          Value: true
+          Value: false
         laser_frame:
-          Value: true
+          Value: false
         left_wheel:
-          Value: true
+          Value: false
         lidar_base_rod:
-          Value: true
+          Value: false
         livox_frame:
-          Value: true
+          Value: false
         map:
           Value: true
         odom:
           Value: true
         right_wheel:
-          Value: true
+          Value: false
         rod1:
-          Value: true
+          Value: false
         rod2:
-          Value: true
+          Value: false
       Marker Scale: 1
       Name: TF
       Show Arrows: true
@@ -564,7 +565,7 @@ Visualization Manager:
       Enabled: true
       Name: MarkerArray
       Namespaces:
-        {}
+        "": true
       Topic:
         Depth: 5
         Durability Policy: Volatile
