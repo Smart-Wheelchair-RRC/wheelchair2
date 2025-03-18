@@ -72,19 +72,104 @@ Visualization Manager:
       Value: false
       Visual Enabled: true
     - Class: rviz_default_plugins/TF
-      Enabled: false
+      Enabled: true
       Frame Timeout: 15
       Frames:
         All Enabled: false
+        base_footprint:
+          Value: true
+        base_link:
+          Value: true
+        camera_base_rod:
+          Value: true
+        camera_bottom_screw_frame:
+          Value: true
+        camera_color_frame:
+          Value: true
+        camera_color_optical_frame:
+          Value: true
+        camera_depth_frame:
+          Value: true
+        camera_depth_optical_frame:
+          Value: true
+        camera_left_ir_frame:
+          Value: true
+        camera_left_ir_optical_frame:
+          Value: true
+        camera_link:
+          Value: true
+        camera_right_ir_frame:
+          Value: true
+        camera_right_ir_optical_frame:
+          Value: true
+        caster1:
+          Value: true
+        caster2:
+          Value: true
+        laser_frame:
+          Value: true
+        left_wheel:
+          Value: true
+        lidar_base_rod:
+          Value: true
+        livox_frame:
+          Value: true
+        map:
+          Value: true
+        odom:
+          Value: true
+        right_wheel:
+          Value: true
+        rod1:
+          Value: true
+        rod2:
+          Value: true
       Marker Scale: 1
       Name: TF
       Show Arrows: true
       Show Axes: true
       Show Names: false
       Tree:
-        {}
+        map:
+          odom:
+            base_footprint:
+              base_link:
+                camera_base_rod:
+                  {}
+                camera_bottom_screw_frame:
+                  camera_link:
+                    camera_depth_frame:
+                      camera_color_frame:
+                        camera_color_optical_frame:
+                          {}
+                      camera_depth_optical_frame:
+                        {}
+                      camera_left_ir_frame:
+                        camera_left_ir_optical_frame:
+                          {}
+                      camera_right_ir_frame:
+                        camera_right_ir_optical_frame:
+                          {}
+                    livox_frame:
+                      {}
+                caster1:
+                  {}
+                caster2:
+                  {}
+                laser_frame:
+                  {}
+                left_wheel:
+                  {}
+                lidar_base_rod:
+                  {}
+                right_wheel:
+                  {}
+                rod1:
+                  {}
+                rod2:
+                  {}
       Update Interval: 0
-      Value: false
+      Value: true
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
@@ -668,7 +753,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/ThirdPersonFollower
-      Distance: 20.74927520751953
+      Distance: 31.259143829345703
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -683,10 +768,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.5697963237762451
+      Pitch: 1.4747964143753052
       Target Frame: <Fixed Frame>
       Value: ThirdPersonFollower (rviz_default_plugins)
-      Yaw: 4.650554180145264
+      Yaw: 3.975553274154663
     Saved: ~
 Window Geometry:
   Camera:
