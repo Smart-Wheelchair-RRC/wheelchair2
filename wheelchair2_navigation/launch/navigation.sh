@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# colcon build --packages-select wheelchair2_navigation wheelchair2_control wheelchair2_bringup --symlink-install
 # Set permissions for the Kangaroo motor controller
 sudo chmod 777 /dev/ttyACM0
 
@@ -35,4 +35,4 @@ xterm -e "rviz2 -d navigation.rviz" &
 
 sleep 5
 
-xterm -e "ros2 run wheelchair2_control keyboard_teleop.py" &
+xterm -e "ros2 run wheelchair2_control keyboard_teleop_constant.py" &
