@@ -82,7 +82,6 @@ ROS2 Humble setup to operate the RRC wheelchair
     docker run -it \
     --rm \
     --privileged \
-    --gpus=all \
     --cap-add=SYS_NICE \
     --ulimit rtprio=99 \
     --ulimit rttime=-1 \
@@ -101,11 +100,11 @@ ROS2 Humble setup to operate the RRC wheelchair
     -e LIBGL_ALWAYS_SOFTWARE="1" \
     --entrypoint /bin/bash \
     --name wheelchair2-navigation \
-    ghcr.io/smart-wheelchair-rrc/wheelchair2_navigation:v1.0.0
+    ghcr.io/smart-wheelchair-rrc/wheelchair2_navigation_jetson:kcis_kday
     ```
 - Inside the container to run the Navigation stack
     ```bash
-    source install/setup.bash && cd src/wheelchair2_navigation/rviz && ./navigation.sh
+    source install/setup.bash && cd src/wheelchair2_navigation/launch && ./navigation.sh
     ```
   
 ## Hardware Setup
