@@ -61,7 +61,8 @@ ROS2 Humble setup to operate the RRC wheelchair
     ```
 - To start container
     - Open Command Pallete with `Ctrl+Shift+P`
-    - Select Option to DevContainer: Rebuild and Reopen Container (the process takes some time during the first time)
+    - Select Option to DevContainer: Reopen in Container (the process takes some time during the first time)
+    - Select between Jetson (ARM based system) or AMD64/x86 (x86 based laptop) 
       >Note: If there is an error related to gpu, comment the line 53 in the devcontainer.json and try to build again
     - Use `Build WS` button to build workspace
   
