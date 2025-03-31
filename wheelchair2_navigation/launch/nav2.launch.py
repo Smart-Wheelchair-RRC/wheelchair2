@@ -3,13 +3,8 @@ import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.actions import DeclareLaunchArgument, GroupAction, IncludeLaunchDescription
-from launch.conditions import IfCondition
-from launch.substitutions import LaunchConfiguration, PythonExpression
-from launch_ros.actions import Node, LoadComposableNodes
-from launch_ros.actions import PushRosNamespace
-from launch_ros.descriptions import ComposableNode
-from nav2_common.launch import RewrittenYaml
+from launch.actions import IncludeLaunchDescription
+from launch.substitutions import LaunchConfiguration
 
 def generate_launch_description():
     
@@ -33,7 +28,6 @@ def generate_launch_description():
             "nav2_params.yaml",
         ),
     )
-    
 
     # Nav2 bringup launch file
     nav2 = IncludeLaunchDescription(
@@ -49,11 +43,6 @@ def generate_launch_description():
 
     return LaunchDescription(
         [
-            DeclareLaunchArgument("use_sim_time", default_value="false", description="Use simulation (Gazebo) clock if true"),
-            DeclareLaunchArgument("map", default_value=map_yaml, description="Full path to map file to load"),
-            DeclareLaunchArgument("params_file", default_value=nav2_parameters_file, description="Path for Nav2 config file"),
-            
-            # Launch Nav2
             nav2,
         ]
     )

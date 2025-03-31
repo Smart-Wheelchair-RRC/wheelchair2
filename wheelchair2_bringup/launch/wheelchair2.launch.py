@@ -1,17 +1,13 @@
 from launch import LaunchDescription
 from launch.actions import (
-    DeclareLaunchArgument,
     IncludeLaunchDescription,
     RegisterEventHandler,
 )
-from launch.conditions import IfCondition
 from launch.event_handlers import OnProcessExit, OnProcessStart
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import (
     Command,
     FindExecutable,
-    LaunchConfiguration,
-    NotSubstitution,
     PathJoinSubstitution,
 )
 from launch_ros.actions import Node
@@ -100,8 +96,7 @@ def generate_launch_description():
     return LaunchDescription(
         [
             robot_state_publisher,
-            joystick,
-            
+            joystick,           
 
             # URDF/ROS2 CONTROL
             RegisterEventHandler(
