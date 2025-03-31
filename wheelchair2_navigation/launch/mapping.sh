@@ -21,4 +21,4 @@ xterm -e "ros2 launch realsense2_camera rs_launch.py" &
 sleep 5
 
 # Launch RViz with the specified configuration
-xterm -e "rviz2 -d navigation.rviz" &
+xterm -e "rviz2 -d navigation_amcl.rviz" &

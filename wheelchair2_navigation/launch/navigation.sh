@@ -16,9 +16,9 @@ xterm -e "ros2 launch wheelchair2_bringup livox.launch.py" &
 sleep 5
 
 # Launch navigation stack
-xterm -e "ros2 launch wheelchair2_navigation nav2.launch.py use_sim_time:=False" &
+xterm -e "ros2 launch wheelchair2_navigation nav2_amcl.launch.py use_sim_time:=False" &
 
 sleep 5
 
 # Launch RViz with the specified configuration
-xterm -e "rviz2 -d navigation.rviz" &
+xterm -e "rviz2 -d navigation_amcl.rviz" &

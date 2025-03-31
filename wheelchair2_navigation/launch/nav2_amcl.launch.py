@@ -28,7 +28,7 @@ def generate_launch_description():
         default=os.path.join(
             get_package_share_directory("wheelchair2_navigation"),
             "config",
-            "nav2_params.yaml",
+            "nav2_params_amcl.yaml",
         ),
     )
     # rviz_config_path = os.path.join(("rviz"), 'voxel.rviz')

@@ -149,6 +149,6 @@ The repository has currently been setup with
   ros2 launch wheelchair2_navigation nav2.launch.py use_sim_time:=False
   ros2 run rviz2 rviz2 -d $(ros2 pkg prefix nav2_bringup)/share/nav2_bringup/rviz/nav2_default_view.rviz
   ```
-  >Note: You can also navigate to the src/wheelchair2_navigation/rviz and run `rviz2 -d navigation.rviz` For visualizing with the camera PoV. 
+  >Note: You can also navigate to the src/wheelchair2_navigation/rviz and run `rviz2 -d navigation_amcl.rviz` For visualizing with the camera PoV. 
 - A few launch option are available with above command
   - `in_simulation` and `use_sim_time:=True/False` : False to run the hardware setup ,True to run Gazebo

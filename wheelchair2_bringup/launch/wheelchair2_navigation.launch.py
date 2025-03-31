@@ -34,7 +34,7 @@ def generate_launch_description():
     navigation_stack = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             PathJoinSubstitution(
-                [FindPackageShare("wheelchair2_navigation"), "launch", "nav2.launch.py"]
+                [FindPackageShare("wheelchair2_navigation"), "launch", "nav2_amcl.launch.py"]
             )
         ),
     )
@@ -48,7 +48,7 @@ def generate_launch_description():
                 [
                     FindPackageShare("wheelchair2_navigation"),
                     "rviz",
-                    "navigation.rviz",  # Ensure the file exists in this location
+                    "navigation_amcl.rviz",  # Ensure the file exists in this location
                 ]
             ),
         ],
