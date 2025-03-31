@@ -11,15 +11,25 @@ from launch_ros.actions import PushRosNamespace
 from launch_ros.descriptions import ComposableNode
 from nav2_common.launch import RewrittenYaml
 
-
 def generate_launch_description():
     
     use_sim_time = LaunchConfiguration("use_sim_time", default="false")
+    autostart = LaunchConfiguration('autostart', default="true")
 
-    namespace = LaunchConfiguration('namespace', default="")
+    lifecycle_nodes = ['filter_mask_server', 'costmap_filter_info_server']
 
-    keepout_mask_yaml = LaunchConfiguration(
-        "keepout_mask_yaml",
+
+    keepout_params_file = LaunchConfiguration(
+        'keepout_params_file',
+        default=os.path.join(
+            get_package_share_directory("wheelchair2_navigation"),
+            "config",
+            "keepout_params.yaml",
+        ),
+    )
+                                                
+    mask_yaml_file = LaunchConfiguration(
+        'mask',
         default=os.path.join(
             get_package_share_directory("wheelchair2_navigation"),
             "maps",
@@ -28,71 +38,76 @@ def generate_launch_description():
         ),
     )
 
-    # Keepout filter parameters
-    keepout_params_file = LaunchConfiguration(
-        "keepout_params_file",
+    # Map and Nav2 config files
+    map_yaml = LaunchConfiguration(
+        "map",
         default=os.path.join(
             get_package_share_directory("wheelchair2_navigation"),
             "maps",
             "rrc",
-            "keepout_params.yaml",
+            "rrc_lab.yaml",
         ),
     )
-
+    nav2_parameters_file = LaunchConfiguration(
+        "params_file",
+        default=os.path.join(
+            get_package_share_directory("wheelchair2_navigation"),
+            "config",
+            "nav2_params.yaml",
+        ),
+    )
     param_substitutions = {
-        'use_sim_time': use_sim_time,
-        'yaml_filename': keepout_mask_yaml}
+            'use_sim_time': use_sim_time,
+            'yaml_filename': mask_yaml_file}
 
     configured_params = RewrittenYaml(
-        source_file=keepout_params_file,
-        root_key=namespace,
-        param_rewrites=param_substitutions,
-        convert_types=True)
+            source_file=keepout_params_file,
+            param_rewrites=param_substitutions,
+            convert_types=True)
+    
 
-    # Keepout Filter Nodes
-    filter_mask_server = Node(
-        package="nav2_map_server",
-        executable="map_server",
-        name="filter_mask_server",
-        output="screen",
-        parameters=[{"use_sim_time": use_sim_time, "yaml_filename": keepout_mask_yaml}],
+    # Nav2 bringup launch file
+    nav2 = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(get_package_share_directory("nav2_bringup"), "launch", "bringup_launch.py")
+        ),
+        launch_arguments={
+            "map": map_yaml,
+            "use_sim_time": use_sim_time,
+            "params_file": nav2_parameters_file,
+        }.items(),
     )
+    lifecycle_manager = Node(
+            package='nav2_lifecycle_manager',
+            executable='lifecycle_manager',
+            name='lifecycle_manager_costmap_filters',
+            output='screen',
+            emulate_tty=True,  
+            parameters=[{'use_sim_time': use_sim_time},
+                        {'autostart': autostart},
+                        {'node_names': lifecycle_nodes}])
+
+    map_server = Node(
+            package='nav2_map_server',
+            executable='map_server',
+            name='filter_mask_server',
+            output='screen',
+            emulate_tty=True, 
+            parameters=[configured_params])
 
     costmap_filter_info_server = Node(
-        package="nav2_map_server",
-        executable="costmap_filter_info_server",
-        name="costmap_filter_info_server",
-        output="screen",
-        parameters=[{"use_sim_time": use_sim_time, "yaml_filename": keepout_mask_yaml}],
-    )
-
-    lifecycle_manager_costmap_filters = Node(
-        package="nav2_lifecycle_manager",
-        executable="lifecycle_manager",
-        name="lifecycle_manager_costmap_filters",
-        output="screen",
-        parameters=[{
-            "use_sim_time": use_sim_time,
-            "autostart": True,
-            "node_names": ["filter_mask_server", "costmap_filter_info_server"],
-        }],
-    )
+            package='nav2_map_server',
+            executable='costmap_filter_info_server',
+            name='costmap_filter_info_server',
+            output='screen',
+            emulate_tty=True,  
+            parameters=[configured_params])
 
     return LaunchDescription(
         [
-            DeclareLaunchArgument("use_sim_time", 
-                                  default_value="false", 
-                                  description="Use simulation (Gazebo) clock if true"),
-            DeclareLaunchArgument("keepout_mask", 
-                                  default_value=keepout_mask_yaml, 
-                                  description="Path to keepout mask file"),
-            DeclareLaunchArgument("keepout_params_file", 
-                                  default_value=keepout_params_file, 
-                                  description="Path for keepout filter parameters"),
-            
-            # Start filter nodes
-            filter_mask_server,
+            nav2,
+            lifecycle_manager,
+            map_server,
             costmap_filter_info_server,
-            lifecycle_manager_costmap_filters,
         ]
     )

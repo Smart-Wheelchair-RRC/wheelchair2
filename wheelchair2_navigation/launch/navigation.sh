@@ -26,14 +26,14 @@ sleep 5
 # sleep 5
 
 # Launch keepout zone
-# xterm -e "ros2 launch wheelchair2_navigation keepout.launch.py" &
+xterm -e "ros2 launch wheelchair2_navigation keepout.launch.py" &
 
-# sleep 5 
+sleep 5 
 
 # Launch navigation stack
-xterm -e "ros2 launch wheelchair2_navigation nav2.launch.py use_sim_time:=False" &
+# xterm -e "ros2 launch wheelchair2_navigation nav2.launch.py use_sim_time:=False" &
 
-sleep 5
+# sleep 5
 
 # Launch RViz with the specified configuration
 xterm -e "rviz2 -d navigation.rviz" &
