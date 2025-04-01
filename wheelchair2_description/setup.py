@@ -21,8 +21,17 @@ setup(
             glob(os.path.join("urdf", "*.xacro")),
         ),
         (
+            os.path.join("share", package_name, "urdf/gz_sim"),
+            glob(os.path.join("urdf", "gz_sim", "*.xacro")),
+        ),
+        (
             os.path.join("share", package_name, "meshes"),
             glob(os.path.join("meshes", "*.[ds][at]*")),
+        ),
+        (
+            os.path.join("share", package_name, "models"),
+            glob(os.path.join(
+                "models",  "model.[sc][do]*")),
         ),
     ],
     install_requires=["setuptools"],

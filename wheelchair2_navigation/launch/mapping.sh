@@ -15,6 +15,7 @@ xterm -e "ros2 launch wheelchair2_bringup livox.launch.py" &
 
 sleep 5
 
+<<<<<<< HEAD
 #launch the realsense 
 xterm -e "ros2 launch realsense2_camera rs_d455_pointcloud_launch.py" &
 
@@ -27,3 +28,12 @@ sleep 5
 
 # keyboard teleop
 xterm -e "ros2 run wheelchair2_control keyboard_teleop.py" &
+=======
+# Launch navigation stack
+xterm -e "ros2 launch realsense2_camera rs_launch.py" &
+
+sleep 5
+
+# Launch RViz with the specified configuration
+xterm -e "rviz2 -d navigation.rviz" &
+>>>>>>> origin/master
