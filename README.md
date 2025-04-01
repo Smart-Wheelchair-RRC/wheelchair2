@@ -100,7 +100,7 @@ sudo chmod 777 /dev/ttyACM0
   
 - To run the Navigation stack inside the container
   ```
-  source install/setup.bash && cd src/wheelchair2_navigation/rviz && ./navigation.sh
+  source install/setup.bash && cd src/wheelchair2_navigation/launch && ./navigation.sh
   ```
 
 #### Option 2: Docker for Demo runs
@@ -108,7 +108,7 @@ sudo chmod 777 /dev/ttyACM0
 ##### x86 Laptop Navigation Demo run
 - To pull latest docker image
     ```bash
-    docker pull ghcr.io/smart-wheelchair-rrc/wheelchair2_navigation:v1.0.0
+    docker pull ghcr.io/smart-wheelchair-rrc/wheelchair2_navigation:v1.0
     ```  
 - To start container
     ```bash
@@ -133,7 +133,7 @@ sudo chmod 777 /dev/ttyACM0
     -e LIBGL_ALWAYS_SOFTWARE="1" \
     --entrypoint /bin/bash \
     --name wheelchair2-navigation \
-    ghcr.io/smart-wheelchair-rrc/wheelchair2_navigation:v1.0.0
+    ghcr.io/smart-wheelchair-rrc/wheelchair2_navigation:v1.0
     ```
 - Inside the container to run the Navigation stack
     ```bash
