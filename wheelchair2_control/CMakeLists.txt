@@ -18,4 +18,14 @@ install (DIRECTORY
   DESTINATION share/${PROJECT_NAME}
 )
 
+install(PROGRAMS
+  scripts/keyboard_teleop.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+install(PROGRAMS
+  scripts/keyboard_teleop_constant.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
 ament_package()

@@ -1,4 +1,4 @@
-FROM ghcr.io/smart-wheelchair-rrc/wheelchair2_base:latest
+FROM ghcr.io/smart-wheelchair-rrc/wheelchair2_base_jetson:v1.0
 
 # Add the following labels
 LABEL org.opencontainers.image.description="Wheelchair2"
@@ -15,6 +15,7 @@ WORKDIR /home/wheelchair2/wheelchair2
 SHELL ["/bin/bash", "-c"]
 RUN source /opt/ros/humble/setup.bash \
     && colcon build --cmake-args -DROS_EDITION=ROS2 -DHUMBLE_ROS=humble \
+    && colcon build --packages-select wheelchair2_navigation wheelchair2_control wheelchair2_bringup --symlink-install \
     && source install/setup.bash \
-    && cd src/wheelchair2_navigation/rviz \
+    && cd src/wheelchair2_navigation/launch \
     && sudo chmod +x ./navigation.sh

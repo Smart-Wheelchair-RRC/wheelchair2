@@ -1,6 +1,6 @@
 {
-    "name": "Wheelchair2 Development",
-    "image": "ghcr.io/smart-wheelchair-rrc/wheelchair2_base",
+    "name": "Wheelchair2 Development on Jetson",
+    "image": "ghcr.io/smart-wheelchair-rrc/wheelchair2_base_jetson:v1.0",
     "privileged": true,
     "workspaceMount": "source=${localWorkspaceFolder},target=/home/wheelchair2/wheelchair2/src,type=bind",
     "workspaceFolder": "/home/wheelchair2/wheelchair2/src",
@@ -17,7 +17,7 @@
                             "cwd": "/home/wheelchair2/wheelchair2",
                             "color": "green",
                             "singleInstance": true,
-                            "command": "colcon build --cmake-args -DROS_EDITION=ROS2 -DHUMBLE_ROS=humble" // This is executed in the terminal.
+                            "command": "colcon build --cmake-args -DROS_EDITION=ROS2 -DHUMBLE_ROS=humble && source install/setup.bash" 
                         }
                     ]
                 }
@@ -50,7 +50,7 @@
         "LIBGL_ALWAYS_SOFTWARE": "1"
     },
     "runArgs": [
-        "--gpus=all",
+        // "--gpus=all",
         "--cap-add=SYS_NICE",
         "--ulimit=rtprio=99",
         "--ulimit=rttime=-1",
@@ -62,5 +62,5 @@
         "--net=host",
         "--ipc=host"
     ],
-    "postStartCommand": "sudo chown -R wheelchair2 /home/wheelchair2/wheelchair2 /run"
+    "postStartCommand": "sudo chown -R wheelchair2:wheelchair2 /home/wheelchair2/wheelchair2 /run"
 }

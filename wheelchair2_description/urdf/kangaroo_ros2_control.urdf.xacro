@@ -1,27 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-	<xacro:macro name="kangaroo_x2_driver" params="name prefix is_sim">
+	<xacro:macro name="kangaroo_x2_driver">
 
-		<ros2_control name="${name}" type="system">
+		<ros2_control name="kangaroo_ros2_control" type="system">
 			<hardware>
-				<xacro:if value="${is_sim}">
-					<plugin>gazebo_ros2_control/GazeboSystem</plugin>
-				</xacro:if>
-				<xacro:unless value="${is_sim}">
-					<plugin>wheelchair2_kangaroo_x2_driver/Kangaroo</plugin>
-					<!-- <plugin>mock_components/GenericSystem</plugin> -->
-					<param name="left_wheel_name">base_link_to_left_wheel</param>
-					<param name="right_wheel_name">base_link_to_right_wheel</param>
-					<param name="wheel_diameter">0.32</param>
-					<param name="wheel_center_distance">0.55</param>
-					<param name="encoder_lines_per_revolution">65536</param>
-					<param name="hz">50</param>
-					<param name="port">/dev/ttyACM0</param>
-					<param name="mixed_mode">true</param>
-				</xacro:unless>
+				<plugin>wheelchair2_kangaroo_x2_driver/Kangaroo</plugin>
+				<param name="left_wheel_name">base_link_to_left_wheel</param>
+				<param name="right_wheel_name">base_link_to_right_wheel</param>
+				<param name="wheel_diameter">0.32</param>
+				<param name="wheel_center_distance">0.55</param>
+				<param name="encoder_lines_per_revolution">65536</param>
+				<param name="hz">50</param>
+				<param name="port">/dev/ttyACM0</param>
+				<param name="mixed_mode">true</param>
 			</hardware>
-			<joint name="${prefix}base_link_to_left_wheel">
+			<joint name="base_link_to_left_wheel">
 				<command_interface name="velocity">
 					<param name="min">-1</param>
 					<param name="max">1</param>
@@ -29,7 +23,7 @@
 				<state_interface name="position" />
 				<state_interface name="velocity" />
 			</joint>
-			<joint name="${prefix}base_link_to_right_wheel">
+			<joint name="base_link_to_right_wheel">
 				<command_interface name="velocity">
 					<param name="min">-1</param>
 					<param name="max">1</param>
