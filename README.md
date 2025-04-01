@@ -5,75 +5,107 @@ ROS2 Humble setup to operate the RRC wheelchair
 
 - [Wheelchair2](#wheelchair2)
   - [Table of contents](#table-of-contents)
-  - [Docker Setup](#docker-setup)
-      - [Install and setup Docker](#install-and-setup-docker)
+    - [Docker Setup](#docker-setup)
+      - [Installation \& Configuration](#installation--configuration)
+      - [Docker Installation](#docker-installation)
+        - [GHCR Authentication](#ghcr-authentication)
+    - [Hardware Configuration](#hardware-configuration)
+        - [Motor Driver Controller and Wheel Odometery](#motor-driver-controller-and-wheel-odometery)
+        - [RGB Camera: Realsense D455](#rgb-camera-realsense-d455)
+        - [3D LiDAR: Livox MID-360](#3d-lidar-livox-mid-360)
+    - [Software Setup Options](#software-setup-options)
       - [Option 1: Docker for Development](#option-1-docker-for-development)
         - [Prerequisites](#prerequisites)
-        - [Wheelchair Development](#wheelchair-development)
-      - [Option 2: Docker for demo runs](#option-2-docker-for-demo-runs)
-  - [Hardware Setup](#hardware-setup)
+        - [Setup Process](#setup-process)
+      - [Option 2: Docker for Demo runs](#option-2-docker-for-demo-runs)
+        - [x86 Laptop Navigation Demo run](#x86-laptop-navigation-demo-run)
+        - [Jetson Navigation Demo run](#jetson-navigation-demo-run)
   - [How to Use Locally](#how-to-use-locally)
+    - [Recomended not to run locally please use Docker](#recomended-not-to-run-locally-please-use-docker)
 
 
-## Docker Setup
-- The docker can be used in two different setting. 
-  - Option 1: Docker for development 
-  - Option 2: Docker for demo runs
->
-#### Install and setup Docker
-- Install using simple bash script
+### Docker Setup
+#### Installation & Configuration
+#### Docker Installation
   ```bash
+  # Install Docker using convenience script
   curl -fsSL https://get.docker.com -o get-docker.sh
   sudo sh ./get-docker.sh
-  ```
-- Post-Install setup
-  ```bash
+
+  # Post-install configuration
   sudo groupadd docker
   sudo usermod -aG docker $USER
-  ```
-- Configure Docker to start on boot with systemd
-  ```bash
   sudo systemctl enable docker.service
   sudo systemctl enable containerd.service
-  ```
-- Check if it is enabled 
-  ```bash
+
+  # Verify installation
   sudo systemctl is-enabled docker
   ```
-- **Reboot before proceeding further**
-- Login to GHCR using your GitHub  
+
+ **Reboot before proceeding further**
+
+##### GHCR Authentication 
   ```bash
   echo "<YOUR_GITHUB_PAT>" | docker login ghcr.io -u <YOUR_GITHUB_USERID> --password-stdin
   ```
+### Hardware Configuration
+The repository has currently been setup with
+##### Motor Driver Controller and Wheel Odometery
+  - **Components:**
+    - Kangaroo X2 Motion controller
+    - Sabertooth 2x32 Motor driver
+    - AMT102-V Wheelencoders
+
+**Permission for Motor Driver Controller**
+```bash 
+sudo chmod 777 /dev/ttyACM0
+```
+
+##### RGB Camera: Realsense D455 
+  - With the current setup we only use realsense for RTABMAP
+  - No Additional Setup is required for getting data, just plug-in the type-c cable
+##### 3D LiDAR: Livox MID-360
+   1.  Create new network profile "Livox"
+   2.  Configure static IP:
+        - **IP Address:** 192.168.1.50
+        - **Netmask:** 255.255.255.0
+
+### Software Setup Options
+
 #### Option 1: Docker for Development
 ##### Prerequisites
 - VSCode
-- Remote Development Extension by Microsoft
+- Remote Development Extension by Microsoft (Inside VSCode)
   
-##### Wheelchair Development 
+##### Setup Process
 - Create a folder for wheelchair development (preferably in home) 
     ```bash 
     mkdir wheelchair2 && cd wheelchair2
-    ```
-- Clone the repo with submodules
-    ```bash
+    # Clone the repo with submodules
     git clone https://github.com/Smart-Wheelchair-RRC/wheelchair2.git --recurse-submodules .
+    # Open VSCode 
+    code .
     ```
-- To start container
+- To enter the container
     - Open Command Pallete with `Ctrl+Shift+P`
-    - Select Option to DevContainer: Reopen in Container (the process takes some time during the first time)
-    - Select between Jetson (ARM based system) or AMD64/x86 (x86 based laptop) 
-      >Note: If there is an error related to gpu, comment the line 53 in the devcontainer.json and try to build again
+    - Select **Dev Containers: Reopen in Container**
+    - Choose architecture:
+        - **Jetson** (ARM-based systems)
+
+        - **AMD64/x86** (Standard laptops)
+    >Note: If there is an error related to gpu, comment the line 53 in the devcontainer.json and try to build again
     - Use `Build WS` button to build workspace
   
-      >Note: To access these buttons you may need to enable [VSCode Action Button Extension](https://marketplace.visualstudio.com/items?itemName=seunlanlege.action-buttons) through the Extensions Tab in VSCode, the extension should download automatically on container startup
+    >Note: To access these buttons you may need to enable [VSCode Action Button Extension](https://marketplace.visualstudio.com/items?itemName=seunlanlege.action-buttons) through the Extensions Tab in VSCode, the extension should download automatically on container startup
   
 - To run the Navigation stack inside the container
   ```
   source install/setup.bash && cd src/wheelchair2_navigation/rviz && ./navigation.sh
   ```
 
-#### Option 2: Docker for demo runs
+#### Option 2: Docker for Demo runs
+
+##### x86 Laptop Navigation Demo run
 - To pull latest docker image
     ```bash
     docker pull ghcr.io/smart-wheelchair-rrc/wheelchair2_navigation:v1.0.0
@@ -101,26 +133,52 @@ ROS2 Humble setup to operate the RRC wheelchair
     -e LIBGL_ALWAYS_SOFTWARE="1" \
     --entrypoint /bin/bash \
     --name wheelchair2-navigation \
-    ghcr.io/smart-wheelchair-rrc/wheelchair2_navigation_jetson:kcis_kday
+    ghcr.io/smart-wheelchair-rrc/wheelchair2_navigation:v1.0.0
+    ```
+- Inside the container to run the Navigation stack
+    ```bash
+    source install/setup.bash && cd src/wheelchair2_navigation/launch && ./navigation.sh
+    ```
+##### Jetson Navigation Demo run
+- To pull latest docker image
+    ```bash
+    docker pull ghcr.io/smart-wheelchair-rrc/wheelchair2_navigation_jetson:v1.0
+    ```  
+- To start container
+    ```bash
+    docker run -it \
+    --rm \
+    --privileged \
+    --cap-add=SYS_NICE \
+    --ulimit rtprio=99 \
+    --ulimit rttime=-1 \
+    --ulimit memlock=8428281856 \
+    --cap-add=all \
+    --security-opt seccomp:unconfined \
+    --security-opt apparmor:unconfined \
+    --volume=/dev:/dev \
+    --net=host \
+    --ipc=host \
+    -e DISPLAY="${DISPLAY}" \
+    -e WAYLAND_DISPLAY="${WAYLAND_DISPLAY}" \
+    -e XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR}" \
+    -e PULSE_SERVER="${PULSE_SERVER}" \
+    -e QT_X11_NO_MITSHM="1" \
+    -e LIBGL_ALWAYS_SOFTWARE="1" \
+    --entrypoint /bin/bash \
+    --name wheelchair2-navigation-jetson \
+    ghcr.io/smart-wheelchair-rrc/wheelchair2_navigation_jetson:v1.0
     ```
 - Inside the container to run the Navigation stack
     ```bash
     source install/setup.bash && cd src/wheelchair2_navigation/launch && ./navigation.sh
     ```
   
-## Hardware Setup
-The repository has currently been setup with
-- Wheel Odometery
-  - Kangaroo X2 Motion controller
-  - Sabertooth 2x32 Motor driver
-  - AMT102-V Wheelencoders
-- RGB Camera: Realsense D455 (for RTABMap only)
-  - No Additional Setup is required for this
-- 3D LiDAR: Livox MID-360
-  - IP Address: 192.168.1.50
-  - Netmask: 255.255.255.0
+
 
 ## How to Use Locally
+
+### Recomended not to run locally please use Docker
 - Clone the repo inside your workspace
   ```bash
   mkdir wheelchair2_ws && cd wheelchair2_ws && mkdir src && cd src
@@ -150,5 +208,4 @@ The repository has currently been setup with
   ros2 run rviz2 rviz2 -d $(ros2 pkg prefix nav2_bringup)/share/nav2_bringup/rviz/nav2_default_view.rviz
   ```
   >Note: You can also navigate to the src/wheelchair2_navigation/rviz and run `rviz2 -d navigation.rviz` For visualizing with the camera PoV. 
-- A few launch option are available with above command
-  - `in_simulation` and `use_sim_time:=True/False` : False to run the hardware setup ,True to run Gazebo
+
