@@ -4,6 +4,7 @@ from launch import LaunchDescription
 from launch.actions import (
     IncludeLaunchDescription,
     RegisterEventHandler,
+    DeclareLaunchArgument
 )
 from launch.event_handlers import OnProcessExit, OnProcessStart
 from launch.launch_description_sources import PythonLaunchDescriptionSource
@@ -13,6 +14,7 @@ from launch.substitutions import (
     PathJoinSubstitution,
     LaunchConfiguration,
 )
+from launch.conditions import IfCondition, UnlessCondition
 from launch_ros.actions import Node
 from launch_ros.parameter_descriptions import ParameterValue
 from launch_ros.substitutions import FindPackageShare
@@ -21,22 +23,40 @@ from ament_index_python.packages import get_package_share_directory
 
 def generate_launch_description():
 
+    # Declare launch arguments
 
-    livox_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            PathJoinSubstitution(
-                [FindPackageShare("livox_ros_driver2"), "launch_ROS2", "msg_MID360_launch.py"]
-            ),
-        ),
+    launch_arguments = []
+    launch_arguments.append(
+        DeclareLaunchArgument(
+            'use_sim_time',
+            default_value='False',
+            description='Launch in simulation mode'
+        )
+    )
+    launch_arguments.append(
+        DeclareLaunchArgument(
+            'use_keepout_zone',
+            default_value='False',
+            description='Launch with keepout zones'
+        )
+    )
+    launch_arguments.append(
+        DeclareLaunchArgument(
+            'use_joy',
+            default_value='True',
+            description='Use joystick control'
+        )
     )
 
-    pointcloud_to_laserscan_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            PathJoinSubstitution(
-                [FindPackageShare("pointcloud_to_laserscan"), "launch", "sample_pointcloud_to_laserscan_launch.py"]
-            ),
-        ),
-    )
+    #Initialize arguments
+    use_sim_time = LaunchConfiguration("use_sim_time")
+    autostart = LaunchConfiguration('autostart', default="true")
+    use_keepout_zone = LaunchConfiguration('use_keepout_zone')
+    use_joy = LaunchConfiguration('use_joy')
+
+    # lifecycle node for mask layer
+    lifecycle_nodes = ['filter_mask_server', 'costmap_filter_info_server']
+
 
     # ROBOT DESCRIPTION
     robot_description = {
@@ -58,16 +78,7 @@ def generate_launch_description():
         )
     }
 
-    # ROBOT STATE PUBLISHER
-    robot_state_publisher = Node(
-        package="robot_state_publisher",
-        executable="robot_state_publisher",
-        output="screen",
-        parameters=[robot_description, 
-                    ],
-    )
-
-    # CONTROLLER MANAGER NODE
+    #CONTROLLER MANAGER NODE
     ros2_control = Node(
         package="controller_manager",
         executable="ros2_control_node",
@@ -87,6 +98,15 @@ def generate_launch_description():
             ("/wheelchair2_base_controller/odom", "/odom"),
         ],
     )
+
+    # ROBOT STATE PUBLISHER
+    robot_state_publisher = Node(
+        package="robot_state_publisher",
+        executable="robot_state_publisher",
+        output="screen",
+        parameters=[robot_description],
+    )
+    
     # JOINT STATE BROADCASTER
     joint_state_broadcaster_spawner = Node(
         package="controller_manager",
@@ -109,15 +129,33 @@ def generate_launch_description():
         ],
         output="screen",
     )
+
+    livox_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            PathJoinSubstitution(
+                [FindPackageShare("livox_ros_driver2"), "launch_ROS2", "msg_MID360_launch.py"]
+            ),
+        ),
+    )
+
+    pointcloud_to_laserscan_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            PathJoinSubstitution(
+                [FindPackageShare("pointcloud_to_laserscan"), "launch", "sample_pointcloud_to_laserscan_launch.py"]
+            ),
+        ),
+    )
+
+
     #JOYSTICK TELEOP
     joystick = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(PathJoinSubstitution(
-        [FindPackageShare("wheelchair2_control"), 'launch', 'wheelchair_teleop.launch.py'])))
-
-    use_sim_time = LaunchConfiguration("use_sim_time", default="false")
-    autostart = LaunchConfiguration('autostart', default="true")
-
-    lifecycle_nodes = ['filter_mask_server', 'costmap_filter_info_server']
+            [
+                FindPackageShare("wheelchair2_control"), 'launch', 'wheelchair_teleop.launch.py'
+            ])
+        ),
+        condition=IfCondition(use_joy),
+    )
 
 
     keepout_params_file = LaunchConfiguration(
@@ -127,6 +165,7 @@ def generate_launch_description():
             "config",
             "keepout_params.yaml",
         ),
+        # condition=IfCondition(use_keepout_zone),
     )
                                                 
     mask_yaml_file = LaunchConfiguration(
@@ -137,6 +176,7 @@ def generate_launch_description():
             "rrc",
             "rrc_lab_mask.yaml",
         ),
+        # condition=IfCondition(use_keepout_zone),
     )
 
     # Map and Nav2 config files
@@ -184,7 +224,7 @@ def generate_launch_description():
             package='rviz2',
             executable='rviz2',
             output='screen',
-            arguments=['-d' + rviz_config],
+            arguments=['-d', rviz_config],
             parameters=[{'use_sim_time': use_sim_time}],
     )
 
@@ -194,6 +234,7 @@ def generate_launch_description():
             name='lifecycle_manager_costmap_filters',
             output='screen',
             emulate_tty=True,  
+            condition=IfCondition(use_keepout_zone),
             parameters=[{'use_sim_time': use_sim_time},
                         {'autostart': autostart},
                         {'node_names': lifecycle_nodes}])
@@ -203,7 +244,8 @@ def generate_launch_description():
             executable='map_server',
             name='filter_mask_server',
             output='screen',
-            emulate_tty=True, 
+            emulate_tty=True,
+            condition=IfCondition(use_keepout_zone),
             parameters=[configured_params])
 
     costmap_filter_info_server = Node(
@@ -212,40 +254,82 @@ def generate_launch_description():
             name='costmap_filter_info_server',
             output='screen',
             emulate_tty=True,  
+            condition=IfCondition(use_keepout_zone),
             parameters=[configured_params])
-
-    return LaunchDescription(
-        [   
+    
+    # delay start of ros2_control after robot_state_publisher
+    delay_ros2_control = RegisterEventHandler(
+                event_handler=OnProcessStart(
+                    target_action=robot_state_publisher,
+                    on_start=[ros2_control],
+                )
+            )
+    # delay start of joint_state_broadcaster_spawner after ros2 control 
+    delay_joint_state_broadcaster_spawner = RegisterEventHandler(
+                event_handler=OnProcessStart(
+                    target_action=ros2_control,
+                    on_start=[joint_state_broadcaster_spawner],
+                )
+            )
+    
+    #delay start of robot_controller_spawner after joint_state_broadcaster_spawner
+    delay_robot_controller_spawner = RegisterEventHandler(
+                event_handler=OnProcessExit(
+                    target_action=joint_state_broadcaster_spawner,
+                    on_exit=[robot_controller_spawner],
+                )
+            )
+    
+    
+    nodes = [
             livox_launch,
             pointcloud_to_laserscan_launch,
             robot_state_publisher,
+            delay_ros2_control,
+            delay_joint_state_broadcaster_spawner,
+            delay_robot_controller_spawner,
             joystick,
             nav2,
             rviz,
             lifecycle_manager,
             map_server,
-            costmap_filter_info_server,       
+            costmap_filter_info_server,  
+    ]
 
-            # URDF/ROS2 CONTROL
-            RegisterEventHandler(
-                event_handler=OnProcessStart(
-                    target_action=robot_state_publisher,
-                    on_start=[ros2_control],
-                )
-            ),
-            # JOINT STATE BROADCASTER
-            RegisterEventHandler(
-                event_handler=OnProcessStart(
-                    target_action=ros2_control,
-                    on_start=[joint_state_broadcaster_spawner],
-                )
-            ),
-            # WHEELCHAIR CONTROLLER
-            RegisterEventHandler(
-                event_handler=OnProcessExit(
-                    target_action=joint_state_broadcaster_spawner,
-                    on_exit=[robot_controller_spawner],
-                )
-            ),
-        ]
+    return LaunchDescription(
+
+        launch_arguments + nodes
+        # [   
+        #     livox_launch,
+        #     pointcloud_to_laserscan_launch,
+        #     robot_state_publisher,
+        #     joystick,
+        #     nav2,
+        #     rviz,
+        #     lifecycle_manager,
+        #     map_server,
+        #     costmap_filter_info_server,       
+
+        #     # URDF/ROS2 CONTROL
+        #     RegisterEventHandler(
+        #         event_handler=OnProcessStart(
+        #             target_action=robot_state_publisher,
+        #             on_start=[ros2_control],
+        #         )
+        #     ),
+        #     # JOINT STATE BROADCASTER
+        #     RegisterEventHandler(
+        #         event_handler=OnProcessStart(
+        #             target_action=ros2_control,
+        #             on_start=[joint_state_broadcaster_spawner],
+        #         )
+        #     ),
+        #     # WHEELCHAIR CONTROLLER
+        #     RegisterEventHandler(
+        #         event_handler=OnProcessExit(
+        #             target_action=joint_state_broadcaster_spawner,
+        #             on_exit=[robot_controller_spawner],
+        #         )
+        #     ),
+        # ]
     )
