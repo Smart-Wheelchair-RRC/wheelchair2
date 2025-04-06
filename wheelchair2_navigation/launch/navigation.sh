@@ -1,8 +1,8 @@
 # colcon build --packages-select wheelchair2_navigation wheelchair2_control wheelchair2_bringup --symlink-install
 # Set permissions for the Kangaroo motor controller
-# sudo chmod 777 /dev/ttyACM0
+sudo chmod 777 /dev/ttyACM0
 
-# sleep 5
+sleep 5
 
 # Launch wheelchair bringup
 xterm -e "ros2 launch wheelchair2_bringup wheelchair2_navigation.launch.py" &  
