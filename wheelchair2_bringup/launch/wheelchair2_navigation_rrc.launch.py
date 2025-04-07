@@ -165,7 +165,6 @@ def generate_launch_description():
             "config",
             "keepout_params.yaml",
         ),
-        # condition=IfCondition(use_keepout_zone),
     )
                                                 
     mask_yaml_file = LaunchConfiguration(
@@ -176,7 +175,6 @@ def generate_launch_description():
             "rrc",
             "rrc_lab_mask.yaml",
         ),
-        # condition=IfCondition(use_keepout_zone),
     )
 
     # Map and Nav2 config files
@@ -219,7 +217,7 @@ def generate_launch_description():
         }.items(),
     )
 
-    rviz_config = os.path.join(get_package_share_directory('wheelchair2_navigation'), 'launch', 'navigation.rviz')
+    rviz_config = os.path.join(get_package_share_directory('wheelchair2_navigation'), 'rviz', 'navigation.rviz')
     rviz = Node(
             package='rviz2',
             executable='rviz2',
@@ -296,40 +294,4 @@ def generate_launch_description():
             costmap_filter_info_server,  
     ]
 
-    return LaunchDescription(
-
-        launch_arguments + nodes
-        # [   
-        #     livox_launch,
-        #     pointcloud_to_laserscan_launch,
-        #     robot_state_publisher,
-        #     joystick,
-        #     nav2,
-        #     rviz,
-        #     lifecycle_manager,
-        #     map_server,
-        #     costmap_filter_info_server,       
-
-        #     # URDF/ROS2 CONTROL
-        #     RegisterEventHandler(
-        #         event_handler=OnProcessStart(
-        #             target_action=robot_state_publisher,
-        #             on_start=[ros2_control],
-        #         )
-        #     ),
-        #     # JOINT STATE BROADCASTER
-        #     RegisterEventHandler(
-        #         event_handler=OnProcessStart(
-        #             target_action=ros2_control,
-        #             on_start=[joint_state_broadcaster_spawner],
-        #         )
-        #     ),
-        #     # WHEELCHAIR CONTROLLER
-        #     RegisterEventHandler(
-        #         event_handler=OnProcessExit(
-        #             target_action=joint_state_broadcaster_spawner,
-        #             on_exit=[robot_controller_spawner],
-        #         )
-        #     ),
-        # ]
-    )
+    return LaunchDescription(launch_arguments + nodes)
