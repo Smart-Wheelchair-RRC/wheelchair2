@@ -173,39 +173,8 @@ sudo chmod 777 /dev/ttyACM0
     ```bash
     source install/setup.bash && cd src/wheelchair2_navigation/launch && ./navigation.sh
     ```
-  
 
+> ⚠️ **Warning:** Recommended **not to run locally** — please use **Docker** instead.  
+> Running locally may lead to **dependency conflicts** and could affect your **system-wide packages** or break existing setups.
 
-## How to Use Locally
-
-### Recomended not to run locally please use Docker
-- Clone the repo inside your workspace
-  ```bash
-  mkdir wheelchair2_ws && cd wheelchair2_ws && mkdir src && cd src
-  git clone https://github.com/Smart-Wheelchair-RRC/wheelchair2.git --recurse-submodules
-  ``` 
-- Build and Source the Workspace using below commands (in `/wheelchair2_ws` folder)
-  ```bash
-  colcon build --cmake-args -DROS_EDITION=ROS2 -DHUMBLE_ROS=humble
-  source install/setup.bash
-  ```
-- Ensure Hardware is setup properly connected with the laptop and powered on
-- Use following command to give permission for the Kangaroo X2 controller
-  ```bash
-  sudo chmod 777 /dev/ttyACM0
-  ```
-- Use following command to launch the Kangaroo X2 controller, State publisher and Teleop node
-  ```bash
-  ros2 launch wheelchair2_bringup wheelchair2.launch.py in_simulation:=false
-  ```
-- Use following command to launch 3D LiDAR and pointcloud to laserscan node
-  ```bash
-  ros2 launch wheelchair2_bringup livox.launch.py
-  ```
-- Use following command to launch the navigation stack and Rviz
-  ```bash
-  ros2 launch wheelchair2_navigation nav2.launch.py use_sim_time:=False
-  ros2 run rviz2 rviz2 -d $(ros2 pkg prefix nav2_bringup)/share/nav2_bringup/rviz/nav2_default_view.rviz
-  ```
-  >Note: You can also navigate to the src/wheelchair2_navigation/rviz and run `rviz2 -d navigation.rviz` For visualizing with the camera PoV. 
 
