@@ -30,6 +30,7 @@ def generate_launch_description():
         ],
         remappings=[("scan", "/scan_raw"), ("scan_filtered", "/scan")],
     )
+    
 
     return LaunchDescription(
         [
