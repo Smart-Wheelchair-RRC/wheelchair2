@@ -5,7 +5,7 @@ sudo chmod 777 /dev/ttyACM0
 sleep 5
 
 # Launch wheelchair bringup
-xterm -e "ros2 launch wheelchair2_bringup wheelchair2_navigation_kcis.launch.py use_keepout_zone:=False" &  
+xterm -e "ros2 launch wheelchair2_bringup wheelchair2_navigation_rrc.launch.py use_keepout_zone:=False" &  
 
 sleep 5
 
