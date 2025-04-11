@@ -20,8 +20,6 @@ ROS2 Humble setup to operate the RRC wheelchair
       - [Option 2: Docker for Demo runs](#option-2-docker-for-demo-runs)
         - [x86 Laptop Navigation Demo run](#x86-laptop-navigation-demo-run)
         - [Jetson Navigation Demo run](#jetson-navigation-demo-run)
-  - [How to Use Locally](#how-to-use-locally)
-    - [Recomended not to run locally please use Docker](#recomended-not-to-run-locally-please-use-docker)
 
 
 ### Docker Setup
@@ -98,10 +96,14 @@ sudo chmod 777 /dev/ttyACM0
   
     >Note: To access these buttons you may need to enable [VSCode Action Button Extension](https://marketplace.visualstudio.com/items?itemName=seunlanlege.action-buttons) through the Extensions Tab in VSCode, the extension should download automatically on container startup
   
-- To run the Navigation stack inside the container
+- ##### To run the Navigation stack inside the container
+  ```bash
+  ros2 launch wheelchair2_bringup wheelchair2_navigation_rrc.launch.py use_keepout_zone:=<Boolean> use_joy:=<Boolean>
   ```
-  source install/setup.bash && cd src/wheelchair2_navigation/launch && ./navigation.sh
-  ```
+  - use_joy: To use joystick teleop (only works on AMD64x86)
+  - use_keepout_zone: To use keepout zone.
+  - Change `wheelchair2_navigation_rrc` to `wheelchair2_navigation_kcis` when working at KCIS block.
+  - Keyboard teleop `ros2 run wheelchair2_control keyboard_teleop_constant.py`
 
 #### Option 2: Docker for Demo runs
 
@@ -135,11 +137,10 @@ sudo chmod 777 /dev/ttyACM0
     --name wheelchair2-navigation \
     ghcr.io/smart-wheelchair-rrc/wheelchair2_navigation:v1.0
     ```
-- Inside the container to run the Navigation stack
-    ```bash
-    source install/setup.bash && cd src/wheelchair2_navigation/launch && ./navigation.sh
-    ```
+- Inside the container to run the Navigation stack - follow the above [instructions](#to-run-the-navigation-stack-inside-the-container)
+
 ##### Jetson Navigation Demo run
+
 - To pull latest docker image
     ```bash
     docker pull ghcr.io/smart-wheelchair-rrc/wheelchair2_navigation_jetson:v1.0
@@ -169,10 +170,7 @@ sudo chmod 777 /dev/ttyACM0
     --name wheelchair2-navigation-jetson \
     ghcr.io/smart-wheelchair-rrc/wheelchair2_navigation_jetson:v1.0
     ```
-- Inside the container to run the Navigation stack
-    ```bash
-    source install/setup.bash && cd src/wheelchair2_navigation/launch && ./navigation.sh
-    ```
+- Inside the container to run the Navigation stack - follow the above [instructions](#to-run-the-navigation-stack-inside-the-container)
 
 > ⚠️ **Warning:** Recommended **not to run locally** — please use **Docker** instead.  
 > Running locally may lead to **dependency conflicts** and could affect your **system-wide packages** or break existing setups.
