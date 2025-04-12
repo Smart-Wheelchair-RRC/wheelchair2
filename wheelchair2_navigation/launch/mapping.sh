@@ -2,7 +2,7 @@
 
 # Set permissions for the Kangaroo motor controller
 sudo chmod 777 /dev/ttyACM0
-
+#dssds
 sleep 5
 
 # Launch wheelchair bringup
