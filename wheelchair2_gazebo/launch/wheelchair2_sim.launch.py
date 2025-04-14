@@ -40,8 +40,8 @@ def generate_launch_description():
                             "wheelchair2_camera_livox_gazebo.urdf.xacro",
                         ]
                     ),
-                    " is_sim:=",
-                    use_sim_time,
+                    # " is_sim:=",
+                    # use_sim_time,
                 ]
             ),
             value_type=str,
@@ -108,32 +108,32 @@ def generate_launch_description():
                                    '-z', '0.1'],
                         output='screen')
 
-    # JOINT STATE BROADCASTER
-    joint_state_broadcaster_spawner = Node(
+    diff_drive_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=[
-            "joint_state_broadcaster",
-            "--controller-manager",
-            "/controller_manager",
-        ],
-        output="screen",
+        arguments=["diff_cont"],
     )
-    # WHEELCHAIR CONTROLLER
-    robot_controller_spawner = Node(
+
+    joint_broad_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=[
-            "wheelchair2_base_controller",
-            "--controller-manager",
-            "/controller_manager",
-        ],
-        output="screen",
+        arguments=["joint_broad"],
     )
-    #JOYSTICK TELEOP
+
     joystick = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(PathJoinSubstitution(
         [FindPackageShare("wheelchair2_control"), 'launch', 'wheelchair_teleop.launch.py'])))
+
+    bridge_params = os.path.join(get_package_share_directory('wheelchair2_gazebo'), 'config', 'gz_bridge.yaml')
+    ros_gz_bridge = Node(
+        package="ros_gz_bridge",
+        executable="parameter_bridge",
+        arguments=[
+            '--ros-args',
+            '-p',
+            f'config_file:={bridge_params}',
+        ]
+    )
 
     return LaunchDescription(
         [
@@ -147,29 +147,32 @@ def generate_launch_description():
             world_arg,
             gazebo,
             spawn_entity,
+            diff_drive_spawner,
+            joint_broad_spawner,
+            ros_gz_bridge,
 
         
                 
-            # URDF/ROS2 CONTROL
-            RegisterEventHandler(
-                event_handler=OnProcessStart(
-                    target_action=robot_state_publisher,
-                    on_start=[ros2_control],
-                )
-            ),
-            # JOINT STATE BROADCASTER
-            RegisterEventHandler(
-                event_handler=OnProcessStart(
-                    target_action=ros2_control,
-                    on_start=[joint_state_broadcaster_spawner],
-                )
-            ),
-            # WHEELCHAIR CONTROLLER
-            RegisterEventHandler(
-                event_handler=OnProcessExit(
-                    target_action=joint_state_broadcaster_spawner,
-                    on_exit=[robot_controller_spawner],
-                )
-            ),
+            # # URDF/ROS2 CONTROL
+            # RegisterEventHandler(
+            #     event_handler=OnProcessStart(
+            #         target_action=robot_state_publisher,
+            #         on_start=[ros2_control],
+            #     )
+            # ),
+            # # JOINT STATE BROADCASTER
+            # RegisterEventHandler(
+            #     event_handler=OnProcessStart(
+            #         target_action=ros2_control,
+            #         on_start=[joint_state_broadcaster_spawner],
+            #     )
+            # ),
+            # # WHEELCHAIR CONTROLLER
+            # RegisterEventHandler(
+            #     event_handler=OnProcessExit(
+            #         target_action=joint_state_broadcaster_spawner,
+            #         on_exit=[robot_controller_spawner],
+            #     )
+            # ),
         ]
     )

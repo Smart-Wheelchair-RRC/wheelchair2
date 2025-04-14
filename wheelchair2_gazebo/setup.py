@@ -1,6 +1,7 @@
 from setuptools import find_packages, setup
 import os
 from glob import glob
+
 package_name = 'wheelchair2_gazebo'
 
 setup(
@@ -36,6 +37,10 @@ setup(
             os.path.join("share", package_name, "urdf/gz_sim"),
             glob(os.path.join("urdf", "gz_sim", "*.xacro")),
         ),
+        (
+            os.path.join("share", package_name, "config"),
+            glob(os.path.join("config", "*.yaml")),
+        ),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -45,7 +50,6 @@ setup(
     license='TODO: License declaration',
     tests_require=['pytest'],
     entry_points={
-        'console_scripts': [
-        ],
+        'console_scripts': [],
     },
 )
