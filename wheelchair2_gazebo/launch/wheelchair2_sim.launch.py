@@ -58,27 +58,27 @@ def generate_launch_description():
     )
 
     # CONTROLLER MANAGER NODE
-    ros2_control = Node(
-        package="controller_manager",
-        executable="ros2_control_node",
-        parameters=[
-            robot_description,
-            PathJoinSubstitution(
-                [
-                    FindPackageShare("wheelchair2_bringup"),
-                    "config",
-                    "wheelchair2_controllers.yaml",
-                ]
-            ),
-            {"use_sim_time": use_sim_time},
-        ],
-        output="screen",
-        remappings=[
-            # ("/wheelchair2_base_controller/cmd_vel_unstamped", "/cmd_vel"),
-            ("/wheelchair2_base_controller/odom", "/odom"),
-        ],
-        condition=IfCondition(NotSubstitution(use_sim_time)),
-    )
+    # ros2_control = Node(
+    #     package="controller_manager",
+    #     executable="ros2_control_node",
+    #     parameters=[
+    #         robot_description,
+    #         PathJoinSubstitution(
+    #             [
+    #                 FindPackageShare("wheelchair2_bringup"),
+    #                 "config",
+    #                 "wheelchair2_controllers.yaml",
+    #             ]
+    #         ),
+    #         {"use_sim_time": use_sim_time},
+    #     ],
+    #     output="screen",
+    #     remappings=[
+    #         # ("/wheelchair2_base_controller/cmd_vel_unstamped", "/cmd_vel"),
+    #         ("/wheelchair2_base_controller/odom", "/odom"),
+    #     ],
+    #     condition=IfCondition(NotSubstitution(use_sim_time)),
+    # )
 
     default_world = os.path.join(
         get_package_share_directory('wheelchair2_gazebo'),
@@ -111,13 +111,13 @@ def generate_launch_description():
     diff_drive_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["diff_cont"],
+        arguments=["wheelchair2_base_controller"],
     )
 
     joint_broad_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["joint_broad"],
+        arguments=["joint_state_broadcaster"],
     )
 
     joystick = IncludeLaunchDescription(
