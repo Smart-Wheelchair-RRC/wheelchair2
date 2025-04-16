@@ -8,6 +8,7 @@
     <xacro:include filename="$(find wheelchair2_description)/urdf/mid360.xacro" />
     <xacro:include filename="$(find wheelchair2_gazebo)/urdf/ros2_control.urdf.xacro" />
     <xacro:include filename="$(find wheelchair2_gazebo)/urdf/wheelchair2_gazebo.urdf.xacro" />
+    <xacro:include filename="$(find wheelchair2_gazebo)/urdf/livox.urdf.xacro" />
 
 
 
@@ -43,14 +44,14 @@
             <material name="black" />
         </collision>
 
-        <visual>
+        <!-- <visual>
             <origin xyz="0 0 0" rpy=" 0 0 3.14" />
             <geometry>
                 <mesh filename="file://$(find wheelchair2_description)/meshes/wheelchair2.dae" scale="0.01 0.01 0.01" />
 
             </geometry>
             <material name="black" />
-        </visual>
+        </visual> -->
     </link>
 
     <!-- Left Wheel-->
@@ -109,14 +110,14 @@
 
 
     <!--Lidar-->
-    <!-- <xacro:m_link_cylinder name="laser_frame" origin_rpy="0 0 0" origin_xyz="0 0 0" mass="0.10441" ixx="0.1000000042" ixy="0" ixz="0" iyy="0.1000000042" iyz="0" izz="0.1000000040" material="black" filename="file://$(find wheelchair2_description)/meshes/rplidar.dae" scale="1 1 1" /> -->
+    <xacro:m_link_cylinder name="laser_frame" origin_rpy="0 0 0" origin_xyz="0 0 0" mass="0.10441" ixx="0.1000000042" ixy="0" ixz="0" iyy="0.1000000042" iyz="0" izz="0.1000000040" material="black" filename="file://$(find wheelchair2_description)/meshes/rplidar.dae" scale="1 1 1" />
 
 
     <!-- joint between base_link and lidar -->
-    <!-- <xacro:f_joint name="base_link_to_laser" type="fixed" axis_xyz="0 0 0" origin_rpy="0 0 0" origin_xyz="0.53 0 -0.15" parent="base_link" child="laser_frame" />
+    <xacro:f_joint name="base_link_to_laser" type="fixed" axis_xyz="0 0 0" origin_rpy="0 0 0" origin_xyz="0.53 0 -0.15" parent="base_link" child="laser_frame" />
 
 
-    <xacro:realsense parent="base_link" name="camera">
+    <!-- <xacro:realsense parent="base_link" name="camera">
         <origin xyz="0 0 1.25" rpy="0 0 0" />
     </xacro:realsense> -->
 

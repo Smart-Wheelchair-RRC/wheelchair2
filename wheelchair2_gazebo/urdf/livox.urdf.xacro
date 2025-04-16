@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<robot name="wheelchair2"
+    xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <gazebo reference="laser_frame">
+        <material>Gazebo/Black</material>
+
+        <sensor name="UniqueSensorName" type="custom">
+            <plugin filename="RGLServerPluginInstance" name="rgl::RGLServerPluginInstance">
+                <range>
+                    <min>0</min>
+                    <max>100</max>
+                </range>
+                <update_rate>10</update_rate>
+                <update_on_paused_sim>false</update_on_paused_sim>
+                <topic>rgl_lidar</topic>
+                <frame>RGLLidar</frame>
+                <pattern_preset>Alpha Prime</pattern_preset>
+            </plugin>
+        </sensor>
+
+
+    </gazebo>
+
+</robot>
