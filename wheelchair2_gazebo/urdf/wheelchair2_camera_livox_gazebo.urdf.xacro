@@ -44,14 +44,14 @@
             <material name="black" />
         </collision>
 
-        <!-- <visual>
+        <visual>
             <origin xyz="0 0 0" rpy=" 0 0 3.14" />
             <geometry>
                 <mesh filename="file://$(find wheelchair2_description)/meshes/wheelchair2.dae" scale="0.01 0.01 0.01" />
 
             </geometry>
             <material name="black" />
-        </visual> -->
+        </visual>
     </link>
 
     <!-- Left Wheel-->
