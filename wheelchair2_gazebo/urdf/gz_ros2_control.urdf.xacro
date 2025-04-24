@@ -24,11 +24,7 @@
             <state_interface name="position"/>
         </joint>
     </ros2_control>
-    <gazebo>
-        <plugin name="gz_ros2_control::GazeboSimROS2ControlPlugin" filename="libgz_ros2_control-system.so">
-            <parameters>$(find wheelchair2_bringup)/config/wheelchair2_controllers.yaml</parameters>
-        </plugin>
-    </gazebo>
+
 
 
 </robot>
