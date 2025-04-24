@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot name="wheelchair2"
     xmlns:xacro="http://www.ros.org/wiki/xacro">
-    <gazebo reference="laser_frame">
+    <gazebo reference="livox_frame">
         <material>Gazebo/Black</material>
 
         <sensor name="Livox" type="custom">
@@ -13,7 +13,7 @@
                 <update_rate>10</update_rate>
                 <update_on_paused_sim>false</update_on_paused_sim>
                 <topic>rgl_lidar</topic>
-                <frame>laser_frame</frame>
+                <frame>livox_frame</frame>
                 <pattern_preset>Livox Mid360</pattern_preset>
             </plugin>
         </sensor>

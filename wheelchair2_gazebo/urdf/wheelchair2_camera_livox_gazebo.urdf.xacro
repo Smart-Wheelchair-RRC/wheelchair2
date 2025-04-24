@@ -102,18 +102,18 @@
     <xacro:f_joint name="base_link_to_camera_base_rod" type="fixed" axis_xyz="0 0 0" origin_rpy="0 0 0" origin_xyz="-0.23 0 0.650" parent="base_link" child="camera_base_rod" />
 
 
-    <xacro:f_link_box name="lidar_base_rod" origin_rpy="0 0 0" origin_xyz="0 0 0" mass="0.45164" ixx="0.100000005621" ixy="0.100000001310" ixz="0.100000001649" iyy="0.100000004345" iyz="0.100000002360" izz="0.100000003315" material="black" size="0.016 0.48 0.016" />
+    <!-- <xacro:f_link_box name="lidar_base_rod" origin_rpy="0 0 0" origin_xyz="0 0 0" mass="0.45164" ixx="0.100000005621" ixy="0.100000001310" ixz="0.100000001649" iyy="0.100000004345" iyz="0.100000002360" izz="0.100000003315" material="black" size="0.016 0.48 0.016" /> -->
 
 
-    <xacro:f_joint name="base_link_to_lidar_base_rod" type="fixed" axis_xyz="0 0 0" origin_rpy="0 0 0" origin_xyz="0.23 0 -0.15" parent="base_link" child="lidar_base_rod" />
+    <!-- <xacro:f_joint name="base_link_to_lidar_base_rod" type="fixed" axis_xyz="0 0 0" origin_rpy="0 0 0" origin_xyz="0.23 0 -0.15" parent="base_link" child="lidar_base_rod" /> -->
 
 
     <!--Lidar-->
-    <xacro:m_link_cylinder name="laser_frame" origin_rpy="0 0 0" origin_xyz="0 0 0" mass="0.10441" ixx="0.1000000042" ixy="0" ixz="0" iyy="0.1000000042" iyz="0" izz="0.1000000040" material="black" filename="file://$(find wheelchair2_description)/meshes/rplidar.dae" scale="1 1 1" />
+    <!-- <xacro:m_link_cylinder name="laser_frame" origin_rpy="0 0 0" origin_xyz="0 0 0" mass="0.10441" ixx="0.1000000042" ixy="0" ixz="0" iyy="0.1000000042" iyz="0" izz="0.1000000040" material="black" filename="file://$(find wheelchair2_description)/meshes/rplidar.dae" scale="1 1 1" /> -->
 
 
     <!-- joint between base_link and lidar -->
-    <xacro:f_joint name="base_link_to_laser" type="fixed" axis_xyz="0 0 0" origin_rpy="0 0 0" origin_xyz="0.53 0 -0.15" parent="base_link" child="laser_frame" />
+    <!-- <xacro:f_joint name="base_link_to_laser" type="fixed" axis_xyz="0 0 0" origin_rpy="0 0 0" origin_xyz="0.53 0 -0.15" parent="base_link" child="laser_frame" /> -->
 
 
     <xacro:realsense parent="base_link" name="camera_link">
@@ -121,10 +121,8 @@
     </xacro:realsense>
 
     <!-- MID-360 -->
-    <!-- <xacro:mid360 name="livox_frame" parent="camera_link" topic="mid360">
+    <xacro:mid360 name="livox_frame" parent="base_link" topic="mid360">
         <origin xyz="-0.05 0 -0.05" rpy="3.14 0 0" />
-    </xacro:mid360> -->
-
-    <!-- <xacro:kangaroo_x2_driver/> -->
+    </xacro:mid360>
 
 </robot>
