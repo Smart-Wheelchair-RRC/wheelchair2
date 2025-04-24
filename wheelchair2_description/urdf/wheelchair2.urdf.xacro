@@ -1,166 +1,305 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<robot name="wheelchair2"
-	xmlns:xacro="http://www.ros.org/wiki/xacro">
-	<!--Include
-	Files-->
-	<xacro:include filename="$(find wheelchair2_description)/urdf/links_joints.urdf.xacro" />
-	<xacro:include filename="$(find wheelchair2_description)/urdf/wheelchair2_gazebo.urdf.xacro" />
-	<xacro:include filename="$(find wheelchair2_description)/urdf/_d435.urdf.xacro" />
-	<!--xacro:include
-	filename="$(find wheelchair2_description)/urdf/_d455.urdf.xacro" /-->
-	<!--xacro:arg
-	name="use_nominal_extrinsics" default="false"/>
-  <xacro:arg name="add_plug" default="false" />
-  <xacro:arg name="use_mesh" default="true" /-->
+<robot name="wheelchair2">
 
-
-	<link name="base_link" />
-
-	<joint name="base_joint" type="fixed">
-		<parent link="base_link" />
-		<child link="base_link" />
-		<origin xyz="0 0 0.2" rpy="0 0 0" />
-	</joint>
-
-	<link name='base_link'>
-		<pose>0 0 0.1 0 0 0</pose>
-
+	<link name="base_link">
 		<inertial>
-			<!--ALL
-			MASSES IN KILOGRAM-->
-			<mass value="8.96" />
-			<origin xyz="0 0 0" rpy=" 0 0 0" />
-			<!--ALL
-			INERTIA VALUES IN KILOGRAM PER SQUARE METER-->
-			<inertia ixx="2.83" ixy="-0.12" ixz="-1.17" iyy="3.47" iyz="0.29" izz="0.73" />
+			<origin xyz="-0.0942860483151309 1.11022302462516E-16 0.171005361938349" rpy="0 0 0" />
+			<mass value="56.5309018301627" />
+			<inertia ixx="4.29142506121311" ixy="2.12958929444418E-16" ixz="0.997570908456329" iyy="4.40588339864459" iyz="-1.37048386684853E-16" izz="2.73188612803767" />
 		</inertial>
-
-		<collision>
-			<origin xyz="0.1 0 0" rpy=" 0 0 0" />
-			<geometry>
-				<box size="0.75 0.60 0.60" />
-			</geometry>
-			<material name="black" />
-		</collision>
-
 		<visual>
-			<origin xyz="0 0 0" rpy=" 0 0 3.14" />
+			<origin xyz="0 0 0" rpy="0 0 0" />
 			<geometry>
-				<mesh filename="file://$(find wheelchair2_description)/wheelchair2.dae"
-					scale="0.01 0.01 0.01" />
+				<mesh filename="package://wheelchair2/meshes/visual/base_link.STL" />
 			</geometry>
-			<material name="black" />
+			<material name="">
+				<color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+			</material>
 		</visual>
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://wheelchair2/meshes/collision/base_link.STL" />
+			</geometry>
+		</collision>
 	</link>
-
-	<!--Left
-	Wheel-->
-	<xacro:m1_link_cylinder name="left_wheel" origin_rpy="0 0 0" origin_xyz="0 0 0.027" mass="0.10441"
-		ixx="0.1000000042" ixy="0" ixz="0" iyy="0.1000000042" iyz="0" izz="0.1000000040" radius="0.155"
-		length="0.06" radius_2="0.0028" length_2="0.005" material="grey" />
-	<!--joint
-
-	between base_link and Left wheel-->
-	<xacro:w_joint name="base_link_to_left_wheel" type="continuous" axis_xyz="0 0 1" axis_rpy="0 0 0"
-		limit_e="100" limit_v="20" damping="1.0" friction="200000.0" origin_rpy="-1.57 0 0"
-		origin_xyz="-0.22 0.28 -0.285" parent="base_link" child="left_wheel" />
-
-	<!-- inertia values are added by 0.1 in both left and right wheel to avoid collapsing of model in
-	gazebo-->
-
-	<!--joint
-	between base_link and Right Wheel-->
-	<!--Right
-	Wheel-->
-	<xacro:m1_link_cylinder name="right_wheel" origin_rpy="0 0 0" origin_xyz="0 0 0.027"
-		mass="0.10441" ixx="0.1000000042" ixy="0" ixz="0" iyy="0.1000000042" iyz="0" izz="0.1000000040"
-		radius="0.155" length="0.06" radius_2="0.0028" length_2="0.005" material="grey" />
-
-
-	<xacro:w_joint name="base_link_to_right_wheel" type="continuous" axis_xyz="0 0 1" axis_rpy="0 0 0"
-		limit_e="100" limit_v="20" damping="1.0" friction="200000.0" origin_rpy="-1.57 0 0"
-		origin_xyz="-0.22 -0.32 -0.285" parent="base_link" child="right_wheel" />
-
-	<!--Caster
-	1,2 and there joints with Base Link-->
-
-	<xacro:m_link_sphere name="caster1" origin_rpy="0 0 0" origin_xyz="0 0 0" mass="0.45164"
-		ixx="0.100000005621" ixy="0.100000001310" ixz="0.100000001649" iyy="0.100000004345"
-		iyz="0.100000002360" izz="0.100000003315" material="black" radius="0.1" radius_2="0.001" />
-
-
-	<xacro:f_joint name="base_link_to_caster1" type="fixed" axis_xyz="0 0 0" origin_rpy="0 0 0"
-		origin_xyz="0.2 -0.25 -0.33" parent="base_link" child="caster1" />
-
-	<xacro:m_link_sphere name="caster2" origin_rpy="0 0 0" origin_xyz="0 0 0" mass="0.45164"
-		ixx="0.100000005621" ixy="0.100000001310" ixz="0.100000001649" iyy="0.100000004345"
-		iyz="0.100000002360" izz="0.100000003315" material="black" radius="0.1" radius_2="0.001" />
-
-
-	<xacro:f_joint name="base_link_to_caster2" type="fixed" axis_xyz="0 0 0" origin_rpy="0 0 0"
-		origin_xyz="0.2 0.25 -0.33" parent="base_link" child="caster2" />
-
-	<xacro:f_link_box name="rod1" origin_rpy="0 0 0" origin_xyz="0 0 0" mass="0.45164"
-		ixx="0.100000005621" ixy="0.100000001310" ixz="0.100000001649" iyy="0.100000004345"
-		iyz="0.100000002360" izz="0.100000003315" material="black" size="0.016 0.016 0.6" />
-
-
-	<xacro:f_joint name="base_link_to_rod1" type="fixed" axis_xyz="0 0 0" origin_rpy="0 0 0"
-		origin_xyz="-0.23 0.24 0.65" parent="base_link" child="rod1" />
-
-	<xacro:f_link_box name="rod2" origin_rpy="0 0 0" origin_xyz="0 0 0" mass="0.45164"
-		ixx="0.100000005621" ixy="0.100000001310" ixz="0.100000001649" iyy="0.100000004345"
-		iyz="0.100000002360" izz="0.100000003315" material="black" size="0.016 0.016 0.6" />
-
-
-	<xacro:f_joint name="base_link_to_rod2" type="fixed" axis_xyz="0 0 0" origin_rpy="0 0 0"
-		origin_xyz="-0.23 -0.24 0.65" parent="base_link" child="rod2" />
-
-	<xacro:f_link_box name="camera_base_rod" origin_rpy="0 0 0" origin_xyz="0 0 0" mass="0.45164"
-		ixx="0.100000005621" ixy="0.100000001310" ixz="0.100000001649" iyy="0.100000004345"
-		iyz="0.100000002360" izz="0.100000003315" material="black" size="0.016 0.48 0.016" />
-
-
-	<xacro:f_joint name="base_link_to_camera_base_rod" type="fixed" axis_xyz="0 0 0"
-		origin_rpy="0 0 0" origin_xyz="-0.23 0 0.650" parent="base_link" child="camera_base_rod" />
-
-	<!--xacro:f_link_box
-	name="lidar_base_rod" origin_rpy="0 0 0" origin_xyz="0 0 0" mass="0.45164" ixx="0.100000005621"
-	ixy="0.100000001310" ixz="0.100000001649" iyy="0.100000004345" iyz="0.100000002360"
-	izz="0.100000003315" material="black" size="0.016 0.48 0.016"/>
-
-    <xacro:f_joint name="base_link_to_lidar_base_rod" type="fixed" axis_xyz="0 0 0" origin_rpy="0 0 0"
-	origin_xyz="0.23 0 -0.15" parent="base_link" child="lidar_base_rod" /-->
-
-
-	<!--Lidar-->
-	<!--xacro:m_link_cylinder
-	name="rplidar" origin_rpy="0 0 0" origin_xyz="0 0 0" mass="0.10441" ixx="0.1000000042" ixy="0"
-	ixz="0" iyy="0.1000000042" iyz="0" izz="0.1000000040" material="black"
-	filename="package://wheelchair2_description/meshes/rplidar.dae" scale="1 1 1"/-->
-
-	<!-- joint between base_link and lidar -->
-	<!--xacro:f_joint
-	name="base_link_to_rplidar" type="fixed" axis_xyz="0 0 0" origin_rpy="0 0 3.14" origin_xyz="0.23 0
-	-0.15" parent="base_link" child="rplidar" /-->
-
-
-	<!--Real_Sense-->
-
-	<xacro:sensor_d435 parent="base_link" name="camera2" topics_ns="camera2" pointcloud="true">
-		<origin xyz="-0.18 0 0.860" rpy="0 0 0" />
-	</xacro:sensor_d435>
-
-	<xacro:sensor_d435 parent="camera_base_rod" name="camera1" topics_ns="camera1" pointcloud="true">
-		<origin xyz="0.60 -0.34 -0.50" rpy="0 -0.01 0" />
-	</xacro:sensor_d435>
-
-
-	<gazebo>
-		<plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-			<robotNamespace>/wheelchair2</robotNamespace>
-			<legacyModeNS>true</legacyModeNS>
-		</plugin>
-	</gazebo>
-
+	<link name="chassis">
+		<inertial>
+			<origin xyz="0.157797285018202 -1.11022302462516E-16 0.171005361938348" rpy="0 0 0" />
+			<mass value="56.5309018301627" />
+			<inertia ixx="4.29142506121311" ixy="2.15672734098896E-16" ixz="0.997570908456326" iyy="4.40588339864459" iyz="9.15002685900496E-17" izz="2.73188612803767" />
+		</inertial>
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://wheelchair2/meshes/visual/chassis.STL" />
+			</geometry>
+			<material name="">
+				<color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://wheelchair2/meshes/collision/chassis.STL" />
+			</geometry>
+		</collision>
+	</link>
+	<joint name="chassis_joint" type="fixed">
+		<origin xyz="-0.252083333333333 0 0" rpy="0 0 0" />
+		<parent link="base_link" />
+		<child link="chassis" />
+		<axis xyz="0 0 0" />
+	</joint>
+	<link name="base_footprint">
+		<inertial>
+			<origin xyz="0.132797285018202 1.11022302462516E-16 0.446005361938349" rpy="0 0 0" />
+			<mass value="56.5309018301627" />
+			<inertia ixx="4.29142506121311" ixy="2.14652995338927E-16" ixz="0.99757090845633" iyy="4.40588339864458" iyz="-1.91258495309129E-16" izz="2.73188612803767" />
+		</inertial>
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://wheelchair2/meshes/visual/base_footprint.STL" />
+			</geometry>
+			<material name="">
+				<color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://wheelchair2/meshes/collision/base_footprint.STL" />
+			</geometry>
+		</collision>
+	</link>
+	<joint name="base_footprint_joint" type="fixed">
+		<origin xyz="-0.227083333333333 0 -0.275" rpy="0 0 0" />
+		<parent link="base_link" />
+		<child link="base_footprint" />
+		<axis xyz="0 0 0" />
+	</joint>
+	<link name="left_wheel">
+		<inertial>
+			<origin xyz="4.44089209850063E-16 1.11022302462516E-16 -0.0255339805825243" rpy="0 0 0" />
+			<mass value="4.85376064979623" />
+			<inertia ixx="0.0325553333899157" ixy="-3.48565307451475E-18" ixz="4.67941582553182E-19" iyy="0.0325553333899157" iyz="3.3937865241495E-18" izz="0.0617676385603923" />
+		</inertial>
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://wheelchair2/meshes/visual/left_wheel.STL" />
+			</geometry>
+			<material name="">
+				<color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://wheelchair2/meshes/collision/left_wheel.STL" />
+			</geometry>
+		</collision>
+	</link>
+	<joint name="base_link_to_left_wheel" type="continuous">
+		<origin xyz="-0.227083333333333 0.305 -0.275" rpy="-1.5707963267949 0 0" />
+		<parent link="base_link" />
+		<child link="left_wheel" />
+		<axis xyz="0 0 -1" />
+	</joint>
+	<link name="right_wheel">
+		<inertial>
+			<origin xyz="0 0 0.0255339805825243" rpy="0 0 0" />
+			<mass value="4.85376064979623" />
+			<inertia ixx="0.0325553333899157" ixy="-3.57932779783464E-18" ixz="8.41693935431952E-19" iyy="0.0325553333899157" iyz="4.37508696952865E-19" izz="0.0617676385603924" />
+		</inertial>
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://wheelchair2/meshes/visual/right_wheel.STL" />
+			</geometry>
+			<material name="">
+				<color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://wheelchair2/meshes/collision/right_wheel.STL" />
+			</geometry>
+		</collision>
+	</link>
+	<joint name="base_link_to_right_wheel" type="continuous">
+		<origin xyz="-0.227083333333334 -0.305 -0.275" rpy="-1.5707963267949 0 0" />
+		<parent link="base_link" />
+		<child link="right_wheel" />
+		<axis xyz="0 0 1" />
+	</joint>
+	<link name="left_caster_rod">
+		<inertial>
+			<origin xyz="2.22044604925031E-16 -0.00430076483117153 -0.0570663710100268" rpy="0 0 0" />
+			<mass value="0.287358849314769" />
+			<inertia ixx="0.00117522382309539" ixy="0.000245266498143811" ixz="1.11745411100367E-20" iyy="0.000518928146884442" iyz="1.63035037395678E-19" izz="0.000894128734997518" />
+		</inertial>
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://wheelchair2/meshes/visual/left_caster_rod.STL" />
+			</geometry>
+			<material name="">
+				<color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://wheelchair2/meshes/collision/left_caster_rod.STL" />
+			</geometry>
+		</collision>
+	</link>
+	<joint name="base_link_to_left_caster_rod" type="continuous">
+		<origin xyz="0.122916666666667 0.275 -0.185" rpy="0 0 0" />
+		<parent link="base_link" />
+		<child link="left_caster_rod" />
+		<axis xyz="0 0 1" />
+	</joint>
+	<link name="left_caster_wheel">
+		<inertial>
+			<origin xyz="2.22044604925031E-16 0 0" rpy="0 0 0" />
+			<mass value="1.6022122533308" />
+			<inertia ixx="0.00471319524017462" ixy="-1.21686863938567E-18" ixz="-0.0010827586519939" iyy="0.0043401102509343" iyz="-1.61073375236757E-19" izz="0.00748246744106097" />
+		</inertial>
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://wheelchair2/meshes/visual/left_caster_wheel.STL" />
+			</geometry>
+			<material name="">
+				<color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://wheelchair2/meshes/collision/left_caster_wheel.STL" />
+			</geometry>
+		</collision>
+	</link>
+	<joint name="left_caster_rod_to_left_caster_wheel" type="continuous">
+		<origin xyz="0 0 -0.15" rpy="-1.5707963267949 0 0" />
+		<parent link="left_caster_rod" />
+		<child link="left_caster_wheel" />
+		<axis xyz="0.32577211570214 0 -0.945448321502001" />
+	</joint>
+	<link name="right_caster_rod">
+		<inertial>
+			<origin xyz="-4.44089209850063E-16 0.00430076483117148 -0.0570663710100263" rpy="0 0 0" />
+			<mass value="0.287358849314767" />
+			<inertia ixx="0.00120353434760658" ixy="0.000203948775387364" ixz="-1.50709802220351E-19" iyy="0.000490617622373233" iyz="6.93738460714225E-19" izz="0.000894128734997513" />
+		</inertial>
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://wheelchair2/meshes/visual/right_caster_rod.STL" />
+			</geometry>
+			<material name="">
+				<color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://wheelchair2/meshes/collision/right_caster_rod.STL" />
+			</geometry>
+		</collision>
+	</link>
+	<joint name="base_link_to_right_caster_rod" type="continuous">
+		<origin xyz="0.122916666666668 -0.274999999999998 -0.185" rpy="0 0 0" />
+		<parent link="base_link" />
+		<child link="right_caster_rod" />
+		<axis xyz="0 0 1" />
+	</joint>
+	<link name="right_caster_wheel">
+		<inertial>
+			<origin xyz="2.22044604925031E-16 0 0" rpy="0 0 0" />
+			<mass value="1.6022122533308" />
+			<inertia ixx="0.00458821500198889" ixy="-1.47075986302915E-19" ixz="-0.000900356562292288" iyy="0.0043401102509343" iyz="-3.29973933005766E-19" izz="0.00760744767924669" />
+		</inertial>
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://wheelchair2/meshes/visual/right_caster_wheel.STL" />
+			</geometry>
+			<material name="">
+				<color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://wheelchair2/meshes/collision/right_caster_wheel.STL" />
+			</geometry>
+		</collision>
+	</link>
+	<joint name="right_caster_rod_to_right_caster_wheel" type="continuous">
+		<origin xyz="0 0 -0.150000000000001" rpy="-1.5707963267949 0 0" />
+		<parent link="right_caster_rod" />
+		<child link="right_caster_wheel" />
+		<axis xyz="0.265660851795672 0 -0.964066549478405" />
+	</joint>
+	<link name="camera_link">
+		<inertial>
+			<origin xyz="-0.0486291353477233 -4.44010772593373E-08 -0.0351105647568382" rpy="0 0 0" />
+			<mass value="0.135645690370584" />
+			<inertia ixx="0.000182104723310744" ixy="1.21998370915692E-10" ixz="-7.46304115079175E-05" iyy="0.00023020749645117" iyz="1.7421082282053E-11" izz="0.000199626751375708" />
+		</inertial>
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://wheelchair2/meshes/visual/camera_link.STL" />
+			</geometry>
+			<material name="">
+				<color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://wheelchair2/meshes/collision/camera_link.STL" />
+			</geometry>
+		</collision>
+	</link>
+	<joint name="base_link_to_camera_link" type="fixed">
+		<origin xyz="-0.19159 0 1.2144" rpy="0 0 0" />
+		<parent link="base_link" />
+		<child link="camera_link" />
+		<axis xyz="0 0 0" />
+	</joint>
+	<link name="livox_frame">
+		<inertial>
+			<origin xyz="0.012405780901473 -1.11022302462516E-16 -0.0685400711495037" rpy="0 0 0" />
+			<mass value="0.0762231639050693" />
+			<inertia ixx="6.53660107667828E-05" ixy="-7.71587624303186E-21" ixz="6.21280920764121E-06" iyy="5.32185130510974E-05" iyz="6.31374774620195E-21" izz="4.71979285382324E-05" />
+		</inertial>
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://wheelchair2/meshes/visual/livox_frame.STL" />
+			</geometry>
+			<material name="">
+				<color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+			</material>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://wheelchair2/meshes/collision/livox_frame.STL" />
+			</geometry>
+		</collision>
+	</link>
+	<joint name="camera_link_to_livox_frame" type="fixed">
+		<origin xyz="-0.064156 0 -0.064846" rpy="-3.1416 -0.0131 0" />
+		<parent link="camera_link" />
+		<child link="livox_frame" />
+		<axis xyz="0 0 0" />
+	</joint>
 </robot>
