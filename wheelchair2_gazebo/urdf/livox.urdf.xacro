@@ -4,21 +4,19 @@
     <gazebo reference="laser_frame">
         <material>Gazebo/Black</material>
 
-        <sensor name="UniqueSensorName" type="custom">
+        <sensor name="Livox" type="custom">
             <plugin filename="RGLServerPluginInstance" name="rgl::RGLServerPluginInstance">
                 <range>
                     <min>0</min>
-                    <max>100</max>
+                    <max>10</max>
                 </range>
                 <update_rate>10</update_rate>
                 <update_on_paused_sim>false</update_on_paused_sim>
                 <topic>rgl_lidar</topic>
-                <frame>RGLLidar</frame>
-                <pattern_preset>Alpha Prime</pattern_preset>
+                <frame>laser_frame</frame>
+                <pattern_preset>Livox Mid360</pattern_preset>
             </plugin>
         </sensor>
-
-
     </gazebo>
 
 </robot>
