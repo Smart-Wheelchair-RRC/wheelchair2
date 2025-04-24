@@ -1,6 +1,6 @@
 {
     "name": "Wheelchair2 Development on AMD64/x86",
-    "image": "ghcr.io/smart-wheelchair-rrc/wheelchair_base_gazebo-optix",
+    "image": "ghcr.io/smart-wheelchair-rrc/wheelchair_base_gazebo:cuda-12.2",
     "privileged": true,
     "workspaceMount": "source=${localWorkspaceFolder},target=/home/wheelchair2/wheelchair2/src,type=bind",
     "workspaceFolder": "/home/wheelchair2/wheelchair2/src",
@@ -18,6 +18,13 @@
                             "color": "green",
                             "singleInstance": true,
                             "command": "colcon build --cmake-args -DROS_EDITION=ROS2 -DHUMBLE_ROS=humble && source install/setup.bash"
+                        },
+                        {
+                            "name": "Build WS with symlink",
+                            "cwd": "/home/wheelchair2/wheelchair2",
+                            "color": "aqua",
+                            "singleInstance": true,
+                            "command": " colcon build --packages-select wheelchair2_navigation wheelchair2_control wheelchair2_bringup wheelchair2_description wheelchair2_gazebo --symlink-install && source install/setup.bash"
                         }
                     ]
                 }
@@ -43,10 +50,10 @@
     },
     "containerEnv": {
         "DISPLAY": "${localEnv:DISPLAY}", // Needed for GUI try ":0" for windows
-        "WAYLAND_DISPLAY": "${localEnv:WAYLAND_DISPLAY}",
-        "XDG_RUNTIME_DIR": "${localEnv:XDG_RUNTIME_DIR}",
-        "PULSE_SERVER": "${localEnv:PULSE_SERVER}",
-        "QT_X11_NO_MITSHM": "1",
+        // "WAYLAND_DISPLAY": "${localEnv:WAYLAND_DISPLAY}",
+        // "XDG_RUNTIME_DIR": "${localEnv:XDG_RUNTIME_DIR}",
+        // "PULSE_SERVER": "${localEnv:PULSE_SERVER}",
+        // "QT_X11_NO_MITSHM": "1",
         // "LIBGL_ALWAYS_SOFTWARE": "1", // Needed for software rendering of opengl ( Comment this off if you face any lag in Gazebo )
         "NVIDIA_DRIVER_CAPABILITIES": "all",
         "NVIDIA_VISIBLE_DEVICES": "all"
