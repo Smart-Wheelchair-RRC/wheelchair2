@@ -83,7 +83,7 @@ def generate_launch_description():
     default_world = os.path.join(
         get_package_share_directory('wheelchair2_gazebo'),
         'worlds',
-        'empty.world'
+        'obstacles.world'
         )    
     
     world = LaunchConfiguration('world')
@@ -108,16 +108,27 @@ def generate_launch_description():
                                    '-z', '0.1'],
                         output='screen')
 
-    diff_drive_spawner = Node(
+   # JOINT STATE BROADCASTER
+    joint_state_broadcaster_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["wheelchair2_base_controller"],
+        arguments=[
+            "joint_state_broadcaster",
+            "--controller-manager",
+            "/controller_manager",
+        ],
+        output="screen",
     )
-
-    joint_broad_spawner = Node(
+    # WHEELCHAIR CONTROLLER
+    robot_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["joint_state_broadcaster"],
+        arguments=[
+            "wheelchair2_base_controller",
+            "--controller-manager",
+            "/controller_manager",
+        ],
+        output="screen",
     )
 
     joystick = IncludeLaunchDescription(
@@ -147,8 +158,8 @@ def generate_launch_description():
             world_arg,
             gazebo,
             spawn_entity,
-            diff_drive_spawner,
-            joint_broad_spawner,
+            robot_controller_spawner,
+            joint_state_broadcaster_spawner,
             ros_gz_bridge,
 
         
