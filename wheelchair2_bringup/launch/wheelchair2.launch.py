@@ -1,21 +1,28 @@
+import os
 from launch import LaunchDescription
 from launch.actions import (
     IncludeLaunchDescription,
     RegisterEventHandler,
+    DeclareLaunchArgument,
 )
+from ament_index_python.packages import get_package_share_directory
 from launch.event_handlers import OnProcessExit, OnProcessStart
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import (
     Command,
     FindExecutable,
     PathJoinSubstitution,
+    LaunchConfiguration,
+    NotSubstitution,
 )
+from launch.conditions import IfCondition, UnlessCondition
 from launch_ros.actions import Node
 from launch_ros.parameter_descriptions import ParameterValue
 from launch_ros.substitutions import FindPackageShare
 
-
 def generate_launch_description():
+    
+    use_sim_time = LaunchConfiguration("use_sim_time")
 
     # ROBOT DESCRIPTION
     robot_description = {
@@ -26,11 +33,13 @@ def generate_launch_description():
                     " ",
                     PathJoinSubstitution(
                         [
-                            FindPackageShare("wheelchair2_description"),
+                            FindPackageShare("wheelchair2_gazebo"),
                             "urdf",
-                            "wheelchair2_camera_livox.urdf.xacro",
+                            "wheelchair2_camera_livox_gazebo.urdf.xacro",
                         ]
                     ),
+                    " use_sim_time:=",
+                    use_sim_time,
                 ]
             ),
             value_type=str,
@@ -43,7 +52,7 @@ def generate_launch_description():
         executable="robot_state_publisher",
         output="screen",
         parameters=[robot_description, 
-                    ],
+                    {"use_sim_time": use_sim_time}],
     )
 
     # CONTROLLER MANAGER NODE
@@ -59,14 +68,23 @@ def generate_launch_description():
                     "wheelchair2_controllers.yaml",
                 ]
             ),
+            {"use_sim_time": use_sim_time},
         ],
         output="screen",
         remappings=[
             # ("/wheelchair2_base_controller/cmd_vel_unstamped", "/cmd_vel"),
             ("/wheelchair2_base_controller/odom", "/odom"),
         ],
+        condition=IfCondition(NotSubstitution(use_sim_time)),
     )
-    # JOINT STATE BROADCASTER
+
+    default_world = os.path.join(
+        get_package_share_directory('wheelchair2_gazebo'),
+        'worlds',
+        'obstacles.world'
+        )    
+    
+   # JOINT STATE BROADCASTER
     joint_state_broadcaster_spawner = Node(
         package="controller_manager",
         executable="spawner",
@@ -88,27 +106,28 @@ def generate_launch_description():
         ],
         output="screen",
     )
-    #JOYSTICK TELEOP
+
     joystick = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(PathJoinSubstitution(
         [FindPackageShare("wheelchair2_control"), 'launch', 'wheelchair_teleop.launch.py'])))
 
+    
+
     return LaunchDescription(
         [
+            DeclareLaunchArgument(
+                        'use_sim_time',
+                        default_value='False',
+                        description='Launch in simulation mode'
+                    ),
             robot_state_publisher,
-            joystick,           
+            ros2_control,
+            joystick,
 
-            # URDF/ROS2 CONTROL
-            RegisterEventHandler(
-                event_handler=OnProcessStart(
-                    target_action=robot_state_publisher,
-                    on_start=[ros2_control],
-                )
-            ),
             # JOINT STATE BROADCASTER
             RegisterEventHandler(
                 event_handler=OnProcessStart(
-                    target_action=ros2_control,
+                    target_action=robot_state_publisher,
                     on_start=[joint_state_broadcaster_spawner],
                 )
             ),
