@@ -3,7 +3,7 @@
     "image": "ghcr.io/smart-wheelchair-rrc/wheelchair_base_gazebo:cuda-12.2",
     "privileged": true,
     "workspaceMount": "source=${localWorkspaceFolder},target=/home/wheelchair2/wheelchair2/src,type=bind",
-    "workspaceFolder": "/home/wheelchair2/wheelchair2",
+    "workspaceFolder": "/home/wheelchair2/wheelchair2/src",
     "customizations": {
         "vscode": {
             "settings": {
