@@ -1,5 +1,5 @@
 {
-    "name": "Wheelchair2 Development on AMD64/x86",
+    "name": "Wheelchair2 Development on AMD64/x86 with GPU",
     "image": "ghcr.io/smart-wheelchair-rrc/wheelchair_base_gazebo:cuda-12.2",
     "privileged": true,
     "workspaceMount": "source=${localWorkspaceFolder},target=/home/wheelchair2/wheelchair2/src,type=bind",
