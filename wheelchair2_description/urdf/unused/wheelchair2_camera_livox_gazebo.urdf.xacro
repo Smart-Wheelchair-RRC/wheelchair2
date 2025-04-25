@@ -119,7 +119,7 @@
     <xacro:if value="$(arg use_sim_time)">
         <gazebo>
             <plugin name="gz_ros2_control::GazeboSimROS2ControlPlugin" filename="libgz_ros2_control-system.so">
-                <parameters>$(find wheelchair2_bringup)/config/wheelchair2_controllers.yaml</parameters>
+                <parameters>$(find wheelchair2_control)/config/wheelchair2_controllers.yaml</parameters>
             </plugin>
         </gazebo>
         <xacro:include filename="$(find wheelchair2_gazebo)/urdf/wheelchair2_gazebo.urdf.xacro" />

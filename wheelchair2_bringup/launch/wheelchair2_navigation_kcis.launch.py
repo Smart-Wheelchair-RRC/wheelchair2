@@ -86,7 +86,7 @@ def generate_launch_description():
             robot_description,
             PathJoinSubstitution(
                 [
-                    FindPackageShare("wheelchair2_bringup"),
+                    FindPackageShare("wheelchair2_control"),
                     "config",
                     "wheelchair2_controllers.yaml",
                 ]

@@ -33,9 +33,9 @@ def generate_launch_description():
                     " ",
                     PathJoinSubstitution(
                         [
-                            FindPackageShare("wheelchair2_gazebo"),
+                            FindPackageShare("wheelchair2_description"),
                             "urdf",
-                            "wheelchair2_camera_livox_gazebo.urdf.xacro",
+                            "wheelchair2_core.urdf.xacro",
                         ]
                     ),
                     " use_sim_time:=",
@@ -63,7 +63,7 @@ def generate_launch_description():
             robot_description,
             PathJoinSubstitution(
                 [
-                    FindPackageShare("wheelchair2_bringup"),
+                    FindPackageShare("wheelchair2_control"),
                     "config",
                     "wheelchair2_controllers.yaml",
                 ]
