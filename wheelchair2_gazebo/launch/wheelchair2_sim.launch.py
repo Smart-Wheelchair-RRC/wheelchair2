@@ -40,8 +40,8 @@ def generate_launch_description():
                             "wheelchair2_camera_livox_gazebo.urdf.xacro",
                         ]
                     ),
-                    # " is_sim:=",
-                    # use_sim_time,
+                    " use_sim_time:=",
+                    use_sim_time,
                 ]
             ),
             value_type=str,
@@ -58,27 +58,27 @@ def generate_launch_description():
     )
 
     # CONTROLLER MANAGER NODE
-    # ros2_control = Node(
-    #     package="controller_manager",
-    #     executable="ros2_control_node",
-    #     parameters=[
-    #         robot_description,
-    #         PathJoinSubstitution(
-    #             [
-    #                 FindPackageShare("wheelchair2_bringup"),
-    #                 "config",
-    #                 "wheelchair2_controllers.yaml",
-    #             ]
-    #         ),
-    #         {"use_sim_time": use_sim_time},
-    #     ],
-    #     output="screen",
-    #     remappings=[
-    #         # ("/wheelchair2_base_controller/cmd_vel_unstamped", "/cmd_vel"),
-    #         ("/wheelchair2_base_controller/odom", "/odom"),
-    #     ],
-    #     condition=IfCondition(NotSubstitution(use_sim_time)),
-    # )
+    ros2_control = Node(
+        package="controller_manager",
+        executable="ros2_control_node",
+        parameters=[
+            robot_description,
+            PathJoinSubstitution(
+                [
+                    FindPackageShare("wheelchair2_bringup"),
+                    "config",
+                    "wheelchair2_controllers.yaml",
+                ]
+            ),
+            {"use_sim_time": use_sim_time},
+        ],
+        output="screen",
+        remappings=[
+            # ("/wheelchair2_base_controller/cmd_vel_unstamped", "/cmd_vel"),
+            ("/wheelchair2_base_controller/odom", "/odom"),
+        ],
+        condition=IfCondition(NotSubstitution(use_sim_time)),
+    )
 
     default_world = os.path.join(
         get_package_share_directory('wheelchair2_gazebo'),
@@ -98,7 +98,8 @@ def generate_launch_description():
     gazebo = IncludeLaunchDescription(
                 PythonLaunchDescriptionSource([os.path.join(
                     get_package_share_directory('ros_gz_sim'), 'launch', 'gz_sim.launch.py')]),
-                    launch_arguments={'gz_args': ['-r -v4 ', world], 'on_exit_shutdown': 'true'}.items()
+                    launch_arguments={'gz_args': ['-r -v4 ', world], 'on_exit_shutdown': 'true'}.items(),
+                    condition=IfCondition(use_sim_time)
              )
 
     # Run the spawner node from the ros_gz_sim package. The entity name doesn't really matter if you only have a single robot.
@@ -106,6 +107,8 @@ def generate_launch_description():
                         arguments=['-topic', 'robot_description',
                                    '-name', 'wheelchair2',
                                    '-z', '0.2'],
+                        parameters=[{'use_sim_time': use_sim_time}],
+                        condition=IfCondition(use_sim_time),
                         output='screen')
 
    # JOINT STATE BROADCASTER
@@ -139,12 +142,24 @@ def generate_launch_description():
     ros_gz_bridge = Node(
         package="ros_gz_bridge",
         executable="parameter_bridge",
+        parameters=[
+            {'use_sim_time': use_sim_time}],
+        condition=IfCondition(use_sim_time),
         arguments=[
             '--ros-args',
             '-p',
             f'config_file:={bridge_params}',
         ]
     )
+
+    ros_gz_image_bridge = Node(
+        package="ros_gz_image",
+        executable="image_bridge",
+        condition=IfCondition(use_sim_time),
+        arguments=["/camera/image_raw"]
+    )
+
+    
 
     return LaunchDescription(
         [
@@ -154,13 +169,15 @@ def generate_launch_description():
                         description='Launch in simulation mode'
                     ),
             robot_state_publisher,
+            ros2_control,
             joystick,   
             world_arg,
             gazebo,
             spawn_entity,
-            robot_controller_spawner,
-            joint_state_broadcaster_spawner,
+            # robot_controller_spawner,
+            # joint_state_broadcaster_spawner,
             ros_gz_bridge,
+            ros_gz_image_bridge,
 
         
                 
@@ -172,18 +189,18 @@ def generate_launch_description():
             #     )
             # ),
             # # JOINT STATE BROADCASTER
-            # RegisterEventHandler(
-            #     event_handler=OnProcessStart(
-            #         target_action=ros2_control,
-            #         on_start=[joint_state_broadcaster_spawner],
-            #     )
-            # ),
-            # # WHEELCHAIR CONTROLLER
-            # RegisterEventHandler(
-            #     event_handler=OnProcessExit(
-            #         target_action=joint_state_broadcaster_spawner,
-            #         on_exit=[robot_controller_spawner],
-            #     )
-            # ),
+            RegisterEventHandler(
+                event_handler=OnProcessStart(
+                    target_action=robot_state_publisher,
+                    on_start=[joint_state_broadcaster_spawner],
+                )
+            ),
+            # WHEELCHAIR CONTROLLER
+            RegisterEventHandler(
+                event_handler=OnProcessExit(
+                    target_action=joint_state_broadcaster_spawner,
+                    on_exit=[robot_controller_spawner],
+                )
+            ),
         ]
     )
