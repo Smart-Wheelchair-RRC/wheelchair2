@@ -24,7 +24,4 @@
             <state_interface name="position"/>
         </joint>
     </ros2_control>
-
-
-
 </robot>
