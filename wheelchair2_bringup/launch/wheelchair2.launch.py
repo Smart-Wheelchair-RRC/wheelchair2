@@ -22,6 +22,15 @@ from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description():
     
+    launch_arguments = []
+    launch_arguments.append(
+        DeclareLaunchArgument(
+            'use_sim_time',
+            default_value='False',
+            description='Launch in simulation mode'
+        )
+    )
+    
     use_sim_time = LaunchConfiguration("use_sim_time")
 
     # ROBOT DESCRIPTION
@@ -111,32 +120,28 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(PathJoinSubstitution(
         [FindPackageShare("wheelchair2_control"), 'launch', 'wheelchair_teleop.launch.py'])))
 
-    
-
-    return LaunchDescription(
-        [
-            DeclareLaunchArgument(
-                        'use_sim_time',
-                        default_value='False',
-                        description='Launch in simulation mode'
-                    ),
-            robot_state_publisher,
-            ros2_control,
-            joystick,
-
-            # JOINT STATE BROADCASTER
-            RegisterEventHandler(
+    # delay start of joint_state_broadcaster_spawner after ros2 control 
+    delay_joint_state_broadcaster_spawner = RegisterEventHandler(
                 event_handler=OnProcessStart(
                     target_action=robot_state_publisher,
                     on_start=[joint_state_broadcaster_spawner],
                 )
-            ),
-            # WHEELCHAIR CONTROLLER
-            RegisterEventHandler(
+            )
+    
+    #delay start of robot_controller_spawner after joint_state_broadcaster_spawner
+    delay_robot_controller_spawner = RegisterEventHandler(
                 event_handler=OnProcessExit(
                     target_action=joint_state_broadcaster_spawner,
                     on_exit=[robot_controller_spawner],
                 )
-            ),
-        ]
-    )
+            )
+    
+    nodes = [
+            robot_state_publisher,
+            ros2_control,
+            joystick,
+            delay_joint_state_broadcaster_spawner,
+            delay_robot_controller_spawner,
+    ]
+    
+    return LaunchDescription(launch_arguments + nodes)
