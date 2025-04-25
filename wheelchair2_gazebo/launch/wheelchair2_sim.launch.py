@@ -93,8 +93,7 @@ def generate_launch_description():
         default_value=default_world,
         description='World to load'
         )
-
-    # Include the Gazebo launch file, provided by the ros_gz_sim package
+    
     gazebo = IncludeLaunchDescription(
                 PythonLaunchDescriptionSource([os.path.join(
                     get_package_share_directory('ros_gz_sim'), 'launch', 'gz_sim.launch.py')]),
@@ -102,7 +101,6 @@ def generate_launch_description():
                     condition=IfCondition(use_sim_time)
              )
 
-    # Run the spawner node from the ros_gz_sim package. The entity name doesn't really matter if you only have a single robot.
     spawn_entity = Node(package='ros_gz_sim', executable='create',
                         arguments=['-topic', 'robot_description',
                                    '-name', 'wheelchair2',
