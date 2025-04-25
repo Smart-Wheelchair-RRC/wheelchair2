@@ -3,7 +3,7 @@
     "image": "ghcr.io/smart-wheelchair-rrc/wheelchair_base_gazebo:cuda-12.2",
     "privileged": true,
     "workspaceMount": "source=${localWorkspaceFolder},target=/home/wheelchair2/wheelchair2/src,type=bind",
-    "workspaceFolder": "/home/wheelchair2/wheelchair2/src",
+    "workspaceFolder": "/home/wheelchair2/wheelchair2",
     "customizations": {
         "vscode": {
             "settings": {
@@ -15,16 +15,9 @@
                         {
                             "name": "Build WS",
                             "cwd": "/home/wheelchair2/wheelchair2",
-                            "color": "green",
-                            "singleInstance": true,
-                            "command": "colcon build --cmake-args -DROS_EDITION=ROS2 -DHUMBLE_ROS=humble && source install/setup.bash"
-                        },
-                        {
-                            "name": "Build WS with symlink",
-                            "cwd": "/home/wheelchair2/wheelchair2",
                             "color": "aqua",
                             "singleInstance": true,
-                            "command": " colcon build --packages-select wheelchair2_navigation wheelchair2_control wheelchair2_bringup wheelchair2_description wheelchair2_gazebo --symlink-install && source install/setup.bash"
+                            "command": "colcon build --cmake-args -DROS_EDITION=ROS2 -DHUMBLE_ROS=humble && source install/setup.bash"
                         }
                     ]
                 }
