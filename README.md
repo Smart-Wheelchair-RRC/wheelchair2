@@ -59,7 +59,7 @@ Information about the Hardware Setup:
 
 ## Development 
 
-#### Setup Process
+### Setup Process
 - Create a folder for wheelchair development (preferably in home) 
     ```bash 
     mkdir wheelchair2 && cd wheelchair2
@@ -73,7 +73,6 @@ Information about the Hardware Setup:
     - Select **Dev Containers: Rebuild and Reopen in Container**
     - Choose your development container:
         - **Jetson** (ARM-based systems)
-
         - **AMD64/x86 with GPU** (Standard laptops)
         - **AMD64/x86 without GPU** (Machine with Nvidia GPU)
     - Use `Build WS` button to build workspace **or** run `colcon build --symlink-install && source install/setup.bash`
