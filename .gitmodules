@@ -1,10 +1,12 @@
 [submodule "dependencies/realsense-ros"]
 	path = dependencies/realsense-ros
 	url = https://github.com/rtarun1/realsense-ros.git
+	branch = ros2-master
 [submodule "dependencies/pointcloud_to_laserscan"]
 	path = dependencies/pointcloud_to_laserscan
 	url = https://github.com/rtarun1/pointcloud_to_laserscan.git
+	branch = humble
 [submodule "livox_ros_driver2"]
 	path = livox_ros_driver2
 	url = https://github.com/rtarun1/livox_ros_driver2.git
-
+	branch = master
