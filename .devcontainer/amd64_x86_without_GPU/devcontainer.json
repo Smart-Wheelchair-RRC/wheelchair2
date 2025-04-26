@@ -17,7 +17,7 @@
                             "cwd": "/home/wheelchair2/wheelchair2",
                             "color": "aqua",
                             "singleInstance": true,
-                            "command": "colcon build --cmake-args -DROS_EDITION=ROS2 -DHUMBLE_ROS=humble && source install/setup.bash"
+                            "command": "colcon build --symlink-install && source install/setup.bash"
                         }
                     ]
                 }
