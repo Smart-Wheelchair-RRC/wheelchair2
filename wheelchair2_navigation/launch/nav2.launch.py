@@ -8,6 +8,23 @@ from launch_ros.actions import Node
 from launch.substitutions import LaunchConfiguration
 
 def generate_launch_description():
+
+    launch_arguments = []
+    launch_arguments.append(
+        DeclareLaunchArgument(
+                "use_sim_time",
+                default_value="false",
+                description="Use simulation (Gazebo) clock if true",
+            )
+    )
+    launch_arguments.append(
+        DeclareLaunchArgument(
+                "map",
+                default_value=map_yaml,
+                description="Full path to map file to load",
+            )
+    ) 
+            
     
     use_sim_time = LaunchConfiguration("use_sim_time", default="false")
 
@@ -50,20 +67,9 @@ def generate_launch_description():
             parameters=[{'use_sim_time': use_sim_time}],
     )
 
-    return LaunchDescription(
-        [
-            DeclareLaunchArgument(
-                "use_sim_time",
-                default_value="false",
-                description="Use simulation (Gazebo) clock if true",
-            ),
-            DeclareLaunchArgument(
-                "map",
-                default_value=map_yaml,
-                description="Full path to map file to load",
-            ),
-            
-            nav2,
-            rviz,
-        ]
-    )
+    nodes = [
+        nav2,
+        rviz
+    ]
+
+    return LaunchDescription(launch_arguments + nodes)
