@@ -40,7 +40,7 @@ ROS2 Humble and Gazebo Harmonic packages to operate the RRC wheelchair
   - So, run
   `sudo prime-select nvidia` locally.
 
-## Hardware
+## Hardware Setup
 Information about the Hardware Setup:
 
 #### Motor Driver Controller and Wheel Odometery
@@ -57,9 +57,7 @@ Information about the Hardware Setup:
         - **IP Address:** 192.168.1.50
         - **Netmask:** 255.255.255.0
 
-## Development 
-
-### Setup Process
+## Development Setup
 - Create a folder for wheelchair development (preferably in home) 
     ```bash 
     mkdir wheelchair2 && cd wheelchair2
@@ -75,11 +73,14 @@ Information about the Hardware Setup:
         - **Jetson** (ARM-based systems)
         - **AMD64/x86 with GPU** (Standard laptops)
         - **AMD64/x86 without GPU** (Machine with Nvidia GPU)
-    - Use `Build WS` button to build workspace **or** run `colcon build --symlink-install && source install/setup.bash`
-  
-    >Note: To access these buttons you may need to enable [VSCode Action Button Extension](https://marketplace.visualstudio.com/items?itemName=seunlanlege.action-buttons) through the Extensions Tab in VSCode, the extension should download automatically on container startup
+    - Use `Build WS` action button to build workspace and source.
+      
+      We use the [VSCode Action Button Extension](https://marketplace.visualstudio.com/items?itemName=seunlanlege.action-buttons) to facilitate development. They are not necessary but certainly do help. To access these buttons you may need to enable it through the Extensions Tab in VSCode, though the extension should download automatically on container startup. All the action button does is as follows:
+      ```bash
+      colcon build --symlink-install && source install/setup.bash
+      ```
 
-### How to Use
+## How to Use
 
 - **Wheelchair launch**
   ```bash
