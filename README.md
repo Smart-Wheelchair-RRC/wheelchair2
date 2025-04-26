@@ -81,7 +81,7 @@ Information about the Hardware Setup:
 
 ### How to Use
 
-- ##### Wheelchair launch
+- **Wheelchair launch**
   ```bash
   # For real wheelchair
   sudo chmod 777 /dev/ttyACM0 # Permission for Motor Driver Controller
@@ -89,27 +89,27 @@ Information about the Hardware Setup:
   # For simulation
   ros2 launch wheelchair2_gazebo wheelchair2_sim.launch.py use_sim_time:=<Boolean> use_joy:=<Boolean>
   ```
-- ##### LiDAR launch
+- **LiDAR launch**
   ```bash
   ros2 launch wheelchair2_bringup livox.launch.py use_sim_time:=<Boolean> 
   ```
-- ##### Camera 
+- **Camera** 
   ```bash
   # Currently only used for rtabmap
   ros2 launch realsense2_camera rs_launch.py
   ```
-- ##### Mapping 
+- **Mapping**
   ```bash
   # slam_toolbox
   ros2 launch wheelchair2_navigation online_async_launch.py
   # rtabmap 
   ros2 launch wheelchair2_navigation rtabmap_lidar_camera_icp.launch.py
   ```
-- ##### Navigation 
+- **Navigation** 
   ```bash
   ros2 launch wheelchair2_navigation nav2.launch.py use_sim_time:=<Boolean> map:=$MAP_DIR/<map_folder>/<map_name>.yaml
   ```
-- ##### Keyboard Telep
+- **Keyboard Telep**
   ```bash
   ros2 run wheelchair2_control keyboard_teleop_constant.py
   ```
@@ -122,7 +122,7 @@ Information about the Hardware Setup:
   | `use_joy`      | `True`                      | Use joystick control.                                                               |
   | `map`          | `$MAP_DIR/rrc/rrc_lab.yaml` | Using different maps on startup.                                                    |
 
-- Inside `wheelchair2_navigation/launch` the script files can be used for quick navigation and mapping. 
+- **Note**, scripts inside `wheelchair2_navigation/launch` be used for quick navigation and mapping. 
 
 ## Demo Runs
 
