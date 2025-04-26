@@ -30,8 +30,16 @@ def generate_launch_description():
             description='Launch in simulation mode'
         )
     )
+    launch_arguments.append(
+        DeclareLaunchArgument(
+            'use_joy',
+            default_value='True',
+            description='Use joystick control'
+        )
+    )
     
     use_sim_time = LaunchConfiguration("use_sim_time")
+    use_joy = LaunchConfiguration('use_joy')
 
     # ROBOT DESCRIPTION
     robot_description = {
@@ -84,14 +92,8 @@ def generate_launch_description():
             # ("/wheelchair2_base_controller/cmd_vel_unstamped", "/cmd_vel"),
             ("/wheelchair2_base_controller/odom", "/odom"),
         ],
-        condition=IfCondition(NotSubstitution(use_sim_time)),
+        condition=UnlessCondition(use_sim_time),
     )
-
-    default_world = os.path.join(
-        get_package_share_directory('wheelchair2_gazebo'),
-        'worlds',
-        'obstacles.world'
-        )    
     
    # JOINT STATE BROADCASTER
     joint_state_broadcaster_spawner = Node(
@@ -116,9 +118,15 @@ def generate_launch_description():
         output="screen",
     )
 
+    #JOYSTICK TELEOP
     joystick = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(PathJoinSubstitution(
-        [FindPackageShare("wheelchair2_control"), 'launch', 'wheelchair_teleop.launch.py'])))
+            [
+                FindPackageShare("wheelchair2_control"), 'launch', 'wheelchair_teleop.launch.py'
+            ])
+        ),
+        condition=IfCondition(use_joy),
+    )
 
     # delay start of joint_state_broadcaster_spawner after ros2 control 
     delay_joint_state_broadcaster_spawner = RegisterEventHandler(

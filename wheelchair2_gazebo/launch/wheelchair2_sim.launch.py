@@ -20,11 +20,26 @@ from launch_ros.actions import Node
 from launch_ros.parameter_descriptions import ParameterValue
 from launch_ros.substitutions import FindPackageShare
 
-
 def generate_launch_description():
     
+    launch_arguments = []
+    launch_arguments.append(
+        DeclareLaunchArgument(
+            'use_sim_time',
+            default_value='True',
+            description='Launch in simulation mode'
+        )
+    )
+    launch_arguments.append(
+        DeclareLaunchArgument(
+            'use_joy',
+            default_value='True',
+            description='Use joystick control'
+        )
+    )
+    
     use_sim_time = LaunchConfiguration("use_sim_time")
-
+    use_joy = LaunchConfiguration('use_joy')
 
     # ROBOT DESCRIPTION
     robot_description = {
@@ -108,7 +123,7 @@ def generate_launch_description():
                         parameters=[{'use_sim_time': use_sim_time}],
                         condition=IfCondition(use_sim_time),
                         output='screen')
-
+    
    # JOINT STATE BROADCASTER
     joint_state_broadcaster_spawner = Node(
         package="controller_manager",
@@ -132,9 +147,15 @@ def generate_launch_description():
         output="screen",
     )
 
+    #JOYSTICK TELEOP
     joystick = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(PathJoinSubstitution(
-        [FindPackageShare("wheelchair2_control"), 'launch', 'wheelchair_teleop.launch.py'])))
+            [
+                FindPackageShare("wheelchair2_control"), 'launch', 'wheelchair_teleop.launch.py'
+            ])
+        ),
+        condition=IfCondition(use_joy),
+    )
 
     bridge_params = os.path.join(get_package_share_directory('wheelchair2_gazebo'), 'config', 'gz_bridge.yaml')
     ros_gz_bridge = Node(
@@ -156,49 +177,35 @@ def generate_launch_description():
         condition=IfCondition(use_sim_time),
         arguments=["/camera/image_raw"]
     )
+ 
 
-    
-
-    return LaunchDescription(
-        [
-            DeclareLaunchArgument(
-                        'use_sim_time',
-                        default_value='True',
-                        description='Launch in simulation mode'
-                    ),
-            robot_state_publisher,
-            ros2_control,
-            joystick,   
-            world_arg,
-            gazebo,
-            spawn_entity,
-            # robot_controller_spawner,
-            # joint_state_broadcaster_spawner,
-            ros_gz_bridge,
-            ros_gz_image_bridge,
-
-        
-                
-            # # URDF/ROS2 CONTROL
-            # RegisterEventHandler(
-            #     event_handler=OnProcessStart(
-            #         target_action=robot_state_publisher,
-            #         on_start=[ros2_control],
-            #     )
-            # ),
-            # # JOINT STATE BROADCASTER
-            RegisterEventHandler(
+    # delay start of joint_state_broadcaster_spawner after ros2 control 
+    delay_joint_state_broadcaster_spawner = RegisterEventHandler(
                 event_handler=OnProcessStart(
                     target_action=robot_state_publisher,
                     on_start=[joint_state_broadcaster_spawner],
                 )
-            ),
-            # WHEELCHAIR CONTROLLER
-            RegisterEventHandler(
+            )
+    
+    #delay start of robot_controller_spawner after joint_state_broadcaster_spawner
+    delay_robot_controller_spawner = RegisterEventHandler(
                 event_handler=OnProcessExit(
                     target_action=joint_state_broadcaster_spawner,
                     on_exit=[robot_controller_spawner],
                 )
-            ),
-        ]
-    )
+            )
+    
+    nodes = [
+            robot_state_publisher,
+            ros2_control,
+            joystick,
+            delay_joint_state_broadcaster_spawner,
+            delay_robot_controller_spawner,
+            world_arg,
+            gazebo,
+            spawn_entity,
+            ros_gz_bridge,
+            ros_gz_image_bridge,
+    ]
+    
+    return LaunchDescription(launch_arguments + nodes)
