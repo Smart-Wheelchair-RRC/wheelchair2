@@ -1,14 +1,5 @@
 # Wheelchair2
-ROS2 Humble setup to operate the RRC wheelchair
-
-## Table of contents
-
-- [Wheelchair2](#wheelchair2)
-  - [Table of contents](#table-of-contents)
-  - [Prerequisites](#prerequisites)
-  - [Demo Runs](#demo-runs)
-        - [x86 Laptop Navigation Demo run](#x86-laptop-navigation-demo-run)
-        - [Jetson Navigation Demo run](#jetson-navigation-demo-run)
+ROS2 Humble and Gazebo Harmonic packages to operate the RRC wheelchair
 
 ## Prerequisites
 
