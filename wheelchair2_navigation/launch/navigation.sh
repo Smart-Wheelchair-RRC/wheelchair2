@@ -1,4 +1,3 @@
-# colcon build --packages-select wheelchair2_navigation wheelchair2_control wheelchair2_bringup wheelchair2_description wheelchair2_gazebo --symlink-install
 # Set permissions for the Kangaroo motor controller
 sudo chmod 777 /dev/ttyACM0
 

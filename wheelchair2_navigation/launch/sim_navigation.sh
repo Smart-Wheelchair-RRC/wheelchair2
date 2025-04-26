@@ -1,16 +1,11 @@
-# colcon build --packages-select wheelchair2_navigation wheelchair2_control wheelchair2_bringup wheelchair2_description wheelchair2_gazebo --symlink-install
-# Set permissions for the Kangaroo motor controller
-# sudo chmod 777 /dev/ttyACM0
-
-# sleep 5
 
 # Launch wheelchair bringup
-xterm -e "ros2 launch wheelchair2_gazebo wheelchair2_sim.launch.py" &  
+xterm -e "ros2 launch wheelchair2_gazebo wheelchair2_sim.launch.py use_sim_time:=true use_joy:=true" &  
 
 sleep 10
 
 # # Launch 3D LiDAR and pointcloud to laserscan
-xterm -e "ros2 launch pointcloud_to_laserscan sample_pointcloud_to_laserscan_launch.py" &
+xterm -e "ros2 launch wheelchair2_bringup livox.launch.py use_sim_time:=true" &
 
 # sleep 5
 
@@ -30,7 +25,7 @@ xterm -e "ros2 launch pointcloud_to_laserscan sample_pointcloud_to_laserscan_lau
 sleep 5 
 
 # Launch navigation stack
-xterm -e "ros2 launch wheelchair2_navigation nav2.launch.py use_sim_time:=true" &
+xterm -e "ros2 launch wheelchair2_navigation nav2.launch.py use_sim_time:=true map:=$MAP_DIR/rrc/himalaya_kcis.yaml" &
 
 # sleep 5
 
