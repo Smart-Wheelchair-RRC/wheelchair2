@@ -1,12 +1,12 @@
 [submodule "dependencies/realsense-ros"]
 	path = dependencies/realsense-ros
 	url = https://github.com/rtarun1/realsense-ros.git
+	branch = ros2-master
 [submodule "dependencies/pointcloud_to_laserscan"]
 	path = dependencies/pointcloud_to_laserscan
 	url = https://github.com/rtarun1/pointcloud_to_laserscan.git
-[submodule "livox_ros_driver2"]
-	path = livox_ros_driver2
+	branch = humble
+[submodule "dependencies/livox_ros_driver2"]
+	path = dependencies/livox_ros_driver2
 	url = https://github.com/rtarun1/livox_ros_driver2.git
-[submodule "dependencies/kinematic-icp"]
-	path = dependencies/kinematic-icp
-	url = https://github.com/rtarun1/kinematic-icp.git
+	branch = master

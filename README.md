@@ -1,30 +1,12 @@
 # Wheelchair2
-ROS2 Humble setup to operate the RRC wheelchair
+ROS2 Humble and Gazebo Harmonic packages to operate the RRC wheelchair
 
-## Table of contents
+## Prerequisites
 
-- [Wheelchair2](#wheelchair2)
-  - [Table of contents](#table-of-contents)
-    - [Docker Setup](#docker-setup)
-      - [Installation \& Configuration](#installation--configuration)
-      - [Docker Installation](#docker-installation)
-        - [GHCR Authentication](#ghcr-authentication)
-    - [Hardware Configuration](#hardware-configuration)
-        - [Motor Driver Controller and Wheel Odometery](#motor-driver-controller-and-wheel-odometery)
-        - [RGB Camera: Realsense D455](#rgb-camera-realsense-d455)
-        - [3D LiDAR: Livox MID-360](#3d-lidar-livox-mid-360)
-    - [Software Setup Options](#software-setup-options)
-      - [Option 1: Docker for Development](#option-1-docker-for-development)
-        - [Prerequisites](#prerequisites)
-        - [Setup Process](#setup-process)
-      - [Option 2: Docker for Demo runs](#option-2-docker-for-demo-runs)
-        - [x86 Laptop Navigation Demo run](#x86-laptop-navigation-demo-run)
-        - [Jetson Navigation Demo run](#jetson-navigation-demo-run)
-
-
-### Docker Setup
-#### Installation & Configuration
-#### Docker Installation
+- Ubuntu 22.04 or 24.04
+- VSCode
+- Remote Development Extension by Microsoft (Inside VSCode)
+- **Docker Installation**
   ```bash
   # Install Docker using convenience script
   curl -fsSL https://get.docker.com -o get-docker.sh
@@ -39,43 +21,43 @@ ROS2 Humble setup to operate the RRC wheelchair
   # Verify installation
   sudo systemctl is-enabled docker
   ```
-
- **Reboot before proceeding further**
-
-##### GHCR Authentication 
+  - **Reboot before proceeding further**
   ```bash
-  echo "<YOUR_GITHUB_PAT>" | docker login ghcr.io -u <YOUR_GITHUB_USERID> --password-stdin
-  ```
-### Hardware Configuration
-The repository has currently been setup with
-##### Motor Driver Controller and Wheel Odometery
+    # GHCR Authentication
+    echo "<YOUR_GITHUB_PAT>" | docker login ghcr.io -u <YOUR_GITHUB_USERID> --password-stdin
+    ```
+- Enabling Nvidia GPU for simulation
+
+  | Hardware | Requirement  |
+  | :------- | :----------- |
+  | GPU      | CUDA-enabled |
+
+  | Software      | Requirement                                                           |
+  | :------------ | :-------------------------------------------------------------------- |
+  | Nvidia Driver | - Ubuntu 22.04 `>=515.43.04` <br/> - Ubuntu 24.04 `>=555.42.02` <br/> |
+  
+  - Switching to NVIDIA graphics driver libraries with prime-select tool (reboot required). By default, it is set to on-demand in which the system selects libraries to render automatically (not always correctly). 
+  - So, run
+  `sudo prime-select nvidia` locally.
+
+## Hardware Setup
+Information about the Hardware Setup:
+
+#### Motor Driver Controller and Wheel Odometery
   - **Components:**
     - Kangaroo X2 Motion controller
     - Sabertooth 2x32 Motor driver
     - AMT102-V Wheelencoders
-
-**Permission for Motor Driver Controller**
-```bash 
-sudo chmod 777 /dev/ttyACM0
-```
-
-##### RGB Camera: Realsense D455 
+#### RGB Camera: Realsense D455 
   - With the current setup we only use realsense for RTABMAP
   - No Additional Setup is required for getting data, just plug-in the type-c cable
-##### 3D LiDAR: Livox MID-360
-   1.  Create new network profile "Livox"
+#### 3D LiDAR: Livox MID-360
+   1.  Create new network profile **"Livox"**
    2.  Configure static IP:
         - **IP Address:** 192.168.1.50
         - **Netmask:** 255.255.255.0
 
-### Software Setup Options
-
-#### Option 1: Docker for Development
-##### Prerequisites
-- VSCode
-- Remote Development Extension by Microsoft (Inside VSCode)
-  
-##### Setup Process
+## Development Setup
 - Create a folder for wheelchair development (preferably in home) 
     ```bash 
     mkdir wheelchair2 && cd wheelchair2
@@ -86,26 +68,70 @@ sudo chmod 777 /dev/ttyACM0
     ```
 - To enter the container
     - Open Command Pallete with `Ctrl+Shift+P`
-    - Select **Dev Containers: Reopen in Container**
-    - Choose architecture:
-        - **Jetson** (ARM-based systems)
+    - Select **Dev Containers: Rebuild and Reopen in Container**
+    - Choose your development container:
 
-        - **AMD64/x86** (Standard laptops)
-    >Note: If there is an error related to gpu, comment the line 53 in the devcontainer.json and try to build again
-    - Use `Build WS` button to build workspace
-  
-    >Note: To access these buttons you may need to enable [VSCode Action Button Extension](https://marketplace.visualstudio.com/items?itemName=seunlanlege.action-buttons) through the Extensions Tab in VSCode, the extension should download automatically on container startup
-  
-- ##### To run the Navigation stack inside the container
+      | Develeopment Container | System requirement         | Use case                        |
+      |------------------------|----------------------------|---------------------------------|
+      | Jetson                 | ARM system                 | Running Jetson                  |
+      | AMD64/x86 with GPU     | x86 system with Nvidia GPU | Running Real-life + Simulation  |
+      | AMD64/x86 without GPU  | x86 system                 | Running only Real-life          |
+
+    - Use `Build WS` action button to build workspace and source.
+      
+      We use the [VSCode Action Button Extension](https://marketplace.visualstudio.com/items?itemName=seunlanlege.action-buttons) to facilitate development. They are not necessary but certainly do help. To access these buttons you may need to enable it through the Extensions Tab in VSCode, though the extension should download automatically on container startup. All the action button does is as follows:
+      ```bash
+      colcon build --symlink-install && source install/setup.bash
+      ```
+
+## How to Use
+
+- **Wheelchair launch**
   ```bash
-  ros2 launch wheelchair2_bringup wheelchair2_navigation_rrc.launch.py use_keepout_zone:=<Boolean> use_joy:=<Boolean>
+  # For real wheelchair
+  sudo chmod 777 /dev/ttyACM0 # Permission for Motor Driver Controller
+  ros2 launch wheelchair2_bringup wheelchair2.launch.py use_sim_time:=<Boolean> use_joy:=<Boolean>
+  # For simulation
+  ros2 launch wheelchair2_gazebo wheelchair2_sim.launch.py use_sim_time:=<Boolean> use_joy:=<Boolean>
   ```
-  - use_joy: To use joystick teleop (only works on AMD64x86)
-  - use_keepout_zone: To use keepout zone.
-  - Change `wheelchair2_navigation_rrc` to `wheelchair2_navigation_kcis` when working at KCIS block.
-  - Keyboard teleop `ros2 run wheelchair2_control keyboard_teleop_constant.py`
+- **LiDAR launch**
+  ```bash
+  ros2 launch wheelchair2_bringup livox.launch.py use_sim_time:=<Boolean> 
+  ```
+- **Camera** 
+  ```bash
+  # Currently only used for rtabmap
+  ros2 launch realsense2_camera rs_launch.py
+  ```
+- **Mapping**
+  ```bash
+  # slam_toolbox
+  ros2 launch wheelchair2_navigation online_async_launch.py
+  # rtabmap 
+  ros2 launch wheelchair2_navigation rtabmap_lidar_camera_icp.launch.py
+  ```
+- **Navigation** 
+  ```bash
+  ros2 launch wheelchair2_navigation nav2.launch.py use_sim_time:=<Boolean> map:=$MAP_DIR/<map_folder>/<map_name>.yaml
+  ```
+- **Keyboard Telep**
+  ```bash
+  ros2 run wheelchair2_control keyboard_teleop_constant.py
+  ```
 
-#### Option 2: Docker for Demo runs
+  Available arguments are as follows:
+
+  | Argument       | Default Value               | Description                                                                         |
+  | -------------- | --------------------------- | ----------------------------------------------------------------------------------- |
+  | `use_sim_time` | `False`                     | Launch in simulation mode (`True` for simulation, `False` for hardware connection). |  |
+  | `use_joy`      | `True`                      | Use joystick control.                                                               |
+  | `map`          | `$MAP_DIR/rrc/rrc_lab.yaml` | Using different maps on startup.                                                    |
+
+- **Note**, scripts inside `wheelchair2_navigation/launch` be used for quick navigation and mapping. 
+
+## Demo Runs
+
+**⚠️ Important Note:** This option is not maintained frequently so, the latest changes may not be applied here. 
 
 ##### x86 Laptop Navigation Demo run
 - To pull latest docker image

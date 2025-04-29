@@ -13,6 +13,7 @@ from launch.substitutions import (
     FindExecutable,
     PathJoinSubstitution,
     LaunchConfiguration,
+    NotSubstitution,
 )
 from launch.conditions import IfCondition, UnlessCondition
 from launch_ros.actions import Node
@@ -57,77 +58,23 @@ def generate_launch_description():
     # lifecycle node for mask layer
     lifecycle_nodes = ['filter_mask_server', 'costmap_filter_info_server']
 
-
-    # ROBOT DESCRIPTION
-    robot_description = {
-        "robot_description": ParameterValue(
-            Command(
-                [
-                    PathJoinSubstitution([FindExecutable(name="xacro")]),
-                    " ",
-                    PathJoinSubstitution(
-                        [
-                            FindPackageShare("wheelchair2_description"),
-                            "urdf",
-                            "wheelchair2_camera_livox.urdf.xacro",
-                        ]
-                    ),
-                ]
-            ),
-            value_type=str,
-        )
-    }
-
-    #CONTROLLER MANAGER NODE
-    ros2_control = Node(
-        package="controller_manager",
-        executable="ros2_control_node",
-        parameters=[
-            robot_description,
-            PathJoinSubstitution(
-                [
-                    FindPackageShare("wheelchair2_bringup"),
-                    "config",
-                    "wheelchair2_controllers.yaml",
-                ]
-            ),
-        ],
-        output="screen",
-        remappings=[
-            # ("/wheelchair2_base_controller/cmd_vel_unstamped", "/cmd_vel"),
-            ("/wheelchair2_base_controller/odom", "/odom"),
-        ],
-    )
-
-    # ROBOT STATE PUBLISHER
-    robot_state_publisher = Node(
-        package="robot_state_publisher",
-        executable="robot_state_publisher",
-        output="screen",
-        parameters=[robot_description],
-    )
     
-    # JOINT STATE BROADCASTER
-    joint_state_broadcaster_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=[
-            "joint_state_broadcaster",
-            "--controller-manager",
-            "/controller_manager",
-        ],
-        output="screen",
+    wheelchair2_bringup_sim = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            PathJoinSubstitution(
+                [FindPackageShare("wheelchair2_gazebo"), "launch", "wheelchair2_sim.launch.py"]
+            ),
+        ),
+        condition=IfCondition(use_sim_time)
     )
-    # WHEELCHAIR CONTROLLER
-    robot_controller_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=[
-            "wheelchair2_base_controller",
-            "--controller-manager",
-            "/controller_manager",
-        ],
-        output="screen",
+
+    wheelchair2_bringup = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            PathJoinSubstitution(
+                [FindPackageShare("wheelchair2_bringup"), "launch", "wheelchair2.launch.py"]
+            ),
+        ),
+        condition=UnlessCondition(use_sim_time),
     )
 
     livox_launch = IncludeLaunchDescription(
@@ -145,18 +92,6 @@ def generate_launch_description():
             ),
         ),
     )
-
-
-    #JOYSTICK TELEOP
-    joystick = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(PathJoinSubstitution(
-            [
-                FindPackageShare("wheelchair2_control"), 'launch', 'wheelchair_teleop.launch.py'
-            ])
-        ),
-        condition=IfCondition(use_joy),
-    )
-
 
     keepout_params_file = LaunchConfiguration(
         'keepout_params_file',
@@ -254,39 +189,12 @@ def generate_launch_description():
             emulate_tty=True,  
             condition=IfCondition(use_keepout_zone),
             parameters=[configured_params])
-    
-    # delay start of ros2_control after robot_state_publisher
-    delay_ros2_control = RegisterEventHandler(
-                event_handler=OnProcessStart(
-                    target_action=robot_state_publisher,
-                    on_start=[ros2_control],
-                )
-            )
-    # delay start of joint_state_broadcaster_spawner after ros2 control 
-    delay_joint_state_broadcaster_spawner = RegisterEventHandler(
-                event_handler=OnProcessStart(
-                    target_action=ros2_control,
-                    on_start=[joint_state_broadcaster_spawner],
-                )
-            )
-    
-    #delay start of robot_controller_spawner after joint_state_broadcaster_spawner
-    delay_robot_controller_spawner = RegisterEventHandler(
-                event_handler=OnProcessExit(
-                    target_action=joint_state_broadcaster_spawner,
-                    on_exit=[robot_controller_spawner],
-                )
-            )
-    
-    
+
     nodes = [
+            wheelchair2_bringup_sim,
+            wheelchair2_bringup,
             livox_launch,
             pointcloud_to_laserscan_launch,
-            robot_state_publisher,
-            delay_ros2_control,
-            delay_joint_state_broadcaster_spawner,
-            delay_robot_controller_spawner,
-            joystick,
             nav2,
             rviz,
             lifecycle_manager,

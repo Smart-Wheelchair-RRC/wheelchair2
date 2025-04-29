@@ -1,0 +1,68 @@
+{
+    "name": "Wheelchair2 Development on AMD64/x86 with GPU",
+    "image": "ghcr.io/smart-wheelchair-rrc/wheelchair_base_gazebo:latest",
+    "privileged": true,
+    "workspaceMount": "source=${localWorkspaceFolder},target=/home/wheelchair2/wheelchair2/src,type=bind",
+    "workspaceFolder": "/home/wheelchair2/wheelchair2/src",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "actionButtons": {
+                    "defaultColor": "#ff0034",
+                    "loadNpmCommands": false,
+                    "reloadButton": "♻️",
+                    "commands": [
+                        {
+                            "name": "Build WS",
+                            "cwd": "/home/wheelchair2/wheelchair2",
+                            "color": "aqua",
+                            "singleInstance": true,
+                            "command": "colcon build --symlink-install && source install/setup.bash"
+                        }
+                    ]
+                }
+            },
+            "extensions": [
+                "althack.ament-task-provider",
+                "betwo.b2-catkin-tools",
+                "DotJoshJohnson.xml",
+                "ms-azuretools.vscode-docker",
+                "ms-iot.vscode-ros",
+                "ms-python.python",
+                "ms-vscode.cpptools",
+                "redhat.vscode-yaml",
+                "seunlanlege.action-buttons",
+                "smilerobotics.urdf",
+                "streetsidesoftware.code-spell-checker",
+                "twxs.cmake",
+                "yzhang.markdown-all-in-one",
+                "zachflower.uncrustify",
+                "akhail.save-typing"
+            ]
+        }
+    },
+    "containerEnv": {
+        "DISPLAY": "${localEnv:DISPLAY}", // Needed for GUI try ":0" for windows
+        "WAYLAND_DISPLAY": "${localEnv:WAYLAND_DISPLAY}",
+        "XDG_RUNTIME_DIR": "${localEnv:XDG_RUNTIME_DIR}",
+        "PULSE_SERVER": "${localEnv:PULSE_SERVER}",
+        "QT_X11_NO_MITSHM": "1",
+        // "LIBGL_ALWAYS_SOFTWARE": "1", // Needed for software rendering of opengl ( Comment this off if you face any lag in Gazebo )
+        "NVIDIA_DRIVER_CAPABILITIES": "all",
+        "NVIDIA_VISIBLE_DEVICES": "all"
+    },
+    "runArgs": [
+        "--gpus=all", // Comment this off if you don't have a GPU
+        "--cap-add=SYS_NICE",
+        "--ulimit=rtprio=99",
+        "--ulimit=rttime=-1",
+        "--ulimit=memlock=8428281856",
+        "--cap-add=all",
+        "--security-opt=seccomp:unconfined",
+        "--security-opt=apparmor:unconfined",
+        "--volume=/dev:/dev",
+        "--net=host",
+        "--ipc=host"
+    ],
+    "postStartCommand": "sudo chown -R wheelchair2:wheelchair2 /home/wheelchair2/wheelchair2 /run"
+}
