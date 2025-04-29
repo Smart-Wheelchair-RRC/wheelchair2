@@ -70,9 +70,13 @@ Information about the Hardware Setup:
     - Open Command Pallete with `Ctrl+Shift+P`
     - Select **Dev Containers: Rebuild and Reopen in Container**
     - Choose your development container:
-        - **Jetson** (ARM-based systems)
-        - **AMD64/x86 with GPU** (Standard laptops)
-        - **AMD64/x86 without GPU** (Machine with Nvidia GPU)
+
+      | Develeopment Container | System requirement         | Use case                        |
+      |------------------------|----------------------------|---------------------------------|
+      | Jetson                 | ARM system                 | Running Jetson                  |
+      | AMD64/x86 with GPU     | x86 system with Nvidia GPU | Running Real-life + Simulation  |
+      | AMD64/x86 without GPU  | x86 system                 | Running only Real-life          |
+
     - Use `Build WS` action button to build workspace and source.
       
       We use the [VSCode Action Button Extension](https://marketplace.visualstudio.com/items?itemName=seunlanlege.action-buttons) to facilitate development. They are not necessary but certainly do help. To access these buttons you may need to enable it through the Extensions Tab in VSCode, though the extension should download automatically on container startup. All the action button does is as follows:
