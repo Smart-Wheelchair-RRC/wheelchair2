@@ -1,5 +1,4 @@
-FROM ghcr.io/smart-wheelchair-rrc/wheelchair_base_gazebo:cuda-12.2
-# Hello, Srinath was here (Arch user btw)
+FROM ghcr.io/smart-wheelchair-rrc/wheelchair_base_gazebo:latest
 # Add the following labels
 LABEL org.opencontainers.image.description="Wheelchair2"
 LABEL org.opencontainers.image.title="Wheelchair2Navigation"

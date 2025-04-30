@@ -1,5 +1,4 @@
 FROM ghcr.io/smart-wheelchair-rrc/wheelchair2_base:v1.0
-# Hello, Srinath was here (Arch user btw)
 # Add the following labels
 LABEL org.opencontainers.image.description="Wheelchair2"
 LABEL org.opencontainers.image.title="Wheelchair2Navigation"
