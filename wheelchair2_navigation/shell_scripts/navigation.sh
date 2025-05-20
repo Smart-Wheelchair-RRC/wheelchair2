@@ -4,12 +4,12 @@ sudo chmod 777 /dev/ttyACM0
 sleep 5
 
 # Launch wheelchair bringup
-xterm -e "ros2 launch wheelchair2_bringup wheelchair2.launch.py" &  
+xterm -e "ros2 launch wheelchair2_bringup wheelchair2.launch.py use_sim_time:=False" &  
 
 sleep 5
 
 # # Launch 3D LiDAR and pointcloud to laserscan
-xterm -e "ros2 launch wheelchair2_bringup livox.launch.py" &
+xterm -e "ros2 launch wheelchair2_bringup livox.launch.py use_sim_time:=False" &
 
 # sleep 5
 
@@ -29,7 +29,7 @@ xterm -e "ros2 launch wheelchair2_bringup livox.launch.py" &
 sleep 5 
 
 # Launch navigation stack
-xterm -e "ros2 launch wheelchair2_navigation nav2.launch.py use_sim_time:=False" &
+xterm -e "ros2 launch wheelchair2_navigation nav2.launch.py use_sim_time:=False map:=$MAP_DIR/rrc/rrc_lab.yaml" &
 
 sleep 5
 
