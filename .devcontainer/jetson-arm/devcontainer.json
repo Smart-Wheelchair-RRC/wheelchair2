@@ -1,6 +1,6 @@
 {
     "name": "Wheelchair2 Development on Jetson",
-    "image": "ghcr.io/smart-wheelchair-rrc/wheelchair2_base_jetson:v1.0",
+    "image": "ghcr.io/smart-wheelchair-rrc/wheelchair2_base_jetson:latest",
     "privileged": true,
     "workspaceMount": "source=${localWorkspaceFolder},target=/home/wheelchair2/wheelchair2/src,type=bind",
     "workspaceFolder": "/home/wheelchair2/wheelchair2/src",
@@ -17,7 +17,7 @@
                             "cwd": "/home/wheelchair2/wheelchair2",
                             "color": "green",
                             "singleInstance": true,
-                            "command": "colcon build --symlink-install && source install/setup.bash" 
+                            "command": "colcon build --symlink-install && source install/setup.bash"
                         }
                     ]
                 }
