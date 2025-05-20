@@ -25,7 +25,7 @@ xterm -e "ros2 launch wheelchair2_bringup livox.launch.py use_sim_time:=true" &
 sleep 5 
 
 # Launch navigation stack
-xterm -e "ros2 launch wheelchair2_navigation nav2.launch.py use_sim_time:=true map:=$MAP_DIR/rrc/himalaya_kcis.yaml" &
+xterm -e "ros2 launch wheelchair2_navigation nav2.launch.py use_sim_time:=true map:=$MAP_DIR/sim/obstacles_world.yaml" &
 
 # sleep 5
 
