@@ -77,15 +77,15 @@ Information about the Hardware Setup:
       | AMD64/x86 with GPU     | x86 system with Nvidia GPU | Running Real-life + Simulation  |
       | AMD64/x86 without GPU  | x86 system                 | Running only Real-life          |
 
-    - Use `Build WS` action button to build workspace and source.
-      
-      We use the [VSCode Action Button Extension](https://marketplace.visualstudio.com/items?itemName=seunlanlege.action-buttons) to facilitate development. They are not necessary but certainly do help. To access these buttons you may need to enable it through the Extensions Tab in VSCode, though the extension should download automatically on container startup. All the action button does is as follows:
-      ```bash
-      colcon build --symlink-install && source install/setup.bash
-      ```
-
 ## How to Use
 
+- **Open Terminal**
+  - Open Command Pallete with `Ctrl+Shift+P`
+  - Select **Terminal: Create New Terminal in Editor Area** and drag and drop it in a random place to have a terminal only window.
+- **Build workspace and source**
+  ```bash
+  colcon build --symlink-install && source install/setup.bash
+  ```
 - **Wheelchair launch**
   ```bash
   # For real wheelchair
@@ -127,7 +127,14 @@ Information about the Hardware Setup:
   | `use_joy`      | `True`                      | Use joystick control.                                                               |
   | `map`          | `$MAP_DIR/rrc/rrc_lab.yaml` | Using different maps on startup.                                                    |
 
-- **Note**, scripts inside `wheelchair2_navigation/launch` be used for quick navigation and mapping. 
+- **Note**, tmux scripts inside `wheelchair2_navigation/shell_scripts` can be used for ease. 
+
+  | Script file         | Action                                |
+  |---------------------|---------------------------------------|
+  | `navigation.tmux`     | Runs real wheelchair navigation       |
+  | `sim_navigation.tmux` | Runs simulation wheelchair navigation |
+
+
 
 ## Demo Runs
 
