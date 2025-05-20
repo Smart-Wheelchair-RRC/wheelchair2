@@ -28,7 +28,7 @@ tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2.launch.py 
 
 # Window 6: Keyboard Teleop
 tmux new-window -t $SESSION -n 'teleop'
-tmux send-keys -t $SESSION:5 'ros2 run wheelchair2_control keyboard_teleop_constant.py' C-m
+tmux send-keys -t $SESSION:3 'ros2 run wheelchair2_control keyboard_teleop_constant.py' C-m
 
 # Attach to session
 tmux attach -t $SESSION
