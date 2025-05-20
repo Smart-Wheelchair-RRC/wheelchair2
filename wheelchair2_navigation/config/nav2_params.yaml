@@ -103,7 +103,7 @@ controller_server:
       plugin: "nav2_mppi_controller::MPPIController"
       time_steps: 80 #56
       model_dt: 0.05
-      batch_size: 10000
+      batch_size: 2000
       vx_std: 0.30
       vy_std: 0.30
       wz_std: 0.30
@@ -123,7 +123,19 @@ controller_server:
         time_step: 3
       AckermannConstraints:
         min_turning_r: 0.4
-      critics: ["ConstraintCritic", "ObstaclesCritic", "GoalCritic", "GoalAngleCritic", "PathAlignCritic", "PathFollowCritic", "PathAngleCritic", "PreferForwardCritic", "VelocityDeadbandCritic", "TwirlingCritic"]
+      critics:
+        [
+          "ConstraintCritic",
+          "ObstaclesCritic",
+          "GoalCritic",
+          "GoalAngleCritic",
+          "PathAlignCritic",
+          "PathFollowCritic",
+          "PathAngleCritic",
+          "PreferForwardCritic",
+          "VelocityDeadbandCritic",
+          "TwirlingCritic",
+        ]
       ConstraintCritic:
         enabled: true
         cost_power: 1
@@ -147,7 +159,7 @@ controller_server:
       ObstaclesCritic:
         enabled: true
         cost_power: 1
-        repulsion_weight: 1.5
+        repulsion_weight: 2.5
         critical_weight: 10.0
         consider_footprint: true
         collision_cost: 1000.0
@@ -208,7 +220,7 @@ local_costmap:
       rolling_window: true
       width: 6 #5
       height: 6 #5
-      resolution: 0.05
+      resolution: 0.1
       # robot_radius: 0.50
       footprint: "[[-0.30,-0.32],[0.72,-0.32],[0.72,0.32],[-0.30,0.32]]"
       # footprint: "[[-0.30,-0.32],[0.80,-0.32],[0.80,0.32],[-0.30,0.32]]"
@@ -221,47 +233,47 @@ local_costmap:
         cost_scaling_factor: 10.0 #10 2.58
       lidar_obstacle_layer:
         plugin: "spatio_temporal_voxel_layer/SpatioTemporalVoxelLayer"
-        enabled:                  true
-        voxel_decay:              1.0  # seconds if linear, e^n if exponential 5
-        decay_model:              0     # 0=linear, 1=exponential, -1=persistent
-        voxel_size:               0.05  # meters
-        track_unknown_space:      true  # default space is known
-        mark_threshold:           0     # voxel height
+        enabled: true
+        voxel_decay: 1.0 # seconds if linear, e^n if exponential 5
+        decay_model: 0 # 0=linear, 1=exponential, -1=persistent
+        voxel_size: 0.05 # meters
+        track_unknown_space: true # default space is known
+        mark_threshold: 0 # voxel height
         update_footprint_enabled: true
-        combination_method:       1     # 1=max, 0=override
-        origin_z:                 0.0   # meters
-        publish_voxel_map:        false # default off
-        transform_tolerance:      0.2   # seconds
-        mapping_mode:             false # default off, saves map not for navigation
-        map_save_duration:        60.0  # default 60s, how often to autosave
-        observation_sources:      lidar1_mark lidar1_clear
+        combination_method: 1 # 1=max, 0=override
+        origin_z: 0.0 # meters
+        publish_voxel_map: false # default off
+        transform_tolerance: 0.2 # seconds
+        mapping_mode: false # default off, saves map not for navigation
+        map_save_duration: 60.0 # default 60s, how often to autosave
+        observation_sources: lidar1_mark lidar1_clear
         lidar1_mark:
           data_type: PointCloud2
           topic: /livox/lidar
           marking: true
           clearing: false
-          obstacle_range: 5.0          # meters 3
-          min_obstacle_height: 0.1     # default 0, meters
-          max_obstacle_height: 5.0     # default 3, meters
-          expected_update_rate: 0.0    # default 0, if not updating at this rate at least, remove from buffer
+          obstacle_range: 5.0 # meters 3
+          min_obstacle_height: 0.1 # default 0, meters
+          max_obstacle_height: 5.0 # default 3, meters
+          expected_update_rate: 0.0 # default 0, if not updating at this rate at least, remove from buffer
           observation_persistence: 0.0 # default 0, use all measurements taken during now-value, 0=latest
-          inf_is_valid: false          # default false, for laser scans
-          filter: "voxel"        # default passthrough, apply "voxel", "passthrough", or no filter to sensor data, recommend on     voxel_min_points: 0          # default 0, minimum points per voxel for voxel filter
-          
-          clear_after_reading: true    # default false, clear the buffer after the layer gets readings from it
+          inf_is_valid: false # default false, for laser scans
+          filter: "voxel" # default passthrough, apply "voxel", "passthrough", or no filter to sensor data, recommend on     voxel_min_points: 0          # default 0, minimum points per voxel for voxel filter
+
+          clear_after_reading: true # default false, clear the buffer after the layer gets readings from it
         lidar1_clear:
-          enabled: true                #default true, can be toggled on/off with associated service call
+          enabled: true #default true, can be toggled on/off with associated service call
           data_type: PointCloud2
           topic: /livox/lidar
           marking: false
           clearing: true
-          max_z: 0.2                  # default 0, meters
-          min_z: 5.0                  # default 10, meters
-          vertical_fov_angle: 1.02   # default 0.7, radians. For 3D lidars it's the symmetric FOV about the planar axis.
-          vertical_fov_padding: 0.05    # 3D Lidar only. Default 0, in meters 
-          horizontal_fov_angle: 6.29  # 3D lidar scanners like the VLP16 have 360 deg horizontal FOV.
-          decay_acceleration: 5.0     # default 0, 1/s^2. 
-          model_type: 1               # default 0, model type for frustum. 0=depth camera, 1=3d lidar like VLP16 or similar
+          max_z: 0.2 # default 0, meters
+          min_z: 1.0 # default 10, meters
+          vertical_fov_angle: 1.02 # default 0.7, radians. For 3D lidars it's the symmetric FOV about the planar axis.
+          vertical_fov_padding: 0.05 # 3D Lidar only. Default 0, in meters
+          horizontal_fov_angle: 6.29 # 3D lidar scanners like the VLP16 have 360 deg horizontal FOV.
+          decay_acceleration: 5.0 # default 0, 1/s^2.
+          model_type: 1 # default 0, model type for frustum. 0=depth camera, 1=3d lidar like VLP16 or similar
       keepout_filter:
         plugin: "nav2_costmap_2d::KeepoutFilter"
         enabled: True
@@ -287,53 +299,53 @@ global_costmap:
       # robot_radius: 0.50
       # footprint: "[[-0.40,-0.32],[0.70,-0.32],[0.70,0.32],[-0.40,0.32]]"
       footprint: "[[-0.30,-0.32],[0.80,-0.32],[0.80,0.32],[-0.30,0.32]]"
-      resolution: 0.05
+      resolution: 0.1
       track_unknown_space: true
       plugins: ["static_layer", "lidar_obstacle_layer", "inflation_layer"]
       filters: ["keepout_filter"]
       lidar_obstacle_layer:
         plugin: "spatio_temporal_voxel_layer/SpatioTemporalVoxelLayer"
-        enabled:                  true
-        voxel_decay:              1.0  # seconds if linear, e^n if exponential 15
-        decay_model:              0     # 0=linear, 1=exponential, -1=persistent
-        voxel_size:               0.05  # meters
-        track_unknown_space:      true  # default space is known
-        mark_threshold:           0     # voxel height
+        enabled: true
+        voxel_decay: 1.0 # seconds if linear, e^n if exponential 15
+        decay_model: 0 # 0=linear, 1=exponential, -1=persistent
+        voxel_size: 0.05 # meters
+        track_unknown_space: true # default space is known
+        mark_threshold: 0 # voxel height
         update_footprint_enabled: true
-        combination_method:       1     # 1=max, 0=override
-        origin_z:                 0.0   # meters
-        publish_voxel_map:        false # default off
-        transform_tolerance:      0.2   # seconds
-        mapping_mode:             false # default off, saves map not for navigation
-        map_save_duration:        60.0  # default 60s, how often to autosave
-        observation_sources:      lidar1_mark lidar1_clear
+        combination_method: 1 # 1=max, 0=override
+        origin_z: 0.0 # meters
+        publish_voxel_map: false # default off
+        transform_tolerance: 0.2 # seconds
+        mapping_mode: false # default off, saves map not for navigation
+        map_save_duration: 60.0 # default 60s, how often to autosave
+        observation_sources: lidar1_mark lidar1_clear
         lidar1_mark:
           data_type: PointCloud2
           topic: /livox/lidar
           marking: true
           clearing: false
-          obstacle_range: 5.0          # meters 3
-          min_obstacle_height: 0.1     # default 0, meters
-          max_obstacle_height: 1.0     # default 3, meters
-          expected_update_rate: 0.0    # default 0, if not updating at this rate at least, remove from buffer
+          obstacle_range: 5.0 # meters 3
+          min_obstacle_height: 0.1 # default 0, meters
+          max_obstacle_height: 1.0 # default 3, meters
+          expected_update_rate: 0.0 # default 0, if not updating at this rate at least, remove from buffer
           observation_persistence: 0.0 # default 0, use all measurements taken during now-value, 0=latest
-          inf_is_valid: false          # default false, for laser scans
-          filter: "voxel"        # default passthrough, apply "voxel", "passthrough", or no filter to sensor data, recommend on     voxel_min_points: 0          # default 0, minimum points per voxel for voxel filter
-          
-          clear_after_reading: true    # default false, clear the buffer after the layer gets readings from it
+          inf_is_valid: false # default false, for laser scans
+          filter: "voxel" # default passthrough, apply "voxel", "passthrough", or no filter to sensor data, recommend on     voxel_min_points: 0          # default 0, minimum points per voxel for voxel filter
+
+          clear_after_reading: true # default false, clear the buffer after the layer gets readings from it
         lidar1_clear:
-          enabled: true                #default true, can be toggled on/off with associated service call
+          enabled: true #default true, can be toggled on/off with associated service call
           data_type: PointCloud2
           topic: /livox/lidar
           marking: false
           clearing: true
-          max_z: 0.5                  # default 0, meters
-          min_z: 5.0                  # default 10, meters
-          vertical_fov_angle: 1.02   # default 0.7, radians. For 3D lidars it's the symmetric FOV about the planar axis.
-          vertical_fov_padding: 0.05    # 3D Lidar only. Default 0, in meters 
-          horizontal_fov_angle: 6.29  # 3D lidar scanners like the VLP16 have 360 deg horizontal FOV.
-          decay_acceleration: 5.0     # default 0, 1/s^2. 
-          model_type: 1               # default 0, model type for frustum. 0=depth camera, 1=3d lidar like VLP16 or similar
+          max_z: 0.5 # default 0, meters
+          min_z: 5.0 # default 10, meters
+          vertical_fov_angle: 1.02 # default 0.7, radians. For 3D lidars it's the symmetric FOV about the planar axis.
+          vertical_fov_padding: 0.05 # 3D Lidar only. Default 0, in meters
+          horizontal_fov_angle: 6.29 # 3D lidar scanners like the VLP16 have 360 deg horizontal FOV.
+          decay_acceleration: 5.0 # default 0, 1/s^2.
+          model_type: 1 # default 0, model type for frustum. 0=depth camera, 1=3d lidar like VLP16 or similar
       keepout_filter:
         plugin: "nav2_costmap_2d::KeepoutFilter"
         enabled: True
@@ -344,7 +356,7 @@ global_costmap:
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         enabled: True
-        cost_scaling_factor: 2.58 #10 
+        cost_scaling_factor: 2.58 #10
         inflation_radius: 1.75 #.55
       always_send_full_costmap: True
   global_costmap_client:
@@ -373,32 +385,32 @@ planner_server:
 
     GridBased:
       plugin: "nav2_smac_planner/SmacPlanner2D"
-      downsample_costmap: false           # whether or not to downsample the map
-      downsampling_factor: 1              # multiplier for the resolution of the costmap layer (e.g. 2 on a 5cm costmap would be 10cm)
+      downsample_costmap: false # whether or not to downsample the map
+      downsampling_factor: 1 # multiplier for the resolution of the costmap layer (e.g. 2 on a 5cm costmap would be 10cm)
       tolerance: 0.75 #5                 # dist-to-goal heuristic cost (distance) for valid tolerance endpoints if exact goal cannot be found.
-      allow_unknown: false           # allow traveling in unknown space
-      max_iterations: 1000000             # maximum total iterations to search for before failing (in case unreachable), set to -1 to disable
-      max_on_approach_iterations: 1000    # Maximum number of iterations after within tolerances to continue to try to find exact solution
-      max_planning_time: 5.0              # max time in s for planner to plan, smooth
-      motion_model_for_search: "DUBIN"    # Hybrid-A* Dubin, Redds-Shepp
-      angle_quantization_bins: 72         # Number of angle bins for search
-      analytic_expansion_ratio: 3.5       # The ratio to attempt analytic expansions during search for final approach.
-      analytic_expansion_max_length: 6.0  # For Hybrid/Lattice nodes: The maximum length of the analytic expansion to be considered valid to prevent unsafe shortcutting
-      analytic_expansion_max_cost: 200.0  # The maximum single cost for any part of an analytic expansion to contain and be valid, except when necessary on approach to goal
-      analytic_expansion_max_cost_override: false  #  Whether or not to override the maximum cost setting if within critical distance to goal (ie probably required)
-      minimum_turning_radius: 0.4        # minimum turning radius in m of path / vehicle
+      allow_unknown: false # allow traveling in unknown space
+      max_iterations: 1000000 # maximum total iterations to search for before failing (in case unreachable), set to -1 to disable
+      max_on_approach_iterations: 1000 # Maximum number of iterations after within tolerances to continue to try to find exact solution
+      max_planning_time: 5.0 # max time in s for planner to plan, smooth
+      motion_model_for_search: "DUBIN" # Hybrid-A* Dubin, Redds-Shepp
+      angle_quantization_bins: 72 # Number of angle bins for search
+      analytic_expansion_ratio: 3.5 # The ratio to attempt analytic expansions during search for final approach.
+      analytic_expansion_max_length: 6.0 # For Hybrid/Lattice nodes: The maximum length of the analytic expansion to be considered valid to prevent unsafe shortcutting
+      analytic_expansion_max_cost: 200.0 # The maximum single cost for any part of an analytic expansion to contain and be valid, except when necessary on approach to goal
+      analytic_expansion_max_cost_override: false #  Whether or not to override the maximum cost setting if within critical distance to goal (ie probably required)
+      minimum_turning_radius: 0.4 # minimum turning radius in m of path / vehicle
       reverse_penalty: 1.0 #1.3                # Penalty to apply if motion is reversing, must be => 1
-      change_penalty: 0.0                 # Penalty to apply if motion is changing directions (L to R), must be >= 0
+      change_penalty: 0.0 # Penalty to apply if motion is changing directions (L to R), must be >= 0
       non_straight_penalty: 1.0 #1.3           # Penalty to apply if motion is non-straight, must be => 1
       cost_penalty: 6.0 #2 #6                   # Penalty to apply to higher cost areas when adding into the obstacle map dynamic programming distance expansion heuristic. This drives the robot more towards the center of passages. A value between 1.3 - 3.5 is reasonable.
       retrospective_penalty: 0.015
-      lookup_table_size: 20.0             # Size of the dubin/reeds-sheep distance window to cache, in meters.
-      cache_obstacle_heuristic: false     # Cache the obstacle map dynamic programming distance expansion heuristic between subsequent replannings of the same goal location. Dramatically speeds up replanning performance (40x) if costmap is largely static.
-      debug_visualizations: false         # For Hybrid nodes: Whether to publish expansions on the /expansions topic as an array of poses (the orientation has no meaning) and the path's footprints on the /planned_footprints topic. WARNING: heavy to compute and to display, for debug only as it degrades the performance.
+      lookup_table_size: 20.0 # Size of the dubin/reeds-sheep distance window to cache, in meters.
+      cache_obstacle_heuristic: false # Cache the obstacle map dynamic programming distance expansion heuristic between subsequent replannings of the same goal location. Dramatically speeds up replanning performance (40x) if costmap is largely static.
+      debug_visualizations: false # For Hybrid nodes: Whether to publish expansions on the /expansions topic as an array of poses (the orientation has no meaning) and the path's footprints on the /planned_footprints topic. WARNING: heavy to compute and to display, for debug only as it degrades the performance.
       use_quadratic_cost_penalty: False
       downsample_obstacle_heuristic: False
       allow_primitive_interpolation: False
-      smooth_path: True                   # If true, does a simple and quick smoothing post-processing to the path
+      smooth_path: True # If true, does a simple and quick smoothing post-processing to the path
 
       smoother:
         max_iterations: 1000
@@ -406,7 +418,7 @@ planner_server:
         w_data: 0.2
         tolerance: 1.0e-10
         do_refinement: true
-        refinement_num: 2       # Whether to recursively run the smoother 3 times on the results from prior runs to refine the results further
+        refinement_num: 2 # Whether to recursively run the smoother 3 times on the results from prior runs to refine the results further
 
 planner_server_rclcpp_node:
   ros__parameters:
