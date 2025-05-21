@@ -10,3 +10,7 @@
 	path = dependencies/livox_ros_driver2
 	url = https://github.com/rtarun1/livox_ros_driver2.git
 	branch = master
+[submodule "dependencies/fast-lio"]
+	path = dependencies/fast-lio
+	url = https://github.com/hku-mars/FAST_LIO.git
+	branch = ROS2
