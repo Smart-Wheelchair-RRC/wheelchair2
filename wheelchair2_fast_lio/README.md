@@ -36,7 +36,7 @@ Next, make sure the submodule is set to the `ros2` branch by editing the [`.gitm
 [submodule "dependencies/FAST_LIO_ROS2"]
 	path = dependencies/FAST_LIO_ROS2
 	url = https://github.com/Ericsii/FAST_LIO_ROS2.git
-    branch = ros2
+	branch = ros2
 ```
 
 Make sure to run the following command to initialize the submodule (**you must do this**):
