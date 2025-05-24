@@ -1,6 +1,6 @@
 # FAST-LIO package for Wheelchair2
 
-This a ROS2 implementation of the FAST-LIO algorithm for the Wheelchair2 robot. Odometry information and relevant frames are published by the `fastlio_mapping` , and you should consult the docs of the `FAST_LIO_ROS2` package for more details on this.
+This a ROS2 implementation of the FAST-LIO algorithm for the Wheelchair2 robot. Odometry information and relevant frames are published by the `fastlio_mapping`, and you should consult the docs of the `FAST_LIO_ROS2` package for more details on this.
 
 Original paper on FAST-LIO:
 
@@ -30,7 +30,7 @@ The recommended way to do this is to add this to your repository dependencies as
 git submodule add https://github.com/Ericsii/FAST_LIO_ROS2.git dependencies/FAST_LIO_ROS2
 ```
 
-Next, make sure the submodule is set to the `ros2` branch by editing the [`.gitmodules`](.gitmodules) file in the root of your repository (thi is also done for you in the Wheelchair2 repository):
+Next, make sure the submodule is set to the `ros2` branch by editing the [`.gitmodules`](.gitmodules) file in the root of your repository (this is also done for you in the Wheelchair2 repository):
 
 ```ini
 [submodule "dependencies/FAST_LIO_ROS2"]
@@ -114,7 +114,7 @@ as 0.0
              timestamp_unit: 3
 ```
 
-Explanation of the parameters:
+Explanation of the changes:
 - `lid_topic`: The topic name for the lidar data. We set it to `/livox/lidar_inverted` because we are inverting the data in the `invert_livox_data` node.
 - `imu_topic`: The topic name for the IMU data. We set it to `/livox/imu_inverted` because we are inverting the data in the `invert_livox_data` node.
 - `lidar_type`: The type of lidar being used. We set it to `4` because we want to use PointCloud2 message as input. The default of `1` uses the custom `livox` message type, which is not considered a standard ROS message type.

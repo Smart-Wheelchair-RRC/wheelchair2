@@ -13,3 +13,4 @@
 [submodule "dependencies/FAST_LIO_ROS2"]
 	path = dependencies/FAST_LIO_ROS2
 	url = https://github.com/Ericsii/FAST_LIO_ROS2.git
+	branch = ros2
