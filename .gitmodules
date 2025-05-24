@@ -12,4 +12,4 @@
 	branch = master
 [submodule "dependencies/FAST_LIO_ROS2"]
 	path = dependencies/FAST_LIO_ROS2
-	url = https://github.com/eccentricOrange/FAST_LIO_ROS2.git
+	url = https://github.com/Ericsii/FAST_LIO_ROS2.git

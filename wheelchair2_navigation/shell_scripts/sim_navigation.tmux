@@ -26,15 +26,23 @@ tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2.launch.py 
 # tmux new-window -t $SESSION -n 'keepout'
 # tmux send-keys -t $SESSION:3 'ros2 launch wheelchair2_navigation keepout.launch.py' C-m
 
-# Window 3: FAST-LIO
-tmux new-window -t $SESSION -n 'fast_lio'
-tmux send-keys -t $SESSION:3 'ros2 launch fast_lio mapping.launch.py use_sim_time:=true config_file:=mid360.yaml rviz:=false config_path:=/home/wheelchair2/wheelchair2/src/dependencies/FAST_LIO_ROS2/config' C-m
-
 sleep 5
+
+# # Window 3: FAST LIO
+tmux new-window -t $SESSION -n 'fast_lio'
+tmux send-keys -t $SESSION:3 "ros2 launch wheelchair2_fast_lio odometry.launch.py use_sim_time:=true fast_lio_rviz_required:=true" C-m
+
+# # # Window 3: TF2 Publisher
+# tmux new-window -t $SESSION -n 'tf2'
+# tmux send-keys -t $SESSION:3 'ros2 run tf2_ros static_transform_publisher 0 0 0 0 0 0 1 map camera_init' C-m
 
 # Window 4: Keyboard Teleop
 tmux new-window -t $SESSION -n 'teleop'
 tmux send-keys -t $SESSION:4 'ros2 run wheelchair2_control keyboard_teleop_constant.py' C-m
+
+# # Window 5: FAST-LIO
+# tmux new-window -t $SESSION -n 'fast_lio'
+# tmux send-keys -t $SESSION:5 'ros2 launch fast_lio mapping.launch.py use_sim_time:=true config_file:=mid360.yaml rviz:=true config_path:=/home/wheelchair2/wheelchair2/src/dependencies/FAST_LIO_ROS2/config' C-m
 
 # Attach to session
 tmux attach -t $SESSION
