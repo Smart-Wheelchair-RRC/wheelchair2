@@ -30,7 +30,7 @@ The recommended way to do this is to add this to your repository dependencies as
 git submodule add https://github.com/Ericsii/FAST_LIO_ROS2.git dependencies/FAST_LIO_ROS2
 ```
 
-Next, make sure the submodule is set to the `ros2` branch by editing the [`.gitmodules`](.gitmodules) file in the root of your repository (this is also done for you in the Wheelchair2 repository):
+Next, make sure the submodule is set to the `ros2` branch by editing the [`.gitmodules`](/.gitmodules) file in the root of your repository (this is also done for you in the Wheelchair2 repository):
 
 ```ini
 [submodule "dependencies/FAST_LIO_ROS2"]
