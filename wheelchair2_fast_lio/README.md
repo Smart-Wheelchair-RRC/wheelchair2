@@ -85,7 +85,7 @@ The following parameters are available in the launch file:
 | `fast_lio_config_path` | `str` (path) | `wheelchair2_fast_lio/config` | Path to the `fast_lio` config file directory |
 | `use_sim_time` | `bool` | `false` | Whether to use simulation time |
 | `fast_lio_rviz_required` | `bool` | `false` | Whether to launch RViz with `fast_lio` |
-| `fast_lio_rviz_config_file` | `str` (path) | `fast_lio/rviz/fastlio.rviz` | Path to the RViz config file |
+| `fast_lio_rviz_config_file` | `str` (path) | `FAST_LIO_ROS2/rviz/fastlio.rviz` | Path to the RViz config file |
 
 ## The `FAST_LIO_ROS2` config file
 We've copied the `fast_lio_mid360.yaml` file from the `FAST_LIO_ROS2` package to the `wheelchair2_fast_lio/config` directory, but changed some parameters, shown here as a diff and explained below:
