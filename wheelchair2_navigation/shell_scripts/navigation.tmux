@@ -46,9 +46,9 @@ tmux send-keys -t $SESSION:2 'ros2 launch wheelchair2_navigation nav2.launch.py 
 
 sleep 5
 
-# # Window 3: Teleop
-# tmux new-window -t $SESSION -n 'teleop'
-# tmux send-keys -t $SESSION:3 'ros2 run wheelchair2_control keyboard_teleop_constant.py' C-m
+# Window 3: Teleop
+tmux new-window -t $SESSION -n 'teleop'
+tmux send-keys -t $SESSION:3 'ros2 run wheelchair2_control keyboard_teleop_constant.py' C-m
 
 # Optional: RViz
 # tmux new-window -t $SESSION -n 'rviz'
@@ -56,7 +56,7 @@ sleep 5
 
 # Window 5: FAST-LIO
 tmux new-window -t $SESSION -n 'fast_lio'
-tmux send-keys -t $SESSION:3 'ros2 launch wheelchair2_fast_lio odometry.launch.py use_sim_time:=false fast_lio_rviz_required:=true' C-m
+tmux send-keys -t $SESSION:4 'ros2 launch wheelchair2_fast_lio odometry.launch.py use_sim_time:=false fast_lio_rviz_required:=true init_frame_tf_required:=true' C-m
 
 # Attach to session
 tmux attach -t $SESSION

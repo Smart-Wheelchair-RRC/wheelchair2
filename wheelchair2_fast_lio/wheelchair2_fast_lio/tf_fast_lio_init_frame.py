@@ -25,7 +25,7 @@ class TfFastLioInitFrame(Node):
 
         t.header.stamp = self.get_clock().now().to_msg()
         t.child_frame_id = transformation[1]
-        t.header.frame_id = 'map'
+        t.header.frame_id = 'odom'
         t.child_frame_id = 'camera_init'
         t.transform.translation.x = 0.0
         t.transform.translation.y = 0.0

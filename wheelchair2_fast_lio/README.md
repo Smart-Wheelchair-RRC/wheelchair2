@@ -56,7 +56,7 @@ colcon build --symlink-install
 | Node | Description |
 | --- | --- |
 | `invert_livox_data` | Inverts the lidar and IMU data from the `livox` driver. |
-| `tf_fast_lio_init_frame` | Publishes the tf from `map` to `camera_init`. |
+| `tf_fast_lio_init_frame` | Publishes the tf from `odom` to `camera_init`. |
 | `fastlio_mapping` (from the `FAST_LIO_ROS2` package) | The main FAST-LIO node that performs the odometry. |
 
 ## Usage
@@ -69,7 +69,7 @@ ros2 launch wheelchair2_fast_lio odometry.launch.py
 
 ### Sequence of launching nodes
 1. `invert_livox_data`: This node inverts the lidar and IMU data from the `livox` driver. It is launched first to ensure that the data is inverted before being passed to the FAST-LIO node.
-2. `tf_fast_lio_init_frame`: This node publishes the tf from `map` to `camera_init`. It is launched after the `invert_livox_data` node to ensure that the tf is published after the data is inverted.
+2. `tf_fast_lio_init_frame`: This node publishes the tf from `odom` to `camera_init`. It is launched after the `invert_livox_data` node to ensure that the tf is published after the data is inverted.
 3. `fastlio_mapping`: This is the main FAST-LIO node that performs the odometry. It is launched after the `invert_livox_data` and `tf_fast_lio_init_frame` nodes to ensure that it has access to the inverted data and the tf.
 4. `rviz2`: This node launches RViz with the specified config file. It is launched last to ensure that all the other nodes are running before launching RViz.
 
@@ -80,7 +80,7 @@ The following parameters are available in the launch file:
 | Parameter | Expected Type | Default Value | Description |
 | --- | --- | --- | --- |
 | `lidar_inverted` | `bool` | `true` | Whether to invert the lidar data |
-| `init_frame_tf_required` | `bool` | `true` | Whether to publish tf from `map` to `camera_init` |
+| `init_frame_tf_required` | `bool` | `true` | Whether to publish tf from `odom` to `camera_init` |
 | `fast_lio_config` | `str` (file name, not path) | `fast_lio_mid360.yaml` | Name of the `fast_lio` config file |
 | `fast_lio_config_path` | `str` (path) | `wheelchair2_fast_lio/config` | Path to the `fast_lio` config file directory |
 | `use_sim_time` | `bool` | `false` | Whether to use simulation time |
