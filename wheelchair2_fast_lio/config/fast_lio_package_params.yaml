@@ -1,0 +1,31 @@
+# Configuration parameters for wheelchair2_fast_lio package
+
+lidar:
+    inverted: true
+
+tf:
+    init_frame_required: true
+
+fast_lio:
+    config_file: "fast_lio_mapping_mid360.yaml" # name of the config file
+    config_path: "" # use default path (wheelchair2_fast_lio/config)
+    rviz:
+        required: false
+        config_file: "" # use default config file (dependencies/FAST_LIO_ROS2/rviz/fastlio.rviz)
+
+use_sim_time: false
+
+localization:
+    enabled: true
+
+    # IRL map
+    # pcd_map_path: "$MAP_DIR/rrc/rrc_lab.pcd"
+
+    # simulation map
+    # pcd_map_path: "$MAP_DIR/sim/obstacles_world.pcd"
+
+topics:
+    lidar_cloud: "/livox/lidar"
+    fast_lio_odom: "/Odometry"
+    initialpose: "/initialpose"
+    localization_pose: "/localization_pose"

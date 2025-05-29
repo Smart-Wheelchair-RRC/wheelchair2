@@ -1,6 +1,6 @@
 """
 TF broadcaster for the initial camera frame in Fast LIO.
-- publishes a static transform from `map` to `camera_init`
+- publishes a static transform from `odom` to `camera_init`
 - the transform is set to identity (0 translation, 0 rotation)
 """
 

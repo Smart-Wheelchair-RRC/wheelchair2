@@ -32,7 +32,8 @@ setup(
     entry_points={
         'console_scripts': [
             'tf_fast_lio_init_frame = wheelchair2_fast_lio.tf_fast_lio_init_frame:main',
-            'invert_livox_data = wheelchair2_fast_lio.invert_livox_data:main'
+            'invert_livox_data = wheelchair2_fast_lio.invert_livox_data:main',
+            'localization = wheelchair2_fast_lio.localization:main',
         ],
     },
 )
