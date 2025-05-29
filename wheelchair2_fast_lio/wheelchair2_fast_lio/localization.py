@@ -211,7 +211,6 @@ class FASTLIOLocalizationNode(Node):
         pose_stamped_msg.pose.orientation.w = final_rotation[3]
 
         self.pub_localization.publish(pose_stamped_msg)
-        self.get_logger().info("Published localization pose.")
 
 
 def main(args=None):
