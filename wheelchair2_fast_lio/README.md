@@ -92,6 +92,9 @@ The following parameters are available in the launch file:
 | `fast_lio_rviz_config_file` | `str` (file path) | `dependencies/FAST_LIO_ROS2/rviz/fastlio.rviz` | Path to the RViz config file |
 | `use_localization` | `bool` | `true` | Whether to use localization mode |
 | `pcd_map_path` | `str` (file path) | `you-super-accurate-map.pcd` | Path to the PCD map file |
+| `publish_3d_map` | `bool` | `false` | Whether to publish the 3D map for visualization |
+| `use_map_cropping` | `bool` | `true` | Whether to crop the map to a specified distance from robot |
+| `map_crop_distance` | `float` | `20.0` | The radius in meters for map cropping |
 | `lidar_cloud_topic` | `str` (topic) | `/livox/lidar` | Topic for the LiDAR point cloud data |
 | `fast_lio_odom_topic` | `str` (topic) | `/Odometry` | Topic for the FAST-LIO odometry data |
 | `initialpose_topic` | `str` (topic) | `/initialpose` | Topic for the initial pose estimate |
@@ -161,6 +164,11 @@ localization:
 
     # simulation map
     # pcd_map_path: "$MAP_DIR/sim/obstacles_world.pcd"
+    
+    # Parameters from localization.py
+    publish_3d_map: false
+    use_map_cropping: true
+    map_crop_distance: 20.0
 
 topics:
     lidar_cloud: "/livox/lidar"

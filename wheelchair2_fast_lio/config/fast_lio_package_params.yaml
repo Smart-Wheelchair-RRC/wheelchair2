@@ -23,6 +23,11 @@ localization:
 
     # simulation map
     # pcd_map_path: "$MAP_DIR/sim/obstacles_world.pcd"
+    
+    # Parameters from localization.py
+    publish_3d_map: false
+    use_map_cropping: true
+    map_crop_distance: 20.0
 
 topics:
     lidar_cloud: "/livox/lidar"
