@@ -34,6 +34,11 @@ def load_yaml_parameters():
         'fast_lio_rviz_config_file': str(Path(get_package_share_directory('fast_lio')) / 'rviz' / 'fastlio.rviz'),
         'use_localization': 'true',
         'pcd_map_path': 'you-super-accurate-map.pcd',
+        'publish_3d_map': 'false',
+        'use_map_cropping': 'true',
+        'map_crop_distance': '20.0',
+        'icp_threshold': '0.8',
+        'icp_max_iterations': '50',
         'lidar_cloud_topic': '/livox/lidar',
         'fast_lio_odom_topic': '/Odometry',
         'initialpose_topic': '/initialpose',
@@ -47,41 +52,73 @@ def load_yaml_parameters():
             
             # Convert YAML parameters to flat dictionary with default string values
             if yaml_params:
-                if 'lidar' in yaml_params and 'inverted' in yaml_params['lidar']:
-                    param_defaults['lidar_inverted'] = str(yaml_params['lidar']['inverted']).lower()
-                
-                if 'tf' in yaml_params and 'init_frame_required' in yaml_params['tf']:
-                    param_defaults['init_frame_tf_required'] = str(yaml_params['tf']['init_frame_required']).lower()
-                
-                if 'fast_lio' in yaml_params:
-                    if 'config_file' in yaml_params['fast_lio']:
-                        param_defaults['fast_lio_config'] = yaml_params['fast_lio']['config_file']
-                    if 'config_path' in yaml_params['fast_lio'] and yaml_params['fast_lio']['config_path']:
-                        param_defaults['fast_lio_config_path'] = yaml_params['fast_lio']['config_path']
-                    if 'rviz' in yaml_params['fast_lio']:
-                        if 'required' in yaml_params['fast_lio']['rviz']:
-                            param_defaults['fast_lio_rviz_required'] = str(yaml_params['fast_lio']['rviz']['required']).lower()
-                        if 'config_file' in yaml_params['fast_lio']['rviz'] and yaml_params['fast_lio']['rviz']['config_file']:
-                            param_defaults['fast_lio_rviz_config_file'] = yaml_params['fast_lio']['rviz']['config_file']
-                
+                # Use sim time
                 if 'use_sim_time' in yaml_params:
                     param_defaults['use_sim_time'] = str(yaml_params['use_sim_time']).lower()
                 
-                if 'localization' in yaml_params:
-                    if 'enabled' in yaml_params['localization']:
-                        param_defaults['use_localization'] = str(yaml_params['localization']['enabled']).lower()
-                    if 'pcd_map_path' in yaml_params['localization']:
-                        param_defaults['pcd_map_path'] = yaml_params['localization']['pcd_map_path']
+                # Fast-LIO odometry parameters
+                if 'fast_lio_odometry' in yaml_params:
+                    fast_lio_params = yaml_params['fast_lio_odometry']
+                    
+                    if 'config_file' in fast_lio_params:
+                        param_defaults['fast_lio_config'] = fast_lio_params['config_file']
+                    
+                    if 'config_path' in fast_lio_params and fast_lio_params['config_path']:
+                        param_defaults['fast_lio_config_path'] = fast_lio_params['config_path']
+                    
+                    if 'init_frame_required' in fast_lio_params:
+                        param_defaults['init_frame_tf_required'] = str(fast_lio_params['init_frame_required']).lower()
+                    
+                    if 'lidar_inverted' in fast_lio_params:
+                        param_defaults['lidar_inverted'] = str(fast_lio_params['lidar_inverted']).lower()
+                    
+                    if 'rviz' in fast_lio_params:
+                        if 'required' in fast_lio_params['rviz']:
+                            param_defaults['fast_lio_rviz_required'] = str(fast_lio_params['rviz']['required']).lower()
+                        if 'config_file' in fast_lio_params['rviz'] and fast_lio_params['rviz']['config_file']:
+                            param_defaults['fast_lio_rviz_config_file'] = fast_lio_params['rviz']['config_file']
                 
+                # Localization parameters
+                if 'localization' in yaml_params:
+                    localization_params = yaml_params['localization']
+                    
+                    if 'enabled' in localization_params:
+                        param_defaults['use_localization'] = str(localization_params['enabled']).lower()
+                    
+                    if 'pcd_map_path' in localization_params:
+                        param_defaults['pcd_map_path'] = localization_params['pcd_map_path']
+                    
+                    # Add the new localization parameters
+                    if 'publish_3d_map' in localization_params:
+                        param_defaults['publish_3d_map'] = str(localization_params['publish_3d_map']).lower()
+                    
+                    if 'use_map_cropping' in localization_params:
+                        param_defaults['use_map_cropping'] = str(localization_params['use_map_cropping']).lower()
+                    
+                    if 'map_crop_distance' in localization_params:
+                        param_defaults['map_crop_distance'] = str(localization_params['map_crop_distance'])
+                    
+                    if 'icp_threshold' in localization_params:
+                        param_defaults['icp_threshold'] = str(localization_params['icp_threshold'])
+                    
+                    if 'icp_max_iterations' in localization_params:
+                        param_defaults['icp_max_iterations'] = str(localization_params['icp_max_iterations'])
+                
+                # Topic parameters
                 if 'topics' in yaml_params:
-                    if 'lidar_cloud' in yaml_params['topics']:
-                        param_defaults['lidar_cloud_topic'] = yaml_params['topics']['lidar_cloud']
-                    if 'fast_lio_odom' in yaml_params['topics']:
-                        param_defaults['fast_lio_odom_topic'] = yaml_params['topics']['fast_lio_odom']
-                    if 'initialpose' in yaml_params['topics']:
-                        param_defaults['initialpose_topic'] = yaml_params['topics']['initialpose']
-                    if 'localization_pose' in yaml_params['topics']:
-                        param_defaults['localization_pose_topic'] = yaml_params['topics']['localization_pose']
+                    topics = yaml_params['topics']
+                    
+                    if 'lidar_cloud' in topics:
+                        param_defaults['lidar_cloud_topic'] = topics['lidar_cloud']
+                    
+                    if 'fast_lio_odom' in topics:
+                        param_defaults['fast_lio_odom_topic'] = topics['fast_lio_odom']
+                    
+                    if 'initialpose' in topics:
+                        param_defaults['initialpose_topic'] = topics['initialpose']
+                    
+                    if 'localization_pose' in topics:
+                        param_defaults['localization_pose_topic'] = topics['localization_pose']
     
     return param_defaults
 
@@ -142,9 +179,41 @@ def declare_launch_arguments(param_defaults):
     launch_args.append(DeclareLaunchArgument(
         'pcd_map_path',
         default_value=param_defaults['pcd_map_path'],
-        description='Path to the PCD map directory'
+        description='Path to the PCD map file'
     ))
     
+    # New localization parameters
+    launch_args.append(DeclareLaunchArgument(
+        'publish_3d_map',
+        default_value=param_defaults['publish_3d_map'],
+        description='Whether to publish the 3D map for visualization'
+    ))
+    
+    launch_args.append(DeclareLaunchArgument(
+        'use_map_cropping',
+        default_value=param_defaults['use_map_cropping'],
+        description='Whether to crop the map to a specified distance from robot'
+    ))
+    
+    launch_args.append(DeclareLaunchArgument(
+        'map_crop_distance',
+        default_value=param_defaults['map_crop_distance'],
+        description='The radius in meters for map cropping'
+    ))
+    
+    launch_args.append(DeclareLaunchArgument(
+        'icp_threshold',
+        default_value=param_defaults['icp_threshold'],
+        description='ICP convergence threshold'
+    ))
+    
+    launch_args.append(DeclareLaunchArgument(
+        'icp_max_iterations',
+        default_value=param_defaults['icp_max_iterations'],
+        description='Maximum number of ICP iterations'
+    ))
+    
+    # Topic parameters
     launch_args.append(DeclareLaunchArgument(
         'lidar_cloud_topic',
         default_value=param_defaults['lidar_cloud_topic'],
@@ -183,6 +252,15 @@ def create_nodes():
     fast_lio_rviz_config_file = LaunchConfiguration('fast_lio_rviz_config_file')
     use_localization = LaunchConfiguration('use_localization')
     pcd_map_path = LaunchConfiguration('pcd_map_path')
+    
+    # New localization parameters
+    publish_3d_map = LaunchConfiguration('publish_3d_map')
+    use_map_cropping = LaunchConfiguration('use_map_cropping')
+    map_crop_distance = LaunchConfiguration('map_crop_distance')
+    icp_threshold = LaunchConfiguration('icp_threshold')
+    icp_max_iterations = LaunchConfiguration('icp_max_iterations')
+    
+    # Topic parameters
     lidar_cloud_topic = LaunchConfiguration('lidar_cloud_topic')
     fast_lio_odom_topic = LaunchConfiguration('fast_lio_odom_topic')
     initialpose_topic = LaunchConfiguration('initialpose_topic')
@@ -220,7 +298,7 @@ def create_nodes():
         ]
     ))
     
-    # Localization node
+    # Localization node with updated parameters
     nodes.append(Node(
         package='wheelchair2_fast_lio',
         executable='localization',
@@ -231,7 +309,12 @@ def create_nodes():
             {'lidar_cloud_topic': lidar_cloud_topic},
             {'fast_lio_odom_topic': fast_lio_odom_topic},
             {'initialpose_topic': initialpose_topic},
-            {'localization_pose_topic': localization_pose_topic}
+            {'localization_pose_topic': localization_pose_topic},
+            {'publish_3d_map': publish_3d_map},
+            {'use_map_cropping': use_map_cropping},
+            {'map_crop_distance': map_crop_distance},
+            {'icp_threshold': icp_threshold},
+            {'icp_max_iterations': icp_max_iterations}
         ],
         condition=launch.conditions.IfCondition(use_localization)
     ))

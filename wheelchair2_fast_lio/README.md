@@ -95,6 +95,8 @@ The following parameters are available in the launch file:
 | `publish_3d_map` | `bool` | `false` | Whether to publish the 3D map for visualization |
 | `use_map_cropping` | `bool` | `true` | Whether to crop the map to a specified distance from robot |
 | `map_crop_distance` | `float` | `20.0` | The radius in meters for map cropping |
+| `icp_threshold` | `float` | `0.8` | ICP convergence threshold for localization |
+| `icp_max_iterations` | `int` | `50` | Maximum number of ICP iterations for localization |
 | `lidar_cloud_topic` | `str` (topic) | `/livox/lidar` | Topic for the LiDAR point cloud data |
 | `fast_lio_odom_topic` | `str` (topic) | `/Odometry` | Topic for the FAST-LIO odometry data |
 | `initialpose_topic` | `str` (topic) | `/initialpose` | Topic for the initial pose estimate |
@@ -141,20 +143,16 @@ Additionally, we've added a `fast_lio_package_params.yaml` file to store paramet
 ```yaml
 # Configuration parameters for wheelchair2_fast_lio package
 
-lidar:
-    inverted: true
+use_sim_time: false
 
-tf:
-    init_frame_required: true
-
-fast_lio:
+fast_lio_odometry:
     config_file: "fast_lio_mapping_mid360.yaml" # name of the config file
     config_path: "" # use default path (wheelchair2_fast_lio/config)
+    init_frame_required: true
+    lidar_inverted: true
     rviz:
         required: false
         config_file: "" # use default config file (dependencies/FAST_LIO_ROS2/rviz/fastlio.rviz)
-
-use_sim_time: false
 
 localization:
     enabled: true
@@ -169,6 +167,9 @@ localization:
     publish_3d_map: false
     use_map_cropping: true
     map_crop_distance: 20.0
+
+    icp_threshold: 0.8
+    icp_max_iterations: 50
 
 topics:
     lidar_cloud: "/livox/lidar"

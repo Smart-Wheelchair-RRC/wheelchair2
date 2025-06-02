@@ -7,7 +7,7 @@ from nav_msgs.msg import Odometry
 from rclpy.node import Node
 from rclpy.qos import (DurabilityPolicy, HistoryPolicy, QoSProfile,
                        ReliabilityPolicy)
-from scipy.spatial.transform import Rotation as R
+from scipy.spatial.transform import Rotation
 from sensor_msgs.msg import PointCloud2
 from sensor_msgs_py import point_cloud2
 from std_msgs.msg import Header
@@ -37,6 +37,10 @@ class FASTLIOLocalizationNode(Node):
         self.fast_lio_odom_topic = '/Odometry'  # Default topic for Fast LIO odometry
         self.initialpose_topic = '/initialpose'  # Default topic for initial pose estimates
         self.localization_pose_topic = '/localization_pose'  # Default topic for publishing localization pose
+        
+        # ICP parameters
+        self.icp_threshold = 0.8  # Default ICP distance threshold
+        self.icp_max_iterations = 200  # Default ICP max iterations
         
         # Setup component parts
         self._setup_parameters()
@@ -75,6 +79,13 @@ class FASTLIOLocalizationNode(Node):
         
         self.declare_parameter('localization_pose_topic', '/localization_pose')
         self.localization_pose_topic = self.get_parameter('localization_pose_topic').get_parameter_value().string_value
+        
+        # ICP parameters
+        self.declare_parameter('icp_threshold', 0.8)
+        self.icp_threshold = self.get_parameter('icp_threshold').get_parameter_value().double_value
+        
+        self.declare_parameter('icp_max_iterations', 200)
+        self.icp_max_iterations = self.get_parameter('icp_max_iterations').get_parameter_value().integer_value
         
         # Map cropping parameters
         self.declare_parameter('use_map_cropping', True)
@@ -194,7 +205,7 @@ class FASTLIOLocalizationNode(Node):
         # extract the pose from the message
         pose = msg.pose.pose
         translation = np.array([pose.position.x, pose.position.y, pose.position.z])
-        rotation = R.from_quat([pose.orientation.x, pose.orientation.y, pose.orientation.z, pose.orientation.w]).as_matrix()
+        rotation = Rotation.from_quat([pose.orientation.x, pose.orientation.y, pose.orientation.z, pose.orientation.w]).as_matrix()
 
         # create the initial pose estimate matrix
         self.initial_pose_estimate = np.identity(4)
@@ -223,9 +234,9 @@ class FASTLIOLocalizationNode(Node):
 
         # sign up ICP
         reg_p2p = o3d.pipelines.registration.registration_icp(
-            source_pcd_down, self.map_pcd, 0.5, self.initial_pose_estimate,
+            source_pcd_down, self.map_pcd, self.icp_threshold, self.initial_pose_estimate,
             o3d.pipelines.registration.TransformationEstimationPointToPlane(),
-            o3d.pipelines.registration.ICPConvergenceCriteria(max_iteration=2000)
+            o3d.pipelines.registration.ICPConvergenceCriteria(max_iteration=self.icp_max_iterations)
         )
 
         self.map_to_odom_transform = reg_p2p.transformation
@@ -243,7 +254,7 @@ class FASTLIOLocalizationNode(Node):
         # Get the transform from the odometry message (odom -> lidar_link)
         odom_pose = self.current_odometry.pose.pose
         translation = np.array([odom_pose.position.x, odom_pose.position.y, odom_pose.position.z])
-        rotation = R.from_quat([odom_pose.orientation.x, odom_pose.orientation.y, odom_pose.orientation.z, odom_pose.orientation.w]).as_matrix()
+        rotation = Rotation.from_quat([odom_pose.orientation.x, odom_pose.orientation.y, odom_pose.orientation.z, odom_pose.orientation.w]).as_matrix()
         odom_to_lidar_transform = np.identity(4)
         odom_to_lidar_transform[:3, :3] = rotation
         odom_to_lidar_transform[:3, 3] = translation
@@ -258,7 +269,7 @@ class FASTLIOLocalizationNode(Node):
         pose_stamped_msg.header.frame_id = "map"  # Assuming the PCD map is in the 'map' frame
 
         final_translation = final_transform[:3, 3]
-        final_rotation = R.from_matrix(final_transform[:3, :3]).as_quat()
+        final_rotation = Rotation.from_matrix(final_transform[:3, :3]).as_quat()
 
         pose_stamped_msg.pose.position.x = final_translation[0]
         pose_stamped_msg.pose.position.y = final_translation[1]
