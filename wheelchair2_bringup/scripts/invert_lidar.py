@@ -1,9 +1,4 @@
-"""
-Livox lidar data inversion node
-- subscribes to /livox/lidar (PointCloud2) and /livox/imu (Imu)
-- publishes to /livox/lidar_inverted (PointCloud2) and /livox/imu_inverted (Imu)
-- inversion is defined as a 180 degrees rotation around the x axis
-"""
+#!/usr/bin/env python3
 
 import rclpy
 from rclpy.node import Node
