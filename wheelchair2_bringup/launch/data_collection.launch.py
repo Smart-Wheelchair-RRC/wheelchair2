@@ -1,10 +1,12 @@
 import os
+import datetime
 from launch import LaunchDescription
 from launch.actions import (
     IncludeLaunchDescription,
     RegisterEventHandler,
     DeclareLaunchArgument,
 )
+from launch.actions import TimerAction
 from ament_index_python.packages import get_package_share_directory
 from launch.event_handlers import OnProcessExit, OnProcessStart
 from launch.launch_description_sources import PythonLaunchDescriptionSource
@@ -39,9 +41,24 @@ def generate_launch_description():
             description='Launch Realsense',
         )
     )
+    launch_arguments.append(
+        DeclareLaunchArgument(
+            'record',
+            default_value='True',
+            description='Record in rosbag'
+        )
+    )
     
     use_sim_time = LaunchConfiguration("use_sim_time")
     use_realsense = LaunchConfiguration("use_realsense")
+    record = LaunchConfiguration("record")
+
+
+    # set log output path
+    get_current_timestamp = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+    log_full_path = os.path.join('/home/wheelchair2/wheelchair2/src/records/', get_current_timestamp)
+    rosbag_full_path = os.path.join(log_full_path, 'rosbag')
+    package_path = get_package_share_directory('wheelchair2_bringup')
 
 
     bringup_launch = IncludeLaunchDescription(
@@ -78,11 +95,37 @@ def generate_launch_description():
         ),
     )
 
+    invert_lidar_node = Node(
+        package='wheelchair2_bringup',
+        executable='invert_lidar.py',
+        name='invert_lidar_node',
+        output='screen'
+    )
+
+    rosbag_recorder_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            [package_path, '/launch/rosbag_recorder.launch.py']
+        ),
+        launch_arguments={
+            'use_sim_time': use_sim_time,
+            'rosbag_storage_dir': rosbag_full_path,
+        }.items(),
+        condition=IfCondition(record),
+    )
+
+    rosbag_with_delay = TimerAction(
+        period=5.0,  # 5 second delay
+        actions=[rosbag_recorder_launch],
+        condition=IfCondition(record),
+    )
+
     nodes =[
         bringup_launch,
         realsense_launch,
         livox_launch,
-        pointcloud_to_laserscan_launch
+        pointcloud_to_laserscan_launch,
+        invert_lidar_node,
+        rosbag_with_delay,
     ]
 
     return LaunchDescription(launch_arguments + nodes)
