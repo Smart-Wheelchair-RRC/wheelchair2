@@ -9,7 +9,7 @@ tmux new-session -d -s $SESSION
 tmux rename-window -t $SESSION:0 'bringup'
 # tmux send-keys -t $SESSION:0 'sudo chmod 777 /dev/ttyACM0' C-m
 # tmux send-keys -t $SESSION:0 'sleep 2' C-m
-tmux send-keys -t $SESSION:0 'ros2 launch wheelchair2_bringup wheelchair2.launch.py use_sim_time:=False' C-m
+tmux send-keys -t $SESSION:0 'sudo chmod 777 /dev/ttyACM0 && ros2 launch wheelchair2_bringup wheelchair2.launch.py use_sim_time:=False' C-m
 
 # Wait a bit before launching next nodes
 sleep 5
@@ -36,7 +36,7 @@ sleep 5
 
 # Window 2: Nav2
 tmux new-window -t $SESSION -n 'nav2'
-tmux send-keys -t $SESSION:2 'ros2 launch wheelchair2_navigation nav2.launch.py use_sim_time:=False map:=$MAP_DIR/rrc/himalaya_with_classroom.yaml' C-m
+tmux send-keys -t $SESSION:2 'ros2 launch wheelchair2_navigation nav2.launch.py use_sim_time:=False map:=$MAP_DIR/rrc/rrc_lab.yaml' C-m
 
 # Window 3: Teleop
 tmux new-window -t $SESSION -n 'teleop'
