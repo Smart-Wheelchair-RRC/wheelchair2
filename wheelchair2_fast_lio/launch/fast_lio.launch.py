@@ -8,13 +8,14 @@ Launch file for the wheelchair2 fast_lio odometry package.
 
 from pathlib import Path
 
+import launch
 import yaml
 from ament_index_python.packages import get_package_share_directory
-from launch_ros.actions import Node
-
-import launch
-from launch.actions import DeclareLaunchArgument
+from launch.actions import (DeclareLaunchArgument, GroupAction,
+                            IncludeLaunchDescription)
+from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
+from launch_ros.actions import Node
 
 
 def load_yaml_parameters():
@@ -43,6 +44,15 @@ def load_yaml_parameters():
         'fast_lio_odom_topic': '/Odometry',
         'initialpose_topic': '/initialpose',
         'localization_pose_topic': '/localization_pose',
+        'odom_frame_id': 'odom',
+        'initial_frame_id': 'camera_init',
+        'loc_broadcast_tf': 'true',
+        'loc_global_frame': 'map',
+        'navigation_mode': 'true',
+        'nav2_params_file': str(Path(get_package_share_directory('wheelchair2_navigation')) / 'config' / 'nav2_params.yaml'),
+        'map_file_path': str(Path(get_package_share_directory('wheelchair2_navigation')) / 'maps' / 'rrc' / 'rrc_lab.yaml'),
+        'nav2_rviz_config_file': str(Path(get_package_share_directory('wheelchair2_navigation')) / 'rviz' / 'navigation.rviz'),
+        'nav2_rviz_required': 'false',
     }
 
     # Try to load parameters from YAML file if available
@@ -72,6 +82,12 @@ def load_yaml_parameters():
                     if 'lidar_inverted' in fast_lio_params:
                         param_defaults['lidar_inverted'] = str(fast_lio_params['lidar_inverted']).lower()
                     
+                    if 'odom_frame_id' in fast_lio_params: # Shared odom frame
+                        param_defaults['odom_frame_id'] = fast_lio_params['odom_frame_id']
+                    
+                    if 'initial_frame_id' in fast_lio_params: # For TF node
+                        param_defaults['initial_frame_id'] = fast_lio_params['initial_frame_id']
+
                     if 'rviz' in fast_lio_params:
                         if 'required' in fast_lio_params['rviz']:
                             param_defaults['fast_lio_rviz_required'] = str(fast_lio_params['rviz']['required']).lower()
@@ -104,6 +120,20 @@ def load_yaml_parameters():
                     if 'icp_max_iterations' in localization_params:
                         param_defaults['icp_max_iterations'] = str(localization_params['icp_max_iterations'])
                 
+                    # Localization specific TF parameters
+                    if 'broadcast_tf' in localization_params:
+                        param_defaults['loc_broadcast_tf'] = str(localization_params['broadcast_tf']).lower()
+                    
+                    if 'global_frame' in localization_params:
+                        param_defaults['loc_global_frame'] = localization_params['global_frame']
+                    
+                    # If localization.odom_frame_id is present in YAML and differs, 
+                    # it will be overridden by fast_lio_odometry.odom_frame_id
+                    # to ensure sharing, as per current logic.
+                    # If it's critical for localization to have a *different* odom_frame_id,
+                    # then the sharing logic needs to be revisited.
+                    # For now, we assume they share the same odom_frame_id.
+
                 # Topic parameters
                 if 'topics' in yaml_params:
                     topics = yaml_params['topics']
@@ -119,6 +149,25 @@ def load_yaml_parameters():
                     
                     if 'localization_pose' in topics:
                         param_defaults['localization_pose_topic'] = topics['localization_pose']
+
+                # Nav2 parameters
+                if 'nav2' in yaml_params:
+                    nav2_params = yaml_params['nav2']
+
+                    if 'navigation_mode' in nav2_params:
+                        param_defaults['navigation_mode'] = str(nav2_params['navigation_mode']).lower()
+                    
+                    if 'params_file' in nav2_params:
+                        param_defaults['nav2_params_file'] = nav2_params['params_file']
+                    
+                    if 'map_file_path' in nav2_params:
+                        param_defaults['map_file_path'] = nav2_params['map_file_path']
+                    
+                    if 'rviz_config_file' in nav2_params:
+                        param_defaults['nav2_rviz_config_file'] = nav2_params['rviz_config_file']
+
+                    if 'rviz_required' in nav2_params:
+                        param_defaults['nav2_rviz_required'] = str(nav2_params['rviz_required']).lower()
     
     return param_defaults
 
@@ -237,7 +286,64 @@ def declare_launch_arguments(param_defaults):
         default_value=param_defaults['localization_pose_topic'],
         description='Topic for the localization pose output'
     ))
+
+    # Shared odom_frame_id for both localization and tf_init_frame node
+    launch_args.append(DeclareLaunchArgument(
+        'odom_frame_id',
+        default_value=param_defaults['odom_frame_id'],
+        description='Shared odometry frame ID for TF and localization nodes'
+    ))
+
+    # Frame ID for the initial camera pose (for tf_fast_lio_init_frame node)
+    launch_args.append(DeclareLaunchArgument(
+        'initial_frame_id',
+        default_value=param_defaults['initial_frame_id'],
+        description='Initial camera frame ID for tf_fast_lio_init_frame node'
+    ))
     
+    # TF parameters for localization node
+    launch_args.append(DeclareLaunchArgument(
+        'loc_broadcast_tf',
+        default_value=param_defaults['loc_broadcast_tf'],
+        description='Whether localization node broadcasts map to odom TF'
+    ))
+    launch_args.append(DeclareLaunchArgument(
+        'loc_global_frame',
+        default_value=param_defaults['loc_global_frame'],
+        description='Global frame ID for localization node (e.g., map)'
+    ))
+
+    # Nav2 parameters
+    launch_args.append(DeclareLaunchArgument(
+        'navigation_mode',
+        default_value=param_defaults['navigation_mode'],
+        description='Whether to enable navigation mode with Nav2'
+    ))
+
+    launch_args.append(DeclareLaunchArgument(
+        'nav2_params_file',
+        default_value=str(Path(get_package_share_directory('wheelchair2_navigation')) / 'config' / 'nav2_params.yaml'),
+        description='Path to the Nav2 parameters file'
+    ))
+
+    launch_args.append(DeclareLaunchArgument(
+        'map_file_path',
+        default_value=str(Path(get_package_share_directory('wheelchair2_navigation')) / 'maps' / 'rrc' / 'rrc_lab.yaml'),
+        description='Path to the map file for Nav2'
+    ))
+
+    launch_args.append(DeclareLaunchArgument(
+        'nav2_rviz_config_file',
+        default_value=str(Path(get_package_share_directory('wheelchair2_navigation')) / 'rviz' / 'navigation.rviz'),
+        description='Path to the RViz config file for Nav2'
+    ))
+    
+    launch_args.append(DeclareLaunchArgument(
+        'nav2_rviz_required',
+        default_value='false',
+        description='Whether to launch RViz for Nav2 visualization'
+    ))
+
     return launch_args
 
 def create_nodes():
@@ -265,9 +371,24 @@ def create_nodes():
     fast_lio_odom_topic = LaunchConfiguration('fast_lio_odom_topic')
     initialpose_topic = LaunchConfiguration('initialpose_topic')
     localization_pose_topic = LaunchConfiguration('localization_pose_topic')
+
+    # Shared and specific frame LaunchConfigurations
+    odom_frame_id = LaunchConfiguration('odom_frame_id') # Shared
+    initial_frame_id = LaunchConfiguration('initial_frame_id') # For TF node
+    loc_broadcast_tf = LaunchConfiguration('loc_broadcast_tf') # For localization node
+    loc_global_frame = LaunchConfiguration('loc_global_frame') # For localization node
+
+    # Nav2 parameters
+    navigation_mode = LaunchConfiguration('navigation_mode')
+    nav2_parameters_file = LaunchConfiguration('nav2_params_file')
+    map_file_path = LaunchConfiguration('map_file_path')
+    nav2_rviz_config_file = LaunchConfiguration('nav2_rviz_config_file')
+    nav2_rviz_required = LaunchConfiguration('nav2_rviz_required')
+
     
     # Create nodes
     nodes = []
+    group_actions = []
     
     # Invert LiDAR data node
     nodes.append(Node(
@@ -284,6 +405,10 @@ def create_nodes():
         executable='tf_fast_lio_init_frame',
         name='tf_fast_lio_init_frame',
         output='screen',
+        parameters=[
+            {'odom_frame_id': odom_frame_id}, # Use shared odom_frame_id
+            {'initial_frame_id': initial_frame_id}
+        ],
         condition=launch.conditions.IfCondition(init_fram_tf_required)
     ))
     
@@ -314,19 +439,74 @@ def create_nodes():
             {'use_map_cropping': use_map_cropping},
             {'map_crop_distance': map_crop_distance},
             {'icp_threshold': icp_threshold},
-            {'icp_max_iterations': icp_max_iterations}
+            {'icp_max_iterations': icp_max_iterations},
+            # TF parameters for localization node
+            {'broadcast_tf': loc_broadcast_tf},
+            {'global_frame': loc_global_frame},
+            {'odom_frame_id': odom_frame_id} # Use shared odom_frame_id
         ],
         condition=launch.conditions.IfCondition(use_localization)
     ))
-    
-    # RViz node
+
+    # Mapper server node
+    nodes.append(Node(
+        package="nav2_map_server",
+        executable="map_server",
+        output="screen",
+        parameters=[{
+            'use_sim_time': use_sim_time,
+            'yaml_filename': map_file_path,
+            'frame_id': loc_global_frame
+        }],
+        condition=launch.conditions.IfCondition(navigation_mode)
+    ))
+
+    # Mapper server lifecycle manager
+    group_actions.append(Node(
+        package="nav2_lifecycle_manager",
+        executable="lifecycle_manager",
+        name="lifecycle_manager",
+        output="screen",
+        emulate_tty=True,
+        parameters=[{
+            'autostart': True,
+            'node_names': ['mapper_server'],
+            'use_sim_time': use_sim_time
+        }],
+        condition=launch.conditions.IfCondition(navigation_mode)
+    ))
+
+    # Nav2 bringup for navigation
+    group_actions.append(IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            [get_package_share_directory('nav2_bringup'), '/launch', '/navigation_launch.py']
+        ),
+        launch_arguments={
+            "use_sim_time": use_sim_time,
+            "params_file": nav2_parameters_file,
+        }.items(),
+        condition=launch.conditions.IfCondition(navigation_mode)
+    ))
+
+    # RViz node for FAST-LIO visualization
     nodes.append(Node(
         package='rviz2',
         executable='rviz2',
+        name='rviz_fast_lio',
         arguments=['-d', fast_lio_rviz_config_file],
         condition=launch.conditions.IfCondition(fast_lio_rviz_required)
     ))
-    
+
+    # RViz node for nav2 visualization
+    nodes.append(Node(
+        package='rviz2',
+        executable='rviz2',
+        name='rviz_nav2',
+        arguments=['-d', nav2_rviz_config_file],
+        condition=launch.conditions.IfCondition(nav2_rviz_required)
+    ))
+
+    nodes.append(GroupAction(actions=group_actions))
     return nodes
 
 def generate_launch_description():
