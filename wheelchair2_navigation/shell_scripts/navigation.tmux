@@ -7,9 +7,9 @@ tmux new-session -d -s $SESSION
 
 # Window 0: Wheelchair Bringup (with chmod)
 tmux rename-window -t $SESSION:0 'bringup'
-# tmux send-keys -t $SESSION:0 'sudo chmod 777 /dev/ttyACM0' C-m
-# tmux send-keys -t $SESSION:0 'sleep 2' C-m
-tmux send-keys -t $SESSION:0 'sudo chmod 777 /dev/ttyACM0 && ros2 launch wheelchair2_bringup wheelchair2.launch.py use_sim_time:=False' C-m
+sudo chmod 777 /dev/ttyACM0
+sleep 2
+tmux send-keys -t $SESSION:0 'ros2 launch wheelchair2_bringup wheelchair2.launch.py use_sim_time:=False' C-m
 
 # Wait a bit before launching next nodes
 sleep 5
