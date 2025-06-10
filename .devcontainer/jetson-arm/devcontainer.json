@@ -1,9 +1,9 @@
 {
     "name": "Wheelchair2 Development on Jetson",
-    "image": "ghcr.io/smart-wheelchair-rrc/wheelchair2_base_jetson:latest",
+    "image": "ghcr.io/smart-wheelchair-rrc/wheelchair2_base_jetson:v3.0",
     "privileged": true,
-    "workspaceMount": "source=${localWorkspaceFolder},target=/home/wheelchair2/wheelchair2/src,type=bind",
-    "workspaceFolder": "/home/wheelchair2/wheelchair2/src",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/home/container_user/wheelchair2/src,type=bind",
+    "workspaceFolder": "/home/container_user/wheelchair2/src",
     "customizations": {
         "vscode": {
             "settings": {
@@ -14,8 +14,8 @@
                     "commands": [
                         {
                             "name": "Build WS",
-                            "cwd": "/home/wheelchair2/wheelchair2",
-                            "color": "green",
+                            "cwd": "/home/container_user/wheelchair2",
+                            "color": "aqua",
                             "singleInstance": true,
                             "command": "colcon build --symlink-install && source install/setup.bash"
                         }
@@ -36,31 +36,33 @@
                 "streetsidesoftware.code-spell-checker",
                 "twxs.cmake",
                 "yzhang.markdown-all-in-one",
-                "zachflower.uncrustify",
                 "akhail.save-typing"
             ]
         }
     },
     "containerEnv": {
-        "DISPLAY": "${localEnv:DISPLAY}",
+        "DISPLAY": ":1",
         "WAYLAND_DISPLAY": "${localEnv:WAYLAND_DISPLAY}",
         "XDG_RUNTIME_DIR": "${localEnv:XDG_RUNTIME_DIR}",
         "PULSE_SERVER": "${localEnv:PULSE_SERVER}",
         "QT_X11_NO_MITSHM": "1",
-        "LIBGL_ALWAYS_SOFTWARE": "1"
+        "ROS_DOMAIN_ID": "14"
+        // "LIBGL_ALWAYS_SOFTWARE": "1"
     },
     "runArgs": [
-        // "--gpus=all",
-        "--cap-add=SYS_NICE",
-        "--ulimit=rtprio=99",
-        "--ulimit=rttime=-1",
-        "--ulimit=memlock=8428281856",
-        "--cap-add=all",
-        "--security-opt=seccomp:unconfined",
-        "--security-opt=apparmor:unconfined",
-        "--volume=/dev:/dev",
+        "--runtime=nvidia",
+        // "--cap-add=SYS_NICE",
+        // "--ulimit=rtprio=99",
+        // "--ulimit=rttime=-1",
+        // "--ulimit=memlock=8428281856",
+        // "--cap-add=all",
+        // "--security-opt=seccomp:unconfined",
+        // "--security-opt=apparmor:unconfined",
+        "--volume=/dev:/dev/*",
+        "--volume=/tmp/.X11-unix:/tmp/.X11-unix",
         "--net=host",
         "--ipc=host"
-    ],
-    "postStartCommand": "sudo chown -R wheelchair2:wheelchair2 /home/wheelchair2/wheelchair2 /run"
+    ]
+    ,
+    "postStartCommand": "sudo chown -R container_user:container_user /home/container_user/wheelchair2 /run"
 }
