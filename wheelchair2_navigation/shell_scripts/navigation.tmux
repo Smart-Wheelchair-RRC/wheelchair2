@@ -36,19 +36,19 @@ sleep 3
 
 # Window 2: FAST-LIO
 tmux new-window -t $SESSION -n "fast_lio"
-tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_fast_lio fast_lio.launch.py fast_lio_rviz_required:=true pcd_map_path:=$MAP_DIR/rrc/rrc_lab.pcd" C-m
+tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_fast_lio fast_lio.launch.py fast_lio_rviz_required:=true pcd_map_path:=$MAP_DIR/rrc/rrc_lab.pcd nav2_rviz_required:=true" C-m
 
 sleep 3
 
 # Window 3: Nav2
-tmux new-window -t $SESSION -n "nav2"
-tmux send-keys -t $SESSION:3 "ros2 launch wheelchair2_navigation nav2.launch.py use_sim_time:=False map:=$MAP_DIR/rrc/rrc_lab.yaml" C-m
+# tmux new-window -t $SESSION -n "nav2"
+# tmux send-keys -t $SESSION:3 "ros2 launch wheelchair2_navigation nav2.launch.py use_sim_time:=False map:=$MAP_DIR/rrc/rrc_lab.yaml" C-m
 
 sleep 5
 
 # Window 4: Teleop
 tmux new-window -t $SESSION -n "teleop"
-tmux send-keys -t $SESSION:4 "ros2 run wheelchair2_control keyboard_teleop_constant.py" C-m
+tmux send-keys -t $SESSION:3 "ros2 run wheelchair2_control keyboard_teleop_constant.py" C-m
 
 # Optional: RViz
 # tmux new-window -t $SESSION -n "rviz"

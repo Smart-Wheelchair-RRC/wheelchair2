@@ -289,7 +289,6 @@ class FASTLIOLocalizationNode(Node):
         odom_to_lidar_transform[:3, 3] = translation
 
         # Combine transforms: map -> odom -> lidar_link
-        print(odom_to_lidar_transform)
         final_transform = self.map_to_odom_transform @ odom_to_lidar_transform
 
         # Create and publish the PoseStamped message

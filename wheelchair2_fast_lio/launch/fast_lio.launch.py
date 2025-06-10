@@ -20,12 +20,12 @@ from launch_ros.actions import Node
 
 def load_yaml_parameters():
     """Load parameters from YAML file if available."""
-    package_dir = Path(get_package_share_directory('wheelchair2_fast_lio'))
-    config_path = package_dir / 'config'
+    SELF_PACKAGE_DIRECTORY = Path(get_package_share_directory('wheelchair2_fast_lio'))
+    config_path = SELF_PACKAGE_DIRECTORY / 'config'
     yaml_config_path = config_path / 'fast_lio_package_params.yaml'
     
     # Default parameter values
-    param_defaults = {
+    DEFAULT_PARAMATER_VALUES = {
         'lidar_inverted': 'true',
         'init_frame_tf_required': 'true',
         'fast_lio_config': 'fast_lio_mapping_mid360.yaml',
@@ -64,68 +64,68 @@ def load_yaml_parameters():
             if yaml_params:
                 # Use sim time
                 if 'use_sim_time' in yaml_params:
-                    param_defaults['use_sim_time'] = str(yaml_params['use_sim_time']).lower()
+                    DEFAULT_PARAMATER_VALUES['use_sim_time'] = str(yaml_params['use_sim_time']).lower()
                 
                 # Fast-LIO odometry parameters
                 if 'fast_lio_odometry' in yaml_params:
                     fast_lio_params = yaml_params['fast_lio_odometry']
                     
                     if 'config_file' in fast_lio_params:
-                        param_defaults['fast_lio_config'] = fast_lio_params['config_file']
+                        DEFAULT_PARAMATER_VALUES['fast_lio_config'] = fast_lio_params['config_file']
                     
                     if 'config_path' in fast_lio_params and fast_lio_params['config_path']:
-                        param_defaults['fast_lio_config_path'] = fast_lio_params['config_path']
+                        DEFAULT_PARAMATER_VALUES['fast_lio_config_path'] = fast_lio_params['config_path']
                     
                     if 'init_frame_required' in fast_lio_params:
-                        param_defaults['init_frame_tf_required'] = str(fast_lio_params['init_frame_required']).lower()
+                        DEFAULT_PARAMATER_VALUES['init_frame_tf_required'] = str(fast_lio_params['init_frame_required']).lower()
                     
                     if 'lidar_inverted' in fast_lio_params:
-                        param_defaults['lidar_inverted'] = str(fast_lio_params['lidar_inverted']).lower()
+                        DEFAULT_PARAMATER_VALUES['lidar_inverted'] = str(fast_lio_params['lidar_inverted']).lower()
                     
                     if 'odom_frame_id' in fast_lio_params: # Shared odom frame
-                        param_defaults['odom_frame_id'] = fast_lio_params['odom_frame_id']
+                        DEFAULT_PARAMATER_VALUES['odom_frame_id'] = fast_lio_params['odom_frame_id']
                     
                     if 'initial_frame_id' in fast_lio_params: # For TF node
-                        param_defaults['initial_frame_id'] = fast_lio_params['initial_frame_id']
+                        DEFAULT_PARAMATER_VALUES['initial_frame_id'] = fast_lio_params['initial_frame_id']
 
                     if 'rviz' in fast_lio_params:
                         if 'required' in fast_lio_params['rviz']:
-                            param_defaults['fast_lio_rviz_required'] = str(fast_lio_params['rviz']['required']).lower()
+                            DEFAULT_PARAMATER_VALUES['fast_lio_rviz_required'] = str(fast_lio_params['rviz']['required']).lower()
                         if 'config_file' in fast_lio_params['rviz'] and fast_lio_params['rviz']['config_file']:
-                            param_defaults['fast_lio_rviz_config_file'] = fast_lio_params['rviz']['config_file']
+                            DEFAULT_PARAMATER_VALUES['fast_lio_rviz_config_file'] = fast_lio_params['rviz']['config_file']
                 
                 # Localization parameters
                 if 'localization' in yaml_params:
                     localization_params = yaml_params['localization']
                     
                     if 'enabled' in localization_params:
-                        param_defaults['use_localization'] = str(localization_params['enabled']).lower()
+                        DEFAULT_PARAMATER_VALUES['use_localization'] = str(localization_params['enabled']).lower()
                     
                     if 'pcd_map_path' in localization_params:
-                        param_defaults['pcd_map_path'] = localization_params['pcd_map_path']
+                        DEFAULT_PARAMATER_VALUES['pcd_map_path'] = localization_params['pcd_map_path']
                     
                     # Add the new localization parameters
                     if 'publish_3d_map' in localization_params:
-                        param_defaults['publish_3d_map'] = str(localization_params['publish_3d_map']).lower()
+                        DEFAULT_PARAMATER_VALUES['publish_3d_map'] = str(localization_params['publish_3d_map']).lower()
                     
                     if 'use_map_cropping' in localization_params:
-                        param_defaults['use_map_cropping'] = str(localization_params['use_map_cropping']).lower()
+                        DEFAULT_PARAMATER_VALUES['use_map_cropping'] = str(localization_params['use_map_cropping']).lower()
                     
                     if 'map_crop_distance' in localization_params:
-                        param_defaults['map_crop_distance'] = str(localization_params['map_crop_distance'])
+                        DEFAULT_PARAMATER_VALUES['map_crop_distance'] = str(localization_params['map_crop_distance'])
                     
                     if 'icp_threshold' in localization_params:
-                        param_defaults['icp_threshold'] = str(localization_params['icp_threshold'])
+                        DEFAULT_PARAMATER_VALUES['icp_threshold'] = str(localization_params['icp_threshold'])
                     
                     if 'icp_max_iterations' in localization_params:
-                        param_defaults['icp_max_iterations'] = str(localization_params['icp_max_iterations'])
+                        DEFAULT_PARAMATER_VALUES['icp_max_iterations'] = str(localization_params['icp_max_iterations'])
                 
                     # Localization specific TF parameters
                     if 'broadcast_tf' in localization_params:
-                        param_defaults['loc_broadcast_tf'] = str(localization_params['broadcast_tf']).lower()
+                        DEFAULT_PARAMATER_VALUES['loc_broadcast_tf'] = str(localization_params['broadcast_tf']).lower()
                     
                     if 'global_frame' in localization_params:
-                        param_defaults['loc_global_frame'] = localization_params['global_frame']
+                        DEFAULT_PARAMATER_VALUES['loc_global_frame'] = localization_params['global_frame']
                     
                     # If localization.odom_frame_id is present in YAML and differs, 
                     # it will be overridden by fast_lio_odometry.odom_frame_id
@@ -139,37 +139,37 @@ def load_yaml_parameters():
                     topics = yaml_params['topics']
                     
                     if 'lidar_cloud' in topics:
-                        param_defaults['lidar_cloud_topic'] = topics['lidar_cloud']
+                        DEFAULT_PARAMATER_VALUES['lidar_cloud_topic'] = topics['lidar_cloud']
                     
                     if 'fast_lio_odom' in topics:
-                        param_defaults['fast_lio_odom_topic'] = topics['fast_lio_odom']
+                        DEFAULT_PARAMATER_VALUES['fast_lio_odom_topic'] = topics['fast_lio_odom']
                     
                     if 'initialpose' in topics:
-                        param_defaults['initialpose_topic'] = topics['initialpose']
+                        DEFAULT_PARAMATER_VALUES['initialpose_topic'] = topics['initialpose']
                     
                     if 'localization_pose' in topics:
-                        param_defaults['localization_pose_topic'] = topics['localization_pose']
+                        DEFAULT_PARAMATER_VALUES['localization_pose_topic'] = topics['localization_pose']
 
                 # Nav2 parameters
                 if 'nav2' in yaml_params:
                     nav2_params = yaml_params['nav2']
 
                     if 'navigation_mode' in nav2_params:
-                        param_defaults['navigation_mode'] = str(nav2_params['navigation_mode']).lower()
+                        DEFAULT_PARAMATER_VALUES['navigation_mode'] = str(nav2_params['navigation_mode']).lower()
                     
                     if 'params_file' in nav2_params:
-                        param_defaults['nav2_params_file'] = nav2_params['params_file']
+                        DEFAULT_PARAMATER_VALUES['nav2_params_file'] = nav2_params['params_file']
                     
                     if 'map_file_path' in nav2_params:
-                        param_defaults['map_file_path'] = nav2_params['map_file_path']
+                        DEFAULT_PARAMATER_VALUES['map_file_path'] = nav2_params['map_file_path']
                     
                     if 'rviz_config_file' in nav2_params:
-                        param_defaults['nav2_rviz_config_file'] = nav2_params['rviz_config_file']
+                        DEFAULT_PARAMATER_VALUES['nav2_rviz_config_file'] = nav2_params['rviz_config_file']
 
                     if 'rviz_required' in nav2_params:
-                        param_defaults['nav2_rviz_required'] = str(nav2_params['rviz_required']).lower()
+                        DEFAULT_PARAMATER_VALUES['nav2_rviz_required'] = str(nav2_params['rviz_required']).lower()
     
-    return param_defaults
+    return DEFAULT_PARAMATER_VALUES
 
 def declare_launch_arguments(param_defaults):
     """Declare all launch arguments with values from parameters."""
@@ -470,7 +470,7 @@ def create_nodes():
         emulate_tty=True,
         parameters=[{
             'autostart': True,
-            'node_names': ['mapper_server'],
+            'node_names': ['map_server'],
             'use_sim_time': use_sim_time
         }],
         condition=launch.conditions.IfCondition(navigation_mode)

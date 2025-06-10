@@ -43,4 +43,4 @@ nav2:
     nav2_params_file: "" # Path to Nav2 parameters file (if use_nav2 is true)
     map_file_path: ""     # Path to the map file for Nav2 (if use_nav2 is true)
     rviz_config_file: ""  # Path to the RViz config file for Nav2 (if use_nav2 is true)
-    rviz_required: false   # Whether to launch RViz for Nav2 visualization
+    rviz_required: true   # Whether to launch RViz for Nav2 visualization

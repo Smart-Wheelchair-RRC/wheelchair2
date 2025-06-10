@@ -25,8 +25,8 @@ tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_fast_lio fast_lio.launch.p
 sleep 2
 
 # Window 3: Navigation
-tmux new-window -t $SESSION -n "nav2"
-tmux send-keys -t $SESSION:3 "ros2 launch wheelchair2_navigation nav2.launch.py use_sim_time:=true map:=$MAP_DIR/sim/obstacles_world.yaml" C-m
+# tmux new-window -t $SESSION -n "nav2"
+# tmux send-keys -t $SESSION:3 "ros2 launch wheelchair2_navigation nav2.launch.py use_sim_time:=true map:=$MAP_DIR/sim/obstacles_world.yaml" C-m
 
 # (Optional) Window 3: Keepout Zones
 # tmux new-window -t $SESSION -n "keepout"
@@ -36,7 +36,7 @@ sleep 2
 
 # Window 4: Keyboard Teleop
 tmux new-window -t $SESSION -n "teleop"
-tmux send-keys -t $SESSION:4 "ros2 run wheelchair2_control keyboard_teleop_constant.py" C-m
+tmux send-keys -t $SESSION:3 "ros2 run wheelchair2_control keyboard_teleop_constant.py" C-m
 
 # Attach to session
 tmux attach -t $SESSION
