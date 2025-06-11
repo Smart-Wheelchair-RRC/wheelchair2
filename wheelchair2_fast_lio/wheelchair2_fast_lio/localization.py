@@ -40,6 +40,8 @@ class FASTLIOLocalizationNode(Node):
         self.fast_lio_odom_topic = '/Odometry'  # Default topic for Fast LIO odometry
         self.initialpose_topic = '/initialpose'  # Default topic for initial pose estimates
         self.localization_pose_topic = '/localization_pose'  # Default topic for publishing localization pose
+        self.localized_pose_message = PoseStamped()
+        self.localization_publish_period = 1/30  # Default timer period for publishing localization pose
         
         # ICP parameters
         self.icp_threshold = 0.8  # Default ICP distance threshold
@@ -96,6 +98,10 @@ class FASTLIOLocalizationNode(Node):
         
         self.declare_parameter('localization_pose_topic', '/localization_pose')
         self.localization_pose_topic = self.get_parameter('localization_pose_topic').get_parameter_value().string_value
+
+        # Timer period for publishing localization pose
+        self.declare_parameter('localization_publish_period', 1/30.0)  # Default 30 Hz
+        self.localization_publish_period = self.get_parameter('localization_publish_period').get_parameter_value().double_value
         
         # ICP parameters
         self.declare_parameter('icp_threshold', 0.8)
@@ -178,6 +184,11 @@ class FASTLIOLocalizationNode(Node):
                 )
             )
 
+        self.localization_publish_timer = self.create_timer(
+            timer_period_sec=self.localization_publish_period,
+            callback=self.publish_localization_pose
+        )
+
     def load_pcd_map(self):
         """Loads the PCD map from the specified file path."""
         try:
@@ -202,7 +213,7 @@ class FASTLIOLocalizationNode(Node):
                 self.get_logger().info(f"Cropped map to {len(cropped_map_pcd.points)} points within {self.map_crop_distance}m radius")
 
         # downsample the map for faster processing
-        self.map_pcd = cropped_map_pcd.voxel_down_sample(voxel_size=1e-3) if cropped_map_pcd else None
+        self.map_pcd = cropped_map_pcd.voxel_down_sample(voxel_size=0.5) if cropped_map_pcd else None
 
         if self.map_pcd is not None:
             self.get_logger().info(f"Map loaded with {len(self.map_pcd.points)} points after downsampling.")
@@ -258,7 +269,7 @@ class FASTLIOLocalizationNode(Node):
         source_pcd.points = o3d.utility.Vector3dVector(pc_data)
 
         # downsample the point clouds for faster processing
-        source_pcd_down = source_pcd.voxel_down_sample(voxel_size=0.2)
+        source_pcd_down = source_pcd.voxel_down_sample(voxel_size=0.5)
 
         # sign up ICP
         reg_p2p = o3d.pipelines.registration.registration_icp(
@@ -273,9 +284,9 @@ class FASTLIOLocalizationNode(Node):
         self.initial_pose_estimate = reg_p2p.transformation
 
         self._broadcast_map_to_odom_tf()
-        self.publish_localization_pose()
+        self.calculate_localization_pose()
 
-    def publish_localization_pose(self):
+    def calculate_localization_pose(self):
         """Calculates and publishes the robot's pose in the map frame."""
         if self.current_odometry is None:
             return
@@ -292,22 +303,23 @@ class FASTLIOLocalizationNode(Node):
         final_transform = self.map_to_odom_transform @ odom_to_lidar_transform
 
         # Create and publish the PoseStamped message
-        pose_stamped_msg = PoseStamped()
-        pose_stamped_msg.header.stamp = self.get_clock().now().to_msg()
-        pose_stamped_msg.header.frame_id = self.global_frame
+        self.localized_pose_message = PoseStamped()
+        self.localized_pose_message.header.frame_id = self.global_frame
 
         final_translation = final_transform[:3, 3]
         final_rotation = Rotation.from_matrix(final_transform[:3, :3]).as_quat()
 
-        pose_stamped_msg.pose.position.x = final_translation[0]
-        pose_stamped_msg.pose.position.y = final_translation[1]
-        pose_stamped_msg.pose.position.z = final_translation[2]
-        pose_stamped_msg.pose.orientation.x = final_rotation[0]
-        pose_stamped_msg.pose.orientation.y = final_rotation[1]
-        pose_stamped_msg.pose.orientation.z = final_rotation[2]
-        pose_stamped_msg.pose.orientation.w = final_rotation[3]
+        self.localized_pose_message.pose.position.x = final_translation[0]
+        self.localized_pose_message.pose.position.y = final_translation[1]
+        self.localized_pose_message.pose.position.z = final_translation[2]
+        self.localized_pose_message.pose.orientation.x = final_rotation[0]
+        self.localized_pose_message.pose.orientation.y = final_rotation[1]
+        self.localized_pose_message.pose.orientation.z = final_rotation[2]
+        self.localized_pose_message.pose.orientation.w = final_rotation[3]
 
-        self.pub_localization.publish(pose_stamped_msg)
+    def publish_localization_pose(self):
+        self.localized_pose_message.header.stamp = self.get_clock().now().to_msg()
+        self.pub_localization.publish(self.localized_pose_message)
     
     def crop_map_to_fov(self, robot_position, max_distance, map_pcd):
         """
