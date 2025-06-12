@@ -6,10 +6,10 @@ SESSION="navigation_real"
 tmux new-session -d -s $SESSION
 
 # Window 0: Wheelchair Bringup (with chmod)
-tmux rename-window -t $SESSION:0 "bringup"
-tmux send-keys -t $SESSION:0 "sudo chmod 777 /dev/ttyACM0" C-m
+tmux rename-window -t $SESSION:0 'bringup'
+sudo chmod 777 /dev/ttyACM0
 sleep 2
-tmux send-keys -t $SESSION:0 "ros2 launch wheelchair2_bringup wheelchair2.launch.py use_sim_time:=False" C-m
+tmux send-keys -t $SESSION:0 'ros2 launch wheelchair2_bringup wheelchair2.launch.py use_sim_time:=False' C-m
 
 # Wait a bit before launching next nodes
 sleep 5
@@ -38,13 +38,11 @@ sleep 3
 tmux new-window -t $SESSION -n "fast_lio"
 tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_fast_lio fast_lio.launch.py fast_lio_rviz_required:=false nav2_rviz_required:=true pcd_map_path:=$MAP_DIR/rrc/rrc_lab.pcd map_file_path:=$MAP_DIR/rrc/rrc_lab.yaml" C-m
 
-sleep 3
-
-# Window 3: Nav2
-# tmux new-window -t $SESSION -n "nav2"
-# tmux send-keys -t $SESSION:3 "ros2 launch wheelchair2_navigation nav2.launch.py use_sim_time:=False map:=$MAP_DIR/rrc/rrc_lab.yaml" C-m
-
 sleep 5
+
+# Window 2: Nav2
+tmux new-window -t $SESSION -n 'nav2'
+tmux send-keys -t $SESSION:2 'ros2 launch wheelchair2_navigation nav2.launch.py use_sim_time:=False map:=$MAP_DIR/rrc/rrc_lab.yaml' C-m
 
 # Window 3: Teleop
 tmux new-window -t $SESSION -n "teleop"

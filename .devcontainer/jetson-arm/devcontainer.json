@@ -10,7 +10,7 @@
                 "actionButtons": {
                     "defaultColor": "#ff0034",
                     "loadNpmCommands": false,
-                    "reloadButton": "♻️",
+                    "reloadButton": "♻️",   
                     "commands": [
                         {
                             "name": "Build WS",
