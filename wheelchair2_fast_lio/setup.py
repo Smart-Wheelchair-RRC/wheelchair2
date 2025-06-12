@@ -22,7 +22,11 @@ setup(
             glob(os.path.join("config", "*.yaml")),
         ),
     ],
-    install_requires=['setuptools'],
+    install_requires=[
+        'setuptools',
+        'open3d',         # Add after numpy to ensure correct version dependency
+        'numpy==1.24',  # Specify numpy 1.24.x
+    ],
     zip_safe=True,
     maintainer='Eccentric Orange',
     maintainer_email='eccentric.orange2@gmail.com',

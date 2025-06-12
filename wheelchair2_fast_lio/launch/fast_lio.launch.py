@@ -21,15 +21,15 @@ from launch_ros.actions import Node
 def load_yaml_parameters():
     """Load parameters from YAML file if available."""
     SELF_PACKAGE_DIRECTORY = Path(get_package_share_directory('wheelchair2_fast_lio'))
-    config_path = SELF_PACKAGE_DIRECTORY / 'config'
-    yaml_config_path = config_path / 'fast_lio_package_params.yaml'
+    SELF_CONFIG_PATH = SELF_PACKAGE_DIRECTORY / 'config'
+    SELF_YAML_CONFIG = SELF_CONFIG_PATH / 'fast_lio_package_params.yaml'
     
     # Default parameter values
-    DEFAULT_PARAMATER_VALUES = {
+    yaml_parameters = {
         'lidar_inverted': 'true',
         'init_frame_tf_required': 'true',
         'fast_lio_config': 'fast_lio_mapping_mid360.yaml',
-        'fast_lio_config_path': str(config_path),
+        'fast_lio_config_path': str(SELF_YAML_CONFIG),
         'use_sim_time': 'false',
         'fast_lio_rviz_required': 'false',
         'fast_lio_rviz_config_file': str(Path(get_package_share_directory('fast_lio')) / 'rviz' / 'fastlio.rviz'),
@@ -49,83 +49,83 @@ def load_yaml_parameters():
         'loc_broadcast_tf': 'true',
         'loc_global_frame': 'map',
         'navigation_mode': 'true',
-        'nav2_params_file': str(Path(get_package_share_directory('wheelchair2_navigation')) / 'config' / 'nav2_params.yaml'),
+        'nav2_params_file': str(SELF_CONFIG_PATH / 'nav2_fastlio_params.yaml'),
         'map_file_path': str(Path(get_package_share_directory('wheelchair2_navigation')) / 'maps' / 'rrc' / 'rrc_lab.yaml'),
         'nav2_rviz_config_file': str(Path(get_package_share_directory('wheelchair2_navigation')) / 'rviz' / 'navigation.rviz'),
         'nav2_rviz_required': 'false',
     }
 
     # Try to load parameters from YAML file if available
-    if yaml_config_path.exists():
-        with open(yaml_config_path, 'r') as f:
-            yaml_params = yaml.safe_load(f)
+    if SELF_YAML_CONFIG.exists():
+        with open(SELF_YAML_CONFIG, 'r') as f:
+            yaml_params_from_config = yaml.safe_load(f)
             
             # Convert YAML parameters to flat dictionary with default string values
-            if yaml_params:
+            if yaml_params_from_config:
                 # Use sim time
-                if 'use_sim_time' in yaml_params:
-                    DEFAULT_PARAMATER_VALUES['use_sim_time'] = str(yaml_params['use_sim_time']).lower()
+                if 'use_sim_time' in yaml_params_from_config:
+                    yaml_parameters['use_sim_time'] = str(yaml_params_from_config['use_sim_time']).lower()
                 
                 # Fast-LIO odometry parameters
-                if 'fast_lio_odometry' in yaml_params:
-                    fast_lio_params = yaml_params['fast_lio_odometry']
+                if 'fast_lio_odometry' in yaml_params_from_config:
+                    fast_lio_params = yaml_params_from_config['fast_lio_odometry']
                     
                     if 'config_file' in fast_lio_params:
-                        DEFAULT_PARAMATER_VALUES['fast_lio_config'] = fast_lio_params['config_file']
+                        yaml_parameters['fast_lio_config'] = fast_lio_params['config_file']
                     
                     if 'config_path' in fast_lio_params and fast_lio_params['config_path']:
-                        DEFAULT_PARAMATER_VALUES['fast_lio_config_path'] = fast_lio_params['config_path']
+                        yaml_parameters['fast_lio_config_path'] = fast_lio_params['config_path']
                     
                     if 'init_frame_required' in fast_lio_params:
-                        DEFAULT_PARAMATER_VALUES['init_frame_tf_required'] = str(fast_lio_params['init_frame_required']).lower()
+                        yaml_parameters['init_frame_tf_required'] = str(fast_lio_params['init_frame_required']).lower()
                     
                     if 'lidar_inverted' in fast_lio_params:
-                        DEFAULT_PARAMATER_VALUES['lidar_inverted'] = str(fast_lio_params['lidar_inverted']).lower()
+                        yaml_parameters['lidar_inverted'] = str(fast_lio_params['lidar_inverted']).lower()
                     
                     if 'odom_frame_id' in fast_lio_params: # Shared odom frame
-                        DEFAULT_PARAMATER_VALUES['odom_frame_id'] = fast_lio_params['odom_frame_id']
+                        yaml_parameters['odom_frame_id'] = fast_lio_params['odom_frame_id']
                     
                     if 'initial_frame_id' in fast_lio_params: # For TF node
-                        DEFAULT_PARAMATER_VALUES['initial_frame_id'] = fast_lio_params['initial_frame_id']
+                        yaml_parameters['initial_frame_id'] = fast_lio_params['initial_frame_id']
 
                     if 'rviz' in fast_lio_params:
                         if 'required' in fast_lio_params['rviz']:
-                            DEFAULT_PARAMATER_VALUES['fast_lio_rviz_required'] = str(fast_lio_params['rviz']['required']).lower()
+                            yaml_parameters['fast_lio_rviz_required'] = str(fast_lio_params['rviz']['required']).lower()
                         if 'config_file' in fast_lio_params['rviz'] and fast_lio_params['rviz']['config_file']:
-                            DEFAULT_PARAMATER_VALUES['fast_lio_rviz_config_file'] = fast_lio_params['rviz']['config_file']
+                            yaml_parameters['fast_lio_rviz_config_file'] = fast_lio_params['rviz']['config_file']
                 
                 # Localization parameters
-                if 'localization' in yaml_params:
-                    localization_params = yaml_params['localization']
+                if 'localization' in yaml_params_from_config:
+                    localization_params = yaml_params_from_config['localization']
                     
                     if 'enabled' in localization_params:
-                        DEFAULT_PARAMATER_VALUES['use_localization'] = str(localization_params['enabled']).lower()
+                        yaml_parameters['use_localization'] = str(localization_params['enabled']).lower()
                     
                     if 'pcd_map_path' in localization_params:
-                        DEFAULT_PARAMATER_VALUES['pcd_map_path'] = localization_params['pcd_map_path']
+                        yaml_parameters['pcd_map_path'] = localization_params['pcd_map_path']
                     
                     # Add the new localization parameters
                     if 'publish_3d_map' in localization_params:
-                        DEFAULT_PARAMATER_VALUES['publish_3d_map'] = str(localization_params['publish_3d_map']).lower()
+                        yaml_parameters['publish_3d_map'] = str(localization_params['publish_3d_map']).lower()
                     
                     if 'use_map_cropping' in localization_params:
-                        DEFAULT_PARAMATER_VALUES['use_map_cropping'] = str(localization_params['use_map_cropping']).lower()
+                        yaml_parameters['use_map_cropping'] = str(localization_params['use_map_cropping']).lower()
                     
                     if 'map_crop_distance' in localization_params:
-                        DEFAULT_PARAMATER_VALUES['map_crop_distance'] = str(localization_params['map_crop_distance'])
+                        yaml_parameters['map_crop_distance'] = str(localization_params['map_crop_distance'])
                     
                     if 'icp_threshold' in localization_params:
-                        DEFAULT_PARAMATER_VALUES['icp_threshold'] = str(localization_params['icp_threshold'])
+                        yaml_parameters['icp_threshold'] = str(localization_params['icp_threshold'])
                     
                     if 'icp_max_iterations' in localization_params:
-                        DEFAULT_PARAMATER_VALUES['icp_max_iterations'] = str(localization_params['icp_max_iterations'])
+                        yaml_parameters['icp_max_iterations'] = str(localization_params['icp_max_iterations'])
                 
                     # Localization specific TF parameters
                     if 'broadcast_tf' in localization_params:
-                        DEFAULT_PARAMATER_VALUES['loc_broadcast_tf'] = str(localization_params['broadcast_tf']).lower()
+                        yaml_parameters['loc_broadcast_tf'] = str(localization_params['broadcast_tf']).lower()
                     
                     if 'global_frame' in localization_params:
-                        DEFAULT_PARAMATER_VALUES['loc_global_frame'] = localization_params['global_frame']
+                        yaml_parameters['loc_global_frame'] = localization_params['global_frame']
                     
                     # If localization.odom_frame_id is present in YAML and differs, 
                     # it will be overridden by fast_lio_odometry.odom_frame_id
@@ -135,41 +135,41 @@ def load_yaml_parameters():
                     # For now, we assume they share the same odom_frame_id.
 
                 # Topic parameters
-                if 'topics' in yaml_params:
-                    topics = yaml_params['topics']
+                if 'topics' in yaml_params_from_config:
+                    topics = yaml_params_from_config['topics']
                     
                     if 'lidar_cloud' in topics:
-                        DEFAULT_PARAMATER_VALUES['lidar_cloud_topic'] = topics['lidar_cloud']
+                        yaml_parameters['lidar_cloud_topic'] = topics['lidar_cloud']
                     
                     if 'fast_lio_odom' in topics:
-                        DEFAULT_PARAMATER_VALUES['fast_lio_odom_topic'] = topics['fast_lio_odom']
+                        yaml_parameters['fast_lio_odom_topic'] = topics['fast_lio_odom']
                     
                     if 'initialpose' in topics:
-                        DEFAULT_PARAMATER_VALUES['initialpose_topic'] = topics['initialpose']
+                        yaml_parameters['initialpose_topic'] = topics['initialpose']
                     
                     if 'localization_pose' in topics:
-                        DEFAULT_PARAMATER_VALUES['localization_pose_topic'] = topics['localization_pose']
+                        yaml_parameters['localization_pose_topic'] = topics['localization_pose']
 
                 # Nav2 parameters
-                if 'nav2' in yaml_params:
-                    nav2_params = yaml_params['nav2']
+                if 'nav2' in yaml_params_from_config:
+                    nav2_params = yaml_params_from_config['nav2']
 
                     if 'navigation_mode' in nav2_params:
-                        DEFAULT_PARAMATER_VALUES['navigation_mode'] = str(nav2_params['navigation_mode']).lower()
+                        yaml_parameters['navigation_mode'] = str(nav2_params['navigation_mode']).lower()
                     
                     if 'params_file' in nav2_params:
-                        DEFAULT_PARAMATER_VALUES['nav2_params_file'] = nav2_params['params_file']
+                        yaml_parameters['nav2_params_file'] = nav2_params['params_file']
                     
                     if 'map_file_path' in nav2_params:
-                        DEFAULT_PARAMATER_VALUES['map_file_path'] = nav2_params['map_file_path']
+                        yaml_parameters['map_file_path'] = nav2_params['map_file_path']
                     
                     if 'rviz_config_file' in nav2_params:
-                        DEFAULT_PARAMATER_VALUES['nav2_rviz_config_file'] = nav2_params['rviz_config_file']
+                        yaml_parameters['nav2_rviz_config_file'] = nav2_params['rviz_config_file']
 
                     if 'rviz_required' in nav2_params:
-                        DEFAULT_PARAMATER_VALUES['nav2_rviz_required'] = str(nav2_params['rviz_required']).lower()
+                        yaml_parameters['nav2_rviz_required'] = str(nav2_params['rviz_required']).lower()
     
-    return DEFAULT_PARAMATER_VALUES
+    return yaml_parameters
 
 def declare_launch_arguments(param_defaults):
     """Declare all launch arguments with values from parameters."""

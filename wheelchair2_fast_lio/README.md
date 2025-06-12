@@ -24,43 +24,62 @@ Original paper on FAST-LIO:
 ```
 
 ## Requirements and installation
-You must have the [FAST_LIO_ROS2](https://github.com/Ericsii/FAST_LIO_ROS2) package added to your project.
 
-The recommended way to do this is to add this to your repository dependencies as a git submodule (this is already done for you in the Wheelchair2 repository):
+1.  **FAST_LIO_ROS2**
 
-```bash
-git submodule add https://github.com/Ericsii/FAST_LIO_ROS2.git dependencies/FAST_LIO_ROS2
-```
+    You must have the [FAST_LIO_ROS2](https://github.com/Ericsii/FAST_LIO_ROS2) package added to your project.
 
-Next, make sure the submodule is set to the `ros2` branch by editing the [`.gitmodules`](/.gitmodules) file in the root of your repository (this is also done for you in the Wheelchair2 repository):
+    The recommended way to do this is to add this to your repository dependencies as a git submodule (this is already done for you in the Wheelchair2 repository):
 
-```ini
-[submodule "dependencies/FAST_LIO_ROS2"]
-	path = dependencies/FAST_LIO_ROS2
-	url = https://github.com/Ericsii/FAST_LIO_ROS2.git
-	branch = ros2
-```
+    ```bash
+    git submodule add https://github.com/Ericsii/FAST_LIO_ROS2.git dependencies/FAST_LIO_ROS2
+    ```
 
-Make sure to run the following command to initialize the submodule (**you must do this**):
+    Next, make sure the submodule is set to the `ros2` branch by editing the [`.gitmodules`](/.gitmodules) file in the root of your repository (this is also done for you in the Wheelchair2 repository):
 
-```bash
-git submodule update --init --recursive --remote
-```
+    ```ini
+    [submodule "dependencies/FAST_LIO_ROS2"]
+        path = dependencies/FAST_LIO_ROS2
+        url = https://github.com/Ericsii/FAST_LIO_ROS2.git
+        branch = ros2
+    ```
 
-Finally, make sure to build the package:
+    Make sure to run the following command to initialize the submodule (**you must do this**):
 
-```bash
-colcon build --symlink-install
-```
+    ```bash
+    git submodule update --init --recursive --remote
+    ```
+
+
+2.  **Python PyPa packages**
+
+    This package requires the following Python packages:
+    1. numpy 1.24.x
+    2. open3d
+
+    **Important**: These must be installed in the specified order, otherwise open3d may install a different version of numpy:
+
+    ```bash
+    pip install numpy==1.24.*
+    pip install open3d
+    ```
+
+3.  Finally, make sure to build the package:
+
+    ```bash
+    colcon build --symlink-install
+    ```
 
 ## Available Nodes
 
 | Node | Description |
 | --- | --- |
 | `invert_livox_data` | Inverts the lidar and IMU data from the `livox` driver. |
-| `tf_fast_lio_init_frame` | Publishes the tf from `map` to `camera_init`. |
+| `tf_fast_lio_init_frame` | Publishes the tf from `odom` to `camera_init`. |
 | `localization` | Localization using a pre-built PCD map. |
 | `fastlio_mapping` (from the `FAST_LIO_ROS2` package) | The main FAST-LIO node that performs the odometry. |
+| `map_server` (from `nav2_map_server`) | Loads and serves the map for Nav2. Launched if `navigation_mode` is true. |
+| Nav2 Stack (via `navigation_launch.py`) | Core Nav2 components (planner, controller, behavior server, etc.) for navigation. Launched if `navigation_mode` is true. |
 
 ## Usage
 
@@ -75,7 +94,11 @@ ros2 launch wheelchair2_fast_lio fast_lio.launch.py
 2. `tf_fast_lio_init_frame`: This node publishes the tf from `odom` to `camera_init`. It is launched after the `invert_livox_data` node to ensure that the tf is published after the data is inverted.
 3. `fastlio_mapping`: This is the main FAST-LIO node that performs the odometry. It is launched after the `invert_livox_data` and `tf_fast_lio_init_frame` nodes to ensure that it has access to the inverted data and the tf.
 4. `localization`: This node provides localization using a pre-built PCD map. It is launched after the FAST-LIO node to make use of the odometry data.
-5. `rviz2`: This node launches RViz with the specified config file. It is launched last to ensure that all the other nodes are running before launching RViz.
+5. Nav2 components (if `navigation_mode` is true):
+    - `map_server`: Loads the 2D map required for navigation.
+    - `lifecycle_manager` for `map_server`: Manages the lifecycle of the `map_server`.
+    - `navigation_launch.py`: Launches the core Nav2 stack (planner, controller, behavior server, etc.).
+6. `rviz2`: This node launches RViz with the specified config file(s). It is launched last to ensure that all the other nodes are running before launching RViz. Separate RViz instances can be launched for FAST-LIO and Nav2 visualization based on their respective `*_rviz_required` parameters.
 
 ### Parameters
 
@@ -83,24 +106,39 @@ The following parameters are available in the launch file:
 
 | Parameter | Expected Type | Default Value | Description |
 | --- | --- | --- | --- |
+| **Core functionality** |
+| `use_sim_time` | `bool` | `false` | Whether to use simulation time |
 | `lidar_inverted` | `bool` | `true` | Whether to invert the lidar data |
+| `use_localization` | `bool` | `true` | Whether to use localization mode |
+| `navigation_mode` | `bool` | `true` | Whether to enable navigation mode with Nav2 |
+| **Frame and TF configuration** |
+| `odom_frame_id` | `str` | `odom` | Shared odometry frame ID |
+| `initial_frame_id` | `str` | `camera_init` | Initial camera frame ID for `tf_fast_lio_init_frame` node |
+| `loc_global_frame` | `str` | `map` | Global frame ID for localization node (e.g., map) |
 | `init_frame_tf_required` | `bool` | `true` | Whether to publish tf from `odom` to `camera_init` |
+| `loc_broadcast_tf` | `bool` | `true` | Whether localization node broadcasts map to odom TF |
+| **Configuration files** |
 | `fast_lio_config` | `str` (file name, not path) | `fast_lio_mapping_mid360.yaml` | Name of the `fast_lio` config file |
 | `fast_lio_config_path` | `str` (folder path) | `wheelchair2_fast_lio/config` | Path to the `fast_lio` config file directory |
-| `use_sim_time` | `bool` | `false` | Whether to use simulation time |
-| `fast_lio_rviz_required` | `bool` | `false` | Whether to launch RViz with `fast_lio` |
-| `fast_lio_rviz_config_file` | `str` (file path) | `dependencies/FAST_LIO_ROS2/rviz/fastlio.rviz` | Path to the RViz config file |
-| `use_localization` | `bool` | `true` | Whether to use localization mode |
-| `pcd_map_path` | `str` (file path) | `you-super-accurate-map.pcd` | Path to the PCD map file |
-| `publish_3d_map` | `bool` | `false` | Whether to publish the 3D map for visualization |
-| `use_map_cropping` | `bool` | `true` | Whether to crop the map to a specified distance from robot |
-| `map_crop_distance` | `float` | `20.0` | The radius in meters for map cropping |
-| `icp_threshold` | `float` | `0.8` | ICP convergence threshold for localization |
-| `icp_max_iterations` | `int` | `50` | Maximum number of ICP iterations for localization |
+| `pcd_map_path` | `str` (file path) | `you-super-accurate-map.pcd` | Path to the PCD map file for localization |
+| `nav2_params_file` | `str` (file path) | `wheelchair2_fast_lio/config/nav2_fastlio_params.yaml` | Path to the Nav2 parameters file |
+| `map_file_path` | `str` (file path) | `wheelchair2_navigation/maps/rrc/rrc_lab.yaml` | Path to the map file for Nav2's map_server |
+| **Topics** |
 | `lidar_cloud_topic` | `str` (topic) | `/livox/lidar` | Topic for the LiDAR point cloud data |
 | `fast_lio_odom_topic` | `str` (topic) | `/Odometry` | Topic for the FAST-LIO odometry data |
 | `initialpose_topic` | `str` (topic) | `/initialpose` | Topic for the initial pose estimate |
 | `localization_pose_topic` | `str` (topic) | `/localization_pose` | Topic for the localization pose output |
+| **Localization parameters** |
+| `publish_3d_map` | `bool` | `false` | Whether to publish the 3D map for visualization from localization node |
+| `use_map_cropping` | `bool` | `true` | Whether to crop the map to a specified distance from robot in localization node |
+| `map_crop_distance` | `float` | `20.0` | The radius in meters for map cropping in localization node |
+| `icp_threshold` | `float` | `0.8` | ICP convergence threshold for localization |
+| `icp_max_iterations` | `int` | `50` | Maximum number of ICP iterations for localization |
+| **Visualization** |
+| `fast_lio_rviz_required` | `bool` | `false` | Whether to launch RViz with `fast_lio` |
+| `fast_lio_rviz_config_file` | `str` (file path) | `dependencies/FAST_LIO_ROS2/rviz/fastlio.rviz` | Path to the RViz config file for FAST-LIO |
+| `nav2_rviz_required` | `bool` | `false` | Whether to launch RViz for Nav2 visualization |
+| `nav2_rviz_config_file` | `str` (file path) | `wheelchair2_navigation/rviz/navigation.rviz` | Path to the RViz config file for Nav2 |
 
 ## The `FAST_LIO_ROS2` config file
 We've copied the `mid360.yaml` file from the `FAST_LIO_ROS2` package to the `wheelchair2_fast_lio/config` directory as `fast_lio_mapping_mid360.yaml`, but changed some parameters, shown here as a diff and explained below:
@@ -138,45 +176,7 @@ Explanation of the changes:
 
 ## The package parameters YAML file
 
-Additionally, we've added a `fast_lio_package_params.yaml` file to store parameters for the entire package:
-
-```yaml
-# Configuration parameters for wheelchair2_fast_lio package
-
-use_sim_time: false
-
-fast_lio_odometry:
-    config_file: "fast_lio_mapping_mid360.yaml" # name of the config file
-    config_path: "" # use default path (wheelchair2_fast_lio/config)
-    init_frame_required: true
-    lidar_inverted: true
-    rviz:
-        required: false
-        config_file: "" # use default config file (dependencies/FAST_LIO_ROS2/rviz/fastlio.rviz)
-
-localization:
-    enabled: true
-
-    # IRL map
-    # pcd_map_path: "$MAP_DIR/rrc/rrc_lab.pcd"
-
-    # simulation map
-    # pcd_map_path: "$MAP_DIR/sim/obstacles_world.pcd"
-    
-    # Parameters from localization.py
-    publish_3d_map: false
-    use_map_cropping: true
-    map_crop_distance: 20.0
-
-    icp_threshold: 0.8
-    icp_max_iterations: 50
-
-topics:
-    lidar_cloud: "/livox/lidar"
-    fast_lio_odom: "/Odometry"
-    initialpose: "/initialpose"
-    localization_pose: "/localization_pose"
-```
+Additionally, we've added a [`fast_lio_package_params.yaml`](config/fast_lio_package_params.yaml) file to store parameters for the entire package:
 
 This file allows for flexible configuration of the entire `wheelchair2_fast_lio` package and all its components. The priority of the parameters is as follows:
 1.  Defaults from the Python launch file.

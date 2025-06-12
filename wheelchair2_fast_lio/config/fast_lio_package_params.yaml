@@ -7,16 +7,16 @@ fast_lio_odometry:
     config_path: "" # use default path (wheelchair2_fast_lio/config)
     init_frame_required: true
     lidar_inverted: true
-    odom_frame_id: "odom"           # Common odometry frame ID
-    initial_frame_id: "camera_init" # Initial camera frame ID for the TF broadcaster
+    odom_frame_id: "odom" # Common odometry frame ID
+    initial_frame_id: "camera_init" # Initial frame ID for the TF broadcaster
     rviz:
         required: false
         config_file: "" # use default config file (dependencies/FAST_LIO_ROS2/rviz/fastlio.rviz)
 
 localization:
     enabled: true
-    broadcast_tf: true      # Whether the localization node should broadcast the map to odom TF
-    global_frame: "map"     # Global frame ID (map frame) for localization
+    broadcast_tf: true # Whether the localization node should broadcast the map to odom TF
+    global_frame: "map" # Global frame ID (map frame) for localization
     # Note: odom_frame_id for localization will use fast_lio_odometry.odom_frame_id
 
     # IRL map
@@ -24,7 +24,7 @@ localization:
 
     # simulation map
     # pcd_map_path: "$MAP_DIR/sim/obstacles_world.pcd"
-    
+
     # Parameters from localization.py
     publish_3d_map: false
     use_map_cropping: true
@@ -40,7 +40,8 @@ topics:
     localization_pose: "/localization_pose"
 
 nav2:
-    nav2_params_file: "" # Path to Nav2 parameters file (if use_nav2 is true)
-    map_file_path: ""     # Path to the map file for Nav2 (if use_nav2 is true)
-    rviz_config_file: ""  # Path to the RViz config file for Nav2 (if use_nav2 is true)
-    rviz_required: true   # Whether to launch RViz for Nav2 visualization
+    navigation_mode: true # Whether to spin up the nav2 stack
+    nav2_params_file: ""
+    map_file_path: ""
+    rviz_config_file: ""
+    rviz_required: true
