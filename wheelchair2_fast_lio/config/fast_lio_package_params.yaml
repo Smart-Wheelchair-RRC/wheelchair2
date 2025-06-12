@@ -28,7 +28,7 @@ localization:
     # Parameters from localization.py
     publish_3d_map: false
     use_map_cropping: true
-    map_crop_distance: 30.0
+    map_crop_distance: 20.0
 
     icp_threshold: 0.8
     icp_max_iterations: 50
