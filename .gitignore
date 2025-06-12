@@ -1,3 +1,5 @@
 .vscode/*
+*rosbag*
+__pycache__
 bag*
 records*

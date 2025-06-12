@@ -15,5 +15,6 @@
 		"/opt/ros/humble/lib/python3.10/site-packages",
 		"/opt/ros/humble/local/lib/python3.10/dist-packages"
 	],
-	"cmake.sourceDirectory": "/home/tarun/wheelchair2/livox_ros_driver2"
+	"cmake.sourceDirectory": "/home/container_user/wheelchair2/src/wheelchair2_bringup",
+	"ros.distro": "humble"
 }

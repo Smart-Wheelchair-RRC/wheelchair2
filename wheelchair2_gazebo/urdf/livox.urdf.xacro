@@ -17,6 +17,14 @@
                 <pattern_preset>Livox Mid360</pattern_preset>
             </plugin>
         </sensor>
+
+        <sensor name="imu_sensor" type="imu">
+            <always_on>1</always_on>
+            <update_rate>10</update_rate>
+            <visualize>true</visualize>
+            <topic>livox_imu</topic>
+        </sensor>
+
     </gazebo>
 
 </robot>
