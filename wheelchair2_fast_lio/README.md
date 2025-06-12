@@ -60,8 +60,8 @@ Original paper on FAST-LIO:
     **Important**: These must be installed in the specified order, otherwise open3d may install a different version of numpy:
 
     ```bash
-    pip install numpy==1.24.*
-    pip install open3d
+    python3 -m pip install open3d
+    python3 -m pip install numpy==1.24
     ```
 
 3.  Finally, make sure to build the package:

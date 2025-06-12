@@ -17,19 +17,19 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 
+SELF_PACKAGE_DIRECTORY = Path(get_package_share_directory('wheelchair2_fast_lio'))
+SELF_CONFIG_PATH = SELF_PACKAGE_DIRECTORY / 'config'
+SELF_YAML_CONFIG = SELF_CONFIG_PATH / 'fast_lio_package_params.yaml'
 
 def load_yaml_parameters():
     """Load parameters from YAML file if available."""
-    SELF_PACKAGE_DIRECTORY = Path(get_package_share_directory('wheelchair2_fast_lio'))
-    SELF_CONFIG_PATH = SELF_PACKAGE_DIRECTORY / 'config'
-    SELF_YAML_CONFIG = SELF_CONFIG_PATH / 'fast_lio_package_params.yaml'
     
     # Default parameter values
     yaml_parameters = {
         'lidar_inverted': 'true',
         'init_frame_tf_required': 'true',
         'fast_lio_config': 'fast_lio_mapping_mid360.yaml',
-        'fast_lio_config_path': str(SELF_YAML_CONFIG),
+        'fast_lio_config_path': str(SELF_CONFIG_PATH),
         'use_sim_time': 'false',
         'fast_lio_rviz_required': 'false',
         'fast_lio_rviz_config_file': str(Path(get_package_share_directory('fast_lio')) / 'rviz' / 'fastlio.rviz'),
@@ -70,7 +70,7 @@ def load_yaml_parameters():
                 if 'fast_lio_odometry' in yaml_params_from_config:
                     fast_lio_params = yaml_params_from_config['fast_lio_odometry']
                     
-                    if 'config_file' in fast_lio_params:
+                    if 'config_file' in fast_lio_params and fast_lio_params['config_file'].strip():
                         yaml_parameters['fast_lio_config'] = fast_lio_params['config_file']
                     
                     if 'config_path' in fast_lio_params and fast_lio_params['config_path']:
@@ -91,7 +91,7 @@ def load_yaml_parameters():
                     if 'rviz' in fast_lio_params:
                         if 'required' in fast_lio_params['rviz']:
                             yaml_parameters['fast_lio_rviz_required'] = str(fast_lio_params['rviz']['required']).lower()
-                        if 'config_file' in fast_lio_params['rviz'] and fast_lio_params['rviz']['config_file']:
+                        if 'config_file' in fast_lio_params['rviz'] and fast_lio_params['rviz']['config_file'].strip():
                             yaml_parameters['fast_lio_rviz_config_file'] = fast_lio_params['rviz']['config_file']
                 
                 # Localization parameters
@@ -101,7 +101,7 @@ def load_yaml_parameters():
                     if 'enabled' in localization_params:
                         yaml_parameters['use_localization'] = str(localization_params['enabled']).lower()
                     
-                    if 'pcd_map_path' in localization_params:
+                    if 'pcd_map_path' in localization_params and localization_params['pcd_map_path'].strip():
                         yaml_parameters['pcd_map_path'] = localization_params['pcd_map_path']
                     
                     # Add the new localization parameters
@@ -157,13 +157,13 @@ def load_yaml_parameters():
                     if 'navigation_mode' in nav2_params:
                         yaml_parameters['navigation_mode'] = str(nav2_params['navigation_mode']).lower()
                     
-                    if 'params_file' in nav2_params:
+                    if 'params_file' in nav2_params and nav2_params['params_file'].strip():
                         yaml_parameters['nav2_params_file'] = nav2_params['params_file']
                     
-                    if 'map_file_path' in nav2_params:
+                    if 'map_file_path' in nav2_params and nav2_params['map_file_path'].strip():
                         yaml_parameters['map_file_path'] = nav2_params['map_file_path']
                     
-                    if 'rviz_config_file' in nav2_params:
+                    if 'rviz_config_file' in nav2_params and nav2_params['rviz_config_file'].strip():
                         yaml_parameters['nav2_rviz_config_file'] = nav2_params['rviz_config_file']
 
                     if 'rviz_required' in nav2_params:
@@ -322,19 +322,19 @@ def declare_launch_arguments(param_defaults):
 
     launch_args.append(DeclareLaunchArgument(
         'nav2_params_file',
-        default_value=str(Path(get_package_share_directory('wheelchair2_navigation')) / 'config' / 'nav2_params.yaml'),
+        default_value=param_defaults['nav2_params_file'],
         description='Path to the Nav2 parameters file'
     ))
 
     launch_args.append(DeclareLaunchArgument(
         'map_file_path',
-        default_value=str(Path(get_package_share_directory('wheelchair2_navigation')) / 'maps' / 'rrc' / 'rrc_lab.yaml'),
+        default_value=param_defaults['map_file_path'],
         description='Path to the map file for Nav2'
     ))
 
     launch_args.append(DeclareLaunchArgument(
         'nav2_rviz_config_file',
-        default_value=str(Path(get_package_share_directory('wheelchair2_navigation')) / 'rviz' / 'navigation.rviz'),
+        default_value=param_defaults['nav2_rviz_config_file'],
         description='Path to the RViz config file for Nav2'
     ))
     
