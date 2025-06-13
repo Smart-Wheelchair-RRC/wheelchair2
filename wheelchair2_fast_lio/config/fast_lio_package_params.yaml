@@ -33,7 +33,7 @@ localization:
     icp_threshold: 0.8
     icp_max_iterations: 50
 
-    localization_publish_frequency: 30
+    localization_publish_frequency: 30.0
 
 topics:
     lidar_cloud: "/livox/lidar"

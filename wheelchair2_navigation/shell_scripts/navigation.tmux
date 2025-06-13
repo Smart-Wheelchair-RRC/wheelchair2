@@ -41,8 +41,8 @@ tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_fast_lio fast_lio.launch.p
 sleep 5
 
 # Window 2: Nav2
-tmux new-window -t $SESSION -n 'nav2'
-tmux send-keys -t $SESSION:2 'ros2 launch wheelchair2_navigation nav2.launch.py use_sim_time:=False map:=$MAP_DIR/rrc/rrc_lab.yaml' C-m
+# tmux new-window -t $SESSION -n 'nav2'
+# tmux send-keys -t $SESSION:2 'ros2 launch wheelchair2_navigation nav2.launch.py use_sim_time:=False map:=$MAP_DIR/rrc/rrc_lab.yaml' C-m
 
 # Window 3: Teleop
 tmux new-window -t $SESSION -n "teleop"

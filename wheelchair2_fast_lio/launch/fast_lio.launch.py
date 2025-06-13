@@ -44,7 +44,7 @@ def load_yaml_parameters():
         'fast_lio_odom_topic': '/Odometry',
         'initialpose_topic': '/initialpose',
         'localization_pose_topic': '/localization_pose',
-        'localization_publish_frequency': '30',
+        'localization_publish_frequency': '30.0',
         'odom_frame_id': 'odom',
         'initial_frame_id': 'camera_init',
         'loc_broadcast_tf': 'true',
