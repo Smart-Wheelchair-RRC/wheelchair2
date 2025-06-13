@@ -1,49 +1,45 @@
-# Configuration parameters for wheelchair2_fast_lio package
+core:
+  use_sim_time: false
+  lidar_inverted: true
+  use_localization: true
+  navigation_mode: true
 
-use_sim_time: false
+frames:
+  initial_flodom_id: camera_init
+  global_frame_id: map
+  flodom_id: body
+  lidar_mount_frame_id: livox_frame
 
-fast_lio_odometry:
-    config_file: "fast_lio_mapping_mid360.yaml" # name of the config file
-    config_path: "" # use default path (wheelchair2_fast_lio/config)
-    init_frame_required: true
-    lidar_inverted: true
-    odom_frame_id: "odom" # Common odometry frame ID
-    initial_frame_id: "camera_init" # Initial frame ID for the TF broadcaster
-    rviz:
-        required: false
-        config_file: "" # use default config file (dependencies/FAST_LIO_ROS2/rviz/fastlio.rviz)
-
-localization:
-    enabled: true
-    broadcast_tf: true # Whether the localization node should broadcast the map to odom TF
-    global_frame: "map" # Global frame ID (map frame) for localization
-    # Note: odom_frame_id for localization will use fast_lio_odometry.odom_frame_id
-
-    # IRL map
-    # pcd_map_path: "$MAP_DIR/rrc/rrc_lab.pcd"
-
-    # simulation map
-    # pcd_map_path: "$MAP_DIR/sim/obstacles_world.pcd"
-
-    # Parameters from localization.py
-    publish_3d_map: false
-    use_map_cropping: true
-    map_crop_distance: 20.0
-
-    icp_threshold: 0.8
-    icp_max_iterations: 50
-
-    localization_publish_frequency: 30.0
+tfs:
+  global_frame_to_fll_tf: true
+  flodom_to_lidar_mount_tf: true
 
 topics:
-    lidar_cloud: "/livox/lidar"
-    fast_lio_odom: "/Odometry"
-    initialpose: "/initialpose"
-    localization_pose: "/localization_pose"
+  input_lidar_topic: /livox/lidar
+  inverted_lidar_topic: /livox/lidar_inverted
+  imu_topic: /livox/imu
+  inverted_imu_topic: /livox/imu_inverted
+  flodom_topic: /Odometry
+  localized_pose_topic: /localization_pose
+  initial_pose_topic: /initialpose
+  pcd_3d_map_topic: /pcd_3d_map
 
-nav2:
-    navigation_mode: true # Whether to spin up the nav2 stack
-    nav2_params_file: ""
-    map_file_path: ""
-    rviz_config_file: ""
-    rviz_required: true
+localization:
+  use_map_cropping: true
+  map_crop_distance: 20.0
+  icp_threshold: 0.8
+  icp_max_iterations: 50
+  localization_publish_frequency: 30.0
+
+files:
+  pcd_map_path: ""
+  fast_lio_mapping_config: ""
+  fast_lio_rviz_config_file: ""
+  nav2_params_file: ""
+  map_file_path: ""
+  nav2_rviz_config_file: ""
+
+rviz:
+  fast_lio_rviz_required: false
+  nav2_rviz_required: true
+  publish_3d_pcd_map: false

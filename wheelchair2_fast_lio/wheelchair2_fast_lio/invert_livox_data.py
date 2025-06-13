@@ -22,15 +22,41 @@ class InvertLivoxData(Node):
     def __init__(self):
         super().__init__('invert_livox_data')
 
+        self.setup_parameters()
+
         self.lidar_sub = self.create_subscription(
-            PointCloud2, '/livox/lidar', self.lidar_callback, qos_profile=qos_profile)
+            PointCloud2,
+            self.get_parameter('input_lidar_topic').get_parameter_value().string_value,
+            self.lidar_callback,
+            qos_profile=qos_profile
+        )
+
         self.imu_sub = self.create_subscription(
-            Imu, '/livox/imu', self.imu_callback, qos_profile=qos_profile)
+            Imu,
+            self.get_parameter('input_imu_topic').get_parameter_value().string_value,
+            self.imu_callback,
+            qos_profile=qos_profile
+        )
+
         self.lidar_pub = self.create_publisher(
-            PointCloud2, '/livox/lidar_inverted', qos_profile=qos_profile)
+            PointCloud2,
+            self.get_parameter('inverted_lidar_topic').get_parameter_value().string_value,
+            qos_profile=qos_profile
+        )
+
         self.imu_pub = self.create_publisher(
-            Imu, '/livox/imu_inverted', qos_profile=qos_profile)
+            Imu,
+            self.get_parameter('inverted_imu_topic').get_parameter_value().string_value,
+            qos_profile=qos_profile
+        )
+
         self.get_logger().info("invert_livox_data node started")
+
+    def setup_parameters(self):
+        self.declare_parameter('input_lidar_topic', '/livox/lidar')
+        self.declare_parameter('input_imu_topic', '/livox/imu')
+        self.declare_parameter('inverted_lidar_topic', '/livox/lidar_inverted')
+        self.declare_parameter('inverted_imu_topic', '/livox/imu_inverted')
 
     def lidar_callback(self, original_message: PointCloud2):
         """

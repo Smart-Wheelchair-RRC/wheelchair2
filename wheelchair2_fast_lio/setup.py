@@ -35,7 +35,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'tf_fast_lio_init_frame = wheelchair2_fast_lio.tf_fast_lio_init_frame:main',
+            'fast_lio_tfs = wheelchair2_fast_lio.fast_lio_tfs:main',
             'invert_livox_data = wheelchair2_fast_lio.invert_livox_data:main',
             'localization = wheelchair2_fast_lio.localization:main',
         ],

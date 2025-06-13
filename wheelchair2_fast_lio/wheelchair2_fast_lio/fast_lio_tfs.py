@@ -15,26 +15,25 @@ from tf2_ros import StaticTransformBroadcaster
 class TfFastLioInitFrame(Node):
 
     def __init__(self, transformation):
-        super().__init__('tf_fast_lio_init_frame')
+        super().__init__('fast_lio_tfs')
 
         # Declare parameters
-        self.declare_parameter('odom_frame_id', 'odom')
-        self.declare_parameter('initial_frame_id', 'camera_init')
+        self.declare_parameter('flodom_frame_id', 'body')
+        self.declare_parameter('lidar_mount_frame_id', 'livox_frame')
 
         # Get parameters
-        self.odom_frame_id = self.get_parameter('odom_frame_id').get_parameter_value().string_value
-        self.initial_frame_id = self.get_parameter('initial_frame_id').get_parameter_value().string_value
+        self.flodom_frame_id = self.get_parameter('flodom_frame_id').get_parameter_value().string_value
+        self.lidar_mount_frame_id = self.get_parameter('lidar_mount_frame_id').get_parameter_value().string_value
 
         self.tf_broadcaster = StaticTransformBroadcaster(self)
-        self.get_logger().info(f"tf_fast_lio_init_frame node started, publishing transform from '{self.odom_frame_id}' to '{self.initial_frame_id}'")
-        self.make_transforms()
+        self.flodom_to_lidar_mount_tf()
 
-    def make_transforms(self):
+    def flodom_to_lidar_mount_tf(self):
         t = TransformStamped()
 
         t.header.stamp = self.get_clock().now().to_msg()
-        t.header.frame_id = self.odom_frame_id
-        t.child_frame_id = self.initial_frame_id
+        t.header.frame_id = self.flodom_frame_id
+        t.child_frame_id = self.lidar_mount_frame_id
         t.transform.translation.x = 0.0
         t.transform.translation.y = 0.0
         t.transform.translation.z = 0.0
