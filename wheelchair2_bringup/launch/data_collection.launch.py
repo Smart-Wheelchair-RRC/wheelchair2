@@ -29,12 +29,12 @@ def generate_launch_description():
     
     launch_arguments = []
     launch_arguments.append(
-            DeclareLaunchArgument(
-                'use_sim_time',
-                default_value='False',
-                description='Launch in simulation mode',
-            )
+        DeclareLaunchArgument(
+            'use_sim_time',
+            default_value='False',
+            description='Launch in simulation mode',
         )
+    )
     launch_arguments.append(
         DeclareLaunchArgument(
             'use_camera1',
@@ -86,7 +86,7 @@ def generate_launch_description():
         ),
     )
 
-    realsense1_launch = IncludeLaunchDescription(
+    camera1_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             PathJoinSubstitution(
                 [FindPackageShare("realsense2_camera"), "launch", "rs_launch.py"]
@@ -101,10 +101,10 @@ def generate_launch_description():
         condition=IfCondition(use_camera1),
     )
     
-    realsense2_launch = IncludeLaunchDescription(
+    camera2_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             PathJoinSubstitution(
-                 [FindPackageShare("realsense2_camera"), "launch", "rs_launch.py"]
+                [FindPackageShare("realsense2_camera"), "launch", "rs_launch.py"]
             ),
         ),
         launch_arguments={
@@ -170,8 +170,8 @@ def generate_launch_description():
 
     nodes =[
         bringup_launch,
-        realsense1_launch,
-        realsense2_launch,
+        camera1_launch,
+        camera2_launch,
         livox_launch,
         pointcloud_to_laserscan_launch,
         invert_lidar_node,
