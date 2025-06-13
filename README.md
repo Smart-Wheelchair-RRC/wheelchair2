@@ -3,9 +3,9 @@ ROS2 Humble and Gazebo Harmonic packages to operate the RRC wheelchair
 
 ## Prerequisites
 
-- Ubuntu 22.04 or 24.04
-- VSCode
-- Remote Development Extension by Microsoft (Inside VSCode)
+- **Ubuntu** (tested on 22.04)
+- **VSCode**
+- **Remote Development Extension by Microsoft** (Inside VSCode)
 - **Docker Installation**
   ```bash
   # Install Docker using convenience script
@@ -15,13 +15,16 @@ ROS2 Humble and Gazebo Harmonic packages to operate the RRC wheelchair
   # Post-install configuration
   sudo groupadd docker
   sudo usermod -aG docker $USER
+
+  # Verify if Docker service is enabled
+  sudo systemctl is-enabled docker
+
+  # If not enable it
   sudo systemctl enable docker.service
   sudo systemctl enable containerd.service
-
-  # Verify installation
-  sudo systemctl is-enabled docker
   ```
-  - **Reboot before proceeding further**
+  >[!IMPORTANT]
+  >**Reboot before proceeding further**
   ```bash
     # GHCR Authentication
     echo "<YOUR_GITHUB_PAT>" | docker login ghcr.io -u <YOUR_GITHUB_USERID> --password-stdin
@@ -66,7 +69,17 @@ Information about the Hardware Setup:
     # Open VSCode 
     code .
     ```
-- To enter the container
+---
+## How to Use
+- **Set ROS DOMAIN ID** to a random number between 0 to 101 inside the **devcontainer.json** file. Please make sure to read the [Docs.](https://docs.ros.org/en/eloquent/Tutorials/Configuring-ROS2-Environment.html#the-ros-domain-id-variable)
+  ```json
+  {
+    "containerEnv": {
+      "ROS_DOMAIN_ID": "42"  // Change this to your unique ID between (0 - 101)
+    }
+  }
+  ```
+- **Enter the container**
     - Open Command Pallete with `Ctrl+Shift+P`
     - Select **Dev Containers: Rebuild and Reopen in Container**
     - Choose your development container:
@@ -77,11 +90,6 @@ Information about the Hardware Setup:
       | AMD64/x86 with GPU     | x86 system with Nvidia GPU | Running Real-life + Simulation  |
       | AMD64/x86 without GPU  | x86 system                 | Running only Real-life          |
 
-## How to Use
-
-- **Open Terminal**
-  - Open Command Pallete with `Ctrl+Shift+P`
-  - Select **Terminal: Create New Terminal in Editor Area** and drag and drop it in a random place to have a terminal only window.
 - **Build workspace and source**
   ```bash
   colcon build --symlink-install && source install/setup.bash
@@ -90,18 +98,18 @@ Information about the Hardware Setup:
   ```bash
   # For real wheelchair
   sudo chmod 777 /dev/ttyACM0 # Permission for Motor Driver Controller
-  ros2 launch wheelchair2_bringup wheelchair2.launch.py use_sim_time:=<Boolean> use_joy:=<Boolean>
+  ros2 launch wheelchair2_bringup wheelchair2.launch.py use_sim_time:=False use_joy:=True
   # For simulation
-  ros2 launch wheelchair2_gazebo wheelchair2_sim.launch.py use_sim_time:=<Boolean> use_joy:=<Boolean>
+  ros2 launch wheelchair2_gazebo wheelchair2_sim.launch.py use_sim_time:=True use_joy:=True
   ```
 - **LiDAR launch**
   ```bash
-  ros2 launch wheelchair2_bringup livox.launch.py use_sim_time:=<Boolean> 
+  ros2 launch wheelchair2_bringup livox.launch.py use_sim_time:=False 
   ```
 - **Camera** 
   ```bash
   # Currently only used for rtabmap
-  ros2 launch realsense2_camera rs_launch.py
+  ros2 launch realsense2_camera rs_launch.py 
   ```
 - **Mapping**
   ```bash
@@ -112,33 +120,51 @@ Information about the Hardware Setup:
   ```
 - **Navigation** 
   ```bash
-  ros2 launch wheelchair2_navigation nav2.launch.py use_sim_time:=<Boolean> map:=$MAP_DIR/<map_folder>/<map_name>.yaml
+  ros2 launch wheelchair2_navigation nav2.launch.py use_sim_time:=False map:=$MAP_DIR/rrc/rrc_lab.yaml
   ```
 - **Keyboard Telep**
   ```bash
   ros2 run wheelchair2_control keyboard_teleop_constant.py
   ```
+- **Data collection**
+  ```bash
+  ros2 launch wheelchair2_bringup data_collection.launch.py use_sim_time:=False use_camera1:=True use_camera2:=True use_rivz:=True record:=True
+  ```
+    
+---
 
-  Available arguments are as follows:
+## Launch File Arguments
 
-  | Argument       | Default Value               | Description                                                                         |
-  | -------------- | --------------------------- | ----------------------------------------------------------------------------------- |
-  | `use_sim_time` | `False`                     | Launch in simulation mode (`True` for simulation, `False` for hardware connection). |  |
-  | `use_joy`      | `True`                      | Use joystick control.                                                               |
-  | `map`          | `$MAP_DIR/rrc/rrc_lab.yaml` | Using different maps on startup.                                                    |
+> [!NOTE]
+>  The arguments shown above for each launch file are the default values.
 
-- **Note**, tmux scripts inside `wheelchair2_navigation/shell_scripts` can be used for ease. 
+| Argument      | Description                                                                         |
+|---------------|-------------------------------------------------------------------------------------|
+| `use_sim_time`| Launch in simulation mode (`True` for simulation, `False` for hardware connection). |
+| `use_joy`     | Use joystick control.                                                               |
+| `map`         | Specify map file for navigation.                                                    |
+| `use_camera1` | Enable/disable first camera for data collection.                                    |
+| `use_camera2` | Enable/disable second camera for data collection.                                   |
+| `use_rivz`    | Enable/disable RViz visualization for data collection.                              |
+| `record`      | Enable/disable data recording during data collection.                               |
 
-  | Script file         | Action                                |
-  |---------------------|---------------------------------------|
-  | `navigation.tmux`     | Runs real wheelchair navigation       |
-  | `sim_navigation.tmux` | Runs simulation wheelchair navigation |
+---
 
+## tmux Scripts
 
+| Script File           | Action                                |
+|-----------------------|---------------------------------------|
+| `navigation.tmux`     | Runs real wheelchair navigation       |
+| `sim_navigation.tmux` | Runs simulation wheelchair navigation |
+
+Scripts are located in `wheelchair2_navigation/shell_scripts` for convenience.
+
+---
 
 ## Demo Runs
 
-**⚠️ Important Note:** This option is not maintained frequently so, the latest changes may not be applied here. 
+>[!WARNING]
+>This option is not maintained frequently so, the latest changes may not be applied here. 
 
 ##### x86 Laptop Navigation Demo run
 - To pull latest docker image
@@ -205,7 +231,8 @@ Information about the Hardware Setup:
     ```
 - Inside the container to run the Navigation stack - follow the above [instructions](#to-run-the-navigation-stack-inside-the-container)
 
-> ⚠️ **Warning:** Recommended **not to run locally** — please use **Docker** instead.  
+> [!WARNING]
+>  Recommended **not to run locally** — please use **Docker** instead.  
 > Running locally may lead to **dependency conflicts** and could affect your **system-wide packages** or break existing setups.
 
 
