@@ -4,6 +4,7 @@ from launch import LaunchDescription
 from launch.actions import (
     IncludeLaunchDescription,
     RegisterEventHandler,
+    Shutdown,
     DeclareLaunchArgument,
 )
 from launch.actions import TimerAction
@@ -36,9 +37,23 @@ def generate_launch_description():
         )
     launch_arguments.append(
         DeclareLaunchArgument(
-            'use_realsense',
+            'use_camera1',
             default_value='True',
-            description='Launch Realsense',
+            description='Launch Camera1',
+        )
+    )
+    launch_arguments.append(
+        DeclareLaunchArgument(
+            'use_camera2',
+            default_value='True',
+            description='Launch Camera2',
+        )
+    )
+    launch_arguments.append(
+        DeclareLaunchArgument(
+            'use_rviz',
+            default_value='True',
+            description='Use RViz'
         )
     )
     launch_arguments.append(
@@ -50,7 +65,9 @@ def generate_launch_description():
     )
     
     use_sim_time = LaunchConfiguration("use_sim_time")
-    use_realsense = LaunchConfiguration("use_realsense")
+    use_rviz = LaunchConfiguration('use_rviz')
+    use_camera1 = LaunchConfiguration("use_camera1")
+    use_camera2 = LaunchConfiguration("use_camera2")
     record = LaunchConfiguration("record")
 
 
@@ -69,13 +86,34 @@ def generate_launch_description():
         ),
     )
 
-    realsense_launch = IncludeLaunchDescription(
+    realsense1_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             PathJoinSubstitution(
                 [FindPackageShare("realsense2_camera"), "launch", "rs_launch.py"]
             ),
         ),
-        condition=IfCondition(use_realsense),
+        launch_arguments={
+            'serial_no': "'213522253879'",
+            'camera_name': "camera1",
+            'camera_namespace': "camera1",
+            'use_sim_time': use_sim_time,
+        }.items(),
+        condition=IfCondition(use_camera1),
+    )
+    
+    realsense2_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            PathJoinSubstitution(
+                 [FindPackageShare("realsense2_camera"), "launch", "rs_launch.py"]
+            ),
+        ),
+        launch_arguments={
+            'serial_no': "'151422254995'",
+            'camera_name': "camera2",
+            'camera_namespace': "camera2",
+            'use_sim_time': use_sim_time,
+        }.items(),
+        condition=IfCondition(use_camera2),
     )
 
     livox_launch = IncludeLaunchDescription(
@@ -114,18 +152,31 @@ def generate_launch_description():
     )
 
     rosbag_with_delay = TimerAction(
-        period=5.0,  # 5 second delay
+        period=10.0,
         actions=[rosbag_recorder_launch],
         condition=IfCondition(record),
+    )
+    
+    rviz_node = Node(
+        package='rviz2',
+        executable='rviz2',
+        name='rviz2',
+        output='log',
+        parameters=[{'use_sim_time': use_sim_time}],
+        arguments=['-d', get_package_share_directory('wheelchair2_bringup') + '/rviz/data_collection.rviz'],
+        on_exit=Shutdown(),
+        condition=IfCondition(use_rviz),
     )
 
     nodes =[
         bringup_launch,
-        realsense_launch,
+        realsense1_launch,
+        realsense2_launch,
         livox_launch,
         pointcloud_to_laserscan_launch,
         invert_lidar_node,
         rosbag_with_delay,
+        rviz_node,
     ]
 
     return LaunchDescription(launch_arguments + nodes)
