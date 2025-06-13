@@ -1,0 +1,45 @@
+core:
+  use_sim_time: false
+  lidar_inverted: true
+  use_localization: true
+  navigation_mode: true
+
+frames:
+  initial_flodom_id: camera_init
+  global_frame_id: map
+  flodom_id: body
+  lidar_mount_frame_id: livox_frame
+
+tfs:
+  global_frame_to_fll_tf: true
+  flodom_to_lidar_mount_tf: true
+
+topics:
+  input_lidar_topic: /livox/lidar
+  inverted_lidar_topic: /livox/lidar_inverted
+  imu_topic: /livox/imu
+  inverted_imu_topic: /livox/imu_inverted
+  flodom_topic: /Odometry
+  localized_pose_topic: /localization_pose
+  initial_pose_topic: /initialpose
+  pcd_3d_map_topic: /pcd_3d_map
+
+localization:
+  use_map_cropping: true
+  map_crop_distance: 20.0
+  icp_threshold: 0.8
+  icp_max_iterations: 50
+  localization_publish_frequency: 30.0
+
+files:
+  pcd_map_path: ""
+  fast_lio_mapping_config: ""
+  fast_lio_rviz_config_file: ""
+  nav2_params_file: ""
+  map_file_path: ""
+  nav2_rviz_config_file: ""
+
+rviz:
+  fast_lio_rviz_required: false
+  nav2_rviz_required: true
+  publish_3d_pcd_map: false

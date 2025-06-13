@@ -45,7 +45,8 @@
         "WAYLAND_DISPLAY": "${localEnv:WAYLAND_DISPLAY}",
         "XDG_RUNTIME_DIR": "${localEnv:XDG_RUNTIME_DIR}",
         "PULSE_SERVER": "${localEnv:PULSE_SERVER}",
-        "QT_X11_NO_MITSHM": "1"
+        "QT_X11_NO_MITSHM": "1",
+        "ROS_DOMAIN_ID": "14"
         // "LIBGL_ALWAYS_SOFTWARE": "1"
     },
     "runArgs": [
@@ -57,11 +58,10 @@
         "--cap-add=all",
         "--security-opt=seccomp:unconfined",
         "--security-opt=apparmor:unconfined",
-        "--volume=/dev:/dev/",
-        "--volume=/tmp/.X11-unix:/tmp/.X11-unix",
+        "--volume=/dev:/dev/*",
+        // "--volume=/tmp/.X11-unix:/tmp/.X11-unix",
         "--net=host",
         "--ipc=host"
-    ]
-    ,
+    ],
     "postStartCommand": "sudo chown -R container_user:container_user /home/container_user/wheelchair2 /run"
 }

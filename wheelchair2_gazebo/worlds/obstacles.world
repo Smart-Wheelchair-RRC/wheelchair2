@@ -1243,5 +1243,9 @@
         <falloff>0</falloff>
       </spot>
     </light>
+
+    <plugin filename="gz-sim-imu-system"
+      name="gz::sim::systems::Imu">
+    </plugin>
   </world>
 </sdf>
