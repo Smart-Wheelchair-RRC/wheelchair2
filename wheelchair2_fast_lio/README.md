@@ -108,7 +108,7 @@ The following parameters are available in the launch file:
 | --- | --- | --- | --- |
 | **Core functionality** |
 | `use_sim_time` | `bool` | `false` | Whether to use simulation time |
-| `lidar_inverted` | `bool` | `true` | Whether to invert the lidar data |
+| `lidar_inverted` | `bool` | `true` | Whether to invert the lidar and IMU data (180-degree rotation about the x-axis) |
 | `use_localization` | `bool` | `true` | Whether to use localization mode |
 | `navigation_mode` | `bool` | `true` | Whether to enable navigation mode with Nav2 |
 | **Frame and TF configuration** |
@@ -129,11 +129,12 @@ The following parameters are available in the launch file:
 | `initialpose_topic` | `str` (topic) | `/initialpose` | Topic for the initial pose estimate |
 | `localization_pose_topic` | `str` (topic) | `/localization_pose` | Topic for the localization pose output |
 | **Localization parameters** |
-| `publish_3d_map` | `bool` | `false` | Whether to publish the 3D map for visualization from localization node |
+| `publish_3d_map` | `bool` | `false` | Whether to publish the 3D map for visualization from localization node (saved map from the PCD file) |
 | `use_map_cropping` | `bool` | `true` | Whether to crop the map to a specified distance from robot in localization node |
 | `map_crop_distance` | `float` | `20.0` | The radius in meters for map cropping in localization node |
 | `icp_threshold` | `float` | `0.8` | ICP convergence threshold for localization |
 | `icp_max_iterations` | `int` | `50` | Maximum number of ICP iterations for localization |
+| `localization_publish_frequency` | `float` | `30.0` | Frequency of publishing localization results |
 | **Visualization** |
 | `fast_lio_rviz_required` | `bool` | `false` | Whether to launch RViz with `fast_lio` |
 | `fast_lio_rviz_config_file` | `str` (file path) | `dependencies/FAST_LIO_ROS2/rviz/fastlio.rviz` | Path to the RViz config file for FAST-LIO |

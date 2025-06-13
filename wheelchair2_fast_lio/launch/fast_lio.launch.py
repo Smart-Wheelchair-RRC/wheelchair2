@@ -44,6 +44,7 @@ def load_yaml_parameters():
         'fast_lio_odom_topic': '/Odometry',
         'initialpose_topic': '/initialpose',
         'localization_pose_topic': '/localization_pose',
+        'localization_publish_frequency': '30',
         'odom_frame_id': 'odom',
         'initial_frame_id': 'camera_init',
         'loc_broadcast_tf': 'true',
@@ -126,6 +127,9 @@ def load_yaml_parameters():
                     
                     if 'global_frame' in localization_params:
                         yaml_parameters['loc_global_frame'] = localization_params['global_frame']
+
+                    if 'localization_publish_frequency' in localization_params:
+                        yaml_parameters['localization_publish_frequency'] = str(localization_params['localization_publish_frequency'])
                     
                     # If localization.odom_frame_id is present in YAML and differs, 
                     # it will be overridden by fast_lio_odometry.odom_frame_id
@@ -287,6 +291,12 @@ def declare_launch_arguments(param_defaults):
         description='Topic for the localization pose output'
     ))
 
+    launch_args.append(DeclareLaunchArgument(
+        'localization_publish_frequency',
+        default_value=param_defaults['localization_publish_frequency'],
+        description='Frequency at which the localization node publishes poses'
+    ))
+
     # Shared odom_frame_id for both localization and tf_init_frame node
     launch_args.append(DeclareLaunchArgument(
         'odom_frame_id',
@@ -365,6 +375,7 @@ def create_nodes():
     map_crop_distance = LaunchConfiguration('map_crop_distance')
     icp_threshold = LaunchConfiguration('icp_threshold')
     icp_max_iterations = LaunchConfiguration('icp_max_iterations')
+    localization_publish_frequency = LaunchConfiguration('localization_publish_frequency')
     
     # Topic parameters
     lidar_cloud_topic = LaunchConfiguration('lidar_cloud_topic')
@@ -443,7 +454,8 @@ def create_nodes():
             # TF parameters for localization node
             {'broadcast_tf': loc_broadcast_tf},
             {'global_frame': loc_global_frame},
-            {'odom_frame_id': odom_frame_id} # Use shared odom_frame_id
+            {'odom_frame_id': odom_frame_id}, # Use shared odom_frame_id
+            {'localization_publish_frequency': localization_publish_frequency},
         ],
         condition=launch.conditions.IfCondition(use_localization)
     ))

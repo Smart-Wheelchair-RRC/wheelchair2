@@ -41,7 +41,7 @@ class FASTLIOLocalizationNode(Node):
         self.initialpose_topic = '/initialpose'  # Default topic for initial pose estimates
         self.localization_pose_topic = '/localization_pose'  # Default topic for publishing localization pose
         self.localized_pose_message = PoseStamped()
-        self.localization_publish_period = 1/30  # Default timer period for publishing localization pose
+        self.localization_publish_frequency = 30  # Default timer frequency for publishing localization pose (Hz)
         
         # ICP parameters
         self.icp_threshold = 0.8  # Default ICP distance threshold
@@ -99,9 +99,8 @@ class FASTLIOLocalizationNode(Node):
         self.declare_parameter('localization_pose_topic', '/localization_pose')
         self.localization_pose_topic = self.get_parameter('localization_pose_topic').get_parameter_value().string_value
 
-        # Timer period for publishing localization pose
-        self.declare_parameter('localization_publish_period', 1/30.0)  # Default 30 Hz
-        self.localization_publish_period = self.get_parameter('localization_publish_period').get_parameter_value().double_value
+        self.declare_parameter('localization_publish_frequency', 30.0)  # Default 30 Hz
+        self.localization_publish_frequency = self.get_parameter('localization_publish_frequency').get_parameter_value().double_value
         
         # ICP parameters
         self.declare_parameter('icp_threshold', 0.8)
@@ -185,7 +184,7 @@ class FASTLIOLocalizationNode(Node):
             )
 
         self.localization_publish_timer = self.create_timer(
-            timer_period_sec=self.localization_publish_period,
+            timer_period_sec= (1 / self.localization_publish_frequency),
             callback=self.publish_localization_pose
         )
 
