@@ -61,6 +61,7 @@
         "--security-opt=seccomp:unconfined",
         "--security-opt=apparmor:unconfined",
         "--volume=/dev:/dev",
+        "--volume=/media:/media:rw",
         "--net=host",
         "--ipc=host"
     ],
