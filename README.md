@@ -23,8 +23,8 @@ ROS2 Humble and Gazebo Harmonic packages to operate the RRC wheelchair
   sudo systemctl enable docker.service
   sudo systemctl enable containerd.service
   ```
-  >[!IMPORTANT]
-  >**Reboot before proceeding further**
+>[!IMPORTANT]
+>**Reboot before proceeding further**
   ```bash
     # GHCR Authentication
     echo "<YOUR_GITHUB_PAT>" | docker login ghcr.io -u <YOUR_GITHUB_USERID> --password-stdin
