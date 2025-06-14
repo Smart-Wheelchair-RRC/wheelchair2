@@ -25,11 +25,12 @@ ROS2 Humble and Gazebo Harmonic packages to operate the RRC wheelchair
   ```
 >[!IMPORTANT]
 >**Reboot before proceeding further**
-  ```bash
-    # GHCR Authentication
-    echo "<YOUR_GITHUB_PAT>" | docker login ghcr.io -u <YOUR_GITHUB_USERID> --password-stdin
-    ```
-- Enabling Nvidia GPU for simulation
+```bash
+  # GHCR Authentication
+  echo "<YOUR_GITHUB_PAT>" | docker login ghcr.io -u <YOUR_GITHUB_USERID> --password-stdin
+  ```
+
+* **Enabling Nvidia GPU for simulation**
 
   | Hardware | Requirement  |
   | :------- | :----------- |
@@ -38,7 +39,7 @@ ROS2 Humble and Gazebo Harmonic packages to operate the RRC wheelchair
   | Software      | Requirement                                                           |
   | :------------ | :-------------------------------------------------------------------- |
   | Nvidia Driver | - Ubuntu 22.04 `>=515.43.04` <br/> - Ubuntu 24.04 `>=555.42.02` <br/> |
-  
+
   - Switching to NVIDIA graphics driver libraries with prime-select tool (reboot required). By default, it is set to on-demand in which the system selects libraries to render automatically (not always correctly). 
   - So, run
   `sudo prime-select nvidia` locally.
@@ -47,38 +48,38 @@ ROS2 Humble and Gazebo Harmonic packages to operate the RRC wheelchair
 Information about the Hardware Setup:
 
 #### Motor Driver Controller and Wheel Odometery
-  - **Components:**
-    - Kangaroo X2 Motion controller
-    - Sabertooth 2x32 Motor driver
-    - AMT102-V Wheelencoders
+- **Components:**
+  - Kangaroo X2 Motion controller
+  - Sabertooth 2x32 Motor driver
+  - AMT102-V Wheelencoders
 #### RGB Camera: Realsense D455 
-  - With the current setup we only use realsense for RTABMAP
-  - No Additional Setup is required for getting data, just plug-in the type-c cable
+- With the current setup we only use realsense for RTABMAP
+- No Additional Setup is required for getting data, just plug-in the type-c cable
 #### 3D LiDAR: Livox MID-360
-   1.  Create new network profile **"Livox"**
-   2.  Configure static IP:
-        - **IP Address:** 192.168.1.50
-        - **Netmask:** 255.255.255.0
+ 1.  Create new network profile **"Livox"**
+ 2.  Configure static IP:
+      - **IP Address:** 192.168.1.50
+      - **Netmask:** 255.255.255.0
 
 ## Development Setup
 - Create a folder for wheelchair development (preferably in home) 
-    ```bash 
-    mkdir wheelchair2 && cd wheelchair2
-    # Clone the repo with submodules
-    git clone https://github.com/Smart-Wheelchair-RRC/wheelchair2.git --recurse-submodules .
-    # Open VSCode 
-    code .
-    ```
+  ```bash 
+  mkdir wheelchair2 && cd wheelchair2
+  # Clone the repo with submodules
+  git clone https://github.com/Smart-Wheelchair-RRC/wheelchair2.git --recurse-submodules .
+  # Open VSCode 
+  code .
+  ```
 ---
 ## How to Use
 - **Set ROS DOMAIN ID** to a random number between 0 to 101 inside the **devcontainer.json** file. Please make sure to read the [Docs.](https://docs.ros.org/en/eloquent/Tutorials/Configuring-ROS2-Environment.html#the-ros-domain-id-variable)
-  ```json
-  {
-    "containerEnv": {
-      "ROS_DOMAIN_ID": "42"  // Change this to your unique ID between (0 - 101)
-    }
+```json
+{
+  "containerEnv": {
+    "ROS_DOMAIN_ID": "42"  // Change this to your unique ID between (0 - 101)
   }
-  ```
+}
+```
 - **Enter the container**
     - Open Command Pallete with `Ctrl+Shift+P`
     - Select **Dev Containers: Rebuild and Reopen in Container**
