@@ -6,9 +6,9 @@ topics:
   - /camera2/camera2/color/image_raw
 
   - /livox/lidar
-  - /livox/lidar_inverted
+  # - /livox/lidar_inverted
   - /livox/imu
-  - /livox/imu_inverted
+  # - /livox/imu_inverted
   
   - /odom
   - /cmd_vel_joy
