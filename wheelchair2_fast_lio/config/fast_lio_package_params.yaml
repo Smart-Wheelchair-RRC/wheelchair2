@@ -1,6 +1,6 @@
 core:
   use_sim_time: false
-  lidar_inverted: true
+  lidar_inverted: false
   use_localization: true
   navigation_mode: true
 
@@ -9,6 +9,7 @@ frames:
   global_frame_id: map
   flodom_id: body
   lidar_mount_frame_id: livox_frame
+  base_frame_id: base_footprint
 
 tfs:
   global_frame_to_fll_tf: true
@@ -27,9 +28,10 @@ topics:
 localization:
   use_map_cropping: true
   map_crop_distance: 20.0
-  icp_threshold: 0.8
-  icp_max_iterations: 50
+  icp_threshold: 0.5
+  icp_max_iterations: 200
   localization_publish_frequency: 30.0
+  publish_localized_pose: false
 
 files:
   pcd_map_path: ""
@@ -42,4 +44,4 @@ files:
 rviz:
   fast_lio_rviz_required: false
   nav2_rviz_required: true
-  publish_3d_pcd_map: false
+  publish_3d_pcd_map: true

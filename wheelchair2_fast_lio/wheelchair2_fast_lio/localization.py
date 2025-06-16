@@ -15,7 +15,6 @@ from sensor_msgs_py import point_cloud2
 from std_msgs.msg import Header
 from tf2_ros import TransformBroadcaster
 
-
 class FASTLIOLocalizationNode(Node):
     """
     FAST-LIO based localization node that uses ICP to align lidar scans with a pre-built PCD map.
@@ -31,10 +30,10 @@ class FASTLIOLocalizationNode(Node):
 
         # Initialize class attributes
         self.map_pcd = None
-        self.current_odometry = None
+        self.fast_lio_odometry_transform = None
         self.publish_3d_map = False  # Flag to control map publishing
         self.initial_pose_estimate = np.identity(4)
-        self.map_to_fll_transform = np.identity(4)
+        self.icp_transform = np.identity(4)
         self.pcd_map_path = '/path/to/your/map.pcd'  # Default path to the PCD map
         self.lidar_cloud_topic = '/cloud_registered'  # Default topic for lidar scans
         self.fast_lio_odom_topic = '/Odometry'  # Default topic for Fast LIO odometry
@@ -42,6 +41,7 @@ class FASTLIOLocalizationNode(Node):
         self.localization_pose_topic = '/localization_pose'  # Default topic for publishing localization pose
         self.localized_pose_message = PoseStamped()
         self.localization_publish_frequency = 30  # Default timer frequency for publishing localization pose (Hz)
+        self.final_transform = np.identity(4)
         
         # ICP parameters
         self.icp_threshold = 0.8  # Default ICP distance threshold
@@ -104,6 +104,9 @@ class FASTLIOLocalizationNode(Node):
 
         self.declare_parameter('localization_publish_frequency', 30.0)  # Default 30 Hz
         self.localization_publish_frequency = self.get_parameter('localization_publish_frequency').get_parameter_value().double_value
+
+        self.declare_parameter('publish_localized_pose', True)
+        self.publish_localized_pose = self.get_parameter('publish_localized_pose').get_parameter_value().bool_value
         
         # ICP parameters
         self.declare_parameter('icp_threshold', 0.8)
@@ -128,6 +131,30 @@ class FASTLIOLocalizationNode(Node):
         
         self.declare_parameter('fll_frame_id', self.fll_frame_id)
         self.fll_frame_id = self.get_parameter('fll_frame_id').get_parameter_value().string_value
+
+        # Create the transforms between footprint and lidar
+        self.base_footprint_to_lidar_TF = self.create_base_footprint_to_lidar_TF()
+        self.lidar_to_base_footprint_TF = self.create_lidar_to_base_footprint_TF()
+
+    def create_base_footprint_to_lidar_TF(self) -> np.ndarray:
+        ROTATION = [1, 0, 0.007, 0]
+        TRANSLATION = [0.064, 0.018, 1.362]
+
+        transform = np.identity(4)
+        transform[:3, :3] = Rotation.from_quat(ROTATION).as_matrix()
+        transform[:3, 3] = TRANSLATION
+
+        return transform
+    
+    def create_lidar_to_base_footprint_TF(self) -> np.ndarray:
+        ROTATION = [1, 0, 0.007, 0]
+        TRANSLATION = [-0.082, 0.017, 1.361]
+
+        transform = np.identity(4)
+        transform[:3, :3] = Rotation.from_quat(ROTATION).as_matrix()
+        transform[:3, 3] = TRANSLATION
+
+        return transform
     
     def _setup_subscribers(self):
         """Set up all subscribers"""
@@ -162,17 +189,29 @@ class FASTLIOLocalizationNode(Node):
     
     def _setup_publishers(self):
         """Set up all publishers"""
-        self.pub_localization = self.create_publisher(
-            msg_type=PoseStamped,
-            topic=self.localization_pose_topic,
-            qos_profile=QoSProfile(
-                depth=10,
-                history=HistoryPolicy.KEEP_LAST,
-                reliability=ReliabilityPolicy.RELIABLE,
-                durability=DurabilityPolicy.TRANSIENT_LOCAL,
-            )
+
+        self.localization_TF_publish_timer = self.create_timer(
+            timer_period_sec= (1 / self.localization_publish_frequency),
+            callback=self.broadcast_global_frame_to_flinit_frame_tf
         )
 
+        if self.publish_localized_pose:
+            self.pub_localization = self.create_publisher(
+                msg_type=PoseStamped,
+                topic=self.localization_pose_topic,
+                qos_profile=QoSProfile(
+                    depth=10,
+                    history=HistoryPolicy.KEEP_LAST,
+                    reliability=ReliabilityPolicy.RELIABLE,
+                    durability=DurabilityPolicy.TRANSIENT_LOCAL,
+                )
+            )
+
+            self.localization_pose_publish_timer = self.create_timer(
+                timer_period_sec= (1 / self.localization_publish_frequency),
+                callback=self.publish_localization_pose
+            )
+            
         if self.publish_3d_map:
 
             self.map_publisher = self.create_publisher(
@@ -186,10 +225,6 @@ class FASTLIOLocalizationNode(Node):
                 )
             )
 
-        self.localization_publish_timer = self.create_timer(
-            timer_period_sec= (1 / self.localization_publish_frequency),
-            callback=self.publish_localization_pose
-        )
 
     def load_pcd_map(self):
         """Loads the PCD map from the specified file path."""
@@ -251,11 +286,26 @@ class FASTLIOLocalizationNode(Node):
         self.initial_pose_estimate = np.identity(4)
         self.initial_pose_estimate[:3, :3] = rotation
         self.initial_pose_estimate[:3, 3] = translation
-        self.map_to_fll_transform = self.initial_pose_estimate
+        self.icp_transform = self.initial_pose_estimate
 
     def deal_with_current_odometry(self, msg: Odometry):
         """Stores the latest odometry from Fast LIO."""
-        self.current_odometry = msg
+        fast_lio_odometry = msg.pose.pose
+
+        self.fast_lio_odometry_transform = np.identity(4)
+        self.fast_lio_odometry_transform[:3, 3] = np.array([
+            fast_lio_odometry.position.x,
+            fast_lio_odometry.position.y,
+            fast_lio_odometry.position.z
+        ])
+        self.fast_lio_odometry_transform[:3, :3] = Rotation.from_quat([
+            fast_lio_odometry.orientation.x,
+            fast_lio_odometry.orientation.y,
+            fast_lio_odometry.orientation.z,
+            fast_lio_odometry.orientation.w
+        ]).as_matrix()
+
+        # self.fast_lio_odometry_transform = fast_lio_odometry_transform # @ ROTATION_TRANSFORM
 
     def deal_with_current_scan(self, msg: PointCloud2):
         """Processes the current Lidar scan to perform localization."""
@@ -274,40 +324,32 @@ class FASTLIOLocalizationNode(Node):
 
         # sign up ICP
         reg_p2p = o3d.pipelines.registration.registration_icp(
-            source_pcd_down, self.map_pcd, self.icp_threshold, self.initial_pose_estimate,
+            source_pcd_down, self.map_pcd, self.icp_threshold, self.icp_transform,
             o3d.pipelines.registration.TransformationEstimationPointToPlane(),
             o3d.pipelines.registration.ICPConvergenceCriteria(max_iteration=self.icp_max_iterations)
         )
 
-        self.map_to_fll_transform = reg_p2p.transformation
+        self.icp_transform = reg_p2p.transformation
 
         # Update the initial guess for the next iteration
-        self.initial_pose_estimate = reg_p2p.transformation
 
-        self.calculate_localization_pose()
+        if self.publish_localized_pose:
+            self.calculate_localization_pose()
 
     def calculate_localization_pose(self):
         """Calculates and publishes the robot's pose in the map frame."""
-        if self.current_odometry is None:
+        if self.fast_lio_odometry_transform is None:
             return
 
-        # Get the transform from the odometry message (fast_lio_localization -> lidar_link)
-        odom_pose = self.current_odometry.pose.pose
-        translation = np.array([odom_pose.position.x, odom_pose.position.y, odom_pose.position.z])
-        rotation = Rotation.from_quat([odom_pose.orientation.x, odom_pose.orientation.y, odom_pose.orientation.z, odom_pose.orientation.w]).as_matrix()
-        fll_to_lidar_transform = np.identity(4)
-        fll_to_lidar_transform[:3, :3] = rotation
-        fll_to_lidar_transform[:3, 3] = translation
-
         # Combine transforms: map -> fast_lio_localization -> lidar_link
-        final_transform = self.map_to_fll_transform @ fll_to_lidar_transform
+        self.final_transform = self.icp_transform @ self.lidar_to_base_footprint_TF
 
         # Create and publish the PoseStamped message
         self.localized_pose_message = PoseStamped()
-        self.localized_pose_message.header.frame_id = self.global_frame
+        self.localized_pose_message.header.frame_id = self.fll_frame_id
 
-        final_translation = final_transform[:3, 3]
-        final_rotation = Rotation.from_matrix(final_transform[:3, :3]).as_quat()
+        final_translation = self.final_transform[:3, 3]
+        final_rotation = Rotation.from_matrix(self.final_transform[:3, :3]).as_quat()
 
         self.localized_pose_message.pose.position.x = final_translation[0]
         self.localized_pose_message.pose.position.y = final_translation[1]
@@ -320,7 +362,6 @@ class FASTLIOLocalizationNode(Node):
     def publish_localization_pose(self):
         self.localized_pose_message.header.stamp = self.get_clock().now().to_msg()
         self.pub_localization.publish(self.localized_pose_message)
-        self._broadcast_map_to_flodom_tf()
     
     def crop_map_to_fov(self, robot_position, max_distance, map_pcd):
         """
@@ -378,7 +419,7 @@ class FASTLIOLocalizationNode(Node):
         
         return cropped_map
 
-    def _broadcast_map_to_flodom_tf(self):
+    def broadcast_global_frame_to_flinit_frame_tf(self):
         """Broadcasts the transform from the global frame to the fast lio localization frame."""
         if not self.broadcast_tf or self.tf_broadcaster is None:
             return
@@ -388,11 +429,13 @@ class FASTLIOLocalizationNode(Node):
         t = TransformStamped()
         t.header.stamp = now
         t.header.frame_id = self.global_frame  # map
-        t.child_frame_id = self.fll_frame_id  # body
+        t.child_frame_id = self.fll_frame_id  # camera_init
+
+        T_global_frame_to_fll = self.icp_transform @ self.base_footprint_to_lidar_TF
 
         # self.map_to_odom_transform is T_global_odom
-        translation = self.map_to_fll_transform[:3, 3]
-        rotation_quat = Rotation.from_matrix(np.array(self.map_to_fll_transform[:3, :3])).as_quat()
+        translation = T_global_frame_to_fll[:3, 3]
+        rotation_quat = Rotation.from_matrix(np.array(T_global_frame_to_fll[:3, :3])).as_quat()
 
         t.transform.translation.x = translation[0]
         t.transform.translation.y = translation[1]

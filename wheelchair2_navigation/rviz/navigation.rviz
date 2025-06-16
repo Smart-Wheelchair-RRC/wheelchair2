@@ -62,20 +62,113 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /robot_description
-      Enabled: false
+      Enabled: true
       Links:
         All Links Enabled: true
         Expand Joint Details: false
         Expand Link Details: false
         Expand Tree: false
-        Link Tree Style: ""
+        Link Tree Style: Links in Alphabetic Order
+        base_footprint:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        camera_base_rod:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        camera_bottom_screw_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera_color_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera_color_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera_depth_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera_depth_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera_left_ir_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera_left_ir_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        camera_mount_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera_right_ir_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera_right_ir_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        caster1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        caster2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        livox_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        right_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rod1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rod2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
       Mass Properties:
         Inertia: false
         Mass: false
       Name: RobotModel
       TF Prefix: ""
       Update Interval: 0
-      Value: false
+      Value: true
       Visual Enabled: true
     - Class: rviz_default_plugins/TF
       Enabled: true
@@ -83,7 +176,7 @@ Visualization Manager:
       Frames:
         All Enabled: false
         base_footprint:
-          Value: false
+          Value: true
         base_link:
           Value: true
         body:
@@ -109,7 +202,7 @@ Visualization Manager:
         camera_link:
           Value: false
         camera_mount_link:
-          Value: true
+          Value: false
         camera_right_ir_frame:
           Value: false
         camera_right_ir_optical_frame:
@@ -118,12 +211,14 @@ Visualization Manager:
           Value: false
         caster2:
           Value: false
-        livox_frame:
+        left_wheel:
           Value: false
+        livox_frame:
+          Value: true
         map:
           Value: true
-        odom:
-          Value: true
+        right_wheel:
+          Value: false
         rod1:
           Value: false
         rod2:
@@ -132,20 +227,51 @@ Visualization Manager:
       Name: TF
       Show Arrows: true
       Show Axes: true
-      Show Names: false
+      Show Names: true
       Tree:
         map:
-          odom:
-            camera_init:
-              body:
-                {}
+          camera_init:
+            body:
+              base_footprint:
+                base_link:
+                  camera_base_rod:
+                    {}
+                  camera_mount_link:
+                    camera_bottom_screw_frame:
+                      camera_link:
+                        camera_depth_frame:
+                          camera_color_frame:
+                            camera_color_optical_frame:
+                              {}
+                          camera_depth_optical_frame:
+                            {}
+                          camera_left_ir_frame:
+                            camera_left_ir_optical_frame:
+                              {}
+                          camera_right_ir_frame:
+                            camera_right_ir_optical_frame:
+                              {}
+                        livox_frame:
+                          {}
+                  caster1:
+                    {}
+                  caster2:
+                    {}
+                  left_wheel:
+                    {}
+                  right_wheel:
+                    {}
+                  rod1:
+                    {}
+                  rod2:
+                    {}
       Update Interval: 0
       Value: true
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
-        Max Value: 1.4612584114074707
-        Min Value: 1.2395153045654297
+        Max Value: 1.5306885242462158
+        Min Value: 1.3988399505615234
         Value: true
       Axis: Z
       Channel Name: intensity
@@ -153,7 +279,7 @@ Visualization Manager:
       Color: 255; 255; 255
       Color Transformer: AxisColor
       Decay Time: 0
-      Enabled: true
+      Enabled: false
       Invert Rainbow: false
       Max Color: 255; 255; 255
       Max Intensity: 0
@@ -174,7 +300,7 @@ Visualization Manager:
         Value: /scan
       Use Fixed Frame: true
       Use rainbow: true
-      Value: true
+      Value: false
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
@@ -732,7 +858,7 @@ Visualization Manager:
       Axes Radius: 0.10000000149011612
       Class: rviz_default_plugins/Pose
       Color: 0; 255; 255
-      Enabled: true
+      Enabled: false
       Head Length: 0.6000000238418579
       Head Radius: 0.6000000238418579
       Name: Pose
@@ -746,7 +872,7 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /localization_pose
-      Value: true
+      Value: false
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
@@ -759,7 +885,7 @@ Visualization Manager:
       Color: 255; 255; 255
       Color Transformer: AxisColor
       Decay Time: 0
-      Enabled: false
+      Enabled: true
       Invert Rainbow: false
       Max Color: 255; 255; 255
       Max Intensity: 0
@@ -767,7 +893,7 @@ Visualization Manager:
       Min Intensity: 0
       Name: PointCloud2
       Position Transformer: XYZ
-      Selectable: true
+      Selectable: false
       Size (Pixels): 3
       Size (m): 0.009999999776482582
       Style: Points
@@ -780,7 +906,7 @@ Visualization Manager:
         Value: /map_by_fast_lio
       Use Fixed Frame: true
       Use rainbow: true
-      Value: false
+      Value: true
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
@@ -796,7 +922,7 @@ Visualization Manager:
       Enabled: false
       Invert Rainbow: false
       Max Color: 255; 255; 255
-      Max Intensity: 158.8000030517578
+      Max Intensity: 255
       Min Color: 0; 0; 0
       Min Intensity: 0
       Name: PointCloud2
@@ -853,25 +979,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 27.08233642578125
+      Distance: 32.391563415527344
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 4.411672592163086
-        Y: -2.1441144943237305
-        Z: -3.956246852874756
+        X: 5.7433648109436035
+        Y: -2.616030216217041
+        Z: -1.5864834785461426
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.3897967338562012
+      Pitch: 0.9647963643074036
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz_default_plugins)
-      Yaw: 3.7242889404296875
+      Yaw: 4.614288330078125
     Saved: ~
 Window Geometry:
   Camera:

@@ -57,6 +57,7 @@ class InvertLivoxData(Node):
         self.declare_parameter('input_imu_topic', '/livox/imu')
         self.declare_parameter('inverted_lidar_topic', '/livox/lidar_inverted')
         self.declare_parameter('inverted_imu_topic', '/livox/imu_inverted')
+        self.declare_parameter('lidar_monut_frame_id', 'livox_frame')
 
     def lidar_callback(self, original_message: PointCloud2):
         """
@@ -77,6 +78,9 @@ class InvertLivoxData(Node):
         # Convert back to PointCloud2
         inverted_message = point_cloud2.create_cloud(
             original_message.header, original_message.fields, xyz_data)
+        
+        # inverted_message.header.frame_id = self.get_parameter('lidar_monut_frame_id').get_parameter_value().string_value
+
         self.lidar_pub.publish(inverted_message)
 
     def imu_callback(self, original_message: Imu):
@@ -89,6 +93,8 @@ class InvertLivoxData(Node):
 
         original_message.angular_velocity.y = -original_message.angular_velocity.y
         original_message.angular_velocity.z = -original_message.angular_velocity.z
+
+        # original_message.header.frame_id = self.get_parameter('lidar_monut_frame_id').get_parameter_value().string_value
 
         self.imu_pub.publish(original_message)
 

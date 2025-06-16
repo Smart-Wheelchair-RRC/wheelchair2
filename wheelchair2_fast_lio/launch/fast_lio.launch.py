@@ -41,6 +41,7 @@ def load_yaml_parameters():
         'global_frame_id': 'map',
         'flodom_id': 'body',
         'lidar_mount_frame_id': 'livox_frame',
+        'base_frame_id': 'base_footprint',
 
         # TFs enabled
         'global_frame_to_fll_tf': 'true',
@@ -62,6 +63,7 @@ def load_yaml_parameters():
         'icp_threshold': '0.8',  # ICP convergence threshold
         'icp_max_iterations': '50',  # Maximum number of ICP iterations
         'localization_publish_frequency': '30.0',  # Frequency for publishing localization poses
+        'publish_localized_pose': 'true',  # Whether to publish the localized pose
 
         # File paths
         'pcd_map_path': 'you-super-accurate-map.pcd',
@@ -114,6 +116,9 @@ def load_yaml_parameters():
                     
                     if 'lidar_mount_frame_id' in frames_params:
                         yaml_parameters['lidar_mounting_frame_id'] = frames_params['lidar_mount_frame_id']
+
+                    if 'base_frame_id' in frames_params:
+                        yaml_parameters['base_frame_id'] = frames_params['base_frame_id']
 
                 if 'tfs' in yaml_params_from_config:
                     tfs_params = yaml_params_from_config['tfs']
@@ -169,6 +174,9 @@ def load_yaml_parameters():
                     
                     if 'localization_publish_frequency' in localization_params:
                         yaml_parameters['localization_publish_frequency'] = str(localization_params['localization_publish_frequency'])
+
+                    if 'publish_localized_pose' in localization_params:
+                        yaml_parameters['publish_localized_pose'] = str(localization_params['publish_localized_pose']).lower()
 
                 if 'files' in yaml_params_from_config:
                     files_params = yaml_params_from_config['files']
@@ -259,6 +267,13 @@ def declare_launch_arguments(param_defaults):
         description='LiDAR mounting frame ID'
     ))
 
+    launch_args.append(DeclareLaunchArgument(
+        'base_frame_id',
+        default_value=param_defaults['base_frame_id'],
+        description='Base frame ID for the robot'
+    ))
+
+    # Declare TFs enabled
     launch_args.append(DeclareLaunchArgument(
         'global_frame_to_fll_tf',
         default_value='true',
@@ -351,6 +366,12 @@ def declare_launch_arguments(param_defaults):
         description='Frequency for publishing localization poses'
     ))
 
+    launch_args.append(DeclareLaunchArgument(
+        'publish_localized_pose',
+        default_value=param_defaults['publish_localized_pose'],
+        description='Whether to publish the localized pose'
+    ))
+
     # Declare file paths
     launch_args.append(DeclareLaunchArgument(
         'pcd_map_path',
@@ -430,6 +451,9 @@ def create_nodes():
     global_frame_id = LaunchConfiguration('global_frame_id')
     live_lidar_frame_id = LaunchConfiguration('live_lidar_frame_id')
     lidar_mount_frame_id = LaunchConfiguration('lidar_mount_frame_id')
+    base_frame_id = LaunchConfiguration('base_frame_id')
+
+    # TFs
     global_frame_to_fll_tf = LaunchConfiguration('global_frame_to_fll_tf')
     flodom_to_lidar_mount_tf = LaunchConfiguration('flodom_to_lidar_mount_tf')
 
@@ -457,6 +481,7 @@ def create_nodes():
     nav2_params_file = LaunchConfiguration('nav2_params_file')
     map_file_path = LaunchConfiguration('map_file_path')
     nav2_rviz_config_file = LaunchConfiguration('nav2_rviz_config_file')
+    publish_localized_pose = LaunchConfiguration('publish_localized_pose')
 
     # Visualization parameters
     fast_lio_rviz_required = LaunchConfiguration('fast_lio_rviz_required')
@@ -477,7 +502,8 @@ def create_nodes():
             {'input_lidar_topic': lidar_cloud_topic},
             {'input_imu_topic': imu_topic},
             {'inverted_lidar_topic': inverted_lidar_topic},
-            {'inverted_imu_topic': inverted_imu_topic}
+            {'inverted_imu_topic': inverted_imu_topic},
+            {'lidar_mount_frame_id': lidar_mount_frame_id},
         ],
         condition=launch.conditions.IfCondition(lidar_inverted)
     ))
@@ -490,7 +516,8 @@ def create_nodes():
         output='screen',
         parameters=[
             {'flodom_frame_id': live_lidar_frame_id}, # Use shared odom_frame_id
-            {'lidar_mount_frame_id': lidar_mount_frame_id}
+            {'lidar_mount_frame_id': lidar_mount_frame_id},
+            {'base_frame_id': base_frame_id},
         ],
         condition=launch.conditions.IfCondition(flodom_to_lidar_mount_tf)
     ))
@@ -521,6 +548,7 @@ def create_nodes():
             {'initialpose_topic': initialpose_topic},
             {'localization_pose_topic': localization_pose_topic},
             {'localization_publish_frequency': localization_publish_frequency},
+            {'publish_localized_pose': publish_localized_pose},
             {'icp_threshold': icp_threshold},
             {'icp_max_iterations': icp_max_iterations},
             {'use_map_cropping': use_map_cropping},
@@ -542,7 +570,7 @@ def create_nodes():
             'yaml_filename': map_file_path,
             'frame_id': global_frame_id
         }],
-        condition=launch.conditions.IfCondition(navigation_mode)
+        # condition=launch.conditions.IfCondition(navigation_mode)
     ))
 
     # Mapper server lifecycle manager
@@ -557,7 +585,7 @@ def create_nodes():
             'node_names': ['map_server'],
             'use_sim_time': use_sim_time
         }],
-        condition=launch.conditions.IfCondition(navigation_mode)
+        # condition=launch.conditions.IfCondition(navigation_mode)
     ))
 
     # Nav2 bringup for navigation
