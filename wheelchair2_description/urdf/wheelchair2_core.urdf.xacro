@@ -107,7 +107,7 @@
     <!-- livox link w.r.t camera_link -->
     <link name="livox_frame"/>
     <joint name="camera_link_to_livox_frame" type="fixed">
-        <origin xyz="-0.064156 0 -0.064846" rpy="-3.1416 -0.0131 0" />
+        <origin xyz="-0.064156 0 -0.064846" rpy="0 -0.0131 0" />
         <parent link="camera_link" />
         <child link="livox_frame" />
         <axis xyz="0 0 0" />

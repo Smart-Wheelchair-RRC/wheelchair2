@@ -1,6 +1,6 @@
 core:
   use_sim_time: false
-  lidar_inverted: false
+  lidar_inverted: true
   use_localization: true
   navigation_mode: true
 
@@ -26,11 +26,11 @@ topics:
   pcd_3d_map_topic: /pcd_3d_map
 
 localization:
-  use_map_cropping: true
-  map_crop_distance: 20.0
-  icp_threshold: 0.5
-  icp_max_iterations: 200
-  localization_publish_frequency: 30.0
+  use_map_cropping: false
+  map_crop_distance: 10.0
+  icp_threshold: 0.8
+  icp_max_iterations: 20
+  localization_publish_frequency: 50.0
   publish_localized_pose: false
 
 files:
