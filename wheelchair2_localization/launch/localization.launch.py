@@ -59,7 +59,7 @@ def load_yaml_parameters():
         'map_file_path': str(NAVIGATION_PACKAGE_DIRECTORY / 'maps' / 'rrc' / 'rrc_lab.yaml'),
         'icp_config_file': str(ICP_LOCALIZATION_CONFIG_PATH / 'icp.yaml'),
         'icp_node_params_file': str(ICP_LOCALIZATION_CONFIG_PATH / 'node_params.yaml'),
-        'nav2_params_file': str(NAVIGATION_PACKAGE_DIRECTORY / 'config' / 'nav2_params.yaml'),
+        'nav2_params_file': str(NAVIGATION_PACKAGE_DIRECTORY / 'config' / 'nav2_icp_params.yaml'),
         'nav2_rviz_config_file': str(NAVIGATION_PACKAGE_DIRECTORY / 'rviz' / 'navigation.rviz'),
     }
 
