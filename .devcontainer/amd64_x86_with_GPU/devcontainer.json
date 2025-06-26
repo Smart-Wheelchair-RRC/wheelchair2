@@ -17,10 +17,11 @@
                             "cwd": "/home/wheelchair2/wheelchair2",
                             "color": "aqua",
                             "singleInstance": true,
-                            "command": "colcon build --symlink-install && source install/setup.bash"
+                            "command": "colcon build --symlink-install --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && source install/setup.bash"
                         }
                     ]
-                }
+                },
+                "C_Cpp.default.intelliSenseMode": "gcc-x64"
             },
             "extensions": [
                 "althack.ament-task-provider",
@@ -61,7 +62,7 @@
         "--cap-add=all",
         "--security-opt=seccomp:unconfined",
         "--security-opt=apparmor:unconfined",
-        "--volume=/dev:/dev",
+        "--device=/dev/ttyACM0",
         "--volume=/media:/media:rw",
         "--net=host",
         "--ipc=host"

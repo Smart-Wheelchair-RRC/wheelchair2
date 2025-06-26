@@ -1,26 +1,17 @@
 {
-  "configurations": [
-    {
-      "browse": {
-        "databaseFilename": "${default}",
-        "limitSymbolsToIncludedHeaders": false
-      },
-      "includePath": [
-        "/home/radtop/ros2/wheelchair_ws/install/wheelchair2_kangaroo_x2_driver/include/**",
-        "/home/radtop/ros2/wheelchair_ws/install/ros2_livox_simulation/include/**",
-        "/home/radtop/ros2/wheelchair_ws/install/livox_ros_driver2/include/**",
-        "/opt/ros/humble/include/**",
-        "/home/radtop/ros2/wheelchair_ws/src/livox_laser_simulation_RO2/include/**",
-        "/home/radtop/ros2/wheelchair_ws/src/wheelchair2_kangaroo_x2_driver/include/**",
-        "/home/radtop/ros2/wheelchair_ws/src/wheelchair2_navigation/include/**",
-        "/usr/include/**"
-      ],
-      "name": "ROS",
-      "intelliSenseMode": "gcc-x64",
-      "compilerPath": "/usr/bin/gcc",
-      "cStandard": "gnu11",
-      "cppStandard": "c++14"
-    }
-  ],
-  "version": 4
-}
+    "configurations": [
+      {
+        "browse": {
+          "databaseFilename": "${default}",
+          "limitSymbolsToIncludedHeaders": false
+        },
+        "includePath": [],
+        "compileCommands": "/home/container_user/wheelchair2/build/compile_commands.json",
+        "name": "ROS",
+        "compilerPath": "/usr/bin/gcc",
+        "cStandard": "gnu11",
+        "cppStandard": "c++17"
+      }
+    ],
+    "version": 4
+  }
