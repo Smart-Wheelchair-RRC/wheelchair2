@@ -2,8 +2,8 @@
     "name": "Wheelchair2 Development on AMD64/x86 without GPU",
     "image": "ghcr.io/smart-wheelchair-rrc/wheelchair2_base:v3.0",
     "privileged": true,
-    "workspaceMount": "source=${localWorkspaceFolder},target=/home/wheelchair2/wheelchair2/src,type=bind",
-    "workspaceFolder": "/home/wheelchair2/wheelchair2/src",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/home/container_user/wheelchair2/src,type=bind",
+    "workspaceFolder": "/home/container_user/wheelchair2/src",
     "customizations": {
         "vscode": {
             "settings": {
@@ -14,7 +14,7 @@
                     "commands": [
                         {
                             "name": "Build WS",
-                            "cwd": "/home/wheelchair2/wheelchair2",
+                            "cwd": "/home/container_user/wheelchair2",
                             "color": "aqua",
                             "singleInstance": true,
                             "command": "colcon build --symlink-install --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && source install/setup.bash"
@@ -66,5 +66,5 @@
         "--net=host",
         "--ipc=host"
     ],
-    "postStartCommand": "sudo chown -R wheelchair2:wheelchair2 /home/wheelchair2/wheelchair2 /run"
+    "postStartCommand": "sudo chown -R container_user:container_user /home/container_user/wheelchair2 /run"
 }
