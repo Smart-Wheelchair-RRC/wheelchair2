@@ -1,6 +1,6 @@
 {
     "name": "Wheelchair2 Development on AMD64/x86 without GPU",
-    "image": "ghcr.io/smart-wheelchair-rrc/wheelchair2_base:v3.0",
+    "image": "ghcr.io/smart-wheelchair-rrc/wheelchair2_base:v4.0",
     "privileged": true,
     "workspaceMount": "source=${localWorkspaceFolder},target=/home/container_user/wheelchair2/src,type=bind",
     "workspaceFolder": "/home/container_user/wheelchair2/src",
