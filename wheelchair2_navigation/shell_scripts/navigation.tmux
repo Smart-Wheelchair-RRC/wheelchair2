@@ -8,7 +8,7 @@ tmux new-session -d -s $SESSION
 # Window 0: Wheelchair Bringup (with chmod)
 tmux rename-window -t $SESSION:0 "bringup"
 sudo chmod 777 /dev/ttyACM0
-sleep 2
+sleep 5
 tmux send-keys -t $SESSION:0 "ros2 launch wheelchair2_bringup wheelchair2.launch.py use_sim_time:=False" C-m
 
 # Wait a bit before launching next nodes
@@ -39,12 +39,13 @@ tmux new-window -t $SESSION -n "nav2"
 
 ## AMCL stack
 # tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2.launch.py use_sim_time:=False map:=$MAP_DIR/rrc/rrc_lab.yaml" C-m
+# tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2.launch.py use_sim_time:=False map:=$MAP_DIR/rrc/himalaya_with_classroom.yaml" C-m
 
 ## for RRC lab
 tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_localization localization.launch.py use_sim_time:=False map_file_path:=$MAP_DIR/rrc/rrc_lab.yaml pcd_map_path:=$MAP_DIR/rrc/lab_map_with_outside_corridor.pcd" C-m
 
 ## for Himalaya and KCIS
-# tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_localization localization.launch.py use_sim_time:=False map_file_path:=$MAP_DIR/himalaya/himalaya_kcis.yaml pcd_map_path:=$MAP_DIR/himalaya/himalaya_kcis.pcd" C-m
+# tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_localization localization.launch.py use_sim_time:=False map_file_path:=$MAP_DIR/rrc/himalaya_with_classroom.yaml pcd_map_path:=$MAP_DIR/rrc/himalaya_with_classroom.pcd" C-m
 
 # Window 3: Teleop
 tmux new-window -t $SESSION -n "teleop"

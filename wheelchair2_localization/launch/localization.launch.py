@@ -40,6 +40,7 @@ def load_yaml_parameters():
         'use_sim_time': 'false',
         'use_mapper_server': 'true',
         'nav2_rviz_required': 'true',
+        'publish_pcd_map': 'false',
 
         # frames and TFs
         'main_map_frame': 'map',
@@ -59,7 +60,7 @@ def load_yaml_parameters():
         'map_file_path': str(NAVIGATION_PACKAGE_DIRECTORY / 'maps' / 'rrc' / 'rrc_lab.yaml'),
         'icp_config_file': str(ICP_LOCALIZATION_CONFIG_PATH / 'icp.yaml'),
         'icp_node_params_file': str(ICP_LOCALIZATION_CONFIG_PATH / 'node_params.yaml'),
-        'nav2_params_file': str(NAVIGATION_PACKAGE_DIRECTORY / 'config' / 'nav2_icp_params.yaml'),
+        'nav2_params_file': str(NAVIGATION_PACKAGE_DIRECTORY / 'config' / 'nav2_params.yaml'),
         'nav2_rviz_config_file': str(NAVIGATION_PACKAGE_DIRECTORY / 'rviz' / 'navigation.rviz'),
     }
 
@@ -88,6 +89,9 @@ def load_yaml_parameters():
 
                     if 'use_mapper_server' in core_params:
                         yaml_parameters['use_mapper_server'] = str(core_params['use_mapper_server']).lower()
+
+                if 'publish_pcd_map' in yaml_params_from_config:
+                    yaml_parameters['publish_pcd_map'] = str(yaml_params_from_config['publish_pcd_map']).lower()
 
                 if 'frames' in yaml_params_from_config:
                     frames_params = yaml_params_from_config['frames']
@@ -167,6 +171,7 @@ def create_nodes():
     use_sim_time = LaunchConfiguration('use_sim_time')
     nav2_rviz_required = LaunchConfiguration('nav2_rviz_required')
     use_mapper_server = LaunchConfiguration('use_mapper_server')
+    publish_pcd_map = LaunchConfiguration('publish_pcd_map')
 
     # frames and TFs
     main_map_frame_id = LaunchConfiguration('main_map_frame')
@@ -192,6 +197,20 @@ def create_nodes():
     # Create nodes
     nodes = []
     group_actions = []
+
+    # PCD map publisher node
+    nodes.append(Node(
+        package=SELF_PACKAGE_NAME,
+        executable='vizualize_pcd_map',
+        name='vizualize_pcd_map',
+        output='screen',
+        parameters=[
+            {'pcd_map_path': pcd_map_path},
+            {'map_topic': '/pcd_map'},
+            {'downsampling_voxel_size': 0.2},  # Default downsampling voxel
+        ],
+        condition=launch.conditions.IfCondition(publish_pcd_map)
+    ))
     
     # Invert LiDAR data node
     nodes.append(Node(
@@ -208,6 +227,7 @@ def create_nodes():
         condition=launch.conditions.IfCondition(lidar_inverted)
     ))
 
+    # ICP localization node
     nodes.append(Node(
         package=ICP_LOCALIZATION_PACKAGE_NAME,
         executable='icp_localization',

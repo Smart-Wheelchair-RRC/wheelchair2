@@ -6,7 +6,7 @@ package_name = 'wheelchair2_localization'
 
 setup(
     name=package_name,
-    version='0.0.0',
+    version='1.0.0',
     packages=find_packages(exclude=['test']),
     data_files=[
         ('share/ament_index/resource_index/packages',
@@ -30,7 +30,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'invert_livox_data = wheelchair2_localization.invert_livox_data:main'
+            'invert_livox_data = wheelchair2_localization.invert_livox_data:main',
+            'visualize_pcd_map = wheelchair2_localization.vizualize_pcd_map:main',
         ],
     },
 )

@@ -4,6 +4,7 @@ core_functionality:
   use_sim_time: false
   nav2_rviz_required: true
   use_mapper_server: true
+  publish_pcd_map: false
 
 frames_and_tfs:
   main_map_frame: map
