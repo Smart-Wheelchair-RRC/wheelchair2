@@ -13,7 +13,6 @@
   <test_depend>python3-pytest</test_depend>
 
   <exec_depend>python3-open3d-pip</exec_depend>
-  <exec_depend version_gte="1.24">python3-numpy</exec_depend>
   <build_depend>libpointmatcher</build_depend>
   
   <export>
