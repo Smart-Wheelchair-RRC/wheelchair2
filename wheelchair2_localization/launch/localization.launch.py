@@ -72,8 +72,8 @@ def load_yaml_parameters():
             # Convert YAML parameters to flat dictionary with default string values
             if yaml_params_from_config:
 
-                if 'core' in yaml_params_from_config:
-                    core_params = yaml_params_from_config['core']
+                if 'core_functionality' in yaml_params_from_config:
+                    core_params = yaml_params_from_config['core_functionality']
 
                     if 'lidar_inverted' in core_params:
                         yaml_parameters['lidar_inverted'] = str(core_params['lidar_inverted']).lower()
@@ -81,8 +81,8 @@ def load_yaml_parameters():
                     if 'use_navigation' in core_params:
                         yaml_parameters['use_navigation'] = str(core_params['use_navigation']).lower()
 
-                    if 'use_sim_time' in yaml_params_from_config:
-                        yaml_parameters['use_sim_time'] = str(yaml_params_from_config['use_sim_time']).lower()
+                    if 'use_sim_time' in core_params:
+                        yaml_parameters['use_sim_time'] = str(core_params['use_sim_time']).lower()
 
                     if 'nav2_rviz_required' in core_params:
                         yaml_parameters['nav2_rviz_required'] = str(core_params['nav2_rviz_required']).lower()
@@ -90,11 +90,11 @@ def load_yaml_parameters():
                     if 'use_mapper_server' in core_params:
                         yaml_parameters['use_mapper_server'] = str(core_params['use_mapper_server']).lower()
 
-                if 'publish_pcd_map' in yaml_params_from_config:
-                    yaml_parameters['publish_pcd_map'] = str(yaml_params_from_config['publish_pcd_map']).lower()
+                    if 'publish_pcd_map' in core_params:
+                        yaml_parameters['publish_pcd_map'] = str(core_params['publish_pcd_map']).lower()
 
-                if 'frames' in yaml_params_from_config:
-                    frames_params = yaml_params_from_config['frames']
+                if 'frames_and_tfs' in yaml_params_from_config:
+                    frames_params = yaml_params_from_config['frames_and_tfs']
                     
                     if 'main_map_frame' in frames_params:
                         yaml_parameters['main_map_frame'] = frames_params['main_map_frame']
@@ -126,8 +126,8 @@ def load_yaml_parameters():
                     if 'input_odom_topic' in topics_params:
                         yaml_parameters['input_odom_topic'] = topics_params['input_odom_topic']
 
-                if 'files' in yaml_params_from_config:
-                    files_params = yaml_params_from_config['files']
+                if 'file_paths' in yaml_params_from_config:
+                    files_params = yaml_params_from_config['file_paths']
                     
                     if 'pcd_map_path' in files_params and files_params['pcd_map_path']:
                         yaml_parameters['pcd_map_path'] = files_params['pcd_map_path']

@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import open3d as o3d
 import numpy as np
 from rclpy.qos import HistoryPolicy, QoSProfile, ReliabilityPolicy, DurabilityPolicy
@@ -8,14 +10,14 @@ import rclpy
 from rclpy.node import Node
 
 
-class VisualizePCDMap(Node):
+class VizualizePCDMap(Node):
 
     map_topic: str = None
     downsampling_voxel_size: float = None
     pcd_map_path: str = None
 
     def __init__(self):
-        super().__init__('visualize_pcd_map')
+        super().__init__('vizualize_pcd_map')
 
         self.declare_parameter('map_topic', '/pcd_map')
         self.map_topic = self.get_parameter('map_topic').get_parameter_value().string_value
@@ -24,7 +26,7 @@ class VisualizePCDMap(Node):
         self.downsampling_voxel_size = self.get_parameter('downsampling_voxel_size').get_parameter_value().double_value
 
         self.declare_parameter('pcd_map_path', '')
-        self.pcd_map_path = self.get_parameter('pcd_map_path').get_parameter_value
+        self.pcd_map_path = self.get_parameter('pcd_map_path').get_parameter_value().string_value
 
         self.map_publisher = self.create_publisher(
                 msg_type=PointCloud2,
@@ -75,7 +77,7 @@ class VisualizePCDMap(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    node = VisualizePCDMap()
+    node = VizualizePCDMap()
     rclpy.spin(node)
     node.destroy_node()
     rclpy.shutdown()

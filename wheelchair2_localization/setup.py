@@ -31,7 +31,7 @@ setup(
     entry_points={
         'console_scripts': [
             'invert_livox_data = wheelchair2_localization.invert_livox_data:main',
-            'visualize_pcd_map = wheelchair2_localization.vizualize_pcd_map:main',
+            'vizualize_pcd_map = wheelchair2_localization.vizualize_pcd_map:main',
         ],
     },
 )
