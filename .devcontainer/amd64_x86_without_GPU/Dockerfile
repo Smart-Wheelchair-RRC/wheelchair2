@@ -1,4 +1,4 @@
-FROM ghcr.io/smart-wheelchair-rrc/wheelchair2_base:v1.0
+FROM ghcr.io/smart-wheelchair-rrc/wheelchair2_base:v4.0
 # Add the following labels
 LABEL org.opencontainers.image.description="Wheelchair2"
 LABEL org.opencontainers.image.title="Wheelchair2Navigation"
@@ -7,14 +7,15 @@ LABEL org.opencontainers.image.source="https://github.com/Smart-Wheelchair-RRC/w
 LABEL maintainer="tarun.ramak@gmail.com"
 LABEL org.opencontainers.image.licenses="MIT"
 
-COPY . /home/wheelchair2/wheelchair2/src
-
-WORKDIR /home/wheelchair2/wheelchair2
 # handle default shell
 SHELL ["/bin/bash", "-c"]
+COPY . /home/container_user/wheelchair2/src
+
+WORKDIR /home/container_user/wheelchair2
+
 RUN source /opt/ros/humble/setup.bash \
-    && colcon build --cmake-args -DROS_EDITION=ROS2 -DHUMBLE_ROS=humble \
-    && colcon build --packages-select wheelchair2_navigation wheelchair2_control wheelchair2_bringup --symlink-install \
+    && colcon build --symlink-install \
     && source install/setup.bash \
-    && cd src/wheelchair2_navigation/launch \
-    && sudo chmod +x ./navigation.sh
+    && cd src/wheelchair2_navigation/shell_scripts \
+    && sudo chmod +x ./navigation.tmux
+

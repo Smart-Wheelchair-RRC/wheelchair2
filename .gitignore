@@ -1,3 +1,4 @@
 .vscode/*
 bag*
 records*
+__pycache__

@@ -1,6 +1,6 @@
 {
     "name": "Wheelchair2 Development on Jetson",
-    "image": "ghcr.io/smart-wheelchair-rrc/wheelchair2_base_jetson:v3.0",
+    "image": "ghcr.io/smart-wheelchair-rrc/wheelchair2_base_jetson:v4.0",
     "privileged": true,
     "workspaceMount": "source=${localWorkspaceFolder},target=/home/container_user/wheelchair2/src,type=bind",
     "workspaceFolder": "/home/container_user/wheelchair2/src",
@@ -17,10 +17,11 @@
                             "cwd": "/home/container_user/wheelchair2",
                             "color": "aqua",
                             "singleInstance": true,
-                            "command": "colcon build --symlink-install && source install/setup.bash"
+                            "command": "colcon build --symlink-install --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && source install/setup.bash"
                         }
                     ]
-                }
+                },
+                "C_Cpp.default.intelliSenseMode": "gcc-arm64"
             },
             "extensions": [
                 "althack.ament-task-provider",
@@ -58,7 +59,7 @@
         "--cap-add=all",
         "--security-opt=seccomp:unconfined",
         "--security-opt=apparmor:unconfined",
-        "--volume=/dev:/dev/",
+        "--device=/dev/ttyACM0",
         "--volume=/tmp/.X11-unix:/tmp/.X11-unix",
         "--net=host",
         "--ipc=host"
