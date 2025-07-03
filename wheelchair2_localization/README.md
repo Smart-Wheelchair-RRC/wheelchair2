@@ -35,13 +35,7 @@ The current ICP algorithm is taken from [baiyeweiguang/icp_localization_ros2](ht
 
 1.  **[OPTIONAL] Open3D dependency**: This package provides an extra node to visualize the 3D map in RViz. It is not required for the localization to work, but it is useful for debugging and visualization purposes, using Open3D.
 
-    If you're in the wheelchair2 workspace, this should be available as a Python Virtual Environment, and may simply be activated if needed:
-    
-    ```bash
-    source /home/container_user/python3_venvs/o3d_venv/bin/activate
-    ```
-
-    However, if this doesn't work, you can install Open3D using pip:
+    If you're in the wheelchair2 workspace, these should already be installed. If not, you can install Open3D using pip:
 
     ```bash
     python3 -m pip install open3d
