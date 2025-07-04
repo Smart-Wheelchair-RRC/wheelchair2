@@ -6,6 +6,8 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
 from launch_ros.actions import Node
 from launch.substitutions import LaunchConfiguration
+from nav2_common.launch import RewrittenYaml
+from launch.conditions import IfCondition
 
 def generate_launch_description():
 
@@ -34,10 +36,44 @@ def generate_launch_description():
                 default_value=map_yaml,
                 description="Full path to map file to load",
             )
-    ) 
+    )
+    launch_arguments.append(
+        DeclareLaunchArgument(
+            'use_keepout_zone',
+            default_value='False',
+            description='Launch with keepout zones'
+        )
+    )
+
+    launch_arguments.append(
+        DeclareLaunchArgument(
+            "keepout_params_file",
+            default_value=os.path.join(
+                get_package_share_directory("wheelchair2_navigation"),
+                "config",
+                "keepout_params.yaml",
+            ),
+            description="Full path to keepout zone parameters file",
+        )
+    )
+
+    launch_arguments.append(
+        DeclareLaunchArgument(
+            "keepout_mask_file_path",
+            default_value=os.path.join(
+                get_package_share_directory("wheelchair2_navigation"),
+                "maps",
+                "rrc",
+                "rrc_lab_mask.yaml",
+            ),
+            description="Full path to keepout zone mask file",
+        )
+    )
             
     
     use_sim_time = LaunchConfiguration("use_sim_time", default="false")
+    use_keepout_zone = LaunchConfiguration('use_keepout_zone', default='False')
+
 
     
     nav2_parameters_file = LaunchConfiguration(
@@ -48,6 +84,36 @@ def generate_launch_description():
             "nav2_params.yaml",
         ),
     )
+
+    keepout_params_file = LaunchConfiguration(
+        'keepout_params_file',
+        default=os.path.join(
+            get_package_share_directory("wheelchair2_navigation"),
+            "config",
+            "keepout_params.yaml",
+        ),
+    )
+
+    keepout_mask_file_path = LaunchConfiguration(
+        'keepout_mask_file_path',
+        default=os.path.join(
+            get_package_share_directory("wheelchair2_navigation"),
+            "maps",
+            "rrc",
+            "rrc_lab_mask.yaml",
+        ),
+    )
+
+    updated_keepout_params = RewrittenYaml(
+        source_file=keepout_params_file,
+        param_rewrites={
+            'use_sim_time': use_sim_time,
+            'yaml_filename': keepout_mask_file_path
+        },
+        convert_types=True
+    )
+
+    lifecycle_nodes = ['filter_mask_server', 'costmap_filter_info_server']
 
     # Nav2 bringup launch file
     nav2 = IncludeLaunchDescription(
@@ -60,6 +126,39 @@ def generate_launch_description():
             "params_file": nav2_parameters_file,
         }.items(),
     )
+
+    costmap_filter_info_server = Node(
+        package='nav2_map_server',
+        executable='costmap_filter_info_server',
+        name='costmap_filter_info_server',
+        output='screen',
+        emulate_tty=True,  
+        condition=IfCondition(use_keepout_zone),
+        parameters=[updated_keepout_params]
+    )
+    
+    filtered_map_server = Node(
+        package='nav2_map_server',
+        executable='map_server',
+        name='filter_mask_server',
+        output='screen',
+        emulate_tty=True,
+        condition=IfCondition(use_keepout_zone),
+        parameters=[updated_keepout_params]
+    )
+    
+    lifecycle_manager = Node(
+        package='nav2_lifecycle_manager',
+        executable='lifecycle_manager',
+        name='lifecycle_manager_costmap_filters',
+        output='screen',
+        emulate_tty=True,  
+        condition=IfCondition(use_keepout_zone),
+        parameters=[{'use_sim_time': use_sim_time},
+                    {'autostart': True},
+                    {'node_names': lifecycle_nodes}]
+    )
+
     rviz_config = os.path.join(get_package_share_directory('wheelchair2_navigation'), 'rviz', 'navigation.rviz')
     rviz = Node(
             package='rviz2',
@@ -71,7 +170,10 @@ def generate_launch_description():
 
     nodes = [
         nav2,
-        rviz
+        rviz,
+        filtered_map_server,
+        lifecycle_manager,
+        costmap_filter_info_server
     ]
 
     return LaunchDescription(launch_arguments + nodes)

@@ -15,6 +15,8 @@ from launch.actions import (DeclareLaunchArgument, GroupAction,
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
+from nav2_common.launch import RewrittenYaml
+
 
 WHEELCHAIR_LOCALIZATION_PACKAGE_NAME = 'wheelchair2_localization'
 WHEELCHAIR_LOCALIZATION_PACKAGE_DIRECTORY = Path(get_package_share_directory(WHEELCHAIR_LOCALIZATION_PACKAGE_NAME))
@@ -28,6 +30,7 @@ DEFAULT_PARAMETERS = {
     'use_sim_time': 'false',
     'use_mapper_server': 'true',
     'nav2_rviz_required': 'true',
+    'use_keepout_zone': 'false',
 
     # frames and TFs
     'main_map_frame': 'map',
@@ -35,8 +38,10 @@ DEFAULT_PARAMETERS = {
 
     # File paths
     'map_file_path': str(NAVIGATION_PACKAGE_DIRECTORY / 'maps' / 'rrc' / 'rrc_lab.yaml'),
+    'keepout_mask_file_path': str(NAVIGATION_PACKAGE_DIRECTORY / 'maps' / 'rrc' / 'rrc_lab_mask.yaml'),
     'nav2_params_file': str(NAVIGATION_PACKAGE_DIRECTORY / 'config' / 'nav2_params.yaml'),
     'nav2_rviz_config_file': str(NAVIGATION_PACKAGE_DIRECTORY / 'rviz' / 'navigation.rviz'),
+    'keepout_params_file': str(NAVIGATION_PACKAGE_DIRECTORY / 'config' / 'keepout_params.yaml'),
 }
 
 def declare_launch_arguments(param_defaults: dict):
@@ -60,6 +65,7 @@ def create_nodes():
     use_sim_time = LaunchConfiguration('use_sim_time')
     nav2_rviz_required = LaunchConfiguration('nav2_rviz_required')
     use_mapper_server = LaunchConfiguration('use_mapper_server')
+    use_keepout_zone = LaunchConfiguration('use_keepout_zone')
 
     # frames and TFs
     main_map_frame_id = LaunchConfiguration('main_map_frame')
@@ -69,6 +75,18 @@ def create_nodes():
     map_file_path = LaunchConfiguration('map_file_path')
     nav2_params_file = LaunchConfiguration('nav2_params_file')
     nav2_rviz_config_file = LaunchConfiguration('nav2_rviz_config_file')
+    keepout_mask_file_path = LaunchConfiguration('keepout_mask_file_path')
+    keepout_params_file = LaunchConfiguration('keepout_params_file')
+
+    # keepout zone parameters
+    updated_keepout_params = RewrittenYaml(
+        source_file=keepout_params_file,
+        param_rewrites={
+            'use_sim_time': use_sim_time,
+            'yaml_filename': keepout_mask_file_path
+        },
+        convert_types=True
+    )
 
     # Create nodes
     nodes = []
@@ -84,6 +102,27 @@ def create_nodes():
         }.items(),
     ))
 
+    # Lifecycle manager
+    lifecycle_nodes = [
+        'map_server',
+        'filter_mask_server',
+        'costmap_filter_info_server'
+    ]
+
+    group_actions.append(Node(
+        package="nav2_lifecycle_manager",
+        executable="lifecycle_manager",
+        name="lifecycle_manager",
+        output="screen",
+        emulate_tty=True,
+        parameters=[{
+            'autostart': True,
+            'node_names': lifecycle_nodes,
+            'use_sim_time': use_sim_time
+        }],
+        condition=launch.conditions.IfCondition(use_mapper_server)
+    ))
+
     # Mapper server node
     nodes.append(Node(
         package="nav2_map_server",
@@ -97,19 +136,25 @@ def create_nodes():
         condition=launch.conditions.IfCondition(use_mapper_server)
     ))
 
-    # Mapper server lifecycle manager
+    # Keepout zone filter nodes
     group_actions.append(Node(
-        package="nav2_lifecycle_manager",
-        executable="lifecycle_manager",
-        name="lifecycle_manager",
-        output="screen",
+        package='nav2_map_server',
+        executable='costmap_filter_info_server',
+        name='costmap_filter_info_server',
+        output='screen',
+        emulate_tty=True,  
+        condition=launch.conditions.IfCondition(use_keepout_zone),
+        parameters=[updated_keepout_params]
+    ))
+    
+    group_actions.append(Node(
+        package='nav2_map_server',
+        executable='map_server',
+        name='filter_mask_server',
+        output='screen',
         emulate_tty=True,
-        parameters=[{
-            'autostart': True,
-            'node_names': ['map_server'],
-            'use_sim_time': use_sim_time
-        }],
-        condition=launch.conditions.IfCondition(use_mapper_server)
+        condition=launch.conditions.IfCondition(use_keepout_zone),
+        parameters=[updated_keepout_params]
     ))
 
     # Nav2 bringup for navigation
