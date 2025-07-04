@@ -20,7 +20,7 @@ ros2 launch wheelchair2_bringup lidar.launch.py
 
 3. Start Navigation2
 ```bash
-ros2 launch wheelchair2_navigation nav2.launch.py
+ros2 launch wheelchair2_navigation nav2_amcl.launch.py
 ```
 Set the `use_sim_time` argument based on whether you are in simulation or not.
 

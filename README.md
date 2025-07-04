@@ -121,7 +121,10 @@ Information about the Hardware Setup:
   ```
 - **Navigation** 
   ```bash
-  ros2 launch wheelchair2_navigation nav2.launch.py use_sim_time:=False map:=$MAP_DIR/rrc/rrc_lab.yaml
+  # AMCL
+  ros2 launch wheelchair2_navigation nav2_amcl.launch.py use_sim_time:=False map:=$MAP_DIR/rrc/rrc_lab.yaml
+  # ICP
+  ros2 launch wheelchair2_navigation nav2_icp.launch.py use_sim_time:=False map:=$MAP_DIR/rrc/rrc_lab.yaml pcd_map_path:=$MAP_DIR/rrc/lab_map_with_outside_corridor.pcd
   ```
 - **Keyboard Telep**
   ```bash

@@ -20,7 +20,7 @@ sleep 5
 
 # Window 3: Navigation
 tmux new-window -t $SESSION -n 'nav2'
-tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2.launch.py use_sim_time:=true map:=$MAP_DIR/sim/obstacles_world.yaml" C-m
+tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_amcl.launch.py use_sim_time:=true map:=$MAP_DIR/sim/obstacles_world.yaml" C-m
 
 # (Optional) Window 4: Keepout Zones
 # tmux new-window -t $SESSION -n 'keepout'
