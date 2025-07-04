@@ -63,12 +63,11 @@ ros2 launch wheelchair2_localization localization.launch.py
 
 ## Parameters
 
-Parameters can be configured in the [`localization_config.yaml`](config/localization_config.yaml) file to store settings for the entire package:
+Parameters can be configured EITHER in the [`localization.launch.py`](launch/localization.launch.py) file to store settings for the entire package OR provided as CLI arguments at run-time:
 
-This file allows for flexible configuration of the entire `wheelchair2_localization` package and all its components. The priority of the parameters is as follows:
+The priority of the parameters is as follows:
+1.  Parameters from the command line when launching the package.
 1.  Defaults from the Python launch file.
-2.  Parameters from the `localization_config.yaml` file.
-3.  Parameters from the command line when launching the package.
 
 ### Core functionality parameters
 | Parameter | Expected Type | Default Value | Description |
