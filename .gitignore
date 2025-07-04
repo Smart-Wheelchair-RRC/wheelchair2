@@ -2,3 +2,4 @@
 bag*
 records*
 __pycache__
+*.pcd
