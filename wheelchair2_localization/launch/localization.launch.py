@@ -1,6 +1,6 @@
 """
 Launch file for the wheelchair2 localization package.
-- Loads parameters from YAML file if available.
+- Loads parameters from CLI if available, else uses defaults.
 - Inverts the LiDAR data if required.
 - Runs ICP localization node.
 - Launches Nav2 map server and lifecycle manager.
