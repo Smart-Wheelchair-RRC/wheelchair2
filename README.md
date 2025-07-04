@@ -142,15 +142,16 @@ Information about the Hardware Setup:
 > [!NOTE]
 >  The arguments shown above for each launch file are the default values.
 
-| Argument      | Description                                                                         |
-|---------------|-------------------------------------------------------------------------------------|
-| `use_sim_time`| Launch in simulation mode (`True` for simulation, `False` for hardware connection). |
-| `use_joy`     | Use joystick control.                                                               |
-| `map`         | Specify map file for navigation.                                                    |
-| `use_camera1` | Enable/disable first camera for data collection.                                    |
-| `use_camera2` | Enable/disable second camera for data collection.                                   |
-| `use_rivz`    | Enable/disable RViz visualization for data collection.                              |
-| `record`      | Enable/disable data recording during data collection.                               |
+| Argument            | Description                                                                         |
+|-------------------- |-------------------------------------------------------------------------------------|
+| `use_sim_time`      | Launch in simulation mode (`True` for simulation, `False` for hardware connection). |
+| `use_joy`           | Use joystick control.                                                               |
+| `map`               | Specify map file for navigation.                                                    |
+| `use_camera1`       | Enable/disable first camera for data collection.                                    |
+| `use_camera2`       | Enable/disable second camera for data collection.                                   |
+| `use_rivz`          | Enable/disable RViz visualization for data collection.                              |
+| `record`            | Enable/disable data recording during data collection.                               |
+| `use_keepout_zone`  | Enable/disable keepout zone filtering in navigation.                                |
 
 ---
 
