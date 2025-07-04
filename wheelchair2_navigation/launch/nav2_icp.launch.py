@@ -1,9 +1,9 @@
 """
-Launch file for the wheelchair2 localization package.
+Launch file for Nav2 stack, using custom localization from the Wheelchair2 project.
 - Loads parameters from CLI if available, else uses defaults.
-- Inverts the LiDAR data if required.
-- Runs ICP localization node.
-- Launches Nav2 map server and lifecycle manager.
+- Runs the map server.
+- Runs the main Nav2 stack (except map server and AMCL).
+- Optionally runs RViz for visualization.
 """
 
 from pathlib import Path
@@ -16,43 +16,25 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 
-SELF_PACKAGE_NAME = 'wheelchair2_localization'
-SELF_PACKAGE_DIRECTORY = Path(get_package_share_directory(SELF_PACKAGE_NAME))
+WHEELCHAIR_LOCALIZATION_PACKAGE_NAME = 'wheelchair2_localization'
+WHEELCHAIR_LOCALIZATION_PACKAGE_DIRECTORY = Path(get_package_share_directory(WHEELCHAIR_LOCALIZATION_PACKAGE_NAME))
 
 NAVIGATION_PACKAGE_NAME = 'wheelchair2_navigation'
 NAVIGATION_PACKAGE_DIRECTORY = Path(get_package_share_directory(NAVIGATION_PACKAGE_NAME))
 
-ICP_LOCALIZATION_PACKAGE_NAME = 'icp_localization_ros2'
-ICP_LOCALIZATION_PACKAGE_DIRECTORY = Path(get_package_share_directory(ICP_LOCALIZATION_PACKAGE_NAME))
-ICP_LOCALIZATION_CONFIG_PATH = ICP_LOCALIZATION_PACKAGE_DIRECTORY / 'config'
-
 DEFAULT_PARAMETERS = {
     # core functionality parameters
-    'lidar_inverted': 'true',
     'use_navigation': 'true',
     'use_sim_time': 'false',
     'use_mapper_server': 'true',
     'nav2_rviz_required': 'true',
-    'publish_pcd_map': 'false',
 
     # frames and TFs
     'main_map_frame': 'map',
     'main_odom_frame': 'odom',
 
-    # Topics
-    'input_lidar_topic': '/livox/lidar',
-    'inverted_lidar_topic': '/livox/lidar_inverted',
-    'imu_topic': '/livox/imu',
-    'inverted_imu_topic': '/livox/imu_inverted',
-    'final_lidar_topic': '/livox/lidar_inverted',
-    'final_imu_topic': '/livox/imu_inverted',
-    'input_odom_topic': '/odom',
-
     # File paths
-    'pcd_map_path': str(NAVIGATION_PACKAGE_DIRECTORY / 'maps' / 'rrc' / 'lab_map_with_outside_corridor.pcd'),
     'map_file_path': str(NAVIGATION_PACKAGE_DIRECTORY / 'maps' / 'rrc' / 'rrc_lab.yaml'),
-    'icp_config_file': str(ICP_LOCALIZATION_CONFIG_PATH / 'icp.yaml'),
-    'icp_node_params_file': str(ICP_LOCALIZATION_CONFIG_PATH / 'node_params.yaml'),
     'nav2_params_file': str(NAVIGATION_PACKAGE_DIRECTORY / 'config' / 'nav2_params.yaml'),
     'nav2_rviz_config_file': str(NAVIGATION_PACKAGE_DIRECTORY / 'rviz' / 'navigation.rviz'),
 }
@@ -74,31 +56,17 @@ def create_nodes():
     """Create all the nodes needed for the launch."""
 
     # core
-    lidar_inverted = LaunchConfiguration('lidar_inverted')
     use_navigation = LaunchConfiguration('use_navigation')
     use_sim_time = LaunchConfiguration('use_sim_time')
     nav2_rviz_required = LaunchConfiguration('nav2_rviz_required')
     use_mapper_server = LaunchConfiguration('use_mapper_server')
-    publish_pcd_map = LaunchConfiguration('publish_pcd_map')
 
     # frames and TFs
     main_map_frame_id = LaunchConfiguration('main_map_frame')
     main_odom_frame_id = LaunchConfiguration('main_odom_frame')
 
-    # Topics
-    lidar_cloud_topic = LaunchConfiguration('input_lidar_topic')
-    inverted_lidar_topic = LaunchConfiguration('inverted_lidar_topic')
-    imu_topic = LaunchConfiguration('imu_topic')
-    inverted_imu_topic = LaunchConfiguration('inverted_imu_topic')
-    final_lidar_topic = LaunchConfiguration('final_lidar_topic')
-    final_imu_topic = LaunchConfiguration('final_imu_topic')
-    input_odom_topic = LaunchConfiguration('input_odom_topic')
-
     # File paths
-    pcd_map_path = LaunchConfiguration('pcd_map_path')
     map_file_path = LaunchConfiguration('map_file_path')
-    icp_config_file = LaunchConfiguration('icp_config_file')
-    icp_node_params_file = LaunchConfiguration('icp_node_params_file')
     nav2_params_file = LaunchConfiguration('nav2_params_file')
     nav2_rviz_config_file = LaunchConfiguration('nav2_rviz_config_file')
 
@@ -106,54 +74,14 @@ def create_nodes():
     nodes = []
     group_actions = []
 
-    # PCD map publisher node
-    nodes.append(Node(
-        package=SELF_PACKAGE_NAME,
-        executable='vizualize_pcd_map',
-        name='vizualize_pcd_map',
-        output='screen',
-        parameters=[
-            {'pcd_map_path': pcd_map_path},
-            {'map_topic': '/pcd_map'},
-            {'downsampling_voxel_size': 0.2},  # Default downsampling voxel
-        ],
-        condition=launch.conditions.IfCondition(publish_pcd_map)
-    ))
-    
-    # Invert LiDAR data node
-    nodes.append(Node(
-        package=SELF_PACKAGE_NAME,
-        executable='invert_livox_data',
-        name='invert_livox_data',
-        output='screen',
-        parameters=[
-            {'input_lidar_topic': lidar_cloud_topic},
-            {'input_imu_topic': imu_topic},
-            {'inverted_lidar_topic': inverted_lidar_topic},
-            {'inverted_imu_topic': inverted_imu_topic},
-        ],
-        condition=launch.conditions.IfCondition(lidar_inverted)
-    ))
-
-    # ICP localization node
-    nodes.append(Node(
-        package=ICP_LOCALIZATION_PACKAGE_NAME,
-        executable='icp_localization',
-        output='screen',
-        parameters=[
-            icp_node_params_file,
-            {
-                'icp_config_path': icp_config_file,
-                'input_filters_config_path': str(ICP_LOCALIZATION_CONFIG_PATH / 'input_filters_mid360.yaml'),
-                'pcd_file_path': pcd_map_path,
-                'use_sim_time': use_sim_time,
-            }
-        ],
-        remappings=[
-            ('/cloud_registered_body', final_lidar_topic),
-            ('/imu/data', final_imu_topic),
-            ('/Odometry', input_odom_topic),
-        ]
+    # Localization node
+    nodes.append(IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            [str(WHEELCHAIR_LOCALIZATION_PACKAGE_DIRECTORY), '/launch', '/localization_icp.launch.py']
+        ),
+        launch_arguments={
+            "use_sim_time": use_sim_time,
+        }.items(),
     ))
 
     # Mapper server node
@@ -165,7 +93,6 @@ def create_nodes():
             'use_sim_time': use_sim_time,
             'yaml_filename': map_file_path,
             'frame_id': main_map_frame_id,
-            'pcd_file_path': pcd_map_path,
         }],
         condition=launch.conditions.IfCondition(use_mapper_server)
     ))

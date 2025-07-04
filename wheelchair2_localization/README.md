@@ -5,7 +5,7 @@ This package is mean to be an all-encompassing solution for the localization/SLA
 ## Current implementation
 The current implementation uses 3D localization using the Iterative Closest Point (ICP) algorithm. This means that a pre-defined 3D map (referred to as "PCD map" or "3D map") should be provided as a file.
 
-The current ICP algorithm is taken from [baiyeweiguang/icp_localization_ros2](https://github.com/baiyeweiguang/icp_localization_ros2), as it is a more-or-less simple but complete package and works with minimal modifications to the standard Nav2/AMCL stack.
+The current ICP algorithm is taken from [baiyeweiguang/icp_localization_ros2](https://github.com/baiyeweiguang/icp_localization_ros2), as it is a more-or-less simple but complete package and works with minimal modifications to the standard Nav2 stack.
 
 ## System requirements
 
@@ -39,7 +39,6 @@ The current ICP algorithm is taken from [baiyeweiguang/icp_localization_ros2](ht
 
     ```bash
     python3 -m pip install open3d
-    python3 -m pip install numpy==1.24
     ```
 
 
@@ -47,7 +46,7 @@ The current ICP algorithm is taken from [baiyeweiguang/icp_localization_ros2](ht
 To use the localization package, simply run the launch file:
 
 ```bash
-ros2 launch wheelchair2_localization localization.launch.py
+ros2 launch wheelchair2_localization localization_icp.launch.py
 ```
 
 ## Available nodes
@@ -57,13 +56,10 @@ ros2 launch wheelchair2_localization localization.launch.py
 | 1 | vizualize_pcd_map | [SELF] | An optional node that visualizes the 3D map in RViz using Open3D. This is useful for debugging and visualization purposes. |
 | 2 | invert_livox_data_node | [SELF]  | Rotates the lidar scan 180 degrees around the x-axis, as our lidar is mounted upside-down. |
 | 3 | icp_localization | icp_localization_ros2 | The main node that performs the ICP localization using the provided 3D map. |
-| 4 | map_server | nav2_map_server | Provides the 2D map to the Nav2 stack. This is used for visualization purposes in RViz. |
-| 5 | nav2_bringup/launch/navigation_launch.py launch file | nav2_bringup | The main Nav2 stack, except the map server and AMCL. This is used for navigation and path planning. |
-| 6 | rviz2 | rviz2 | The RViz visualization tool, which is used to visualize the robot's state, the map, and the localization results. |
 
 ## Parameters
 
-Parameters can be configured EITHER in the [`localization.launch.py`](launch/localization.launch.py) file to store settings for the entire package OR provided as CLI arguments at run-time:
+Parameters can be configured EITHER in the [`localization_icp.launch.py`](launch/localization_icp.launch.py) file to store settings for the entire package OR provided as CLI arguments at run-time:
 
 The priority of the parameters is as follows:
 1.  Parameters from the command line when launching the package.
@@ -73,35 +69,23 @@ The priority of the parameters is as follows:
 | Parameter | Expected Type | Default Value | Description |
 | --- | --- | --- | --- |
 | `lidar_inverted` | `bool` | `true` | Whether the lidar data is inverted (i.e., the lidar is mounted upside-down). |
-| `use_navigation` | `bool` | `true` | Whether to use the Nav2 stack for navigation and path planning. |
 | `use_sim_time` | `bool` | `false` | Whether to use simulated time (useful for testing in simulation environments). |
-| `nav2_rviz_required` | `bool` | `true` | Whether to launch the RViz visualization tool for the Nav2 stack. |
-| `use_mapper_server` | `bool` | `true` | Whether to use the Nav2 map server to provide the 2D map to the Nav2 stack. |
 | `publish_pcd_map` | `bool` | `false` | Whether to publish the 3D map as a PCD file for visualization purposes. This is useful for debugging and visualization purposes, but not required for the localization to work. |
-
-### Frames and TFs parameters
-| Parameter | Expected Type | Default Value | Description |
-| --- | --- | --- | --- |
-| `main_map_frame` | `str` | `map` | The main map frame used for localization. This is the frame in which both the 3D and 2D maps are provided. |
-| `main_odom_frame` | `str` | `odom` | The main odometry frame used for localization. This is the frame in which the robot's odometry is provided. |
 
 ### Topics parameters
 | Parameter | Expected Type | Default Value | Description |
 | --- | --- | --- | --- |
-| `input_lidar_topic` | `str` | `/livox/lidar` | | The topic from which the raw lidar data is read. This is the topic that the `invert_livox_data_node` node subscribes to. |
-| `inverted_lidar_topic` | `str` | `/livox/lidar_inverted` | The topic to which the inverted lidar data is published. |
-| `imu_topic` | `str` | `/livox/imu` | The topic from which the raw IMU data is read. This is the topic that the `invert_livox_data_node` node subscribes to. |
-| `inverted_imu_topic` | `str` | `/livox/imu_inverted` | The topic to which the inverted IMU data is published. |
-| `final_lidar_topic` | `str` | `/livox/lidar_inverted` | The topic to which the final inverted lidar data is published. This is the topic that the `icp_localization` node subscribes to. |
-| `final_imu_topic` | `str` | `/livox/imu_inverted` | The topic to which the final inverted IMU data is published. This is the topic that the `icp_localization` node subscribes to, if IMU data is used. |
-| `input_odom_topic` | `str` | `/odom` | The topic from which the raw odometry data is read. This is the topic that the `icp_localization` node subscribes to, if odometry data is used. |
+| `input_lidar_topic` | `str` | `/livox/lidar` | | Raw lidar data is read, `invert_livox_data_node` node subscribes to this. |
+| `inverted_lidar_topic` | `str` | `/livox/lidar_inverted` | Inverted lidar data is published. |
+| `imu_topic` | `str` | `/livox/imu` | Raw IMU data is read, `invert_livox_data_node` node subscribes to this. |
+| `inverted_imu_topic` | `str` | `/livox/imu_inverted` | Inverted IMU data is published. |
+| `final_lidar_topic` | `str` | `/livox/lidar_inverted` | The `icp_localization` node subscribes to this. |
+| `final_imu_topic` | `str` | `/livox/imu_inverted` | The `icp_localization` node subscribes to this, if IMU data is used. |
+| `input_odom_topic` | `str` | `/odom` | The `icp_localization` node subscribes to this, if odometry data is used. |
 
 ### File paths parameters
 | Parameter | Expected Type | Default Value | Description |
 | --- | --- | --- | --- |
-| `pcd_map_path` | `str` | `$MAP_DIR/rrc/lab_map_with_outside_corridor.pcd` | The path to the 3D map file in PCD format. This is the file that the `icp_localization` node uses for localization. |
-| `map_file_path` | `str` | `$MAP_DIR/rrc/rrc_lab.yaml` | The path to the 2D map file in YAML format. This is the file that the `nav2_map_server` node uses to provide the 2D map to the Nav2 stack. |
-| `icp_config_file` | `str` | `dependencies/icp_localization_ros2/config/icp.yaml` | The path to the ICP configuration file. This file contains the parameters for the ICP algorithm, such as the maximum number of iterations, the convergence threshold, etc. |
-| `icp_node_params_file` | `str` | `dependencies/icp_localization_ros2/config/node_params.yaml` | The path to the ICP node parameters file. This file contains the parameters for the `icp_localization` node, such as the input and output topics, the frame IDs, etc. |
-| `nav2_params_file` | `str` | `wheelchair2_navigation/config/nav2_params.yaml` | The path to the Nav2 parameters file. This file contains the parameters for the Nav2 stack, such as the planner, controller, etc. |
-| `nav2_rviz_config_file` | `str` | `wheelchair2_navigation/rviz/navigation.rviz` | The path to the RViz configuration file for the Nav2 stack. This file contains the configuration for the RViz visualization tool, such as the topics to visualize, the frames to use, etc. |    
+| `pcd_map_path` | `str` | `$MAP_DIR/rrc/lab_map_with_outside_corridor.pcd` | The path to the 3D map file in PCD format, the `icp_localization` node uses this for localization. |
+| `icp_config_file` | `str` | `dependencies/icp_localization_ros2/config/icp.yaml` | ICP algorithm params, taken from the `icp_localization_ros2` package. |
+| `icp_node_params_file` | `str` | `dependencies/icp_localization_ros2/config/node_params.yaml` | ICP node parameters, taken from the `icp_localization_ros2` package. |
