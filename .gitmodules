@@ -10,3 +10,6 @@
 	path = dependencies/livox_ros_driver2
 	url = https://github.com/rtarun1/livox_ros_driver2.git
 	branch = master
+[submodule "dependencies/kiss-mpc"]
+	path = dependencies/kiss-mpc
+	url = https://github.com/rtarun1/kiss-mpc.git
