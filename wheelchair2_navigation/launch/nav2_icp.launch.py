@@ -104,7 +104,6 @@ def create_nodes():
 
     # Lifecycle manager
     lifecycle_nodes = [
-        'map_server',
         'filter_mask_server',
         'costmap_filter_info_server'
     ]
@@ -112,7 +111,21 @@ def create_nodes():
     group_actions.append(Node(
         package="nav2_lifecycle_manager",
         executable="lifecycle_manager",
-        name="lifecycle_manager",
+        name="lifecycle_manager_map",
+        output="screen",
+        emulate_tty=True,
+        parameters=[{
+            'autostart': True,
+            'node_names': ['map_server'],
+            'use_sim_time': use_sim_time
+        }],
+        condition=launch.conditions.IfCondition(use_mapper_server)
+    ))
+
+    group_actions.append(Node(
+        package="nav2_lifecycle_manager",
+        executable="lifecycle_manager",
+        name="lifecycle_manager_keepout",
         output="screen",
         emulate_tty=True,
         parameters=[{
@@ -120,7 +133,7 @@ def create_nodes():
             'node_names': lifecycle_nodes,
             'use_sim_time': use_sim_time
         }],
-        condition=launch.conditions.IfCondition(use_mapper_server)
+        condition=launch.conditions.IfCondition(use_keepout_zone)
     ))
 
     # Mapper server node
