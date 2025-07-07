@@ -32,6 +32,8 @@ namespace wheelchair2_kangaroo_x2_driver
             double wheel_diameter;
             std::string left_wheel_name;
             std::string right_wheel_name;
+            char channel_1;
+            char channel_2;
         };
 
         struct Wheel
