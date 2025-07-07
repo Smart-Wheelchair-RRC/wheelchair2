@@ -4,6 +4,7 @@ from launch.actions import (
     IncludeLaunchDescription,
     RegisterEventHandler,
     DeclareLaunchArgument,
+    OpaqueFunction
 )
 from ament_index_python.packages import get_package_share_directory
 from launch.event_handlers import OnProcessExit, OnProcessStart
@@ -13,48 +14,33 @@ from launch.substitutions import (
     FindExecutable,
     PathJoinSubstitution,
     LaunchConfiguration,
-    NotSubstitution,
 )
 from launch.conditions import IfCondition, UnlessCondition
 from launch_ros.actions import Node
 from launch_ros.parameter_descriptions import ParameterValue
 from launch_ros.substitutions import FindPackageShare
 
-def generate_launch_description():
-    
-    launch_arguments = []
-    launch_arguments.append(
-        DeclareLaunchArgument(
-            'use_sim_time',
-            default_value='False',
-            description='Launch in simulation mode'
-        )
-    )
-    launch_arguments.append(
-        DeclareLaunchArgument(
-            'use_joy',
-            default_value='True',
-            description='Use joystick control'
-        )
-    )
-    
+
+def launch_setup(context, *args, **kwargs):
     use_sim_time = LaunchConfiguration("use_sim_time")
     use_joy = LaunchConfiguration('use_joy')
+    use_ducky = LaunchConfiguration("use_ducky")
+    bringup_dir = get_package_share_directory("wheelchair2_description")
 
-    # ROBOT DESCRIPTION
+
+
+    if use_ducky.perform(context)== "True":
+        xacro_path = os.path.join(bringup_dir, "urdf", "ducky_core.urdf.xacro")
+    else:
+        xacro_path = os.path.join(bringup_dir, "urdf", "wheelchair2_core.urdf.xacro")
+
     robot_description = {
         "robot_description": ParameterValue(
             Command(
                 [
                     PathJoinSubstitution([FindExecutable(name="xacro")]),
                     " ",
-                    PathJoinSubstitution(
-                        [
-                            FindPackageShare("wheelchair2_description"),
-                            "urdf",
-                            "wheelchair2_core.urdf.xacro",
-                        ]
-                    ),
+                    xacro_path,
                     " use_sim_time:=",
                     use_sim_time,
                 ]
@@ -68,8 +54,7 @@ def generate_launch_description():
         package="robot_state_publisher",
         executable="robot_state_publisher",
         output="screen",
-        parameters=[robot_description, 
-                    {"use_sim_time": use_sim_time}],
+        parameters=[robot_description, {"use_sim_time": use_sim_time}],
     )
 
     # CONTROLLER MANAGER NODE
@@ -78,24 +63,21 @@ def generate_launch_description():
         executable="ros2_control_node",
         parameters=[
             robot_description,
-            PathJoinSubstitution(
-                [
-                    FindPackageShare("wheelchair2_control"),
-                    "config",
-                    "wheelchair2_controllers.yaml",
-                ]
-            ),
+            PathJoinSubstitution([
+                FindPackageShare("wheelchair2_control"),
+                "config",
+                "wheelchair2_controllers.yaml",
+            ]),
             {"use_sim_time": use_sim_time},
         ],
         output="screen",
         remappings=[
-            # ("/wheelchair2_base_controller/cmd_vel_unstamped", "/cmd_vel"),
             ("/wheelchair2_base_controller/odom", "/odom"),
         ],
-        condition=UnlessCondition(use_sim_time),
+        condition=UnlessCondition(LaunchConfiguration("use_sim_time")),
     )
-    
-   # JOINT STATE BROADCASTER
+
+    # JOINT STATE BROADCASTER
     joint_state_broadcaster_spawner = Node(
         package="controller_manager",
         executable="spawner",
@@ -106,6 +88,7 @@ def generate_launch_description():
         ],
         output="screen",
     )
+
     # WHEELCHAIR CONTROLLER
     robot_controller_spawner = Node(
         package="controller_manager",
@@ -118,38 +101,56 @@ def generate_launch_description():
         output="screen",
     )
 
-    #JOYSTICK TELEOP
+    # JOYSTICK TELEOP
     joystick = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(PathJoinSubstitution(
-            [
-                FindPackageShare("wheelchair2_control"), 'launch', 'wheelchair_teleop.launch.py'
-            ])
-        ),
+        PythonLaunchDescriptionSource(PathJoinSubstitution([
+            FindPackageShare("wheelchair2_control"), 'launch', 'wheelchair_teleop.launch.py'
+        ])),
         condition=IfCondition(use_joy),
     )
 
-    # delay start of joint_state_broadcaster_spawner after ros2 control 
+    # delay start of joint_state_broadcaster_spawner after robot_state_publisher
     delay_joint_state_broadcaster_spawner = RegisterEventHandler(
-                event_handler=OnProcessStart(
-                    target_action=robot_state_publisher,
-                    on_start=[joint_state_broadcaster_spawner],
-                )
-            )
-    
-    #delay start of robot_controller_spawner after joint_state_broadcaster_spawner
+        event_handler=OnProcessStart(
+            target_action=robot_state_publisher,
+            on_start=[joint_state_broadcaster_spawner],
+        )
+    )
+
+    # delay start of robot_controller_spawner after joint_state_broadcaster_spawner
     delay_robot_controller_spawner = RegisterEventHandler(
-                event_handler=OnProcessExit(
-                    target_action=joint_state_broadcaster_spawner,
-                    on_exit=[robot_controller_spawner],
-                )
-            )
-    
-    nodes = [
-            robot_state_publisher,
-            ros2_control,
-            joystick,
-            delay_joint_state_broadcaster_spawner,
-            delay_robot_controller_spawner,
+        event_handler=OnProcessExit(
+            target_action=joint_state_broadcaster_spawner,
+            on_exit=[robot_controller_spawner],
+        )
+    )
+
+    return [
+        robot_state_publisher,
+        ros2_control,
+        joystick,
+        delay_joint_state_broadcaster_spawner,
+        delay_robot_controller_spawner,
     ]
-    
-    return LaunchDescription(launch_arguments + nodes)
+
+
+def generate_launch_description():
+    launch_arguments = [
+        DeclareLaunchArgument(
+            'use_sim_time',
+            default_value='false',
+            description='Launch in simulation mode'
+        ),
+        DeclareLaunchArgument(
+            'use_joy',
+            default_value='true',
+            description='Use joystick control'
+        ),
+        DeclareLaunchArgument(
+            'use_ducky',
+            default_value='false',
+            description='Launch base description'
+        ),
+    ]
+
+    return LaunchDescription(launch_arguments + [OpaqueFunction(function=launch_setup)])
