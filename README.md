@@ -30,7 +30,8 @@ ROS2 Humble and Gazebo Harmonic packages to operate the RRC wheelchair
   echo "<YOUR_GITHUB_PAT>" | docker login ghcr.io -u <YOUR_GITHUB_USERID> --password-stdin
   ```
 
-* **Enabling Nvidia GPU for simulation**
+- [**Install the NVIDIA Container Toolkit**](http://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
+- **Enabling Nvidia GPU for simulation**
 
   | Hardware | Requirement  |
   | :------- | :----------- |
