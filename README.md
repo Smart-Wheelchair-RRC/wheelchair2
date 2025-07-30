@@ -40,10 +40,8 @@ ROS2 Humble and Gazebo Harmonic packages to operate the RRC wheelchair
   | Software      | Requirement                                                           |
   | :------------ | :-------------------------------------------------------------------- |
   | Nvidia Driver | - Ubuntu 22.04 `>=515.43.04` <br/> - Ubuntu 24.04 `>=555.42.02` <br/> |
-
-  - Switching to NVIDIA graphics driver libraries with prime-select tool (reboot required). By default, it is set to on-demand in which the system selects libraries to render automatically (not always correctly). 
-  - So, run
-  `sudo prime-select nvidia` locally.
+  
+- Check [Docker docs](/docs/docker.md) for more information on docker and Nvidia.
 
 ## Hardware Setup
 Information about the Hardware Setup:
