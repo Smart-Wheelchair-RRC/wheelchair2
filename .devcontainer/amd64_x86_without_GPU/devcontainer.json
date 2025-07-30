@@ -62,7 +62,8 @@
         "--cap-add=all",
         "--security-opt=seccomp:unconfined",
         "--security-opt=apparmor:unconfined",
-        "--device=/dev/ttyACM0",
+        // "--device=/dev/ttyACM0",
+        "--volume=/dev:/dev", // Realsense and Motor driver
         "--net=host",
         "--ipc=host"
     ],
