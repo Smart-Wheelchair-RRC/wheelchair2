@@ -13,3 +13,6 @@
 [submodule "dependencies/icp_localization_ros2"]
 	path = dependencies/icp_localization_ros2
 	url = https://github.com/baiyeweiguang/icp_localization_ros2.git
+[submodule "dependencies/glass_detection"]
+	path = dependencies/glass_detection
+	url = https://github.com/rtarun1/glass_detection.git
