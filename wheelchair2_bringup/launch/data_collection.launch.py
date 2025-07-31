@@ -73,7 +73,7 @@ def generate_launch_description():
 
     # set log output path
     get_current_timestamp = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-    log_full_path = os.path.join('/home/wheelchair2/wheelchair2/src/records/', get_current_timestamp)
+    log_full_path = os.path.join('/home/container_user/wheelchair2/src/records/', get_current_timestamp)
     rosbag_full_path = os.path.join(log_full_path, 'rosbag')
     package_path = get_package_share_directory('wheelchair2_bringup')
 
