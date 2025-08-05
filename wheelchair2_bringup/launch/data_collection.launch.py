@@ -93,7 +93,7 @@ def generate_launch_description():
             ),
         ),
         launch_arguments={
-            'serial_no': "'213522253879'",
+            'serial_no': "'151422254995'",
             'camera_name': "camera1",
             'camera_namespace': "camera1",
             'use_sim_time': use_sim_time,
@@ -108,7 +108,7 @@ def generate_launch_description():
             ),
         ),
         launch_arguments={
-            'serial_no': "'151422254995'",
+            'serial_no': "'213522253879'",
             'camera_name': "camera2",
             'camera_namespace': "camera2",
             'use_sim_time': use_sim_time,
