@@ -59,7 +59,7 @@ def generate_launch_description():
     launch_arguments.append(
         DeclareLaunchArgument(
             'use_insta360',
-            default_value='True',
+            default_value='False',
             description='Record in rosbag'
         )
     )
