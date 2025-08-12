@@ -1,0 +1,15 @@
+[Unit]
+Description=Wheelchair ROS2 Docker Startup
+Requires=docker.service
+After=multi-user.target docker.service network-online.target graphical.target
+
+[Service]
+ExecStartPre=/bin/sleep 15
+ExecStart=/usr/local/bin/start_mvp.sh
+Restart=on-failure
+RestartSec=5
+User=ducky
+
+[Install]
+WantedBy=multi-user.target
+
