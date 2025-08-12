@@ -17,6 +17,5 @@ WORKDIR /home/container_user/wheelchair2
 RUN source /opt/ros/humble/setup.bash \
     && sudo colcon build --symlink-install \
     && source install/setup.bash \
-    && cd src/wheelchair2_navigation/shell_scripts \
-    && sudo chmod +x ./navigation.tmux
+    && sudo chmod +x /home/container_user/wheelchair2/src/wheelchair2_navigation/shell_scripts/navigation.tmux
 
