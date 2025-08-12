@@ -30,7 +30,8 @@ ROS2 Humble and Gazebo Harmonic packages to operate the RRC wheelchair
   echo "<YOUR_GITHUB_PAT>" | docker login ghcr.io -u <YOUR_GITHUB_USERID> --password-stdin
   ```
 
-* **Enabling Nvidia GPU for simulation**
+- [**Install the NVIDIA Container Toolkit**](http://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
+- **Enabling Nvidia GPU for simulation**
 
   | Hardware | Requirement  |
   | :------- | :----------- |
@@ -39,10 +40,8 @@ ROS2 Humble and Gazebo Harmonic packages to operate the RRC wheelchair
   | Software      | Requirement                                                           |
   | :------------ | :-------------------------------------------------------------------- |
   | Nvidia Driver | - Ubuntu 22.04 `>=515.43.04` <br/> - Ubuntu 24.04 `>=555.42.02` <br/> |
-
-  - Switching to NVIDIA graphics driver libraries with prime-select tool (reboot required). By default, it is set to on-demand in which the system selects libraries to render automatically (not always correctly). 
-  - So, run
-  `sudo prime-select nvidia` locally.
+  
+- Check [Docker docs](/docs/docker.md) for more information on docker and Nvidia.
 
 ## Hardware Setup
 Information about the Hardware Setup:
@@ -121,7 +120,10 @@ Information about the Hardware Setup:
   ```
 - **Navigation** 
   ```bash
-  ros2 launch wheelchair2_navigation nav2.launch.py use_sim_time:=False map:=$MAP_DIR/rrc/rrc_lab.yaml
+  # AMCL
+  ros2 launch wheelchair2_navigation nav2_amcl.launch.py use_sim_time:=False map:=$MAP_DIR/rrc/rrc_lab.yaml
+  # ICP
+  ros2 launch wheelchair2_navigation nav2_icp.launch.py use_sim_time:=False map:=$MAP_DIR/rrc/rrc_lab.yaml pcd_map_path:=$MAP_DIR/rrc/lab_map_with_outside_corridor.pcd
   ```
 - **Keyboard Telep**
   ```bash
@@ -139,15 +141,16 @@ Information about the Hardware Setup:
 > [!NOTE]
 >  The arguments shown above for each launch file are the default values.
 
-| Argument      | Description                                                                         |
-|---------------|-------------------------------------------------------------------------------------|
-| `use_sim_time`| Launch in simulation mode (`True` for simulation, `False` for hardware connection). |
-| `use_joy`     | Use joystick control.                                                               |
-| `map`         | Specify map file for navigation.                                                    |
-| `use_camera1` | Enable/disable first camera for data collection.                                    |
-| `use_camera2` | Enable/disable second camera for data collection.                                   |
-| `use_rivz`    | Enable/disable RViz visualization for data collection.                              |
-| `record`      | Enable/disable data recording during data collection.                               |
+| Argument            | Description                                                                         |
+|-------------------- |-------------------------------------------------------------------------------------|
+| `use_sim_time`      | Launch in simulation mode (`True` for simulation, `False` for hardware connection). |
+| `use_joy`           | Use joystick control.                                                               |
+| `map`               | Specify map file for navigation.                                                    |
+| `use_camera1`       | Enable/disable first camera for data collection.                                    |
+| `use_camera2`       | Enable/disable second camera for data collection.                                   |
+| `use_rivz`          | Enable/disable RViz visualization for data collection.                              |
+| `record`            | Enable/disable data recording during data collection.                               |
+| `use_keepout_zone`  | Enable/disable keepout zone filtering in navigation.                                |
 
 ---
 

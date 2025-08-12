@@ -1,6 +1,6 @@
 {
     "name": "Wheelchair2 Development on AMD64/x86 with GPU",
-    "image": "ghcr.io/smart-wheelchair-rrc/wheelchair2_base_gazebo:v4.0",
+    "image": "ghcr.io/smart-wheelchair-rrc/wheelchair2_base_gazebo:v4.1",
     "privileged": true,
     "workspaceMount": "source=${localWorkspaceFolder},target=/home/container_user/wheelchair2/src,type=bind",
     "workspaceFolder": "/home/container_user/wheelchair2/src",
@@ -62,7 +62,8 @@
         "--cap-add=all",
         "--security-opt=seccomp:unconfined",
         "--security-opt=apparmor:unconfined",
-        "--device=/dev/ttyACM0",
+        // "--device=/dev/ttyACM0", // Motor driver only
+        "--volume=/dev:/dev", // Realsense and Motor driver
         "--volume=/media:/media:rw",
         "--net=host",
         "--ipc=host"

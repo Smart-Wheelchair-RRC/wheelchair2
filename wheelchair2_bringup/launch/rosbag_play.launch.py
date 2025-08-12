@@ -25,7 +25,7 @@ def get_latest_rosbag_dir(records_root):
         return None
 
 def launch_playback(context, *args, **kwargs):
-    records_root = '/home/wheelchair2/wheelchair2/src/records'
+    records_root = '/home/container_user/wheelchair2/src/records'
     bag_dir = LaunchConfiguration('bag_dir').perform(context)
     if bag_dir and os.path.isdir(bag_dir):
         selected_bag_dir = bag_dir
