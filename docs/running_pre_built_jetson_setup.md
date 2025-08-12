@@ -3,7 +3,7 @@
 - instructions to log in
   ```
   User : interns
-  Password : wheelchairwheelchair
+  # Please ask the administrator for the password
   ```
 - Run commands
   ```
