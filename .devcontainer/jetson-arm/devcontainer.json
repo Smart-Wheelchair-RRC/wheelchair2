@@ -1,6 +1,6 @@
 {
     "name": "Wheelchair2 Development on Jetson",
-    "image": "ghcr.io/smart-wheelchair-rrc/wheelchair2_base_jetson:v4.0",
+    "image": "ghcr.io/smart-wheelchair-rrc/wheelchair2_base_jetson:v4.1",
     "privileged": true,
     "workspaceMount": "source=${localWorkspaceFolder},target=/home/container_user/wheelchair2/src,type=bind",
     "workspaceFolder": "/home/container_user/wheelchair2/src",
@@ -59,7 +59,8 @@
         "--cap-add=all",
         "--security-opt=seccomp:unconfined",
         "--security-opt=apparmor:unconfined",
-        "--device=/dev/ttyACM0",
+        // "--device=/dev/ttyACM0", // Motor driver only
+        "--volume=/dev:/dev", // Realsense and Motor driver
         "--volume=/tmp/.X11-unix:/tmp/.X11-unix",
         "--net=host",
         "--ipc=host"
