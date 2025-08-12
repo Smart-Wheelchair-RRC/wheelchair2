@@ -14,7 +14,7 @@ COPY . /home/container_user/wheelchair2/src
 WORKDIR /home/container_user/wheelchair2
 
 RUN source /opt/ros/humble/setup.bash \
-    && colcon build --symlink-install \
+    && sudo colcon build --symlink-install \
     && source install/setup.bash \
     && cd src/wheelchair2_navigation/shell_scripts \
     && sudo chmod +x ./navigation.tmux
