@@ -22,7 +22,7 @@ from launch.conditions import IfCondition, UnlessCondition
 from launch_ros.actions import Node
 from launch_ros.parameter_descriptions import ParameterValue
 from launch_ros.substitutions import FindPackageShare
-
+from launch_xml.launch_description_sources import XMLLaunchDescriptionSource
 
 
 def generate_launch_description():
@@ -58,6 +58,13 @@ def generate_launch_description():
     )
     launch_arguments.append(
         DeclareLaunchArgument(
+            'use_insta360',
+            default_value='False',
+            description='Record in rosbag'
+        )
+    )
+    launch_arguments.append(
+        DeclareLaunchArgument(
             'record',
             default_value='True',
             description='Record in rosbag'
@@ -69,6 +76,7 @@ def generate_launch_description():
     use_camera1 = LaunchConfiguration("use_camera1")
     use_camera2 = LaunchConfiguration("use_camera2")
     record = LaunchConfiguration("record")
+    use_insta360 = LaunchConfiguration("use_insta360")
 
 
     # set log output path
@@ -93,7 +101,7 @@ def generate_launch_description():
             ),
         ),
         launch_arguments={
-            'serial_no': "'151422254995'",
+            'serial_no': "'213522253879'",
             'camera_name': "camera1",
             'camera_namespace': "camera1",
             'use_sim_time': use_sim_time,
@@ -108,7 +116,7 @@ def generate_launch_description():
             ),
         ),
         launch_arguments={
-            'serial_no': "'213522253879'",
+            'serial_no': "'151422254995'",
             'camera_name': "camera2",
             'camera_namespace': "camera2",
             'use_sim_time': use_sim_time,
@@ -131,6 +139,15 @@ def generate_launch_description():
                 [FindPackageShare("pointcloud_to_laserscan"), "launch", "sample_pointcloud_to_laserscan_launch.py"]
             ),
         ),
+    )
+
+    insta360_launch = IncludeLaunchDescription(
+        XMLLaunchDescriptionSource( 
+            PathJoinSubstitution(
+                [FindPackageShare("insta360_ros_driver"), "launch", "bringup.launch.xml"]
+            ),
+        ),
+        condition=IfCondition(use_insta360)
     )
 
     invert_lidar_node = Node(
@@ -177,6 +194,7 @@ def generate_launch_description():
         invert_lidar_node,
         rosbag_with_delay,
         rviz_node,
+        insta360_launch,
     ]
 
     return LaunchDescription(launch_arguments + nodes)
