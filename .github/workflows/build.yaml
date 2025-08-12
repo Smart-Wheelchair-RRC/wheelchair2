@@ -1,4 +1,4 @@
-name: Build wheelchair2 Containers
+name: Build Multi-Architecture ROS Containers
 
 on:
   push:
@@ -30,10 +30,10 @@ jobs:
           echo "image_version=${{ github.ref_name }}" >> $GITHUB_OUTPUT
 
 
-  # Stage 1: Wheelchair images (AMD64/x86)
-  wheelchair2_AMD64:
+  # Stage 1: ROS2 base humble images (AMD64/x86)
+  ros2-humble-base-amd64:
     needs: get-version
-    name: Wheelchair2 Images (AMD64)
+    name: ROS2 Humble Base Images (AMD64)
     permissions:
       packages: write
       contents: read
@@ -49,10 +49,10 @@ jobs:
       image_version: ${{ matrix.config.image_version }}
       runs_on: ubuntu-22.04
 
-# Stage 1: Wheelchair images (Jetson/ARM)
-# wheelchair2_ARM64:
+# Stage 1: ROS2 base humble images (Jetson/ARM)
+# ros2-humble-jetson:
 #   needs: get-version
-#   name: Wheelchair2 Images (ARM64)
+#   name: ROS2 Humble Jetson Base
 #   permissions:
 #     packages: write
 #     contents: read
@@ -70,7 +70,7 @@ jobs:
   # Stage 2: Create release
   # if the tag is v*, create a pre-release
   create-release:
-    needs: [wheelchair2_AMD64]
+    needs: [ros2-wheelchair-base, ros2-wheelchair-jetson]
     if: startsWith(github.ref_name, 'v')
     runs-on: ubuntu-latest
     permissions:
