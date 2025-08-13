@@ -1,8 +1,15 @@
-# Auto-Boot for Ducky
+q# Auto-Boot for Ducky
 
 This setup ensures that the **ROS2 nodes** inside Docker start automatically when the Jetson boots.
 
 ---
+
+Before setting up auto-boot, build the Docker image from the `wheelchair` folder:
+
+```bash
+cd ~/wheelchair
+docker build -t wheelchair-boot .
+```
 
 ## 1.Docker Entrypoint
 The `entrypoint.sh` script has been added to the **Dockerfile** so that the `docker run` command will automatically launch all ROS2 nodes.
