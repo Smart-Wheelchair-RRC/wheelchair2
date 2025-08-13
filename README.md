@@ -1,5 +1,5 @@
 # Wheelchair2
-ROS2 Humble and Gazebo Harmonic packages to operate the RRC wheelchair
+ROS2 Humble and Gazebo Harmonic packages to operate the RRC wheelchai
 
 ## Prerequisites
 
