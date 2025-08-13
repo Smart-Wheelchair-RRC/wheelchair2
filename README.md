@@ -36,6 +36,7 @@ we then create a [`mvp.service`](https://github.com/Smart-Wheelchair-RRC/wheelch
 cd /etc/systemd/system
 sudo nano mvp.service
 ```
+Edit the ['user`](https://github.com/Smart-Wheelchair-RRC/wheelchair2/blob/713a9fa01c623aa3fce9413c724efe130cfeebf1/dependencies/auto_boot/mvp.service#L11)accordingly
 
 ### Enable & Start the Service
 ```bash
@@ -56,7 +57,7 @@ sudo systemctl status mvp.service
 
 ## 🛠 Troubleshooting
 
-### Ethernet Taking Priority Over Wi-Fi (ROS2 DDS Network Issue)
+### 1.Ethernet Taking Priority Over Wi-Fi (ROS2 DDS Network Issue)
 
 By default, Linux may give **Ethernet** a higher routing priority than **Wi-Fi**.  
 If your LiDAR is connected via Ethernet, the DDS middleware might choose the Ethernet interface over Wi-Fi for ROS communication — even if you want Wi-Fi to be used for peer-to-peer ROS2 traffic.
@@ -93,6 +94,24 @@ Verification:
 ```bash
 ip route show
 ```
+### 2.ROS2 control manager fails
+for unknown reasons sometimes the ros2 control manager fails to start up because it doesnt have the required permissions to access Kangaroo x2 motion controller.
+In that case from your remote machine ssh into ducky(if your local machine and ducky are connected to wheelchair@rrxc ,then follow the instructions below):
+```bash
+ssh ducky@192.168.0.178
+```
+open a terminal(CTRL+ALT+t)
+attach to the running docker container like so : 
+```bash
+docker exec -it mvp_test bash
+```
+once inside the container attach to the running tmux window `navigation_real`
+```bash
+tmux attach -t navigation_real
+```
+
+
+
 
 
 
