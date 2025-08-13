@@ -1,4 +1,4 @@
-q# Auto-Boot for Ducky
+# Auto-Boot for Ducky
 
 This setup ensures that the **ROS2 nodes** inside Docker start automatically when the Jetson boots.
 
