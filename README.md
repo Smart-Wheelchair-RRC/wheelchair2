@@ -18,27 +18,24 @@ The `entrypoint.sh` script has been added to the **Dockerfile** so that the `doc
 
 ## 2.System-Level Auto-Start
 
-We create a **startup script** that runs the `docker run` command at boot.
+We create a **startup script**([`start_mvp.sh`](https://github.com/Smart-Wheelchair-RRC/wheelchair2/blob/auto-boot/dependencies/auto_boot/start_mvp.sh)) that runs the `docker run` command at boot.
 
 ### Create the startup script
 ```bash
 cd /usr/local/bin
 sudo nano start_mvp.sh
 ```
-The [`start_mvp.sh`](dependencies/auto-boot/start_mvp.sh) script is available in the [`dependencies/auto-boot`](dependencies/auto-boot) folder.
-
-
 Make the script executable:
 ```bash
 sudo chmod +x /usr/local/bin/start_mvp.sh
 ```
 
 ### Create a Systemd Service
+we then create a [`mvp.service`](https://github.com/Smart-Wheelchair-RRC/wheelchair2/blob/auto-boot/dependencies/auto_boot/mvp.service) that runs the startup script on boot.
 ```bash
 cd /etc/systemd/system
 sudo nano mvp.service
 ```
-The mvp.service file is also available in the main wheelchair folder.
 
 ### Enable & Start the Service
 ```bash
