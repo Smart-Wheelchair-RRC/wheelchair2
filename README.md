@@ -46,11 +46,3 @@ sudo systemctl start mvp.service
 # Check service status
 sudo systemctl status mvp.service
 ```
-
-
-
-
-
-
-
-Ask ChatGPT
