@@ -25,7 +25,8 @@ We create a **startup script** that runs the `docker run` command at boot.
 cd /usr/local/bin
 sudo nano start_mvp.sh
 ```
-The start_mvp.sh script is available in the main wheelchair folder.
+The [`start_mvp.sh`](dependencies/auto-boot/start_mvp.sh) script is available in the [`dependencies/auto-boot`](dependencies/auto-boot) folder.
+
 
 Make the script executable:
 ```bash
@@ -95,6 +96,9 @@ Verification:
 ```bash
 ip route show
 ```
+
+
+
 
 
 
