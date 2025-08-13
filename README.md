@@ -53,3 +53,54 @@ sudo systemctl start mvp.service
 # Check service status
 sudo systemctl status mvp.service
 ```
+
+---
+
+## 🛠 Troubleshooting
+
+### Ethernet Taking Priority Over Wi-Fi (ROS2 DDS Network Issue)
+
+By default, Linux may give **Ethernet** a higher routing priority than **Wi-Fi**.  
+If your LiDAR is connected via Ethernet, the DDS middleware might choose the Ethernet interface over Wi-Fi for ROS communication — even if you want Wi-Fi to be used for peer-to-peer ROS2 traffic.
+
+#### Symptoms:
+- `ros2 topic list` shows no data over Wi-Fi on another ROS2 machine with same Domain ID.
+- `ip route show` shows Ethernet with a lower metric (higher priority) than Wi-Fi.
+- DDS discovery only works when Ethernet is unplugged.
+
+#### Solution: Increase Ethernet Metric or Lower Wi-Fi Metric
+You can change network priority by adjusting connection metrics.
+
+1. Check current metrics:
+```bash
+ip route show
+```
+2.Identify your connection names:
+```bash
+nmcli connection show
+```
+3.Increase the metric for Ethernet (so Wi-Fi is preferred):
+```bash
+nmcli connection modify "<Ethernet_Connection_Name>" ipv4.route-metric 200
+```
+4.Lower the metric for Wi-Fi:
+```bash
+nmcli connection modify "<WiFi_Connection_Name>" ipv4.route-metric 100
+```
+5.Restart NetworkManager:
+```bash
+sudo systemctl restart NetworkManager
+```
+Verification:
+```bash
+ip route show
+```
+
+
+
+
+
+
+
+
+
