@@ -16,3 +16,6 @@
 [submodule "dependencies/insta360_ros_driver"]
 	path = dependencies/insta360_ros_driver
 	url = https://github.com/Smart-Wheelchair-RRC/insta360_ros_driver.git
+[submodule "dependencies/glass_detection"]
+	path = dependencies/glass_detection
+	url = https://github.com/rtarun1/glass_detection.git
