@@ -4,7 +4,7 @@ This setup ensures that the **ROS2 nodes** inside Docker start automatically whe
 
 ---
 
-Before setting up auto-boot, build the ['Docker image'](https://github.com/Smart-Wheelchair-RRC/wheelchair2/blob/auto-boot/Dockerfile):
+Before setting up auto-boot, build the [`Docker image`](https://github.com/Smart-Wheelchair-RRC/wheelchair2/blob/auto-boot/Dockerfile) from the **Dockerfile**:
 
 ```bash
 cd ~/wheelchair
@@ -12,7 +12,7 @@ docker build -t wheelchair-boot .
 ```
 
 ## 1.Docker Entrypoint
-The `entrypoint.sh` script has been added to the **Dockerfile** so that the `docker run` command will automatically launch all ROS2 nodes.
+The [`entrypoint.sh`](https://github.com/Smart-Wheelchair-RRC/wheelchair2/blob/auto-boot/dependencies/auto_boot/entrypoint.sh) script has been added to the **Dockerfile** so that the `docker run` command will automatically launch all ROS2 nodes.
 
 ---
 
@@ -36,7 +36,7 @@ we then create a [`mvp.service`](https://github.com/Smart-Wheelchair-RRC/wheelch
 cd /etc/systemd/system
 sudo nano mvp.service
 ```
-Edit the ['user`](https://github.com/Smart-Wheelchair-RRC/wheelchair2/blob/713a9fa01c623aa3fce9413c724efe130cfeebf1/dependencies/auto_boot/mvp.service#L11)accordingly
+Edit the [`user`](https://github.com/Smart-Wheelchair-RRC/wheelchair2/blob/713a9fa01c623aa3fce9413c724efe130cfeebf1/dependencies/auto_boot/mvp.service#L11)accordingly
 
 ### Enable & Start the Service
 ```bash
