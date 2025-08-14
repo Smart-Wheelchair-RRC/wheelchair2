@@ -46,15 +46,28 @@ ROS2 Humble and Gazebo Harmonic packages to operate the RRC wheelchair
 ## Hardware Setup
 Information about the Hardware Setup:
 
-#### Motor Driver Controller and Wheel Odometery
-- **Components:**
+**Motor Driver Controller and Wheel Odometery**
   - Kangaroo X2 Motion controller
   - Sabertooth 2x32 Motor driver
   - AMT102-V Wheelencoders
-#### RGB Camera: Realsense D455 
+
+**RGB Camera: Realsense D455**
 - With the current setup we only use realsense for RTABMAP
 - No Additional Setup is required for getting data, just plug-in the type-c cable
-#### 3D LiDAR: Livox MID-360
+
+**Omnidirectional camera: Insta360 X5**
+
+ 1. Connect the camera via USB. Once connected, a pop-up page will appear on the camera; on that page, select Android mode.
+ 2. Set `udev` rules in your system terminal.
+
+    ```bash
+    echo SUBSYSTEM=='"usb"', ATTR{manufacturer}=='"Arashi Vision"', SYMLINK+='"insta"', MODE='"0777"' | sudo tee /etc/udev/rules.d/99-insta.rules
+    sudo udevadm control --reload-rules
+    sudo udevadm trigger
+    sudo chmod 777 /dev/insta
+    ```
+
+**3D LiDAR: Livox MID-360**
  1.  Create new network profile **"Livox"**
  2.  Configure static IP:
       - **IP Address:** 192.168.1.50
@@ -131,7 +144,7 @@ Information about the Hardware Setup:
   ```
 - **Data collection**
   ```bash
-  ros2 launch wheelchair2_bringup data_collection.launch.py use_sim_time:=False use_camera1:=True use_camera2:=True use_rivz:=True record:=True
+  ros2 launch wheelchair2_bringup data_collection.launch.py use_sim_time:=False use_camera1:=True use_camera2:=True use_rivz:=True record:=True use_insta360:=False
   ```
     
 ---
@@ -148,6 +161,7 @@ Information about the Hardware Setup:
 | `map`               | Specify map file for navigation.                                                    |
 | `use_camera1`       | Enable/disable first camera for data collection.                                    |
 | `use_camera2`       | Enable/disable second camera for data collection.                                   |
+| `use_insta360`       | Enable/disable insta360 camera for data collection.                                   |
 | `use_rivz`          | Enable/disable RViz visualization for data collection.                              |
 | `record`            | Enable/disable data recording during data collection.                               |
 | `use_keepout_zone`  | Enable/disable keepout zone filtering in navigation.                                |

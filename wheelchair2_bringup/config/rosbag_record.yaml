@@ -4,6 +4,9 @@ topics:
   - /camera1/camera1/color/image_raw
   - /camera2/camera2/color/camera_info
   - /camera2/camera2/color/image_raw
+  # Insta 360 topics
+  # - /dual_fisheye/image
+  # - /equirectangular/image
 
   - /livox/lidar
   # - /livox/lidar_inverted

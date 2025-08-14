@@ -1,4 +1,4 @@
-FROM ghcr.io/smart-wheelchair-rrc/wheelchair_base_gazebo:v4.1
+FROM ghcr.io/smart-wheelchair-rrc/wheelchair2_base_gazebo:v4.3
 # Add the following labels
 LABEL org.opencontainers.image.description="Wheelchair2"
 LABEL org.opencontainers.image.title="Wheelchair2Navigation"
@@ -12,9 +12,9 @@ SHELL ["/bin/bash", "-c"]
 COPY . /home/container_user/wheelchair2/src
 
 WORKDIR /home/container_user/wheelchair2
-
 RUN source /opt/ros/humble/setup.bash \
-    && colcon build --symlink-install \
-    && source install/setup.bash \
-    && cd src/wheelchair2_navigation/shell_scripts \
-    && sudo chmod +x ./navigation.tmux
+    && sudo colcon build --symlink-install 
+    
+WORKDIR /home/container_user/wheelchair2
+RUN source install/setup.bash 
+    # && sudo chmod +x /home/container_user/wheelchair2/src/wheelchair2_navigation/shell_scripts/navigation.tmux
