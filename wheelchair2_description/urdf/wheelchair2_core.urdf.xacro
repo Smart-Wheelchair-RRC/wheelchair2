@@ -93,6 +93,10 @@
         <gazebo>
             <plugin name="gz_ros2_control::GazeboSimROS2ControlPlugin" filename="libgz_ros2_control-system.so">
                 <parameters>$(find wheelchair2_control)/config/wheelchair2_controllers.yaml</parameters>
+                 <ros>
+					<!-- <remapping>/wheelchair2_base_controller/cmd_vel_unstamped:=/cmd_vel</remapping> -->
+					<remapping>/wheelchair2_base_controller/odom:=/odom</remapping>
+				</ros>
             </plugin>
         </gazebo>
         <xacro:include filename="$(find wheelchair2_gazebo)/urdf/wheelchair2_gazebo.urdf.xacro" />
