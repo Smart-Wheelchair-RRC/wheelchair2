@@ -4,7 +4,7 @@ This setup ensures that the **ROS2 nodes** inside Docker start automatically whe
 
 ---
 
-Before setting up auto-boot, build the Docker image from the `wheelchair` folder:
+Before setting up auto-boot, build the ['Docker image'](https://github.com/Smart-Wheelchair-RRC/wheelchair2/blob/auto-boot/Dockerfile):
 
 ```bash
 cd ~/wheelchair
