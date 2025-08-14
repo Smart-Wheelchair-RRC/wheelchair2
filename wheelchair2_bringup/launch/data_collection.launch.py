@@ -22,7 +22,7 @@ from launch.conditions import IfCondition, UnlessCondition
 from launch_ros.actions import Node
 from launch_ros.parameter_descriptions import ParameterValue
 from launch_ros.substitutions import FindPackageShare
-
+from launch_xml.launch_description_sources import XMLLaunchDescriptionSource
 
 
 def generate_launch_description():
@@ -58,6 +58,13 @@ def generate_launch_description():
     )
     launch_arguments.append(
         DeclareLaunchArgument(
+            'use_insta360',
+            default_value='False',
+            description='Record in rosbag'
+        )
+    )
+    launch_arguments.append(
+        DeclareLaunchArgument(
             'record',
             default_value='True',
             description='Record in rosbag'
@@ -69,6 +76,7 @@ def generate_launch_description():
     use_camera1 = LaunchConfiguration("use_camera1")
     use_camera2 = LaunchConfiguration("use_camera2")
     record = LaunchConfiguration("record")
+    use_insta360 = LaunchConfiguration("use_insta360")
 
 
     # set log output path
@@ -133,6 +141,15 @@ def generate_launch_description():
         ),
     )
 
+    insta360_launch = IncludeLaunchDescription(
+        XMLLaunchDescriptionSource( 
+            PathJoinSubstitution(
+                [FindPackageShare("insta360_ros_driver"), "launch", "bringup.launch.xml"]
+            ),
+        ),
+        condition=IfCondition(use_insta360)
+    )
+
     invert_lidar_node = Node(
         package='wheelchair2_bringup',
         executable='invert_lidar.py',
@@ -177,6 +194,7 @@ def generate_launch_description():
         invert_lidar_node,
         rosbag_with_delay,
         rviz_node,
+        insta360_launch,
     ]
 
     return LaunchDescription(launch_arguments + nodes)
