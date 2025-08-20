@@ -8,6 +8,8 @@ topics:
   - /dual_fisheye/image
   - /dual_fisheye/image/compressed
   - /equirectangular/image
+  - /front_fisheye/image
+  - /back_fisheye/image
 
   - /livox/lidar
   # - /livox/lidar_inverted
