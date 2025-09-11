@@ -1,14 +1,15 @@
 Panels:
   - Class: rviz_common/Displays
-    Help Height: 85
+    Help Height: 0
     Name: Displays
     Property Tree Widget:
       Expanded:
         - /Global Options1
         - /Status1
         - /TF1/Frames1
+        - /Image1
       Splitter Ratio: 0.5
-    Tree Height: 138
+    Tree Height: 223
   - Class: rviz_common/Selection
     Name: Selection
   - Class: rviz_common/Tool Properties
@@ -258,10 +259,6 @@ Visualization Manager:
           Value: false
         caster2:
           Value: false
-        imu_frame:
-          Value: true
-        imu_stabilized:
-          Value: true
         livox_frame:
           Value: true
         rod1:
@@ -297,10 +294,10 @@ Visualization Manager:
                     {}
               camera2_bottom_screw_frame:
                 camera2_link:
-                  camera2_color_frame:
-                    camera2_color_optical_frame:
-                      {}
                   camera2_depth_frame:
+                    camera2_color_frame:
+                      camera2_color_optical_frame:
+                        {}
                     camera2_depth_optical_frame:
                       {}
                     camera2_left_ir_frame:
@@ -331,7 +328,7 @@ Visualization Manager:
         Durability Policy: Volatile
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /equirectangular/image
+        Value: /dual_fisheye/image
       Value: true
   Enabled: true
   Global Options:
@@ -394,10 +391,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.70539790391922
+      Pitch: 0.8703978061676025
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 2.7604000568389893
+      Yaw: 2.7403998374938965
     Saved: ~
 Window Geometry:
   Camera:
@@ -419,5 +416,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1920
-  X: 0
+  X: 1920
   Y: 27
