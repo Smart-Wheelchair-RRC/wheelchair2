@@ -39,7 +39,7 @@ def generate_launch_description():
             rosbag_cmd.append(topic)
         rosbag_cmd.extend([
             '-o', rosbag_storage_dir,
-            '-s', 'sqlite3', 
+            '-s', 'mcap', 
         ])
     
     start_rosbag_yaml = ExecuteProcess(

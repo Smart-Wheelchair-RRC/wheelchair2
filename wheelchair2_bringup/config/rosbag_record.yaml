@@ -4,12 +4,14 @@ topics:
   - /camera1/camera1/color/image_raw
   - /camera2/camera2/color/camera_info
   - /camera2/camera2/color/image_raw
+  - /camera1/camera1/aligned_depth_to_color/image_raw
+  - /camera2/camera2/aligned_depth_to_color/image_raw
   # Insta 360 topics
   - /dual_fisheye/image
   - /dual_fisheye/image/compressed
-  - /equirectangular/image
-  - /front_fisheye/image
-  - /back_fisheye/image
+  # - /equirectangular/image
+  # - /front_fisheye/image
+  # - /back_fisheye/image
 
   - /livox/lidar
   # - /livox/lidar_inverted
@@ -18,7 +20,5 @@ topics:
   
   - /odom
   - /cmd_vel_joy
-  
   - /tf
   - /tf_static
-  - /joint_states
