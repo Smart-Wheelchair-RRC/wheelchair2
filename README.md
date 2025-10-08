@@ -130,6 +130,8 @@ Information about the Hardware Setup:
   ros2 launch wheelchair2_navigation online_async_launch.py
   # rtabmap 
   ros2 launch wheelchair2_navigation rtabmap_lidar_camera_icp.launch.py
+  # FastLIO
+  ros2 launch fast_lio mapping.launch.py config_file:=mid360.yaml
   ```
 - **Navigation** 
   ```bash
@@ -147,6 +149,30 @@ Information about the Hardware Setup:
   ```bash
   ros2 launch wheelchair2_bringup data_collection.launch.py use_sim_time:=False use_camera1:=True use_camera2:=True use_rivz:=True record:=True use_insta360:=False
   ```
+
+## PCD File Save
+
+To save PCD map files from FastLIO:
+
+1. Enable `pcd_save.pcd_save_en` in the config file and set the `map_file_path` to the path where the map will be saved.
+2. Launch the FastLIO according to README.
+> [!Note] **Make sure to call this before ending the FAST-LIO mapping Node**
+3. Open `rqt` in a different terminal after mapping and switch to `Plugins->Services->Service Caller`. Trigger the service `/map_save`, then the pcd map file will be generated.
+
+**Visualization:**
+```bash
+pcl_viewer scans.pcd
+```
+
+*Tips for pcl_viewer:*
+- Change what to visualize/color by pressing keyboard 1,2,3,4,5 when pcl_viewer is running:
+```
+    1 is all random
+    2 is X values
+    3 is Y values
+    4 is Z values
+    5 is intensity
+```
     
 ---
 
@@ -166,7 +192,7 @@ Information about the Hardware Setup:
 | `use_rivz`          | Enable/disable RViz visualization for data collection.                              |
 | `record`            | Enable/disable data recording during data collection.                               |
 | `use_keepout_zone`  | Enable/disable keepout zone filtering in navigation.                                |
-
+| `use_fast_lio`     | Enable/disable FastLIO for mapping. (Put everything else False)                                |
 ---
 
 ## tmux Scripts
