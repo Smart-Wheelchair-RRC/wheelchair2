@@ -70,6 +70,13 @@ def generate_launch_description():
             description='Record in rosbag'
         )
     )
+    launch_arguments.append(
+        DeclareLaunchArgument(
+            'use_fast_lio',
+            default_value='True',
+            description='Record with Fast-LIO odom'
+        )
+    )
     
     use_sim_time = LaunchConfiguration("use_sim_time")
     use_rviz = LaunchConfiguration('use_rviz')
@@ -77,6 +84,7 @@ def generate_launch_description():
     use_camera2 = LaunchConfiguration("use_camera2")
     record = LaunchConfiguration("record")
     use_insta360 = LaunchConfiguration("use_insta360")
+    use_fast_lio = LaunchConfiguration("use_fast_lio")
 
 
     # set log output path
@@ -131,6 +139,18 @@ def generate_launch_description():
             ),
         ),
         condition=UnlessCondition(use_sim_time),
+    )
+    fast_lio_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            PathJoinSubstitution(
+                [FindPackageShare("fast_lio"), "launch", "mapping.launch.py"]
+            ),
+        ),
+        launch_arguments={
+            'config_file': 'mid360.yaml',
+            # 'rviz': 'false',
+        }.items(),
+        condition=IfCondition(use_fast_lio),
     )
 
     pointcloud_to_laserscan_launch = IncludeLaunchDescription(
@@ -190,6 +210,7 @@ def generate_launch_description():
         camera1_launch,
         camera2_launch,
         livox_launch,
+        fast_lio_launch,
         pointcloud_to_laserscan_launch,
         invert_lidar_node,
         rosbag_with_delay,
