@@ -40,7 +40,7 @@ def generate_launch_description():
     launch_arguments.append(
         DeclareLaunchArgument(
             'use_keepout_zone',
-            default_value='False',
+            default_value='false',
             description='Launch with keepout zones'
         )
     )
@@ -64,7 +64,7 @@ def generate_launch_description():
                 get_package_share_directory("wheelchair2_navigation"),
                 "maps",
                 "rrc",
-                "rrc_lab_mask.yaml",
+                "himalaya_with_classroom_nogo.yaml",
             ),
             description="Full path to keepout zone mask file",
         )
@@ -100,7 +100,8 @@ def generate_launch_description():
             get_package_share_directory("wheelchair2_navigation"),
             "maps",
             "rrc",
-            "rrc_lab_mask.yaml",
+            "ihub_office_nogo.yaml",
+            # "rrc_lab_mask.yaml",
         ),
     )
 
