@@ -64,7 +64,7 @@ def generate_launch_description():
                 get_package_share_directory("wheelchair2_navigation"),
                 "maps",
                 "rrc",
-                "rrc_lab_mask.yaml",
+                "ihub_office_nogo.yaml",
             ),
             description="Full path to keepout zone mask file",
         )
@@ -100,7 +100,7 @@ def generate_launch_description():
             get_package_share_directory("wheelchair2_navigation"),
             "maps",
             "rrc",
-            "rrc_lab_mask.yaml",
+            "ihub_office_nogo.yaml",
         ),
     )
 

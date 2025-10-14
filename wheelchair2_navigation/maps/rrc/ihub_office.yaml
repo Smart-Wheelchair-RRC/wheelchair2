@@ -1,0 +1,6 @@
+free_thresh: 0.3
+image: ihub_office.pgm
+negate: 0
+occupied_thresh: 0.6
+origin: [-13.198981285095215, -50.405372619628906, 0.0]
+resolution: 0.05
