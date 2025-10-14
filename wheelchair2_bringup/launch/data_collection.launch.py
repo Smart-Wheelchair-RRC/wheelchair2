@@ -148,7 +148,7 @@ def generate_launch_description():
         ),
         launch_arguments={
             'config_file': 'mid360.yaml',
-            # 'rviz': 'false',
+            'rviz': 'false',
         }.items(),
         condition=IfCondition(use_fast_lio),
     )

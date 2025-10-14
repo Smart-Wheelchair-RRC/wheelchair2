@@ -41,7 +41,7 @@ class InvertLivoxData(Node):
 
         angles_deg = np.degrees(np.arctan2(xyz_data['y'], xyz_data['x']))
 
-        mask = (angles_deg > 135) | (angles_deg < -135)
+        mask = (angles_deg >= -135) & (angles_deg <= 135)
         filtered_data = xyz_data[mask]
 
         filtered_data['y'] = -filtered_data['y']
