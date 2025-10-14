@@ -31,17 +31,16 @@ class InvertLivoxData(Node):
     def lidar_callback(self, original_message: PointCloud2):
         """
         - Extracts x, y, z coordinates from the PointCloud2 message.
-        - Removes points within the forward-facing 270-degree FOV.
+        - Keeps points within the forward-facing 270-degree FOV.
         - Inverts the y and z coordinates (180-degree rotation around x-axis) on the remaining points.
         - Creates and publishes a new PointCloud2 message.
         :param original_message: PointCloud2 message from the /livox/lidar topic.
         """
-        
         xyz_data = point_cloud2.read_points(original_message, skip_nans=True)
 
         angles_deg = np.degrees(np.arctan2(xyz_data['y'], xyz_data['x']))
 
-        mask = (angles_deg > 135) | (angles_deg < -135)
+        mask = (angles_deg >= -135) & (angles_deg <= 135)
         filtered_data = xyz_data[mask]
 
         filtered_data['y'] = -filtered_data['y']
