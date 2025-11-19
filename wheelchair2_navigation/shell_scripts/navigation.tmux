@@ -8,6 +8,8 @@ tmux new-session -d -s $SESSION
 # Window 0: Wheelchair Bringup (with chmod)
 tmux rename-window -t $SESSION:0 "bringup"
 sudo chmod 777 /dev/ttyACM0
+sudo chmod 777 /dev/gpiochip0
+sudo chmod 777 /dev/i2c-7
 sleep 5
 tmux send-keys -t $SESSION:0 "ros2 launch wheelchair2_bringup wheelchair2.launch.py use_sim_time:=False" C-m
 
@@ -38,7 +40,7 @@ sleep 5
 tmux new-window -t $SESSION -n "nav2"
 
 # AMCL stack
-tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_amcl.launch.py use_sim_time:=False map:=$MAP_DIR/rrc/rrc_lab.yaml" C-m
+#tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_amcl.launch.py use_sim_time:=False map:=$MAP_DIR/rrc/rrc_lab.yaml" C-m
 # tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_amcl.launch.py use_sim_time:=False map:=$MAP_DIR/himalaya/himalaya_with_classroom.yaml" C-m
 
 # ICP stack
@@ -51,6 +53,10 @@ tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_amcl.launc
 # Window 3: Teleop
 tmux new-window -t $SESSION -n "teleop"
 tmux send-keys -t $SESSION:3 "ros2 run wheelchair2_control keyboard_teleop_constant.py" C-m
+
+# Window 4: IMU
+tmux new-window -t $SESSION -n "IMU"
+tmux send-keys -t $SESSION:4 "ros2 run wheelchair2_localization adafruit_imu" C-m
 
 # Optional: RViz
 # tmux new-window -t $SESSION -n "rviz"
