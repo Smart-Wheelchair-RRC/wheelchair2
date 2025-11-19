@@ -34,27 +34,12 @@ def generate_launch_description():
         executable='ekf_node',
         name='ekf_filter_node',
         output='screen',
-        parameters=[os.path.join(get_package_share_directory("prototype"), 'config', 'ekf_map.yaml')],
+        parameters=[os.path.join(get_package_share_directory("wheelchair2_localization"), 'config', 'ekf.yaml')],
     )
-    
-    ekf_map=Node(
-        package='robot_localization',
-        executable='ekf_node',
-        name='ekf_filter_node_map',
-        output='screen',
-        parameters=[os.path.join(get_package_share_directory("prototype"), 'config', 'ekf_map.yaml')],
-    )
-    
-    delayed_ekf_map=RegisterEventHandler(
-        event_handler=OnProcessStart(
-        target_action=ekf_odom,
-        on_start=[ekf_map]    
-        )
-    )
-    
+        
     return LaunchDescription([
         ekf_odom,
-        delayed_ekf_map,
+        #delayed_ekf_map,
                 
     ])
         
