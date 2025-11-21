@@ -34,11 +34,6 @@ class BNO055ImuPublisher(Node):
         quat = self.sensor.quaternion        # (x, y, z, w)
         gyro = self.sensor.gyro              # (gx, gy, gz) in deg/sec
         accel = self.sensor.linear_acceleration
-
-        if quat is None or gyro is None or accel is None:
-            self.get_logger().warn("IMU data not available!")
-            return
-
         # -------------------- IMU MESSAGE --------------------
         msg = Imu()
 
@@ -69,22 +64,22 @@ class BNO055ImuPublisher(Node):
 
         # -------------------- DYNAMIC TF --------------------
         t = TransformStamped()
-
+#
         t.header.stamp = msg.header.stamp
         t.header.frame_id = "base_footprint"
         t.child_frame_id = "imu_link"
-
-        # Set your IMU mounting offset here
+#
+        ## Set your IMU mounting offset here
         t.transform.translation.x = 0.0
         t.transform.translation.y = 0.0
         t.transform.translation.z = 0.2   # 20 cm above base (example)
-
-        # Orientation from IMU quaternion
+#
+        ## Orientation from IMU quaternion
         t.transform.rotation.x = quat[2]
         t.transform.rotation.y = quat[1]
         t.transform.rotation.z = quat[3]
         t.transform.rotation.w = quat[0]
-
+#
         self.tf_broadcaster.sendTransform(t)
 
 
