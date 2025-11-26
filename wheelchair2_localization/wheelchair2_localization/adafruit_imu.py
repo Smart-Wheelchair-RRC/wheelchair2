@@ -66,7 +66,7 @@ class BNO055ImuPublisher(Node):
         t = TransformStamped()
 #
         t.header.stamp = msg.header.stamp
-        t.header.frame_id = "base_footprint"
+        t.header.frame_id = "odom"
         t.child_frame_id = "imu_link"
 #
         ## Set your IMU mounting offset here
