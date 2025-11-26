@@ -43,7 +43,7 @@
         </visual>
     </link>
 
-     <joint name="base_footprint_imu_joint" type="continuous">
+     <joint name="base_footprint_imu_joint" type="fixed">
         <parent link="base_footprint" />
         <child link="imu_link" />
         <origin xyz="0.22 0 0.2" rpy="0 0 0" />
