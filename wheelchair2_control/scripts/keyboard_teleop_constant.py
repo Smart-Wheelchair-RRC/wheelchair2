@@ -46,13 +46,13 @@ class KeyboardTeleop(Node):
                 twist = Twist()
 
                 if key == 'w':
-                    twist.linear.x = 0.2
+                    twist.linear.x = 0.4
                 elif key == 'x':
-                    twist.linear.x = -0.2
+                    twist.linear.x = -0.4
                 elif key == 'a':
-                    twist.angular.z = 0.2
+                    twist.angular.z = 0.4
                 elif key == 'd':
-                    twist.angular.z = -0.2
+                    twist.angular.z = -0.4
                 elif key in ('s', ' '):
                     twist.linear.x = 0.0
                     twist.angular.z = 0.0
