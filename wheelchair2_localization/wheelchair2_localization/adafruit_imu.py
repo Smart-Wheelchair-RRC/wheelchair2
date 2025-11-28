@@ -37,10 +37,10 @@ class BNO055ImuPublisher(Node):
         # -------------------- IMU MESSAGE --------------------
         msg = Imu()
 
-        msg.orientation.x = quat[0]
+        msg.orientation.x = quat[2]
         msg.orientation.y = quat[1]
-        msg.orientation.z = quat[2]
-        msg.orientation.w = quat[3]
+        msg.orientation.z = quat[3]
+        msg.orientation.w = quat[0]
 
         # Angular velocity
         msg.angular_velocity.x =gyro[0]
@@ -48,14 +48,19 @@ class BNO055ImuPublisher(Node):
         msg.angular_velocity.z =gyro[2]
 
         # Linear acceleration
-        msg.linear_acceleration.x = 0.0 #accel[0]
-        msg.linear_acceleration.y = accel[1]
-        msg.linear_acceleration.z = accel[2]
+        msg.linear_acceleration.x = accel[0] #accel[0]
+        msg.linear_acceleration.y = 0.0#accel[1]
+        msg.linear_acceleration.z = 0.0#accel[2]
 
         # Covariance (zero for now)
         msg.orientation_covariance = [0.0] * 9
         msg.angular_velocity_covariance = [0.0] * 9
-        msg.linear_acceleration_covariance = [0.0] * 9
+        #msg.linear_acceleration_covariance = [0.0] * 9
+        msg.linear_acceleration_covariance = [
+            0.0001, 0.0,    0.0,
+            0.0,    0.0001, 0.0,
+            0.0,    0.0,    0.0009
+        ]
 
         msg.header.stamp = self.get_clock().now().to_msg()
         msg.header.frame_id = "imu_link"
