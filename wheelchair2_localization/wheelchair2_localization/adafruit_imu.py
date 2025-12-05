@@ -28,7 +28,7 @@ class BNO055ImuPublisher(Node):
         # Publish at 30 Hz
         self.timer = self.create_timer(1.0 / 100.0, self.publish_imu)
 
-        self.get_logger().info("BNO055 IMU Publisher + dynamic TF started...")
+        self.get_logger().info("BNO055 IMU Publisher")
 
     def publish_imu(self):
         quat = self.sensor.quaternion        # (x, y, z, w)
@@ -63,7 +63,7 @@ class BNO055ImuPublisher(Node):
         ]
 
         msg.header.stamp = self.get_clock().now().to_msg()
-        msg.header.frame_id = "imu_link"
+        msg.header.frame_id = "base_footprint"
 
         self.publisher_.publish(msg)
 
@@ -71,7 +71,7 @@ class BNO055ImuPublisher(Node):
         t = TransformStamped()
 #
         t.header.stamp = msg.header.stamp
-        t.header.frame_id = "odom"
+        t.header.frame_id = "base_footprint"
         t.child_frame_id = "imu_link"
 #
         ## Set your IMU mounting offset here
@@ -85,7 +85,7 @@ class BNO055ImuPublisher(Node):
         t.transform.rotation.z = quat[3]
         t.transform.rotation.w = quat[0]
 #
-        self.tf_broadcaster.sendTransform(t)
+        #self.tf_broadcaster.sendTransform(t)
 
 
 def main(args=None):
