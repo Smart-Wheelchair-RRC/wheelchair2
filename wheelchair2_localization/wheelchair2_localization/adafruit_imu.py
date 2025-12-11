@@ -32,7 +32,7 @@ class BNO055ImuPublisher(Node):
 
     def publish_imu(self):
         quat = self.sensor.quaternion        # (x, y, z, w)
-        gyro = self.sensor.gyro              # (gx, gy, gz) in deg/sec
+        gyro = self.sensor.gyro              # (gx, gy, gz) in rad/sec
         accel = self.sensor.linear_acceleration
         # -------------------- IMU MESSAGE --------------------
         msg = Imu()
