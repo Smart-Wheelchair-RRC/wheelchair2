@@ -18,6 +18,8 @@
 					<param name="hz">50</param>
 					<param name="port">/dev/ttyACM0</param>
 					<param name="mixed_mode">true</param>
+					<param name="channel_1">3</param>
+					<param name="channel_2">4</param>
 				</xacro:unless>
 			</hardware>
 			<joint name="${prefix}base_link_to_left_wheel">

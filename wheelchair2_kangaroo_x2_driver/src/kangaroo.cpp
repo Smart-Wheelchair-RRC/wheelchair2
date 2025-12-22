@@ -417,12 +417,14 @@ namespace wheelchair2_kangaroo_x2_driver
         config_.left_wheel_name = info_.hardware_parameters["left_wheel_name"];
         config_.right_wheel_name = info_.hardware_parameters["right_wheel_name"];
         config_.mixed_mode = info_.hardware_parameters["mixed_mode"] == "true";
+        config_.channel_1=info_.hardware_parameters["channel_1"][0];
+        config_.channel_2=info_.hardware_parameters["channel_2"][0];
 
         if (config_.mixed_mode)
         {
             RCLCPP_INFO(rclcpp::get_logger("Kangaroo"), "Mixed Mode is on.");
-            channel_1_ = '3';
-            channel_2_ = '4';
+            channel_1_ =config_.channel_1;
+            channel_2_ =config_.channel_2;
         }
 
         termios_file_descriptor_ = -1;

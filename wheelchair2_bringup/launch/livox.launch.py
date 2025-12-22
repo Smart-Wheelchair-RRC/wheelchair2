@@ -32,7 +32,15 @@ def generate_launch_description():
                 description='Launch in simulation mode'
             )
         )
-    
+    launch_arguments.append(
+        DeclareLaunchArgument(
+            'use_ducky',
+            default_value='False',
+            description='launch duckys lidar'
+        )
+    )
+
+    use_ducky=LaunchConfiguration("use_ducky")
     use_sim_time = LaunchConfiguration("use_sim_time")
 
     livox_launch = IncludeLaunchDescription(
@@ -41,7 +49,16 @@ def generate_launch_description():
                 [FindPackageShare("livox_ros_driver2"), "launch", "msg_MID360_launch.py"]
             ),
         ),
-        condition=UnlessCondition(use_sim_time),
+        condition=UnlessCondition(use_ducky),
+    )
+
+    ducky_livox_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            PathJoinSubstitution(
+                [FindPackageShare("livox_ros_driver2"), "launch", "ducky_msg_MID360_launch.py"]
+            ),
+        ),
+        condition=IfCondition(use_ducky),
     )
 
     pointcloud_to_laserscan_launch = IncludeLaunchDescription(
@@ -54,6 +71,7 @@ def generate_launch_description():
 
     nodes =[
         livox_launch,
+        ducky_livox_launch,
         pointcloud_to_laserscan_launch
     ]
 
