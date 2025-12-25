@@ -38,8 +38,11 @@ sleep 5
 tmux new-window -t $SESSION -n "nav2"
 
 # AMCL stack
-tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_amcl.launch.py use_sim_time:=False map:=$MAP_DIR/rrc/rrc_lab.yaml" C-m
+# tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_amcl.launch.py use_sim_time:=False map:=$MAP_DIR/rrc/rrc_lab.yaml" C-m
 # tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_amcl.launch.py use_sim_time:=False map:=$MAP_DIR/himalaya/himalaya_with_classroom.yaml" C-m
+# tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_amcl.launch.py use_sim_time:=False map:=$MAP_DIR/himalaya/lab_and_himalaya_cleaned.yaml" C-m
+tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_amcl.launch.py use_sim_time:=False map:=$MAP_DIR/ramps/rrc_outside_himalaya_ramps_fast_cleaned.yaml" C-m
+# tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_amcl.launch.py use_sim_time:=False map:=$MAP_DIR/rrc/rrc_4th_floor.yaml" C-m
 
 # ICP stack
 ## for RRC lab
@@ -55,6 +58,9 @@ tmux send-keys -t $SESSION:3 "ros2 run wheelchair2_control keyboard_teleop_const
 # Optional: RViz
 # tmux new-window -t $SESSION -n "rviz"
 # tmux send-keys -t $SESSION:5 "rviz2 -d navigation.rviz" C-m
+
+tmux new-window -t $SESSION -n "ground_detection"
+tmux send-keys -t $SESSION:4 "ros2 run wheelchair2_bringup ground_detection_fast.py --ros-args -p use_sim_time:=False -p publish_grid:=False" C-m
 
 # Attach to session
 tmux attach -t $SESSION

@@ -20,6 +20,8 @@ install(DIRECTORY rviz DESTINATION share/${PROJECT_NAME})
 # Install Python scripts
 install(PROGRAMS
   scripts/invert_lidar.py
+  scripts/ground_detection.py
+  scripts/ground_detection_fast.py
   DESTINATION lib/${PROJECT_NAME}
 )
 
