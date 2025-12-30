@@ -1,0 +1,1 @@
+wheelchair2_gazebo_classic/meshes/wheel_chair.dae filter=lfs diff=lfs merge=lfs -text
