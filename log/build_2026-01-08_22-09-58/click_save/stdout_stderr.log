@@ -1,0 +1,35 @@
+running egg_info
+creating ../../build/click_save/click_save.egg-info
+writing ../../build/click_save/click_save.egg-info/PKG-INFO
+writing dependency_links to ../../build/click_save/click_save.egg-info/dependency_links.txt
+writing entry points to ../../build/click_save/click_save.egg-info/entry_points.txt
+writing requirements to ../../build/click_save/click_save.egg-info/requires.txt
+writing top-level names to ../../build/click_save/click_save.egg-info/top_level.txt
+writing manifest file '../../build/click_save/click_save.egg-info/SOURCES.txt'
+reading manifest file '../../build/click_save/click_save.egg-info/SOURCES.txt'
+writing manifest file '../../build/click_save/click_save.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/container_user/wheelchair2/src/build/click_save/build
+creating /home/container_user/wheelchair2/src/build/click_save/build/lib
+creating /home/container_user/wheelchair2/src/build/click_save/build/lib/click_save
+copying click_save/__init__.py -> /home/container_user/wheelchair2/src/build/click_save/build/lib/click_save
+copying click_save/click_save.py -> /home/container_user/wheelchair2/src/build/click_save/build/lib/click_save
+running install
+running install_lib
+creating /home/container_user/wheelchair2/src/install/click_save/lib/python3.10/site-packages/click_save
+copying /home/container_user/wheelchair2/src/build/click_save/build/lib/click_save/__init__.py -> /home/container_user/wheelchair2/src/install/click_save/lib/python3.10/site-packages/click_save
+copying /home/container_user/wheelchair2/src/build/click_save/build/lib/click_save/click_save.py -> /home/container_user/wheelchair2/src/install/click_save/lib/python3.10/site-packages/click_save
+byte-compiling /home/container_user/wheelchair2/src/install/click_save/lib/python3.10/site-packages/click_save/__init__.py to __init__.cpython-310.pyc
+byte-compiling /home/container_user/wheelchair2/src/install/click_save/lib/python3.10/site-packages/click_save/click_save.py to click_save.cpython-310.pyc
+running install_data
+creating /home/container_user/wheelchair2/src/install/click_save/share/ament_index
+creating /home/container_user/wheelchair2/src/install/click_save/share/ament_index/resource_index
+creating /home/container_user/wheelchair2/src/install/click_save/share/ament_index/resource_index/packages
+copying resource/click_save -> /home/container_user/wheelchair2/src/install/click_save/share/ament_index/resource_index/packages
+copying package.xml -> /home/container_user/wheelchair2/src/install/click_save/share/click_save
+running install_egg_info
+Copying ../../build/click_save/click_save.egg-info to /home/container_user/wheelchair2/src/install/click_save/lib/python3.10/site-packages/click_save-0.0.0-py3.10.egg-info
+running install_scripts
+Installing click_save script to /home/container_user/wheelchair2/src/install/click_save/lib/click_save
+writing list of installed files to '/home/container_user/wheelchair2/src/build/click_save/install.log'

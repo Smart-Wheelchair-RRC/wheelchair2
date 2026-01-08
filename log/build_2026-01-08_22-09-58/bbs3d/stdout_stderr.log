@@ -1,0 +1,30 @@
+-- num_entries in thirdparty/Eigen: 0
+-- Use EIGEN3_INCLUDE_DIR
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/container_user/wheelchair2/src/build/bbs3d
+[35m[1mConsolidate compiler generated dependencies of target cpu_bbs3d[0m
+[ 40%] Built target cpu_bbs3d
+[ 50%] [32m[1mLinking CXX shared library libgpu_bbs3d.so[0m
+[100%] Built target gpu_bbs3d
+-- Install configuration: ""
+-- Installing: /home/container_user/wheelchair2/src/install/bbs3d/lib/libcpu_bbs3d.so
+-- Installing: /home/container_user/wheelchair2/src/install/bbs3d/lib/libgpu_bbs3d.so
+-- Installing: /home/container_user/wheelchair2/src/install/bbs3d/include
+-- Installing: /home/container_user/wheelchair2/src/install/bbs3d/include/discrete_transformation
+-- Installing: /home/container_user/wheelchair2/src/install/bbs3d/include/discrete_transformation/discrete_transformation.hpp
+-- Installing: /home/container_user/wheelchair2/src/install/bbs3d/include/pointcloud_iof
+-- Installing: /home/container_user/wheelchair2/src/install/bbs3d/include/pointcloud_iof/pcd_io.hpp
+-- Installing: /home/container_user/wheelchair2/src/install/bbs3d/include/pointcloud_iof/pcd_loader.hpp
+-- Installing: /home/container_user/wheelchair2/src/install/bbs3d/include/pointcloud_iof/pcl_eigen_converter.hpp
+-- Installing: /home/container_user/wheelchair2/src/install/bbs3d/include/pointcloud_iof/gravity_alignment.hpp
+-- Installing: /home/container_user/wheelchair2/src/install/bbs3d/include/pointcloud_iof/pcd_loader_without_pcl.hpp
+-- Installing: /home/container_user/wheelchair2/src/install/bbs3d/include/pointcloud_iof/filter.hpp
+-- Installing: /home/container_user/wheelchair2/src/install/bbs3d/include/gpu_bbs3d
+-- Installing: /home/container_user/wheelchair2/src/install/bbs3d/include/gpu_bbs3d/bbs3d.cuh
+-- Installing: /home/container_user/wheelchair2/src/install/bbs3d/include/gpu_bbs3d/voxelmaps.cuh
+-- Installing: /home/container_user/wheelchair2/src/install/bbs3d/include/gpu_bbs3d/stream_manager
+-- Installing: /home/container_user/wheelchair2/src/install/bbs3d/include/gpu_bbs3d/stream_manager/check_error.cuh
+-- Installing: /home/container_user/wheelchair2/src/install/bbs3d/include/cpu_bbs3d
+-- Installing: /home/container_user/wheelchair2/src/install/bbs3d/include/cpu_bbs3d/bbs3d.hpp
+-- Installing: /home/container_user/wheelchair2/src/install/bbs3d/include/cpu_bbs3d/voxelmaps.hpp

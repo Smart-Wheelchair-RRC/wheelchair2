@@ -1,0 +1,36 @@
+[1.259s] Invoking command in '/home/container_user/wheelchair2/src/3dbbs_localization/click_save': PYTHONPATH=/home/container_user/wheelchair2/src/build/click_save/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/container_user/wheelchair2/src/install/click_save/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/click_save build --build-base /home/container_user/wheelchair2/src/build/click_save/build install --record /home/container_user/wheelchair2/src/build/click_save/install.log --single-version-externally-managed install_data
+[1.429s] running egg_info
+[1.430s] creating ../../build/click_save/click_save.egg-info
+[1.430s] writing ../../build/click_save/click_save.egg-info/PKG-INFO
+[1.430s] writing dependency_links to ../../build/click_save/click_save.egg-info/dependency_links.txt
+[1.430s] writing entry points to ../../build/click_save/click_save.egg-info/entry_points.txt
+[1.430s] writing requirements to ../../build/click_save/click_save.egg-info/requires.txt
+[1.430s] writing top-level names to ../../build/click_save/click_save.egg-info/top_level.txt
+[1.430s] writing manifest file '../../build/click_save/click_save.egg-info/SOURCES.txt'
+[1.432s] reading manifest file '../../build/click_save/click_save.egg-info/SOURCES.txt'
+[1.432s] writing manifest file '../../build/click_save/click_save.egg-info/SOURCES.txt'
+[1.432s] running build
+[1.432s] running build_py
+[1.432s] creating /home/container_user/wheelchair2/src/build/click_save/build
+[1.432s] creating /home/container_user/wheelchair2/src/build/click_save/build/lib
+[1.432s] creating /home/container_user/wheelchair2/src/build/click_save/build/lib/click_save
+[1.432s] copying click_save/__init__.py -> /home/container_user/wheelchair2/src/build/click_save/build/lib/click_save
+[1.433s] copying click_save/click_save.py -> /home/container_user/wheelchair2/src/build/click_save/build/lib/click_save
+[1.433s] running install
+[1.433s] running install_lib
+[1.434s] creating /home/container_user/wheelchair2/src/install/click_save/lib/python3.10/site-packages/click_save
+[1.434s] copying /home/container_user/wheelchair2/src/build/click_save/build/lib/click_save/__init__.py -> /home/container_user/wheelchair2/src/install/click_save/lib/python3.10/site-packages/click_save
+[1.434s] copying /home/container_user/wheelchair2/src/build/click_save/build/lib/click_save/click_save.py -> /home/container_user/wheelchair2/src/install/click_save/lib/python3.10/site-packages/click_save
+[1.434s] byte-compiling /home/container_user/wheelchair2/src/install/click_save/lib/python3.10/site-packages/click_save/__init__.py to __init__.cpython-310.pyc
+[1.435s] byte-compiling /home/container_user/wheelchair2/src/install/click_save/lib/python3.10/site-packages/click_save/click_save.py to click_save.cpython-310.pyc
+[1.435s] running install_data
+[1.435s] creating /home/container_user/wheelchair2/src/install/click_save/share/ament_index
+[1.436s] creating /home/container_user/wheelchair2/src/install/click_save/share/ament_index/resource_index
+[1.436s] creating /home/container_user/wheelchair2/src/install/click_save/share/ament_index/resource_index/packages
+[1.436s] copying resource/click_save -> /home/container_user/wheelchair2/src/install/click_save/share/ament_index/resource_index/packages
+[1.436s] copying package.xml -> /home/container_user/wheelchair2/src/install/click_save/share/click_save
+[1.436s] running install_egg_info
+[1.438s] Copying ../../build/click_save/click_save.egg-info to /home/container_user/wheelchair2/src/install/click_save/lib/python3.10/site-packages/click_save-0.0.0-py3.10.egg-info
+[1.439s] running install_scripts
+[1.458s] Installing click_save script to /home/container_user/wheelchair2/src/install/click_save/lib/click_save
+[1.458s] writing list of installed files to '/home/container_user/wheelchair2/src/build/click_save/install.log'

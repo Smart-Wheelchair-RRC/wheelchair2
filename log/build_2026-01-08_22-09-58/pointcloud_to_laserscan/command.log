@@ -1,0 +1,1 @@
+Invoking command in '/home/container_user/wheelchair2/src/build/pointcloud_to_laserscan': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/container_user/wheelchair2/src/dependencies/pointcloud_to_laserscan -DCMAKE_INSTALL_PREFIX=/home/container_user/wheelchair2/src/install/pointcloud_to_laserscan

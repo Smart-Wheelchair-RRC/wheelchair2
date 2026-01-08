@@ -1,0 +1,47 @@
+[1.228s] Invoking command in '/home/container_user/wheelchair2/src/wheelchair2_gazebo': PYTHONPATH=/home/container_user/wheelchair2/src/build/wheelchair2_gazebo/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/container_user/wheelchair2/src/install/wheelchair2_gazebo/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/wheelchair2_gazebo build --build-base /home/container_user/wheelchair2/src/build/wheelchair2_gazebo/build install --record /home/container_user/wheelchair2/src/build/wheelchair2_gazebo/install.log --single-version-externally-managed install_data
+[1.401s] running egg_info
+[1.402s] creating ../build/wheelchair2_gazebo/wheelchair2_gazebo.egg-info
+[1.402s] writing ../build/wheelchair2_gazebo/wheelchair2_gazebo.egg-info/PKG-INFO
+[1.402s] writing dependency_links to ../build/wheelchair2_gazebo/wheelchair2_gazebo.egg-info/dependency_links.txt
+[1.403s] writing entry points to ../build/wheelchair2_gazebo/wheelchair2_gazebo.egg-info/entry_points.txt
+[1.403s] writing requirements to ../build/wheelchair2_gazebo/wheelchair2_gazebo.egg-info/requires.txt
+[1.403s] writing top-level names to ../build/wheelchair2_gazebo/wheelchair2_gazebo.egg-info/top_level.txt
+[1.403s] writing manifest file '../build/wheelchair2_gazebo/wheelchair2_gazebo.egg-info/SOURCES.txt'
+[1.404s] reading manifest file '../build/wheelchair2_gazebo/wheelchair2_gazebo.egg-info/SOURCES.txt'
+[1.405s] writing manifest file '../build/wheelchair2_gazebo/wheelchair2_gazebo.egg-info/SOURCES.txt'
+[1.405s] running build
+[1.405s] running build_py
+[1.406s] creating /home/container_user/wheelchair2/src/build/wheelchair2_gazebo/build
+[1.406s] creating /home/container_user/wheelchair2/src/build/wheelchair2_gazebo/build/lib
+[1.406s] creating /home/container_user/wheelchair2/src/build/wheelchair2_gazebo/build/lib/wheelchair2_gazebo
+[1.406s] copying wheelchair2_gazebo/__init__.py -> /home/container_user/wheelchair2/src/build/wheelchair2_gazebo/build/lib/wheelchair2_gazebo
+[1.406s] running install
+[1.406s] running install_lib
+[1.407s] creating /home/container_user/wheelchair2/src/install/wheelchair2_gazebo/lib/python3.10/site-packages/wheelchair2_gazebo
+[1.407s] copying /home/container_user/wheelchair2/src/build/wheelchair2_gazebo/build/lib/wheelchair2_gazebo/__init__.py -> /home/container_user/wheelchair2/src/install/wheelchair2_gazebo/lib/python3.10/site-packages/wheelchair2_gazebo
+[1.408s] byte-compiling /home/container_user/wheelchair2/src/install/wheelchair2_gazebo/lib/python3.10/site-packages/wheelchair2_gazebo/__init__.py to __init__.cpython-310.pyc
+[1.408s] running install_data
+[1.408s] creating /home/container_user/wheelchair2/src/install/wheelchair2_gazebo/share/wheelchair2_gazebo/launch
+[1.409s] copying launch/wheelchair2_sim.launch.py -> /home/container_user/wheelchair2/src/install/wheelchair2_gazebo/share/wheelchair2_gazebo/launch
+[1.409s] creating /home/container_user/wheelchair2/src/install/wheelchair2_gazebo/share/wheelchair2_gazebo/worlds
+[1.409s] copying worlds/rrc.world -> /home/container_user/wheelchair2/src/install/wheelchair2_gazebo/share/wheelchair2_gazebo/worlds
+[1.409s] copying worlds/obstacles.world -> /home/container_user/wheelchair2/src/install/wheelchair2_gazebo/share/wheelchair2_gazebo/worlds
+[1.409s] copying worlds/empty.world -> /home/container_user/wheelchair2/src/install/wheelchair2_gazebo/share/wheelchair2_gazebo/worlds
+[1.409s] creating /home/container_user/wheelchair2/src/install/wheelchair2_gazebo/share/ament_index
+[1.409s] creating /home/container_user/wheelchair2/src/install/wheelchair2_gazebo/share/ament_index/resource_index
+[1.409s] creating /home/container_user/wheelchair2/src/install/wheelchair2_gazebo/share/ament_index/resource_index/packages
+[1.409s] copying resource/wheelchair2_gazebo -> /home/container_user/wheelchair2/src/install/wheelchair2_gazebo/share/ament_index/resource_index/packages
+[1.409s] copying package.xml -> /home/container_user/wheelchair2/src/install/wheelchair2_gazebo/share/wheelchair2_gazebo
+[1.409s] creating /home/container_user/wheelchair2/src/install/wheelchair2_gazebo/share/wheelchair2_gazebo/models
+[1.409s] creating /home/container_user/wheelchair2/src/install/wheelchair2_gazebo/share/wheelchair2_gazebo/params
+[1.409s] creating /home/container_user/wheelchair2/src/install/wheelchair2_gazebo/share/wheelchair2_gazebo/urdf
+[1.410s] copying urdf/wheelchair2_gazebo.urdf.xacro -> /home/container_user/wheelchair2/src/install/wheelchair2_gazebo/share/wheelchair2_gazebo/urdf
+[1.410s] copying urdf/2dlidar.urdf.xacro -> /home/container_user/wheelchair2/src/install/wheelchair2_gazebo/share/wheelchair2_gazebo/urdf
+[1.410s] copying urdf/livox.urdf.xacro -> /home/container_user/wheelchair2/src/install/wheelchair2_gazebo/share/wheelchair2_gazebo/urdf
+[1.410s] creating /home/container_user/wheelchair2/src/install/wheelchair2_gazebo/share/wheelchair2_gazebo/urdf/gz_sim
+[1.410s] creating /home/container_user/wheelchair2/src/install/wheelchair2_gazebo/share/wheelchair2_gazebo/config
+[1.410s] copying config/gz_bridge.yaml -> /home/container_user/wheelchair2/src/install/wheelchair2_gazebo/share/wheelchair2_gazebo/config
+[1.410s] running install_egg_info
+[1.412s] Copying ../build/wheelchair2_gazebo/wheelchair2_gazebo.egg-info to /home/container_user/wheelchair2/src/install/wheelchair2_gazebo/lib/python3.10/site-packages/wheelchair2_gazebo-0.0.0-py3.10.egg-info
+[1.412s] running install_scripts
+[1.430s] writing list of installed files to '/home/container_user/wheelchair2/src/build/wheelchair2_gazebo/install.log'

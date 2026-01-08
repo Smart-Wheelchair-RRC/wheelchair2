@@ -1,0 +1,23 @@
+[ 40%] Built target cpu_bbs3d
+[100%] Built target gpu_bbs3d
+-- Install configuration: ""
+-- Up-to-date: /home/container_user/wheelchair2/src/install/bbs3d/lib/libcpu_bbs3d.so
+-- Up-to-date: /home/container_user/wheelchair2/src/install/bbs3d/lib/libgpu_bbs3d.so
+-- Up-to-date: /home/container_user/wheelchair2/src/install/bbs3d/include
+-- Up-to-date: /home/container_user/wheelchair2/src/install/bbs3d/include/discrete_transformation
+-- Up-to-date: /home/container_user/wheelchair2/src/install/bbs3d/include/discrete_transformation/discrete_transformation.hpp
+-- Up-to-date: /home/container_user/wheelchair2/src/install/bbs3d/include/pointcloud_iof
+-- Up-to-date: /home/container_user/wheelchair2/src/install/bbs3d/include/pointcloud_iof/pcd_io.hpp
+-- Up-to-date: /home/container_user/wheelchair2/src/install/bbs3d/include/pointcloud_iof/pcd_loader.hpp
+-- Up-to-date: /home/container_user/wheelchair2/src/install/bbs3d/include/pointcloud_iof/pcl_eigen_converter.hpp
+-- Up-to-date: /home/container_user/wheelchair2/src/install/bbs3d/include/pointcloud_iof/gravity_alignment.hpp
+-- Up-to-date: /home/container_user/wheelchair2/src/install/bbs3d/include/pointcloud_iof/pcd_loader_without_pcl.hpp
+-- Up-to-date: /home/container_user/wheelchair2/src/install/bbs3d/include/pointcloud_iof/filter.hpp
+-- Up-to-date: /home/container_user/wheelchair2/src/install/bbs3d/include/gpu_bbs3d
+-- Up-to-date: /home/container_user/wheelchair2/src/install/bbs3d/include/gpu_bbs3d/bbs3d.cuh
+-- Up-to-date: /home/container_user/wheelchair2/src/install/bbs3d/include/gpu_bbs3d/voxelmaps.cuh
+-- Up-to-date: /home/container_user/wheelchair2/src/install/bbs3d/include/gpu_bbs3d/stream_manager
+-- Up-to-date: /home/container_user/wheelchair2/src/install/bbs3d/include/gpu_bbs3d/stream_manager/check_error.cuh
+-- Up-to-date: /home/container_user/wheelchair2/src/install/bbs3d/include/cpu_bbs3d
+-- Up-to-date: /home/container_user/wheelchair2/src/install/bbs3d/include/cpu_bbs3d/bbs3d.hpp
+-- Up-to-date: /home/container_user/wheelchair2/src/install/bbs3d/include/cpu_bbs3d/voxelmaps.hpp

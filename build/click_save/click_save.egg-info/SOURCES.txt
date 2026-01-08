@@ -1,0 +1,16 @@
+package.xml
+setup.cfg
+setup.py
+../../build/click_save/click_save.egg-info/PKG-INFO
+../../build/click_save/click_save.egg-info/SOURCES.txt
+../../build/click_save/click_save.egg-info/dependency_links.txt
+../../build/click_save/click_save.egg-info/entry_points.txt
+../../build/click_save/click_save.egg-info/requires.txt
+../../build/click_save/click_save.egg-info/top_level.txt
+../../build/click_save/click_save.egg-info/zip-safe
+click_save/__init__.py
+click_save/click_save.py
+resource/click_save
+test/test_copyright.py
+test/test_flake8.py
+test/test_pep257.py

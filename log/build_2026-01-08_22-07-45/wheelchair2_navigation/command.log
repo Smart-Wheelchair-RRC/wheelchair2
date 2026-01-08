@@ -1,0 +1,1 @@
+Invoking command in '/home/container_user/wheelchair2/src/build/wheelchair2_navigation': /usr/bin/cmake /home/container_user/wheelchair2/src/wheelchair2_navigation -DCMAKE_INSTALL_PREFIX=/home/container_user/wheelchair2/src/install/wheelchair2_navigation

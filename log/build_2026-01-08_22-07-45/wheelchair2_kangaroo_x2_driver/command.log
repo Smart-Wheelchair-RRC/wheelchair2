@@ -1,0 +1,2 @@
+Invoking command in '/home/container_user/wheelchair2/src/build/wheelchair2_kangaroo_x2_driver': /usr/bin/cmake /home/container_user/wheelchair2/src/wheelchair2_kangaroo_x2_driver -DCMAKE_INSTALL_PREFIX=/home/container_user/wheelchair2/src/install/wheelchair2_kangaroo_x2_driver
+Invoked command in '/home/container_user/wheelchair2/src/build/wheelchair2_kangaroo_x2_driver' returned '1': /usr/bin/cmake /home/container_user/wheelchair2/src/wheelchair2_kangaroo_x2_driver -DCMAKE_INSTALL_PREFIX=/home/container_user/wheelchair2/src/install/wheelchair2_kangaroo_x2_driver

@@ -1,0 +1,1 @@
+Invoking command in '/home/container_user/wheelchair2/src/build/livox_ros_driver2': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/container_user/wheelchair2/src/dependencies/livox_ros_driver2 -DCMAKE_INSTALL_PREFIX=/home/container_user/wheelchair2/src/install/livox_ros_driver2

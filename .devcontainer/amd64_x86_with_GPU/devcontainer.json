@@ -1,9 +1,13 @@
 {
     "name": "Wheelchair2 Development on AMD64/x86 with GPU",
-    "image": "ghcr.io/smart-wheelchair-rrc/wheelchair2_base_gazebo:v4.5",
+    "image": "ghcr.io/anirudhadg/wheelchair2_base_gazebo:v4.0",
     "privileged": true,
     "workspaceMount": "source=${localWorkspaceFolder},target=/home/container_user/wheelchair2/src,type=bind",
     "workspaceFolder": "/home/container_user/wheelchair2/src",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": "."
+    },
     "customizations": {
         "vscode": {
             "settings": {
@@ -43,7 +47,7 @@
         }
     },
     "containerEnv": {
-        "DISPLAY": "${localEnv:DISPLAY}", // Needed for GUI try ":0" for windows
+        "DISPLAY": ":0", // Needed for GUI try ":0" for windows
         "WAYLAND_DISPLAY": "${localEnv:WAYLAND_DISPLAY}",
         "XDG_RUNTIME_DIR": "${localEnv:XDG_RUNTIME_DIR}",
         "PULSE_SERVER": "${localEnv:PULSE_SERVER}",

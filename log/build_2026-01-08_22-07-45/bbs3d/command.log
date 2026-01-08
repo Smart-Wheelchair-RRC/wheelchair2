@@ -1,0 +1,1 @@
+Invoking command in '/home/container_user/wheelchair2/src/build/bbs3d': /usr/bin/cmake --build /home/container_user/wheelchair2/src/build/bbs3d -- -j16 -l16

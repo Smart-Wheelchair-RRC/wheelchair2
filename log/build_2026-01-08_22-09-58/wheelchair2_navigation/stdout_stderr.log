@@ -1,0 +1,91 @@
+-- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+-- Found ament_lint_auto: 0.12.14 (/opt/ros/humble/share/ament_lint_auto/cmake)
+-- Added test 'flake8' to check Python code syntax and style conventions
+-- Added test 'lint_cmake' to check CMake code style
+-- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+-- Added test 'xmllint' to check XML markup files
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/container_user/wheelchair2/src/build/wheelchair2_navigation
+-- Install configuration: ""
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/config
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/config/nav2_params.yaml
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/config/keepout_params.yaml
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/config/mapper_params_online_async.yaml
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/config/angle_range_filter.yaml
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/launch
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/launch/online_async_launch.py
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/launch/keepout.launch.py
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/launch/nav2_amcl.launch.py
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/launch/angle_range_filter.launch.py
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/launch/nav2_icp.launch.py
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/launch/rtabmap_lidar_camera_icp.launch.py
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc/KRB_block.yaml
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc/rrc_lab_mask.pgm
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc/KRB_block_mask.yaml
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc/rrc_lab.yaml
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc/KRB_block_mask.png
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc/rrc_lab.pgm
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc/KRB_block.png
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc/rrc_lab_mask.yaml
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/hospital
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/hospital/hospital.yaml
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/hospital/hospital.pgm
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/sim
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/sim/obstacles_world.yaml
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/sim/obstacles_world.pgm
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/KRB_block.yaml
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/himalaya.jpeg
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/himalaya.pgm
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/rrc.yaml
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/KRB_block_mask.yaml
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/himalaya_og.jpeg
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/hardware_lab_01.pgm
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/himalaya_rtab.pgm
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/KRB_block_mask.png
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/KRB_block.png
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/himalaya_block.yaml
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/KRB_block.xcf
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/lala.png
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/rrc.pgm
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/himalaya_block.pgm
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/KRB_block.pgm
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/hardware_lab_01.yaml
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/rrc_test.pgm
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/hardware_lab_02.yaml
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/himalaya_01.jpeg
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/hardware_lab_02.pgm
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/himalaya_kcis_kday.png
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/himalaya
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/himalaya/himalaya_kcis.png
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/himalaya/himalaya_with_classroom_ICP.yaml
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/himalaya/himalaya_with_classroom_ICP.png
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/himalaya/himalaya_with_classroom.yaml
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/himalaya/himalaya_kcis_mask.png
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/himalaya/himalaya_kcis_mask.yaml
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/himalaya/himalaya_kcis.yaml
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/himalaya/himalaya_with_classroom.jpeg
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/doors
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/doors/doors.pgm
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/doors/doors.yaml
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/rviz
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/rviz/navigation.rviz
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/ament_index/resource_index/package_run_dependencies/wheelchair2_navigation
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/ament_index/resource_index/parent_prefix_path/wheelchair2_navigation
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/environment/ament_prefix_path.sh
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/environment/ament_prefix_path.dsv
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/environment/path.sh
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/environment/path.dsv
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/local_setup.bash
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/local_setup.sh
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/local_setup.zsh
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/local_setup.dsv
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/package.dsv
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/ament_index/resource_index/packages/wheelchair2_navigation
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/cmake/wheelchair2_navigationConfig.cmake
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/cmake/wheelchair2_navigationConfig-version.cmake
+-- Installing: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/package.xml

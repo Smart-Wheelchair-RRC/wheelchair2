@@ -1,0 +1,2 @@
+Invoking command in '/home/container_user/wheelchair2/src/build/wheelchair2_bringup': /usr/bin/cmake /home/container_user/wheelchair2/src/wheelchair2_bringup -DCMAKE_INSTALL_PREFIX=/home/container_user/wheelchair2/src/install/wheelchair2_bringup
+Invoked command in '/home/container_user/wheelchair2/src/build/wheelchair2_bringup' returned '1': /usr/bin/cmake /home/container_user/wheelchair2/src/wheelchair2_bringup -DCMAKE_INSTALL_PREFIX=/home/container_user/wheelchair2/src/install/wheelchair2_bringup

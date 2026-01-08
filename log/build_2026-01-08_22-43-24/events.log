@@ -1,0 +1,73 @@
+[0.000000] (-) TimerEvent: {}
+[0.000915] (-) JobUnselected: {'identifier': 'bbs3d'}
+[0.001017] (-) JobUnselected: {'identifier': 'click_save'}
+[0.001037] (-) JobUnselected: {'identifier': 'fast_lio'}
+[0.001053] (-) JobUnselected: {'identifier': 'icp_localization_ros2'}
+[0.001067] (-) JobUnselected: {'identifier': 'livox_ros_driver2'}
+[0.001081] (-) JobUnselected: {'identifier': 'pointcloud_to_laserscan'}
+[0.001095] (-) JobUnselected: {'identifier': 'realsense2_camera'}
+[0.001109] (-) JobUnselected: {'identifier': 'realsense2_camera_msgs'}
+[0.001124] (-) JobUnselected: {'identifier': 'realsense2_description'}
+[0.001137] (-) JobUnselected: {'identifier': 'wheelchair2_bringup'}
+[0.001151] (-) JobUnselected: {'identifier': 'wheelchair2_control'}
+[0.001165] (-) JobUnselected: {'identifier': 'wheelchair2_description'}
+[0.001179] (-) JobUnselected: {'identifier': 'wheelchair2_gazebo'}
+[0.001192] (-) JobUnselected: {'identifier': 'wheelchair2_kangaroo_x2_driver'}
+[0.001206] (-) JobUnselected: {'identifier': 'wheelchair2_localization'}
+[0.001221] (-) JobUnselected: {'identifier': 'wheelchair2_navigation'}
+[0.001237] (rrc_3dloc) JobQueued: {'identifier': 'rrc_3dloc', 'dependencies': OrderedDict()}
+[0.001255] (rrc_3dloc) JobStarted: {'identifier': 'rrc_3dloc'}
+[0.011123] (rrc_3dloc) JobProgress: {'identifier': 'rrc_3dloc', 'progress': 'cmake'}
+[0.011977] (rrc_3dloc) Command: {'cmd': ['/usr/bin/cmake', '/home/container_user/wheelchair2/src/3dbbs_localization/rrc-3dloc', '-DCMAKE_INSTALL_PREFIX=/home/container_user/wheelchair2/src/install/rrc_3dloc'], 'cwd': '/home/container_user/wheelchair2/src/build/rrc_3dloc', 'env': OrderedDict([('GZ_SIM_SYSTEM_PLUGIN_PATH', '/home/container_user/RGLGazeboPlugin/install/RGLServerPlugin'), ('PYTHON_BASIC_REPL', '1'), ('GZ_GUI_PLUGIN_PATH', '/home/container_user/RGLGazeboPlugin/install/RGLVisualize'), ('NV_CUDA_COMPAT_PACKAGE', 'cuda-compat-12-2'), ('HOSTNAME', 'anirudha'), ('GIT_ASKPASS', '/vscode/vscode-server/bin/linux-x64/18e3a1ec544e6907be1e944a94c496e302073435/extensions/git/dist/askpass.sh'), ('SHLVL', '2'), ('LD_LIBRARY_PATH', '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/opt/openvdb_vendor/lib:/opt/ros/humble/lib:/usr/local/cuda/lib64:/usr/local/nvidia/lib:/usr/local/nvidia/lib64'), ('BROWSER', '/vscode/vscode-server/bin/linux-x64/18e3a1ec544e6907be1e944a94c496e302073435/bin/helpers/browser.sh'), ('RGL_PATTERNS_DIR', '/home/container_user/RGLGazeboPlugin/lidar_patterns'), ('HOME', '/root'), ('TERM_PROGRAM_VERSION', '1.101.1'), ('VSCODE_IPC_HOOK_CLI', '/run/user/1000/vscode-ipc-cc0ed479-6b97-4c96-b250-44259436d3bb.sock'), ('ROS_PYTHON_VERSION', '3'), ('VSCODE_GIT_ASKPASS_MAIN', '/vscode/vscode-server/bin/linux-x64/18e3a1ec544e6907be1e944a94c496e302073435/extensions/git/dist/askpass-main.js'), ('VSCODE_GIT_ASKPASS_NODE', '/vscode/vscode-server/bin/linux-x64/18e3a1ec544e6907be1e944a94c496e302073435/node'), ('COLORTERM', 'truecolor'), ('REMOTE_CONTAINERS', 'true'), ('CUDA_VERSION', '12.2.2'), ('WAYLAND_DISPLAY', ''), ('ROS_DISTRO', 'humble'), ('REMOTE_CONTAINERS_IPC', '/tmp/vscode-remote-containers-ipc-67171610-dbf6-445b-b8f1-324528f67486.sock'), ('NVIDIA_REQUIRE_CUDA', 'cuda>=12.2 brand=tesla,driver>=470,driver<471 brand=unknown,driver>=470,driver<471 brand=nvidia,driver>=470,driver<471 brand=nvidiartx,driver>=470,driver<471 brand=geforce,driver>=470,driver<471 brand=geforcertx,driver>=470,driver<471 brand=quadro,driver>=470,driver<471 brand=quadrortx,driver>=470,driver<471 brand=titan,driver>=470,driver<471 brand=titanrtx,driver>=470,driver<471 brand=tesla,driver>=525,driver<526 brand=unknown,driver>=525,driver<526 brand=nvidia,driver>=525,driver<526 brand=nvidiartx,driver>=525,driver<526 brand=geforce,driver>=525,driver<526 brand=geforcertx,driver>=525,driver<526 brand=quadro,driver>=525,driver<526 brand=quadrortx,driver>=525,driver<526 brand=titan,driver>=525,driver<526 brand=titanrtx,driver>=525,driver<526'), ('PULSE_SERVER', ''), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('NVIDIA_DRIVER_CAPABILITIES', 'all'), ('MAP_DIR', '/home/container_user/wheelchair2/src/wheelchair2_navigation/maps'), ('TERM', 'xterm-256color'), ('NV_CUDA_CUDART_VERSION', '12.2.140-1'), ('ROS_LOCALHOST_ONLY', '0'), ('QT_X11_NO_MITSHM', '1'), ('PATH', '/opt/ros/humble/bin:/vscode/vscode-server/bin/linux-x64/18e3a1ec544e6907be1e944a94c496e302073435/bin/remote-cli:/usr/local/cuda/bin:/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('OptiX_INSTALL_DIR', '/opt/nvidia/NVIDIA-OptiX-SDK-7.2.0-linux64-x86_64/'), ('NVARCH', 'x86_64'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('REMOTE_CONTAINERS_SOCKETS', '["/tmp/vscode-ssh-auth-67171610-dbf6-445b-b8f1-324528f67486.sock","/root/.gnupg/S.gpg-agent"]'), ('DISPLAY', ':0'), ('LANG', 'C.UTF-8'), ('PYTHONSTARTUP', '/root/.vscode-server/data/User/workspaceStorage/349d2f8fe9b44d59af52565a4dbd47eb/ms-python.python/pythonrc.py'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('VSCODE_GIT_IPC_HANDLE', '/run/user/1000/vscode-git-57af1b7706.sock'), ('TERM_PROGRAM', 'vscode'), ('SSH_AUTH_SOCK', '/tmp/vscode-ssh-auth-67171610-dbf6-445b-b8f1-324528f67486.sock'), ('ROS_DOMAIN_ID', '79'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('SHELL', '/bin/bash'), ('GZ_VERSION', 'harmonic'), ('VSCODE_GIT_ASKPASS_EXTRA_ARGS', ''), ('PWD', '/home/container_user/wheelchair2/src/build/rrc_3dloc'), ('LC_ALL', 'C.UTF-8'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('NVIDIA_VISIBLE_DEVICES', 'all'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[0.030965] (rrc_3dloc) StdoutLine: {'line': b'-- Current CPU archtecture: x86_64\n'}
+[0.036187] (rrc_3dloc) StdoutLine: {'line': b'-- Processer number:  16\n'}
+[0.036435] (rrc_3dloc) StdoutLine: {'line': b'-- core for MP: 3\n'}
+[0.038992] (rrc_3dloc) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[0.099700] (-) TimerEvent: {}
+[0.167894] (rrc_3dloc) StdoutLine: {'line': b'-- Found nav_msgs: 4.9.0 (/opt/ros/humble/share/nav_msgs/cmake)\n'}
+[0.192289] (rrc_3dloc) StdoutLine: {'line': b'-- Found rosidl_generator_c: 3.1.7 (/opt/ros/humble/share/rosidl_generator_c/cmake)\n'}
+[0.194371] (rrc_3dloc) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.7 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[0.199471] (rrc_3dloc) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 3.1.7 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)\n'}
+[0.199759] (-) TimerEvent: {}
+[0.208511] (rrc_3dloc) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[0.221048] (rrc_3dloc) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[0.265828] (rrc_3dloc) StdoutLine: {'line': b'-- Found rclcpp: 16.0.16 (/opt/ros/humble/share/rclcpp/cmake)\n'}
+[0.286283] (rrc_3dloc) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)\n'}
+[0.287387] (rrc_3dloc) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 6.2.9 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)\n'}
+[0.299827] (-) TimerEvent: {}
+[0.400066] (-) TimerEvent: {}
+[0.424442] (rrc_3dloc) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[0.451738] (rrc_3dloc) StdoutLine: {'line': b'-- Found rclcpp_components: 16.0.16 (/opt/ros/humble/share/rclcpp_components/cmake)\n'}
+[0.464953] (rrc_3dloc) StdoutLine: {'line': b'-- Found sensor_msgs: 4.9.0 (/opt/ros/humble/share/sensor_msgs/cmake)\n'}
+[0.476508] (rrc_3dloc) StdoutLine: {'line': b'-- Found visualization_msgs: 4.9.0 (/opt/ros/humble/share/visualization_msgs/cmake)\n'}
+[0.489822] (rrc_3dloc) StdoutLine: {'line': b'-- Found tf2_ros: 0.25.17 (/opt/ros/humble/share/tf2_ros/cmake)\n'}
+[0.500143] (-) TimerEvent: {}
+[0.534186] (rrc_3dloc) StdoutLine: {'line': b'-- Found tf2_eigen: 0.25.17 (/opt/ros/humble/share/tf2_eigen/cmake)\n'}
+[0.535941] (rrc_3dloc) StdoutLine: {'line': b'-- Found tf2_geometry_msgs: 0.25.17 (/opt/ros/humble/share/tf2_geometry_msgs/cmake)\n'}
+[0.538027] (rrc_3dloc) StdoutLine: {'line': b'-- Found eigen3_cmake_module: 0.1.1 (/opt/ros/humble/share/eigen3_cmake_module/cmake)\n'}
+[0.538995] (rrc_3dloc) StdoutLine: {'line': b'-- Ensuring Eigen3 include directory is part of orocos-kdl CMake target\n'}
+[0.539841] (rrc_3dloc) StdoutLine: {'line': b'-- Found tf2_sensor_msgs: 0.25.17 (/opt/ros/humble/share/tf2_sensor_msgs/cmake)\n'}
+[0.542576] (rrc_3dloc) StdoutLine: {'line': b'-- Found rosbag2_cpp: 0.15.15 (/opt/ros/humble/share/rosbag2_cpp/cmake)\n'}
+[0.580234] (rrc_3dloc) StderrLine: {'line': b'\x1b[31mCMake Error at CMakeLists.txt:55 (find_package):\n'}
+[0.580530] (rrc_3dloc) StderrLine: {'line': b'  By not providing "Findsmall_gicp.cmake" in CMAKE_MODULE_PATH this project\n'}
+[0.580647] (rrc_3dloc) StderrLine: {'line': b'  has asked CMake to find a package configuration file provided by\n'}
+[0.580730] (rrc_3dloc) StderrLine: {'line': b'  "small_gicp", but CMake did not find one.\n'}
+[0.580808] (rrc_3dloc) StderrLine: {'line': b'\n'}
+[0.580882] (rrc_3dloc) StderrLine: {'line': b'  Could not find a package configuration file provided by "small_gicp" with\n'}
+[0.580955] (rrc_3dloc) StderrLine: {'line': b'  any of the following names:\n'}
+[0.581026] (rrc_3dloc) StderrLine: {'line': b'\n'}
+[0.581096] (rrc_3dloc) StderrLine: {'line': b'    small_gicpConfig.cmake\n'}
+[0.581165] (rrc_3dloc) StderrLine: {'line': b'    small_gicp-config.cmake\n'}
+[0.581236] (rrc_3dloc) StderrLine: {'line': b'\n'}
+[0.581306] (rrc_3dloc) StderrLine: {'line': b'  Add the installation prefix of "small_gicp" to CMAKE_PREFIX_PATH or set\n'}
+[0.581370] (rrc_3dloc) StderrLine: {'line': b'  "small_gicp_DIR" to a directory containing one of the above files.  If\n'}
+[0.581399] (rrc_3dloc) StderrLine: {'line': b'  "small_gicp" provides a separate development package or SDK, be sure it has\n'}
+[0.581427] (rrc_3dloc) StderrLine: {'line': b'  been installed.\n'}
+[0.581455] (rrc_3dloc) StderrLine: {'line': b'\n'}
+[0.581482] (rrc_3dloc) StderrLine: {'line': b'\x1b[0m\n'}
+[0.581510] (rrc_3dloc) StdoutLine: {'line': b'-- Configuring incomplete, errors occurred!\n'}
+[0.581545] (rrc_3dloc) StdoutLine: {'line': b'See also "/home/container_user/wheelchair2/src/build/rrc_3dloc/CMakeFiles/CMakeOutput.log".\n'}
+[0.587330] (rrc_3dloc) CommandEnded: {'returncode': 1}
+[0.600224] (-) TimerEvent: {}
+[0.607844] (rrc_3dloc) JobEnded: {'identifier': 'rrc_3dloc', 'rc': 1}
+[0.618422] (-) EventReactorShutdown: {}

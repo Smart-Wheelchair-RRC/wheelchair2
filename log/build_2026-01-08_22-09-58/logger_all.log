@@ -1,0 +1,753 @@
+[0.211s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build']
+[0.211s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=False, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=16, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, mixin_files=None, mixin=None, verb_parser=<colcon_mixin.mixin.mixin_argument.MixinArgumentDecorator object at 0x7c8cb2618460>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x7c8cb278dbd0>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x7c8cb278dbd0>>, mixin_verb=('build',))
+[0.444s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.445s] INFO:colcon.colcon_metadata.package_discovery.colcon_meta:Using configuration from '/root/.colcon/metadata/default/Gazebo.meta'
+[0.446s] INFO:colcon.colcon_metadata.package_discovery.colcon_meta:Using configuration from '/root/.colcon/metadata/default/fastdds.meta'
+[0.447s] INFO:colcon.colcon_metadata.package_discovery.colcon_meta:Using configuration from '/root/.colcon/metadata/default/fastrtps.meta'
+[0.447s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.447s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.447s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.447s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.447s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.447s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/container_user/wheelchair2/src'
+[0.447s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.447s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.447s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.447s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.447s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.447s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.447s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.447s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.447s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.463s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[0.463s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[0.463s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[0.463s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[0.464s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[0.464s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization) by extensions ['ignore', 'ignore_ament_install']
+[0.464s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization) by extension 'ignore'
+[0.464s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization) by extension 'ignore_ament_install'
+[0.464s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization) by extensions ['colcon_pkg']
+[0.464s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization) by extension 'colcon_pkg'
+[0.464s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization) by extensions ['colcon_meta']
+[0.464s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization) by extension 'colcon_meta'
+[0.464s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization) by extensions ['ros']
+[0.464s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization) by extension 'ros'
+[0.464s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization) by extensions ['cmake', 'python']
+[0.464s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization) by extension 'cmake'
+[0.464s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization) by extension 'python'
+[0.464s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization) by extensions ['python_setup_py']
+[0.464s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization) by extension 'python_setup_py'
+[0.464s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/click_save) by extensions ['ignore', 'ignore_ament_install']
+[0.465s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/click_save) by extension 'ignore'
+[0.465s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/click_save) by extension 'ignore_ament_install'
+[0.465s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/click_save) by extensions ['colcon_pkg']
+[0.465s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/click_save) by extension 'colcon_pkg'
+[0.465s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/click_save) by extensions ['colcon_meta']
+[0.465s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/click_save) by extension 'colcon_meta'
+[0.465s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/click_save) by extensions ['ros']
+[0.465s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/click_save) by extension 'ros'
+[0.468s] DEBUG:colcon.colcon_core.package_identification:Package '3dbbs_localization/click_save' with type 'ros.ament_python' and name 'click_save'
+[0.468s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/deps) by extensions ['ignore', 'ignore_ament_install']
+[0.468s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/deps) by extension 'ignore'
+[0.468s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/deps) by extension 'ignore_ament_install'
+[0.469s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/deps) by extensions ['colcon_pkg']
+[0.469s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/deps) by extension 'colcon_pkg'
+[0.469s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/deps) by extensions ['colcon_meta']
+[0.469s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/deps) by extension 'colcon_meta'
+[0.469s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/deps) by extensions ['ros']
+[0.469s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/deps) by extension 'ros'
+[0.469s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/deps) by extensions ['cmake', 'python']
+[0.469s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/deps) by extension 'cmake'
+[0.469s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/deps) by extension 'python'
+[0.469s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/deps) by extensions ['python_setup_py']
+[0.469s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/deps) by extension 'python_setup_py'
+[0.469s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/deps/3d_bbs) by extensions ['ignore', 'ignore_ament_install']
+[0.469s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/deps/3d_bbs) by extension 'ignore'
+[0.469s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/deps/3d_bbs) by extension 'ignore_ament_install'
+[0.469s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/deps/3d_bbs) by extensions ['colcon_pkg']
+[0.469s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/deps/3d_bbs) by extension 'colcon_pkg'
+[0.469s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/deps/3d_bbs) by extensions ['colcon_meta']
+[0.469s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/deps/3d_bbs) by extension 'colcon_meta'
+[0.469s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/deps/3d_bbs) by extensions ['ros']
+[0.469s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/deps/3d_bbs) by extension 'ros'
+[0.469s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/deps/3d_bbs) by extensions ['cmake', 'python']
+[0.469s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/deps/3d_bbs) by extension 'cmake'
+[0.474s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/deps/3d_bbs) by extension 'python'
+[0.475s] DEBUG:colcon.colcon_core.package_identification:Package '3dbbs_localization/deps/3d_bbs' with type 'cmake' and name 'bbs3d'
+[0.475s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/rrc-3dloc) by extensions ['ignore', 'ignore_ament_install']
+[0.475s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/rrc-3dloc) by extension 'ignore'
+[0.475s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/rrc-3dloc) by extension 'ignore_ament_install'
+[0.475s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/rrc-3dloc) by extensions ['colcon_pkg']
+[0.475s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/rrc-3dloc) by extension 'colcon_pkg'
+[0.475s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/rrc-3dloc) by extensions ['colcon_meta']
+[0.475s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/rrc-3dloc) by extension 'colcon_meta'
+[0.475s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/rrc-3dloc) by extensions ['ros']
+[0.475s] Level 1:colcon.colcon_core.package_identification:_identify(3dbbs_localization/rrc-3dloc) by extension 'ros'
+[0.476s] DEBUG:colcon.colcon_core.package_identification:Package '3dbbs_localization/rrc-3dloc' with type 'ros.ament_cmake' and name 'rrc_3dloc'
+[0.476s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.476s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[0.476s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[0.476s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies) by extensions ['ignore', 'ignore_ament_install']
+[0.476s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies) by extension 'ignore'
+[0.477s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies) by extension 'ignore_ament_install'
+[0.477s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies) by extensions ['colcon_pkg']
+[0.477s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies) by extension 'colcon_pkg'
+[0.477s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies) by extensions ['colcon_meta']
+[0.477s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies) by extension 'colcon_meta'
+[0.477s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies) by extensions ['ros']
+[0.477s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies) by extension 'ros'
+[0.477s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies) by extensions ['cmake', 'python']
+[0.477s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies) by extension 'cmake'
+[0.477s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies) by extension 'python'
+[0.477s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies) by extensions ['python_setup_py']
+[0.477s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies) by extension 'python_setup_py'
+[0.477s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/FAST_LIO) by extensions ['ignore', 'ignore_ament_install']
+[0.477s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/FAST_LIO) by extension 'ignore'
+[0.477s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/FAST_LIO) by extension 'ignore_ament_install'
+[0.477s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/FAST_LIO) by extensions ['colcon_pkg']
+[0.477s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/FAST_LIO) by extension 'colcon_pkg'
+[0.477s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/FAST_LIO) by extensions ['colcon_meta']
+[0.477s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/FAST_LIO) by extension 'colcon_meta'
+[0.477s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/FAST_LIO) by extensions ['ros']
+[0.477s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/FAST_LIO) by extension 'ros'
+[0.479s] DEBUG:colcon.colcon_core.package_identification:Package 'dependencies/FAST_LIO' with type 'ros.ament_cmake' and name 'fast_lio'
+[0.479s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/icp_localization_ros2) by extensions ['ignore', 'ignore_ament_install']
+[0.479s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/icp_localization_ros2) by extension 'ignore'
+[0.479s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/icp_localization_ros2) by extension 'ignore_ament_install'
+[0.479s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/icp_localization_ros2) by extensions ['colcon_pkg']
+[0.479s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/icp_localization_ros2) by extension 'colcon_pkg'
+[0.479s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/icp_localization_ros2) by extensions ['colcon_meta']
+[0.479s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/icp_localization_ros2) by extension 'colcon_meta'
+[0.479s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/icp_localization_ros2) by extensions ['ros']
+[0.479s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/icp_localization_ros2) by extension 'ros'
+[0.481s] DEBUG:colcon.colcon_core.package_identification:Package 'dependencies/icp_localization_ros2' with type 'ros.ament_cmake' and name 'icp_localization_ros2'
+[0.481s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/livox_ros_driver2) by extensions ['ignore', 'ignore_ament_install']
+[0.481s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/livox_ros_driver2) by extension 'ignore'
+[0.481s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/livox_ros_driver2) by extension 'ignore_ament_install'
+[0.481s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/livox_ros_driver2) by extensions ['colcon_pkg']
+[0.482s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/livox_ros_driver2) by extension 'colcon_pkg'
+[0.482s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/livox_ros_driver2) by extensions ['colcon_meta']
+[0.482s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/livox_ros_driver2) by extension 'colcon_meta'
+[0.482s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/livox_ros_driver2) by extensions ['ros']
+[0.482s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/livox_ros_driver2) by extension 'ros'
+[0.483s] DEBUG:colcon.colcon_core.package_identification:Package 'dependencies/livox_ros_driver2' with type 'ros.ament_cmake' and name 'livox_ros_driver2'
+[0.483s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/pointcloud_to_laserscan) by extensions ['ignore', 'ignore_ament_install']
+[0.483s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/pointcloud_to_laserscan) by extension 'ignore'
+[0.484s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/pointcloud_to_laserscan) by extension 'ignore_ament_install'
+[0.484s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/pointcloud_to_laserscan) by extensions ['colcon_pkg']
+[0.484s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/pointcloud_to_laserscan) by extension 'colcon_pkg'
+[0.484s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/pointcloud_to_laserscan) by extensions ['colcon_meta']
+[0.484s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/pointcloud_to_laserscan) by extension 'colcon_meta'
+[0.484s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/pointcloud_to_laserscan) by extensions ['ros']
+[0.484s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/pointcloud_to_laserscan) by extension 'ros'
+[0.485s] DEBUG:colcon.colcon_core.package_identification:Package 'dependencies/pointcloud_to_laserscan' with type 'ros.ament_cmake' and name 'pointcloud_to_laserscan'
+[0.486s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros) by extensions ['ignore', 'ignore_ament_install']
+[0.486s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros) by extension 'ignore'
+[0.486s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros) by extension 'ignore_ament_install'
+[0.486s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros) by extensions ['colcon_pkg']
+[0.486s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros) by extension 'colcon_pkg'
+[0.486s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros) by extensions ['colcon_meta']
+[0.486s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros) by extension 'colcon_meta'
+[0.486s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros) by extensions ['ros']
+[0.486s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros) by extension 'ros'
+[0.486s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros) by extensions ['cmake', 'python']
+[0.486s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros) by extension 'cmake'
+[0.486s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros) by extension 'python'
+[0.486s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros) by extensions ['python_setup_py']
+[0.486s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros) by extension 'python_setup_py'
+[0.486s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/realsense2_camera) by extensions ['ignore', 'ignore_ament_install']
+[0.486s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/realsense2_camera) by extension 'ignore'
+[0.486s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/realsense2_camera) by extension 'ignore_ament_install'
+[0.486s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/realsense2_camera) by extensions ['colcon_pkg']
+[0.486s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/realsense2_camera) by extension 'colcon_pkg'
+[0.487s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/realsense2_camera) by extensions ['colcon_meta']
+[0.487s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/realsense2_camera) by extension 'colcon_meta'
+[0.487s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/realsense2_camera) by extensions ['ros']
+[0.487s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/realsense2_camera) by extension 'ros'
+[0.492s] DEBUG:colcon.colcon_core.package_identification:Package 'dependencies/realsense-ros/realsense2_camera' with type 'ros.ament_cmake' and name 'realsense2_camera'
+[0.492s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/realsense2_camera_msgs) by extensions ['ignore', 'ignore_ament_install']
+[0.493s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/realsense2_camera_msgs) by extension 'ignore'
+[0.493s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/realsense2_camera_msgs) by extension 'ignore_ament_install'
+[0.493s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/realsense2_camera_msgs) by extensions ['colcon_pkg']
+[0.493s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/realsense2_camera_msgs) by extension 'colcon_pkg'
+[0.493s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/realsense2_camera_msgs) by extensions ['colcon_meta']
+[0.493s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/realsense2_camera_msgs) by extension 'colcon_meta'
+[0.493s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/realsense2_camera_msgs) by extensions ['ros']
+[0.493s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/realsense2_camera_msgs) by extension 'ros'
+[0.494s] DEBUG:colcon.colcon_core.package_identification:Package 'dependencies/realsense-ros/realsense2_camera_msgs' with type 'ros.ament_cmake' and name 'realsense2_camera_msgs'
+[0.494s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/realsense2_description) by extensions ['ignore', 'ignore_ament_install']
+[0.494s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/realsense2_description) by extension 'ignore'
+[0.494s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/realsense2_description) by extension 'ignore_ament_install'
+[0.494s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/realsense2_description) by extensions ['colcon_pkg']
+[0.494s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/realsense2_description) by extension 'colcon_pkg'
+[0.494s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/realsense2_description) by extensions ['colcon_meta']
+[0.494s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/realsense2_description) by extension 'colcon_meta'
+[0.494s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/realsense2_description) by extensions ['ros']
+[0.494s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/realsense2_description) by extension 'ros'
+[0.495s] DEBUG:colcon.colcon_core.package_identification:Package 'dependencies/realsense-ros/realsense2_description' with type 'ros.ament_cmake' and name 'realsense2_description'
+[0.496s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/scripts) by extensions ['ignore', 'ignore_ament_install']
+[0.496s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/scripts) by extension 'ignore'
+[0.496s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/scripts) by extension 'ignore_ament_install'
+[0.496s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/scripts) by extensions ['colcon_pkg']
+[0.496s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/scripts) by extension 'colcon_pkg'
+[0.496s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/scripts) by extensions ['colcon_meta']
+[0.496s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/scripts) by extension 'colcon_meta'
+[0.496s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/scripts) by extensions ['ros']
+[0.496s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/scripts) by extension 'ros'
+[0.496s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/scripts) by extensions ['cmake', 'python']
+[0.496s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/scripts) by extension 'cmake'
+[0.496s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/scripts) by extension 'python'
+[0.496s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/scripts) by extensions ['python_setup_py']
+[0.496s] Level 1:colcon.colcon_core.package_identification:_identify(dependencies/realsense-ros/scripts) by extension 'python_setup_py'
+[0.496s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extensions ['ignore', 'ignore_ament_install']
+[0.496s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extension 'ignore'
+[0.497s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extension 'ignore_ament_install'
+[0.497s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extensions ['colcon_pkg']
+[0.497s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extension 'colcon_pkg'
+[0.497s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extensions ['colcon_meta']
+[0.497s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extension 'colcon_meta'
+[0.497s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extensions ['ros']
+[0.497s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extension 'ros'
+[0.497s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extensions ['cmake', 'python']
+[0.497s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extension 'cmake'
+[0.497s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extension 'python'
+[0.497s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extensions ['python_setup_py']
+[0.497s] Level 1:colcon.colcon_core.package_identification:_identify(docs) by extension 'python_setup_py'
+[0.497s] Level 1:colcon.colcon_core.package_identification:_identify(docs/images) by extensions ['ignore', 'ignore_ament_install']
+[0.497s] Level 1:colcon.colcon_core.package_identification:_identify(docs/images) by extension 'ignore'
+[0.497s] Level 1:colcon.colcon_core.package_identification:_identify(docs/images) by extension 'ignore_ament_install'
+[0.497s] Level 1:colcon.colcon_core.package_identification:_identify(docs/images) by extensions ['colcon_pkg']
+[0.497s] Level 1:colcon.colcon_core.package_identification:_identify(docs/images) by extension 'colcon_pkg'
+[0.497s] Level 1:colcon.colcon_core.package_identification:_identify(docs/images) by extensions ['colcon_meta']
+[0.497s] Level 1:colcon.colcon_core.package_identification:_identify(docs/images) by extension 'colcon_meta'
+[0.497s] Level 1:colcon.colcon_core.package_identification:_identify(docs/images) by extensions ['ros']
+[0.497s] Level 1:colcon.colcon_core.package_identification:_identify(docs/images) by extension 'ros'
+[0.497s] Level 1:colcon.colcon_core.package_identification:_identify(docs/images) by extensions ['cmake', 'python']
+[0.497s] Level 1:colcon.colcon_core.package_identification:_identify(docs/images) by extension 'cmake'
+[0.498s] Level 1:colcon.colcon_core.package_identification:_identify(docs/images) by extension 'python'
+[0.498s] Level 1:colcon.colcon_core.package_identification:_identify(docs/images) by extensions ['python_setup_py']
+[0.498s] Level 1:colcon.colcon_core.package_identification:_identify(docs/images) by extension 'python_setup_py'
+[0.498s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.498s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[0.498s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[0.498s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.498s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[0.498s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[0.498s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_bringup) by extensions ['ignore', 'ignore_ament_install']
+[0.498s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_bringup) by extension 'ignore'
+[0.498s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_bringup) by extension 'ignore_ament_install'
+[0.498s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_bringup) by extensions ['colcon_pkg']
+[0.498s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_bringup) by extension 'colcon_pkg'
+[0.498s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_bringup) by extensions ['colcon_meta']
+[0.498s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_bringup) by extension 'colcon_meta'
+[0.498s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_bringup) by extensions ['ros']
+[0.498s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_bringup) by extension 'ros'
+[0.499s] DEBUG:colcon.colcon_core.package_identification:Package 'wheelchair2_bringup' with type 'ros.ament_cmake' and name 'wheelchair2_bringup'
+[0.499s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_control) by extensions ['ignore', 'ignore_ament_install']
+[0.499s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_control) by extension 'ignore'
+[0.499s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_control) by extension 'ignore_ament_install'
+[0.499s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_control) by extensions ['colcon_pkg']
+[0.499s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_control) by extension 'colcon_pkg'
+[0.500s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_control) by extensions ['colcon_meta']
+[0.500s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_control) by extension 'colcon_meta'
+[0.500s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_control) by extensions ['ros']
+[0.500s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_control) by extension 'ros'
+[0.500s] DEBUG:colcon.colcon_core.package_identification:Package 'wheelchair2_control' with type 'ros.ament_cmake' and name 'wheelchair2_control'
+[0.500s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_description) by extensions ['ignore', 'ignore_ament_install']
+[0.501s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_description) by extension 'ignore'
+[0.501s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_description) by extension 'ignore_ament_install'
+[0.501s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_description) by extensions ['colcon_pkg']
+[0.501s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_description) by extension 'colcon_pkg'
+[0.501s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_description) by extensions ['colcon_meta']
+[0.501s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_description) by extension 'colcon_meta'
+[0.501s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_description) by extensions ['ros']
+[0.501s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_description) by extension 'ros'
+[0.502s] DEBUG:colcon.colcon_core.package_identification:Package 'wheelchair2_description' with type 'ros.ament_python' and name 'wheelchair2_description'
+[0.502s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_gazebo) by extensions ['ignore', 'ignore_ament_install']
+[0.502s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_gazebo) by extension 'ignore'
+[0.502s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_gazebo) by extension 'ignore_ament_install'
+[0.502s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_gazebo) by extensions ['colcon_pkg']
+[0.502s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_gazebo) by extension 'colcon_pkg'
+[0.502s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_gazebo) by extensions ['colcon_meta']
+[0.502s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_gazebo) by extension 'colcon_meta'
+[0.502s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_gazebo) by extensions ['ros']
+[0.502s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_gazebo) by extension 'ros'
+[0.503s] DEBUG:colcon.colcon_core.package_identification:Package 'wheelchair2_gazebo' with type 'ros.ament_python' and name 'wheelchair2_gazebo'
+[0.503s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_kangaroo_x2_driver) by extensions ['ignore', 'ignore_ament_install']
+[0.503s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_kangaroo_x2_driver) by extension 'ignore'
+[0.503s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_kangaroo_x2_driver) by extension 'ignore_ament_install'
+[0.503s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_kangaroo_x2_driver) by extensions ['colcon_pkg']
+[0.503s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_kangaroo_x2_driver) by extension 'colcon_pkg'
+[0.503s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_kangaroo_x2_driver) by extensions ['colcon_meta']
+[0.503s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_kangaroo_x2_driver) by extension 'colcon_meta'
+[0.503s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_kangaroo_x2_driver) by extensions ['ros']
+[0.503s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_kangaroo_x2_driver) by extension 'ros'
+[0.504s] DEBUG:colcon.colcon_core.package_identification:Package 'wheelchair2_kangaroo_x2_driver' with type 'ros.ament_cmake' and name 'wheelchair2_kangaroo_x2_driver'
+[0.504s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_localization) by extensions ['ignore', 'ignore_ament_install']
+[0.504s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_localization) by extension 'ignore'
+[0.504s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_localization) by extension 'ignore_ament_install'
+[0.504s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_localization) by extensions ['colcon_pkg']
+[0.504s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_localization) by extension 'colcon_pkg'
+[0.505s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_localization) by extensions ['colcon_meta']
+[0.505s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_localization) by extension 'colcon_meta'
+[0.505s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_localization) by extensions ['ros']
+[0.505s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_localization) by extension 'ros'
+[0.505s] DEBUG:colcon.colcon_core.package_identification:Package 'wheelchair2_localization' with type 'ros.ament_python' and name 'wheelchair2_localization'
+[0.505s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_navigation) by extensions ['ignore', 'ignore_ament_install']
+[0.506s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_navigation) by extension 'ignore'
+[0.506s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_navigation) by extension 'ignore_ament_install'
+[0.506s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_navigation) by extensions ['colcon_pkg']
+[0.506s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_navigation) by extension 'colcon_pkg'
+[0.506s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_navigation) by extensions ['colcon_meta']
+[0.506s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_navigation) by extension 'colcon_meta'
+[0.506s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_navigation) by extensions ['ros']
+[0.506s] Level 1:colcon.colcon_core.package_identification:_identify(wheelchair2_navigation) by extension 'ros'
+[0.506s] DEBUG:colcon.colcon_core.package_identification:Package 'wheelchair2_navigation' with type 'ros.ament_cmake' and name 'wheelchair2_navigation'
+[0.507s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.507s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.507s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.507s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.507s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.549s] Level 5:colcon.colcon_core.verb:set package 'bbs3d' build argument 'cmake_args' from command line to 'None'
+[0.549s] Level 5:colcon.colcon_core.verb:set package 'bbs3d' build argument 'cmake_target' from command line to 'None'
+[0.549s] Level 5:colcon.colcon_core.verb:set package 'bbs3d' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.549s] Level 5:colcon.colcon_core.verb:set package 'bbs3d' build argument 'cmake_clean_cache' from command line to 'False'
+[0.549s] Level 5:colcon.colcon_core.verb:set package 'bbs3d' build argument 'cmake_clean_first' from command line to 'False'
+[0.549s] Level 5:colcon.colcon_core.verb:set package 'bbs3d' build argument 'cmake_force_configure' from command line to 'False'
+[0.549s] Level 5:colcon.colcon_core.verb:set package 'bbs3d' build argument 'ament_cmake_args' from command line to 'None'
+[0.550s] Level 5:colcon.colcon_core.verb:set package 'bbs3d' build argument 'catkin_cmake_args' from command line to 'None'
+[0.550s] Level 5:colcon.colcon_core.verb:set package 'bbs3d' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.550s] DEBUG:colcon.colcon_core.verb:Building package 'bbs3d' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/container_user/wheelchair2/src/build/bbs3d', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/container_user/wheelchair2/src/install/bbs3d', 'merge_install': False, 'path': '/home/container_user/wheelchair2/src/3dbbs_localization/deps/3d_bbs', 'symlink_install': False, 'test_result_base': None}
+[0.550s] Level 5:colcon.colcon_core.verb:set package 'click_save' build argument 'cmake_args' from command line to 'None'
+[0.550s] Level 5:colcon.colcon_core.verb:set package 'click_save' build argument 'cmake_target' from command line to 'None'
+[0.550s] Level 5:colcon.colcon_core.verb:set package 'click_save' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.550s] Level 5:colcon.colcon_core.verb:set package 'click_save' build argument 'cmake_clean_cache' from command line to 'False'
+[0.550s] Level 5:colcon.colcon_core.verb:set package 'click_save' build argument 'cmake_clean_first' from command line to 'False'
+[0.550s] Level 5:colcon.colcon_core.verb:set package 'click_save' build argument 'cmake_force_configure' from command line to 'False'
+[0.550s] Level 5:colcon.colcon_core.verb:set package 'click_save' build argument 'ament_cmake_args' from command line to 'None'
+[0.550s] Level 5:colcon.colcon_core.verb:set package 'click_save' build argument 'catkin_cmake_args' from command line to 'None'
+[0.550s] Level 5:colcon.colcon_core.verb:set package 'click_save' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.550s] DEBUG:colcon.colcon_core.verb:Building package 'click_save' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/container_user/wheelchair2/src/build/click_save', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/container_user/wheelchair2/src/install/click_save', 'merge_install': False, 'path': '/home/container_user/wheelchair2/src/3dbbs_localization/click_save', 'symlink_install': False, 'test_result_base': None}
+[0.550s] Level 5:colcon.colcon_core.verb:set package 'icp_localization_ros2' build argument 'cmake_args' from command line to 'None'
+[0.550s] Level 5:colcon.colcon_core.verb:set package 'icp_localization_ros2' build argument 'cmake_target' from command line to 'None'
+[0.550s] Level 5:colcon.colcon_core.verb:set package 'icp_localization_ros2' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.550s] Level 5:colcon.colcon_core.verb:set package 'icp_localization_ros2' build argument 'cmake_clean_cache' from command line to 'False'
+[0.550s] Level 5:colcon.colcon_core.verb:set package 'icp_localization_ros2' build argument 'cmake_clean_first' from command line to 'False'
+[0.550s] Level 5:colcon.colcon_core.verb:set package 'icp_localization_ros2' build argument 'cmake_force_configure' from command line to 'False'
+[0.551s] Level 5:colcon.colcon_core.verb:set package 'icp_localization_ros2' build argument 'ament_cmake_args' from command line to 'None'
+[0.551s] Level 5:colcon.colcon_core.verb:set package 'icp_localization_ros2' build argument 'catkin_cmake_args' from command line to 'None'
+[0.551s] Level 5:colcon.colcon_core.verb:set package 'icp_localization_ros2' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.551s] DEBUG:colcon.colcon_core.verb:Building package 'icp_localization_ros2' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/container_user/wheelchair2/src/build/icp_localization_ros2', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/container_user/wheelchair2/src/install/icp_localization_ros2', 'merge_install': False, 'path': '/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2', 'symlink_install': False, 'test_result_base': None}
+[0.551s] Level 5:colcon.colcon_core.verb:set package 'livox_ros_driver2' build argument 'cmake_args' from command line to 'None'
+[0.551s] Level 5:colcon.colcon_core.verb:set package 'livox_ros_driver2' build argument 'cmake_target' from command line to 'None'
+[0.551s] Level 5:colcon.colcon_core.verb:set package 'livox_ros_driver2' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.551s] Level 5:colcon.colcon_core.verb:set package 'livox_ros_driver2' build argument 'cmake_clean_cache' from command line to 'False'
+[0.551s] Level 5:colcon.colcon_core.verb:set package 'livox_ros_driver2' build argument 'cmake_clean_first' from command line to 'False'
+[0.551s] Level 5:colcon.colcon_core.verb:set package 'livox_ros_driver2' build argument 'cmake_force_configure' from command line to 'False'
+[0.551s] Level 5:colcon.colcon_core.verb:set package 'livox_ros_driver2' build argument 'ament_cmake_args' from command line to 'None'
+[0.551s] Level 5:colcon.colcon_core.verb:set package 'livox_ros_driver2' build argument 'catkin_cmake_args' from command line to 'None'
+[0.551s] Level 5:colcon.colcon_core.verb:set package 'livox_ros_driver2' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.551s] DEBUG:colcon.colcon_core.verb:Building package 'livox_ros_driver2' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/container_user/wheelchair2/src/build/livox_ros_driver2', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/container_user/wheelchair2/src/install/livox_ros_driver2', 'merge_install': False, 'path': '/home/container_user/wheelchair2/src/dependencies/livox_ros_driver2', 'symlink_install': False, 'test_result_base': None}
+[0.551s] Level 5:colcon.colcon_core.verb:set package 'pointcloud_to_laserscan' build argument 'cmake_args' from command line to 'None'
+[0.551s] Level 5:colcon.colcon_core.verb:set package 'pointcloud_to_laserscan' build argument 'cmake_target' from command line to 'None'
+[0.551s] Level 5:colcon.colcon_core.verb:set package 'pointcloud_to_laserscan' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.551s] Level 5:colcon.colcon_core.verb:set package 'pointcloud_to_laserscan' build argument 'cmake_clean_cache' from command line to 'False'
+[0.551s] Level 5:colcon.colcon_core.verb:set package 'pointcloud_to_laserscan' build argument 'cmake_clean_first' from command line to 'False'
+[0.551s] Level 5:colcon.colcon_core.verb:set package 'pointcloud_to_laserscan' build argument 'cmake_force_configure' from command line to 'False'
+[0.552s] Level 5:colcon.colcon_core.verb:set package 'pointcloud_to_laserscan' build argument 'ament_cmake_args' from command line to 'None'
+[0.552s] Level 5:colcon.colcon_core.verb:set package 'pointcloud_to_laserscan' build argument 'catkin_cmake_args' from command line to 'None'
+[0.552s] Level 5:colcon.colcon_core.verb:set package 'pointcloud_to_laserscan' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.552s] DEBUG:colcon.colcon_core.verb:Building package 'pointcloud_to_laserscan' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/container_user/wheelchair2/src/build/pointcloud_to_laserscan', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/container_user/wheelchair2/src/install/pointcloud_to_laserscan', 'merge_install': False, 'path': '/home/container_user/wheelchair2/src/dependencies/pointcloud_to_laserscan', 'symlink_install': False, 'test_result_base': None}
+[0.552s] Level 5:colcon.colcon_core.verb:set package 'realsense2_camera_msgs' build argument 'cmake_args' from command line to 'None'
+[0.552s] Level 5:colcon.colcon_core.verb:set package 'realsense2_camera_msgs' build argument 'cmake_target' from command line to 'None'
+[0.552s] Level 5:colcon.colcon_core.verb:set package 'realsense2_camera_msgs' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.552s] Level 5:colcon.colcon_core.verb:set package 'realsense2_camera_msgs' build argument 'cmake_clean_cache' from command line to 'False'
+[0.552s] Level 5:colcon.colcon_core.verb:set package 'realsense2_camera_msgs' build argument 'cmake_clean_first' from command line to 'False'
+[0.552s] Level 5:colcon.colcon_core.verb:set package 'realsense2_camera_msgs' build argument 'cmake_force_configure' from command line to 'False'
+[0.552s] Level 5:colcon.colcon_core.verb:set package 'realsense2_camera_msgs' build argument 'ament_cmake_args' from command line to 'None'
+[0.552s] Level 5:colcon.colcon_core.verb:set package 'realsense2_camera_msgs' build argument 'catkin_cmake_args' from command line to 'None'
+[0.552s] Level 5:colcon.colcon_core.verb:set package 'realsense2_camera_msgs' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.552s] DEBUG:colcon.colcon_core.verb:Building package 'realsense2_camera_msgs' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/container_user/wheelchair2/src/build/realsense2_camera_msgs', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/container_user/wheelchair2/src/install/realsense2_camera_msgs', 'merge_install': False, 'path': '/home/container_user/wheelchair2/src/dependencies/realsense-ros/realsense2_camera_msgs', 'symlink_install': False, 'test_result_base': None}
+[0.552s] Level 5:colcon.colcon_core.verb:set package 'rrc_3dloc' build argument 'cmake_args' from command line to 'None'
+[0.552s] Level 5:colcon.colcon_core.verb:set package 'rrc_3dloc' build argument 'cmake_target' from command line to 'None'
+[0.552s] Level 5:colcon.colcon_core.verb:set package 'rrc_3dloc' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.552s] Level 5:colcon.colcon_core.verb:set package 'rrc_3dloc' build argument 'cmake_clean_cache' from command line to 'False'
+[0.552s] Level 5:colcon.colcon_core.verb:set package 'rrc_3dloc' build argument 'cmake_clean_first' from command line to 'False'
+[0.552s] Level 5:colcon.colcon_core.verb:set package 'rrc_3dloc' build argument 'cmake_force_configure' from command line to 'False'
+[0.552s] Level 5:colcon.colcon_core.verb:set package 'rrc_3dloc' build argument 'ament_cmake_args' from command line to 'None'
+[0.552s] Level 5:colcon.colcon_core.verb:set package 'rrc_3dloc' build argument 'catkin_cmake_args' from command line to 'None'
+[0.552s] Level 5:colcon.colcon_core.verb:set package 'rrc_3dloc' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.553s] DEBUG:colcon.colcon_core.verb:Building package 'rrc_3dloc' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/container_user/wheelchair2/src/build/rrc_3dloc', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/container_user/wheelchair2/src/install/rrc_3dloc', 'merge_install': False, 'path': '/home/container_user/wheelchair2/src/3dbbs_localization/rrc-3dloc', 'symlink_install': False, 'test_result_base': None}
+[0.553s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_bringup' build argument 'cmake_args' from command line to 'None'
+[0.553s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_bringup' build argument 'cmake_target' from command line to 'None'
+[0.553s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_bringup' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.553s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_bringup' build argument 'cmake_clean_cache' from command line to 'False'
+[0.553s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_bringup' build argument 'cmake_clean_first' from command line to 'False'
+[0.553s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_bringup' build argument 'cmake_force_configure' from command line to 'False'
+[0.553s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_bringup' build argument 'ament_cmake_args' from command line to 'None'
+[0.553s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_bringup' build argument 'catkin_cmake_args' from command line to 'None'
+[0.553s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_bringup' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.553s] DEBUG:colcon.colcon_core.verb:Building package 'wheelchair2_bringup' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/container_user/wheelchair2/src/build/wheelchair2_bringup', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/container_user/wheelchair2/src/install/wheelchair2_bringup', 'merge_install': False, 'path': '/home/container_user/wheelchair2/src/wheelchair2_bringup', 'symlink_install': False, 'test_result_base': None}
+[0.553s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_control' build argument 'cmake_args' from command line to 'None'
+[0.553s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_control' build argument 'cmake_target' from command line to 'None'
+[0.553s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_control' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.553s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_control' build argument 'cmake_clean_cache' from command line to 'False'
+[0.553s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_control' build argument 'cmake_clean_first' from command line to 'False'
+[0.553s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_control' build argument 'cmake_force_configure' from command line to 'False'
+[0.553s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_control' build argument 'ament_cmake_args' from command line to 'None'
+[0.553s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_control' build argument 'catkin_cmake_args' from command line to 'None'
+[0.553s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_control' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.553s] DEBUG:colcon.colcon_core.verb:Building package 'wheelchair2_control' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/container_user/wheelchair2/src/build/wheelchair2_control', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/container_user/wheelchair2/src/install/wheelchair2_control', 'merge_install': False, 'path': '/home/container_user/wheelchair2/src/wheelchair2_control', 'symlink_install': False, 'test_result_base': None}
+[0.554s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_description' build argument 'cmake_args' from command line to 'None'
+[0.554s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_description' build argument 'cmake_target' from command line to 'None'
+[0.554s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_description' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.554s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_description' build argument 'cmake_clean_cache' from command line to 'False'
+[0.554s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_description' build argument 'cmake_clean_first' from command line to 'False'
+[0.554s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_description' build argument 'cmake_force_configure' from command line to 'False'
+[0.554s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_description' build argument 'ament_cmake_args' from command line to 'None'
+[0.554s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_description' build argument 'catkin_cmake_args' from command line to 'None'
+[0.554s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_description' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.554s] DEBUG:colcon.colcon_core.verb:Building package 'wheelchair2_description' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/container_user/wheelchair2/src/build/wheelchair2_description', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/container_user/wheelchair2/src/install/wheelchair2_description', 'merge_install': False, 'path': '/home/container_user/wheelchair2/src/wheelchair2_description', 'symlink_install': False, 'test_result_base': None}
+[0.554s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_gazebo' build argument 'cmake_args' from command line to 'None'
+[0.554s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_gazebo' build argument 'cmake_target' from command line to 'None'
+[0.554s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_gazebo' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.554s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_gazebo' build argument 'cmake_clean_cache' from command line to 'False'
+[0.554s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_gazebo' build argument 'cmake_clean_first' from command line to 'False'
+[0.554s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_gazebo' build argument 'cmake_force_configure' from command line to 'False'
+[0.554s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_gazebo' build argument 'ament_cmake_args' from command line to 'None'
+[0.554s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_gazebo' build argument 'catkin_cmake_args' from command line to 'None'
+[0.554s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_gazebo' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.554s] DEBUG:colcon.colcon_core.verb:Building package 'wheelchair2_gazebo' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/container_user/wheelchair2/src/build/wheelchair2_gazebo', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/container_user/wheelchair2/src/install/wheelchair2_gazebo', 'merge_install': False, 'path': '/home/container_user/wheelchair2/src/wheelchair2_gazebo', 'symlink_install': False, 'test_result_base': None}
+[0.555s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_kangaroo_x2_driver' build argument 'cmake_args' from command line to 'None'
+[0.555s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_kangaroo_x2_driver' build argument 'cmake_target' from command line to 'None'
+[0.555s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_kangaroo_x2_driver' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.555s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_kangaroo_x2_driver' build argument 'cmake_clean_cache' from command line to 'False'
+[0.555s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_kangaroo_x2_driver' build argument 'cmake_clean_first' from command line to 'False'
+[0.555s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_kangaroo_x2_driver' build argument 'cmake_force_configure' from command line to 'False'
+[0.555s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_kangaroo_x2_driver' build argument 'ament_cmake_args' from command line to 'None'
+[0.555s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_kangaroo_x2_driver' build argument 'catkin_cmake_args' from command line to 'None'
+[0.555s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_kangaroo_x2_driver' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.555s] DEBUG:colcon.colcon_core.verb:Building package 'wheelchair2_kangaroo_x2_driver' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/container_user/wheelchair2/src/build/wheelchair2_kangaroo_x2_driver', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/container_user/wheelchair2/src/install/wheelchair2_kangaroo_x2_driver', 'merge_install': False, 'path': '/home/container_user/wheelchair2/src/wheelchair2_kangaroo_x2_driver', 'symlink_install': False, 'test_result_base': None}
+[0.555s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_localization' build argument 'cmake_args' from command line to 'None'
+[0.555s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_localization' build argument 'cmake_target' from command line to 'None'
+[0.555s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_localization' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.555s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_localization' build argument 'cmake_clean_cache' from command line to 'False'
+[0.555s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_localization' build argument 'cmake_clean_first' from command line to 'False'
+[0.555s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_localization' build argument 'cmake_force_configure' from command line to 'False'
+[0.555s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_localization' build argument 'ament_cmake_args' from command line to 'None'
+[0.555s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_localization' build argument 'catkin_cmake_args' from command line to 'None'
+[0.555s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_localization' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.555s] DEBUG:colcon.colcon_core.verb:Building package 'wheelchair2_localization' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/container_user/wheelchair2/src/build/wheelchair2_localization', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/container_user/wheelchair2/src/install/wheelchair2_localization', 'merge_install': False, 'path': '/home/container_user/wheelchair2/src/wheelchair2_localization', 'symlink_install': False, 'test_result_base': None}
+[0.556s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_navigation' build argument 'cmake_args' from command line to 'None'
+[0.556s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_navigation' build argument 'cmake_target' from command line to 'None'
+[0.556s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_navigation' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.556s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_navigation' build argument 'cmake_clean_cache' from command line to 'False'
+[0.556s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_navigation' build argument 'cmake_clean_first' from command line to 'False'
+[0.556s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_navigation' build argument 'cmake_force_configure' from command line to 'False'
+[0.556s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_navigation' build argument 'ament_cmake_args' from command line to 'None'
+[0.556s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_navigation' build argument 'catkin_cmake_args' from command line to 'None'
+[0.556s] Level 5:colcon.colcon_core.verb:set package 'wheelchair2_navigation' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.556s] DEBUG:colcon.colcon_core.verb:Building package 'wheelchair2_navigation' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/container_user/wheelchair2/src/build/wheelchair2_navigation', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/container_user/wheelchair2/src/install/wheelchair2_navigation', 'merge_install': False, 'path': '/home/container_user/wheelchair2/src/wheelchair2_navigation', 'symlink_install': False, 'test_result_base': None}
+[0.556s] Level 5:colcon.colcon_core.verb:set package 'fast_lio' build argument 'cmake_args' from command line to 'None'
+[0.556s] Level 5:colcon.colcon_core.verb:set package 'fast_lio' build argument 'cmake_target' from command line to 'None'
+[0.556s] Level 5:colcon.colcon_core.verb:set package 'fast_lio' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.556s] Level 5:colcon.colcon_core.verb:set package 'fast_lio' build argument 'cmake_clean_cache' from command line to 'False'
+[0.556s] Level 5:colcon.colcon_core.verb:set package 'fast_lio' build argument 'cmake_clean_first' from command line to 'False'
+[0.556s] Level 5:colcon.colcon_core.verb:set package 'fast_lio' build argument 'cmake_force_configure' from command line to 'False'
+[0.556s] Level 5:colcon.colcon_core.verb:set package 'fast_lio' build argument 'ament_cmake_args' from command line to 'None'
+[0.556s] Level 5:colcon.colcon_core.verb:set package 'fast_lio' build argument 'catkin_cmake_args' from command line to 'None'
+[0.556s] Level 5:colcon.colcon_core.verb:set package 'fast_lio' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.556s] DEBUG:colcon.colcon_core.verb:Building package 'fast_lio' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/container_user/wheelchair2/src/build/fast_lio', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/container_user/wheelchair2/src/install/fast_lio', 'merge_install': False, 'path': '/home/container_user/wheelchair2/src/dependencies/FAST_LIO', 'symlink_install': False, 'test_result_base': None}
+[0.557s] Level 5:colcon.colcon_core.verb:set package 'realsense2_camera' build argument 'cmake_args' from command line to 'None'
+[0.557s] Level 5:colcon.colcon_core.verb:set package 'realsense2_camera' build argument 'cmake_target' from command line to 'None'
+[0.557s] Level 5:colcon.colcon_core.verb:set package 'realsense2_camera' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.557s] Level 5:colcon.colcon_core.verb:set package 'realsense2_camera' build argument 'cmake_clean_cache' from command line to 'False'
+[0.557s] Level 5:colcon.colcon_core.verb:set package 'realsense2_camera' build argument 'cmake_clean_first' from command line to 'False'
+[0.557s] Level 5:colcon.colcon_core.verb:set package 'realsense2_camera' build argument 'cmake_force_configure' from command line to 'False'
+[0.557s] Level 5:colcon.colcon_core.verb:set package 'realsense2_camera' build argument 'ament_cmake_args' from command line to 'None'
+[0.557s] Level 5:colcon.colcon_core.verb:set package 'realsense2_camera' build argument 'catkin_cmake_args' from command line to 'None'
+[0.557s] Level 5:colcon.colcon_core.verb:set package 'realsense2_camera' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.557s] DEBUG:colcon.colcon_core.verb:Building package 'realsense2_camera' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/container_user/wheelchair2/src/build/realsense2_camera', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/container_user/wheelchair2/src/install/realsense2_camera', 'merge_install': False, 'path': '/home/container_user/wheelchair2/src/dependencies/realsense-ros/realsense2_camera', 'symlink_install': False, 'test_result_base': None}
+[0.557s] Level 5:colcon.colcon_core.verb:set package 'realsense2_description' build argument 'cmake_args' from command line to 'None'
+[0.557s] Level 5:colcon.colcon_core.verb:set package 'realsense2_description' build argument 'cmake_target' from command line to 'None'
+[0.557s] Level 5:colcon.colcon_core.verb:set package 'realsense2_description' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.557s] Level 5:colcon.colcon_core.verb:set package 'realsense2_description' build argument 'cmake_clean_cache' from command line to 'False'
+[0.557s] Level 5:colcon.colcon_core.verb:set package 'realsense2_description' build argument 'cmake_clean_first' from command line to 'False'
+[0.557s] Level 5:colcon.colcon_core.verb:set package 'realsense2_description' build argument 'cmake_force_configure' from command line to 'False'
+[0.557s] Level 5:colcon.colcon_core.verb:set package 'realsense2_description' build argument 'ament_cmake_args' from command line to 'None'
+[0.557s] Level 5:colcon.colcon_core.verb:set package 'realsense2_description' build argument 'catkin_cmake_args' from command line to 'None'
+[0.557s] Level 5:colcon.colcon_core.verb:set package 'realsense2_description' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.557s] DEBUG:colcon.colcon_core.verb:Building package 'realsense2_description' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/container_user/wheelchair2/src/build/realsense2_description', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/container_user/wheelchair2/src/install/realsense2_description', 'merge_install': False, 'path': '/home/container_user/wheelchair2/src/dependencies/realsense-ros/realsense2_description', 'symlink_install': False, 'test_result_base': None}
+[0.557s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[0.558s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[0.559s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/container_user/wheelchair2/src/dependencies/realsense-ros/realsense2_camera_msgs' with build type 'ament_cmake'
+[0.559s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/container_user/wheelchair2/src/dependencies/realsense-ros/realsense2_camera_msgs'
+[0.563s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.563s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.563s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.569s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/container_user/wheelchair2/src/dependencies/livox_ros_driver2' with build type 'ament_cmake'
+[0.569s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/container_user/wheelchair2/src/dependencies/livox_ros_driver2'
+[0.570s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.570s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.574s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/container_user/wheelchair2/src/3dbbs_localization/deps/3d_bbs'
+[0.574s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.574s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.580s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/container_user/wheelchair2/src/3dbbs_localization/click_save' with build type 'ament_python'
+[0.580s] Level 1:colcon.colcon_core.shell:create_environment_hook('click_save', 'ament_prefix_path')
+[0.580s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/container_user/wheelchair2/src/install/click_save/share/click_save/hook/ament_prefix_path.ps1'
+[0.581s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/container_user/wheelchair2/src/install/click_save/share/click_save/hook/ament_prefix_path.dsv'
+[0.582s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/container_user/wheelchair2/src/install/click_save/share/click_save/hook/ament_prefix_path.sh'
+[0.583s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.583s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.587s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2' with build type 'ament_cmake'
+[0.587s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2'
+[0.588s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.588s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.592s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/container_user/wheelchair2/src/dependencies/pointcloud_to_laserscan' with build type 'ament_cmake'
+[0.593s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/container_user/wheelchair2/src/dependencies/pointcloud_to_laserscan'
+[0.593s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.593s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.597s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/container_user/wheelchair2/src/3dbbs_localization/rrc-3dloc' with build type 'ament_cmake'
+[0.597s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/container_user/wheelchair2/src/3dbbs_localization/rrc-3dloc'
+[0.598s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.598s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.602s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/container_user/wheelchair2/src/wheelchair2_bringup' with build type 'ament_cmake'
+[0.602s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/container_user/wheelchair2/src/wheelchair2_bringup'
+[0.602s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.602s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.608s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/container_user/wheelchair2/src/wheelchair2_control' with build type 'ament_cmake'
+[0.608s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/container_user/wheelchair2/src/wheelchair2_control'
+[0.608s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.608s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.612s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/container_user/wheelchair2/src/wheelchair2_description' with build type 'ament_python'
+[0.613s] Level 1:colcon.colcon_core.shell:create_environment_hook('wheelchair2_description', 'ament_prefix_path')
+[0.613s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/container_user/wheelchair2/src/install/wheelchair2_description/share/wheelchair2_description/hook/ament_prefix_path.ps1'
+[0.613s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/container_user/wheelchair2/src/install/wheelchair2_description/share/wheelchair2_description/hook/ament_prefix_path.dsv'
+[0.614s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/container_user/wheelchair2/src/install/wheelchair2_description/share/wheelchair2_description/hook/ament_prefix_path.sh'
+[0.614s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.614s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.618s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/container_user/wheelchair2/src/wheelchair2_gazebo' with build type 'ament_python'
+[0.618s] Level 1:colcon.colcon_core.shell:create_environment_hook('wheelchair2_gazebo', 'ament_prefix_path')
+[0.618s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/container_user/wheelchair2/src/install/wheelchair2_gazebo/share/wheelchair2_gazebo/hook/ament_prefix_path.ps1'
+[0.619s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/container_user/wheelchair2/src/install/wheelchair2_gazebo/share/wheelchair2_gazebo/hook/ament_prefix_path.dsv'
+[0.619s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/container_user/wheelchair2/src/install/wheelchair2_gazebo/share/wheelchair2_gazebo/hook/ament_prefix_path.sh'
+[0.620s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.620s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.623s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/container_user/wheelchair2/src/wheelchair2_kangaroo_x2_driver' with build type 'ament_cmake'
+[0.623s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/container_user/wheelchair2/src/wheelchair2_kangaroo_x2_driver'
+[0.624s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.624s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.628s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/container_user/wheelchair2/src/wheelchair2_localization' with build type 'ament_python'
+[0.628s] Level 1:colcon.colcon_core.shell:create_environment_hook('wheelchair2_localization', 'ament_prefix_path')
+[0.628s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/container_user/wheelchair2/src/install/wheelchair2_localization/share/wheelchair2_localization/hook/ament_prefix_path.ps1'
+[0.629s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/container_user/wheelchair2/src/install/wheelchair2_localization/share/wheelchair2_localization/hook/ament_prefix_path.dsv'
+[0.629s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/container_user/wheelchair2/src/install/wheelchair2_localization/share/wheelchair2_localization/hook/ament_prefix_path.sh'
+[0.629s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.629s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.633s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/container_user/wheelchair2/src/wheelchair2_navigation' with build type 'ament_cmake'
+[0.633s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/container_user/wheelchair2/src/wheelchair2_navigation'
+[0.634s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.634s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.644s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/container_user/wheelchair2/src/build/realsense2_camera_msgs': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/container_user/wheelchair2/src/dependencies/realsense-ros/realsense2_camera_msgs -DCMAKE_INSTALL_PREFIX=/home/container_user/wheelchair2/src/install/realsense2_camera_msgs
+[0.648s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/container_user/wheelchair2/src/build/livox_ros_driver2': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/container_user/wheelchair2/src/dependencies/livox_ros_driver2 -DCMAKE_INSTALL_PREFIX=/home/container_user/wheelchair2/src/install/livox_ros_driver2
+[0.651s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/container_user/wheelchair2/src/build/bbs3d': /usr/bin/cmake --build /home/container_user/wheelchair2/src/build/bbs3d -- -j16 -l16
+[0.866s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/container_user/wheelchair2/src/3dbbs_localization/click_save'
+[0.866s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.866s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.873s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/container_user/wheelchair2/src/build/icp_localization_ros2': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/container_user/wheelchair2/src/dependencies/icp_localization_ros2 -DCMAKE_INSTALL_PREFIX=/home/container_user/wheelchair2/src/install/icp_localization_ros2
+[0.875s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/container_user/wheelchair2/src/build/pointcloud_to_laserscan': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/container_user/wheelchair2/src/dependencies/pointcloud_to_laserscan -DCMAKE_INSTALL_PREFIX=/home/container_user/wheelchair2/src/install/pointcloud_to_laserscan
+[0.877s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/container_user/wheelchair2/src/build/rrc_3dloc': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/container_user/wheelchair2/src/3dbbs_localization/rrc-3dloc -DCMAKE_INSTALL_PREFIX=/home/container_user/wheelchair2/src/install/rrc_3dloc
+[0.879s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/container_user/wheelchair2/src/build/wheelchair2_bringup': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/container_user/wheelchair2/src/wheelchair2_bringup -DCMAKE_INSTALL_PREFIX=/home/container_user/wheelchair2/src/install/wheelchair2_bringup
+[0.880s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/container_user/wheelchair2/src/build/wheelchair2_control': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/container_user/wheelchair2/src/wheelchair2_control -DCMAKE_INSTALL_PREFIX=/home/container_user/wheelchair2/src/install/wheelchair2_control
+[1.089s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/container_user/wheelchair2/src/wheelchair2_description'
+[1.089s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[1.089s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[1.260s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/container_user/wheelchair2/src/wheelchair2_gazebo'
+[1.260s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[1.260s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[1.264s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/container_user/wheelchair2/src/build/wheelchair2_kangaroo_x2_driver': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/container_user/wheelchair2/src/wheelchair2_kangaroo_x2_driver -DCMAKE_INSTALL_PREFIX=/home/container_user/wheelchair2/src/install/wheelchair2_kangaroo_x2_driver
+[1.417s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/container_user/wheelchair2/src/wheelchair2_localization'
+[1.418s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[1.418s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[1.433s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/container_user/wheelchair2/src/build/wheelchair2_navigation': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/container_user/wheelchair2/src/wheelchair2_navigation -DCMAKE_INSTALL_PREFIX=/home/container_user/wheelchair2/src/install/wheelchair2_navigation
+[1.433s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/container_user/wheelchair2/src/build/wheelchair2_control' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/container_user/wheelchair2/src/wheelchair2_control -DCMAKE_INSTALL_PREFIX=/home/container_user/wheelchair2/src/install/wheelchair2_control
+[1.433s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/container_user/wheelchair2/src/build/wheelchair2_control': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/container_user/wheelchair2/src/build/wheelchair2_control -- -j16 -l16
+[1.434s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/container_user/wheelchair2/src/build/wheelchair2_bringup' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/container_user/wheelchair2/src/wheelchair2_bringup -DCMAKE_INSTALL_PREFIX=/home/container_user/wheelchair2/src/install/wheelchair2_bringup
+[1.435s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/container_user/wheelchair2/src/build/wheelchair2_bringup': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/container_user/wheelchair2/src/build/wheelchair2_bringup -- -j16 -l16
+[1.435s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/container_user/wheelchair2/src/build/bbs3d' returned '0': /usr/bin/cmake --build /home/container_user/wheelchair2/src/build/bbs3d -- -j16 -l16
+[1.444s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/container_user/wheelchair2/src/build/bbs3d': /usr/bin/cmake --install /home/container_user/wheelchair2/src/build/bbs3d
+[1.471s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/container_user/wheelchair2/src/build/wheelchair2_bringup' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/container_user/wheelchair2/src/build/wheelchair2_bringup -- -j16 -l16
+[1.473s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/container_user/wheelchair2/src/build/wheelchair2_bringup': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/container_user/wheelchair2/src/build/wheelchair2_bringup
+[1.480s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/container_user/wheelchair2/src/build/wheelchair2_control' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/container_user/wheelchair2/src/build/wheelchair2_control -- -j16 -l16
+[1.480s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(bbs3d)
+[1.482s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/container_user/wheelchair2/src/build/wheelchair2_control': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/container_user/wheelchair2/src/build/wheelchair2_control
+[1.482s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/container_user/wheelchair2/src/build/bbs3d' returned '0': /usr/bin/cmake --install /home/container_user/wheelchair2/src/build/bbs3d
+[1.490s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/bbs3d' for CMake module files
+[1.490s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/bbs3d' for CMake config files
+[1.491s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/bbs3d/lib'
+[1.491s] Level 1:colcon.colcon_core.shell:create_environment_hook('bbs3d', 'ld_library_path_lib')
+[1.491s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/container_user/wheelchair2/src/install/bbs3d/share/bbs3d/hook/ld_library_path_lib.ps1'
+[1.492s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/container_user/wheelchair2/src/install/bbs3d/share/bbs3d/hook/ld_library_path_lib.dsv'
+[1.493s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/container_user/wheelchair2/src/install/bbs3d/share/bbs3d/hook/ld_library_path_lib.sh'
+[1.494s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/bbs3d/bin'
+[1.495s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/bbs3d/lib/pkgconfig/bbs3d.pc'
+[1.495s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/bbs3d/lib/python3.10/site-packages'
+[1.495s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/bbs3d/bin'
+[1.496s] INFO:colcon.colcon_core.shell:Creating package script '/home/container_user/wheelchair2/src/install/bbs3d/share/bbs3d/package.ps1'
+[1.497s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/container_user/wheelchair2/src/install/bbs3d/share/bbs3d/package.dsv'
+[1.499s] INFO:colcon.colcon_core.shell:Creating package script '/home/container_user/wheelchair2/src/install/bbs3d/share/bbs3d/package.sh'
+[1.500s] INFO:colcon.colcon_core.shell:Creating package script '/home/container_user/wheelchair2/src/install/bbs3d/share/bbs3d/package.bash'
+[1.501s] INFO:colcon.colcon_core.shell:Creating package script '/home/container_user/wheelchair2/src/install/bbs3d/share/bbs3d/package.zsh'
+[1.502s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/container_user/wheelchair2/src/install/bbs3d/share/colcon-core/packages/bbs3d)
+[1.503s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(wheelchair2_bringup)
+[1.503s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/wheelchair2_bringup' for CMake module files
+[1.504s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/container_user/wheelchair2/src/build/wheelchair2_bringup' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/container_user/wheelchair2/src/build/wheelchair2_bringup
+[1.504s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/wheelchair2_bringup' for CMake config files
+[1.505s] Level 1:colcon.colcon_core.shell:create_environment_hook('wheelchair2_bringup', 'cmake_prefix_path')
+[1.505s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/wheelchair2_bringup/hook/cmake_prefix_path.ps1'
+[1.506s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/wheelchair2_bringup/hook/cmake_prefix_path.dsv'
+[1.506s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/wheelchair2_bringup/hook/cmake_prefix_path.sh'
+[1.506s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/wheelchair2_bringup/lib'
+[1.506s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/wheelchair2_bringup/bin'
+[1.507s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/wheelchair2_bringup/lib/pkgconfig/wheelchair2_bringup.pc'
+[1.507s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/wheelchair2_bringup/lib/python3.10/site-packages'
+[1.507s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/wheelchair2_bringup/bin'
+[1.507s] INFO:colcon.colcon_core.shell:Creating package script '/home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/wheelchair2_bringup/package.ps1'
+[1.508s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/wheelchair2_bringup/package.dsv'
+[1.509s] INFO:colcon.colcon_core.shell:Creating package script '/home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/wheelchair2_bringup/package.sh'
+[1.509s] INFO:colcon.colcon_core.shell:Creating package script '/home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/wheelchair2_bringup/package.bash'
+[1.510s] INFO:colcon.colcon_core.shell:Creating package script '/home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/wheelchair2_bringup/package.zsh'
+[1.510s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/colcon-core/packages/wheelchair2_bringup)
+[1.511s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(wheelchair2_bringup)
+[1.511s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/wheelchair2_bringup' for CMake module files
+[1.511s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/wheelchair2_bringup' for CMake config files
+[1.512s] Level 1:colcon.colcon_core.shell:create_environment_hook('wheelchair2_bringup', 'cmake_prefix_path')
+[1.512s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/wheelchair2_bringup/hook/cmake_prefix_path.ps1'
+[1.512s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/wheelchair2_bringup/hook/cmake_prefix_path.dsv'
+[1.513s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/wheelchair2_bringup/hook/cmake_prefix_path.sh'
+[1.513s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/wheelchair2_bringup/lib'
+[1.513s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/wheelchair2_bringup/bin'
+[1.514s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/wheelchair2_bringup/lib/pkgconfig/wheelchair2_bringup.pc'
+[1.514s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/wheelchair2_bringup/lib/python3.10/site-packages'
+[1.514s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/wheelchair2_bringup/bin'
+[1.515s] INFO:colcon.colcon_core.shell:Creating package script '/home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/wheelchair2_bringup/package.ps1'
+[1.516s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/wheelchair2_bringup/package.dsv'
+[1.516s] INFO:colcon.colcon_core.shell:Creating package script '/home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/wheelchair2_bringup/package.sh'
+[1.517s] INFO:colcon.colcon_core.shell:Creating package script '/home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/wheelchair2_bringup/package.bash'
+[1.517s] INFO:colcon.colcon_core.shell:Creating package script '/home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/wheelchair2_bringup/package.zsh'
+[1.518s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/colcon-core/packages/wheelchair2_bringup)
+[1.518s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(wheelchair2_control)
+[1.519s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/wheelchair2_control' for CMake module files
+[1.520s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/container_user/wheelchair2/src/build/wheelchair2_control' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/container_user/wheelchair2/src/build/wheelchair2_control
+[1.521s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/wheelchair2_control' for CMake config files
+[1.521s] Level 1:colcon.colcon_core.shell:create_environment_hook('wheelchair2_control', 'cmake_prefix_path')
+[1.521s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/container_user/wheelchair2/src/install/wheelchair2_control/share/wheelchair2_control/hook/cmake_prefix_path.ps1'
+[1.522s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/container_user/wheelchair2/src/install/wheelchair2_control/share/wheelchair2_control/hook/cmake_prefix_path.dsv'
+[1.522s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/container_user/wheelchair2/src/install/wheelchair2_control/share/wheelchair2_control/hook/cmake_prefix_path.sh'
+[1.523s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/wheelchair2_control/lib'
+[1.523s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/wheelchair2_control/bin'
+[1.523s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/wheelchair2_control/lib/pkgconfig/wheelchair2_control.pc'
+[1.523s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/wheelchair2_control/lib/python3.10/site-packages'
+[1.523s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/wheelchair2_control/bin'
+[1.524s] INFO:colcon.colcon_core.shell:Creating package script '/home/container_user/wheelchair2/src/install/wheelchair2_control/share/wheelchair2_control/package.ps1'
+[1.524s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/container_user/wheelchair2/src/install/wheelchair2_control/share/wheelchair2_control/package.dsv'
+[1.524s] INFO:colcon.colcon_core.shell:Creating package script '/home/container_user/wheelchair2/src/install/wheelchair2_control/share/wheelchair2_control/package.sh'
+[1.525s] INFO:colcon.colcon_core.shell:Creating package script '/home/container_user/wheelchair2/src/install/wheelchair2_control/share/wheelchair2_control/package.bash'
+[1.525s] INFO:colcon.colcon_core.shell:Creating package script '/home/container_user/wheelchair2/src/install/wheelchair2_control/share/wheelchair2_control/package.zsh'
+[1.526s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/container_user/wheelchair2/src/install/wheelchair2_control/share/colcon-core/packages/wheelchair2_control)
+[1.526s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(wheelchair2_control)
+[1.527s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/wheelchair2_control' for CMake module files
+[1.527s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/wheelchair2_control' for CMake config files
+[1.527s] Level 1:colcon.colcon_core.shell:create_environment_hook('wheelchair2_control', 'cmake_prefix_path')
+[1.527s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/container_user/wheelchair2/src/install/wheelchair2_control/share/wheelchair2_control/hook/cmake_prefix_path.ps1'
+[1.528s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/container_user/wheelchair2/src/install/wheelchair2_control/share/wheelchair2_control/hook/cmake_prefix_path.dsv'
+[1.528s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/container_user/wheelchair2/src/install/wheelchair2_control/share/wheelchair2_control/hook/cmake_prefix_path.sh'
+[1.528s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/wheelchair2_control/lib'
+[1.529s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/wheelchair2_control/bin'
+[1.529s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/wheelchair2_control/lib/pkgconfig/wheelchair2_control.pc'
+[1.529s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/wheelchair2_control/lib/python3.10/site-packages'
+[1.529s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/wheelchair2_control/bin'
+[1.529s] INFO:colcon.colcon_core.shell:Creating package script '/home/container_user/wheelchair2/src/install/wheelchair2_control/share/wheelchair2_control/package.ps1'
+[1.530s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/container_user/wheelchair2/src/install/wheelchair2_control/share/wheelchair2_control/package.dsv'
+[1.530s] INFO:colcon.colcon_core.shell:Creating package script '/home/container_user/wheelchair2/src/install/wheelchair2_control/share/wheelchair2_control/package.sh'
+[1.531s] INFO:colcon.colcon_core.shell:Creating package script '/home/container_user/wheelchair2/src/install/wheelchair2_control/share/wheelchair2_control/package.bash'
+[1.531s] INFO:colcon.colcon_core.shell:Creating package script '/home/container_user/wheelchair2/src/install/wheelchair2_control/share/wheelchair2_control/package.zsh'
+[1.531s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/container_user/wheelchair2/src/install/wheelchair2_control/share/colcon-core/packages/wheelchair2_control)
+[1.777s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/container_user/wheelchair2/src/build/wheelchair2_navigation' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/container_user/wheelchair2/src/wheelchair2_navigation -DCMAKE_INSTALL_PREFIX=/home/container_user/wheelchair2/src/install/wheelchair2_navigation
+[1.779s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/container_user/wheelchair2/src/build/wheelchair2_navigation': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/container_user/wheelchair2/src/build/wheelchair2_navigation -- -j16 -l16
+[1.824s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/container_user/wheelchair2/src/build/wheelchair2_navigation' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/container_user/wheelchair2/src/build/wheelchair2_navigation -- -j16 -l16
+[1.826s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/container_user/wheelchair2/src/build/wheelchair2_navigation': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/container_user/wheelchair2/src/build/wheelchair2_navigation
+[1.839s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/container_user/wheelchair2/src/3dbbs_localization/click_save': PYTHONPATH=/home/container_user/wheelchair2/src/build/click_save/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/container_user/wheelchair2/src/install/click_save/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/click_save build --build-base /home/container_user/wheelchair2/src/build/click_save/build install --record /home/container_user/wheelchair2/src/build/click_save/install.log --single-version-externally-managed install_data
+[1.846s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/container_user/wheelchair2/src/wheelchair2_gazebo': PYTHONPATH=/home/container_user/wheelchair2/src/build/wheelchair2_gazebo/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/container_user/wheelchair2/src/install/wheelchair2_gazebo/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/wheelchair2_gazebo build --build-base /home/container_user/wheelchair2/src/build/wheelchair2_gazebo/build install --record /home/container_user/wheelchair2/src/build/wheelchair2_gazebo/install.log --single-version-externally-managed install_data
+[1.851s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/container_user/wheelchair2/src/wheelchair2_description': PYTHONPATH=/home/container_user/wheelchair2/src/build/wheelchair2_description/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/container_user/wheelchair2/src/install/wheelchair2_description/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/wheelchair2_description build --build-base /home/container_user/wheelchair2/src/build/wheelchair2_description/build install --record /home/container_user/wheelchair2/src/build/wheelchair2_description/install.log --single-version-externally-managed install_data
+[1.851s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/container_user/wheelchair2/src/wheelchair2_localization': PYTHONPATH=/home/container_user/wheelchair2/src/build/wheelchair2_localization/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/container_user/wheelchair2/src/install/wheelchair2_localization/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/wheelchair2_localization build --build-base /home/container_user/wheelchair2/src/build/wheelchair2_localization/build install --record /home/container_user/wheelchair2/src/build/wheelchair2_localization/install.log --single-version-externally-managed install_data
+[1.891s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(wheelchair2_navigation)
+[1.892s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/wheelchair2_navigation' for CMake module files
+[1.892s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/container_user/wheelchair2/src/build/wheelchair2_navigation' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/container_user/wheelchair2/src/build/wheelchair2_navigation
+[1.892s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/wheelchair2_navigation' for CMake config files
+[1.893s] Level 1:colcon.colcon_core.shell:create_environment_hook('wheelchair2_navigation', 'cmake_prefix_path')
+[1.893s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/hook/cmake_prefix_path.ps1'
+[1.894s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/hook/cmake_prefix_path.dsv'
+[1.894s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/hook/cmake_prefix_path.sh'
+[1.894s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/wheelchair2_navigation/bin'
+[1.894s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/wheelchair2_navigation/lib/pkgconfig/wheelchair2_navigation.pc'
+[1.895s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/wheelchair2_navigation/lib/python3.10/site-packages'
+[1.895s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/wheelchair2_navigation/bin'
+[1.895s] INFO:colcon.colcon_core.shell:Creating package script '/home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/package.ps1'
+[1.896s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/package.dsv'
+[1.896s] INFO:colcon.colcon_core.shell:Creating package script '/home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/package.sh'
+[1.896s] INFO:colcon.colcon_core.shell:Creating package script '/home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/package.bash'
+[1.897s] INFO:colcon.colcon_core.shell:Creating package script '/home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/package.zsh'
+[1.897s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/colcon-core/packages/wheelchair2_navigation)
+[1.898s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(wheelchair2_navigation)
+[1.898s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/wheelchair2_navigation' for CMake module files
+[1.899s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/wheelchair2_navigation' for CMake config files
+[1.899s] Level 1:colcon.colcon_core.shell:create_environment_hook('wheelchair2_navigation', 'cmake_prefix_path')
+[1.899s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/hook/cmake_prefix_path.ps1'
+[1.900s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/hook/cmake_prefix_path.dsv'
+[1.900s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/hook/cmake_prefix_path.sh'
+[1.901s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/wheelchair2_navigation/bin'
+[1.901s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/wheelchair2_navigation/lib/pkgconfig/wheelchair2_navigation.pc'
+[1.901s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/wheelchair2_navigation/lib/python3.10/site-packages'
+[1.901s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/wheelchair2_navigation/bin'
+[1.902s] INFO:colcon.colcon_core.shell:Creating package script '/home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/package.ps1'
+[1.902s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/package.dsv'
+[1.902s] INFO:colcon.colcon_core.shell:Creating package script '/home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/package.sh'
+[1.903s] INFO:colcon.colcon_core.shell:Creating package script '/home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/package.bash'
+[1.903s] INFO:colcon.colcon_core.shell:Creating package script '/home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/package.zsh'
+[1.903s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/colcon-core/packages/wheelchair2_navigation)
+[1.939s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/container_user/wheelchair2/src/build/rrc_3dloc' returned '1': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/container_user/wheelchair2/src/3dbbs_localization/rrc-3dloc -DCMAKE_INSTALL_PREFIX=/home/container_user/wheelchair2/src/install/rrc_3dloc
+[1.952s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(rrc_3dloc)
+[1.952s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/rrc_3dloc' for CMake module files
+[1.953s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/rrc_3dloc' for CMake config files
+[1.953s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/rrc_3dloc/bin'
+[1.953s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/rrc_3dloc/lib/pkgconfig/rrc_3dloc.pc'
+[1.953s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/rrc_3dloc/lib/python3.10/site-packages'
+[1.953s] Level 1:colcon.colcon_core.environment:checking '/home/container_user/wheelchair2/src/install/rrc_3dloc/bin'
+[1.953s] INFO:colcon.colcon_core.shell:Creating package script '/home/container_user/wheelchair2/src/install/rrc_3dloc/share/rrc_3dloc/package.ps1'
+[1.954s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/container_user/wheelchair2/src/install/rrc_3dloc/share/rrc_3dloc/package.dsv'
+[1.954s] INFO:colcon.colcon_core.shell:Creating package script '/home/container_user/wheelchair2/src/install/rrc_3dloc/share/rrc_3dloc/package.sh'
+[1.954s] INFO:colcon.colcon_core.shell:Creating package script '/home/container_user/wheelchair2/src/install/rrc_3dloc/share/rrc_3dloc/package.bash'
+[1.954s] INFO:colcon.colcon_core.shell:Creating package script '/home/container_user/wheelchair2/src/install/rrc_3dloc/share/rrc_3dloc/package.zsh'
+[1.955s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/container_user/wheelchair2/src/install/rrc_3dloc/share/colcon-core/packages/rrc_3dloc)
+[4.168s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[4.168s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[4.168s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '1'
+[4.168s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[4.178s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.notify_send': Could not find 'notify-send'
+[4.178s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[4.178s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[4.178s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[4.181s] DEBUG:colcon.colcon_notification.desktop_notification.notify2:Failed to initialize notify2: org.freedesktop.DBus.Error.Spawn.ExecFailed: /usr/bin/dbus-launch terminated abnormally without any error message
+[4.181s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[4.182s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/container_user/wheelchair2/src/install/local_setup.ps1'
+[4.183s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/container_user/wheelchair2/src/install/_local_setup_util_ps1.py'
+[4.184s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/container_user/wheelchair2/src/install/setup.ps1'
+[4.184s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/container_user/wheelchair2/src/install/local_setup.sh'
+[4.185s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/container_user/wheelchair2/src/install/_local_setup_util_sh.py'
+[4.185s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/container_user/wheelchair2/src/install/setup.sh'
+[4.186s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/container_user/wheelchair2/src/install/local_setup.bash'
+[4.186s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/container_user/wheelchair2/src/install/setup.bash'
+[4.187s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/container_user/wheelchair2/src/install/local_setup.zsh'
+[4.187s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/container_user/wheelchair2/src/install/setup.zsh'

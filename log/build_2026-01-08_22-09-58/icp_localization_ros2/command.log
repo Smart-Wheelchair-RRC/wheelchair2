@@ -1,0 +1,1 @@
+Invoking command in '/home/container_user/wheelchair2/src/build/icp_localization_ros2': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/container_user/wheelchair2/src/dependencies/icp_localization_ros2 -DCMAKE_INSTALL_PREFIX=/home/container_user/wheelchair2/src/install/icp_localization_ros2

@@ -1,0 +1,3 @@
+[console_scripts]
+pointcloud3d_to_2d = wheelchair2_description.pointcloud3d_to_2d:main
+

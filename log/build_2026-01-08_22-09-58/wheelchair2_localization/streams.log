@@ -1,0 +1,43 @@
+[1.223s] Invoking command in '/home/container_user/wheelchair2/src/wheelchair2_localization': PYTHONPATH=/home/container_user/wheelchair2/src/build/wheelchair2_localization/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/container_user/wheelchair2/src/install/wheelchair2_localization/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/wheelchair2_localization build --build-base /home/container_user/wheelchair2/src/build/wheelchair2_localization/build install --record /home/container_user/wheelchair2/src/build/wheelchair2_localization/install.log --single-version-externally-managed install_data
+[1.392s] running egg_info
+[1.392s] creating ../build/wheelchair2_localization/wheelchair2_localization.egg-info
+[1.392s] writing ../build/wheelchair2_localization/wheelchair2_localization.egg-info/PKG-INFO
+[1.393s] writing dependency_links to ../build/wheelchair2_localization/wheelchair2_localization.egg-info/dependency_links.txt
+[1.393s] writing entry points to ../build/wheelchair2_localization/wheelchair2_localization.egg-info/entry_points.txt
+[1.393s] writing requirements to ../build/wheelchair2_localization/wheelchair2_localization.egg-info/requires.txt
+[1.393s] writing top-level names to ../build/wheelchair2_localization/wheelchair2_localization.egg-info/top_level.txt
+[1.393s] writing manifest file '../build/wheelchair2_localization/wheelchair2_localization.egg-info/SOURCES.txt'
+[1.395s] reading manifest file '../build/wheelchair2_localization/wheelchair2_localization.egg-info/SOURCES.txt'
+[1.395s] adding license file 'LICENSE'
+[1.395s] writing manifest file '../build/wheelchair2_localization/wheelchair2_localization.egg-info/SOURCES.txt'
+[1.396s] running build
+[1.396s] running build_py
+[1.396s] creating /home/container_user/wheelchair2/src/build/wheelchair2_localization/build
+[1.396s] creating /home/container_user/wheelchair2/src/build/wheelchair2_localization/build/lib
+[1.396s] creating /home/container_user/wheelchair2/src/build/wheelchair2_localization/build/lib/wheelchair2_localization
+[1.396s] copying wheelchair2_localization/invert_livox_data.py -> /home/container_user/wheelchair2/src/build/wheelchair2_localization/build/lib/wheelchair2_localization
+[1.397s] copying wheelchair2_localization/vizualize_pcd_map.py -> /home/container_user/wheelchair2/src/build/wheelchair2_localization/build/lib/wheelchair2_localization
+[1.397s] copying wheelchair2_localization/__init__.py -> /home/container_user/wheelchair2/src/build/wheelchair2_localization/build/lib/wheelchair2_localization
+[1.397s] running install
+[1.398s] running install_lib
+[1.399s] creating /home/container_user/wheelchair2/src/install/wheelchair2_localization/lib/python3.10/site-packages/wheelchair2_localization
+[1.399s] copying /home/container_user/wheelchair2/src/build/wheelchair2_localization/build/lib/wheelchair2_localization/invert_livox_data.py -> /home/container_user/wheelchair2/src/install/wheelchair2_localization/lib/python3.10/site-packages/wheelchair2_localization
+[1.399s] copying /home/container_user/wheelchair2/src/build/wheelchair2_localization/build/lib/wheelchair2_localization/vizualize_pcd_map.py -> /home/container_user/wheelchair2/src/install/wheelchair2_localization/lib/python3.10/site-packages/wheelchair2_localization
+[1.399s] copying /home/container_user/wheelchair2/src/build/wheelchair2_localization/build/lib/wheelchair2_localization/__init__.py -> /home/container_user/wheelchair2/src/install/wheelchair2_localization/lib/python3.10/site-packages/wheelchair2_localization
+[1.400s] byte-compiling /home/container_user/wheelchair2/src/install/wheelchair2_localization/lib/python3.10/site-packages/wheelchair2_localization/invert_livox_data.py to invert_livox_data.cpython-310.pyc
+[1.400s] byte-compiling /home/container_user/wheelchair2/src/install/wheelchair2_localization/lib/python3.10/site-packages/wheelchair2_localization/vizualize_pcd_map.py to vizualize_pcd_map.cpython-310.pyc
+[1.401s] byte-compiling /home/container_user/wheelchair2/src/install/wheelchair2_localization/lib/python3.10/site-packages/wheelchair2_localization/__init__.py to __init__.cpython-310.pyc
+[1.401s] running install_data
+[1.401s] creating /home/container_user/wheelchair2/src/install/wheelchair2_localization/share/ament_index
+[1.401s] creating /home/container_user/wheelchair2/src/install/wheelchair2_localization/share/ament_index/resource_index
+[1.401s] creating /home/container_user/wheelchair2/src/install/wheelchair2_localization/share/ament_index/resource_index/packages
+[1.401s] copying resource/wheelchair2_localization -> /home/container_user/wheelchair2/src/install/wheelchair2_localization/share/ament_index/resource_index/packages
+[1.401s] copying package.xml -> /home/container_user/wheelchair2/src/install/wheelchair2_localization/share/wheelchair2_localization
+[1.401s] creating /home/container_user/wheelchair2/src/install/wheelchair2_localization/share/wheelchair2_localization/launch
+[1.401s] copying launch/localization_icp.launch.py -> /home/container_user/wheelchair2/src/install/wheelchair2_localization/share/wheelchair2_localization/launch
+[1.402s] running install_egg_info
+[1.403s] Copying ../build/wheelchair2_localization/wheelchair2_localization.egg-info to /home/container_user/wheelchair2/src/install/wheelchair2_localization/lib/python3.10/site-packages/wheelchair2_localization-1.0.0-py3.10.egg-info
+[1.404s] running install_scripts
+[1.420s] Installing invert_livox_data script to /home/container_user/wheelchair2/src/install/wheelchair2_localization/lib/wheelchair2_localization
+[1.420s] Installing vizualize_pcd_map script to /home/container_user/wheelchair2/src/install/wheelchair2_localization/lib/wheelchair2_localization
+[1.421s] writing list of installed files to '/home/container_user/wheelchair2/src/build/wheelchair2_localization/install.log'
