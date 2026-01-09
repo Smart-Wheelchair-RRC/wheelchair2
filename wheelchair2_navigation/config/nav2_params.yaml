@@ -234,7 +234,7 @@ local_costmap:
       lidar_obstacle_layer:
         plugin: "spatio_temporal_voxel_layer/SpatioTemporalVoxelLayer"
         enabled: true
-        voxel_decay: 1.0 # seconds if linear, e^n if exponential 5
+        voxel_decay: 15.0 # seconds if linear, e^n if exponential 5
         decay_model: 0 # 0=linear, 1=exponential, -1=persistent
         voxel_size: 0.05 # meters
         track_unknown_space: true # default space is known
@@ -259,7 +259,6 @@ local_costmap:
           observation_persistence: 0.0 # default 0, use all measurements taken during now-value, 0=latest
           inf_is_valid: false # default false, for laser scans
           filter: "voxel" # default passthrough, apply "voxel", "passthrough", or no filter to sensor data, recommend on     voxel_min_points: 0          # default 0, minimum points per voxel for voxel filter
-
           clear_after_reading: true # default false, clear the buffer after the layer gets readings from it
         lidar1_clear:
           enabled: true #default true, can be toggled on/off with associated service call
@@ -267,11 +266,12 @@ local_costmap:
           topic: /livox/lidar
           marking: false
           clearing: true
-          max_z: 0.2 # default 0, meters
+          max_z: 8.0 # default 0, meters
           min_z: 1.0 # default 10, meters
-          vertical_fov_angle: 1.02 # default 0.7, radians. For 3D lidars it's the symmetric FOV about the planar axis.
+          vertical_fov_angle: 1.8151 # default 0.7, radians. For 3D lidars it's the symmetric FOV about the planar axis.
           vertical_fov_padding: 0.05 # 3D Lidar only. Default 0, in meters
           horizontal_fov_angle: 6.29 # 3D lidar scanners like the VLP16 have 360 deg horizontal FOV.
+          vertical_fov_offset: 0.3927
           decay_acceleration: 5.0 # default 0, 1/s^2.
           model_type: 1 # default 0, model type for frustum. 0=depth camera, 1=3d lidar like VLP16 or similar
       keepout_filter:
