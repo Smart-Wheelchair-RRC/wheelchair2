@@ -229,6 +229,15 @@ A couple of convenience functions are provided, implemented as aliases in `~/.ba
     cd /home/container_user/wheelchair2 && colcon build --symlink-install --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && wss
     ```
 
+-   **`wsd` Delete Build and Install Directories**
+    This function deletes the build, install, and log directories of the workspace.
+
+    It is equivalent to running the following command:
+
+    ```bash
+    rm -rf /home/container_user/wheelchair2/build /home/container_user/wheelchair2/install /home/container_user/wheelchair2/log && echo "Deleted build, install, and log directories."
+    ```
+
 ---
 
 ## Demo Runs
