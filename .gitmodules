@@ -13,6 +13,7 @@
 [submodule "dependencies/icp_localization_ros2"]
 	path = dependencies/icp_localization_ros2
 	url = https://github.com/baiyeweiguang/icp_localization_ros2.git
+	branch = main
 [submodule "dependencies/FAST_LIO"]
 	path = dependencies/FAST_LIO
 	url = https://github.com/Smart-Wheelchair-RRC/FAST_LIO.git
