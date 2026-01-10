@@ -1,0 +1,34 @@
+[0.252s] Invoking command in '/home/container_user/wheelchair2/src/build/wheelchair2_3dbbs': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/container_user/wheelchair2/install/wheelchair2_localization:/home/container_user/wheelchair2/install/wheelchair2_gazebo:/home/container_user/wheelchair2/install/wheelchair2_description:/home/container_user/wheelchair2/install/click_save:/opt/ros/humble /usr/bin/cmake --build /home/container_user/wheelchair2/src/build/wheelchair2_3dbbs -- -j16 -l16
+[0.766s] [35m[1mConsolidate compiler generated dependencies of target gpu_3dbbs[0m
+[0.766s] [100%] Built target gpu_3dbbs
+[0.784s] Invoked command in '/home/container_user/wheelchair2/src/build/wheelchair2_3dbbs' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/container_user/wheelchair2/install/wheelchair2_localization:/home/container_user/wheelchair2/install/wheelchair2_gazebo:/home/container_user/wheelchair2/install/wheelchair2_description:/home/container_user/wheelchair2/install/click_save:/opt/ros/humble /usr/bin/cmake --build /home/container_user/wheelchair2/src/build/wheelchair2_3dbbs -- -j16 -l16
+[0.785s] Invoking command in '/home/container_user/wheelchair2/src/build/wheelchair2_3dbbs': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/container_user/wheelchair2/install/wheelchair2_localization:/home/container_user/wheelchair2/install/wheelchair2_gazebo:/home/container_user/wheelchair2/install/wheelchair2_description:/home/container_user/wheelchair2/install/click_save:/opt/ros/humble /usr/bin/cmake --install /home/container_user/wheelchair2/src/build/wheelchair2_3dbbs
+[0.817s] -- Install configuration: ""
+[0.817s] -- Execute custom install script
+[0.817s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_3dbbs/include/wheelchair2_3dbbs/load_rviz2.hpp
+[0.817s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_3dbbs/include/wheelchair2_3dbbs/ros2_test_rviz2.hpp
+[0.817s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_3dbbs/lib/wheelchair2_3dbbs/gpu_3dbbs
+[0.817s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_3dbbs/share/wheelchair2_3dbbs/launch/.gitignore
+[0.817s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_3dbbs/share/wheelchair2_3dbbs/launch/3dbbs.launch.py
+[0.817s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_3dbbs/share/wheelchair2_3dbbs/launch/gpu_ros2_test_rviz2_launch.py
+[0.817s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_3dbbs/share/wheelchair2_3dbbs/config/ros2_test.yaml
+[0.817s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_3dbbs/share/wheelchair2_3dbbs/config/rviz2.rviz
+[0.817s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_3dbbs/share/ament_index/resource_index/package_run_dependencies/wheelchair2_3dbbs
+[0.817s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_3dbbs/share/ament_index/resource_index/parent_prefix_path/wheelchair2_3dbbs
+[0.817s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_3dbbs/share/wheelchair2_3dbbs/environment/ament_prefix_path.sh
+[0.817s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_3dbbs/share/wheelchair2_3dbbs/environment/ament_prefix_path.dsv
+[0.817s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_3dbbs/share/wheelchair2_3dbbs/environment/path.sh
+[0.817s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_3dbbs/share/wheelchair2_3dbbs/environment/path.dsv
+[0.818s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_3dbbs/share/wheelchair2_3dbbs/local_setup.bash
+[0.818s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_3dbbs/share/wheelchair2_3dbbs/local_setup.sh
+[0.818s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_3dbbs/share/wheelchair2_3dbbs/local_setup.zsh
+[0.819s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_3dbbs/share/wheelchair2_3dbbs/local_setup.dsv
+[0.819s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_3dbbs/share/wheelchair2_3dbbs/package.dsv
+[0.834s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_3dbbs/share/ament_index/resource_index/packages/wheelchair2_3dbbs
+[0.834s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_3dbbs/share/wheelchair2_3dbbs/cmake/ament_cmake_export_dependencies-extras.cmake
+[0.834s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_3dbbs/share/wheelchair2_3dbbs/cmake/ament_cmake_export_include_directories-extras.cmake
+[0.834s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_3dbbs/share/wheelchair2_3dbbs/cmake/wheelchair2_3dbbsConfig.cmake
+[0.834s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_3dbbs/share/wheelchair2_3dbbs/cmake/wheelchair2_3dbbsConfig-version.cmake
+[0.835s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_3dbbs/share/wheelchair2_3dbbs/package.xml
+[0.835s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_3dbbs/lib/wheelchair2_3dbbs/click_loc.py
+[0.864s] Invoked command in '/home/container_user/wheelchair2/src/build/wheelchair2_3dbbs' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/container_user/wheelchair2/install/wheelchair2_localization:/home/container_user/wheelchair2/install/wheelchair2_gazebo:/home/container_user/wheelchair2/install/wheelchair2_description:/home/container_user/wheelchair2/install/click_save:/opt/ros/humble /usr/bin/cmake --install /home/container_user/wheelchair2/src/build/wheelchair2_3dbbs

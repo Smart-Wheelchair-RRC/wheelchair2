@@ -1,0 +1,33 @@
+[0.249s] Invoking command in '/home/container_user/wheelchair2/src/build/wheelchair2_bringup': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/container_user/wheelchair2/install/wheelchair2_localization:/home/container_user/wheelchair2/install/wheelchair2_gazebo:/home/container_user/wheelchair2/install/wheelchair2_description:/home/container_user/wheelchair2/install/click_save:/opt/ros/humble /usr/bin/cmake --build /home/container_user/wheelchair2/src/build/wheelchair2_bringup -- -j16 -l16
+[0.763s] Invoked command in '/home/container_user/wheelchair2/src/build/wheelchair2_bringup' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/container_user/wheelchair2/install/wheelchair2_localization:/home/container_user/wheelchair2/install/wheelchair2_gazebo:/home/container_user/wheelchair2/install/wheelchair2_description:/home/container_user/wheelchair2/install/click_save:/opt/ros/humble /usr/bin/cmake --build /home/container_user/wheelchair2/src/build/wheelchair2_bringup -- -j16 -l16
+[0.773s] Invoking command in '/home/container_user/wheelchair2/src/build/wheelchair2_bringup': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/container_user/wheelchair2/install/wheelchair2_localization:/home/container_user/wheelchair2/install/wheelchair2_gazebo:/home/container_user/wheelchair2/install/wheelchair2_description:/home/container_user/wheelchair2/install/click_save:/opt/ros/humble /usr/bin/cmake --install /home/container_user/wheelchair2/src/build/wheelchair2_bringup
+[0.796s] -- Install configuration: ""
+[0.796s] -- Execute custom install script
+[0.796s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/wheelchair2_bringup/launch/data_collection.launch.py
+[0.796s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/wheelchair2_bringup/launch/livox.launch.py
+[0.796s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/wheelchair2_bringup/launch/rosbag_play.launch.py
+[0.796s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/wheelchair2_bringup/launch/rosbag_recorder.launch.py
+[0.796s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/wheelchair2_bringup/launch/rplidar.launch.py
+[0.796s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/wheelchair2_bringup/launch/wheelchair2.launch.py
+[0.796s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/wheelchair2_bringup/launch/wheelchair2_navigation_kcis.launch.py
+[0.797s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/wheelchair2_bringup/launch/wheelchair2_navigation_rrc.launch.py
+[0.797s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/wheelchair2_bringup/config/rosbag_record.yaml
+[0.797s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/wheelchair2_bringup/rviz/data_collection.rviz
+[0.797s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/wheelchair2_bringup/rviz/wheelchair2.rviz
+[0.797s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_bringup/lib/wheelchair2_bringup/invert_lidar.py
+[0.797s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/ament_index/resource_index/package_run_dependencies/wheelchair2_bringup
+[0.797s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/ament_index/resource_index/parent_prefix_path/wheelchair2_bringup
+[0.797s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/wheelchair2_bringup/environment/ament_prefix_path.sh
+[0.797s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/wheelchair2_bringup/environment/ament_prefix_path.dsv
+[0.797s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/wheelchair2_bringup/environment/path.sh
+[0.798s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/wheelchair2_bringup/environment/path.dsv
+[0.798s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/wheelchair2_bringup/local_setup.bash
+[0.798s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/wheelchair2_bringup/local_setup.sh
+[0.798s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/wheelchair2_bringup/local_setup.zsh
+[0.798s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/wheelchair2_bringup/local_setup.dsv
+[0.798s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/wheelchair2_bringup/package.dsv
+[0.826s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/ament_index/resource_index/packages/wheelchair2_bringup
+[0.827s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/wheelchair2_bringup/cmake/wheelchair2_bringupConfig.cmake
+[0.827s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/wheelchair2_bringup/cmake/wheelchair2_bringupConfig-version.cmake
+[0.827s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_bringup/share/wheelchair2_bringup/package.xml
+[0.847s] Invoked command in '/home/container_user/wheelchair2/src/build/wheelchair2_bringup' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/container_user/wheelchair2/install/wheelchair2_localization:/home/container_user/wheelchair2/install/wheelchair2_gazebo:/home/container_user/wheelchair2/install/wheelchair2_description:/home/container_user/wheelchair2/install/click_save:/opt/ros/humble /usr/bin/cmake --install /home/container_user/wheelchair2/src/build/wheelchair2_bringup

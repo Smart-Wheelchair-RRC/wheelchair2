@@ -10,7 +10,11 @@ setup.py
 ../../build/click_save/click_save.egg-info/zip-safe
 click_save/__init__.py
 click_save/click_save.py
+click_save.egg-info/PKG-INFO
+click_save.egg-info/SOURCES.txt
+click_save.egg-info/dependency_links.txt
+click_save.egg-info/entry_points.txt
+click_save.egg-info/requires.txt
+click_save.egg-info/top_level.txt
+click_save.egg-info/zip-safe
 resource/click_save
-test/test_copyright.py
-test/test_flake8.py
-test/test_pep257.py

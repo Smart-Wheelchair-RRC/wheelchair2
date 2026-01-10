@@ -1,0 +1,101 @@
+-- Found ament_cmake_auto: 1.3.12 (/opt/ros/humble/share/ament_cmake_auto/cmake)
+-- Override CMake install command with custom implementation using symlinks instead of copying resources
+-- Found rosidl_generator_c: 3.1.7 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+-- Found rosidl_adapter: 3.1.7 (/opt/ros/humble/share/rosidl_adapter/cmake)
+-- Found rosidl_generator_cpp: 3.1.7 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+-- Found rmw_fastrtps_cpp: 6.2.9 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Eigen found (include: /usr/include/eigen3, version: 3.4.0)
+-- FLANN found (include: /usr/include, lib: /usr/lib/x86_64-linux-gnu/libflann_cpp.so)
+-- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+-- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/x86_64-linux-gnu/libOpenNI2.so;libusb::libusb)
+-- Eigen found (include: /usr/include/eigen3, version: 3.4.0)
+-- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+-- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/x86_64-linux-gnu/libOpenNI2.so;libusb::libusb)
+-- Found Qhull version 8.0.2
+-- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+-- Found eigen3_cmake_module: 0.1.1 (/opt/ros/humble/share/eigen3_cmake_module/cmake)
+-- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: thread filesystem system program_options date_time 
+-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: thread filesystem system program_options date_time chrono 
+-- Found ament_lint_auto: 0.12.14 (/opt/ros/humble/share/ament_lint_auto/cmake)
+-- Added test 'cppcheck' to perform static code analysis on C / C++ code
+-- Configured cppcheck include dirs: /home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/include
+-- Configured cppcheck exclude dirs and/or files: 
+-- Added test 'flake8' to check Python code syntax and style conventions
+-- Added test 'lint_cmake' to check CMake code style
+-- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+-- Added test 'uncrustify' to check C / C++ code style
+-- Configured uncrustify additional arguments: 
+-- Added test 'xmllint' to check XML markup files
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/container_user/wheelchair2/src/build/icp_localization_ros2
+[  5%] [32mBuilding CXX object CMakeFiles/icp_localization.dir/src/RangeDataAccumulator.cpp.o[0m
+[ 11%] [32mBuilding CXX object CMakeFiles/icp_localization.dir/src/ICPlocalization.cpp.o[0m
+[ 17%] [32mBuilding CXX object CMakeFiles/icp_localization.dir/src/common/time.cpp.o[0m
+[ 29%] [32mBuilding CXX object CMakeFiles/icp_localization.dir/src/common/math.cpp.o[0m
+[ 29%] [32mBuilding CXX object CMakeFiles/icp_localization.dir/src/localizer_node.cpp.o[0m
+[ 35%] [32mBuilding CXX object CMakeFiles/icp_localization.dir/src/helpers.cpp.o[0m
+[ 41%] [32mBuilding CXX object CMakeFiles/icp_localization.dir/src/transform/FrameTracker.cpp.o[0m
+[ 47%] [32mBuilding CXX object CMakeFiles/icp_localization.dir/src/transform/ImuInterpolationBuffer.cpp.o[0m
+[ 52%] [32mBuilding CXX object CMakeFiles/icp_localization.dir/src/transform/ImuTracker.cpp.o[0m
+[ 64%] [32mBuilding CXX object CMakeFiles/icp_localization.dir/src/transform/ImuReading.cpp.o[0m
+[ 58%] [32mBuilding CXX object CMakeFiles/icp_localization.dir/src/transform/RigidTransform.cpp.o[0m
+[ 70%] [32mBuilding CXX object CMakeFiles/icp_localization.dir/src/transform/TfPublisher.cpp.o[0m
+[ 76%] [32mBuilding CXX object CMakeFiles/icp_localization.dir/src/transform/TwistIntegrationBuffer.cpp.o[0m
+[ 82%] [32mBuilding CXX object CMakeFiles/icp_localization.dir/src/transform/TransformInterpolationBuffer.cpp.o[0m
+[ 88%] [32mBuilding CXX object CMakeFiles/icp_localization.dir/src/transform/Twist.cpp.o[0m
+[ 94%] [32mBuilding CXX object CMakeFiles/icp_localization.dir/src/transform/TwistIntegrationBufferRos.cpp.o[0m
+[100%] [32m[1mLinking CXX executable icp_localization[0m
+[100%] Built target icp_localization
+-- Install configuration: ""
+-- Execute custom install script
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/include/icp_localization_ros2/ICPlocalization.hpp
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/include/icp_localization_ros2/Parameters.hpp
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/include/icp_localization_ros2/RangeDataAccumulator.hpp
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/include/icp_localization_ros2/common/assert.hpp
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/include/icp_localization_ros2/common/math.hpp
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/include/icp_localization_ros2/common/output.hpp
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/include/icp_localization_ros2/common/time.hpp
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/include/icp_localization_ros2/common/typedefs.hpp
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/include/icp_localization_ros2/helpers.hpp
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/include/icp_localization_ros2/transform/FrameTracker.hpp
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/include/icp_localization_ros2/transform/ImuInterpolationBuffer.hpp
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/include/icp_localization_ros2/transform/ImuReading.hpp
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/include/icp_localization_ros2/transform/ImuTracker.hpp
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/include/icp_localization_ros2/transform/RigidTransform.hpp
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/include/icp_localization_ros2/transform/TfPublisher.hpp
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/include/icp_localization_ros2/transform/TransformInterpolationBuffer.hpp
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/include/icp_localization_ros2/transform/Twist.hpp
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/include/icp_localization_ros2/transform/TwistIntegrationBuffer.hpp
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/include/icp_localization_ros2/transform/TwistIntegrationBufferRos.hpp
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/include/icp_localization_ros2/transform/math.hpp
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/lib/icp_localization_ros2/icp_localization
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/launch/bringup.launch.py
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/config/icp.yaml
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/config/input_filters_mid360.yaml
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/config/input_filters_ouster_os1.yaml
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/config/input_filters_velodyne_puck.yaml
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/config/node_params.yaml
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/config/plane_noisy.pcd
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/ament_index/resource_index/package_run_dependencies/icp_localization_ros2
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/ament_index/resource_index/parent_prefix_path/icp_localization_ros2
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/environment/ament_prefix_path.sh
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/environment/ament_prefix_path.dsv
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/environment/path.sh
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/environment/path.dsv
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/local_setup.bash
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/local_setup.sh
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/local_setup.zsh
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/local_setup.dsv
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/package.dsv
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/ament_index/resource_index/packages/icp_localization_ros2
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/cmake/ament_cmake_export_dependencies-extras.cmake
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/cmake/ament_cmake_export_include_directories-extras.cmake
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/cmake/icp_localization_ros2Config.cmake
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/cmake/icp_localization_ros2Config-version.cmake
+-- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/package.xml

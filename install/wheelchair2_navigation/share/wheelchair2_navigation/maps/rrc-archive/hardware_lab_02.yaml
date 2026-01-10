@@ -1,7 +1,1 @@
-image: hardware_lab_02.pgm
-resolution: 0.05
-origin: [-18.8324, -15.2275, 0.0]
-negate: 0
-occupied_thresh: 0.5
-free_thresh: 0.196
-
+/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/rrc-archive/hardware_lab_02.yaml

@@ -1,0 +1,3 @@
+/home/container_user/wheelchair2/src/install/wheelchair2_kangaroo_x2_driver/lib/libwheelchair2_kangaroo_x2_driver.so
+/home/container_user/wheelchair2/src/install/wheelchair2_kangaroo_x2_driver/share/wheelchair2_kangaroo_x2_driver/cmake/export_wheelchair2_kangaroo_x2_driverExport.cmake
+/home/container_user/wheelchair2/src/install/wheelchair2_kangaroo_x2_driver/share/wheelchair2_kangaroo_x2_driver/cmake/export_wheelchair2_kangaroo_x2_driverExport-noconfig.cmake

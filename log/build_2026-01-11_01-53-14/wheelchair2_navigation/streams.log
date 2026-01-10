@@ -1,0 +1,88 @@
+[0.776s] Invoking command in '/home/container_user/wheelchair2/src/build/wheelchair2_navigation': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/container_user/wheelchair2/install/wheelchair2_localization:/home/container_user/wheelchair2/install/wheelchair2_gazebo:/home/container_user/wheelchair2/install/wheelchair2_description:/home/container_user/wheelchair2/install/click_save:/opt/ros/humble /usr/bin/cmake /home/container_user/wheelchair2/src/wheelchair2_navigation -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/container_user/wheelchair2/src/install/wheelchair2_navigation
+[0.791s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.952s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.960s] -- Found ament_lint_auto: 0.12.14 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[1.072s] -- Added test 'flake8' to check Python code syntax and style conventions
+[1.072s] -- Added test 'lint_cmake' to check CMake code style
+[1.072s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[1.077s] -- Added test 'xmllint' to check XML markup files
+[1.078s] -- Configuring done
+[1.085s] -- Generating done
+[1.085s] -- Build files have been written to: /home/container_user/wheelchair2/src/build/wheelchair2_navigation
+[1.090s] Invoked command in '/home/container_user/wheelchair2/src/build/wheelchair2_navigation' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/container_user/wheelchair2/install/wheelchair2_localization:/home/container_user/wheelchair2/install/wheelchair2_gazebo:/home/container_user/wheelchair2/install/wheelchair2_description:/home/container_user/wheelchair2/install/click_save:/opt/ros/humble /usr/bin/cmake /home/container_user/wheelchair2/src/wheelchair2_navigation -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/container_user/wheelchair2/src/install/wheelchair2_navigation
+[1.093s] Invoking command in '/home/container_user/wheelchair2/src/build/wheelchair2_navigation': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/container_user/wheelchair2/install/wheelchair2_localization:/home/container_user/wheelchair2/install/wheelchair2_gazebo:/home/container_user/wheelchair2/install/wheelchair2_description:/home/container_user/wheelchair2/install/click_save:/opt/ros/humble /usr/bin/cmake --build /home/container_user/wheelchair2/src/build/wheelchair2_navigation -- -j16 -l16
+[1.154s] Invoked command in '/home/container_user/wheelchair2/src/build/wheelchair2_navigation' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/container_user/wheelchair2/install/wheelchair2_localization:/home/container_user/wheelchair2/install/wheelchair2_gazebo:/home/container_user/wheelchair2/install/wheelchair2_description:/home/container_user/wheelchair2/install/click_save:/opt/ros/humble /usr/bin/cmake --build /home/container_user/wheelchair2/src/build/wheelchair2_navigation -- -j16 -l16
+[1.154s] Invoking command in '/home/container_user/wheelchair2/src/build/wheelchair2_navigation': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/container_user/wheelchair2/install/wheelchair2_localization:/home/container_user/wheelchair2/install/wheelchair2_gazebo:/home/container_user/wheelchair2/install/wheelchair2_description:/home/container_user/wheelchair2/install/click_save:/opt/ros/humble /usr/bin/cmake --install /home/container_user/wheelchair2/src/build/wheelchair2_navigation
+[1.166s] -- Install configuration: ""
+[1.169s] -- Execute custom install script
+[1.169s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/config/angle_range_filter.yaml
+[1.180s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/config/keepout_params.yaml
+[1.198s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/config/mapper_params_online_async.yaml
+[1.210s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/config/nav2_params.yaml
+[1.225s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/launch/angle_range_filter.launch.py
+[1.239s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/launch/keepout.launch.py
+[1.255s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/launch/nav2_amcl.launch.py
+[1.276s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/launch/nav2_icp.launch.py
+[1.292s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/launch/online_async_launch.py
+[1.304s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/launch/rtabmap_lidar_camera_icp.launch.py
+[1.319s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/doors/doors.pgm
+[1.335s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/doors/doors.yaml
+[1.349s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/himalaya/himalaya_kcis.png
+[1.363s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/himalaya/himalaya_kcis.yaml
+[1.381s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/himalaya/himalaya_kcis_mask.png
+[1.393s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/himalaya/himalaya_kcis_mask.yaml
+[1.407s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/himalaya/himalaya_with_classroom.jpeg
+[1.422s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/himalaya/himalaya_with_classroom.yaml
+[1.438s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/himalaya/himalaya_with_classroom_ICP.png
+[1.450s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/himalaya/himalaya_with_classroom_ICP.yaml
+[1.463s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/hospital/hospital.pgm
+[1.477s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/hospital/hospital.yaml
+[1.493s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/KRB_block.pgm
+[1.510s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/KRB_block.png
+[1.531s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/KRB_block.xcf
+[1.547s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/KRB_block.yaml
+[1.563s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/KRB_block_mask.png
+[1.579s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/KRB_block_mask.yaml
+[1.595s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/hardware_lab_01.pgm
+[1.625s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/hardware_lab_01.yaml
+[1.657s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/hardware_lab_02.pgm
+[1.680s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/hardware_lab_02.yaml
+[1.703s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/himalaya.jpeg
+[1.717s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/himalaya.pgm
+[1.739s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/himalaya_01.jpeg
+[1.761s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/himalaya_block.pgm
+[1.780s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/himalaya_block.yaml
+[1.798s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/himalaya_kcis_kday.png
+[1.824s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/himalaya_og.jpeg
+[1.841s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/himalaya_rtab.pgm
+[1.872s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/lala.png
+[1.888s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/rrc.pgm
+[1.907s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/rrc.yaml
+[1.924s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc-archive/rrc_test.pgm
+[1.941s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc/KRB_block.png
+[1.957s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc/KRB_block.yaml
+[1.973s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc/KRB_block_mask.png
+[1.989s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc/KRB_block_mask.yaml
+[2.005s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc/rrc_lab.pgm
+[2.018s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc/rrc_lab.yaml
+[2.033s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc/rrc_lab_mask.pgm
+[2.046s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/rrc/rrc_lab_mask.yaml
+[2.060s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/sim/obstacles_world.pgm
+[2.074s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/sim/obstacles_world.yaml
+[2.089s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/rviz/navigation.rviz
+[2.104s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/ament_index/resource_index/package_run_dependencies/wheelchair2_navigation
+[2.118s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/ament_index/resource_index/parent_prefix_path/wheelchair2_navigation
+[2.132s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/environment/ament_prefix_path.sh
+[2.145s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/environment/ament_prefix_path.dsv
+[2.159s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/environment/path.sh
+[2.179s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/environment/path.dsv
+[2.189s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/local_setup.bash
+[2.204s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/local_setup.sh
+[2.217s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/local_setup.zsh
+[2.247s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/local_setup.dsv
+[2.262s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/package.dsv
+[2.283s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/ament_index/resource_index/packages/wheelchair2_navigation
+[2.297s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/cmake/wheelchair2_navigationConfig.cmake
+[2.318s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/cmake/wheelchair2_navigationConfig-version.cmake
+[2.339s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_navigation/share/wheelchair2_navigation/package.xml
+[2.366s] Invoked command in '/home/container_user/wheelchair2/src/build/wheelchair2_navigation' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/container_user/wheelchair2/install/wheelchair2_localization:/home/container_user/wheelchair2/install/wheelchair2_gazebo:/home/container_user/wheelchair2/install/wheelchair2_description:/home/container_user/wheelchair2/install/click_save:/opt/ros/humble /usr/bin/cmake --install /home/container_user/wheelchair2/src/build/wheelchair2_navigation

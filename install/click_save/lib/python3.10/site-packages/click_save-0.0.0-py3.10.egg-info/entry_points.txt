@@ -1,3 +1,0 @@
-[console_scripts]
-click_save = click_save.click_save:main
-

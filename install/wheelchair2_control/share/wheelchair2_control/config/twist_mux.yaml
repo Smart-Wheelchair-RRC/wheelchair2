@@ -1,16 +1,1 @@
-twist_mux:
-  ros__parameters:
-   topics:
-    navigation:
-     topic    : cmd_vel
-     timeout  : 0.5
-     priority : 10
-    joystick:
-      topic   : cmd_vel_joy
-      timeout : 0.5
-      priority: 90
-    keyboard:
-      topic   : cmd_vel_keyboard
-      timeout : 0.5
-      priority: 100
-    
+/home/container_user/wheelchair2/src/wheelchair2_control/config/twist_mux.yaml

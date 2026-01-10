@@ -1,0 +1,1 @@
+/home/container_user/wheelchair2/src/build/wheelchair2_kangaroo_x2_driver/ament_cmake_core/wheelchair2_kangaroo_x2_driverConfig-version.cmake

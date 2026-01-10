@@ -1,0 +1,1 @@
+/home/container_user/wheelchair2/src/build/realsense2_camera_msgs/ament_cmake_environment_hooks/local_setup.bash

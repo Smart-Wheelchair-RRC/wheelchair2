@@ -1,0 +1,1 @@
+/home/container_user/wheelchair2/src/build/realsense2_camera_msgs/rosidl_cmake/rosidl_cmake-extras.cmake

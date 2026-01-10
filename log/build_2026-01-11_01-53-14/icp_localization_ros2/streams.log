@@ -1,0 +1,209 @@
+[0.230s] Invoking command in '/home/container_user/wheelchair2/src/build/icp_localization_ros2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/container_user/wheelchair2/install/wheelchair2_localization:/home/container_user/wheelchair2/install/wheelchair2_gazebo:/home/container_user/wheelchair2/install/wheelchair2_description:/home/container_user/wheelchair2/install/click_save:/opt/ros/humble /usr/bin/cmake /home/container_user/wheelchair2/src/dependencies/icp_localization_ros2 -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/container_user/wheelchair2/src/install/icp_localization_ros2
+[0.809s] -- Found ament_cmake_auto: 1.3.12 (/opt/ros/humble/share/ament_cmake_auto/cmake)
+[0.810s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.810s] -- Found rosidl_generator_c: 3.1.7 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.810s] -- Found rosidl_adapter: 3.1.7 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.810s] -- Found rosidl_generator_cpp: 3.1.7 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.810s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.810s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.810s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.810s] -- Found rmw_fastrtps_cpp: 6.2.9 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.810s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.810s] -- Eigen found (include: /usr/include/eigen3, version: 3.4.0)
+[0.810s] -- FLANN found (include: /usr/include, lib: /usr/lib/x86_64-linux-gnu/libflann_cpp.so)
+[1.145s] -- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+[1.157s] -- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/x86_64-linux-gnu/libOpenNI2.so;libusb::libusb)
+[1.357s] -- Eigen found (include: /usr/include/eigen3, version: 3.4.0)
+[1.367s] -- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+[1.375s] -- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/x86_64-linux-gnu/libOpenNI2.so;libusb::libusb)
+[1.551s] -- Found Qhull version 8.0.2
+[1.776s] -- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)
+[2.021s] -- Found eigen3_cmake_module: 0.1.1 (/opt/ros/humble/share/eigen3_cmake_module/cmake)
+[2.023s] -- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+[2.235s] -- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: thread filesystem system program_options date_time 
+[2.248s] -- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: thread filesystem system program_options date_time chrono 
+[2.280s] -- Found ament_lint_auto: 0.12.14 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[2.287s] [0mIn this package, headers install destination is set to `include` by ament_auto_package. It is recommended to install `include/icp_localization_ros2` instead and will be the default behavior of ament_auto_package from ROS 2 Kilted Kaiju. On distributions before Kilted, ament_auto_package behaves the same way when you use USE_SCOPED_HEADER_INSTALL_DIR option.[0m
+[2.309s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[2.309s] -- Configured cppcheck include dirs: /home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/include
+[2.310s] -- Configured cppcheck exclude dirs and/or files: 
+[2.310s] -- Added test 'flake8' to check Python code syntax and style conventions
+[2.312s] -- Added test 'lint_cmake' to check CMake code style
+[2.314s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[2.318s] -- Added test 'uncrustify' to check C / C++ code style
+[2.322s] -- Configured uncrustify additional arguments: 
+[2.325s] -- Added test 'xmllint' to check XML markup files
+[2.325s] -- Configuring done
+[2.486s] -- Generating done
+[2.508s] -- Build files have been written to: /home/container_user/wheelchair2/src/build/icp_localization_ros2
+[2.551s] Invoked command in '/home/container_user/wheelchair2/src/build/icp_localization_ros2' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/container_user/wheelchair2/install/wheelchair2_localization:/home/container_user/wheelchair2/install/wheelchair2_gazebo:/home/container_user/wheelchair2/install/wheelchair2_description:/home/container_user/wheelchair2/install/click_save:/opt/ros/humble /usr/bin/cmake /home/container_user/wheelchair2/src/dependencies/icp_localization_ros2 -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/container_user/wheelchair2/src/install/icp_localization_ros2
+[2.551s] Invoking command in '/home/container_user/wheelchair2/src/build/icp_localization_ros2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/container_user/wheelchair2/install/wheelchair2_localization:/home/container_user/wheelchair2/install/wheelchair2_gazebo:/home/container_user/wheelchair2/install/wheelchair2_description:/home/container_user/wheelchair2/install/click_save:/opt/ros/humble /usr/bin/cmake --build /home/container_user/wheelchair2/src/build/icp_localization_ros2 -- -j16 -l16
+[2.726s] [  5%] [32mBuilding CXX object CMakeFiles/icp_localization.dir/src/RangeDataAccumulator.cpp.o[0m
+[2.731s] [ 11%] [32mBuilding CXX object CMakeFiles/icp_localization.dir/src/ICPlocalization.cpp.o[0m
+[2.740s] [ 17%] [32mBuilding CXX object CMakeFiles/icp_localization.dir/src/common/time.cpp.o[0m
+[2.742s] [ 29%] [32mBuilding CXX object CMakeFiles/icp_localization.dir/src/common/math.cpp.o[0m
+[2.748s] [ 29%] [32mBuilding CXX object CMakeFiles/icp_localization.dir/src/localizer_node.cpp.o[0m
+[2.756s] [ 35%] [32mBuilding CXX object CMakeFiles/icp_localization.dir/src/helpers.cpp.o[0m
+[2.757s] [ 41%] [32mBuilding CXX object CMakeFiles/icp_localization.dir/src/transform/FrameTracker.cpp.o[0m
+[2.791s] [ 47%] [32mBuilding CXX object CMakeFiles/icp_localization.dir/src/transform/ImuInterpolationBuffer.cpp.o[0m
+[2.809s] [ 52%] [32mBuilding CXX object CMakeFiles/icp_localization.dir/src/transform/ImuTracker.cpp.o[0m
+[2.810s] [ 64%] [32mBuilding CXX object CMakeFiles/icp_localization.dir/src/transform/ImuReading.cpp.o[0m
+[2.810s] [ 58%] [32mBuilding CXX object CMakeFiles/icp_localization.dir/src/transform/RigidTransform.cpp.o[0m
+[2.821s] [ 70%] [32mBuilding CXX object CMakeFiles/icp_localization.dir/src/transform/TfPublisher.cpp.o[0m
+[2.828s] [ 76%] [32mBuilding CXX object CMakeFiles/icp_localization.dir/src/transform/TwistIntegrationBuffer.cpp.o[0m
+[2.843s] [ 82%] [32mBuilding CXX object CMakeFiles/icp_localization.dir/src/transform/TransformInterpolationBuffer.cpp.o[0m
+[2.850s] [ 88%] [32mBuilding CXX object CMakeFiles/icp_localization.dir/src/transform/Twist.cpp.o[0m
+[2.891s] [ 94%] [32mBuilding CXX object CMakeFiles/icp_localization.dir/src/transform/TwistIntegrationBufferRos.cpp.o[0m
+[14.810s] In file included from [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/src/transform/ImuTracker.cpp:8[m[K:
+[14.811s] [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/include/icp_localization_ros2/transform/ImuTracker.hpp:[m[K In constructor ‘[01m[Kicp_loco::ImuTracker::ImuTracker()[m[K’:
+[14.811s] [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/include/icp_localization_ros2/transform/ImuTracker.hpp:55:22:[m[K [01;35m[Kwarning: [m[K‘[01m[Kicp_loco::ImuTracker::currentOrientation_[m[K’ will be initialized after [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[14.811s]    55 |   Eigen::Quaterniond [01;35m[KcurrentOrientation_[m[K;
+[14.811s]       |                      [01;35m[K^~~~~~~~~~~~~~~~~~~[m[K
+[14.811s] [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/include/icp_localization_ros2/transform/ImuTracker.hpp:54:10:[m[K [01;35m[Kwarning: [m[K  ‘[01m[Kdouble icp_loco::ImuTracker::imuGravityTimeConstant_[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[14.811s]    54 |   double [01;35m[KimuGravityTimeConstant_[m[K;
+[14.811s]       |          [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~[m[K
+[14.811s] [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/src/transform/ImuTracker.cpp:19:1:[m[K [01;35m[Kwarning: [m[K  when initialized here [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[14.811s]    19 | [01;35m[KImuTracker[m[K::ImuTracker()
+[14.811s]       | [01;35m[K^~~~~~~~~~[m[K
+[14.811s] In file included from [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/src/transform/ImuTracker.cpp:8[m[K:
+[14.811s] [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/include/icp_localization_ros2/transform/ImuTracker.hpp:54:10:[m[K [01;35m[Kwarning: [m[K‘[01m[Kicp_loco::ImuTracker::imuGravityTimeConstant_[m[K’ will be initialized after [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[14.812s]    54 |   double [01;35m[KimuGravityTimeConstant_[m[K;
+[14.812s]       |          [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~[m[K
+[14.814s] [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/include/icp_localization_ros2/transform/ImuTracker.hpp:53:19:[m[K [01;35m[Kwarning: [m[K  ‘[01m[KEigen::Vector3d icp_loco::ImuTracker::currentGravityVector_[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[14.814s]    53 |   Eigen::Vector3d [01;35m[KcurrentGravityVector_[m[K;
+[14.814s]       |                   [01;35m[K^~~~~~~~~~~~~~~~~~~~~[m[K
+[14.814s] [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/src/transform/ImuTracker.cpp:19:1:[m[K [01;35m[Kwarning: [m[K  when initialized here [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[14.815s]    19 | [01;35m[KImuTracker[m[K::ImuTracker()
+[14.815s]       | [01;35m[K^~~~~~~~~~[m[K
+[14.815s] In file included from [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/src/transform/ImuTracker.cpp:8[m[K:
+[14.815s] [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/include/icp_localization_ros2/transform/ImuTracker.hpp:58:19:[m[K [01;35m[Kwarning: [m[K‘[01m[Kicp_loco::ImuTracker::integratedPosition_[m[K’ will be initialized after [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[14.816s]    58 |   Eigen::Vector3d [01;35m[KintegratedPosition_[m[K;
+[14.816s]       |                   [01;35m[K^~~~~~~~~~~~~~~~~~~[m[K
+[14.816s] [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/include/icp_localization_ros2/transform/ImuTracker.hpp:57:19:[m[K [01;35m[Kwarning: [m[K  ‘[01m[KEigen::Vector3d icp_loco::ImuTracker::integratedLinearVelocity_[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[14.816s]    57 |   Eigen::Vector3d [01;35m[KintegratedLinearVelocity_[m[K;
+[14.816s]       |                   [01;35m[K^~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[14.816s] [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/src/transform/ImuTracker.cpp:19:1:[m[K [01;35m[Kwarning: [m[K  when initialized here [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wreorder-Wreorder]8;;[m[K]
+[14.816s]    19 | [01;35m[KImuTracker[m[K::ImuTracker()
+[14.816s]       | [01;35m[K^~~~~~~~~~[m[K
+[14.981s] [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/src/transform/ImuTracker.cpp:[m[K In member function ‘[01m[Kicp_loco::Rigid3d icp_loco::ImuTracker::getLatestOdometry() const[m[K’:
+[14.982s] [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/src/transform/ImuTracker.cpp:110:14:[m[K [01;35m[Kwarning: [m[Kvariable ‘[01m[KrpyAccelerometer[m[K’ set but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-but-set-variable-Wunused-but-set-variable]8;;[m[K]
+[14.982s]   110 |   const auto [01;35m[KrpyAccelerometer[m[K = toRPY(currentOrientation_);
+[14.982s]       |              [01;35m[K^~~~~~~~~~~~~~~~[m[K
+[14.982s] [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/src/transform/ImuTracker.cpp:[m[K In member function ‘[01m[Kvoid icp_loco::ImuTracker::removeGravityAccelerationFromBuffer() const[m[K’:
+[14.982s] [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/src/transform/ImuTracker.cpp:150:21:[m[K [01;35m[Kwarning: [m[Kcomparison of integer expressions of different signedness: ‘[01m[Kint[m[K’ and ‘[01m[Kstd::vector<icp_loco::TimestampedImuReading>::size_type[m[K’ {aka ‘[01m[Klong unsigned int[m[K’} [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wsign-compare-Wsign-compare]8;;[m[K]
+[14.982s]   150 |   for (int i = 0; [01;35m[Ki < integrationBuffer_.size()[m[K; ++i) {
+[14.982s]       |                   [01;35m[K~~^~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[15.029s] [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/src/transform/ImuTracker.cpp:[m[K In member function ‘[01m[Kvoid icp_loco::ImuTracker::integrateBufferInPlace(icp_loco::ImuTracker::Accessor, const Vector3d&) const[m[K’:
+[15.029s] [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/src/transform/ImuTracker.cpp:171:21:[m[K [01;35m[Kwarning: [m[Kcomparison of integer expressions of different signedness: ‘[01m[Kint[m[K’ and ‘[01m[Kstd::vector<icp_loco::TimestampedImuReading>::size_type[m[K’ {aka ‘[01m[Klong unsigned int[m[K’} [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wsign-compare-Wsign-compare]8;;[m[K]
+[15.029s]   171 |   for (int i = 1; [01;35m[Ki < integrationBuffer_.size()[m[K; ++i) {
+[15.029s]       |                   [01;35m[K~~^~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[15.051s] [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/src/transform/ImuTracker.cpp:[m[K In member function ‘[01m[Kvoid icp_loco::ImuTracker::printBuffer(icp_loco::ImuTracker::Accessor) const[m[K’:
+[15.052s] [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/src/transform/ImuTracker.cpp:182:21:[m[K [01;35m[Kwarning: [m[Kcomparison of integer expressions of different signedness: ‘[01m[Kint[m[K’ and ‘[01m[Kstd::vector<icp_loco::TimestampedImuReading>::size_type[m[K’ {aka ‘[01m[Klong unsigned int[m[K’} [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wsign-compare-Wsign-compare]8;;[m[K]
+[15.052s]   182 |   for (int i = 0; [01;35m[Ki < integrationBuffer_.size()[m[K; ++i) {
+[15.052s]       |                   [01;35m[K~~^~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[16.164s] [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/src/transform/FrameTracker.cpp:[m[K In member function ‘[01m[Kbool icp_loco::FrameTracker::isReady() const[m[K’:
+[16.164s] [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/src/transform/FrameTracker.cpp:42:68:[m[K [01;35m[Kwarning: [m[Kcomparison of integer expressions of different signedness: ‘[01m[Ksize_t[m[K’ {aka ‘[01m[Klong unsigned int[m[K’} and ‘[01m[Kconst int[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wsign-compare-Wsign-compare]8;;[m[K]
+[16.164s]    42 |         const bool isOdomBufferReady = [01;35m[KodomToTrackingCamera_.size()>minNumOdomMeasurementsBeforeReady_[m[K || !isUseOdometryForRangeSensorPosePrediction_;
+[16.164s]       |                                        [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[16.165s] [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/src/transform/FrameTracker.cpp:[m[K In member function ‘[01m[Kicp_loco::Rigid3d icp_loco::FrameTracker::getTransformOdomSourceToRangeSensor(const Time&) const[m[K’:
+[16.165s] [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/src/transform/FrameTracker.cpp:59:29:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Ktime[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[16.165s]    59 |                 [01;35m[Kconst Time &time[m[K) const {
+[16.165s]       |                 [01;35m[K~~~~~~~~~~~~^~~~[m[K
+[16.165s] [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/src/transform/FrameTracker.cpp:[m[K In member function ‘[01m[Kicp_loco::Rigid3d icp_loco::FrameTracker::getTransformImuToRangeSensor(const Time&) const[m[K’:
+[16.165s] [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/src/transform/FrameTracker.cpp:63:64:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Ktime[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[16.165s]    63 | Rigid3d FrameTracker::getTransformImuToRangeSensor([01;35m[Kconst Time &time[m[K) const {
+[16.165s]       |                                                    [01;35m[K~~~~~~~~~~~~^~~~[m[K
+[16.174s] [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/src/transform/FrameTracker.cpp:[m[K In member function ‘[01m[Kicp_loco::Rigid3d icp_loco::FrameTracker::computeFromImu(const Time&, const Time&) const[m[K’:
+[16.174s] [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/src/transform/FrameTracker.cpp:151:22:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[KkRadToDeg[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+[16.174s]   151 |         const double [01;35m[KkRadToDeg[m[K = 180.0 / M_PI;
+[16.174s]       |                      [01;35m[K^~~~~~~~~[m[K
+[22.207s] In file included from [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/src/localizer_node.cpp:7[m[K:
+[22.207s] [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/include/icp_localization_ros2/ICPlocalization.hpp:53:73:[m[K [01;35m[Kwarning: [m[K‘[01m[Kgeometry_msgs::msg::PoseWithCovarianceStamped_<std::allocator<void> >::ConstPtr[m[K’ is deprecated [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations-Wdeprecated-declarations]8;;[m[K]
+[22.208s]    53 |       const geometry_msgs::msg::PoseWithCovarianceStamped::ConstPtr &msg[01;35m[K)[m[K;
+[22.208s]       |                                                                         [01;35m[K^[m[K
+[22.209s] In file included from [01m[K/opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/pose_with_covariance_stamped.hpp:7[m[K,
+[22.209s]                  from [01m[K/opt/ros/humble/include/tf2_geometry_msgs/tf2_geometry_msgs/tf2_geometry_msgs.hpp:49[m[K,
+[22.213s]                  from [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/include/icp_localization_ros2/ICPlocalization.hpp:26[m[K,
+[22.213s]                  from [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/src/localizer_node.cpp:7[m[K:
+[22.213s] [01m[K/opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/pose_with_covariance_stamped__struct.hpp:115:5:[m[K [01;36m[Knote: [m[Kdeclared here
+[22.214s]   115 |     [01;36m[KConstPtr[m[K;
+[22.214s]       |     [01;36m[K^~~~~~~~[m[K
+[22.491s] In file included from [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/src/ICPlocalization.cpp:7[m[K:
+[22.492s] [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/include/icp_localization_ros2/ICPlocalization.hpp:53:73:[m[K [01;35m[Kwarning: [m[K‘[01m[Kgeometry_msgs::msg::PoseWithCovarianceStamped_<std::allocator<void> >::ConstPtr[m[K’ is deprecated [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations-Wdeprecated-declarations]8;;[m[K]
+[22.492s]    53 | metry_msgs::msg::PoseWithCovarianceStamped::ConstPtr &msg[01;35m[K)[m[K;
+[22.492s]       |                                                          [01;35m[K^[m[K
+[22.492s] 
+[22.492s] In file included from [01m[K/opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/pose_with_covariance_stamped.hpp:7[m[K,
+[22.492s]                  from [01m[K/opt/ros/humble/include/tf2_geometry_msgs/tf2_geometry_msgs/tf2_geometry_msgs.hpp:49[m[K,
+[22.492s]                  from [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/include/icp_localization_ros2/ICPlocalization.hpp:26[m[K,
+[22.492s]                  from [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/src/ICPlocalization.cpp:7[m[K:
+[22.492s] [01m[K/opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/pose_with_covariance_stamped__struct.hpp:115:5:[m[K [01;36m[Knote: [m[Kdeclared here
+[22.492s]   115 |     [01;36m[KConstPtr[m[K;
+[22.492s]       |     [01;36m[K^~~~~~~~[m[K
+[23.780s] [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/src/ICPlocalization.cpp:84:71:[m[K [01;35m[Kwarning: [m[K‘[01m[Kgeometry_msgs::msg::PoseWithCovarianceStamped_<std::allocator<void> >::ConstPtr[m[K’ is deprecated [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations-Wdeprecated-declarations]8;;[m[K]
+[23.781s]    84 | etry_msgs::msg::PoseWithCovarianceStamped::ConstPtr &msg[01;35m[K)[m[K {
+[23.781s]       |                                                         [01;35m[K^[m[K
+[23.781s] 
+[23.781s] In file included from [01m[K/opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/pose_with_covariance_stamped.hpp:7[m[K,
+[23.781s]                  from [01m[K/opt/ros/humble/include/tf2_geometry_msgs/tf2_geometry_msgs/tf2_geometry_msgs.hpp:49[m[K,
+[23.782s]                  from [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/include/icp_localization_ros2/ICPlocalization.hpp:26[m[K,
+[23.782s]                  from [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/src/ICPlocalization.cpp:7[m[K:
+[23.782s] [01m[K/opt/ros/humble/include/geometry_msgs/geometry_msgs/msg/detail/pose_with_covariance_stamped__struct.hpp:115:5:[m[K [01;36m[Knote: [m[Kdeclared here
+[23.782s]   115 |     [01;36m[KConstPtr[m[K;
+[23.782s]       |     [01;36m[K^~~~~~~~[m[K
+[23.853s] [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/src/ICPlocalization.cpp:[m[K In member function ‘[01m[Kvoid icp_loco::ICPlocalization::icpWorker()[m[K’:
+[23.853s] [01m[K/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/src/ICPlocalization.cpp:388:18:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[KtimeMs[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+[23.853s]   388 |     const double [01;35m[KtimeMs[m[K = nUs / 1000.0;
+[23.853s]       |                  [01;35m[K^~~~~~[m[K
+[61.314s] [100%] [32m[1mLinking CXX executable icp_localization[0m
+[63.069s] [100%] Built target icp_localization
+[63.105s] Invoked command in '/home/container_user/wheelchair2/src/build/icp_localization_ros2' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/container_user/wheelchair2/install/wheelchair2_localization:/home/container_user/wheelchair2/install/wheelchair2_gazebo:/home/container_user/wheelchair2/install/wheelchair2_description:/home/container_user/wheelchair2/install/click_save:/opt/ros/humble /usr/bin/cmake --build /home/container_user/wheelchair2/src/build/icp_localization_ros2 -- -j16 -l16
+[63.108s] Invoking command in '/home/container_user/wheelchair2/src/build/icp_localization_ros2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/container_user/wheelchair2/install/wheelchair2_localization:/home/container_user/wheelchair2/install/wheelchair2_gazebo:/home/container_user/wheelchair2/install/wheelchair2_description:/home/container_user/wheelchair2/install/click_save:/opt/ros/humble /usr/bin/cmake --install /home/container_user/wheelchair2/src/build/icp_localization_ros2
+[63.119s] -- Install configuration: ""
+[63.119s] -- Execute custom install script
+[63.120s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/include/icp_localization_ros2/ICPlocalization.hpp
+[63.132s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/include/icp_localization_ros2/Parameters.hpp
+[63.145s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/include/icp_localization_ros2/RangeDataAccumulator.hpp
+[63.158s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/include/icp_localization_ros2/common/assert.hpp
+[63.171s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/include/icp_localization_ros2/common/math.hpp
+[63.180s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/include/icp_localization_ros2/common/output.hpp
+[63.191s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/include/icp_localization_ros2/common/time.hpp
+[63.202s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/include/icp_localization_ros2/common/typedefs.hpp
+[63.214s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/include/icp_localization_ros2/helpers.hpp
+[63.225s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/include/icp_localization_ros2/transform/FrameTracker.hpp
+[63.236s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/include/icp_localization_ros2/transform/ImuInterpolationBuffer.hpp
+[63.247s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/include/icp_localization_ros2/transform/ImuReading.hpp
+[63.258s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/include/icp_localization_ros2/transform/ImuTracker.hpp
+[63.269s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/include/icp_localization_ros2/transform/RigidTransform.hpp
+[63.280s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/include/icp_localization_ros2/transform/TfPublisher.hpp
+[63.291s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/include/icp_localization_ros2/transform/TransformInterpolationBuffer.hpp
+[63.302s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/include/icp_localization_ros2/transform/Twist.hpp
+[63.313s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/include/icp_localization_ros2/transform/TwistIntegrationBuffer.hpp
+[63.324s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/include/icp_localization_ros2/transform/TwistIntegrationBufferRos.hpp
+[63.335s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/include/icp_localization_ros2/transform/math.hpp
+[63.346s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/lib/icp_localization_ros2/icp_localization
+[63.357s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/launch/bringup.launch.py
+[63.368s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/config/icp.yaml
+[63.379s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/config/input_filters_mid360.yaml
+[63.389s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/config/input_filters_ouster_os1.yaml
+[63.400s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/config/input_filters_velodyne_puck.yaml
+[63.412s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/config/node_params.yaml
+[63.422s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/config/plane_noisy.pcd
+[63.433s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/ament_index/resource_index/package_run_dependencies/icp_localization_ros2
+[63.444s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/ament_index/resource_index/parent_prefix_path/icp_localization_ros2
+[63.456s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/environment/ament_prefix_path.sh
+[63.467s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/environment/ament_prefix_path.dsv
+[63.477s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/environment/path.sh
+[63.488s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/environment/path.dsv
+[63.500s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/local_setup.bash
+[63.511s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/local_setup.sh
+[63.523s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/local_setup.zsh
+[63.536s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/local_setup.dsv
+[63.548s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/package.dsv
+[63.559s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/ament_index/resource_index/packages/icp_localization_ros2
+[63.571s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/cmake/ament_cmake_export_dependencies-extras.cmake
+[63.583s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/cmake/ament_cmake_export_include_directories-extras.cmake
+[63.595s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/cmake/icp_localization_ros2Config.cmake
+[63.606s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/cmake/icp_localization_ros2Config-version.cmake
+[63.617s] -- Symlinking: /home/container_user/wheelchair2/src/install/icp_localization_ros2/share/icp_localization_ros2/package.xml
+[63.630s] Invoked command in '/home/container_user/wheelchair2/src/build/icp_localization_ros2' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/container_user/wheelchair2/install/wheelchair2_localization:/home/container_user/wheelchair2/install/wheelchair2_gazebo:/home/container_user/wheelchair2/install/wheelchair2_description:/home/container_user/wheelchair2/install/click_save:/opt/ros/humble /usr/bin/cmake --install /home/container_user/wheelchair2/src/build/icp_localization_ros2

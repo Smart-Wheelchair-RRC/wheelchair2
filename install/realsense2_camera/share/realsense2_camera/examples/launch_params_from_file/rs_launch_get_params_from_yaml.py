@@ -1,0 +1,1 @@
+/home/container_user/wheelchair2/src/dependencies/realsense-ros/realsense2_camera/examples/launch_params_from_file/rs_launch_get_params_from_yaml.py

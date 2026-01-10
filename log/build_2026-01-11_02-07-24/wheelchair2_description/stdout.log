@@ -1,0 +1,15 @@
+running develop
+running egg_info
+writing wheelchair2_description.egg-info/PKG-INFO
+writing dependency_links to wheelchair2_description.egg-info/dependency_links.txt
+writing entry points to wheelchair2_description.egg-info/entry_points.txt
+writing requirements to wheelchair2_description.egg-info/requires.txt
+writing top-level names to wheelchair2_description.egg-info/top_level.txt
+reading manifest file 'wheelchair2_description.egg-info/SOURCES.txt'
+writing manifest file 'wheelchair2_description.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/container_user/wheelchair2/src/install/wheelchair2_description/lib/python3.10/site-packages/wheelchair2-description.egg-link (link to .)
+Installing pointcloud3d_to_2d script to /home/container_user/wheelchair2/src/install/wheelchair2_description/lib/wheelchair2_description
+
+Installed /home/container_user/wheelchair2/src/build/wheelchair2_description
+running symlink_data

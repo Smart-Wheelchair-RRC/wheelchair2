@@ -1,0 +1,17 @@
+running develop
+running egg_info
+writing click_save.egg-info/PKG-INFO
+writing dependency_links to click_save.egg-info/dependency_links.txt
+writing entry points to click_save.egg-info/entry_points.txt
+writing requirements to click_save.egg-info/requires.txt
+writing top-level names to click_save.egg-info/top_level.txt
+reading manifest file 'click_save.egg-info/SOURCES.txt'
+writing manifest file 'click_save.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/container_user/wheelchair2/src/install/click_save/lib/python3.10/site-packages/click-save.egg-link (link to .)
+Installing click_save script to /home/container_user/wheelchair2/src/install/click_save/lib/click_save
+
+Installed /home/container_user/wheelchair2/src/build/click_save
+running symlink_data
+symbolically linking /home/container_user/wheelchair2/src/build/click_save/resource/click_save -> /home/container_user/wheelchair2/src/install/click_save/share/ament_index/resource_index/packages
+symbolically linking /home/container_user/wheelchair2/src/build/click_save/package.xml -> /home/container_user/wheelchair2/src/install/click_save/share/click_save

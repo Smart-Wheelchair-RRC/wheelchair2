@@ -1,0 +1,25 @@
+running develop
+running egg_info
+writing wheelchair2_gazebo.egg-info/PKG-INFO
+writing dependency_links to wheelchair2_gazebo.egg-info/dependency_links.txt
+writing entry points to wheelchair2_gazebo.egg-info/entry_points.txt
+writing requirements to wheelchair2_gazebo.egg-info/requires.txt
+writing top-level names to wheelchair2_gazebo.egg-info/top_level.txt
+reading manifest file 'wheelchair2_gazebo.egg-info/SOURCES.txt'
+writing manifest file 'wheelchair2_gazebo.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/container_user/wheelchair2/src/install/wheelchair2_gazebo/lib/python3.10/site-packages/wheelchair2-gazebo.egg-link (link to .)
+
+Installed /home/container_user/wheelchair2/src/build/wheelchair2_gazebo
+running symlink_data
+symbolically linking /home/container_user/wheelchair2/src/build/wheelchair2_gazebo/launch/wheelchair2_sim.launch.py -> /home/container_user/wheelchair2/src/install/wheelchair2_gazebo/share/wheelchair2_gazebo/launch
+symbolically linking /home/container_user/wheelchair2/src/build/wheelchair2_gazebo/worlds/rrc.world -> /home/container_user/wheelchair2/src/install/wheelchair2_gazebo/share/wheelchair2_gazebo/worlds
+symbolically linking /home/container_user/wheelchair2/src/build/wheelchair2_gazebo/worlds/obstacles.world -> /home/container_user/wheelchair2/src/install/wheelchair2_gazebo/share/wheelchair2_gazebo/worlds
+symbolically linking /home/container_user/wheelchair2/src/build/wheelchair2_gazebo/worlds/empty.world -> /home/container_user/wheelchair2/src/install/wheelchair2_gazebo/share/wheelchair2_gazebo/worlds
+symbolically linking /home/container_user/wheelchair2/src/build/wheelchair2_gazebo/resource/wheelchair2_gazebo -> /home/container_user/wheelchair2/src/install/wheelchair2_gazebo/share/ament_index/resource_index/packages
+symbolically linking /home/container_user/wheelchair2/src/build/wheelchair2_gazebo/package.xml -> /home/container_user/wheelchair2/src/install/wheelchair2_gazebo/share/wheelchair2_gazebo
+symbolically linking /home/container_user/wheelchair2/src/build/wheelchair2_gazebo/launch/wheelchair2_sim.launch.py -> /home/container_user/wheelchair2/src/install/wheelchair2_gazebo/share/wheelchair2_gazebo/launch
+symbolically linking /home/container_user/wheelchair2/src/build/wheelchair2_gazebo/urdf/wheelchair2_gazebo.urdf.xacro -> /home/container_user/wheelchair2/src/install/wheelchair2_gazebo/share/wheelchair2_gazebo/urdf
+symbolically linking /home/container_user/wheelchair2/src/build/wheelchair2_gazebo/urdf/2dlidar.urdf.xacro -> /home/container_user/wheelchair2/src/install/wheelchair2_gazebo/share/wheelchair2_gazebo/urdf
+symbolically linking /home/container_user/wheelchair2/src/build/wheelchair2_gazebo/urdf/livox.urdf.xacro -> /home/container_user/wheelchair2/src/install/wheelchair2_gazebo/share/wheelchair2_gazebo/urdf
+symbolically linking /home/container_user/wheelchair2/src/build/wheelchair2_gazebo/config/gz_bridge.yaml -> /home/container_user/wheelchair2/src/install/wheelchair2_gazebo/share/wheelchair2_gazebo/config

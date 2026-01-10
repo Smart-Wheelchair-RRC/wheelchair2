@@ -1,0 +1,1 @@
+/home/container_user/wheelchair2/src/dependencies/realsense-ros/realsense2_description/launch/view_model.launch.py

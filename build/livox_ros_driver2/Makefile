@@ -315,17 +315,17 @@ livox_interfaces2__rosidl_typesupport_cpp/fast:
 .PHONY : livox_interfaces2__rosidl_typesupport_cpp/fast
 
 #=============================================================================
-# Target rules for targets named ament_cmake_python_copy_livox_ros_driver2
+# Target rules for targets named ament_cmake_python_symlink_livox_ros_driver2
 
 # Build rule for target.
-ament_cmake_python_copy_livox_ros_driver2: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ament_cmake_python_copy_livox_ros_driver2
-.PHONY : ament_cmake_python_copy_livox_ros_driver2
+ament_cmake_python_symlink_livox_ros_driver2: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ament_cmake_python_symlink_livox_ros_driver2
+.PHONY : ament_cmake_python_symlink_livox_ros_driver2
 
 # fast build rule for target.
-ament_cmake_python_copy_livox_ros_driver2/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ament_cmake_python_copy_livox_ros_driver2.dir/build.make CMakeFiles/ament_cmake_python_copy_livox_ros_driver2.dir/build
-.PHONY : ament_cmake_python_copy_livox_ros_driver2/fast
+ament_cmake_python_symlink_livox_ros_driver2/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ament_cmake_python_symlink_livox_ros_driver2.dir/build.make CMakeFiles/ament_cmake_python_symlink_livox_ros_driver2.dir/build
+.PHONY : ament_cmake_python_symlink_livox_ros_driver2/fast
 
 #=============================================================================
 # Target rules for targets named ament_cmake_python_build_livox_ros_driver2_egg
@@ -1285,7 +1285,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... test"
 	@echo "... ament_cmake_python_build_livox_ros_driver2_egg"
-	@echo "... ament_cmake_python_copy_livox_ros_driver2"
+	@echo "... ament_cmake_python_symlink_livox_ros_driver2"
 	@echo "... livox_interfaces2"
 	@echo "... livox_interfaces2__cpp"
 	@echo "... livox_interfaces2__py"

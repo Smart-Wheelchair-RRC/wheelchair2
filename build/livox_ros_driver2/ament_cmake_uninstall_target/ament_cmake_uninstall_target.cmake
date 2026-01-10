@@ -55,3 +55,6 @@ endforeach()
 message(STATUS "Execute custom uninstall script")
 
 # begin of custom uninstall code
+
+# uninstall files installed using the symlink install functions
+include("/home/container_user/wheelchair2/src/build/livox_ros_driver2/ament_cmake_symlink_install/ament_cmake_symlink_install_uninstall_script.cmake")

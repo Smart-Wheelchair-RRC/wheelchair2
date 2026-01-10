@@ -1,0 +1,4 @@
+source;share/wheelchair2_gicp/local_setup.bash
+source;share/wheelchair2_gicp/local_setup.dsv
+source;share/wheelchair2_gicp/local_setup.sh
+source;share/wheelchair2_gicp/local_setup.zsh

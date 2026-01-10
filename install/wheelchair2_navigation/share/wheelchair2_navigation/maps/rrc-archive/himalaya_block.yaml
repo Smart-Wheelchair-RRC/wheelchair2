@@ -1,6 +1,1 @@
-free_thresh: 0.3
-image: himalaya_block.pgm
-negate: 0
-occupied_thresh: 0.6
-origin: [-55.823143005371094, -89.9205093383789, 0.0]
-resolution: 0.1
+/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/rrc-archive/himalaya_block.yaml

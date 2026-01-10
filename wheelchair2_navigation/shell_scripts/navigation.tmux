@@ -18,6 +18,10 @@ sleep 5
 tmux new-window -t $SESSION -n "livox"
 tmux send-keys -t $SESSION:1 "ros2 launch wheelchair2_bringup livox.launch.py use_sim_time:=False" C-m
 
+# 3DBBS
+tmux new-window -t $SESSION -n "3d_bbs"
+tmux send-keys -t $SESSION:2 "ros2 launch ros2_test_rviz2 gpu_ros2_test_rviz2_launch.py" C-m
+
 # sleep 5
 
 # Optional: Kinematic ICP

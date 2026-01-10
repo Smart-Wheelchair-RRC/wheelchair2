@@ -17,3 +17,6 @@
 	path = dependencies/FAST_LIO
 	url = https://github.com/rtarun1/FAST_LIO.git
 	branch = ROS2
+[submodule "RRC-3DLocalization"]
+	path = RRC-3DLocalization
+	url = https://github.com/Smart-Wheelchair-RRC/RRC-3DLocalization

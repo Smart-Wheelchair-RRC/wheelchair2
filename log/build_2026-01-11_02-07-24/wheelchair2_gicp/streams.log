@@ -1,0 +1,27 @@
+[0.574s] Invoking command in '/home/container_user/wheelchair2/src/build/wheelchair2_gicp': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/container_user/wheelchair2/install/wheelchair2_localization:/home/container_user/wheelchair2/install/wheelchair2_gazebo:/home/container_user/wheelchair2/install/wheelchair2_description:/home/container_user/wheelchair2/install/click_save:/opt/ros/humble /usr/bin/cmake --build /home/container_user/wheelchair2/src/build/wheelchair2_gicp -- -j16 -l16
+[0.742s] [35m[1mConsolidate compiler generated dependencies of target gicp_localization_node[0m
+[0.742s] [100%] Built target gicp_localization_node
+[0.764s] Invoked command in '/home/container_user/wheelchair2/src/build/wheelchair2_gicp' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/container_user/wheelchair2/install/wheelchair2_localization:/home/container_user/wheelchair2/install/wheelchair2_gazebo:/home/container_user/wheelchair2/install/wheelchair2_description:/home/container_user/wheelchair2/install/click_save:/opt/ros/humble /usr/bin/cmake --build /home/container_user/wheelchair2/src/build/wheelchair2_gicp -- -j16 -l16
+[0.766s] Invoking command in '/home/container_user/wheelchair2/src/build/wheelchair2_gicp': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/container_user/wheelchair2/install/wheelchair2_localization:/home/container_user/wheelchair2/install/wheelchair2_gazebo:/home/container_user/wheelchair2/install/wheelchair2_description:/home/container_user/wheelchair2/install/click_save:/opt/ros/humble /usr/bin/cmake --install /home/container_user/wheelchair2/src/build/wheelchair2_gicp
+[0.800s] -- Install configuration: ""
+[0.800s] -- Execute custom install script
+[0.800s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_gicp/lib/wheelchair2_gicp/gicp_localization_node
+[0.800s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_gicp/share/wheelchair2_gicp/launch/gicp.launch.py
+[0.801s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_gicp/include/wheelchair2_gicp/gicp_localization.h
+[0.801s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_gicp/include/wheelchair2_gicp/pcd_utils.hpp
+[0.801s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_gicp/share/ament_index/resource_index/package_run_dependencies/wheelchair2_gicp
+[0.801s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_gicp/share/ament_index/resource_index/parent_prefix_path/wheelchair2_gicp
+[0.804s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_gicp/share/wheelchair2_gicp/environment/ament_prefix_path.sh
+[0.804s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_gicp/share/wheelchair2_gicp/environment/ament_prefix_path.dsv
+[0.804s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_gicp/share/wheelchair2_gicp/environment/path.sh
+[0.804s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_gicp/share/wheelchair2_gicp/environment/path.dsv
+[0.804s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_gicp/share/wheelchair2_gicp/local_setup.bash
+[0.806s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_gicp/share/wheelchair2_gicp/local_setup.sh
+[0.807s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_gicp/share/wheelchair2_gicp/local_setup.zsh
+[0.807s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_gicp/share/wheelchair2_gicp/local_setup.dsv
+[0.807s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_gicp/share/wheelchair2_gicp/package.dsv
+[0.812s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_gicp/share/ament_index/resource_index/packages/wheelchair2_gicp
+[0.812s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_gicp/share/wheelchair2_gicp/cmake/wheelchair2_gicpConfig.cmake
+[0.812s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_gicp/share/wheelchair2_gicp/cmake/wheelchair2_gicpConfig-version.cmake
+[0.812s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_gicp/share/wheelchair2_gicp/package.xml
+[0.863s] Invoked command in '/home/container_user/wheelchair2/src/build/wheelchair2_gicp' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/container_user/wheelchair2/install/wheelchair2_localization:/home/container_user/wheelchair2/install/wheelchair2_gazebo:/home/container_user/wheelchair2/install/wheelchair2_description:/home/container_user/wheelchair2/install/click_save:/opt/ros/humble /usr/bin/cmake --install /home/container_user/wheelchair2/src/build/wheelchair2_gicp

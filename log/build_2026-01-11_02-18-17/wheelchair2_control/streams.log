@@ -1,0 +1,27 @@
+[0.229s] Invoking command in '/home/container_user/wheelchair2/src/build/wheelchair2_control': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/container_user/wheelchair2/install/wheelchair2_localization:/home/container_user/wheelchair2/install/wheelchair2_gazebo:/home/container_user/wheelchair2/install/wheelchair2_description:/home/container_user/wheelchair2/install/click_save:/opt/ros/humble /usr/bin/cmake --build /home/container_user/wheelchair2/src/build/wheelchair2_control -- -j16 -l16
+[0.735s] Invoked command in '/home/container_user/wheelchair2/src/build/wheelchair2_control' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/container_user/wheelchair2/install/wheelchair2_localization:/home/container_user/wheelchair2/install/wheelchair2_gazebo:/home/container_user/wheelchair2/install/wheelchair2_description:/home/container_user/wheelchair2/install/click_save:/opt/ros/humble /usr/bin/cmake --build /home/container_user/wheelchair2/src/build/wheelchair2_control -- -j16 -l16
+[0.736s] Invoking command in '/home/container_user/wheelchair2/src/build/wheelchair2_control': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/container_user/wheelchair2/install/wheelchair2_localization:/home/container_user/wheelchair2/install/wheelchair2_gazebo:/home/container_user/wheelchair2/install/wheelchair2_description:/home/container_user/wheelchair2/install/click_save:/opt/ros/humble /usr/bin/cmake --install /home/container_user/wheelchair2/src/build/wheelchair2_control
+[0.753s] -- Install configuration: ""
+[0.754s] -- Execute custom install script
+[0.756s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_control/share/wheelchair2_control/launch/wheelchair_teleop.launch.py
+[0.757s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_control/share/wheelchair2_control/config/joystick.yaml
+[0.758s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_control/share/wheelchair2_control/config/twist_mux.yaml
+[0.758s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_control/share/wheelchair2_control/config/wheelchair2_controllers.yaml
+[0.759s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_control/lib/wheelchair2_control/keyboard_teleop.py
+[0.759s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_control/lib/wheelchair2_control/keyboard_teleop_constant.py
+[0.759s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_control/share/ament_index/resource_index/package_run_dependencies/wheelchair2_control
+[0.760s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_control/share/ament_index/resource_index/parent_prefix_path/wheelchair2_control
+[0.760s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_control/share/wheelchair2_control/environment/ament_prefix_path.sh
+[0.760s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_control/share/wheelchair2_control/environment/ament_prefix_path.dsv
+[0.760s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_control/share/wheelchair2_control/environment/path.sh
+[0.760s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_control/share/wheelchair2_control/environment/path.dsv
+[0.760s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_control/share/wheelchair2_control/local_setup.bash
+[0.760s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_control/share/wheelchair2_control/local_setup.sh
+[0.760s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_control/share/wheelchair2_control/local_setup.zsh
+[0.760s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_control/share/wheelchair2_control/local_setup.dsv
+[0.760s] -- Symlinking: /home/container_user/wheelchair2/src/install/wheelchair2_control/share/wheelchair2_control/package.dsv
+[0.772s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_control/share/ament_index/resource_index/packages/wheelchair2_control
+[0.772s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_control/share/wheelchair2_control/cmake/wheelchair2_controlConfig.cmake
+[0.772s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_control/share/wheelchair2_control/cmake/wheelchair2_controlConfig-version.cmake
+[0.772s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/wheelchair2_control/share/wheelchair2_control/package.xml
+[0.798s] Invoked command in '/home/container_user/wheelchair2/src/build/wheelchair2_control' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/container_user/wheelchair2/install/wheelchair2_localization:/home/container_user/wheelchair2/install/wheelchair2_gazebo:/home/container_user/wheelchair2/install/wheelchair2_description:/home/container_user/wheelchair2/install/click_save:/opt/ros/humble /usr/bin/cmake --install /home/container_user/wheelchair2/src/build/wheelchair2_control

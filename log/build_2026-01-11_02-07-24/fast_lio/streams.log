@@ -1,0 +1,142 @@
+[0.048s] Invoking command in '/home/container_user/wheelchair2/src/build/fast_lio': AMENT_PREFIX_PATH=/home/container_user/wheelchair2/src/install/livox_ros_driver2:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/container_user/wheelchair2/src/install/livox_ros_driver2:/home/container_user/wheelchair2/install/wheelchair2_navigation:/home/container_user/wheelchair2/install/wheelchair2_kangaroo_x2_driver:/home/container_user/wheelchair2/install/wheelchair2_control:/home/container_user/wheelchair2/install/wheelchair2_bringup:/home/container_user/wheelchair2/install/spark_fast_lio:/home/container_user/wheelchair2/install/rrc_3dloc:/home/container_user/wheelchair2/install/realsense2_description:/home/container_user/wheelchair2/install/realsense2_camera:/home/container_user/wheelchair2/install/realsense2_camera_msgs:/home/container_user/wheelchair2/install/pointcloud_to_laserscan:/home/container_user/wheelchair2/install/fast_lio:/home/container_user/wheelchair2/install/livox_ros_driver2:/home/container_user/wheelchair2/install/icp_localization_ros2:/home/container_user/wheelchair2/install/wheelchair2_localization:/home/container_user/wheelchair2/install/wheelchair2_gazebo:/home/container_user/wheelchair2/install/wheelchair2_description:/home/container_user/wheelchair2/install/click_save:/opt/ros/humble LD_LIBRARY_PATH=/home/container_user/wheelchair2/src/install/livox_ros_driver2/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/container_user/wheelchair2/src/install/livox_ros_driver2/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/container_user/wheelchair2/src/build/fast_lio -- -j16 -l16
+[0.099s] [35m[1mConsolidate compiler generated dependencies of target fast_lio__rosidl_generator_c[0m
+[0.112s] [  2%] Built target fast_lio__cpp
+[0.112s] [ 11%] Built target fast_lio__rosidl_generator_c
+[0.121s] [ 11%] Built target ament_cmake_python_symlink_fast_lio
+[0.124s] [35m[1mConsolidate compiler generated dependencies of target fast_lio__rosidl_typesupport_fastrtps_cpp[0m
+[0.124s] [35m[1mConsolidate compiler generated dependencies of target fast_lio__rosidl_typesupport_cpp[0m
+[0.124s] [35m[1mConsolidate compiler generated dependencies of target fast_lio__rosidl_typesupport_introspection_cpp[0m
+[0.135s] [35m[1mConsolidate compiler generated dependencies of target fast_lio__rosidl_typesupport_c[0m
+[0.135s] [35m[1mConsolidate compiler generated dependencies of target fast_lio__rosidl_typesupport_introspection_c[0m
+[0.135s] [35m[1mConsolidate compiler generated dependencies of target fast_lio__rosidl_typesupport_fastrtps_c[0m
+[0.143s] [ 37%] Built target fast_lio__rosidl_typesupport_introspection_cpp
+[0.143s] [ 37%] Built target fast_lio__rosidl_typesupport_cpp
+[0.143s] [ 37%] Built target fast_lio__rosidl_typesupport_fastrtps_cpp
+[0.149s] [ 54%] Built target fast_lio__rosidl_typesupport_introspection_c
+[0.149s] [ 54%] Built target fast_lio__rosidl_typesupport_c
+[0.151s] [ 62%] Built target fast_lio__rosidl_typesupport_fastrtps_c
+[0.160s] [35m[1mConsolidate compiler generated dependencies of target fastlio_mapping[0m
+[0.180s] [ 62%] Built target fast_lio
+[0.206s] [ 74%] Built target fastlio_mapping
+[0.208s] [ 77%] Built target fast_lio__py
+[0.223s] [35m[1mConsolidate compiler generated dependencies of target fast_lio__rosidl_generator_py[0m
+[0.240s] [ 82%] Built target fast_lio__rosidl_generator_py
+[0.253s] [35m[1mConsolidate compiler generated dependencies of target fast_lio__rosidl_typesupport_c__pyext[0m
+[0.253s] [35m[1mConsolidate compiler generated dependencies of target fast_lio__rosidl_typesupport_introspection_c__pyext[0m
+[0.253s] [35m[1mConsolidate compiler generated dependencies of target fast_lio__rosidl_typesupport_fastrtps_c__pyext[0m
+[0.268s] [ 88%] Built target fast_lio__rosidl_typesupport_c__pyext
+[0.270s] [ 94%] Built target fast_lio__rosidl_typesupport_fastrtps_c__pyext
+[0.270s] [100%] Built target fast_lio__rosidl_typesupport_introspection_c__pyext
+[0.302s] running egg_info
+[0.302s] writing fast_lio.egg-info/PKG-INFO
+[0.302s] writing dependency_links to fast_lio.egg-info/dependency_links.txt
+[0.302s] writing top-level names to fast_lio.egg-info/top_level.txt
+[0.304s] reading manifest file 'fast_lio.egg-info/SOURCES.txt'
+[0.304s] writing manifest file 'fast_lio.egg-info/SOURCES.txt'
+[0.333s] [100%] Built target ament_cmake_python_build_fast_lio_egg
+[0.349s] Invoked command in '/home/container_user/wheelchair2/src/build/fast_lio' returned '0': AMENT_PREFIX_PATH=/home/container_user/wheelchair2/src/install/livox_ros_driver2:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/container_user/wheelchair2/src/install/livox_ros_driver2:/home/container_user/wheelchair2/install/wheelchair2_navigation:/home/container_user/wheelchair2/install/wheelchair2_kangaroo_x2_driver:/home/container_user/wheelchair2/install/wheelchair2_control:/home/container_user/wheelchair2/install/wheelchair2_bringup:/home/container_user/wheelchair2/install/spark_fast_lio:/home/container_user/wheelchair2/install/rrc_3dloc:/home/container_user/wheelchair2/install/realsense2_description:/home/container_user/wheelchair2/install/realsense2_camera:/home/container_user/wheelchair2/install/realsense2_camera_msgs:/home/container_user/wheelchair2/install/pointcloud_to_laserscan:/home/container_user/wheelchair2/install/fast_lio:/home/container_user/wheelchair2/install/livox_ros_driver2:/home/container_user/wheelchair2/install/icp_localization_ros2:/home/container_user/wheelchair2/install/wheelchair2_localization:/home/container_user/wheelchair2/install/wheelchair2_gazebo:/home/container_user/wheelchair2/install/wheelchair2_description:/home/container_user/wheelchair2/install/click_save:/opt/ros/humble LD_LIBRARY_PATH=/home/container_user/wheelchair2/src/install/livox_ros_driver2/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/container_user/wheelchair2/src/install/livox_ros_driver2/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/container_user/wheelchair2/src/build/fast_lio -- -j16 -l16
+[0.351s] Invoking command in '/home/container_user/wheelchair2/src/build/fast_lio': AMENT_PREFIX_PATH=/home/container_user/wheelchair2/src/install/livox_ros_driver2:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/container_user/wheelchair2/src/install/livox_ros_driver2:/home/container_user/wheelchair2/install/wheelchair2_navigation:/home/container_user/wheelchair2/install/wheelchair2_kangaroo_x2_driver:/home/container_user/wheelchair2/install/wheelchair2_control:/home/container_user/wheelchair2/install/wheelchair2_bringup:/home/container_user/wheelchair2/install/spark_fast_lio:/home/container_user/wheelchair2/install/rrc_3dloc:/home/container_user/wheelchair2/install/realsense2_description:/home/container_user/wheelchair2/install/realsense2_camera:/home/container_user/wheelchair2/install/realsense2_camera_msgs:/home/container_user/wheelchair2/install/pointcloud_to_laserscan:/home/container_user/wheelchair2/install/fast_lio:/home/container_user/wheelchair2/install/livox_ros_driver2:/home/container_user/wheelchair2/install/icp_localization_ros2:/home/container_user/wheelchair2/install/wheelchair2_localization:/home/container_user/wheelchair2/install/wheelchair2_gazebo:/home/container_user/wheelchair2/install/wheelchair2_description:/home/container_user/wheelchair2/install/click_save:/opt/ros/humble LD_LIBRARY_PATH=/home/container_user/wheelchair2/src/install/livox_ros_driver2/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/container_user/wheelchair2/src/install/livox_ros_driver2/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --install /home/container_user/wheelchair2/src/build/fast_lio
+[0.361s] -- Install configuration: "Release"
+[0.361s] -- Execute custom install script
+[0.361s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/share/ament_index/resource_index/rosidl_interfaces/fast_lio
+[0.362s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/include/fast_lio/fast_lio/msg/detail/pose6_d__functions.h
+[0.362s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/include/fast_lio/fast_lio/msg/detail/pose6_d__struct.h
+[0.362s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/include/fast_lio/fast_lio/msg/detail/pose6_d__type_support.h
+[0.362s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/include/fast_lio/fast_lio/msg/pose6_d.h
+[0.362s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/include/fast_lio/fast_lio/msg/rosidl_generator_c__visibility_control.h
+[0.362s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/environment/library_path.sh
+[0.362s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/environment/library_path.dsv
+[0.363s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/include/fast_lio/fast_lio/msg/detail/pose6_d__rosidl_typesupport_fastrtps_c.h
+[0.363s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/include/fast_lio/fast_lio/msg/rosidl_typesupport_fastrtps_c__visibility_control.h
+[0.363s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/include/fast_lio/fast_lio/msg/detail/pose6_d__builder.hpp
+[0.363s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/include/fast_lio/fast_lio/msg/detail/pose6_d__struct.hpp
+[0.363s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/include/fast_lio/fast_lio/msg/detail/pose6_d__traits.hpp
+[0.363s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/include/fast_lio/fast_lio/msg/detail/pose6_d__type_support.hpp
+[0.363s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/include/fast_lio/fast_lio/msg/pose6_d.hpp
+[0.363s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/include/fast_lio/fast_lio/msg/rosidl_generator_cpp__visibility_control.hpp
+[0.364s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/include/fast_lio/fast_lio/msg/detail/pose6_d__rosidl_typesupport_fastrtps_cpp.hpp
+[0.364s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/include/fast_lio/fast_lio/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h
+[0.364s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/include/fast_lio/fast_lio/msg/detail/pose6_d__rosidl_typesupport_introspection_c.h
+[0.364s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/include/fast_lio/fast_lio/msg/rosidl_typesupport_introspection_c__visibility_control.h
+[0.364s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/include/fast_lio/fast_lio/msg/detail/pose6_d__rosidl_typesupport_introspection_cpp.hpp
+[0.364s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/environment/pythonpath.sh
+[0.365s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/environment/pythonpath.dsv
+[0.365s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/local/lib/python3.10/dist-packages/fast_lio-0.0.0-py3.10.egg-info/PKG-INFO
+[0.365s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/local/lib/python3.10/dist-packages/fast_lio-0.0.0-py3.10.egg-info/SOURCES.txt
+[0.365s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/local/lib/python3.10/dist-packages/fast_lio-0.0.0-py3.10.egg-info/dependency_links.txt
+[0.365s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/local/lib/python3.10/dist-packages/fast_lio-0.0.0-py3.10.egg-info/top_level.txt
+[0.365s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/local/lib/python3.10/dist-packages/fast_lio/__init__.py
+[0.366s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/local/lib/python3.10/dist-packages/fast_lio/_fast_lio_s.ep.rosidl_typesupport_c.c
+[0.366s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/local/lib/python3.10/dist-packages/fast_lio/_fast_lio_s.ep.rosidl_typesupport_fastrtps_c.c
+[0.366s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/local/lib/python3.10/dist-packages/fast_lio/_fast_lio_s.ep.rosidl_typesupport_introspection_c.c
+[0.366s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/local/lib/python3.10/dist-packages/fast_lio/fast_lio_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+[0.366s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/local/lib/python3.10/dist-packages/fast_lio/fast_lio_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+[0.366s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/local/lib/python3.10/dist-packages/fast_lio/fast_lio_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+[0.366s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/local/lib/python3.10/dist-packages/fast_lio/libfast_lio__rosidl_generator_py.so
+[0.366s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/local/lib/python3.10/dist-packages/fast_lio/msg/__init__.py
+[0.366s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/local/lib/python3.10/dist-packages/fast_lio/msg/_pose6_d.py
+[0.366s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/local/lib/python3.10/dist-packages/fast_lio/msg/_pose6_d_s.c
+[0.367s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/local/lib/python3.10/dist-packages/fast_lio/fast_lio_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+[0.367s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/local/lib/python3.10/dist-packages/fast_lio/fast_lio_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+[0.367s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/local/lib/python3.10/dist-packages/fast_lio/fast_lio_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+[0.367s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/msg/Pose6D.idl
+[0.367s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/msg/Pose6D.msg
+[0.367s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/lib/fast_lio/fastlio_mapping
+[0.367s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/config/avia.yaml
+[0.367s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/config/horizon.yaml
+[0.368s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/config/mid360.yaml
+[0.368s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/config/ouster64.yaml
+[0.368s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/config/velodyne.yaml
+[0.368s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/launch/gdb_debug_example.launch
+[0.368s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/launch/mapping.launch.py
+[0.368s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/rviz/fastlio.rviz
+[0.368s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/share/ament_index/resource_index/package_run_dependencies/fast_lio
+[0.368s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/share/ament_index/resource_index/parent_prefix_path/fast_lio
+[0.368s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/environment/ament_prefix_path.sh
+[0.369s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/environment/ament_prefix_path.dsv
+[0.369s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/environment/path.sh
+[0.369s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/environment/path.dsv
+[0.369s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/local_setup.bash
+[0.369s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/local_setup.sh
+[0.369s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/local_setup.zsh
+[0.369s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/local_setup.dsv
+[0.369s] -- Symlinking: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/package.dsv
+[0.381s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/share/ament_index/resource_index/packages/fast_lio
+[0.381s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/cmake/rosidl_cmake-extras.cmake
+[0.381s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/cmake/ament_cmake_export_include_directories-extras.cmake
+[0.381s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/cmake/ament_cmake_export_libraries-extras.cmake
+[0.381s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/cmake/ament_cmake_export_targets-extras.cmake
+[0.382s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake
+[0.382s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/cmake/ament_cmake_export_dependencies-extras.cmake
+[0.382s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake
+[0.382s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/cmake/fast_lioConfig.cmake
+[0.382s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/cmake/fast_lioConfig-version.cmake
+[0.382s] -- Up-to-date symlink: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/package.xml
+[0.382s] -- Up-to-date: /home/container_user/wheelchair2/src/install/fast_lio/lib/libfast_lio__rosidl_generator_c.so
+[0.383s] -- Up-to-date: /home/container_user/wheelchair2/src/install/fast_lio/lib/libfast_lio__rosidl_typesupport_fastrtps_c.so
+[0.383s] -- Up-to-date: /home/container_user/wheelchair2/src/install/fast_lio/lib/libfast_lio__rosidl_typesupport_fastrtps_cpp.so
+[0.383s] -- Up-to-date: /home/container_user/wheelchair2/src/install/fast_lio/lib/libfast_lio__rosidl_typesupport_introspection_c.so
+[0.383s] -- Up-to-date: /home/container_user/wheelchair2/src/install/fast_lio/lib/libfast_lio__rosidl_typesupport_c.so
+[0.383s] -- Up-to-date: /home/container_user/wheelchair2/src/install/fast_lio/lib/libfast_lio__rosidl_typesupport_introspection_cpp.so
+[0.384s] -- Up-to-date: /home/container_user/wheelchair2/src/install/fast_lio/lib/libfast_lio__rosidl_typesupport_cpp.so
+[0.413s] Listing '/home/container_user/wheelchair2/src/install/fast_lio/local/lib/python3.10/dist-packages/fast_lio'...
+[0.413s] Listing '/home/container_user/wheelchair2/src/install/fast_lio/local/lib/python3.10/dist-packages/fast_lio/msg'...
+[0.417s] -- Up-to-date: /home/container_user/wheelchair2/src/install/fast_lio/lib/libfast_lio__rosidl_generator_py.so
+[0.417s] -- Up-to-date: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/cmake/export_fast_lio__rosidl_generator_cExport.cmake
+[0.417s] -- Up-to-date: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/cmake/export_fast_lio__rosidl_generator_cExport-release.cmake
+[0.417s] -- Up-to-date: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/cmake/export_fast_lio__rosidl_typesupport_fastrtps_cExport.cmake
+[0.417s] -- Up-to-date: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/cmake/export_fast_lio__rosidl_typesupport_fastrtps_cExport-release.cmake
+[0.417s] -- Up-to-date: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/cmake/export_fast_lio__rosidl_generator_cppExport.cmake
+[0.417s] -- Up-to-date: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/cmake/export_fast_lio__rosidl_typesupport_fastrtps_cppExport.cmake
+[0.417s] -- Up-to-date: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/cmake/export_fast_lio__rosidl_typesupport_fastrtps_cppExport-release.cmake
+[0.417s] -- Up-to-date: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/cmake/fast_lio__rosidl_typesupport_introspection_cExport.cmake
+[0.417s] -- Up-to-date: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/cmake/fast_lio__rosidl_typesupport_introspection_cExport-release.cmake
+[0.417s] -- Up-to-date: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/cmake/fast_lio__rosidl_typesupport_cExport.cmake
+[0.418s] -- Up-to-date: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/cmake/fast_lio__rosidl_typesupport_cExport-release.cmake
+[0.418s] -- Up-to-date: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/cmake/fast_lio__rosidl_typesupport_introspection_cppExport.cmake
+[0.418s] -- Up-to-date: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/cmake/fast_lio__rosidl_typesupport_introspection_cppExport-release.cmake
+[0.418s] -- Up-to-date: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/cmake/fast_lio__rosidl_typesupport_cppExport.cmake
+[0.418s] -- Up-to-date: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/cmake/fast_lio__rosidl_typesupport_cppExport-release.cmake
+[0.418s] -- Up-to-date: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/cmake/export_fast_lio__rosidl_generator_pyExport.cmake
+[0.418s] -- Up-to-date: /home/container_user/wheelchair2/src/install/fast_lio/share/fast_lio/cmake/export_fast_lio__rosidl_generator_pyExport-release.cmake
+[0.421s] Invoked command in '/home/container_user/wheelchair2/src/build/fast_lio' returned '0': AMENT_PREFIX_PATH=/home/container_user/wheelchair2/src/install/livox_ros_driver2:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/container_user/wheelchair2/src/install/livox_ros_driver2:/home/container_user/wheelchair2/install/wheelchair2_navigation:/home/container_user/wheelchair2/install/wheelchair2_kangaroo_x2_driver:/home/container_user/wheelchair2/install/wheelchair2_control:/home/container_user/wheelchair2/install/wheelchair2_bringup:/home/container_user/wheelchair2/install/spark_fast_lio:/home/container_user/wheelchair2/install/rrc_3dloc:/home/container_user/wheelchair2/install/realsense2_description:/home/container_user/wheelchair2/install/realsense2_camera:/home/container_user/wheelchair2/install/realsense2_camera_msgs:/home/container_user/wheelchair2/install/pointcloud_to_laserscan:/home/container_user/wheelchair2/install/fast_lio:/home/container_user/wheelchair2/install/livox_ros_driver2:/home/container_user/wheelchair2/install/icp_localization_ros2:/home/container_user/wheelchair2/install/wheelchair2_localization:/home/container_user/wheelchair2/install/wheelchair2_gazebo:/home/container_user/wheelchair2/install/wheelchair2_description:/home/container_user/wheelchair2/install/click_save:/opt/ros/humble LD_LIBRARY_PATH=/home/container_user/wheelchair2/src/install/livox_ros_driver2/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/container_user/wheelchair2/src/install/livox_ros_driver2/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --install /home/container_user/wheelchair2/src/build/fast_lio
