@@ -21,11 +21,11 @@
                         }
                     ]
                 },
-                "C_Cpp.default.intelliSenseMode": "gcc-arm64"
+                "C_Cpp.default.intelliSenseMode": "gcc-x64",
+                "files.autoSave": "onFocusChange"
             },
             "extensions": [
                 "althack.ament-task-provider",
-                "betwo.b2-catkin-tools",
                 "DotJoshJohnson.xml",
                 "ms-azuretools.vscode-docker",
                 "Ranch-Hand-Robotics.rde-pack",
@@ -33,11 +33,8 @@
                 "ms-vscode.cpptools",
                 "redhat.vscode-yaml",
                 "seunlanlege.action-buttons",
-                "smilerobotics.urdf",
                 "streetsidesoftware.code-spell-checker",
-                "twxs.cmake",
-                "yzhang.markdown-all-in-one",
-                "akhail.save-typing"
+                "ms-vscode.cmake-tools"
             ]
         }
     },
@@ -66,5 +63,7 @@
         "--ipc=host"
     ]
     ,
-    "postStartCommand": "sudo chown -R container_user:container_user /home/container_user/wheelchair2 /run"
+    "postStartCommand": "sudo chown -R container_user:container_user /home/container_user/wheelchair2 /run",
+    "postCreateCommand": "bash /home/container_user/wheelchair2/src/scripts/post_create.sh",
+    "initializeCommand": "xhost +local:root"
 }

@@ -206,6 +206,40 @@ Scripts are located in `wheelchair2_navigation/shell_scripts` for convenience.
 
 ---
 
+## Convenience functions
+A couple of convenience functions are provided, implemented as aliases in `~/.bashrc`, if you use the post-create script to set up your environment. If using Dev Containers, these will already be set up for you.
+
+-   **`wss` Source Workspace**
+
+    This function sources the workspace setup file.
+
+    It is equivalent to running the following command:
+
+    ```bash
+    source /home/container_user/wheelchair2/install/setup.bash && echo "Sourced wheelchair2 workspace."
+    ```
+
+-   **`wsb` Build Workspace**
+
+    This function builds the workspace and then sources it.
+
+    It is equivalent to running the following command:
+
+    ```bash
+    cd /home/container_user/wheelchair2 && colcon build --symlink-install --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && wss
+    ```
+
+-   **`wsd` Delete Build and Install Directories**
+    This function deletes the build, install, and log directories of the workspace.
+
+    It is equivalent to running the following command:
+
+    ```bash
+    rm -rf /home/container_user/wheelchair2/build /home/container_user/wheelchair2/install /home/container_user/wheelchair2/log && echo "Deleted build, install, and log directories."
+    ```
+
+---
+
 ## Demo Runs
 
 >[!WARNING]
