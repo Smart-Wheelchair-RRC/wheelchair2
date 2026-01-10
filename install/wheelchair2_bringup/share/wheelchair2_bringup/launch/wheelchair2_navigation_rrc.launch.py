@@ -1,1 +1,0 @@
-/home/container_user/wheelchair2/src/wheelchair2_bringup/launch/wheelchair2_navigation_rrc.launch.py

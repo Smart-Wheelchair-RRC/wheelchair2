@@ -1,1 +1,0 @@
-/home/container_user/wheelchair2/src/dependencies/livox_ros_driver2/msg/CustomMsg.msg

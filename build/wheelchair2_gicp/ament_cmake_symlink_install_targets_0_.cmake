@@ -1,1 +1,0 @@
-ament_cmake_symlink_install_targets("TARGET_FILES" "/home/container_user/wheelchair2/src/build/wheelchair2_gicp/gicp_localization_node" "TARGETS" "gicp_localization_node" "DESTINATION" "lib/wheelchair2_gicp")

@@ -1,1 +1,0 @@
-/home/container_user/wheelchair2/src/dependencies/realsense-ros/realsense2_camera/examples/pointcloud/rs_d455_pointcloud_launch.py

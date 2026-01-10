@@ -1,1 +1,0 @@
-/home/container_user/wheelchair2/src/wheelchair2_navigation/launch/rtabmap_lidar_camera_icp.launch.py

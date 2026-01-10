@@ -1,2 +1,0 @@
-Invoking command in '/home/container_user/wheelchair2/src/build/rrc_3dloc': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/container_user/wheelchair2/src/3dbbs_localization/rrc-3dloc -DCMAKE_INSTALL_PREFIX=/home/container_user/wheelchair2/src/install/rrc_3dloc
-Invoked command in '/home/container_user/wheelchair2/src/build/rrc_3dloc' returned '1': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/container_user/wheelchair2/src/3dbbs_localization/rrc-3dloc -DCMAKE_INSTALL_PREFIX=/home/container_user/wheelchair2/src/install/rrc_3dloc

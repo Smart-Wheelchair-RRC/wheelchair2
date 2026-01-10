@@ -1,8 +1,0 @@
-/home/container_user/wheelchair2/src/build/bbs3d/CMakeFiles/cpu_bbs3d.dir
-/home/container_user/wheelchair2/src/build/bbs3d/CMakeFiles/gpu_bbs3d.dir
-/home/container_user/wheelchair2/src/build/bbs3d/CMakeFiles/edit_cache.dir
-/home/container_user/wheelchair2/src/build/bbs3d/CMakeFiles/rebuild_cache.dir
-/home/container_user/wheelchair2/src/build/bbs3d/CMakeFiles/list_install_components.dir
-/home/container_user/wheelchair2/src/build/bbs3d/CMakeFiles/install.dir
-/home/container_user/wheelchair2/src/build/bbs3d/CMakeFiles/install/local.dir
-/home/container_user/wheelchair2/src/build/bbs3d/CMakeFiles/install/strip.dir

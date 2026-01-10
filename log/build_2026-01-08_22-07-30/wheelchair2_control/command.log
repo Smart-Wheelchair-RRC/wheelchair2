@@ -1,2 +1,0 @@
-Invoking command in '/home/container_user/wheelchair2/src/build/wheelchair2_control': /usr/bin/cmake /home/container_user/wheelchair2/src/wheelchair2_control -DCMAKE_INSTALL_PREFIX=/home/container_user/wheelchair2/src/install/wheelchair2_control
-Invoked command in '/home/container_user/wheelchair2/src/build/wheelchair2_control' returned '1': /usr/bin/cmake /home/container_user/wheelchair2/src/wheelchair2_control -DCMAKE_INSTALL_PREFIX=/home/container_user/wheelchair2/src/install/wheelchair2_control

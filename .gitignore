@@ -4,6 +4,6 @@ records*
 __pycache__
 *.pcd
 rough_scripts
-/build
-/install
-/log
+./build
+./install
+./log

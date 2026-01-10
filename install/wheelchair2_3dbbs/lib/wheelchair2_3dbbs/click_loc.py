@@ -1,1 +1,0 @@
-/home/container_user/wheelchair2/src/RRC-3DLocalization/wheelchair2_3dbbs/scripts/click_loc.py

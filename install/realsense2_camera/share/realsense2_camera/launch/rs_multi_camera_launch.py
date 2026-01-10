@@ -1,1 +1,0 @@
-/home/container_user/wheelchair2/src/dependencies/realsense-ros/realsense2_camera/launch/rs_multi_camera_launch.py
