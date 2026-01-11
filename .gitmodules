@@ -17,3 +17,6 @@
 	path = dependencies/FAST_LIO
 	url = https://github.com/rtarun1/FAST_LIO.git
 	branch = ROS2
+[submodule "dependencies/rplidar_ros"]
+	path = dependencies/rplidar_ros
+	url = https://github.com/Slamtec/rplidar_ros.git
