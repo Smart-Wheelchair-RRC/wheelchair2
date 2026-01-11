@@ -11,6 +11,12 @@ from launch.conditions import IfCondition
 
 def generate_launch_description():
 
+    box_filter_config = os.path.join(
+        get_package_share_directory("wheelchair2_navigation"),
+        "config",
+        "box_filter.yaml",
+    )
+
     # Map and Nav2 config files
     map_yaml = LaunchConfiguration(
         "map",
@@ -115,6 +121,18 @@ def generate_launch_description():
 
     lifecycle_nodes = ['filter_mask_server', 'costmap_filter_info_server']
 
+    laser_filter_node = Node(
+        package='laser_filters',
+        executable='scan_to_scan_filter_chain',
+        name='laser_filter',
+        parameters=[box_filter_config],
+        remappings=[
+            ('scan', 'scan_raw'),        # Input: Raw data from RPLidar
+            ('scan_filtered', 'scan')    # Output: Clean data for Nav2/AMCL
+        ],
+        output='screen'
+    )
+
     # Nav2 bringup launch file
     nav2 = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -169,6 +187,7 @@ def generate_launch_description():
     )
 
     nodes = [
+        laser_filter_node,  
         nav2,
         rviz,
         filtered_map_server,
