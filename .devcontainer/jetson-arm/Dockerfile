@@ -10,6 +10,12 @@ LABEL org.opencontainers.image.licenses="MIT"
 
 # handle default shell
 SHELL ["/bin/bash", "-c"]
+
+# temporary till the merging after that build the humble image with laser scan pkg
+RUN apt-get update && apt-get install -y \
+    ros-humble-laser-filters \
+    && rm -rf /var/lib/apt/lists/*
+
 COPY . /home/container_user/wheelchair2/src
 
 WORKDIR /home/container_user/wheelchair2
