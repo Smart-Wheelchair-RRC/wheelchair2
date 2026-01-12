@@ -87,6 +87,13 @@
         <axis xyz="0 0 0" />
     </joint>
 
+    <link name="rplidar_frame"/>
+    <joint name="base_to_rplidar_frame" type="fixed">
+        <parent link="base_link" />
+        <child link="rplidar_frame" />
+        <origin xyz="0.21 0 -0.095" rpy="${pi} 0 0" />
+    </joint>
+
     <xacro:kangaroo_x2_driver name="kangaroo_ros2_control" prefix="" use_sim_time="$(arg use_sim_time)"></xacro:kangaroo_x2_driver>
 
     <xacro:if value="$(arg use_sim_time)">
