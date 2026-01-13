@@ -1,6 +1,6 @@
 {
     "name": "Wheelchair2 Development on Jetson",
-    "image": "ghcr.io/smart-wheelchair-rrc/wheelchair2_base_jetson:v4.1",
+    "image": "ghcr.io/smart-wheelchair-rrc/wheelchair2_base_jetson:v4.9.2",
     "privileged": true,
     "workspaceMount": "source=${localWorkspaceFolder},target=/home/container_user/wheelchair2/src,type=bind",
     "workspaceFolder": "/home/container_user/wheelchair2/src",
@@ -10,7 +10,7 @@
                 "actionButtons": {
                     "defaultColor": "#ff0034",
                     "loadNpmCommands": false,
-                    "reloadButton": "♻️",   
+                    "reloadButton": "♻️",
                     "commands": [
                         {
                             "name": "Build WS",
@@ -64,7 +64,6 @@
         "--volume=/tmp/.X11-unix:/tmp/.X11-unix",
         "--net=host",
         "--ipc=host"
-    ]
-    ,
+    ],
     "postStartCommand": "sudo chown -R container_user:container_user /home/container_user/wheelchair2 /run"
 }
