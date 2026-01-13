@@ -22,15 +22,6 @@ RUN source /opt/ros/humble/setup.bash \
 WORKDIR /home/container_user/wheelchair2
 RUN source install/setup.bash 
 
-WORKDIR /home/container_user
-RUN git clone https://github.com/koide3/small_gicp.git
-RUN cd small_gicp \
-    && mkdir build && cd build \
-    && cmake .. -DCMAKE_BUILD_TYPE=Release && make -j \
-    && sudo make install \
-    && cd /home/container_user \
-    && rm -rf small_gicp
-
 
 # CUDA
 RUN sudo apt-get update && apt-get install -y --no-install-recommends \
@@ -49,3 +40,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 ENV PATH=/usr/local/cuda/bin:${PATH}
 ENV LD_LIBRARY_PATH=/usr/local/cuda/lib64:${LD_LIBRARY_PATH}
+
+
+WORKDIR /home/container_user
+RUN git clone https://github.com/koide3/small_gicp.git
+RUN cd small_gicp \
+    && mkdir build && cd build \
+    && cmake .. -DCMAKE_BUILD_TYPE=Release && make -j \
+    && sudo make install \
+    && cd /home/container_user \
+    && rm -rf small_gicp

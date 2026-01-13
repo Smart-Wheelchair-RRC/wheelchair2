@@ -20,3 +20,4 @@ RUN source /opt/ros/humble/setup.bash \
     && cd src/wheelchair2_navigation/shell_scripts \
     && sudo chmod +x ./navigation.tmux
 
+

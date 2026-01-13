@@ -1,0 +1,1 @@
+ament_cmake_symlink_install_targets("TARGET_FILES" "/home/container_user/wheelchair2/src/dependencies/build/icp_localization_ros2/icp_localization" "TARGETS" "icp_localization" "DESTINATION" "lib/icp_localization_ros2")
