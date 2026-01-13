@@ -140,7 +140,7 @@ Information about the Hardware Setup:
   # ICP
   ros2 launch wheelchair2_navigation nav2_icp.launch.py use_sim_time:=False map:=$MAP_DIR/rrc/rrc_lab.yaml pcd_map_path:=$MAP_DIR/rrc/lab_map_with_outside_corridor.pcd
   ```
-  - Drive link for [PCD files](https://drive.google.com/drive/folders/1PQQ2YWsBSb9ChDpzQIJkOdT0Re-4qUdX?usp=sharing)
+  - Drive link for [PCD files](https://iiithydresearch-my.sharepoint.com/:f:/g/personal/awc_research_iiit_ac_in/IgAURjoBqv66Ro0U-tmDDK07Ab3xOq4kyZr5sysK7ua5wmk?e=aqrPoF)
 - **Keyboard Telep**
   ```bash
   ros2 run wheelchair2_control keyboard_teleop_constant.py
