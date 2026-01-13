@@ -1,4 +1,4 @@
-FROM ghcr.io/smart-wheelchair-rrc/wheelchair2_base:v4.1
+FROM ghcr.io/smart-wheelchair-rrc/wheelchair2_base:v4.9.2
 
 # Add the following labels
 LABEL org.opencontainers.image.description="Wheelchair2"
@@ -15,8 +15,8 @@ COPY . /home/container_user/wheelchair2/src
 WORKDIR /home/container_user/wheelchair2
 RUN source /opt/ros/humble/setup.bash \
     && sudo colcon build --symlink-install 
-    
+
 WORKDIR /home/container_user/wheelchair2
 RUN source install/setup.bash 
-    # && sudo chmod +x /home/container_user/wheelchair2/src/wheelchair2_navigation/shell_scripts/navigation.tmux
+# && sudo chmod +x /home/container_user/wheelchair2/src/wheelchair2_navigation/shell_scripts/navigation.tmux
 
