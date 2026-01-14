@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot name="wheelchair2" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot name="wheelchair2"
+    xmlns:xacro="http://www.ros.org/wiki/xacro">
 
     <!-- <xacro:property name="pi" value="3.1415926535897931" /> -->
 
@@ -55,35 +56,20 @@
     <xacro:m_link_sphere name="caster2" origin_rpy="0 0 0" origin_xyz="0 0 0" mass="0.45164" ixx="0.100000005621" ixy="0.100000001310" ixz="0.100000001649" iyy="0.100000004345" iyz="0.100000002360" izz="0.100000003315" material="black" radius="0.1" radius_2="0.001" />
     <xacro:f_joint name="base_link_to_caster2" type="fixed" axis_xyz="0 0 0" origin_rpy="0 0 0" origin_xyz="0.2 0.25 -0.33" parent="base_link" child="caster2" />
 
-    <xacro:f_link_box name="rod1" origin_rpy="0 0 0" origin_xyz="0 0 0" mass="0.45164" ixx="0.100000005621" ixy="0.100000001310" ixz="0.100000001649" iyy="0.100000004345" iyz="0.100000002360" izz="0.100000003315" material="black" size="0.016 0.016 0.6" />
+    <!-- <xacro:f_link_box name="rod1" origin_rpy="0 0 0" origin_xyz="0 0 0" mass="0.45164" ixx="0.100000005621" ixy="0.100000001310" ixz="0.100000001649" iyy="0.100000004345" iyz="0.100000002360" izz="0.100000003315" material="black" size="0.016 0.016 0.6" />
     <xacro:f_joint name="base_link_to_rod1" type="fixed" axis_xyz="0 0 0" origin_rpy="0 0 0" origin_xyz="-0.23 0.24 0.65" parent="base_link" child="rod1" />
 
     <xacro:f_link_box name="rod2" origin_rpy="0 0 0" origin_xyz="0 0 0" mass="0.45164" ixx="0.100000005621" ixy="0.100000001310" ixz="0.100000001649" iyy="0.100000004345" iyz="0.100000002360" izz="0.100000003315" material="black" size="0.016 0.016 0.6" />
-    <xacro:f_joint name="base_link_to_rod2" type="fixed" axis_xyz="0 0 0" origin_rpy="0 0 0" origin_xyz="-0.23 -0.24 0.65" parent="base_link" child="rod2" />
+    <xacro:f_joint name="base_link_to_rod2" type="fixed" axis_xyz="0 0 0" origin_rpy="0 0 0" origin_xyz="-0.23 -0.24 0.65" parent="base_link" child="rod2" /> -->
 
-    <xacro:f_link_box name="camera_base_rod" origin_rpy="0 0 0" origin_xyz="0 0 0" mass="0.45164" ixx="0.100000005621" ixy="0.100000001310" ixz="0.100000001649" iyy="0.100000004345" iyz="0.100000002360" izz="0.100000003315" material="black" size="0.016 0.48 0.016" />
-    <xacro:f_joint name="base_link_to_camera_base_rod" type="fixed" axis_xyz="0 0 0" origin_rpy="0 0 0" origin_xyz="-0.23 0 0.650" parent="base_link" child="camera_base_rod" />
-
-    <link name="camera_mount_link"/>
-    <joint name="base_to_camera_mount" type="fixed">
-        <parent link="base_link"/>
-        <child link="camera_mount_link"/>
-        <origin xyz="-0.19159 0 1.2144" rpy="0 0 0" />
-    </joint>
-
-    <xacro:realsense name="camera1" topics_ns="camera1" parent="camera_mount_link" use_sim_time="$(arg use_sim_time)">
-        <origin xyz="0 0 0" rpy="0 0 0"/>
-    </xacro:realsense>
-
-    <xacro:realsense name="camera2" topics_ns="camera2" parent="camera_mount_link" use_sim_time="$(arg use_sim_time)">
-        <origin xyz="-0.13 0 0" rpy="0 0 -${pi}"/>
-    </xacro:realsense>
+    <!-- <xacro:f_link_box name="camera_base_rod" origin_rpy="0 0 0" origin_xyz="0 0 0" mass="0.45164" ixx="0.100000005621" ixy="0.100000001310" ixz="0.100000001649" iyy="0.100000004345" iyz="0.100000002360" izz="0.100000003315" material="black" size="0.016 0.48 0.016" />
+    <xacro:f_joint name="base_link_to_camera_base_rod" type="fixed" axis_xyz="0 0 0" origin_rpy="0 0 0" origin_xyz="-0.23 0 0.650" parent="base_link" child="camera_base_rod" /> -->
 
     <link name="livox_frame"/>
-    <joint name="camera_link_to_livox_frame" type="fixed">
-        <parent link="camera1_link" />
+    <joint name="base_footprint_to_livox" type="fixed">
+        <parent link="base_footprint" />
         <child link="livox_frame" />
-        <origin xyz="-0.064156 0 -0.064846" rpy="-${pi} -0.0131 0" />
+        <origin xyz="0.064 0.018 1.362" rpy="0 -0.0131 0" />
         <axis xyz="0 0 0" />
     </joint>
 
