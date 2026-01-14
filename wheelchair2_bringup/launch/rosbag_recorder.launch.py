@@ -6,7 +6,6 @@ from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, ExecuteProcess
 from launch.substitutions import LaunchConfiguration
 from yaml import safe_load
-
 def generate_launch_description():
     # Get path to package
     robot_bringup_dir = get_package_share_directory('wheelchair2_bringup')
@@ -39,7 +38,7 @@ def generate_launch_description():
             rosbag_cmd.append(topic)
         rosbag_cmd.extend([
             '-o', rosbag_storage_dir,
-            '-s', 'mcap', 
+            '-s', 'sqlite3', 
         ])
     
     start_rosbag_yaml = ExecuteProcess(

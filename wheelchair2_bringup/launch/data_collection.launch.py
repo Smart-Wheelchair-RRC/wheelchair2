@@ -24,7 +24,6 @@ from launch_ros.parameter_descriptions import ParameterValue
 from launch_ros.substitutions import FindPackageShare
 from launch_xml.launch_description_sources import XMLLaunchDescriptionSource
 
-
 def generate_launch_description():
     
     launch_arguments = []
@@ -45,7 +44,7 @@ def generate_launch_description():
     launch_arguments.append(
         DeclareLaunchArgument(
             'use_camera2',
-            default_value='True',
+            default_value='False',
             description='Launch Camera2',
         )
     )
@@ -73,7 +72,7 @@ def generate_launch_description():
     launch_arguments.append(
         DeclareLaunchArgument(
             'use_fast_lio',
-            default_value='True',
+            default_value='False',
             description='Record with Fast-LIO odom'
         )
     )
@@ -109,7 +108,7 @@ def generate_launch_description():
             ),
         ),
         launch_arguments={
-            'serial_no': "'151422254995'",
+            # 'serial_no': "'151422254995'",
             'camera_name': "camera1",
             'camera_namespace': "camera1",
             'use_sim_time': use_sim_time,

@@ -1,22 +1,21 @@
 [submodule "dependencies/realsense-ros"]
 	path = dependencies/realsense-ros
-	url = https://github.com/rtarun1/realsense-ros.git
+	url = https://github.com/Smart-Wheelchair-RRC/realsense-ros.git
 	branch = ros2-master
 [submodule "dependencies/pointcloud_to_laserscan"]
 	path = dependencies/pointcloud_to_laserscan
-	url = https://github.com/rtarun1/pointcloud_to_laserscan.git
+	url = https://github.com/Smart-Wheelchair-RRC/pointcloud_to_laserscan.git
 	branch = humble
 [submodule "dependencies/livox_ros_driver2"]
 	path = dependencies/livox_ros_driver2
-	url = https://github.com/rtarun1/livox_ros_driver2.git
+	url = https://github.com/Smart-Wheelchair-RRC/livox_ros_driver2.git
 	branch = master
 [submodule "dependencies/icp_localization_ros2"]
 	path = dependencies/icp_localization_ros2
 	url = https://github.com/baiyeweiguang/icp_localization_ros2.git
-[submodule "dependencies/insta360_ros_driver"]
-	path = dependencies/insta360_ros_driver
-	url = https://github.com/Smart-Wheelchair-RRC/insta360_ros_driver.git
+	branch = main
 [submodule "dependencies/FAST_LIO"]
 	path = dependencies/FAST_LIO
-	url = https://github.com/rtarun1/FAST_LIO.git
+	url = https://github.com/Smart-Wheelchair-RRC/FAST_LIO.git
 	branch = ROS2
+	

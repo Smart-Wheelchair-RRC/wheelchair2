@@ -9,14 +9,14 @@ tmux new-session -d -s $SESSION
 tmux rename-window -t $SESSION:0 "bringup"
 sudo chmod 777 /dev/ttyACM0
 sleep 5
-tmux send-keys -t $SESSION:0 "ros2 launch wheelchair2_bringup wheelchair2.launch.py use_sim_time:=False" C-m
+tmux send-keys -t $SESSION:0 "ros2 launch wheelchair2_bringup wheelchair2.launch.py robot_name:=ducky use_sim_time:=False" C-m
 
 # Wait a bit before launching next nodes
 sleep 5
 
 # Window 1: Livox LiDAR
 tmux new-window -t $SESSION -n "livox"
-tmux send-keys -t $SESSION:1 "ros2 launch wheelchair2_bringup livox.launch.py use_sim_time:=False" C-m
+tmux send-keys -t $SESSION:1 "ros2 launch wheelchair2_bringup livox.launch.py invert_lidar:=True use_sim_time:=False" C-m
 
 # sleep 5
 
