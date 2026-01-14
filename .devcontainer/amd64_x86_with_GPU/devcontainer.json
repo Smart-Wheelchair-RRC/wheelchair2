@@ -58,6 +58,7 @@
         "ROS_DOMAIN_ID": "79"
     },
     "runArgs": [
+        "--privileged",
         "--gpus=all", // Comment this off if you don't have a GPU
         "--cap-add=SYS_NICE",
         "--ulimit=rtprio=99",
