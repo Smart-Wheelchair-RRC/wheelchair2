@@ -20,3 +20,6 @@
 [submodule "RRC-3DLocalization"]
 	path = RRC-3DLocalization
 	url = https://github.com/Smart-Wheelchair-RRC/RRC-3DLocalization
+[submodule "dependencies/3DBBS"]
+	path = dependencies/3DBBS
+	url = https://github.com/AnirudhaDG/3d_bbs.git
