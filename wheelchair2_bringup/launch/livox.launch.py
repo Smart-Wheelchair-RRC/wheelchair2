@@ -1,25 +1,16 @@
-import os
 from launch import LaunchDescription
 from launch.actions import (
     IncludeLaunchDescription,
-    RegisterEventHandler,
     DeclareLaunchArgument,
 )
 from ament_index_python.packages import get_package_share_directory
-from launch.event_handlers import OnProcessExit, OnProcessStart
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import (
-    Command,
-    FindExecutable,
     PathJoinSubstitution,
     LaunchConfiguration,
-    NotSubstitution,
 )
-from launch.conditions import IfCondition, UnlessCondition
-from launch_ros.actions import Node
-from launch_ros.parameter_descriptions import ParameterValue
+from launch.conditions import UnlessCondition
 from launch_ros.substitutions import FindPackageShare
-
 
 
 def generate_launch_description():
@@ -33,7 +24,16 @@ def generate_launch_description():
             )
         )
     
+    launch_arguments.append(
+            DeclareLaunchArgument(
+                'invert_lidar',
+                default_value='True',
+                description='Invert Livox Lidar Data'
+            )
+        )
+    
     use_sim_time = LaunchConfiguration("use_sim_time")
+    invert_lidar = LaunchConfiguration("invert_lidar")
 
     livox_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -41,6 +41,9 @@ def generate_launch_description():
                 [FindPackageShare("livox_ros_driver2"), "launch", "msg_MID360_launch.py"]
             ),
         ),
+        launch_arguments={
+            'invert_lidar': invert_lidar,
+        }.items(),
         condition=UnlessCondition(use_sim_time),
     )
 

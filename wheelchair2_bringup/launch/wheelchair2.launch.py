@@ -13,7 +13,7 @@ from launch.substitutions import (
     FindExecutable,
     PathJoinSubstitution,
     LaunchConfiguration,
-    NotSubstitution,
+    PythonExpression,
 )
 from launch.conditions import IfCondition, UnlessCondition
 from launch_ros.actions import Node
@@ -23,6 +23,15 @@ from launch_ros.substitutions import FindPackageShare
 def generate_launch_description():
     
     launch_arguments = []
+    
+    launch_arguments.append(
+        DeclareLaunchArgument(
+            'robot_name',
+            default_value='blacky',
+            description='Name of the robot file (e.g. ducky or blacky). Loads {name}.urdf.xacro'
+        )
+    )
+    
     launch_arguments.append(
         DeclareLaunchArgument(
             'use_sim_time',
@@ -40,6 +49,10 @@ def generate_launch_description():
     
     use_sim_time = LaunchConfiguration("use_sim_time")
     use_joy = LaunchConfiguration('use_joy')
+    robot_name = LaunchConfiguration('robot_name')
+
+    # Dynamically construct the filename: 'name' + '.urdf.xacro'
+    model_file_name = PythonExpression(["'", robot_name, ".urdf.xacro'"])
 
     # ROBOT DESCRIPTION
     robot_description = {
@@ -52,7 +65,7 @@ def generate_launch_description():
                         [
                             FindPackageShare("wheelchair2_description"),
                             "urdf",
-                            "wheelchair2_core.urdf.xacro",
+                            model_file_name,
                         ]
                     ),
                     " use_sim_time:=",
