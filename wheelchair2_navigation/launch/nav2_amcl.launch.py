@@ -127,8 +127,8 @@ def generate_launch_description():
         name='laser_filter',
         parameters=[box_filter_config],
         remappings=[
-            ('scan', 'scan_raw'),        # Input: Raw data from RPLidar
-            ('scan_filtered', 'scan')    # Output: Clean data for Nav2/AMCL
+            ('scan', 'scan_rp'),        # Input: Raw data from RPLidar
+            ('scan_filtered', 'scan_rp_filtered')    # Output: Clean data for Nav2/AMCL
         ],
         output='screen'
     )

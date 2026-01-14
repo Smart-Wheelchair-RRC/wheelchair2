@@ -87,11 +87,34 @@
         <axis xyz="0 0 0" />
     </joint>
 
-    <link name="rplidar_frame"/>
-    <joint name="base_to_rplidar_frame" type="fixed">
+         <joint name="base_footprint_imu_joint" type="fixed">
+        <parent link="base_footprint" />
+        <child link="imu_link" />
+        <origin xyz="0.22 0 0.2" rpy="0 0 0" />
+    </joint>
+
+
+    <link name="imu_link">
+        <pose>0 0 0.1 0 0 0</pose>
+        <inertial>
+            <mass value="8.96"/>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <inertia ixx="2.83" ixy="-0.12" ixz="-1.17" iyy="3.47" iyz="0.29" izz="0.73"/>
+        </inertial>
+        <collision>
+            <origin xyz="0.1 0 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.75 0.60 0.60"/>
+            </geometry>
+            <material name="black"/>
+        </collision>
+    </link>
+
+    <link name="laser"/>
+    <joint name="base_to_laser" type="fixed">
         <parent link="base_link" />
         <child link="laser" />
-        <origin xyz="0.21 0 -0.095" rpy="${pi} 0 0" />
+        <origin xyz="0.21 0 -0.095" rpy="0 3.14 0" />
     </joint>
 
     <xacro:kangaroo_x2_driver name="kangaroo_ros2_control" prefix="" use_sim_time="$(arg use_sim_time)"></xacro:kangaroo_x2_driver>
