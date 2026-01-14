@@ -21,6 +21,10 @@ setup(
             glob(os.path.join("urdf", "*.xacro")),
         ),
         (
+            os.path.join("share", package_name, "urdf/wheelchairs"),
+            glob(os.path.join("urdf", "wheelchairs", "*.xacro")),
+        ),
+        (
             os.path.join("share", package_name, "urdf/gz_sim"),
             glob(os.path.join("urdf", "gz_sim", "*.xacro")),
         ),
