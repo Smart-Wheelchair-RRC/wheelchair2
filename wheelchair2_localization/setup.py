@@ -15,6 +15,10 @@ setup(
         (
             os.path.join("share", package_name, "launch"),
             glob(os.path.join("launch", "*launch.[pxy][yma]*")),
+        ),
+        (
+            os.path.join("share", package_name, "config"),
+            glob(os.path.join("config", "*")),
         )
     ],
     install_requires=['setuptools'],
@@ -28,6 +32,7 @@ setup(
         'console_scripts': [
             'invert_livox_data = wheelchair2_localization.invert_livox_data:main',
             'vizualize_pcd_map = wheelchair2_localization.vizualize_pcd_map:main',
+            'adafruit_imu=wheelchair2_localization.adafruit_imu:main'
         ],
     },
 )
