@@ -3,101 +3,96 @@
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Imu
-import board
-import adafruit_bno055
-import math
-
 from geometry_msgs.msg import TransformStamped
 from tf2_ros import TransformBroadcaster
+from rclpy.qos import QoSProfile, ReliabilityPolicy
+import serial
 
-
-class BNO055ImuPublisher(Node):
+class BNO055SerialBridge(Node):
     def __init__(self):
         super().__init__('bno055_imu_publisher')
-
-        # ROS2 IMU publisher
-        self.publisher_ = self.create_publisher(Imu, 'ada_imu/data', 10)
-
-        # TF broadcaster (dynamic)
+        
+        # Best Effort QoS: Best for RViz and EKF
+        qos = QoSProfile(reliability=ReliabilityPolicy.BEST_EFFORT, depth=10)
+        
+        # Keeps your original topic name
+        self.publisher_ = self.create_publisher(Imu, 'ada_imu/data', qos)
         self.tf_broadcaster = TransformBroadcaster(self)
 
-        # BNO055 sensor
-        i2c = board.I2C()
-        self.sensor = adafruit_bno055.BNO055_I2C(i2c)
+        try:
+            self.ser = serial.Serial('/dev/ttyUSB0', 115200, timeout=0.1)
+            self.get_logger().info("✅ BNO055 ESP32 Bridge Active")
+        except Exception as e:
+            self.get_logger().error(f"❌ Serial Error: {e}")
 
-        # Publish at 30 Hz
-        self.timer = self.create_timer(1.0 / 100.0, self.publish_imu)
-
-        self.get_logger().info("BNO055 IMU Publisher")
+        # Matches your old 100Hz frequency
+        self.create_timer(1.0 / 100.0, self.publish_imu)
 
     def publish_imu(self):
-        quat = self.sensor.quaternion        # (x, y, z, w)
-        gyro = self.sensor.gyro              # (gx, gy, gz) in rad/sec
-        accel = self.sensor.linear_acceleration
-        # -------------------- IMU MESSAGE --------------------
-        msg = Imu()
+        if hasattr(self, 'ser') and self.ser.in_waiting > 0:
+            try:
+                line = self.ser.readline().decode('utf-8', errors='ignore').strip()
+                p = line.split(',')
+                
+                # Expecting the 11-value packet from ESP32
+                if len(p) == 11:
+                    ax, ay, az = float(p[0]), float(p[1]), float(p[2])
+                    qw, qx, qy, qz = float(p[3]), float(p[4]), float(p[5]), float(p[6])
+                    gx, gy, gz = float(p[7]), float(p[8]), float(p[9])
+                    calib = int(p[10])
 
-        msg.orientation.x = quat[2]
-        msg.orientation.y = quat[1]
-        msg.orientation.z = quat[3]
-        msg.orientation.w = quat[0]
+                    if calib < 3:
+                        self.get_logger().warn(f"IMU Uncalibrated: {calib}/3", throttle_duration_sec=10.0)
 
-        # Angular velocity
-        msg.angular_velocity.x =gyro[0]
-        msg.angular_velocity.y =gyro[1]
-        msg.angular_velocity.z =gyro[2]
+                    msg = Imu()
+                    msg.header.stamp = self.get_clock().now().to_msg()
+                    msg.header.frame_id = "base_footprint"
 
-        # Linear acceleration
-        msg.linear_acceleration.x = accel[0] #accel[0]
-        msg.linear_acceleration.y = 0.0#accel[1]
-        msg.linear_acceleration.z = 0.0#accel[2]
+                    # -------------------- MATCHING YOUR OLD MAPPING --------------------
+                    # You mapped BNO [2, 1, 3, 0] to ROS [x, y, z, w]
+                    msg.orientation.x = qy
+                    msg.orientation.y = qx
+                    msg.orientation.z = qz
+                    msg.orientation.w = qw
 
-        # Covariance (zero for now)
-        msg.orientation_covariance = [0.0] * 9
-        msg.angular_velocity_covariance = [0.0] * 9
-        #msg.linear_acceleration_covariance = [0.0] * 9
-        msg.linear_acceleration_covariance = [
-            0.0001, 0.0,    0.0,
-            0.0,    0.0001, 0.0,
-            0.0,    0.0,    0.0009
-        ]
+                    # Angular velocity (Gyro)
+                    msg.angular_velocity.x = gx
+                    msg.angular_velocity.y = gy
+                    msg.angular_velocity.z = gz
 
-        msg.header.stamp = self.get_clock().now().to_msg()
-        msg.header.frame_id = "base_footprint"
+                    # Linear acceleration (Kept your old logic of forcing Y and Z to 0)
+                    msg.linear_acceleration.x = ax
+                    msg.linear_acceleration.y = 0.0 
+                    msg.linear_acceleration.z = 0.0
 
-        self.publisher_.publish(msg)
+                    # -------------------- MATCHING YOUR OLD COVARIANCE --------------------
+                    msg.orientation_covariance = [0.0] * 9
+                    msg.angular_velocity_covariance = [0.0] * 9
+                    msg.linear_acceleration_covariance = [
+                        0.0001, 0.0,    0.0,
+                        0.0,    0.0001, 0.0,
+                        0.0,    0.0,    0.0009
+                    ]
 
-        # -------------------- DYNAMIC TF --------------------
-        t = TransformStamped()
-#
-        t.header.stamp = msg.header.stamp
-        t.header.frame_id = "base_footprint"
-        t.child_frame_id = "imu_link"
-#
-        ## Set your IMU mounting offset here
-        t.transform.translation.x = 0.0
-        t.transform.translation.y = 0.0
-        t.transform.translation.z = 0.2   # 20 cm above base (example)
-#
-        ## Orientation from IMU quaternion
-        t.transform.rotation.x = quat[2]
-        t.transform.rotation.y = quat[1]
-        t.transform.rotation.z = quat[3]
-        t.transform.rotation.w = quat[0]
-#
-        #self.tf_broadcaster.sendTransform(t)
+                    self.publisher_.publish(msg)
 
+                    # -------------------- DYNAMIC TF --------------------
+                    t = TransformStamped()
+                    t.header.stamp = msg.header.stamp
+                    t.header.frame_id = "base_footprint"
+                    t.child_frame_id = "imu_link"
+                    t.transform.translation.z = 0.2  # 20cm height
+                    t.transform.rotation = msg.orientation
+                    
+                    self.tf_broadcaster.sendTransform(t)
+
+            except Exception:
+                pass
 
 def main(args=None):
     rclpy.init(args=args)
-    node = BNO055ImuPublisher()
-    try:
-        rclpy.spin(node)
-    except KeyboardInterrupt:
-        pass
-    node.destroy_node()
+    rclpy.spin(BNO055SerialBridge())
     rclpy.shutdown()
-
 
 if __name__ == "__main__":
     main()
