@@ -20,3 +20,6 @@
 [submodule "dependencies/rplidar_ros"]
 	path = dependencies/rplidar_ros
 	url = https://github.com/Slamtec/rplidar_ros.git
+[submodule "dependencies/laser_filters"]
+	path = dependencies/laser_filters
+	url = https://github.com/ros-perception/laser_filters.git
