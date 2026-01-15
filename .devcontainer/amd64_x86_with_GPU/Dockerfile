@@ -53,3 +53,14 @@ RUN cd small_gicp \
     && sudo make install \
     && cd /home/container_user \
     && rm -rf small_gicp
+
+WORKDIR /home/container_user
+RUN git clone https://github.com/KOKIAOKI/3d_bbs.git --recursive
+RUN cd 3d_bbs \
+    && mkdir build && cd build \
+    && cmake .. -DCMAKE_BUILD_TYPE=Release && make -j \
+    && sudo make install \
+    && cd /home/container_user \
+    && rm -rf 3d_bbs \
+    && echo "done" \
+    && echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc 
