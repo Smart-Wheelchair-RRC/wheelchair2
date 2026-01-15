@@ -2,6 +2,9 @@
 
 SESSION="navigation_real"
 
+RAMP_NAV="False"
+ROBOT_NAME="ducky"
+
 # Start new tmux session
 tmux new-session -d -s $SESSION
 
@@ -9,14 +12,14 @@ tmux new-session -d -s $SESSION
 tmux rename-window -t $SESSION:0 "bringup"
 sudo chmod 777 /dev/ttyACM0
 sleep 5
-tmux send-keys -t $SESSION:0 "ros2 launch wheelchair2_bringup wheelchair2.launch.py robot_name:=ducky use_sim_time:=False" C-m
+tmux send-keys -t $SESSION:0 "ros2 launch wheelchair2_bringup wheelchair2.launch.py robot_name:=$ROBOT_NAME use_sim_time:=False" C-m
 
 # Wait a bit before launching next nodes
 sleep 5
 
 # Window 1: Livox LiDAR
 tmux new-window -t $SESSION -n "livox"
-tmux send-keys -t $SESSION:1 "ros2 launch wheelchair2_bringup livox.launch.py invert_lidar:=True use_sim_time:=False" C-m
+tmux send-keys -t $SESSION:1 "ros2 launch wheelchair2_bringup livox.launch.py invert_lidar:=True use_sim_time:=False ramp_nav:=$RAMP_NAV" C-m
 
 # sleep 5
 
@@ -38,11 +41,8 @@ sleep 5
 tmux new-window -t $SESSION -n "nav2"
 
 # AMCL stack
-# tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_amcl.launch.py use_sim_time:=False map:=$MAP_DIR/rrc/rrc_lab.yaml" C-m
-# tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_amcl.launch.py use_sim_time:=False map:=$MAP_DIR/himalaya/himalaya_with_classroom.yaml" C-m
-# tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_amcl.launch.py use_sim_time:=False map:=$MAP_DIR/himalaya/lab_and_himalaya_cleaned.yaml" C-m
-tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_amcl.launch.py use_sim_time:=False map:=$MAP_DIR/ramps/rrc_outside_himalaya_ramps_fast_cleaned.yaml" C-m
-# tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_amcl.launch.py use_sim_time:=False map:=$MAP_DIR/rrc/rrc_4th_floor.yaml" C-m
+tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_amcl.launch.py use_sim_time:=False map:=$MAP_DIR/rrc/rrc_lab.yaml ramp_nav:=$RAMP_NAV" C-m
+# tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_amcl.launch.py use_sim_time:=False map:=$MAP_DIR/himalaya/himalaya_with_classroom.yaml ramp_nav:=$RAMP_NAV" C-m
 
 # ICP stack
 ## for RRC lab
@@ -58,9 +58,6 @@ tmux send-keys -t $SESSION:3 "ros2 run wheelchair2_control keyboard_teleop_const
 # Optional: RViz
 # tmux new-window -t $SESSION -n "rviz"
 # tmux send-keys -t $SESSION:5 "rviz2 -d navigation.rviz" C-m
-
-tmux new-window -t $SESSION -n "ground_detection"
-tmux send-keys -t $SESSION:4 "ros2 run wheelchair2_bringup ground_detection_fast.py --ros-args -p use_sim_time:=False -p publish_grid:=False" C-m
 
 # Attach to session
 tmux attach -t $SESSION

@@ -5,7 +5,7 @@ from launch import LaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
 from launch_ros.actions import Node
-from launch.substitutions import LaunchConfiguration
+from launch.substitutions import LaunchConfiguration, PythonExpression
 from nav2_common.launch import RewrittenYaml
 from launch.conditions import IfCondition
 
@@ -69,12 +69,24 @@ def generate_launch_description():
             description="Full path to keepout zone mask file",
         )
     )
+    
+    launch_arguments.append(
+        DeclareLaunchArgument(
+            "ramp_nav",
+            default_value='False',
+            description="If true, use /points_nonground; else use /livox/lidar"
+        )
+    )
             
     
     use_sim_time = LaunchConfiguration("use_sim_time", default="false")
     use_keepout_zone = LaunchConfiguration('use_keepout_zone', default='False')
+    ramp_nav = LaunchConfiguration("ramp_nav") # [Added]
 
-
+    # [Added] Python Expression to determine topic based on ramp_nav argument
+    lidar_topic = PythonExpression([
+        "'/points_nonground' if ", ramp_nav, " else '/livox/lidar'"
+    ])
     
     nav2_parameters_file = LaunchConfiguration(
         "params_file",
@@ -104,6 +116,19 @@ def generate_launch_description():
         ),
     )
 
+    # [Added] RewrittenYaml for Nav2 Params to inject the dynamic lidar topic
+    configured_nav2_params = RewrittenYaml(
+        source_file=nav2_parameters_file,
+        root_key='',
+        param_rewrites={
+            'use_sim_time': use_sim_time,
+            # Rewriting the topics for mark and clear layers in local costmap
+            'local_costmap.local_costmap.ros__parameters.lidar_obstacle_layer.lidar1_mark.topic': lidar_topic,
+            'local_costmap.local_costmap.ros__parameters.lidar_obstacle_layer.lidar1_clear.topic': lidar_topic
+        },
+        convert_types=True
+    )
+
     updated_keepout_params = RewrittenYaml(
         source_file=keepout_params_file,
         param_rewrites={
@@ -123,7 +148,7 @@ def generate_launch_description():
         launch_arguments={
             "map": map_yaml,
             "use_sim_time": use_sim_time,
-            "params_file": nav2_parameters_file,
+            "params_file": configured_nav2_params,
         }.items(),
     )
 

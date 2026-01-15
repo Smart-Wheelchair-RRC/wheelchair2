@@ -8,9 +8,11 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import (
     PathJoinSubstitution,
     LaunchConfiguration,
+    PythonExpression,
 )
-from launch.conditions import UnlessCondition
+from launch.conditions import UnlessCondition, IfCondition
 from launch_ros.substitutions import FindPackageShare
+from launch_ros.actions import Node
 
 
 def generate_launch_description():
@@ -31,9 +33,23 @@ def generate_launch_description():
                 description='Invert Livox Lidar Data'
             )
         )
+
+    launch_arguments.append(
+            DeclareLaunchArgument(
+                'ramp_nav',
+                default_value='False',
+                description='Enable ramp navigation logic (ground detection)'
+            )
+        )
     
     use_sim_time = LaunchConfiguration("use_sim_time")
     invert_lidar = LaunchConfiguration("invert_lidar")
+    ramp_nav = LaunchConfiguration("ramp_nav")
+
+    # If ramp_nav is True, use /points_nonground, otherwise use /livox/lidar
+    pc_input_topic = PythonExpression([
+        "'/points_nonground' if ", ramp_nav, " else '/livox/lidar'"
+    ])
 
     livox_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -47,16 +63,30 @@ def generate_launch_description():
         condition=UnlessCondition(use_sim_time),
     )
 
+    # Ground Detection Node
+    # Only runs if ramp_nav is True
+    ground_detection_node = Node(
+        package='wheelchair2_bringup',
+        executable='ground_detection_fast.py',
+        name='ground_detection_fast',
+        output='screen',
+        condition=IfCondition(ramp_nav)
+    )
+
     pointcloud_to_laserscan_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             PathJoinSubstitution(
                 [FindPackageShare("pointcloud_to_laserscan"), "launch", "sample_pointcloud_to_laserscan_launch.py"]
             ),
         ),
+        launch_arguments={
+            'cloud_in': pc_input_topic
+        }.items(),
     )
 
     nodes =[
         livox_launch,
+        ground_detection_node,
         pointcloud_to_laserscan_launch
     ]
 
