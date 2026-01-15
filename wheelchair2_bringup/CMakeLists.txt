@@ -20,6 +20,7 @@ install(DIRECTORY rviz DESTINATION share/${PROJECT_NAME})
 # Install Python scripts
 install(PROGRAMS
   scripts/invert_lidar.py
+  scripts/mirror_mount_reflection.py
   DESTINATION lib/${PROJECT_NAME}
 )
 
