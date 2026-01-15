@@ -1,4 +1,4 @@
-FROM ghcr.io/anirudhadg/wheelchair2_base_gazebo:v4.0
+FROM ghcr.io/smart-wheelchair-rrc/wheelchair2_base_gazebo:v4.7
 # Add the following labels
 LABEL org.opencontainers.image.description="Wheelchair2"
 LABEL org.opencontainers.image.title="Wheelchair2Navigation"
@@ -40,6 +40,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 ENV PATH=/usr/local/cuda/bin:${PATH}
 ENV LD_LIBRARY_PATH=/usr/local/cuda/lib64:${LD_LIBRARY_PATH}
+
+ENV NVIDIA_VISIBLE_DEVICES all
+ENV NVIDIA_DRIVER_CAPABILITIES graphics,utility,compute
 
 
 WORKDIR /home/container_user
