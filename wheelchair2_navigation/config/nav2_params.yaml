@@ -180,7 +180,7 @@ controller_server:
         threshold_to_consider: 0.5
       PreferForwardCritic:
         enabled: true
-        cost_power: 1
+        cost_power: 5
         cost_weight: 5.0
         threshold_to_consider: 0.5
       # Option to replace Cost and use Obstacles instead

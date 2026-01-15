@@ -6,26 +6,26 @@ from sensor_msgs.msg import Imu
 from geometry_msgs.msg import TransformStamped
 from tf2_ros import TransformBroadcaster
 from rclpy.qos import QoSProfile, ReliabilityPolicy
+from rclpy.qos import ReliabilityPolicy
 import serial
+
 
 class BNO055SerialBridge(Node):
     def __init__(self):
         super().__init__('bno055_imu_publisher')
         
-        # Best Effort QoS: Best for RViz and EKF
-        qos = QoSProfile(reliability=ReliabilityPolicy.BEST_EFFORT, depth=10)
         
-        # Keeps your original topic name
+        qos = QoSProfile(reliability=ReliabilityPolicy.RELIABLE, depth=10)
+        
         self.publisher_ = self.create_publisher(Imu, 'ada_imu/data', qos)
         self.tf_broadcaster = TransformBroadcaster(self)
 
         try:
             self.ser = serial.Serial('/dev/ttyUSB0', 115200, timeout=0.1)
-            self.get_logger().info("✅ BNO055 ESP32 Bridge Active")
+            self.get_logger().info(" BNO055 ESP32 Bridge Active")
         except Exception as e:
-            self.get_logger().error(f"❌ Serial Error: {e}")
+            self.get_logger().error(f" Serial Error: {e}")
 
-        # Matches your old 100Hz frequency
         self.create_timer(1.0 / 100.0, self.publish_imu)
 
     def publish_imu(self):
@@ -48,24 +48,19 @@ class BNO055SerialBridge(Node):
                     msg.header.stamp = self.get_clock().now().to_msg()
                     msg.header.frame_id = "base_footprint"
 
-                    # -------------------- MATCHING YOUR OLD MAPPING --------------------
-                    # You mapped BNO [2, 1, 3, 0] to ROS [x, y, z, w]
                     msg.orientation.x = qy
                     msg.orientation.y = qx
                     msg.orientation.z = qz
                     msg.orientation.w = qw
 
-                    # Angular velocity (Gyro)
                     msg.angular_velocity.x = gx
                     msg.angular_velocity.y = gy
                     msg.angular_velocity.z = gz
-
-                    # Linear acceleration (Kept your old logic of forcing Y and Z to 0)
+                  
                     msg.linear_acceleration.x = ax
-                    msg.linear_acceleration.y = 0.0 
-                    msg.linear_acceleration.z = 0.0
+                    msg.linear_acceleration.y = ay
+                    msg.linear_acceleration.z = az
 
-                    # -------------------- MATCHING YOUR OLD COVARIANCE --------------------
                     msg.orientation_covariance = [0.0] * 9
                     msg.angular_velocity_covariance = [0.0] * 9
                     msg.linear_acceleration_covariance = [
@@ -76,12 +71,12 @@ class BNO055SerialBridge(Node):
 
                     self.publisher_.publish(msg)
 
-                    # -------------------- DYNAMIC TF --------------------
+
                     t = TransformStamped()
                     t.header.stamp = msg.header.stamp
                     t.header.frame_id = "base_footprint"
                     t.child_frame_id = "imu_link"
-                    t.transform.translation.z = 0.2  # 20cm height
+                    t.transform.translation.z = 0.2 
                     t.transform.rotation = msg.orientation
                     
                     self.tf_broadcaster.sendTransform(t)
