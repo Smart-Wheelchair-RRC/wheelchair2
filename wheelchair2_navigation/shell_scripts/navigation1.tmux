@@ -15,8 +15,7 @@ sleep 2
 
 # Window 1: IMU (Adafruit)
 tmux new-window -t $SESSION -n "IMU"
-sudo chmod 777 /dev/gpiochip0
-sudo chmod 777 /dev/i2c-7
+sudo chmod 777 /dev/ttyUSB0 
 tmux send-keys -t $SESSION:1 "ros2 run wheelchair2_localization adafruit_imu" C-m
 
 sleep 2
@@ -29,7 +28,7 @@ sleep 2
 
 # Window 3: RPLidar S2
 tmux new-window -t $SESSION -n "rplidar"
-sudo chmod 777 /dev/ttyUSB0 
+sudo chmod 777 /dev/ttyUSB1 
 tmux send-keys -t $SESSION:3 "ros2 launch rplidar_ros rplidar_s2_launch.py" C-m
 
 sleep 5
