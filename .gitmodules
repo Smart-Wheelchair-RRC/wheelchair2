@@ -17,3 +17,6 @@
 [submodule "RRC-3DLocalization"]
 	path = RRC-3DLocalization
 	url = https://github.com/Smart-Wheelchair-RRC/RRC-3DLocalization
+[submodule "dependencies/icp"]
+	path = dependencies/icp_localization_ros2
+	url = https://github.com/Smart-Wheelchair-RRC/icp_localization_ros2
