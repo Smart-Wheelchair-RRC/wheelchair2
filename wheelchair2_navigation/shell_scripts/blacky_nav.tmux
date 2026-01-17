@@ -46,10 +46,10 @@ tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_amcl.launc
 
 # ICP stack
 ## for RRC lab
-# tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_icp.launch.py use_sim_time:=False map_file_path:=$MAP_DIR/rrc/rrc_lab.yaml pcd_map_path:=$MAP_DIR/rrc/lab_map_with_outside_corridor.pcd" C-m
+# tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_icp.launch.py use_sim_time:=False ramp_nav:=$RAMP_NAV map_file_path:=$MAP_DIR/rrc/rrc_lab.yaml pcd_map_path:=$MAP_DIR/rrc/lab_map_with_outside_corridor.pcd" C-m
 
 ## for Himalaya and KCIS
-# tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_icp.launch.py use_sim_time:=False map_file_path:=$MAP_DIR/himalaya/himalaya_with_classroom_ICP.yaml pcd_map_path:=$MAP_DIR/himalaya/himalaya_with_classroom_ICP.pcd" C-m
+# tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_icp.launch.py use_sim_time:=False ramp_nav:=$RAMP_NAV map_file_path:=$MAP_DIR/himalaya/himalaya_with_classroom_ICP.yaml pcd_map_path:=$MAP_DIR/himalaya/himalaya_with_classroom_ICP.pcd" C-m
 
 # Window 3: Teleop
 tmux new-window -t $SESSION -n "teleop"
