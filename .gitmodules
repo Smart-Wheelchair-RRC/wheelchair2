@@ -10,9 +10,6 @@
 	path = dependencies/livox_ros_driver2
 	url = https://github.com/rtarun1/livox_ros_driver2.git
 	branch = master
-[submodule "dependencies/icp_localization_ros2"]
-	path = dependencies/icp_localization_ros2
-	url = https://github.com/baiyeweiguang/icp_localization_ros2.git
 [submodule "dependencies/FAST_LIO"]
 	path = dependencies/FAST_LIO
 	url = https://github.com/rtarun1/FAST_LIO.git
