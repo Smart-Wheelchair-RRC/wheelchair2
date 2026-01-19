@@ -1,169 +1,113 @@
 #!/usr/bin/env python3
 
-import serial
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Imu
-from math import isnan, isinf
+import adafruit_bno055
+import math
+from adafruit_blinka.microcontroller.generic_linux.i2c import I2C as _I2C
 
+from geometry_msgs.msg import TransformStamped
+from tf2_ros import TransformBroadcaster
 
-class SerialIMU(Node):
+class I2C_Bus_Wrapper(_I2C):
+    def try_lock(self):
+        return True
+    def unlock(self):
+        pass
+
+class BNO055ImuPublisher(Node):
     def __init__(self):
-        super().__init__('serial_imu_node')
+        super().__init__('bno055_imu_publisher')
 
         # ROS2 IMU publisher
-        self.pub = self.create_publisher(Imu, '/imu/data', 10)
+        self.publisher_ = self.create_publisher(Imu, 'ada_imu/data', 10)
 
-        # Serial configuration
-        self.port = '/dev/ttyUSB1' 
-        self.baud = 115200
+        # TF broadcaster (dynamic)
+        self.tf_broadcaster = TransformBroadcaster(self)
 
-        # Line counters
-        self.good_lines = 0
-        self.bad_lines = 0
-        self.startup_ignore = 50  # ignore first 50 lines for EKF stability
 
-        # Connect to serial
-        self.open_serial()
+        i2c_bus = I2C_Bus_Wrapper(7)
+        self.sensor = adafruit_bno055.BNO055_I2C(i2c_bus)
 
-        # Timer for 50Hz reading
-        self.timer = self.create_timer(0.02, self.read_imu)
-        self.get_logger().info("✅ Serial IMU Node started → publishing /imu/data")
+        # Publish at 100 Hz (per your 1.0/100.0 timer)
+        self.timer = self.create_timer(1.0 / 100.0, self.publish_imu)
 
-    def open_serial(self):
-        try:
-            self.ser = serial.Serial(self.port, self.baud, timeout=1)
-            self.ser.reset_input_buffer()
-            self.get_logger().info(f"✅ Serial connected: {self.port} @ {self.baud}")
-        except Exception as e:
-            self.get_logger().fatal(f"❌ Serial open failed: {e}")
-            raise
+        self.get_logger().info("BNO055 IMU Publisher initialized on Bus 7")
 
-    def reconnect_serial(self):
-        self.get_logger().warn("⚠️ Serial disconnected, trying reconnect...")
-        try:
-            self.ser.close()
-        except:
-            pass
+    def publish_imu(self):
 
-        try:
-            self.ser = serial.Serial(self.port, self.baud, timeout=1)
-            self.ser.reset_input_buffer()
-            self.get_logger().info("✅ Serial reconnected")
-        except Exception as e:
-            self.get_logger().error(f"❌ Reconnect failed: {e}")
+        quat = self.sensor.quaternion        # (x, y, z, w)
+        gyro = self.sensor.gyro              # (gx, gy, gz) in rad/sec
+        accel = self.sensor.linear_acceleration
+        
+        # Check for None values (common during sensor initialization)
+        if quat[0] is None:
+            return
 
-    def read_imu(self):
-        try:
-            raw = self.ser.readline()
-            if not raw:
-                self.get_logger().debug("⏳ No serial data received")
-                return
+        # -------------------- IMU MESSAGE --------------------
+        msg = Imu()
 
-            try:
-                line = raw.decode(errors='ignore').strip()
-            except Exception as e:
-                self.get_logger().warn(f"⚠️ Decode error: {e}")
-                return
+        # Using your original mapping
+        msg.orientation.x = quat[2]
+        msg.orientation.y = quat[1]
+        msg.orientation.z = quat[3]
+        msg.orientation.w = quat[0]
 
-            self.get_logger().debug(f"📥 Raw serial: {line}")
+        # Angular velocity
+        msg.angular_velocity.x = gyro[0]
+        msg.angular_velocity.y = gyro[1]
+        msg.angular_velocity.z = gyro[2]
 
-            parts = line.split(',')
+        # Linear acceleration
+        msg.linear_acceleration.x = accel[0] 
+        msg.linear_acceleration.y = 0.0
+        msg.linear_acceleration.z = 0.0
 
-            # Expecting 10 values: qx,qy,qz,qw,gx,gy,gz,ax,ay,az
-            if len(parts) != 10:
-                self.bad_lines += 1
-                self.get_logger().warn(
-                    f"⚠️ Invalid data length ({len(parts)}): {line} | bad={self.bad_lines}"
-                )
-                return
+        # Covariance (per your original code)
+        msg.orientation_covariance = [0.0] * 9
+        msg.angular_velocity_covariance = [0.0] * 9
+        msg.linear_acceleration_covariance = [
+            0.0001, 0.0,    0.0,
+            0.0,    0.0001, 0.0,
+            0.0,    0.0,    0.0009
+        ]
 
-            try:
-                qx, qy, qz, qw, gx, gy, gz, ax, ay, az = map(float, parts)
-            except ValueError:
-                self.bad_lines += 1
-                self.get_logger().warn(f"⚠️ Float conversion failed: {line}")
-                return
+        msg.header.stamp = self.get_clock().now().to_msg()
+        msg.header.frame_id = "base_footprint"
 
-            # Ignore startup lines
-            if self.good_lines < self.startup_ignore:
-                self.good_lines += 1
-                self.get_logger().info(
-                    f"⏳ Startup settling ({self.good_lines}/{self.startup_ignore})"
-                )
-                return
+        self.publisher_.publish(msg)
 
-            # Validate quaternion
-            if any(isnan(v) or isinf(v) for v in [qx, qy, qz, qw]):
-                self.get_logger().warn("⚠️ Invalid quaternion, skipping")
-                return
+        # -------------------- DYNAMIC TF --------------------
+        t = TransformStamped()
+        t.header.stamp = msg.header.stamp
+        t.header.frame_id = "base_footprint"
+        t.child_frame_id = "imu_link"
 
-            # Fill ROS2 IMU message
-            imu = Imu()
-            imu.header.stamp = self.get_clock().now().to_msg()
-            imu.header.frame_id = "base_footprint"
+        ## Set your IMU mounting offset here
+        t.transform.translation.x = 0.0
+        t.transform.translation.y = 0.0
+        t.transform.translation.z = 0.2   
 
-            # Orientation from BNO055 (direct quaternion)
-            imu.orientation.x = qx
-            imu.orientation.y = qy
-            imu.orientation.z = qz
-            imu.orientation.w = qw
+        ## Orientation from IMU quaternion (Using your original mapping)
+        t.transform.rotation.x = quat[2]
+        t.transform.rotation.y = quat[1]
+        t.transform.rotation.z = quat[3]
+        t.transform.rotation.w = quat[0]
 
-            # Angular velocity (rad/s)
-            imu.angular_velocity.x = gx
-            imu.angular_velocity.y = gy
-            imu.angular_velocity.z = gz
 
-            # Linear acceleration (m/s^2)
-            imu.linear_acceleration.x = ax
-            imu.linear_acceleration.y = ay
-            imu.linear_acceleration.z = az
-
-            # Covariances (same as Jetson code)
-            imu.orientation_covariance = [
-                0.0, 0.0, 0.0,
-                0.0, 0.0, 0.0,
-                0.0, 0.0, 0.0
-            ]
-            imu.angular_velocity_covariance = [
-                0.0, 0.0, 0.0,
-                0.0, 0.0, 0.0,
-                0.0, 0.0, 0.0
-            ]
-            imu.linear_acceleration_covariance = [
-                0.0001, 0.0,    0.0,
-                0.0,    0.0001, 0.0,
-                0.0,    0.0,    0.0009
-            ]
-
-            self.pub.publish(imu)
-            self.good_lines += 1
-
-            self.get_logger().info(
-                f"✅ IMU published | good={self.good_lines} bad={self.bad_lines}"
-            )
-
-        except Exception as e:
-            self.get_logger().error(f"🔥 Runtime error: {e}")
-            if "serial" in str(e).lower():
-                self.reconnect_serial()
 
 
 def main(args=None):
     rclpy.init(args=args)
-    node = SerialIMU()
+    node = BNO055ImuPublisher()
     try:
         rclpy.spin(node)
     except KeyboardInterrupt:
         pass
-    finally:
-        try:
-            node.ser.close()
-        except:
-            pass
-        node.destroy_node()
-        rclpy.shutdown()
+    node.destroy_node()
+    rclpy.shutdown()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

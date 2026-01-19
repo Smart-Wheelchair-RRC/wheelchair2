@@ -15,7 +15,7 @@ sleep 2
 
 # Window 1: IMU (Adafruit)
 tmux new-window -t $SESSION -n "IMU"
-sudo chmod 777 /dev/ttyUSB0 
+sudo chmod 666 /dev/i2c-7
 tmux send-keys -t $SESSION:1 "ros2 run wheelchair2_localization adafruit_imu" C-m
 
 sleep 2
