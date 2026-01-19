@@ -38,13 +38,16 @@ sleep 5
 tmux new-window -t $SESSION -n "nav2"
 
 # AMCL stack
-# tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_amcl.launch.py use_sim_time:=False map:=$MAP_DIR/rrc/rrc_lab.yaml" C-m
-tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_amcl.launch.py use_sim_time:=False use_keepout_zone:=True map:=$MAP_DIR/rrc/ihub_office.yaml" C-m
-# tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_amcl.launch.py use_sim_time:=False map:=$MAP_DIR/himalaya/himalaya_with_classroom.yaml" C-m
+tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_amcl.launch.py use_sim_time:=False map:=$MAP_DIR/rrc/rrc_4th_floor.yaml" C-m
+# tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_amcl.launch.py use_sim_time:=False use_keepout_zone:=True map:=$MAP_DIR/rrc/ihub_office.yaml" C-m
+# tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_amcl.launch.py use_sim_time:=False map:=$MAP_DIR/himalaya/himalaya_kcis_outside.yaml" C-m
+# tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_amcl.launch.py use_sim_time:=False map:=$MAP_DIR/rrc/rrc_lift.yaml" C-m
 
-# ICP stack
-## for RRC lab
-# tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_icp.launch.py use_sim_time:=False map_file_path:=$MAP_DIR/rrc/rrc_lab.yaml pcd_map_path:=$MAP_DIR/rrc/lab_map_with_outside_corridor.pcd" C-m
+# # ICP stack
+# # for RRC lab
+# # tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_icp.launch.py use_sim_time:=False map_file_path:=$MAP_DIR/rrc/rrc_lab.yaml pcd_map_path:=$MAP_DIR/rrc/lab_map_with_outside_corridor.pcd" C-m
+# tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_icp.launch.py use_sim_time:=False map_file_path:=$MAP_DIR/rrc/rrc_4th_floor.yaml pcd_map_path:=$MAP_DIR/rrc/rrc_4th_floor.pcd" C-m
+# # tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_icp.launch.py use_sim_time:=False map_file_path:=$MAP_DIR/himalaya/himalaya_with_classroom.yaml pcd_map_path:=$MAP_DIR/himalaya/himalaya_with_classroom.pcd" C-m
 
 ## for Himalaya and KCIS
 # tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_icp.launch.py use_sim_time:=False map_file_path:=$MAP_DIR/himalaya/himalaya_with_classroom_ICP.yaml pcd_map_path:=$MAP_DIR/himalaya/himalaya_with_classroom_ICP.pcd" C-m

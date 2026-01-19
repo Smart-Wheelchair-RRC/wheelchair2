@@ -1,0 +1,6 @@
+free_thresh: 0.3
+image: rrc_lift.png
+negate: 0
+occupied_thresh: 0.6
+origin: [-29.9682559967041, -34.55901336669922, 0.0]
+resolution: 0.05
