@@ -12,7 +12,7 @@
 	branch = master
 [submodule "dependencies/FAST_LIO"]
 	path = dependencies/FAST_LIO
-	url = https://github.com/rtarun1/FAST_LIO.git
+	url = https://github.com/Smart-Wheelchair-RRC/FAST_LIO
 	branch = ROS2
 [submodule "RRC-3DLocalization"]
 	path = RRC-3DLocalization
