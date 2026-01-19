@@ -1,4 +1,4 @@
-FROM ghcr.io/smart-wheelchair-rrc/wheelchair2_base_jetson:v4.1
+FROM ghcr.io/smart-wheelchair-rrc/wheelchair2_base_jetson:dev4.3.7
 
 # Add the following labels
 LABEL org.opencontainers.image.description="Wheelchair2"
@@ -10,11 +10,6 @@ LABEL org.opencontainers.image.licenses="MIT"
 
 # handle default shell
 SHELL ["/bin/bash", "-c"]
-
-# temporary till the merging after that build the humble image with laser scan pkg
-RUN apt-get update && apt-get install -y \
-    ros-humble-laser-filters \
-    && rm -rf /var/lib/apt/lists/*
 
 COPY . /home/container_user/wheelchair2/src
 

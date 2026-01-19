@@ -1,107 +1,169 @@
 #!/usr/bin/env python3
 
+import serial
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Imu
-from geometry_msgs.msg import TransformStamped
-from tf2_ros import TransformBroadcaster
-from rclpy.qos import QoSProfile, ReliabilityPolicy
-import serial
+from math import isnan, isinf
 
-class BNO055SerialBridge(Node):
+
+class SerialIMU(Node):
     def __init__(self):
-        super().__init__('bno055_imu_publisher')
-        
-        # Using RELIABLE QoS to match standard EKF requirements
-        qos = QoSProfile(reliability=ReliabilityPolicy.RELIABLE, depth=10)
-        
-        self.publisher_ = self.create_publisher(Imu, 'ada_imu/data', qos)
-        self.tf_broadcaster = TransformBroadcaster(self)
+        super().__init__('serial_imu_node')
 
-        # Port updated to USB1 based on your successful hardware tests
+        # ROS2 IMU publisher
+        self.pub = self.create_publisher(Imu, '/imu/data', 10)
+
+        # Serial configuration
+        self.port = '/dev/ttyUSB1' 
+        self.baud = 115200
+
+        # Line counters
+        self.good_lines = 0
+        self.bad_lines = 0
+        self.startup_ignore = 50  # ignore first 50 lines for EKF stability
+
+        # Connect to serial
+        self.open_serial()
+
+        # Timer for 50Hz reading
+        self.timer = self.create_timer(0.02, self.read_imu)
+        self.get_logger().info("✅ Serial IMU Node started → publishing /imu/data")
+
+    def open_serial(self):
         try:
-            self.ser = serial.Serial('/dev/ttyUSB1', 115200, timeout=0.1)
-            self.get_logger().info("✅ BNO055 ESP32 Bridge Active on /dev/ttyUSB1")
+            self.ser = serial.Serial(self.port, self.baud, timeout=1)
+            self.ser.reset_input_buffer()
+            self.get_logger().info(f"✅ Serial connected: {self.port} @ {self.baud}")
         except Exception as e:
-            self.get_logger().error(f"❌ Serial Error: {e}")
+            self.get_logger().fatal(f"❌ Serial open failed: {e}")
+            raise
 
-        # Timer set to 100Hz (0.01s). 
-        # Note: If your CPU struggles, you can change this to 1.0/50.0
-        self.create_timer(1.0 / 100.0, self.publish_imu)
+    def reconnect_serial(self):
+        self.get_logger().warn("⚠️ Serial disconnected, trying reconnect...")
+        try:
+            self.ser.close()
+        except:
+            pass
 
-    def publish_imu(self):
-        if hasattr(self, 'ser') and self.ser.in_waiting > 0:
+        try:
+            self.ser = serial.Serial(self.port, self.baud, timeout=1)
+            self.ser.reset_input_buffer()
+            self.get_logger().info("✅ Serial reconnected")
+        except Exception as e:
+            self.get_logger().error(f"❌ Reconnect failed: {e}")
+
+    def read_imu(self):
+        try:
+            raw = self.ser.readline()
+            if not raw:
+                self.get_logger().debug("⏳ No serial data received")
+                return
+
             try:
-                line = self.ser.readline().decode('utf-8', errors='ignore').strip()
-                p = line.split(',')
-                
-                # Expecting the 11-value packet: ax,ay,az,qw,qx,qy,qz,gx,gy,gz,calib
-                if len(p) == 11:
-                    ax, ay, az = float(p[0]), float(p[1]), float(p[2])
-                    qw, qx, qy, qz = float(p[3]), float(p[4]), float(p[5]), float(p[6])
-                    gx, gy, gz = float(p[7]), float(p[8]), float(p[9])
-                    calib = int(p[10])
-
-                    if calib < 3:
-                        self.get_logger().warn(f"IMU Uncalibrated: {calib}/3", throttle_duration_sec=10.0)
-
-                    msg = Imu()
-                    msg.header.stamp = self.get_clock().now().to_msg()
-                    msg.header.frame_id = "imu_link" 
-
-                    # -------------------- QUATERNION MAPPING --------------------
-                    # Matches your working I2C indices [quat[2], quat[1], quat[3], quat[0]]
-                    msg.orientation.x = qy
-                    msg.orientation.y = qx
-                    msg.orientation.z = qz
-                    msg.orientation.w = qw
-
-                    # Angular velocity (Gyro)
-                    msg.angular_velocity.x = gx
-                    msg.angular_velocity.y = gy
-                    msg.angular_velocity.z = gz
-                  
-                    # Linear acceleration 
-                    # Forced Y/Z to 0.0 as per your working template
-                    msg.linear_acceleration.x = ax
-                    msg.linear_acceleration.y = 0.0 
-                    msg.linear_acceleration.z = 0.0
-
-                    # -------------------- CRITICAL COVARIANCE FIX --------------------
-                    # Non-zero covariance prevents the EKF from "jumping" in RViz
-                    msg.orientation_covariance = [0.01, 0.0, 0.0, 0.0, 0.01, 0.0, 0.0, 0.0, 0.01]
-                    msg.angular_velocity_covariance = [0.01, 0.0, 0.0, 0.0, 0.01, 0.0, 0.0, 0.0, 0.01]
-                    msg.linear_acceleration_covariance = [
-                        0.0001, 0.0,    0.0,
-                        0.0,    0.0001, 0.0,
-                        0.0,    0.0,    0.0009
-                    ]
-
-                    self.publisher_.publish(msg)
-
-                    # -------------------- DYNAMIC TF --------------------
-                    t = TransformStamped()
-                    t.header.stamp = msg.header.stamp
-                    t.header.frame_id = "base_footprint"
-                    t.child_frame_id = "imu_link"
-                    t.transform.translation.z = 0.2 
-                    t.transform.rotation = msg.orientation
-                    
-                    self.tf_broadcaster.sendTransform(t)
-
+                line = raw.decode(errors='ignore').strip()
             except Exception as e:
-                self.get_logger().debug(f"Parsing Error: {e}")
+                self.get_logger().warn(f"⚠️ Decode error: {e}")
+                return
+
+            self.get_logger().debug(f"📥 Raw serial: {line}")
+
+            parts = line.split(',')
+
+            # Expecting 10 values: qx,qy,qz,qw,gx,gy,gz,ax,ay,az
+            if len(parts) != 10:
+                self.bad_lines += 1
+                self.get_logger().warn(
+                    f"⚠️ Invalid data length ({len(parts)}): {line} | bad={self.bad_lines}"
+                )
+                return
+
+            try:
+                qx, qy, qz, qw, gx, gy, gz, ax, ay, az = map(float, parts)
+            except ValueError:
+                self.bad_lines += 1
+                self.get_logger().warn(f"⚠️ Float conversion failed: {line}")
+                return
+
+            # Ignore startup lines
+            if self.good_lines < self.startup_ignore:
+                self.good_lines += 1
+                self.get_logger().info(
+                    f"⏳ Startup settling ({self.good_lines}/{self.startup_ignore})"
+                )
+                return
+
+            # Validate quaternion
+            if any(isnan(v) or isinf(v) for v in [qx, qy, qz, qw]):
+                self.get_logger().warn("⚠️ Invalid quaternion, skipping")
+                return
+
+            # Fill ROS2 IMU message
+            imu = Imu()
+            imu.header.stamp = self.get_clock().now().to_msg()
+            imu.header.frame_id = "base_footprint"
+
+            # Orientation from BNO055 (direct quaternion)
+            imu.orientation.x = qx
+            imu.orientation.y = qy
+            imu.orientation.z = qz
+            imu.orientation.w = qw
+
+            # Angular velocity (rad/s)
+            imu.angular_velocity.x = gx
+            imu.angular_velocity.y = gy
+            imu.angular_velocity.z = gz
+
+            # Linear acceleration (m/s^2)
+            imu.linear_acceleration.x = ax
+            imu.linear_acceleration.y = ay
+            imu.linear_acceleration.z = az
+
+            # Covariances (same as Jetson code)
+            imu.orientation_covariance = [
+                0.0, 0.0, 0.0,
+                0.0, 0.0, 0.0,
+                0.0, 0.0, 0.0
+            ]
+            imu.angular_velocity_covariance = [
+                0.0, 0.0, 0.0,
+                0.0, 0.0, 0.0,
+                0.0, 0.0, 0.0
+            ]
+            imu.linear_acceleration_covariance = [
+                0.0001, 0.0,    0.0,
+                0.0,    0.0001, 0.0,
+                0.0,    0.0,    0.0009
+            ]
+
+            self.pub.publish(imu)
+            self.good_lines += 1
+
+            self.get_logger().info(
+                f"✅ IMU published | good={self.good_lines} bad={self.bad_lines}"
+            )
+
+        except Exception as e:
+            self.get_logger().error(f"🔥 Runtime error: {e}")
+            if "serial" in str(e).lower():
+                self.reconnect_serial()
+
 
 def main(args=None):
     rclpy.init(args=args)
-    node = BNO055SerialBridge()
+    node = SerialIMU()
     try:
         rclpy.spin(node)
     except KeyboardInterrupt:
         pass
     finally:
+        try:
+            node.ser.close()
+        except:
+            pass
         node.destroy_node()
         rclpy.shutdown()
 
-if __name__ == "__main__":
+
+if __name__ == '__main__':
     main()

@@ -1,6 +1,7 @@
 {
     "name": "Wheelchair2 Development on Jetson",
-    "image": "ghcr.io/smart-wheelchair-rrc/wheelchair2_base_jetson:v4.1",
+    "image": "ghcr.io/smart-wheelchair-rrc/wheelchair2_base_jetson:dev4.3.7",
+
     "privileged": true,
     "workspaceMount": "source=${localWorkspaceFolder},target=/home/container_user/wheelchair2/src,type=bind",
     "workspaceFolder": "/home/container_user/wheelchair2/src",
@@ -39,7 +40,7 @@
         }
     },
     "containerEnv": {
-        "DISPLAY": ":1",
+        "DISPLAY": ":1001",
         "WAYLAND_DISPLAY": "${localEnv:WAYLAND_DISPLAY}",
         "XDG_RUNTIME_DIR": "${localEnv:XDG_RUNTIME_DIR}",
         "PULSE_SERVER": "${localEnv:PULSE_SERVER}",
