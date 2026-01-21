@@ -22,7 +22,7 @@
 	url = https://github.com/Smart-Wheelchair-RRC/icp_localization_ros2
 [submodule "dependencies/direct_lidar_inertial_odometry"]
 	path = dependencies/direct_lidar_inertial_odometry
-	url = https://github.com/vectr-ucla/direct_lidar_inertial_odometry
+	url = https://github.com/Smart-Wheelchair-RRC/direct_lidar_inertial_odometry
 	branch = feature/ros2
 [submodule "dependencies/iris_lama_ros"]
 	path = dependencies/iris_lama_ros
