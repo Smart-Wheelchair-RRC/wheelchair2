@@ -19,3 +19,6 @@
 	url = https://github.com/Smart-Wheelchair-RRC/FAST_LIO.git
 	branch = ROS2
 	
+[submodule "dependencies/kiss-mpc"]
+	path = dependencies/kiss-mpc
+	url = https://github.com/rtarun1/kiss-mpc.git
