@@ -11,9 +11,15 @@ LABEL org.opencontainers.image.licenses="MIT"
 SHELL ["/bin/bash", "-c"]
 COPY . /home/container_user/wheelchair2/src
 
+WORKDIR /
+
 WORKDIR /home/container_user/wheelchair2
 RUN source /opt/ros/humble/setup.bash \
     && sudo colcon build --symlink-install 
+
+RUN sudo apt-get update && sudo apt-get install -y \
+    libeigen3-dev \
+    && sudo rm -rf /var/lib/apt/lists/*
 
 WORKDIR /home/container_user/wheelchair2
 RUN source install/setup.bash 

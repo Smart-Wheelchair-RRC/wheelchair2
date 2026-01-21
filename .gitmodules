@@ -19,3 +19,10 @@
 	url = https://github.com/Smart-Wheelchair-RRC/FAST_LIO.git
 	branch = ROS2
 	
+[submodule "iris_lama/iris_lama"]
+	path = iris_lama/iris_lama
+	url = https://github.com/iris-ua/iris_lama
+[submodule "iris_lama/iris_lama_ros"]
+	path = iris_lama/iris_lama_ros
+	url = https://github.com/suo235/iris_lama_ros
+	branch = jazzy-devel

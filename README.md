@@ -314,4 +314,29 @@ A couple of convenience functions are provided, implemented as aliases in `~/.ba
 >  Recommended **not to run locally** — please use **Docker** instead.  
 > Running locally may lead to **dependency conflicts** and could affect your **system-wide packages** or break existing setups.
 
+## IRIS LAMA
+
+### RUN for setup:
+
+``` git submodule update --remote --recursive ```
+
+``` 
+# install location of generated cmake config files
+set(ConfigPackageLocation ${CMAKE_INSTALL_LIBDIR}/${CMAKE_PROJECT_NAME}/cmake)
+
+# dependencies
+find_package(Eigen3 3.3 REQUIRED NO_MODULE)
+
+# ########################## Add this line ! ############################
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+# #######################################################################
+
+# the code
+add_subdirectory(src)
+
+# header files, note the "/" after include
+install(DIRECTORY include/
+  DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+```
+
 
