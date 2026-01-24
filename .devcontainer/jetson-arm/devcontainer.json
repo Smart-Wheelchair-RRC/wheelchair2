@@ -1,6 +1,6 @@
 {
     "name": "Wheelchair2 Development on Jetson",
-    "image": "ghcr.io/smart-wheelchair-rrc/wheelchair2_base_jetson:v4.9.2",
+    "image": "ghcr.io/smart-wheelchair-rrc/wheelchair2_base_jetson:v5.0",
     "privileged": true,
     "workspaceMount": "source=${localWorkspaceFolder},target=/home/container_user/wheelchair2/src,type=bind",
     "workspaceFolder": "/home/container_user/wheelchair2/src",

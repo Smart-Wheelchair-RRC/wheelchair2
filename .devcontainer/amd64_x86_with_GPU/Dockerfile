@@ -1,4 +1,4 @@
-FROM ghcr.io/smart-wheelchair-rrc/wheelchair2_base_gazebo:v4.9.2
+FROM ghcr.io/smart-wheelchair-rrc/wheelchair2_base_cuda:v5.0
 # Add the following labels
 LABEL org.opencontainers.image.description="Wheelchair2"
 LABEL org.opencontainers.image.title="Wheelchair2Navigation"
