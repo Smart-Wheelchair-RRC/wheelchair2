@@ -1,4 +1,4 @@
-FROM ghcr.io/smart-wheelchair-rrc/wheelchair2_base_gazebo:v4.7
+FROM ghcr.io/smart-wheelchair-rrc/wheelchair2_base_cuda:v5.0
 # Add the following labels
 LABEL org.opencontainers.image.description="Wheelchair2"
 LABEL org.opencontainers.image.title="Wheelchair2Navigation"
@@ -7,60 +7,44 @@ LABEL org.opencontainers.image.source="https://github.com/Smart-Wheelchair-RRC/w
 LABEL maintainer="tarun.ramak@gmail.com"
 LABEL org.opencontainers.image.licenses="MIT"
 
-
-USER root
-
-
 # handle default shell
 SHELL ["/bin/bash", "-c"]
 COPY . /home/container_user/wheelchair2/src
 
-WORKDIR /home/container_user/wheelchair2
-RUN source /opt/ros/humble/setup.bash \
-    && sudo colcon build --symlink-install 
-    
-WORKDIR /home/container_user/wheelchair2
-RUN source install/setup.bash 
+# WORKDIR /home/container_user/wheelchair2
+# RUN source /opt/ros/humble/setup.bash \
+#     && sudo colcon build --symlink-install 
 
+# Small-GICP
+# WORKDIR /home/container_user
+# RUN git clone https://github.com/koide3/small_gicp.git
+# RUN cd small_gicp \
+#     && mkdir build && cd build \
+#     && cmake .. -DCMAKE_BUILD_TYPE=Release && make -j \
+#     && sudo make install \
+#     && cd /home/container_user \
+#     && rm -rf small_gicp
 
-# CUDA
-RUN sudo apt-get update && apt-get install -y --no-install-recommends \
-gnupg2 \
-ca-certificates \
-&& sudo rm -rf /var/lib/apt/lists/*
-
-RUN wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-keyring_1.1-1_all.deb \
-    && sudo dpkg -i cuda-keyring_1.1-1_all.deb \
-    && sudo rm cuda-keyring_1.1-1_all.deb
-
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    cuda-toolkit-12-2 \
-    && sudo rm -rf /var/lib/apt/lists/*
-
-
-ENV PATH=/usr/local/cuda/bin:${PATH}
-ENV LD_LIBRARY_PATH=/usr/local/cuda/lib64:${LD_LIBRARY_PATH}
-
-ENV NVIDIA_VISIBLE_DEVICES all
-ENV NVIDIA_DRIVER_CAPABILITIES graphics,utility,compute
-
-
+#Eigen3
 WORKDIR /home/container_user
-RUN git clone https://github.com/koide3/small_gicp.git
-RUN cd small_gicp \
-    && mkdir build && cd build \
-    && cmake .. -DCMAKE_BUILD_TYPE=Release && make -j \
-    && sudo make install \
-    && cd /home/container_user \
-    && rm -rf small_gicp
+RUN sudo apt-get update && export DEBIAN_FRONTEND=noninteractive \
+    && sudo apt-get -y install --no-install-recommends libeigen3-dev
 
+# 3D-BBS
 WORKDIR /home/container_user
-RUN git clone https://github.com/KOKIAOKI/3d_bbs.git --recursive
+RUN git clone https://github.com/KOKIAOKI/3d_bbs.git --recursive --depth 1
 RUN cd 3d_bbs \
     && mkdir build && cd build \
     && cmake .. -DCMAKE_BUILD_TYPE=Release && make -j \
     && sudo make install \
     && cd /home/container_user \
     && rm -rf 3d_bbs \
-    && echo "done" \
-    && echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc 
+    && echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
+    
+WORKDIR /home/container_user/wheelchair2
+RUN git submodule update --init --recursive --remote
+
+
+# WORKDIR /home/container_user/wheelchair2
+# RUN source install/setup.bash 
+# # && sudo chmod +x /home/container_user/wheelchair2/src/wheelchair2_navigation/shell_scripts/navigation.tmux
