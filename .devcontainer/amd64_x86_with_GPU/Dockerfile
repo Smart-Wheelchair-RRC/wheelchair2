@@ -15,15 +15,6 @@ COPY . /home/container_user/wheelchair2/src
 # RUN source /opt/ros/humble/setup.bash \
 #     && sudo colcon build --symlink-install 
 
-# Small-GICP
-# WORKDIR /home/container_user
-# RUN git clone https://github.com/koide3/small_gicp.git
-# RUN cd small_gicp \
-#     && mkdir build && cd build \
-#     && cmake .. -DCMAKE_BUILD_TYPE=Release && make -j \
-#     && sudo make install \
-#     && cd /home/container_user \
-#     && rm -rf small_gicp
 
 #Eigen3
 WORKDIR /home/container_user
