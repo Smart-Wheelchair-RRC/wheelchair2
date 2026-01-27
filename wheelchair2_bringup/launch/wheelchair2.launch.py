@@ -13,33 +13,36 @@ from launch.substitutions import (
     FindExecutable,
     PathJoinSubstitution,
     LaunchConfiguration,
-    NotSubstitution,
+    PythonExpression,
 )
 from launch.conditions import IfCondition, UnlessCondition
 from launch_ros.actions import Node
 from launch_ros.parameter_descriptions import ParameterValue
 from launch_ros.substitutions import FindPackageShare
 
+
 def generate_launch_description():
-    
     launch_arguments = []
+
     launch_arguments.append(
         DeclareLaunchArgument(
-            'use_sim_time',
-            default_value='False',
-            description='Launch in simulation mode'
+            "robot_name",
+            default_value="blacky",
+            description="Name of the robot file (e.g. ducky or blacky). Loads {name}.urdf.xacro",
         )
     )
+
     launch_arguments.append(
-        DeclareLaunchArgument(
-            'use_joy',
-            default_value='True',
-            description='Use joystick control'
-        )
+        DeclareLaunchArgument("use_sim_time", default_value="False", description="Launch in simulation mode")
     )
-    
+    launch_arguments.append(DeclareLaunchArgument("use_joy", default_value="True", description="Use joystick control"))
+
     use_sim_time = LaunchConfiguration("use_sim_time")
-    use_joy = LaunchConfiguration('use_joy')
+    use_joy = LaunchConfiguration("use_joy")
+    robot_name = LaunchConfiguration("robot_name")
+
+    # Dynamically construct the filename: 'name' + '.urdf.xacro'
+    model_file_name = PythonExpression(["'", robot_name, ".urdf.xacro'"])
 
     # ROBOT DESCRIPTION
     robot_description = {
@@ -52,7 +55,8 @@ def generate_launch_description():
                         [
                             FindPackageShare("wheelchair2_description"),
                             "urdf",
-                            "wheelchair2_core.urdf.xacro",
+                            "wheelchairs",
+                            model_file_name,
                         ]
                     ),
                     " use_sim_time:=",
@@ -68,8 +72,7 @@ def generate_launch_description():
         package="robot_state_publisher",
         executable="robot_state_publisher",
         output="screen",
-        parameters=[robot_description, 
-                    {"use_sim_time": use_sim_time}],
+        parameters=[robot_description, {"use_sim_time": use_sim_time}],
     )
 
     # CONTROLLER MANAGER NODE
@@ -94,8 +97,8 @@ def generate_launch_description():
         ],
         condition=UnlessCondition(use_sim_time),
     )
-    
-   # JOINT STATE BROADCASTER
+
+    # JOINT STATE BROADCASTER
     joint_state_broadcaster_spawner = Node(
         package="controller_manager",
         executable="spawner",
@@ -118,38 +121,36 @@ def generate_launch_description():
         output="screen",
     )
 
-    #JOYSTICK TELEOP
+    # JOYSTICK TELEOP
     joystick = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(PathJoinSubstitution(
-            [
-                FindPackageShare("wheelchair2_control"), 'launch', 'wheelchair_teleop.launch.py'
-            ])
+        PythonLaunchDescriptionSource(
+            PathJoinSubstitution([FindPackageShare("wheelchair2_control"), "launch", "wheelchair_teleop.launch.py"])
         ),
         condition=IfCondition(use_joy),
     )
 
-    # delay start of joint_state_broadcaster_spawner after ros2 control 
+    # delay start of joint_state_broadcaster_spawner after ros2 control
     delay_joint_state_broadcaster_spawner = RegisterEventHandler(
-                event_handler=OnProcessStart(
-                    target_action=robot_state_publisher,
-                    on_start=[joint_state_broadcaster_spawner],
-                )
-            )
-    
-    #delay start of robot_controller_spawner after joint_state_broadcaster_spawner
+        event_handler=OnProcessStart(
+            target_action=robot_state_publisher,
+            on_start=[joint_state_broadcaster_spawner],
+        )
+    )
+
+    # delay start of robot_controller_spawner after joint_state_broadcaster_spawner
     delay_robot_controller_spawner = RegisterEventHandler(
-                event_handler=OnProcessExit(
-                    target_action=joint_state_broadcaster_spawner,
-                    on_exit=[robot_controller_spawner],
-                )
-            )
-    
+        event_handler=OnProcessExit(
+            target_action=joint_state_broadcaster_spawner,
+            on_exit=[robot_controller_spawner],
+        )
+    )
+
     nodes = [
-            robot_state_publisher,
-            ros2_control,
-            joystick,
-            delay_joint_state_broadcaster_spawner,
-            delay_robot_controller_spawner,
+        robot_state_publisher,
+        ros2_control,
+        joystick,
+        delay_joint_state_broadcaster_spawner,
+        delay_robot_controller_spawner,
     ]
-    
+
     return LaunchDescription(launch_arguments + nodes)

@@ -1,35 +1,27 @@
 {
-    "ROS2.distro": "humble",
-    "python.autoComplete.extraPaths": [
-        "/home/container_user/wheelchair2/src/install/fast_lio/local/lib/python3.10/dist-packages",
-        "/home/container_user/wheelchair2/build/wheelchair2_localization",
-        "/home/container_user/wheelchair2/install/wheelchair2_localization/lib/python3.10/site-packages",
-        "/home/container_user/wheelchair2/build/wheelchair2_gazebo",
-        "/home/container_user/wheelchair2/install/wheelchair2_gazebo/lib/python3.10/site-packages",
-        "/home/container_user/wheelchair2/build/wheelchair2_description",
-        "/home/container_user/wheelchair2/install/wheelchair2_description/lib/python3.10/site-packages",
-        "/home/container_user/wheelchair2/install/realsense2_camera_msgs/local/lib/python3.10/dist-packages",
-        "/home/container_user/wheelchair2/install/fast_lio/local/lib/python3.10/dist-packages",
-        "/home/container_user/wheelchair2/install/livox_ros_driver2/local/lib/python3.10/dist-packages",
-        "/home/container_user/wheelchair2/build/click_save",
-        "/home/container_user/wheelchair2/install/click_save/lib/python3.10/site-packages",
-        "/opt/ros/humble/lib/python3.10/site-packages",
-        "/opt/ros/humble/local/lib/python3.10/dist-packages"
-    ],
-    "python.analysis.extraPaths": [
-        "/home/container_user/wheelchair2/src/install/fast_lio/local/lib/python3.10/dist-packages",
-        "/home/container_user/wheelchair2/build/wheelchair2_localization",
-        "/home/container_user/wheelchair2/install/wheelchair2_localization/lib/python3.10/site-packages",
-        "/home/container_user/wheelchair2/build/wheelchair2_gazebo",
-        "/home/container_user/wheelchair2/install/wheelchair2_gazebo/lib/python3.10/site-packages",
-        "/home/container_user/wheelchair2/build/wheelchair2_description",
-        "/home/container_user/wheelchair2/install/wheelchair2_description/lib/python3.10/site-packages",
-        "/home/container_user/wheelchair2/install/realsense2_camera_msgs/local/lib/python3.10/dist-packages",
-        "/home/container_user/wheelchair2/install/fast_lio/local/lib/python3.10/dist-packages",
-        "/home/container_user/wheelchair2/install/livox_ros_driver2/local/lib/python3.10/dist-packages",
-        "/home/container_user/wheelchair2/build/click_save",
-        "/home/container_user/wheelchair2/install/click_save/lib/python3.10/site-packages",
-        "/opt/ros/humble/lib/python3.10/site-packages",
-        "/opt/ros/humble/local/lib/python3.10/dist-packages"
-    ]
+	"python.autoComplete.extraPaths": [
+		"/home/container_user/wheelchair2/build/wheelchair2_localization",
+		"/home/container_user/wheelchair2/install/wheelchair2_localization/lib/python3.10/site-packages",
+		"/home/container_user/wheelchair2/build/wheelchair2_gazebo",
+		"/home/container_user/wheelchair2/install/wheelchair2_gazebo/lib/python3.10/site-packages",
+		"/home/container_user/wheelchair2/build/wheelchair2_description",
+		"/home/container_user/wheelchair2/install/wheelchair2_description/lib/python3.10/site-packages",
+		"/home/container_user/wheelchair2/install/realsense2_camera_msgs/local/lib/python3.10/dist-packages",
+		"/home/container_user/wheelchair2/install/livox_ros_driver2/local/lib/python3.10/dist-packages",
+		"/opt/ros/humble/lib/python3.10/site-packages",
+		"/opt/ros/humble/local/lib/python3.10/dist-packages"
+	],
+	"python.analysis.extraPaths": [
+		"/home/container_user/wheelchair2/build/wheelchair2_localization",
+		"/home/container_user/wheelchair2/install/wheelchair2_localization/lib/python3.10/site-packages",
+		"/home/container_user/wheelchair2/build/wheelchair2_gazebo",
+		"/home/container_user/wheelchair2/install/wheelchair2_gazebo/lib/python3.10/site-packages",
+		"/home/container_user/wheelchair2/build/wheelchair2_description",
+		"/home/container_user/wheelchair2/install/wheelchair2_description/lib/python3.10/site-packages",
+		"/home/container_user/wheelchair2/install/realsense2_camera_msgs/local/lib/python3.10/dist-packages",
+		"/home/container_user/wheelchair2/install/livox_ros_driver2/local/lib/python3.10/dist-packages",
+		"/opt/ros/humble/lib/python3.10/site-packages",
+		"/opt/ros/humble/local/lib/python3.10/dist-packages"
+	],
+	"ROS2.distro": "humble"
 }

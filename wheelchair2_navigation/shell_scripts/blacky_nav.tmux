@@ -9,23 +9,14 @@ tmux new-session -d -s $SESSION
 tmux rename-window -t $SESSION:0 "bringup"
 sudo chmod 777 /dev/ttyACM0
 sleep 5
-tmux send-keys -t $SESSION:0 "ros2 launch wheelchair2_bringup wheelchair2.launch.py use_sim_time:=False" C-m
+tmux send-keys -t $SESSION:0 "ros2 launch wheelchair2_bringup wheelchair2.launch.py robot_name:=blacky use_sim_time:=False" C-m
 
 # Wait a bit before launching next nodes
 sleep 5
 
 # Window 1: Livox LiDAR
 tmux new-window -t $SESSION -n "livox"
-tmux send-keys -t $SESSION:1 "ros2 launch wheelchair2_bringup livox.launch.py use_sim_time:=False" C-m
-
-# 3DBBS
-tmux new-window -t $SESSION -n "3d_bbs"
-tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_3dbbs 3dbbs.launch.py" C-m
-
-# click-localization 
-tmux new-window -t $SESSION -n "click_localization"
-tmux send-keys -t $SESSION:2 "python3 /home/container_user/wheelchair2/src/RRC-3DLocalization/wheelchair2_3dbbs/scripts/click_loc.py" C-m
-
+tmux send-keys -t $SESSION:1 "ros2 launch wheelchair2_bringup livox.launch.py invert_lidar:=True use_sim_time:=False" C-m
 
 # sleep 5
 
@@ -41,17 +32,13 @@ tmux send-keys -t $SESSION:2 "python3 /home/container_user/wheelchair2/src/RRC-3
 # tmux new-window -t $SESSION -n "keepout"
 # tmux send-keys -t $SESSION:4 "ros2 launch wheelchair2_navigation keepout.launch.py" C-m
 
-# FAST-LIO
-tmux new-window -t $SESSION -n "fast_lio"
-tmux send-keys -t $SESSION:5 "ros2 launch FAST_LIO mapping.launch.py config_file_path:=/home/container_user/wheelchair2/src/dependencies/FAST_LIO/config/mid360.yaml use_sim_time:=False" C-m
-
 sleep 5
 
 # Window 2: Nav2
-# tmux new-window -t $SESSION -n "nav2"
+tmux new-window -t $SESSION -n "nav2"
 
 # AMCL stack
-# tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_amcl.launch.py use_sim_time:=False map:=$MAP_DIR/rrc/rrc_lab.yaml" C-m
+tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_amcl.launch.py use_sim_time:=False map:=$MAP_DIR/rrc/rrc_lab.yaml" C-m
 # tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_amcl.launch.py use_sim_time:=False map:=$MAP_DIR/himalaya/himalaya_with_classroom.yaml" C-m
 
 # ICP stack

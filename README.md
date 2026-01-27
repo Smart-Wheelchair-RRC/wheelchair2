@@ -140,7 +140,7 @@ Information about the Hardware Setup:
   # ICP
   ros2 launch wheelchair2_navigation nav2_icp.launch.py use_sim_time:=False map:=$MAP_DIR/rrc/rrc_lab.yaml pcd_map_path:=$MAP_DIR/rrc/lab_map_with_outside_corridor.pcd
   ```
-  - Drive link for [PCD files](https://drive.google.com/drive/folders/1PQQ2YWsBSb9ChDpzQIJkOdT0Re-4qUdX?usp=sharing)
+  - Drive link for [PCD files](https://iiithydresearch-my.sharepoint.com/:f:/g/personal/awc_research_iiit_ac_in/IgAURjoBqv66Ro0U-tmDDK07Ab3xOq4kyZr5sysK7ua5wmk?e=aqrPoF)
 - **Keyboard Telep**
   ```bash
   ros2 run wheelchair2_control keyboard_teleop_constant.py
@@ -203,6 +203,40 @@ pcl_viewer scans.pcd
 | `sim_navigation.tmux` | Runs simulation wheelchair navigation |
 
 Scripts are located in `wheelchair2_navigation/shell_scripts` for convenience.
+
+---
+
+## Convenience functions
+A couple of convenience functions are provided, implemented as aliases in `~/.bashrc`, if you use the post-create script to set up your environment. If using Dev Containers, these will already be set up for you.
+
+-   **`wss` Source Workspace**
+
+    This function sources the workspace setup file.
+
+    It is equivalent to running the following command:
+
+    ```bash
+    source /home/container_user/wheelchair2/install/setup.bash && echo "Sourced wheelchair2 workspace."
+    ```
+
+-   **`wsb` Build Workspace**
+
+    This function builds the workspace and then sources it.
+
+    It is equivalent to running the following command:
+
+    ```bash
+    cd /home/container_user/wheelchair2 && colcon build --symlink-install --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON && wss
+    ```
+
+-   **`wsd` Delete Build and Install Directories**
+    This function deletes the build, install, and log directories of the workspace.
+
+    It is equivalent to running the following command:
+
+    ```bash
+    rm -rf /home/container_user/wheelchair2/build /home/container_user/wheelchair2/install /home/container_user/wheelchair2/log && echo "Deleted build, install, and log directories."
+    ```
 
 ---
 
