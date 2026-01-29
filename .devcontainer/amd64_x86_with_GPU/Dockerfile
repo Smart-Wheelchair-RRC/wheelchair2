@@ -32,10 +32,6 @@ RUN cd 3d_bbs \
     && rm -rf 3d_bbs \
     && echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
     
-WORKDIR /home/container_user/wheelchair2
-RUN git submodule update --init --recursive --remote
-
-
 # WORKDIR /home/container_user/wheelchair2
 # RUN source install/setup.bash 
 # # && sudo chmod +x /home/container_user/wheelchair2/src/wheelchair2_navigation/shell_scripts/navigation.tmux

@@ -50,7 +50,7 @@
         }
     },
     "containerEnv": {
-        "DISPLAY": ":0", // Needed for GUI try ":0" for windows
+        "DISPLAY": "${localEnv:DISPLAY}", // Needed for GUI try ":0" for windows
         "WAYLAND_DISPLAY": "${localEnv:WAYLAND_DISPLAY}",
         "XDG_RUNTIME_DIR": "${localEnv:XDG_RUNTIME_DIR}",
         "PULSE_SERVER": "${localEnv:PULSE_SERVER}",
