@@ -29,9 +29,23 @@ RUN cd 3d_bbs \
     && cmake .. -DCMAKE_BUILD_TYPE=Release && make -j \
     && sudo make install \
     && cd /home/container_user \
+<<<<<<< Updated upstream
     && rm -rf 3d_bbs \
     && echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
     
+=======
+    && rm -rf 3d_bbs
+
+# needed for libpointmatcher
+WORKDIR /home/container_user
+RUN git clone --recurse-submodules https://github.com/norlab-ulaval/libnabo.git 
+RUN cd libnabo \
+    && mkdir build && cd build \
+    && cmake .. \
+    && cmake --build . \
+    && sudo cmake --build . --target install 
+
+>>>>>>> Stashed changes
 # WORKDIR /home/container_user/wheelchair2
 # RUN source install/setup.bash 
 # # && sudo chmod +x /home/container_user/wheelchair2/src/wheelchair2_navigation/shell_scripts/navigation.tmux
