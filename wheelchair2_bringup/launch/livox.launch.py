@@ -46,7 +46,8 @@ def generate_launch_description():
     invert_lidar = LaunchConfiguration("invert_lidar")
     ramp_nav = LaunchConfiguration("ramp_nav")
 
-    # If ramp_nav is True, use /points_nonground, otherwise use /livox/lidar
+    # If ramp_nav is True, use /points_nonground (output of C++ node)
+    # otherwise use /livox/lidar directly
     pc_input_topic = PythonExpression([
         "'/points_nonground' if ", ramp_nav, " else '/livox/lidar'"
     ])
@@ -63,13 +64,21 @@ def generate_launch_description():
         condition=UnlessCondition(use_sim_time),
     )
 
-    # Ground Detection Node
-    # Only runs if ramp_nav is True
+    # Launching the C++ executable 'ground_detection_node'
+    # instead of 'ground_detection_fast.py'
     ground_detection_node = Node(
         package='wheelchair2_bringup',
-        executable='ground_detection_fast.py',
-        name='ground_detection_fast',
+        executable='ground_detection_node',
+        name='ground_detection',
         output='screen',
+        parameters=[{
+            'lidar_topic': '/livox/lidar',
+            'publish_grid': True,
+            'target_frame': 'base_link',
+            'ground_thickness': 0.05,
+            'max_step_height': 0.05,
+            'cell_size': 0.25
+        }],
         condition=IfCondition(ramp_nav)
     )
 

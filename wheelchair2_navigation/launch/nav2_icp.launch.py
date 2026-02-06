@@ -37,7 +37,7 @@ DEFAULT_PARAMETERS = {
     # File paths
     "map_file_path": str(NAVIGATION_PACKAGE_DIRECTORY / "maps" / "rrc" / "rrc_lab.yaml"),
     "keepout_mask_file_path": str(NAVIGATION_PACKAGE_DIRECTORY / "maps" / "rrc" / "rrc_lab_mask.yaml"),
-    "nav2_params_file": str(NAVIGATION_PACKAGE_DIRECTORY / "config" / "nav2_params.yaml"),
+    "nav2_params_file": str(NAVIGATION_PACKAGE_DIRECTORY / "config" / "nav2_params_icp.yaml"),
     "nav2_rviz_config_file": str(NAVIGATION_PACKAGE_DIRECTORY / "rviz" / "navigation.rviz"),
     "keepout_params_file": str(NAVIGATION_PACKAGE_DIRECTORY / "config" / "keepout_params.yaml"),
     "pcd_map_path": str(NAVIGATION_PACKAGE_DIRECTORY / "maps" / "rrc" / "lab_map_with_outside_corridor.pcd"),

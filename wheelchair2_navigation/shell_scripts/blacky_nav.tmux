@@ -51,6 +51,9 @@ tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_amcl.launc
 ## for Himalaya and KCIS
 # tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_icp.launch.py use_sim_time:=False ramp_nav:=$RAMP_NAV map_file_path:=$MAP_DIR/himalaya/himalaya_with_classroom_ICP.yaml pcd_map_path:=$MAP_DIR/himalaya/himalaya_with_classroom_ICP.pcd" C-m
 
+## for Ramps Testing
+# tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_icp.launch.py use_sim_time:=False ramp_nav:=$RAMP_NAV map_file_path:=$MAP_DIR/ramps/rrc_outside_himalaya_ramps_fast_cleaned.yaml pcd_map_path:=$MAP_DIR/ramps/rrc_outside_himalaya_ramps.pcd" C-m
+
 # Window 3: Teleop
 tmux new-window -t $SESSION -n "teleop"
 tmux send-keys -t $SESSION:3 "ros2 run wheelchair2_control keyboard_teleop_constant.py" C-m
