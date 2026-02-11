@@ -16,6 +16,11 @@ def generate_launch_description():
         "config",
         "box_filter.yaml",
     )
+    box_filter_config_1 = os.path.join(
+        get_package_share_directory("wheelchair2_navigation"),
+        "config",
+        "box_filter_2.yaml",
+    )
 
     # Map and Nav2 config files
     map_yaml = LaunchConfiguration(
@@ -88,6 +93,7 @@ def generate_launch_description():
             get_package_share_directory("wheelchair2_navigation"),
             "config",
             "nav2_params.yaml",
+            # "nav2_params.yaml",
         ),
     )
 
@@ -127,8 +133,19 @@ def generate_launch_description():
         name='laser_filter',
         parameters=[box_filter_config],
         remappings=[
-            ('scan', 'scan_rp'),        # Input: Raw data from RPLidar
-            ('scan_filtered', 'scan_rp_filtered')    # Output: Clean data for Nav2/AMCL
+            ('scan', 'scan_rp'),       
+            ('scan_filtered', 'scan_rp_filtered_1') 
+        ],
+        output='screen'
+    )
+    laser_filter_node_1 = Node(
+        package='laser_filters',
+        executable='scan_to_scan_filter_chain',
+        name='laser_filter_1',
+        parameters=[box_filter_config_1],
+        remappings=[
+            ('scan', 'scan_rp_filtered_1'),       
+            ('scan_filtered', 'scan_rp_filtered')    
         ],
         output='screen'
     )
@@ -188,6 +205,7 @@ def generate_launch_description():
 
     nodes = [
         laser_filter_node,  
+        laser_filter_node_1,
         nav2,
         rviz,
         filtered_map_server,

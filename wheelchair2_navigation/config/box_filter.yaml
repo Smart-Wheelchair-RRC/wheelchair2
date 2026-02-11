@@ -7,8 +7,8 @@ laser_filter:
         box_frame: laser
         max_x: 0.39
         min_x: -0.39
-        max_y: 0.35
-        min_y: -0.35
+        max_y: 0.375
+        min_y: -0.375
         max_z: 2.0
         min_z: -2.0 
         invert: false # activate to remove all points outside of the box
