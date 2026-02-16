@@ -14,9 +14,6 @@
 	path = dependencies/FAST_LIO
 	url = https://github.com/Smart-Wheelchair-RRC/FAST_LIO
 	branch = ROS2
-[submodule "RRC-3DLocalization"]
-	path = RRC-3DLocalization
-	url = https://github.com/Smart-Wheelchair-RRC/RRC-3DLocalization
 [submodule "dependencies/icp"]
 	path = dependencies/icp_localization_ros2
 	url = https://github.com/Smart-Wheelchair-RRC/icp_localization_ros2
@@ -24,6 +21,9 @@
 	path = dependencies/direct_lidar_inertial_odometry
 	url = https://github.com/Smart-Wheelchair-RRC/direct_lidar_inertial_odometry
 	branch = feature/ros2
-[submodule "change_detection"]
-	path = change_detection
-	url = https://github.com/Smart-Wheelchair-RRC/change_detection
+[submodule "dependencies/change_detection"]
+	path = dependencies/change_detection
+	url = https://github.com/Smart-Wheelchair-RRC/change_detection.git
+[submodule "dependencies/3DLocalization"]
+	path = dependencies/3DLocalization
+	url = https://github.com/Smart-Wheelchair-RRC/RRC-3DLocalization.git

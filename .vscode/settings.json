@@ -24,5 +24,6 @@
 		"/opt/ros/humble/local/lib/python3.10/dist-packages"
 	],
 	"ROS2.distro": "humble",
-	"cmake.sourceDirectory": "/home/container_user/wheelchair2/src/RRC-3DLocalization/wheelchair2_3dbbs"
+	"cmake.sourceDirectory": "/home/container_user/wheelchair2/src/RRC-3DLocalization/wheelchair2_3dbbs",
+	"cmake.ignoreCMakeListsMissing": true
 }
