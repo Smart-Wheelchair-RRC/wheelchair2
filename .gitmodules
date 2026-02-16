@@ -23,3 +23,7 @@
 [submodule "dependencies/laser_filters"]
 	path = dependencies/laser_filters
 	url = https://github.com/ros-perception/laser_filters.git
+[submodule "dependencies/rosbridge_suite"]
+	path = dependencies/rosbridge_suite
+	url = https://github.com/RobotWebTools/rosbridge_suite.git
+	branch = ros2
