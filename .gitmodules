@@ -24,3 +24,6 @@
 	path = dependencies/direct_lidar_inertial_odometry
 	url = https://github.com/Smart-Wheelchair-RRC/direct_lidar_inertial_odometry
 	branch = feature/ros2
+[submodule "change_detection"]
+	path = change_detection
+	url = https://github.com/Smart-Wheelchair-RRC/change_detection
