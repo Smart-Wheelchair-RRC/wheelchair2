@@ -48,6 +48,9 @@ tmux send-keys -t $SESSION:5 "ros2 launch wheelchair2_navigation nav2_amcl.launc
 # Window 6: Teleop
 # tmux new-window -t $SESSION -n "teleop"
 # tmux send-keys -t $SESSION:6 "ros2 run wheelchair2_control keyboard_teleop_constant.py" C-m
+# Window 6: GUI
+tmux new-window -t $SESSION -n "gui"
+tmux send-keys -t $SESSION:6 "ros2 launch rosbridge_server rosbridge_websocket_launch.xml" C-m
 
 # Attach to session
 tmux attach -t $SESSION

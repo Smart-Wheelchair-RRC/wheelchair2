@@ -13,6 +13,7 @@ Panels:
         - /Odometry1
         - /Odometry1/Shape1
         - /PointCloud23
+        - /LaserScan2
       Splitter Ratio: 0.5833333134651184
     Tree Height: 574
   - Class: rviz_common/Selection
@@ -85,77 +86,21 @@ Visualization Manager:
           Value: true
         base_link:
           Value: false
-        camera1_bottom_screw_frame:
-          Value: false
-        camera1_color_frame:
-          Value: false
-        camera1_color_optical_frame:
-          Value: false
-        camera1_depth_frame:
-          Value: false
-        camera1_depth_optical_frame:
-          Value: false
-        camera1_left_ir_frame:
-          Value: false
-        camera1_left_ir_optical_frame:
-          Value: false
-        camera1_link:
-          Value: false
-        camera1_right_ir_frame:
-          Value: false
-        camera1_right_ir_optical_frame:
-          Value: false
-        camera2_bottom_screw_frame:
-          Value: false
-        camera2_color_frame:
-          Value: false
-        camera2_color_optical_frame:
-          Value: false
-        camera2_depth_frame:
-          Value: false
-        camera2_depth_optical_frame:
-          Value: false
-        camera2_left_ir_frame:
-          Value: false
-        camera2_left_ir_optical_frame:
-          Value: false
-        camera2_link:
-          Value: false
-        camera2_right_ir_frame:
-          Value: false
-        camera2_right_ir_optical_frame:
-          Value: false
-        camera_base_rod:
-          Value: false
-        camera_mount_link:
-          Value: false
-        caster1:
-          Value: false
-        caster2:
-          Value: false
-        inertial_sensor:
+        caster_left:
           Value: true
-        init_odom_source:
+        caster_right:
+          Value: true
+        imu_link:
+          Value: true
+        laser:
           Value: true
         left_wheel:
           Value: false
         livox_frame:
           Value: true
-        map:
-          Value: true
         odom:
           Value: true
-        odom_source:
-          Value: true
-        range_sensor:
-          Value: true
-        raw_odometry_source:
-          Value: true
         right_wheel:
-          Value: false
-        rod1:
-          Value: false
-        rod2:
           Value: false
       Marker Scale: 1
       Name: TF
@@ -163,69 +108,14 @@ Visualization Manager:
       Show Axes: true
       Show Names: true
       Tree:
-        map:
-          init_odom_source:
-            raw_odometry_source:
-              {}
-          odom:
-            base_footprint:
-              base_link:
-                camera_base_rod:
-                  {}
-                camera_mount_link:
-                  camera1_bottom_screw_frame:
-                    camera1_link:
-                      camera1_depth_frame:
-                        camera1_color_frame:
-                          camera1_color_optical_frame:
-                            {}
-                        camera1_depth_optical_frame:
-                          {}
-                        camera1_left_ir_frame:
-                          camera1_left_ir_optical_frame:
-                            {}
-                        camera1_right_ir_frame:
-                          camera1_right_ir_optical_frame:
-                            {}
-                      livox_frame:
-                        {}
-                  camera2_bottom_screw_frame:
-                    camera2_link:
-                      camera2_depth_frame:
-                        camera2_color_frame:
-                          camera2_color_optical_frame:
-                            {}
-                        camera2_depth_optical_frame:
-                          {}
-                        camera2_left_ir_frame:
-                          camera2_left_ir_optical_frame:
-                            {}
-                        camera2_right_ir_frame:
-                          camera2_right_ir_optical_frame:
-                            {}
-                caster1:
-                  {}
-                caster2:
-                  {}
-                left_wheel:
-                  {}
-                right_wheel:
-                  {}
-                rod1:
-                  {}
-                rod2:
-                  {}
-            odom_source:
-              range_sensor:
-                inertial_sensor:
-                  {}
+        {}
       Update Interval: 0
       Value: true
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
-        Max Value: 1.6171562671661377
-        Min Value: 1.4473679065704346
+        Max Value: 1.600014328956604
+        Min Value: 1.5999490022659302
         Value: true
       Axis: Z
       Channel Name: intensity
@@ -861,6 +751,40 @@ Visualization Manager:
       Use Fixed Frame: true
       Use rainbow: true
       Value: true
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz_default_plugins/LaserScan
+      Color: 255; 255; 0
+      Color Transformer: FlatColor
+      Decay Time: 0
+      Enabled: true
+      Invert Rainbow: false
+      Max Color: 255; 255; 255
+      Max Intensity: 47
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: LaserScan
+      Position Transformer: XYZ
+      Selectable: true
+      Size (Pixels): 3
+      Size (m): 0.009999999776482582
+      Style: Flat Squares
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        Filter size: 10
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /scan_rp_filtered
+      Use Fixed Frame: true
+      Use rainbow: true
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -899,25 +823,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/ThirdPersonFollower
-      Distance: 33.19009780883789
+      Distance: 31.60514259338379
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 10.137530326843262
-        Y: -4.85495662689209
-        Z: -2.508649595256429e-05
+        X: 5.130967140197754
+        Y: -3.4137420654296875
+        Z: -3.2147934689419344e-05
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.5597963333129883
+      Pitch: 1.5697963237762451
       Target Frame: <Fixed Frame>
       Value: ThirdPersonFollower (rviz_default_plugins)
-      Yaw: 4.680546283721924
+      Yaw: 6.160547256469727
     Saved: ~
 Window Geometry:
   Camera:

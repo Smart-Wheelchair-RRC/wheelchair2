@@ -6,7 +6,7 @@ amcl:
     alpha3: 0.2
     alpha4: 0.2
     alpha5: 0.2
-    base_frame_id: "base_footprint"
+    base_frame_id: "base_link"
     beam_skip_distance: 0.8 #0.5
     beam_skip_error_threshold: 1.5 #0.9 1.5
     beam_skip_threshold: 0.8 #0.3 0.7
@@ -180,8 +180,8 @@ controller_server:
         threshold_to_consider: 0.5
       PreferForwardCritic:
         enabled: true
-        cost_power: 5
-        cost_weight: 5.0
+        cost_power: 3
+        cost_weight: 3.0
         threshold_to_consider: 0.5
       # Option to replace Cost and use Obstacles instead
       ObstaclesCritic:
@@ -250,7 +250,7 @@ local_costmap:
       height: 6 #5
       resolution: 0.1
       # robot_radius: 0.50
-      footprint: "[[-0.30,-0.32],[0.72,-0.32],[0.72,0.32],[-0.30,0.32]]"
+      footprint: "[ [0.78, 0.33], [0.78, -0.33], [-0.35, -0.33], [-0.35, 0.33] ]"
       # footprint: "[[-0.30,-0.32],[0.80,-0.32],[0.80,0.32],[-0.30,0.32]]"
       plugins: ["lidar_obstacle_layer", "inflation_layer"]
       filters: ["keepout_filter"]
@@ -316,7 +316,7 @@ local_costmap:
           inf_is_valid: false
       keepout_filter:
         plugin: "nav2_costmap_2d::KeepoutFilter"
-        enabled: True
+        enabled: False
         filter_info_topic: "/costmap_filter_info"
       static_layer:
         map_subscribe_transient_local: True
@@ -335,8 +335,8 @@ global_costmap:
       publish_frequency: 1.0
       global_frame: map
       robot_base_frame: base_link
-      use_sim_time: True
-      robot_radius: 0.22
+      use_sim_time: False
+      footprint: "[ [0.78, 0.33], [0.78, -0.33], [-0.35, -0.33], [-0.35, 0.33] ]"
       resolution: 0.05
       track_unknown_space: true
       plugins: ["static_layer", "obstacle_layer", "inflation_layer"]
