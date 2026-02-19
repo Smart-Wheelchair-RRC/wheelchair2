@@ -12,16 +12,19 @@ slam_toolbox:
     odom_frame: odom
     map_frame: map
     base_frame: base_footprint
-    scan_topic: /scan
+    # scan_topic: /scan
+    scan_topic: /scan_rp_filtered
     use_map_saver: true
-    mode: mapping #localization
+    # mode: mapping #localization
+    mode: lifelong #localization
 
     # if you'd like to immediately start continuing a map at a given pose
     # or at the dock, but they are mutually exclusive, if pose is given
     # will use pose
     # map_start_pose: [0.0, 0.0, 0.0]
     # map_file_name: ~/wheelchair2/src/wheelchair2_navigation/maps/sim/test
-    map_start_at_dock: true
+    map_file_name: /home/container_user/wheelchair2/src/wheelchair2_navigation/maps/posegraph/slam_lifelong_run
+    map_start_at_dock: false # true
 
     debug_logging: false
     throttle_scans: 1

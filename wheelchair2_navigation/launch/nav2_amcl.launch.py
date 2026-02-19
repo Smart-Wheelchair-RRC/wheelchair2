@@ -80,13 +80,10 @@ def generate_launch_description():
             description="Full path to keepout zone mask file",
         )
     )
-            
     
     use_sim_time = LaunchConfiguration("use_sim_time", default="false")
     use_keepout_zone = LaunchConfiguration('use_keepout_zone', default='False')
 
-
-    
     nav2_parameters_file = LaunchConfiguration(
         "params_file",
         default=os.path.join(
