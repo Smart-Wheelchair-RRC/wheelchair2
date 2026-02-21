@@ -205,16 +205,16 @@ def generate_launch_description():
     )
 
     nodes =[
-        bringup_launch,
-        camera1_launch,
-        camera2_launch,
-        livox_launch,
+        # bringup_launch,
+        # camera1_launch,
+        # camera2_launch,
+        # livox_launch,
         fast_lio_launch,
         pointcloud_to_laserscan_launch,
-        invert_lidar_node,
+        # invert_lidar_node,
         rosbag_with_delay,
         rviz_node,
-        insta360_launch,
+        # insta360_launch,
     ]
 
     return LaunchDescription(launch_arguments + nodes)
