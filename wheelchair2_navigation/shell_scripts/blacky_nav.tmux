@@ -43,6 +43,7 @@ tmux new-window -t $SESSION -n "nav2"
 # AMCL stack
 tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_amcl.launch.py use_sim_time:=False map:=$MAP_DIR/rrc/rrc_lab.yaml ramp_nav:=$RAMP_NAV" C-m
 # tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_amcl.launch.py use_sim_time:=False map:=$MAP_DIR/himalaya/himalaya_with_classroom.yaml ramp_nav:=$RAMP_NAV" C-m
+# tmux send-keys -t $SESSION:2 "ros2 launch wheelchair2_navigation nav2_amcl.launch.py use_sim_time:=False map:=$MAP_DIR/ramps/rrc_outside_himalaya_ramps_fast_cleaned.yaml ramp_nav:=$RAMP_NAV" C-m
 
 # ICP stack
 ## for RRC lab

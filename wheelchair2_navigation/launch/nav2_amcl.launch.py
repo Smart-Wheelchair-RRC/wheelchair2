@@ -81,11 +81,12 @@ def generate_launch_description():
     
     use_sim_time = LaunchConfiguration("use_sim_time", default="false")
     use_keepout_zone = LaunchConfiguration('use_keepout_zone', default='False')
-    ramp_nav = LaunchConfiguration("ramp_nav") # [Added]
+    ramp_nav = LaunchConfiguration("ramp_nav")
 
-    # [Added] Python Expression to determine topic based on ramp_nav argument
+    # Expression to determine topic based on ramp_nav argument
     lidar_topic = PythonExpression([
         "'/points_nonground' if ", ramp_nav, " else '/livox/lidar'"
+        # "'/patchworkpp/nonground' if ", ramp_nav, " else '/livox/lidar'"
     ])
     
     nav2_parameters_file = LaunchConfiguration(

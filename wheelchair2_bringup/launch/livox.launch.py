@@ -37,7 +37,7 @@ def generate_launch_description():
     launch_arguments.append(
             DeclareLaunchArgument(
                 'ramp_nav',
-                default_value='False',
+                default_value='True',
                 description='Enable ramp navigation logic (ground detection)'
             )
         )
@@ -50,6 +50,7 @@ def generate_launch_description():
     # otherwise use /livox/lidar directly
     pc_input_topic = PythonExpression([
         "'/points_nonground' if ", ramp_nav, " else '/livox/lidar'"
+        # "'/patchworkpp/nonground' if ", ramp_nav, " else '/livox/lidar'"
     ])
 
     livox_launch = IncludeLaunchDescription(
@@ -68,7 +69,8 @@ def generate_launch_description():
     # instead of 'ground_detection_fast.py'
     ground_detection_node = Node(
         package='wheelchair2_bringup',
-        executable='ground_detection_node',
+        executable='ground_detection_node_reuse_planes',
+        # executable='ground_detection_node_reuse_planes',
         name='ground_detection',
         output='screen',
         parameters=[{
@@ -81,6 +83,22 @@ def generate_launch_description():
         }],
         condition=IfCondition(ramp_nav)
     )
+    
+    # patchwork_launch = IncludeLaunchDescription(
+    #     PythonLaunchDescriptionSource(
+    #         PathJoinSubstitution(
+    #             [FindPackageShare("patchworkpp"), "launch", "patchworkpp.launch.py"]
+    #         )
+    #     ),
+    #     launch_arguments={
+    #         'visualize': 'False',
+    #         'use_sim_time': use_sim_time,
+    #         'cloud_topic': '/livox/lidar',
+    #         'base_frame': 'livox_frame',
+    #     }.items(),
+    #     condition=IfCondition(ramp_nav),
+    # )
+    
 
     pointcloud_to_laserscan_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -96,6 +114,7 @@ def generate_launch_description():
     nodes =[
         livox_launch,
         ground_detection_node,
+        # patchwork_launch,
         pointcloud_to_laserscan_launch
     ]
 
