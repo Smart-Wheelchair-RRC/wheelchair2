@@ -33,12 +33,24 @@ RUN cd 3d_bbs \
 
 # needed for libpointmatcher
 WORKDIR /home/container_user
+RUN git clone https://github.com/pybind/pybind11
+RUN cd pybind11 && git checkout v2.5.0
+RUN mkdir build && cd build \
+    && cmake .. \
+    && make check -j 4 && sudo make install \
+    && cd /home/container_user \
+    && rm -rf pybind11
+
+WORKDIR /home/container_user
 RUN git clone --recurse-submodules https://github.com/norlab-ulaval/libnabo.git 
 RUN cd libnabo \
     && mkdir build && cd build \
-    && cmake .. \
+    && cmake -DBUILD_PYTHON_MODULE=ON .. \
     && cmake --build . \
-    && sudo cmake --build . --target install 
+    && sudo cmake --build . --target install \
+    && cd /home/container_user \
+    && rm -rf libnabo
+
 
 # WORKDIR /home/container_user/wheelchair2
 # RUN source install/setup.bash 
