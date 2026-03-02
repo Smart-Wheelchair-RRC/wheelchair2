@@ -22,5 +22,5 @@
 	url = https://github.com/Smart-Wheelchair-RRC/direct_lidar_inertial_odometry
 	branch = feature/ros2
 [submodule "dependencies/3DLocalization"]
-	path = dependencies/3DLocalization
+	path = wheelchair2_localization/3DLocalization
 	url = https://github.com/Smart-Wheelchair-RRC/RRC-3DLocalization.git
