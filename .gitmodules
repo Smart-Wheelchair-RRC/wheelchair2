@@ -15,7 +15,7 @@
 	url = https://github.com/Smart-Wheelchair-RRC/FAST_LIO
 	branch = ROS2
 [submodule "dependencies/icp"]
-	path = dependencies/icp_localization_ros2
+	path = wheelchair2_localization/icp_localization_ros2
 	url = https://github.com/Smart-Wheelchair-RRC/icp_localization_ros2
 [submodule "dependencies/direct_lidar_inertial_odometry"]
 	path = dependencies/direct_lidar_inertial_odometry
