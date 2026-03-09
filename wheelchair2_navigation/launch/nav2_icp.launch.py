@@ -20,6 +20,9 @@ from nav2_common.launch import RewrittenYaml
 ICP_LOCALIZATION_PACKAGE_NAME = "icp_localization_ros2"
 ICP_LOCALIZATION_PACKAGE_DIRECTORY = Path(get_package_share_directory(ICP_LOCALIZATION_PACKAGE_NAME))
 
+BBS_3D_PACKAGE_NAME = "wheelchair2_3dbbs"
+BBS_3D_PACKAGE_DIRECTORY = Path(get_package_share_directory(BBS_3D_PACKAGE_NAME))
+
 NAVIGATION_PACKAGE_NAME = "wheelchair2_navigation"
 NAVIGATION_PACKAGE_DIRECTORY = Path(get_package_share_directory(NAVIGATION_PACKAGE_NAME))
 
@@ -122,6 +125,15 @@ def create_nodes():
             launch_arguments={
                 "rate": icp_rate,
             }.items(),
+        )
+    )
+
+    # 3D BBS node (wheelchair2_3dbbs)
+    nodes.append(
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(
+                [str(BBS_3D_PACKAGE_DIRECTORY), "/launch", "/3dbbs.launch.py"]
+            ),
         )
     )
 
