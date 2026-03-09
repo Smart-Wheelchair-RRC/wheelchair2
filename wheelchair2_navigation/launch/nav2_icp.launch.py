@@ -17,8 +17,8 @@ from launch_ros.actions import Node
 from nav2_common.launch import RewrittenYaml
 
 
-WHEELCHAIR_LOCALIZATION_PACKAGE_NAME = "wheelchair2_localization"
-WHEELCHAIR_LOCALIZATION_PACKAGE_DIRECTORY = Path(get_package_share_directory(WHEELCHAIR_LOCALIZATION_PACKAGE_NAME))
+ICP_LOCALIZATION_PACKAGE_NAME = "icp_localization_ros2"
+ICP_LOCALIZATION_PACKAGE_DIRECTORY = Path(get_package_share_directory(ICP_LOCALIZATION_PACKAGE_NAME))
 
 NAVIGATION_PACKAGE_NAME = "wheelchair2_navigation"
 NAVIGATION_PACKAGE_DIRECTORY = Path(get_package_share_directory(NAVIGATION_PACKAGE_NAME))
@@ -35,12 +35,14 @@ DEFAULT_PARAMETERS = {
     "main_map_frame": "map",
     "main_odom_frame": "odom",
     # File paths
-    "map_file_path": str(NAVIGATION_PACKAGE_DIRECTORY / "maps" / "rrc" / "rrc_lab.yaml"),
+    # "map_file_path": str(NAVIGATION_PACKAGE_DIRECTORY / "maps" / "rrc" / "rrc_lab.yaml"),
+    "map_file_path": str(NAVIGATION_PACKAGE_DIRECTORY / "maps" / "ramps" / "rrc_outside_himalaya_ramps_fast_cleaned.yaml"),
     "keepout_mask_file_path": str(NAVIGATION_PACKAGE_DIRECTORY / "maps" / "rrc" / "rrc_lab_mask.yaml"),
-    "nav2_params_file": str(NAVIGATION_PACKAGE_DIRECTORY / "config" / "nav2_params.yaml"),
+    "nav2_params_file": str(NAVIGATION_PACKAGE_DIRECTORY / "config" / "nav2_params_new.yaml"),
     "nav2_rviz_config_file": str(NAVIGATION_PACKAGE_DIRECTORY / "rviz" / "navigation.rviz"),
     "keepout_params_file": str(NAVIGATION_PACKAGE_DIRECTORY / "config" / "keepout_params.yaml"),
     "pcd_map_path": str(NAVIGATION_PACKAGE_DIRECTORY / "maps" / "rrc" / "lab_map_with_outside_corridor.pcd"),
+    "icp_rate": "0.5",
 }
 
 
@@ -80,10 +82,11 @@ def create_nodes():
     keepout_mask_file_path = LaunchConfiguration("keepout_mask_file_path")
     keepout_params_file = LaunchConfiguration("keepout_params_file")
     pcd_map_path = LaunchConfiguration("pcd_map_path")
+    icp_rate = LaunchConfiguration("icp_rate")
 
     lidar_topic = PythonExpression([
-        # "'/points_nonground' if ", ramp_nav, " else '/livox/lidar'"
-        "'/patchworkpp/nonground' if ", ramp_nav, " else '/livox/lidar'"
+        "'/points_nonground' if ", ramp_nav, " else '/livox/lidar'"
+        # "'/patchworkpp/nonground' if ", ramp_nav, " else '/livox/lidar'"
     ])
     
 
@@ -110,15 +113,14 @@ def create_nodes():
     nodes = []
     group_actions = []
 
-    # Localization node
+    # Localization node (icp_localization_ros2)
     nodes.append(
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
-                [str(WHEELCHAIR_LOCALIZATION_PACKAGE_DIRECTORY), "/launch", "/localization_icp.launch.py"]
+                [str(ICP_LOCALIZATION_PACKAGE_DIRECTORY), "/launch", "/bringup.launch.py"]
             ),
             launch_arguments={
-                "use_sim_time": use_sim_time,
-                "pcd_map_path": pcd_map_path,
+                "rate": icp_rate,
             }.items(),
         )
     )
