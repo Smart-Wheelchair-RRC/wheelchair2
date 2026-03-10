@@ -1,0 +1,237 @@
+[INFO] [launch]: All log files can be found below /home/container_user/.ros/log/2026-03-11-02-37-27-901107-anirudha-232777
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [dlio_odom_node-1]: process started with pid [232779]
+[INFO] [dlio_map_node-2]: process started with pid [232781]
+[INFO] [rviz2-3]: process started with pid [232783]
+[INFO] [gpu_3dbbs-4]: process started with pid [232785]
+[INFO] [map_server-5]: process started with pid [232787]
+[INFO] [controller_server-6]: process started with pid [232789]
+[INFO] [smoother_server-7]: process started with pid [232791]
+[INFO] [planner_server-8]: process started with pid [232793]
+[INFO] [behavior_server-9]: process started with pid [232795]
+[INFO] [bt_navigator-10]: process started with pid [232797]
+[INFO] [waypoint_follower-11]: process started with pid [232799]
+[INFO] [velocity_smoother-12]: process started with pid [232801]
+[INFO] [lifecycle_manager-13]: process started with pid [232803]
+[INFO] [lifecycle_manager-14]: process started with pid [232805]
+[INFO] [rviz2-15]: process started with pid [232807]
+[lifecycle_manager-14] [INFO] [1773176848.454487376] [lifecycle_manager_localization]: Creating
+[lifecycle_manager-14] [INFO] [1773176848.458620515] [lifecycle_manager_localization]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[waypoint_follower-11] [INFO] [1773176848.782037443] [waypoint_follower]: 
+[waypoint_follower-11] 	waypoint_follower lifecycle node launched. 
+[waypoint_follower-11] 	Waiting on external lifecycle transitions to activate
+[waypoint_follower-11] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[waypoint_follower-11] [INFO] [1773176848.784582133] [waypoint_follower]: Creating
+[controller_server-6] [INFO] [1773176848.789770944] [controller_server]: 
+[controller_server-6] 	controller_server lifecycle node launched. 
+[controller_server-6] 	Waiting on external lifecycle transitions to activate
+[controller_server-6] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-8] [INFO] [1773176848.797745527] [planner_server]: 
+[planner_server-8] 	planner_server lifecycle node launched. 
+[planner_server-8] 	Waiting on external lifecycle transitions to activate
+[planner_server-8] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[velocity_smoother-12] [INFO] [1773176848.800098536] [velocity_smoother]: 
+[velocity_smoother-12] 	velocity_smoother lifecycle node launched. 
+[velocity_smoother-12] 	Waiting on external lifecycle transitions to activate
+[velocity_smoother-12] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-6] [INFO] [1773176848.803288287] [controller_server]: Creating controller server
+[planner_server-8] [INFO] [1773176848.804800065] [planner_server]: Creating
+[lifecycle_manager-13] [INFO] [1773176848.806946516] [lifecycle_manager_navigation]: Creating
+[lifecycle_manager-13] [INFO] [1773176848.829017071] [lifecycle_manager_navigation]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[smoother_server-7] [INFO] [1773176848.844284910] [smoother_server]: 
+[smoother_server-7] 	smoother_server lifecycle node launched. 
+[smoother_server-7] 	Waiting on external lifecycle transitions to activate
+[smoother_server-7] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[bt_navigator-10] [INFO] [1773176848.854142621] [bt_navigator]: 
+[bt_navigator-10] 	bt_navigator lifecycle node launched. 
+[bt_navigator-10] 	Waiting on external lifecycle transitions to activate
+[bt_navigator-10] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[bt_navigator-10] [INFO] [1773176848.854405102] [bt_navigator]: Creating
+[smoother_server-7] [INFO] [1773176848.857991279] [smoother_server]: Creating smoother server
+[map_server-5] [INFO] [1773176848.895656832] [map_server]: 
+[map_server-5] 	map_server lifecycle node launched. 
+[map_server-5] 	Waiting on external lifecycle transitions to activate
+[map_server-5] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[map_server-5] [INFO] [1773176848.895911308] [map_server]: Creating
+[behavior_server-9] [INFO] [1773176848.900692563] [behavior_server]: 
+[behavior_server-9] 	behavior_server lifecycle node launched. 
+[behavior_server-9] 	Waiting on external lifecycle transitions to activate
+[behavior_server-9] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-6] [INFO] [1773176848.928081577] [local_costmap.local_costmap]: 
+[controller_server-6] 	local_costmap lifecycle node launched. 
+[controller_server-6] 	Waiting on external lifecycle transitions to activate
+[controller_server-6] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-6] [INFO] [1773176848.929621447] [local_costmap.local_costmap]: Creating Costmap
+[lifecycle_manager-14] [INFO] [1773176848.944065728] [lifecycle_manager_localization]: [34m[1mStarting managed nodes bringup...[0m[0m
+[lifecycle_manager-14] [INFO] [1773176848.944155943] [lifecycle_manager_localization]: [34m[1mConfiguring map_server[0m[0m
+[map_server-5] [INFO] [1773176848.949293631] [map_server]: Configuring
+[map_server-5] [INFO] [1773176848.949436693] [map_io]: Loading yaml file: /home/container_user/wheelchair2/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/ramps/rrc_outside_himalaya_ramps_fast_cleaned.yaml
+[map_server-5] [INFO] [1773176848.950153916] [map_io]: resolution: 0.05
+[map_server-5] [INFO] [1773176848.950180094] [map_io]: origin[0]: -89.5476
+[map_server-5] [INFO] [1773176848.950185855] [map_io]: origin[1]: -77.1717
+[map_server-5] [INFO] [1773176848.950190613] [map_io]: origin[2]: 0
+[map_server-5] [INFO] [1773176848.950195332] [map_io]: free_thresh: 0.196
+[map_server-5] [INFO] [1773176848.950199970] [map_io]: occupied_thresh: 0.65
+[map_server-5] [INFO] [1773176848.950207314] [map_io]: mode: trinary
+[map_server-5] [INFO] [1773176848.950214116] [map_io]: negate: 0
+[map_server-5] [INFO] [1773176848.950554920] [map_io]: Loading image_file: /home/container_user/wheelchair2/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/ramps/rrc_outside_himalaya_ramps_fast_cleaned.png
+[planner_server-8] [INFO] [1773176849.011013091] [global_costmap.global_costmap]: 
+[planner_server-8] 	global_costmap lifecycle node launched. 
+[planner_server-8] 	Waiting on external lifecycle transitions to activate
+[planner_server-8] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-8] [INFO] [1773176849.012818146] [global_costmap.global_costmap]: Creating Costmap
+[lifecycle_manager-13] [INFO] [1773176849.112379061] [lifecycle_manager_navigation]: [34m[1mStarting managed nodes bringup...[0m[0m
+[lifecycle_manager-13] [INFO] [1773176849.112456263] [lifecycle_manager_navigation]: [34m[1mConfiguring controller_server[0m[0m
+[controller_server-6] [INFO] [1773176849.113192411] [controller_server]: Configuring controller interface
+[controller_server-6] [INFO] [1773176849.113461494] [controller_server]: getting goal checker plugins..
+[controller_server-6] [INFO] [1773176849.113546379] [controller_server]: Controller frequency set to 30.0000Hz
+[controller_server-6] [INFO] [1773176849.113589238] [local_costmap.local_costmap]: Configuring
+[controller_server-6] [INFO] [1773176849.123936656] [local_costmap.local_costmap]: Using plugin "lidar_obstacle_layer"
+[controller_server-6] [INFO] [1773176849.178669231] [local_costmap.local_costmap]: lidar_obstacle_layer being initialized as SpatioTemporalVoxelLayer!
+[controller_server-6] [INFO] [1773176849.179093548] [local_costmap.local_costmap]: lidar_obstacle_layer's global frame is odom.
+[controller_server-6] [INFO] [1773176849.180392066] [local_costmap.local_costmap]: lidar_obstacle_layer loaded parameters from parameter server.
+[controller_server-6] [INFO] [1773176849.184118149] [local_costmap.local_costmap]: lidar_obstacle_layer created underlying voxel grid.
+[controller_server-6] [INFO] [1773176849.185950836] [local_costmap.local_costmap]: Voxel filter activated.
+[controller_server-6] [INFO] [1773176849.195786547] [local_costmap.local_costmap]: Passthough filter activated.
+[controller_server-6] [INFO] [1773176849.201781464] [local_costmap.local_costmap]: lidar_obstacle_layer initialization complete!
+[controller_server-6] [INFO] [1773176849.201872581] [local_costmap.local_costmap]: Initialized plugin "lidar_obstacle_layer"
+[controller_server-6] [INFO] [1773176849.201884393] [local_costmap.local_costmap]: Using plugin "inflation_layer"
+[controller_server-6] [INFO] [1773176849.208247735] [local_costmap.local_costmap]: Initialized plugin "inflation_layer"
+[controller_server-6] [INFO] [1773176849.208319266] [local_costmap.local_costmap]: Using costmap filter "keepout_filter"
+[controller_server-6] [INFO] [1773176849.213939558] [local_costmap.local_costmap]: Initialized costmap filter "keepout_filter"
+[controller_server-6] [ERROR] [1773176849.224697648] [local_costmap.local_costmap]: The configured inflation radius (0.250) is smaller than the computed inscribed radius (0.310) of your footprint, it is highly recommended to set inflation radius to be at least as big as the inscribed radius to avoid collisions
+[controller_server-6] [INFO] [1773176849.230062662] [controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[controller_server-6] [INFO] [1773176849.232225493] [controller_server]: Created goal checker : general_goal_checker of type nav2_controller::SimpleGoalChecker
+[controller_server-6] [INFO] [1773176849.232743151] [controller_server]: Controller Server has general_goal_checker  goal checkers available.
+[controller_server-6] [INFO] [1773176849.236406930] [controller_server]: Created controller : FollowPath of type nav2_rotation_shim_controller::RotationShimController
+[controller_server-6] [INFO] [1773176849.240240941] [controller_server]: Created internal controller for rotation shimming: FollowPath of type nav2_mppi_controller::MPPIController
+[controller_server-6] [WARN] [1773176849.242481304] [controller_server]: Controller period is less then model dt, consider setting it equal
+[controller_server-6] [INFO] [1773176849.246241069] [controller_server]: ConstraintCritic instantiated with 1 power and 4.000000 weight.
+[controller_server-6] [INFO] [1773176849.246303583] [controller_server]: Critic loaded : mppi::critics::ConstraintCritic
+[controller_server-6] [INFO] [1773176849.247054288] [controller_server]: ObstaclesCritic instantiated with 1 power and 10.000000 / 2.500000 weights. Critic will collision check based on footprint cost.
+[controller_server-6] [INFO] [1773176849.247084433] [controller_server]: Critic loaded : mppi::critics::ObstaclesCritic
+[controller_server-6] [INFO] [1773176849.247379563] [controller_server]: GoalCritic instantiated with 1 power and 5.000000 weight.
+[controller_server-6] [INFO] [1773176849.247396835] [controller_server]: Critic loaded : mppi::critics::GoalCritic
+[controller_server-6] [INFO] [1773176849.247749841] [controller_server]: GoalAngleCritic instantiated with 1 power, 3.000000 weight, and 0.500000 angular threshold.
+[controller_server-6] [INFO] [1773176849.247770960] [controller_server]: Critic loaded : mppi::critics::GoalAngleCritic
+[controller_server-6] [INFO] [1773176849.248301922] [controller_server]: ReferenceTrajectoryCritic instantiated with 1 power and 8.000000 weight
+[controller_server-6] [INFO] [1773176849.248324203] [controller_server]: Critic loaded : mppi::critics::PathAlignCritic
+[controller_server-6] [INFO] [1773176849.248623090] [controller_server]: Critic loaded : mppi::critics::PathFollowCritic
+[controller_server-6] [INFO] [1773176849.249076230] [controller_server]: PathAngleCritic instantiated with 1 power and 2.000000 weight. Reversing allowed.
+[controller_server-6] [INFO] [1773176849.249100835] [controller_server]: Critic loaded : mppi::critics::PathAngleCritic
+[controller_server-6] [INFO] [1773176849.249332429] [controller_server]: PreferForwardCritic instantiated with 1 power and 5.000000 weight.
+[controller_server-6] [INFO] [1773176849.249348429] [controller_server]: Critic loaded : mppi::critics::PreferForwardCritic
+[controller_server-6] [INFO] [1773176849.249702677] [controller_server]: VelocityDeadbandCritic instantiated with 1 power, 35 weight, deadband_velocity [0,0,0]
+[controller_server-6] [INFO] [1773176849.249740827] [controller_server]: Critic loaded : mppi::critics::VelocityDeadbandCritic
+[controller_server-6] [INFO] [1773176849.249952845] [controller_server]: TwirlingCritic instantiated with 1 power and 10.000000 weight.
+[controller_server-6] [INFO] [1773176849.249972171] [controller_server]: Critic loaded : mppi::critics::TwirlingCritic
+[controller_server-6] [INFO] [1773176849.262640519] [controller_server]: Optimizer reset
+[controller_server-6] [INFO] [1773176849.270811762] [MPPIController]: Configured MPPI Controller: FollowPath
+[controller_server-6] [INFO] [1773176849.270874136] [controller_server]: Controller Server has FollowPath  controllers available.
+[lifecycle_manager-13] [INFO] [1773176849.287506333] [lifecycle_manager_navigation]: [34m[1mConfiguring smoother_server[0m[0m
+[smoother_server-7] [INFO] [1773176849.287891629] [smoother_server]: Configuring smoother server
+[smoother_server-7] [INFO] [1773176849.307444403] [smoother_server]: Created smoother : simple_smoother of type nav2_smoother::SimpleSmoother
+[smoother_server-7] [INFO] [1773176849.308288579] [smoother_server]: Smoother Server has simple_smoother  smoothers available.
+[lifecycle_manager-13] [INFO] [1773176849.323303695] [lifecycle_manager_navigation]: [34m[1mConfiguring planner_server[0m[0m
+[planner_server-8] [INFO] [1773176849.324062885] [planner_server]: Configuring
+[planner_server-8] [INFO] [1773176849.324169841] [global_costmap.global_costmap]: Configuring
+[planner_server-8] [INFO] [1773176849.340786439] [global_costmap.global_costmap]: Using plugin "static_layer"
+[planner_server-8] [INFO] [1773176849.349018464] [global_costmap.global_costmap]: Subscribing to the map topic (/map) with transient local durability
+[planner_server-8] [INFO] [1773176849.351825644] [global_costmap.global_costmap]: Initialized plugin "static_layer"
+[planner_server-8] [INFO] [1773176849.351894971] [global_costmap.global_costmap]: Using plugin "obstacle_layer"
+[planner_server-8] [INFO] [1773176849.352550121] [global_costmap.global_costmap]: Subscribed to Topics: scan
+[planner_server-8] [INFO] [1773176849.359701076] [global_costmap.global_costmap]: Initialized plugin "obstacle_layer"
+[planner_server-8] [INFO] [1773176849.359848095] [global_costmap.global_costmap]: Using plugin "inflation_layer"
+[planner_server-8] [INFO] [1773176849.364242932] [global_costmap.global_costmap]: Initialized plugin "inflation_layer"
+[planner_server-8] [INFO] [1773176849.364336764] [global_costmap.global_costmap]: Using costmap filter "keepout_filter"
+[gpu_3dbbs-4] [ROS2] Loading config file...
+[gpu_3dbbs-4] [YAML] Loading paths...
+[gpu_3dbbs-4] [YAML] Loading topic name...
+[gpu_3dbbs-4] [YAML] Loading 3D-BBS parameters...
+[gpu_3dbbs-4] [YAML] Loading angular search range...
+[gpu_3dbbs-4] [YAML] Loading score threshold percentage...
+[gpu_3dbbs-4] [YAML] Loading downsample parameters...
+[planner_server-8] [INFO] [1773176849.372490014] [global_costmap.global_costmap]: Initialized costmap filter "keepout_filter"
+[gpu_3dbbs-4] [ROS2] Loading target clouds...
+[planner_server-8] [INFO] [1773176849.411729870] [planner_server]: Created global planner plugin GridBased of type nav2_smac_planner/SmacPlanner2D
+[planner_server-8] [INFO] [1773176849.411836135] [planner_server]: Configuring GridBased of type SmacPlanner2D
+[planner_server-8] [INFO] [1773176849.417261349] [planner_server]: Configured plugin GridBased of type SmacPlanner2D with tolerance 0.75, maximum iterations 1000000, max on approach iterations 1000, and not allowing unknown traversal.
+[planner_server-8] [INFO] [1773176849.417346565] [planner_server]: Planner Server has GridBased  planners available.
+[lifecycle_manager-13] [INFO] [1773176849.445814506] [lifecycle_manager_navigation]: [34m[1mConfiguring behavior_server[0m[0m
+[behavior_server-9] [INFO] [1773176849.447697564] [behavior_server]: Configuring
+[behavior_server-9] [INFO] [1773176849.478040548] [behavior_server]: Creating behavior plugin spin of type nav2_behaviors/Spin
+[behavior_server-9] [INFO] [1773176849.480649034] [behavior_server]: Configuring spin
+[behavior_server-9] [INFO] [1773176849.505527482] [behavior_server]: Creating behavior plugin backup of type nav2_behaviors/BackUp
+[behavior_server-9] [INFO] [1773176849.508426370] [behavior_server]: Configuring backup
+[behavior_server-9] [INFO] [1773176849.521900964] [behavior_server]: Creating behavior plugin drive_on_heading of type nav2_behaviors/DriveOnHeading
+[behavior_server-9] [INFO] [1773176849.525772805] [behavior_server]: Configuring drive_on_heading
+[behavior_server-9] [INFO] [1773176849.541352073] [behavior_server]: Creating behavior plugin wait of type nav2_behaviors/Wait
+[behavior_server-9] [INFO] [1773176849.544606162] [behavior_server]: Configuring wait
+[lifecycle_manager-13] [INFO] [1773176849.561122246] [lifecycle_manager_navigation]: [34m[1mConfiguring bt_navigator[0m[0m
+[bt_navigator-10] [INFO] [1773176849.562132586] [bt_navigator]: Configuring
+[INFO] [icp_localization-16]: process started with pid [233007]
+[lifecycle_manager-13] [INFO] [1773176849.773168874] [lifecycle_manager_navigation]: [34m[1mConfiguring waypoint_follower[0m[0m
+[waypoint_follower-11] [INFO] [1773176849.773645487] [waypoint_follower]: Configuring
+[waypoint_follower-11] [INFO] [1773176849.806424772] [waypoint_follower]: Created waypoint_task_executor : wait_at_waypoint of type nav2_waypoint_follower::WaitAtWaypoint
+[lifecycle_manager-13] [INFO] [1773176849.808979971] [lifecycle_manager_navigation]: [34m[1mConfiguring velocity_smoother[0m[0m
+[velocity_smoother-12] [INFO] [1773176849.809330493] [velocity_smoother]: Configuring velocity smoother
+[lifecycle_manager-13] [INFO] [1773176849.816744660] [lifecycle_manager_navigation]: [34m[1mActivating controller_server[0m[0m
+[controller_server-6] [INFO] [1773176849.817318831] [controller_server]: Activating
+[controller_server-6] [INFO] [1773176849.817383529] [local_costmap.local_costmap]: Activating
+[controller_server-6] [INFO] [1773176849.817401202] [local_costmap.local_costmap]: Checking transform
+[controller_server-6] [INFO] [1773176849.817433100] [local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[rviz2-3] [INFO] [1773176849.986435837] [rviz2]: Stereo is NOT SUPPORTED
+[rviz2-3] [INFO] [1773176849.986549956] [rviz2]: OpenGl version: 4.6 (GLSL 4.6)
+[rviz2-15] [INFO] [1773176849.990580637] [rviz2]: Stereo is NOT SUPPORTED
+[rviz2-15] [INFO] [1773176849.990837597] [rviz2]: OpenGl version: 4.6 (GLSL 4.6)
+[rviz2-3] [INFO] [1773176850.012299508] [rviz2]: Stereo is NOT SUPPORTED
+[rviz2-15] [INFO] [1773176850.016329678] [rviz2]: Stereo is NOT SUPPORTED
+[controller_server-6] [INFO] [1773176850.317492785] [local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[map_server-5] [INFO] [1773176850.473118225] [map_io]: Read map /home/container_user/wheelchair2/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/ramps/rrc_outside_himalaya_ramps_fast_cleaned.png: 3299 X 5132 map @ 0.05 m/cell
+[lifecycle_manager-14] [INFO] [1773176850.507519541] [lifecycle_manager_localization]: [34m[1mActivating map_server[0m[0m
+[map_server-5] [INFO] [1773176850.507655239] [map_server]: Activating
+[map_server-5] [INFO] [1773176850.521430074] [map_server]: Creating bond (map_server) to lifecycle manager.
+[planner_server-8] [INFO] [1773176850.558596903] [global_costmap.global_costmap]: StaticLayer: Resizing costmap to 3299 X 5132 at 0.050000 m/pix
+[rviz2-15] [INFO] [1773176850.587018829] [rviz2]: Trying to create a map of size 3299 x 5132 using 1 swatches
+[lifecycle_manager-14] [INFO] [1773176850.628662136] [lifecycle_manager_localization]: Server map_server connected with bond.
+[lifecycle_manager-14] [INFO] [1773176850.628720613] [lifecycle_manager_localization]: [34m[1mManaged nodes are active[0m[0m
+[lifecycle_manager-14] [INFO] [1773176850.628729790] [lifecycle_manager_localization]: [34m[1mCreating bond timer...[0m[0m
+[controller_server-6] [INFO] [1773176850.817481300] [local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[controller_server-6] [INFO] [1773176851.317503927] [local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[icp_localization-16] Map size is: 6776134(befor filter), 1849172(after filter)
+[icp_localization-16] Init pose set to, xyz: 0 0 0, q: 0 0 0 1, rpy: 0 0 0 deg 
+[icp_localization-16] odometry data topic: /Odometry
+[icp_localization-16] imu data topic: /livox/imu
+[icp_localization-16] Is use odometry: true
+[icp_localization-16] Gravity vector filter time constant: 0.01
+[icp_localization-16] Min num odom measurements before ready: 5
+[icp_localization-16] Calibration: 
+[icp_localization-16] imu to range sensor: t:[-0.011000, -0.023400, 0.044000] ; q:[0.000000, 0.000000, 0.000000, 1.000000] ; rpy (deg):[0.000000, 0.000000, 0.000000]
+[icp_localization-16] 
+[icp_localization-16] odometry source to range sensor: t:[0.000000, 0.000000, 0.000000] ; q:[0.000000, 0.000000, 0.000000, 1.000000] ; rpy (deg):[0.000000, 0.000000, 0.000000]
+[icp_localization-16] 
+[icp_localization-16] range data parameters: 
+[icp_localization-16] topic: /livox/lidar
+[icp_localization-16] num range data accumulated: 1
+[icp_localization-16]  
+[icp_localization-16] Setting fixed frame to: map
+[icp_localization-16] Setting rate to: 3
+[icp_localization-16] ICPlocalization: Initialized 
+[icp_localization-16] succesfully initialized icp
+[controller_server-6] [INFO] [1773176851.817495798] [local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Invalid frame ID "odom" passed to canTransform argument target_frame - frame does not exist
+[gpu_3dbbs-4] [Viewer]: x: -7.2008, y: 44.0545, z: -0.0602358
+[gpu_3dbbs-4] [ROS2] Target clouds loaded
+[gpu_3dbbs-4] [Voxel map] Creating hierarchical voxel map...
+[controller_server-6] [INFO] [1773176852.317506083] [local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Could not find a connection between 'odom' and 'base_link' because they are not part of the same tree.Tf has two or more unconnected trees.
+[gpu_3dbbs-4] *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+[gpu_3dbbs-4]    [ROS2] 3D-BBS initialized
+[gpu_3dbbs-4] *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+[controller_server-6] [INFO] [1773176852.817554627] [local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Could not find a connection between 'odom' and 'base_link' because they are not part of the same tree.Tf has two or more unconnected trees.
+[controller_server-6] [INFO] [1773176853.317518506] [local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Could not find a connection between 'odom' and 'base_link' because they are not part of the same tree.Tf has two or more unconnected trees.
+[controller_server-6] [INFO] [1773176853.817523591] [local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Could not find a connection between 'odom' and 'base_link' because they are not part of the same tree.Tf has two or more unconnected trees.
+[controller_server-6] [INFO] [1773176854.317515573] [local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Could not find a connection between 'odom' and 'base_link' because they are not part of the same tree.Tf has two or more unconnected trees.
+[controller_server-6] [INFO] [1773176854.817533002] [local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Could not find a connection between 'odom' and 'base_link' because they are not part of the same tree.Tf has two or more unconnected trees.
+[controller_server-6] [INFO] [1773176855.317541793] [local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Could not find a connection between 'odom' and 'base_link' because they are not part of the same tree.Tf has two or more unconnected trees.
+[controller_server-6] [INFO] [1773176855.817536170] [local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Could not find a connection between 'odom' and 'base_link' because they are not part of the same tree.Tf has two or more unconnected trees.
+[controller_server-6] [INFO] [1773176856.317569308] [local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Could not find a connection between 'odom' and 'base_link' because they are not part of the same tree.Tf has two or more unconnected trees.
+[controller_server-6] [INFO] [1773176856.818468110] [local_costmap.local_costmap]: Timed out waiting for transform from base_link to odom to become available, tf error: Could not find a connection between 'odom' and 'base_link' because they are not part of the same tree.Tf has two or more unconnected trees.
