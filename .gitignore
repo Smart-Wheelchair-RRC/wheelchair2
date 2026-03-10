@@ -8,3 +8,6 @@ build
 install
 log
 test_maps
+dependencies/change_detection
+dependencies/rtabmap_ros
+dependencies/patchworkpp

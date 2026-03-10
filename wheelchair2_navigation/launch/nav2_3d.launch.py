@@ -19,11 +19,12 @@ def generate_launch_description():
     map_yaml = LaunchConfiguration(
         "map",
         # default=os.path.join(wheelchair_nav_dir, "maps", "rrc", "rrc_lab.yaml"),
-        default="/home/container_user/wheelchair2/src/dependencies/change_detection/cartograph/maps_pgm/final.yaml"
+        default=os.path.join(wheelchair_nav_dir, "maps", "ramps", "rrc_outside_himalaya_ramps_fast_cleaned.yaml"),
+        # default="/home/container_user/wheelchair2/src/dependencies/change_detection/cartograph/maps_pgm/final.yaml"
     )
     params_file = LaunchConfiguration(
         "params_file",
-        default=os.path.join(wheelchair_nav_dir, "config", "nav2_params_probablity.yaml"),
+        default=os.path.join(wheelchair_nav_dir, "config", "nav2_params.yaml"),
     )
     use_keepout_zone = LaunchConfiguration('use_keepout_zone', default='False')
     keepout_params_file = LaunchConfiguration(

@@ -253,7 +253,7 @@ local_costmap:
       # robot_radius: 0.50
       footprint: "[[-0.30,-0.32],[0.72,-0.32],[0.72,0.32],[-0.30,0.32]]"
       # footprint: "[[-0.30,-0.32],[0.80,-0.32],[0.80,0.32],[-0.30,0.32]]"
-      plugins: ["static_layer", "lidar_obstacle_layer", "inflation_layer"]
+      plugins: ["static_layer", "obstacle_layer", "inflation_layer"]
       filters: ["keepout_filter"]
 
       static_layer:

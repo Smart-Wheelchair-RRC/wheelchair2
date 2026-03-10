@@ -1,0 +1,36 @@
+digraph G {
+"odom" -> "base_link"[label=" Broadcaster: default_authority\nAverage rate: 10.527\nBuffer length: 1.9\nMost recent transform: 1773161102.963419\nOldest transform: 1773161101.063476\n"];
+"map" -> "odom"[label=" Broadcaster: default_authority\nAverage rate: 94.496\nBuffer length: 2.561\nMost recent transform: 1773161103.041203\nOldest transform: 1773161100.480248\n"];
+"base_link" -> "livox/imu"[label=" Broadcaster: default_authority\nAverage rate: 10.25\nBuffer length: 4.0\nMost recent transform: 1773161102.963419\nOldest transform: 1773161098.963472\n"];
+"base_link" -> "livox/lidar"[label=" Broadcaster: default_authority\nAverage rate: 10.25\nBuffer length: 4.0\nMost recent transform: 1773161102.963419\nOldest transform: 1773161098.963472\n"];
+"range_sensor" -> "inertial_sensor"[label=" Broadcaster: default_authority\nAverage rate: 199.992\nBuffer length: 2.56\nMost recent transform: 1773161103.039475\nOldest transform: 1773161100.47937\n"];
+"odom_source" -> "range_sensor"[label=" Broadcaster: default_authority\nAverage rate: 100.399\nBuffer length: 2.55\nMost recent transform: 1773161103.034495\nOldest transform: 1773161100.484657\n"];
+"odom" -> "odom_source"[label=" Broadcaster: default_authority\nAverage rate: 100.398\nBuffer length: 2.55\nMost recent transform: 1773161103.034445\nOldest transform: 1773161100.484594\n"];
+"map" -> "init_odom_source"[label=" Broadcaster: default_authority\nAverage rate: 100.399\nBuffer length: 2.55\nMost recent transform: 1773161103.034536\nOldest transform: 1773161100.484708\n"];
+"init_odom_source" -> "raw_odometry_source"[label=" Broadcaster: default_authority\nAverage rate: 100.4\nBuffer length: 2.55\nMost recent transform: 1773161103.034574\nOldest transform: 1773161100.484763\n"];
+"odom" -> "base_footprint"[label=" Broadcaster: default_authority\nAverage rate: 10.18\nBuffer length: 2.063\nMost recent transform: 1773161103.029565\nOldest transform: 1773161100.96663\n"];
+"base_link" -> "left_wheel"[label=" Broadcaster: default_authority\nAverage rate: 10.158\nBuffer length: 2.166\nMost recent transform: 1773161103.029565\nOldest transform: 1773161100.863679\n"];
+"base_link" -> "right_wheel"[label=" Broadcaster: default_authority\nAverage rate: 10.158\nBuffer length: 2.166\nMost recent transform: 1773161103.029565\nOldest transform: 1773161100.863679\n"];
+"base_link" -> "camera_base_rod"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"base_link" -> "caster1"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"base_link" -> "caster2"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"base_link" -> "rod1"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"base_link" -> "rod2"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"base_footprint" -> "livox_mount_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"camera_depth_frame" -> "camera_color_frame"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"camera_link" -> "camera_depth_frame"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"camera_color_frame" -> "camera_color_optical_frame"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"camera_bottom_screw_frame" -> "camera_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"camera_depth_frame" -> "camera_depth_optical_frame"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"camera_mount_link" -> "camera_bottom_screw_frame"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"livox_frame" -> "camera_mount_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"camera_depth_frame" -> "camera_left_ir_frame"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"camera_left_ir_frame" -> "camera_left_ir_optical_frame"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"livox_mount_link" -> "livox_frame"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"camera_depth_frame" -> "camera_right_ir_frame"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"camera_right_ir_frame" -> "camera_right_ir_optical_frame"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 1773161103.0566854"[ shape=plaintext ] ;
+}->"map";
+}
