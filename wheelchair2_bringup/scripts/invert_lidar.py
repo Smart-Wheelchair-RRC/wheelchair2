@@ -23,7 +23,7 @@ class InvertLivoxData(Node):
         self.imu_sub = self.create_subscription(
             Imu, '/livox/imu', self.imu_callback, qos_profile=qos_profile)
         self.lidar_pub = self.create_publisher(
-            PointCloud2, '/livox/lidar_cropped', qos_profile=qos_profile)
+            PointCloud2, '/livox/lidar_inverted', qos_profile=qos_profile)
         self.imu_pub = self.create_publisher(
             Imu, '/livox/imu_inverted', qos_profile=qos_profile)
         self.get_logger().info("invert_livox_data node started")
@@ -43,8 +43,8 @@ class InvertLivoxData(Node):
         mask = (angles_deg >= -135) & (angles_deg <= 135)
         filtered_data = xyz_data[mask]
 
-        # filtered_data['y'] = -filtered_data['y']
-        # filtered_data['z'] = -filtered_data['z']
+        filtered_data['y'] = -filtered_data['y']
+        filtered_data['z'] = -filtered_data['z']
 
         processed_message = point_cloud2.create_cloud(original_message.header, original_message.fields, filtered_data)
         

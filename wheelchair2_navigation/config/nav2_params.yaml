@@ -277,7 +277,8 @@ local_costmap:
         observation_sources: lidar1_mark lidar1_clear
         lidar1_mark:
           data_type: PointCloud2
-          topic: /livox/lidar_box
+          # topic: /livox/lidar_box
+          topic: /points_nonground
           marking: true
           clearing: false
           obstacle_range: 5.0 # meters 3
@@ -292,7 +293,8 @@ local_costmap:
         lidar1_clear:
           enabled: true #default true, can be toggled on/off with associated service call
           data_type: PointCloud2
-          topic: /livox/lidar_box
+          # topic: /livox/lidar_box
+          topic: /points_nonground
           marking: false
           clearing: true
           max_z: 0.2 # default 0, meters

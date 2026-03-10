@@ -18,11 +18,9 @@ def generate_launch_description():
     use_sim_time = LaunchConfiguration("use_sim_time", default="false")
     map_yaml = LaunchConfiguration(
         "map",
-        default=os.path.join(wheelchair_nav_dir, "maps", "rrc", "rrc_lab.yaml"),
-        # default="/home/container_user/wheelchair2/src/change_detection/cartograph/aligned_results/probabilistic_master.yaml"
         # default=os.path.join(wheelchair_nav_dir, "maps", "rrc", "rrc_lab.yaml"),
+        # default="/home/container_user/wheelchair2/src/change_detection/cartograph/aligned_results/probabilistic_master.yaml"
         default=os.path.join(wheelchair_nav_dir, "maps", "ramps", "rrc_outside_himalaya_ramps_fast_cleaned.yaml"),
-        # default="/home/container_user/wheelchair2/src/dependencies/change_detection/cartograph/maps_pgm/final.yaml"
     )
     params_file = LaunchConfiguration(
         "params_file",
@@ -152,13 +150,13 @@ def generate_launch_description():
             parameters=[{'autostart': True, 'node_names': lifecycle_nodes_keepout, 'use_sim_time': use_sim_time}]
         ),
 
-        # RViz
-        # Node(
-        #     package='rviz2',
-        #     executable='rviz2',
-        #     name='rviz2',
-        #     arguments=['-d', rviz_config_file],
-        #     condition=IfCondition(run_rviz),
-        #     output='screen'
-        # ),
+        #RViz
+        Node(
+            package='rviz2',
+            executable='rviz2',
+            name='rviz2',
+            arguments=['-d', rviz_config_file],
+            condition=IfCondition(run_rviz),
+            output='screen'
+        ),
     ])
