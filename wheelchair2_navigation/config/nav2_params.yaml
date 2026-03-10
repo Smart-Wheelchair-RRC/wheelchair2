@@ -30,7 +30,7 @@ amcl:
     save_pose_rate: 0.5
     sigma_hit: 0.2 #0.2
     tf_broadcast: true
-    transform_tolerance: 0.1 #1.0
+    transform_tolerance: 1.0
     update_min_a: 0.1 #0.05 #0.2
     update_min_d: 0.1 #0.05 #0.25
     z_hit: 0.5 #0.3
@@ -281,8 +281,8 @@ local_costmap:
           marking: true
           clearing: false
           obstacle_range: 5.0 # meters 3
-          min_obstacle_height: 0.01 # default 0, meters
-          max_obstacle_height: 1.5 # default 3, meters
+          min_obstacle_height: 0.1 # default 0, meters
+          max_obstacle_height: 1.0 # default 3, meters
           expected_update_rate: 0.0 # default 0, if not updating at this rate at least, remove from buffer
           observation_persistence: 0.0 # default 0, use all measurements taken during now-value, 0=latest
           inf_is_valid: false # default false, for laser scans
@@ -372,8 +372,8 @@ map_saver:
   ros__parameters:
     use_sim_time: False
     save_map_timeout: 5.0
-    free_thresh_default: 0.20 #0.25
-    occupied_thresh_default: 0.50 #0.65
+    free_thresh_default: 0.25
+    occupied_thresh_default: 0.65
     map_subscribe_transient_local: True
 
 planner_server:
