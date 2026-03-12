@@ -54,8 +54,8 @@ bt_navigator:
     robot_base_frame: base_footprint
     odom_topic: /Odometry
     default_bt_xml_filename: "navigate_w_replanning_and_recovery.xml"
-    bt_loop_duration: 10
-    default_server_timeout: 20
+    bt_loop_duration: 50
+    default_server_timeout: 10000
     enable_groot_monitoring: True
     groot_zmq_publisher_port: 1666
     groot_zmq_server_port: 1667
@@ -99,7 +99,7 @@ bt_navigator_rclcpp_node:
 controller_server:
   ros__parameters:
     use_sim_time: False
-    controller_frequency: 30.0
+    controller_frequency: 10.0
     min_x_velocity_threshold: 0.001
     min_y_velocity_threshold: 0.5
     min_theta_velocity_threshold: 0.001
@@ -129,9 +129,9 @@ controller_server:
       simulate_ahead_time: 1.0
       rotate_to_goal_heading: false
       # MPPI Parameters below
-      time_steps: 80 #56
-      model_dt: 0.05
-      batch_size: 2000
+      time_steps: 40 #56
+      model_dt: 0.1
+      batch_size: 800
       vx_std: 0.30
       vy_std: 0.30
       wz_std: 0.30
@@ -239,8 +239,8 @@ controller_server:
 local_costmap:
   local_costmap:
     ros__parameters:
-      update_frequency: 20.0 #5.0
-      publish_frequency: 20.0 #3.0
+      update_frequency: 5.0
+      publish_frequency: 2.0
       global_frame: odom
       robot_base_frame: base_footprint
       use_sim_time: False
@@ -253,11 +253,11 @@ local_costmap:
       footprint: "[[-0.30,-0.32],[0.72,-0.32],[0.72,0.32],[-0.30,0.32]]"
       # footprint: "[[-0.30,-0.32],[0.80,-0.32],[0.80,0.32],[-0.30,0.32]]"
       plugins: ["lidar_obstacle_layer", "inflation_layer"]
-      filters: ["keepout_filter"]
+      # filters: ["keepout_filter"]  # Uncomment when use_keepout_zone is True
       inflation_layer:
         enabled: True
         plugin: "nav2_costmap_2d::InflationLayer"
-        inflation_radius: 0.25 #1 1.75
+        inflation_radius: 0.25
         cost_scaling_factor: 10.0 #10 2.58
       lidar_obstacle_layer:
         plugin: "spatio_temporal_voxel_layer/SpatioTemporalVoxelLayer"
@@ -325,12 +325,12 @@ global_costmap:
       publish_frequency: 1.0
       global_frame: map
       robot_base_frame: base_footprint
-      use_sim_time: True
+      use_sim_time: False
       robot_radius: 0.22
       resolution: 0.05
       track_unknown_space: true
       plugins: ["static_layer", "obstacle_layer", "inflation_layer"]
-      filters: ["keepout_filter"]
+      # filters: ["keepout_filter"]  # Uncomment when use_keepout_zone is True
       obstacle_layer:
         plugin: "nav2_costmap_2d::ObstacleLayer"
         enabled: True

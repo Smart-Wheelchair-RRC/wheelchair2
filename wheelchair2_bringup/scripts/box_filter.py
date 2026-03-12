@@ -6,7 +6,6 @@ from rclpy.qos import HistoryPolicy, QoSProfile, ReliabilityPolicy
 from sensor_msgs.msg import PointCloud2
 from visualization_msgs.msg import Marker
 from sensor_msgs_py import point_cloud2
-import numpy as np
 
 qos_profile = QoSProfile(
     reliability=ReliabilityPolicy.RELIABLE,
@@ -19,10 +18,13 @@ class LivoxBoxFilter(Node):
         super().__init__('livox_box_filter')
 
         # Box Dimensions (Meters)
-        self.dx = 0.5  # 5cm long
+        self.dx = 0.75  # 5cm long
         self.dy = 0.5  # 5cm wide
         self.dz = 1.0  # 30cm high
         self.frame_id = "livox_frame"
+        self.box_center_x = self.dx / 2 - 0.05
+        self.box_center_y = 0.0
+        self.box_center_z = -self.dz / 2 + 0.05
 
         # Publishers & Subscribers
         self.lidar_sub = self.create_subscription(
@@ -44,9 +46,9 @@ class LivoxBoxFilter(Node):
 
         # Erase logic (Masking points INSIDE the box)
         mask = (
-            (pc_data['x'] >= -self.dx/2) & (pc_data['x'] <= self.dx/2) &
-            (pc_data['y'] >= -self.dy/2) & (pc_data['y'] <= self.dy/2) &
-            (pc_data['z'] >= -self.dz/2) & (pc_data['z'] <= self.dz/2)
+            (pc_data['x'] >= self.box_center_x - self.dx / 2) & (pc_data['x'] <= self.box_center_x + self.dx / 2) &
+            (pc_data['y'] >= self.box_center_y - self.dy / 2) & (pc_data['y'] <= self.box_center_y + self.dy / 2) &
+            (pc_data['z'] >= self.box_center_z - self.dz / 2) & (pc_data['z'] <= self.box_center_z + self.dz / 2)
         )
 
         filtered_data = pc_data[~mask]
@@ -69,9 +71,9 @@ class LivoxBoxFilter(Node):
         marker.action = Marker.ADD
 
         # Position (Centered at origin)
-        marker.pose.position.x = 0.0
-        marker.pose.position.y = 0.0
-        marker.pose.position.z = 0.0
+        marker.pose.position.x = self.box_center_x
+        marker.pose.position.y = self.box_center_y
+        marker.pose.position.z = self.box_center_z
         
         # Scale (Matches your filter dimensions)
         marker.scale.x = self.dx
