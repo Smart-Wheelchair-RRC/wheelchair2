@@ -1,0 +1,36 @@
+charging point:
+  x: 7.44730774872005
+  y: 1.5007885564118624
+  yaw: -1.568601116328644
+  type: "charging area"
+  tags: ["charging", "battery"]
+kd:
+  x: 10.79730779863894
+  y: -8.49921159259975
+  yaw: -0.04138787485688243
+  type: "person"
+  tags: ["rrc","working on wheelchair"]
+lift area:
+  x: 2.1473076697438955
+  y: 9.100788669660687
+  yaw: -0.07849566047094189
+  type: "transportation to another floor"
+  tags: ["rrc lift", "another floor"]
+rrc security check:
+  x: 0.9473076518625021
+  y: 5.400788614526391
+  yaw: 3.1013421177828047
+  type: "rrc"
+  tags: ["security", "rrc","rrc entry", "enquiry"]
+rrc testing area:
+  x: 3.8973076958209276
+  y: -6.199211558327079
+  yaw: 1.5601896493838345
+  type: "testing area"
+  tags: ["experiment", "testing"]
+water cooler:
+  x: 18.24730790965259
+  y: 5.200788611546159
+  yaw: -0.030093627978076517
+  type: "water"
+  tags: ["water", "drinking water", "cold water", "hot water"]

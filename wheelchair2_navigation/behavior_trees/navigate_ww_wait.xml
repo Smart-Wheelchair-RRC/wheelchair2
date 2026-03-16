@@ -1,0 +1,23 @@
+<root main_tree_to_execute="MainTree">
+  <BehaviorTree ID="MainTree">
+    <RecoveryNode number_of_retries="20" name="NavigateRecovery">
+      
+      <PipelineSequence name="NavigateWithWait">
+        <RateController hz="2.0"> <ComputePathToPose goal="{goal}" path="{path}" planner_id="GridBased"/>
+        </RateController>
+        <FollowPath path="{path}" controller_id="FollowPath"/>
+      </PipelineSequence>
+
+      <Sequence name="CrowdRecovery">
+        <ClearEntireCostmap name="ClearLocalCostmap" service_name="local_costmap/clear_entirely_local_costmap"/>
+        <ClearEntireCostmap name="ClearGlobalCostmap" service_name="global_costmap/clear_entirely_global_costmap"/>
+        
+        <Wait wait_duration="4.0"/>
+        
+        <DriveOnHeading dist="0.15" speed="0.1" time_out="3.0"/>
+        
+      </Sequence>
+      
+    </RecoveryNode>
+  </BehaviorTree>
+</root>

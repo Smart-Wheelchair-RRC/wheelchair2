@@ -47,7 +47,7 @@
         "XDG_RUNTIME_DIR": "${localEnv:XDG_RUNTIME_DIR}",
         "PULSE_SERVER": "${localEnv:PULSE_SERVER}",
         "QT_X11_NO_MITSHM": "1",
-        "ROS_DOMAIN_ID": "19" // Adding this will restrict your ROS 2 nodes to communicate only with systems in the network with same ROS_DOMAIN_ID, preventing interference from other ROS 2 nodes on the same network.
+        "ROS_DOMAIN_ID": "56" // Adding this will restrict your ROS 2 nodes to communicate only with systems in the network with same ROS_DOMAIN_ID, preventing interference from other ROS 2 nodes on the same network.
         // "LIBGL_ALWAYS_SOFTWARE": "1"
     },
     "runArgs": [

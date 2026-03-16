@@ -1,0 +1,65 @@
+#!/usr/bin/env python3
+import rclpy
+from rclpy.node import Node
+from tf2_ros import TransformListener, Buffer
+import math
+import sys
+
+class GetMapCoords(Node):
+    def __init__(self):
+        super().__init__('get_map_coords')
+        self.tf_buffer = Buffer()
+        self.tf_listener = TransformListener(self.tf_buffer, self)
+        
+        # Check every 1 second
+        self.timer = self.create_timer(1.0, self.get_pos)
+        self.get_logger().info('Searching for robot position... (Make sure your map/odom is active)')
+
+    def get_pos(self):
+        try:
+            # We look for the position of base_link relative to map
+            # We use a 0.5s timeout to wait for the transform to actually arrive
+            now = rclpy.time.Time()
+            trans = self.tf_buffer.lookup_transform(
+                'map', 
+                'base_link', 
+                now, 
+                timeout=rclpy.duration.Duration(seconds=0.5)
+            )
+            
+            x = trans.transform.translation.x
+            y = trans.transform.translation.y
+            
+            # Convert Quaternion to Euler Yaw
+            q = trans.transform.rotation
+            siny_cosp = 2 * (q.w * q.z + q.x * q.y)
+            cosy_cosp = 1 - 2 * (q.y * q.y + q.z * q.z)
+            yaw = math.atan2(siny_cosp, cosy_cosp)
+            
+            # Print the formatted output
+            print(f'\n"PLACE_NAME":     {{"x": {round(x, 2)},  "y": {round(y, 2)},  "yaw": {round(yaw, 2)}}},')
+            
+            # This triggers the exit in the main loop
+            raise KeyboardInterrupt 
+            
+        except Exception as e:
+            # If it's just a "waiting" error, stay silent. 
+            # If it's a real error, we might want to know.
+            pass
+
+def main(args=None):
+    rclpy.init(args=args)
+    node = GetMapCoords()
+    
+    try:
+        # Use spin to keep the node alive until KeyboardInterrupt is raised
+        rclpy.spin(node)
+    except KeyboardInterrupt:
+        # This is our clean exit path
+        print("\nCoordinate captured. Exiting...")
+    finally:
+        node.destroy_node()
+        rclpy.shutdown()
+
+if __name__ == '__main__':
+    main()
