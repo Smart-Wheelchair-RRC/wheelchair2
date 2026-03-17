@@ -17,6 +17,7 @@
 [submodule "dependencies/icp"]
 	path = dependencies/icp_localization_ros2
 	url = https://github.com/Smart-Wheelchair-RRC/icp_localization_ros2
+	branch = main
 [submodule "dependencies/direct_lidar_inertial_odometry"]
 	path = dependencies/direct_lidar_inertial_odometry
 	url = https://github.com/Smart-Wheelchair-RRC/direct_lidar_inertial_odometry
@@ -24,3 +25,4 @@
 [submodule "dependencies/3DLocalization"]
 	path = dependencies/3DLocalization
 	url = https://github.com/Smart-Wheelchair-RRC/RRC-3DLocalization.git
+	branch = main
