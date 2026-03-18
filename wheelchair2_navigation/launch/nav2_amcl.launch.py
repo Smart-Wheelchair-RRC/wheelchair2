@@ -93,7 +93,7 @@ def generate_launch_description():
             get_package_share_directory("wheelchair2_navigation"),
             "config",
             # "nav2_params_g.yaml",
-            "nav2_params.yaml",
+            "nav2_params1.yaml",
         ),
     )
 

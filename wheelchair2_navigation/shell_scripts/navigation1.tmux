@@ -59,10 +59,11 @@ sleep 2
 tmux new-window -t $SESSION -n "gui_controller"
 tmux send-keys -t $SESSION:6 "ros2 run wheelchair_gui wheelchair_gui" C-m
 
-sleep 2
+sleep 4
 # Window 7: Wheelchair Intelligenxce
 tmux new-window -t $SESSION -n "wheelchair intelligence"
 tmux send-keys -t $SESSION:7 "ros2 run hla_generator e_hla_navigate2pose" C-m
 
+sleep 2
 # Attach to session
 tmux attach -t $SESSION

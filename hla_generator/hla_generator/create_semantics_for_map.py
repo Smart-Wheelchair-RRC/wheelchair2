@@ -14,7 +14,7 @@ class Nav2PlanSaver(Node):
         super().__init__('nav2_plan_saver')
 
         self.yaml_file = os.path.expanduser(
-            "/home/robot/Documents/wheelchair_intelligence/ros_ws/src/hla_generator/config/rrc_map_semantics.yaml"
+            "/home/container_user/wheelchair2/src/hla_generator/config/rrclab_map_semantics.yaml"
         )
 
         self.new_goal = None
