@@ -1,0 +1,789 @@
+[INFO] [launch]: All log files can be found below /home/container_user/.ros/log/2026-03-19-23-07-28-528254-blackie-85703
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [dlio_odom_node-1]: process started with pid [85706]
+[INFO] [dlio_map_node-2]: process started with pid [85708]
+[INFO] [rviz2-3]: process started with pid [85710]
+[INFO] [gpu_3dbbs-4]: process started with pid [85712]
+[INFO] [map_server-5]: process started with pid [85714]
+[INFO] [controller_server-6]: process started with pid [85716]
+[INFO] [smoother_server-7]: process started with pid [85718]
+[INFO] [planner_server-8]: process started with pid [85720]
+[INFO] [behavior_server-9]: process started with pid [85722]
+[INFO] [bt_navigator-10]: process started with pid [85733]
+[INFO] [waypoint_follower-11]: process started with pid [85744]
+[INFO] [velocity_smoother-12]: process started with pid [85762]
+[INFO] [lifecycle_manager-13]: process started with pid [85785]
+[INFO] [lifecycle_manager-14]: process started with pid [85804]
+[INFO] [rviz2-15]: process started with pid [85807]
+[smoother_server-7] [INFO] [1773941849.063175823] [smoother_server]: 
+[smoother_server-7] 	smoother_server lifecycle node launched. 
+[smoother_server-7] 	Waiting on external lifecycle transitions to activate
+[smoother_server-7] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[smoother_server-7] [INFO] [1773941849.074430448] [smoother_server]: Creating smoother server
+[planner_server-8] [INFO] [1773941849.160820382] [planner_server]: 
+[planner_server-8] 	planner_server lifecycle node launched. 
+[planner_server-8] 	Waiting on external lifecycle transitions to activate
+[planner_server-8] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-8] [INFO] [1773941849.208053085] [planner_server]: Creating
+[dlio_odom_node-1] 
+[lifecycle_manager-14] [INFO] [1773941849.405467347] [lifecycle_manager_localization]: Creating
+[map_server-5] [INFO] [1773941849.434164150] [map_server]: 
+[map_server-5] 	map_server lifecycle node launched. 
+[map_server-5] 	Waiting on external lifecycle transitions to activate
+[map_server-5] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[map_server-5] [INFO] [1773941849.434404444] [map_server]: Creating
+[controller_server-6] [INFO] [1773941849.448420676] [controller_server]: 
+[controller_server-6] 	controller_server lifecycle node launched. 
+[controller_server-6] 	Waiting on external lifecycle transitions to activate
+[controller_server-6] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-6] [INFO] [1773941849.464656870] [controller_server]: Creating controller server
+[lifecycle_manager-14] [INFO] [1773941849.554360329] [lifecycle_manager_localization]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[lifecycle_manager-14] [INFO] [1773941849.579053412] [lifecycle_manager_localization]: [34m[1mStarting managed nodes bringup...[0m[0m
+[lifecycle_manager-14] [INFO] [1773941849.579148519] [lifecycle_manager_localization]: [34m[1mConfiguring map_server[0m[0m
+[velocity_smoother-12] [INFO] [1773941849.702196964] [velocity_smoother]: 
+[velocity_smoother-12] 	velocity_smoother lifecycle node launched. 
+[velocity_smoother-12] 	Waiting on external lifecycle transitions to activate
+[velocity_smoother-12] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[behavior_server-9] [INFO] [1773941849.811560257] [behavior_server]: 
+[behavior_server-9] 	behavior_server lifecycle node launched. 
+[behavior_server-9] 	Waiting on external lifecycle transitions to activate
+[behavior_server-9] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[map_server-5] [INFO] [1773941850.019402819] [map_server]: Configuring
+[map_server-5] [INFO] [1773941850.019548871] [map_io]: Loading yaml file: /home/container_user/wheelchair2/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/ramps/rrc_outside_himalaya_ramps_fast_cleaned.yaml
+[map_server-5] [INFO] [1773941850.019993331] [map_io]: resolution: 0.05
+[map_server-5] [INFO] [1773941850.020015411] [map_io]: origin[0]: -89.5476
+[map_server-5] [INFO] [1773941850.020022483] [map_io]: origin[1]: -77.1717
+[map_server-5] [INFO] [1773941850.020028211] [map_io]: origin[2]: 0
+[map_server-5] [INFO] [1773941850.020033780] [map_io]: free_thresh: 0.196
+[map_server-5] [INFO] [1773941850.020039188] [map_io]: occupied_thresh: 0.65
+[map_server-5] [INFO] [1773941850.020046132] [map_io]: mode: trinary
+[map_server-5] [INFO] [1773941850.020053876] [map_io]: negate: 0
+[map_server-5] [INFO] [1773941850.020341180] [map_io]: Loading image_file: /home/container_user/wheelchair2/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/ramps/rrc_outside_himalaya_ramps_fast_cleaned.png
+[waypoint_follower-11] [INFO] [1773941850.178998892] [waypoint_follower]: 
+[waypoint_follower-11] 	waypoint_follower lifecycle node launched. 
+[waypoint_follower-11] 	Waiting on external lifecycle transitions to activate
+[waypoint_follower-11] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[waypoint_follower-11] [INFO] [1773941850.201707540] [waypoint_follower]: Creating
+[bt_navigator-10] [INFO] [1773941850.349190532] [bt_navigator]: 
+[bt_navigator-10] 	bt_navigator lifecycle node launched. 
+[bt_navigator-10] 	Waiting on external lifecycle transitions to activate
+[bt_navigator-10] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[bt_navigator-10] [INFO] [1773941850.350010137] [bt_navigator]: Creating
+[INFO] [icp_localization-16]: process started with pid [85928]
+[lifecycle_manager-13] [INFO] [1773941850.475563382] [lifecycle_manager_navigation]: Creating
+[lifecycle_manager-13] [INFO] [1773941850.578083651] [lifecycle_manager_navigation]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[gpu_3dbbs-4] [ROS2] Loading config file...
+[gpu_3dbbs-4] [YAML] Loading paths...
+[gpu_3dbbs-4] [YAML] Loading topic name...
+[gpu_3dbbs-4] [YAML] Loading 3D-BBS parameters...
+[gpu_3dbbs-4] [YAML] Loading angular search range...
+[gpu_3dbbs-4] [YAML] Loading score threshold percentage...
+[gpu_3dbbs-4] [YAML] Loading downsample parameters...
+[planner_server-8] [INFO] [1773941851.288911049] [global_costmap.global_costmap]: 
+[planner_server-8] 	global_costmap lifecycle node launched. 
+[planner_server-8] 	Waiting on external lifecycle transitions to activate
+[planner_server-8] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-8] [INFO] [1773941851.290720439] [global_costmap.global_costmap]: Creating Costmap
+[gpu_3dbbs-4] [ROS2] Loading target clouds...
+[rviz2-3] [INFO] [1773941851.654028820] [rviz2]: Stereo is NOT SUPPORTED
+[rviz2-3] [INFO] [1773941851.654233721] [rviz2]: OpenGl version: 4.6 (GLSL 4.6)
+[rviz2-3] [INFO] [1773941851.696231441] [rviz2]: Stereo is NOT SUPPORTED
+[lifecycle_manager-13] [INFO] [1773941851.945873955] [lifecycle_manager_navigation]: [34m[1mStarting managed nodes bringup...[0m[0m
+[lifecycle_manager-13] [INFO] [1773941851.946202124] [lifecycle_manager_navigation]: [34m[1mConfiguring controller_server[0m[0m
+[rviz2-15] [INFO] [1773941851.954081302] [rviz2]: Stereo is NOT SUPPORTED
+[rviz2-15] [INFO] [1773941851.954876683] [rviz2]: OpenGl version: 4.6 (GLSL 4.6)
+[controller_server-6] [INFO] [1773941851.969941422] [local_costmap.local_costmap]: 
+[controller_server-6] 	local_costmap lifecycle node launched. 
+[controller_server-6] 	Waiting on external lifecycle transitions to activate
+[controller_server-6] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-6] [INFO] [1773941851.972776503] [local_costmap.local_costmap]: Creating Costmap
+[controller_server-6] [INFO] [1773941852.000880713] [controller_server]: Configuring controller interface
+[controller_server-6] [INFO] [1773941852.002336943] [controller_server]: getting goal checker plugins..
+[controller_server-6] [INFO] [1773941852.004424005] [controller_server]: Controller frequency set to 10.0000Hz
+[controller_server-6] [INFO] [1773941852.004531655] [local_costmap.local_costmap]: Configuring
+[controller_server-6] [INFO] [1773941852.057974949] [local_costmap.local_costmap]: Using plugin "lidar_obstacle_layer"
+[rviz2-15] [INFO] [1773941852.067877732] [rviz2]: Stereo is NOT SUPPORTED
+[controller_server-6] [INFO] [1773941852.191644785] [local_costmap.local_costmap]: lidar_obstacle_layer being initialized as SpatioTemporalVoxelLayer!
+[controller_server-6] [INFO] [1773941852.191743891] [local_costmap.local_costmap]: lidar_obstacle_layer's global frame is odom.
+[controller_server-6] [INFO] [1773941852.213125017] [local_costmap.local_costmap]: lidar_obstacle_layer loaded parameters from parameter server.
+[controller_server-6] [INFO] [1773941852.221734806] [local_costmap.local_costmap]: lidar_obstacle_layer created underlying voxel grid.
+[controller_server-6] [INFO] [1773941852.263425446] [local_costmap.local_costmap]: Voxel filter activated.
+[dlio_odom_node-1]  Calibrating IMU for 3 seconds... done
+[dlio_odom_node-1] 
+[dlio_odom_node-1]  Accel biases [xyz]: 0.02171370, -0.01197884, 0.99411494
+[dlio_odom_node-1]  Gyro biases  [xyz]: 0.00359632, 0.00448702, 0.00115155
+[controller_server-6] [INFO] [1773941852.385581450] [local_costmap.local_costmap]: Passthough filter activated.
+[controller_server-6] [INFO] [1773941852.401426081] [local_costmap.local_costmap]: lidar_obstacle_layer initialization complete!
+[controller_server-6] [INFO] [1773941852.401520547] [local_costmap.local_costmap]: Initialized plugin "lidar_obstacle_layer"
+[controller_server-6] [INFO] [1773941852.401537988] [local_costmap.local_costmap]: Using plugin "inflation_layer"
+[controller_server-6] [INFO] [1773941852.416935792] [local_costmap.local_costmap]: Initialized plugin "inflation_layer"
+[dlio_odom_node-1] 
+[dlio_odom_node-1]  DLIO initialized!
+[controller_server-6] [INFO] [1773941852.488401437] [controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[controller_server-6] [INFO] [1773941852.497917649] [controller_server]: Created goal checker : general_goal_checker of type nav2_controller::SimpleGoalChecker
+[controller_server-6] [INFO] [1773941852.509206771] [controller_server]: Controller Server has general_goal_checker  goal checkers available.
+[controller_server-6] [INFO] [1773941852.517095646] [controller_server]: Created controller : FollowPath of type nav2_rotation_shim_controller::RotationShimController
+[controller_server-6] [INFO] [1773941852.569904011] [controller_server]: Created internal controller for rotation shimming: FollowPath of type nav2_mppi_controller::MPPIController
+[controller_server-6] [INFO] [1773941852.653316267] [controller_server]: Controller period is equal to model dt. Control sequence shifting is ON
+[controller_server-6] [INFO] [1773941852.685568040] [controller_server]: ConstraintCritic instantiated with 1 power and 4.000000 weight.
+[controller_server-6] [INFO] [1773941852.685677163] [controller_server]: Critic loaded : mppi::critics::ConstraintCritic
+[controller_server-6] [INFO] [1773941852.739153258] [controller_server]: ObstaclesCritic instantiated with 1 power and 10.000000 / 2.500000 weights. Critic will collision check based on footprint cost.
+[controller_server-6] [INFO] [1773941852.739309486] [controller_server]: Critic loaded : mppi::critics::ObstaclesCritic
+[controller_server-6] [INFO] [1773941852.766550698] [controller_server]: GoalCritic instantiated with 1 power and 5.000000 weight.
+[controller_server-6] [INFO] [1773941852.766639436] [controller_server]: Critic loaded : mppi::critics::GoalCritic
+[controller_server-6] [INFO] [1773941852.795680823] [controller_server]: GoalAngleCritic instantiated with 1 power, 3.000000 weight, and 0.500000 angular threshold.
+[controller_server-6] [INFO] [1773941852.796676560] [controller_server]: Critic loaded : mppi::critics::GoalAngleCritic
+[controller_server-6] [INFO] [1773941852.858894256] [controller_server]: ReferenceTrajectoryCritic instantiated with 1 power and 8.000000 weight
+[controller_server-6] [INFO] [1773941852.860986853] [controller_server]: Critic loaded : mppi::critics::PathAlignCritic
+[controller_server-6] [INFO] [1773941852.893007228] [controller_server]: Critic loaded : mppi::critics::PathFollowCritic
+[controller_server-6] [INFO] [1773941852.929100988] [controller_server]: PathAngleCritic instantiated with 1 power and 2.000000 weight. Reversing allowed.
+[controller_server-6] [INFO] [1773941852.930066997] [controller_server]: Critic loaded : mppi::critics::PathAngleCritic
+[controller_server-6] [INFO] [1773941852.970255358] [controller_server]: PreferForwardCritic instantiated with 1 power and 5.000000 weight.
+[controller_server-6] [INFO] [1773941852.970462051] [controller_server]: Critic loaded : mppi::critics::PreferForwardCritic
+[controller_server-6] [INFO] [1773941852.980139228] [controller_server]: VelocityDeadbandCritic instantiated with 1 power, 35 weight, deadband_velocity [0,0,0]
+[controller_server-6] [INFO] [1773941852.980222078] [controller_server]: Critic loaded : mppi::critics::VelocityDeadbandCritic
+[controller_server-6] [INFO] [1773941853.031895342] [controller_server]: TwirlingCritic instantiated with 1 power and 10.000000 weight.
+[controller_server-6] [INFO] [1773941853.036200285] [controller_server]: Critic loaded : mppi::critics::TwirlingCritic
+[controller_server-6] [INFO] [1773941853.066947347] [controller_server]: Optimizer reset
+[controller_server-6] [INFO] [1773941853.107118619] [MPPIController]: Configured MPPI Controller: FollowPath
+[controller_server-6] [INFO] [1773941853.107187421] [controller_server]: Controller Server has FollowPath  controllers available.
+[lifecycle_manager-13] [INFO] [1773941853.188590121] [lifecycle_manager_navigation]: [34m[1mConfiguring smoother_server[0m[0m
+[smoother_server-7] [INFO] [1773941853.189090422] [smoother_server]: Configuring smoother server
+[smoother_server-7] [INFO] [1773941853.392371677] [smoother_server]: Created smoother : simple_smoother of type nav2_smoother::SimpleSmoother
+[smoother_server-7] [INFO] [1773941853.406019196] [smoother_server]: Smoother Server has simple_smoother  smoothers available.
+[lifecycle_manager-13] [INFO] [1773941853.573256902] [lifecycle_manager_navigation]: [34m[1mConfiguring planner_server[0m[0m
+[planner_server-8] [INFO] [1773941853.573686609] [planner_server]: Configuring
+[planner_server-8] [INFO] [1773941853.573768723] [global_costmap.global_costmap]: Configuring
+[planner_server-8] [INFO] [1773941853.623938076] [global_costmap.global_costmap]: Using plugin "static_layer"
+[planner_server-8] [INFO] [1773941853.669883993] [global_costmap.global_costmap]: Subscribing to the map topic (/map) with transient local durability
+[planner_server-8] [INFO] [1773941853.686087897] [global_costmap.global_costmap]: Initialized plugin "static_layer"
+[planner_server-8] [INFO] [1773941853.686165403] [global_costmap.global_costmap]: Using plugin "obstacle_layer"
+[planner_server-8] [INFO] [1773941853.709995232] [global_costmap.global_costmap]: Subscribed to Topics: scan
+[planner_server-8] [INFO] [1773941853.817756209] [global_costmap.global_costmap]: Initialized plugin "obstacle_layer"
+[planner_server-8] [INFO] [1773941853.818022840] [global_costmap.global_costmap]: Using plugin "inflation_layer"
+[planner_server-8] [INFO] [1773941853.834516991] [global_costmap.global_costmap]: Initialized plugin "inflation_layer"
+[planner_server-8] [INFO] [1773941853.946002192] [planner_server]: Created global planner plugin GridBased of type nav2_smac_planner/SmacPlanner2D
+[planner_server-8] [INFO] [1773941853.946126163] [planner_server]: Configuring GridBased of type SmacPlanner2D
+[planner_server-8] [INFO] [1773941853.987555996] [planner_server]: Configured plugin GridBased of type SmacPlanner2D with tolerance 0.75, maximum iterations 1000000, max on approach iterations 1000, and not allowing unknown traversal.
+[planner_server-8] [INFO] [1773941853.987648478] [planner_server]: Planner Server has GridBased  planners available.
+[rviz2-15] [INFO] [1773941854.022065139] [rviz2]: Message Filter dropping message: frame 'base_footprint' at time 1773941853.304 for reason 'discarding message because the queue is full'
+[lifecycle_manager-13] [INFO] [1773941854.076192353] [lifecycle_manager_navigation]: [34m[1mConfiguring behavior_server[0m[0m
+[behavior_server-9] [INFO] [1773941854.076999190] [behavior_server]: Configuring
+[behavior_server-9] [INFO] [1773941854.144525789] [behavior_server]: Creating behavior plugin spin of type nav2_behaviors/Spin
+[behavior_server-9] [INFO] [1773941854.146080293] [behavior_server]: Configuring spin
+[behavior_server-9] [INFO] [1773941854.246925060] [behavior_server]: Creating behavior plugin backup of type nav2_behaviors/BackUp
+[behavior_server-9] [INFO] [1773941854.248516780] [behavior_server]: Configuring backup
+[behavior_server-9] [INFO] [1773941854.304477994] [behavior_server]: Creating behavior plugin drive_on_heading of type nav2_behaviors/DriveOnHeading
+[behavior_server-9] [INFO] [1773941854.306029970] [behavior_server]: Configuring drive_on_heading
+[rviz2-15] [INFO] [1773941854.342279829] [rviz2]: Message Filter dropping message: frame 'odom' at time 1773941853.256 for reason 'discarding message because the queue is full'
+[behavior_server-9] [INFO] [1773941854.359310411] [behavior_server]: Creating behavior plugin wait of type nav2_behaviors/Wait
+[behavior_server-9] [INFO] [1773941854.360928148] [behavior_server]: Configuring wait
+[lifecycle_manager-13] [INFO] [1773941854.410080803] [lifecycle_manager_navigation]: [34m[1mConfiguring bt_navigator[0m[0m
+[bt_navigator-10] [INFO] [1773941854.410585584] [bt_navigator]: Configuring
+[lifecycle_manager-13] [INFO] [1773941854.780861689] [lifecycle_manager_navigation]: [34m[1mConfiguring waypoint_follower[0m[0m
+[waypoint_follower-11] [INFO] [1773941854.781546667] [waypoint_follower]: Configuring
+[gpu_3dbbs-4] [Viewer]: x: -7.2008, y: 44.0545, z: -0.0602358
+[gpu_3dbbs-4] [ROS2] Target clouds loaded
+[gpu_3dbbs-4] [Voxel map] Creating hierarchical voxel map...
+[map_server-5] [INFO] [1773941854.867522635] [map_io]: Read map /home/container_user/wheelchair2/install/wheelchair2_navigation/share/wheelchair2_navigation/maps/ramps/rrc_outside_himalaya_ramps_fast_cleaned.png: 3299 X 5132 map @ 0.05 m/cell
+[waypoint_follower-11] [INFO] [1773941854.904312669] [waypoint_follower]: Created waypoint_task_executor : wait_at_waypoint of type nav2_waypoint_follower::WaitAtWaypoint
+[lifecycle_manager-13] [INFO] [1773941854.910801091] [lifecycle_manager_navigation]: [34m[1mConfiguring velocity_smoother[0m[0m
+[velocity_smoother-12] [INFO] [1773941854.911277967] [velocity_smoother]: Configuring velocity smoother
+[lifecycle_manager-14] [INFO] [1773941854.934106298] [lifecycle_manager_localization]: [34m[1mActivating map_server[0m[0m
+[map_server-5] [INFO] [1773941854.934647624] [map_server]: Activating
+[lifecycle_manager-13] [INFO] [1773941854.955001779] [lifecycle_manager_navigation]: [34m[1mActivating controller_server[0m[0m
+[controller_server-6] [INFO] [1773941854.956271635] [controller_server]: Activating
+[controller_server-6] [INFO] [1773941854.956372342] [local_costmap.local_costmap]: Activating
+[controller_server-6] [INFO] [1773941854.956400215] [local_costmap.local_costmap]: Checking transform
+[controller_server-6] [INFO] [1773941854.956560027] [local_costmap.local_costmap]: start
+[controller_server-6] [INFO] [1773941854.956590716] [local_costmap.local_costmap]: lidar_obstacle_layer was activated.
+[map_server-5] [INFO] [1773941854.984143583] [map_server]: Creating bond (map_server) to lifecycle manager.
+[planner_server-8] [INFO] [1773941855.033794171] [global_costmap.global_costmap]: StaticLayer: Resizing costmap to 3299 X 5132 at 0.050000 m/pix
+[rviz2-15] [INFO] [1773941855.063762429] [rviz2]: Trying to create a map of size 3299 x 5132 using 1 swatches
+[lifecycle_manager-14] [INFO] [1773941855.113216019] [lifecycle_manager_localization]: Server map_server connected with bond.
+[lifecycle_manager-14] [INFO] [1773941855.113333046] [lifecycle_manager_localization]: [34m[1mManaged nodes are active[0m[0m
+[lifecycle_manager-14] [INFO] [1773941855.113353142] [lifecycle_manager_localization]: [34m[1mCreating bond timer...[0m[0m
+[controller_server-6] [INFO] [1773941855.166866325] [controller_server]: Activating controller: FollowPath of type nav2_rotation_shim_controller::RotationShimController
+[controller_server-6] [WARN] [1773941855.167006808] [controller_server]: Parameter controller_server.verbose not found
+[controller_server-6] [INFO] [1773941855.168470142] [controller_server]: Optimizer reset
+[controller_server-6] [INFO] [1773941855.169120015] [MPPIController]: Activated MPPI Controller: FollowPath
+[controller_server-6] [INFO] [1773941855.169168144] [controller_server]: Creating bond (controller_server) to lifecycle manager.
+[lifecycle_manager-13] [INFO] [1773941855.304384481] [lifecycle_manager_navigation]: Server controller_server connected with bond.
+[lifecycle_manager-13] [INFO] [1773941855.304484739] [lifecycle_manager_navigation]: [34m[1mActivating smoother_server[0m[0m
+[smoother_server-7] [INFO] [1773941855.305237751] [smoother_server]: Activating
+[smoother_server-7] [INFO] [1773941855.305318201] [smoother_server]: Creating bond (smoother_server) to lifecycle manager.
+[lifecycle_manager-13] [INFO] [1773941855.419615120] [lifecycle_manager_navigation]: Server smoother_server connected with bond.
+[lifecycle_manager-13] [INFO] [1773941855.419736180] [lifecycle_manager_navigation]: [34m[1mActivating planner_server[0m[0m
+[planner_server-8] [INFO] [1773941855.420343267] [planner_server]: Activating
+[planner_server-8] [INFO] [1773941855.420417797] [global_costmap.global_costmap]: Activating
+[planner_server-8] [INFO] [1773941855.420443110] [global_costmap.global_costmap]: Checking transform
+[planner_server-8] [INFO] [1773941855.420498055] [global_costmap.global_costmap]: Timed out waiting for transform from base_footprint to map to become available, tf error: Could not find a connection between 'map' and 'base_footprint' because they are not part of the same tree.Tf has two or more unconnected trees.
+[icp_localization-16] Map size is: 6776134(befor filter), 1849172(after filter)
+[gpu_3dbbs-4] *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+[gpu_3dbbs-4]    [ROS2] 3D-BBS initialized
+[gpu_3dbbs-4] *=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*
+[planner_server-8] [INFO] [1773941855.920552787] [global_costmap.global_costmap]: Timed out waiting for transform from base_footprint to map to become available, tf error: Could not find a connection between 'map' and 'base_footprint' because they are not part of the same tree.Tf has two or more unconnected trees.
+[icp_localization-16] Init pose set to, xyz: 0 0 0, q: 0 0 0 1, rpy: 0 0 0 deg 
+[icp_localization-16] odometry data topic: /Odometry
+[icp_localization-16] imu data topic: /livox/imu
+[icp_localization-16] Is use odometry: true
+[icp_localization-16] Gravity vector filter time constant: 0.01
+[icp_localization-16] Min num odom measurements before ready: 5
+[icp_localization-16] Calibration: 
+[icp_localization-16] imu to range sensor: t:[-0.011000, -0.023400, 0.044000] ; q:[0.000000, 0.000000, 0.000000, 1.000000] ; rpy (deg):[0.000000, 0.000000, 0.000000]
+[icp_localization-16] 
+[icp_localization-16] odometry source to range sensor: t:[0.000000, 0.000000, 0.000000] ; q:[0.000000, 0.000000, 0.000000, 1.000000] ; rpy (deg):[0.000000, 0.000000, 0.000000]
+[icp_localization-16] 
+[icp_localization-16] range data parameters: 
+[icp_localization-16] topic: /livox/lidar
+[icp_localization-16] num range data accumulated: 1
+[icp_localization-16]  
+[icp_localization-16] Setting fixed frame to: map
+[icp_localization-16] Setting rate to: 0.5
+[icp_localization-16] ICPlocalization: Initialized 
+[icp_localization-16] succesfully initialized icp
+[planner_server-8] [INFO] [1773941856.420538778] [global_costmap.global_costmap]: Timed out waiting for transform from base_footprint to map to become available, tf error: Could not find a connection between 'map' and 'base_footprint' because they are not part of the same tree.Tf has two or more unconnected trees.
+[rviz2-15] [INFO] [1773941856.590214975] [rviz2]: Message Filter dropping message: frame 'base_footprint' at time 1773941855.566 for reason 'discarding message because the queue is full'
+[rviz2-15] [INFO] [1773941856.846100970] [rviz2]: Message Filter dropping message: frame 'odom' at time 1773941855.789 for reason 'discarding message because the queue is full'
+[icp_localization-16] [INFO] [1773941856.891443702] [icp_localization]: Scan matching took: 199.86 ms
+[planner_server-8] [INFO] [1773941856.920623587] [global_costmap.global_costmap]: Timed out waiting for transform from base_footprint to map to become available, tf error: Lookup would require extrapolation into the past.  Requested time 1773941856.839190 but the earliest data is at time 1773941856.891820, when looking up transform from frame [base_footprint] to frame [map]
+[rviz2-15] [INFO] [1773941856.984081153] [rviz2]: Trying to create a map of size 60 x 60 using 1 swatches
+[planner_server-8] [INFO] [1773941857.420677033] [global_costmap.global_costmap]: start
+[icp_localization-16] [INFO] [1773941857.464279049] [icp_localization]: Scan matching took: 271.027 ms
+[icp_localization-16] [INFO] [1773941858.005250857] [icp_localization]: Scan matching took: 307.604 ms
+[planner_server-8] [INFO] [1773941858.473396376] [planner_server]: Activating plugin GridBased of type SmacPlanner2D
+[planner_server-8] [INFO] [1773941858.487225915] [planner_server]: Creating bond (planner_server) to lifecycle manager.
+[icp_localization-16] [INFO] [1773941858.516602829] [icp_localization]: Scan matching took: 309.756 ms
+[lifecycle_manager-13] [INFO] [1773941858.630566298] [lifecycle_manager_navigation]: Server planner_server connected with bond.
+[lifecycle_manager-13] [INFO] [1773941858.630669276] [lifecycle_manager_navigation]: [34m[1mActivating behavior_server[0m[0m
+[behavior_server-9] [INFO] [1773941858.632753170] [behavior_server]: Activating
+[behavior_server-9] [INFO] [1773941858.632834100] [behavior_server]: Activating spin
+[behavior_server-9] [INFO] [1773941858.632861909] [behavior_server]: Activating backup
+[behavior_server-9] [INFO] [1773941858.632877557] [behavior_server]: Activating drive_on_heading
+[behavior_server-9] [INFO] [1773941858.632891605] [behavior_server]: Activating wait
+[behavior_server-9] [INFO] [1773941858.632911318] [behavior_server]: Creating bond (behavior_server) to lifecycle manager.
+[rviz2-15] [INFO] [1773941858.711069068] [rviz2]: Trying to create a map of size 3299 x 5132 using 1 swatches
+[lifecycle_manager-13] [INFO] [1773941858.757861245] [lifecycle_manager_navigation]: Server behavior_server connected with bond.
+[lifecycle_manager-13] [INFO] [1773941858.757959551] [lifecycle_manager_navigation]: [34m[1mActivating bt_navigator[0m[0m
+[bt_navigator-10] [INFO] [1773941858.759448838] [bt_navigator]: Activating
+[icp_localization-16] [INFO] [1773941859.163065340] [icp_localization]: Scan matching took: 454.456 ms
+[bt_navigator-10] [INFO] [1773941859.203396838] [bt_navigator]: Creating bond (bt_navigator) to lifecycle manager.
+[lifecycle_manager-13] [INFO] [1773941859.342471831] [lifecycle_manager_navigation]: Server bt_navigator connected with bond.
+[lifecycle_manager-13] [INFO] [1773941859.342626747] [lifecycle_manager_navigation]: [34m[1mActivating waypoint_follower[0m[0m
+[waypoint_follower-11] [INFO] [1773941859.345697642] [waypoint_follower]: Activating
+[waypoint_follower-11] [INFO] [1773941859.345805389] [waypoint_follower]: Creating bond (waypoint_follower) to lifecycle manager.
+[lifecycle_manager-13] [INFO] [1773941859.461655785] [lifecycle_manager_navigation]: Server waypoint_follower connected with bond.
+[lifecycle_manager-13] [INFO] [1773941859.461750540] [lifecycle_manager_navigation]: [34m[1mActivating velocity_smoother[0m[0m
+[velocity_smoother-12] [INFO] [1773941859.462425757] [velocity_smoother]: Activating
+[velocity_smoother-12] [INFO] [1773941859.462550208] [velocity_smoother]: Creating bond (velocity_smoother) to lifecycle manager.
+[icp_localization-16] [INFO] [1773941859.553740580] [icp_localization]: Scan matching took: 342.45 ms
+[lifecycle_manager-13] [INFO] [1773941859.583480703] [lifecycle_manager_navigation]: Server velocity_smoother connected with bond.
+[lifecycle_manager-13] [INFO] [1773941859.583631907] [lifecycle_manager_navigation]: [34m[1mManaged nodes are active[0m[0m
+[lifecycle_manager-13] [INFO] [1773941859.583756518] [lifecycle_manager_navigation]: [34m[1mCreating bond timer...[0m[0m
+[icp_localization-16] [INFO] [1773941860.003754879] [icp_localization]: Scan matching took: 286.804 ms
+[icp_localization-16] [INFO] [1773941860.501590914] [icp_localization]: Scan matching took: 284.53 ms
+[icp_localization-16] [INFO] [1773941860.934918926] [icp_localization]: Scan matching took: 211.494 ms
+[icp_localization-16] [INFO] [1773941861.496215818] [icp_localization]: Scan matching took: 269.074 ms
+[icp_localization-16] [INFO] [1773941861.970242568] [icp_localization]: Scan matching took: 242.279 ms
+[icp_localization-16] [INFO] [1773941862.545715243] [icp_localization]: Scan matching took: 311.537 ms
+[icp_localization-16] [INFO] [1773941863.011966846] [icp_localization]: Scan matching took: 271.938 ms
+[icp_localization-16] [INFO] [1773941863.652334942] [icp_localization]: Scan matching took: 408.1 ms
+[icp_localization-16] [INFO] [1773941864.070990985] [icp_localization]: Scan matching took: 321.042 ms
+[icp_localization-16] [INFO] [1773941864.489039619] [icp_localization]: Scan matching took: 233.206 ms
+[icp_localization-16] [INFO] [1773941865.058643816] [icp_localization]: Scan matching took: 295.275 ms
+[rviz2-15] [INFO] [1773941865.077813428] [rviz2]: Message Filter dropping message: frame 'odom' at time 1773941855.073 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-15] [INFO] [1773941865.165777601] [rviz2]: Message Filter dropping message: frame 'odom' at time 1773941855.160 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[icp_localization-16] [INFO] [1773941865.607367028] [icp_localization]: Scan matching took: 340.912 ms
+[icp_localization-16] [INFO] [1773941866.001929329] [icp_localization]: Scan matching took: 230.429 ms
+[rviz2-15] [INFO] [1773941866.013013069] [rviz2]: Message Filter dropping message: frame 'odom' at time 1773941856.000 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-15] [INFO] [1773941866.252904142] [rviz2]: Message Filter dropping message: frame 'base_footprint' at time 1773941856.175 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[icp_localization-16] [INFO] [1773941866.555685658] [icp_localization]: Scan matching took: 278.062 ms
+[icp_localization-16] [INFO] [1773941866.922946202] [icp_localization]: Scan matching took: 143.54 ms
+[icp_localization-16] [INFO] [1773941867.582897311] [icp_localization]: Scan matching took: 300.53 ms
+[icp_localization-16] [INFO] [1773941867.952763679] [icp_localization]: Scan matching took: 166.904 ms
+[icp_localization-16] [INFO] [1773941868.523495764] [icp_localization]: Scan matching took: 228.087 ms
+[icp_localization-16] [INFO] [1773941869.044583953] [icp_localization]: Scan matching took: 248.8 ms
+[icp_localization-16] [INFO] [1773941869.565178015] [icp_localization]: Scan matching took: 268.214 ms
+[icp_localization-16] [INFO] [1773941870.017241267] [icp_localization]: Scan matching took: 218.891 ms
+[icp_localization-16] [INFO] [1773941870.549801231] [icp_localization]: Scan matching took: 244.752 ms
+[icp_localization-16] [INFO] [1773941871.083417319] [icp_localization]: Scan matching took: 270.592 ms
+[rviz2-15] [INFO] [1773941871.482606476] [rviz2]: Setting estimate pose: Frame:map, Position(6.63603, 21.3508, 0), Orientation(0, 0, 0.99681, 0.0798129) = Angle: 2.9818
+[icp_localization-16] User set pose to :t:[6.636029, 21.350843, 0.000000] ; q:[0.000000, 0.000000, 0.996810, 0.079813] ; rpy (deg):[0.000000, 0.000000, 170.844376]
+[icp_localization-16] [INFO] [1773941871.601074787] [icp_localization]: Scan matching took: 285.069 ms
+[icp_localization-16] [INFO] [1773941871.926170688] [icp_localization]: Scan matching took: 103.267 ms
+[icp_localization-16] [INFO] [1773941872.553220136] [icp_localization]: Scan matching took: 227.973 ms
+[icp_localization-16] [INFO] [1773941873.060402933] [icp_localization]: Scan matching took: 231.564 ms
+[icp_localization-16] [INFO] [1773941873.488965476] [icp_localization]: Scan matching took: 154.786 ms
+[icp_localization-16] [INFO] [1773941874.082622801] [icp_localization]: Scan matching took: 248.401 ms
+[icp_localization-16] [INFO] [1773941874.625090910] [icp_localization]: Scan matching took: 290.185 ms
+[icp_localization-16] [INFO] [1773941874.953470377] [icp_localization]: Scan matching took: 115.896 ms
+[icp_localization-16] [INFO] [1773941875.621662465] [icp_localization]: Scan matching took: 274.117 ms
+[icp_localization-16] [INFO] [1773941876.008273243] [icp_localization]: Scan matching took: 160.417 ms
+[icp_localization-16] [INFO] [1773941876.484426914] [icp_localization]: Scan matching took: 130.692 ms
+[icp_localization-16] [INFO] [1773941877.072291153] [icp_localization]: Scan matching took: 214.631 ms
+[icp_localization-16] [INFO] [1773941877.645996754] [icp_localization]: Scan matching took: 286.125 ms
+[icp_localization-16] [INFO] [1773941878.101847279] [icp_localization]: Scan matching took: 241.112 ms
+[icp_localization-16] [INFO] [1773941878.554811713] [icp_localization]: Scan matching took: 188.262 ms
+[rviz2-15] [INFO] [1773941878.746930476] [rviz2]: Setting estimate pose: Frame:map, Position(1.95647, 21.4875, 0), Orientation(0, 0, 0.996487, 0.0837447) = Angle: 2.97391
+[icp_localization-16] User set pose to :t:[1.956469, 21.487474, 0.000000] ; q:[0.000000, 0.000000, 0.996487, 0.083745] ; rpy (deg):[0.000000, 0.000000, 170.392309]
+[icp_localization-16] [INFO] [1773941878.973748493] [icp_localization]: Scan matching took: 104.873 ms
+[icp_localization-16] [INFO] [1773941879.657286172] [icp_localization]: Scan matching took: 287.784 ms
+[icp_localization-16] [INFO] [1773941880.148999432] [icp_localization]: Scan matching took: 276.467 ms
+[controller_server-6] [INFO] [1773941880.368018720] [local_costmap.local_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1773941880.167 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[icp_localization-16] [INFO] [1773941880.672514557] [icp_localization]: Scan matching took: 296.799 ms
+[icp_localization-16] [INFO] [1773941881.128020074] [icp_localization]: Scan matching took: 250.301 ms
+[icp_localization-16] [INFO] [1773941881.660670213] [icp_localization]: Scan matching took: 279.523 ms
+[icp_localization-16] [INFO] [1773941882.151435699] [icp_localization]: Scan matching took: 266.766 ms
+[icp_localization-16] [INFO] [1773941882.534106776] [icp_localization]: Scan matching took: 141.007 ms
+[icp_localization-16] [INFO] [1773941883.057285054] [icp_localization]: Scan matching took: 156.962 ms
+[icp_localization-16] [INFO] [1773941883.733171449] [icp_localization]: Scan matching took: 331.432 ms
+[icp_localization-16] [INFO] [1773941884.056013797] [icp_localization]: Scan matching took: 152.39 ms
+[icp_localization-16] [INFO] [1773941884.687630419] [icp_localization]: Scan matching took: 279.376 ms
+[icp_localization-16] [INFO] [1773941885.106606001] [icp_localization]: Scan matching took: 194.374 ms
+[controller_server-6] [INFO] [1773941885.574698513] [local_costmap.local_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1773941885.374 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[icp_localization-16] [INFO] [1773941885.752707596] [icp_localization]: Scan matching took: 331.533 ms
+[icp_localization-16] [INFO] [1773941886.106034590] [icp_localization]: Scan matching took: 181.207 ms
+[icp_localization-16] [INFO] [1773941886.688419741] [icp_localization]: Scan matching took: 260.677 ms
+[icp_localization-16] [INFO] [1773941887.082655903] [icp_localization]: Scan matching took: 148.707 ms
+[icp_localization-16] [INFO] [1773941887.713958938] [icp_localization]: Scan matching took: 277.031 ms
+[icp_localization-16] [INFO] [1773941888.194587027] [icp_localization]: Scan matching took: 248.047 ms
+[icp_localization-16] [INFO] [1773941888.712391006] [icp_localization]: Scan matching took: 264.412 ms
+[icp_localization-16] [INFO] [1773941889.223888934] [icp_localization]: Scan matching took: 269.538 ms
+[icp_localization-16] [INFO] [1773941889.649468161] [icp_localization]: Scan matching took: 191.826 ms
+[icp_localization-16] [INFO] [1773941890.274677655] [icp_localization]: Scan matching took: 311.92 ms
+[icp_localization-16] [INFO] [1773941890.712060315] [icp_localization]: Scan matching took: 244.018 ms
+[controller_server-6] [INFO] [1773941891.172457801] [local_costmap.local_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1773941890.971 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[icp_localization-16] [INFO] [1773941891.191723731] [icp_localization]: Scan matching took: 218.149 ms
+[icp_localization-16] [INFO] [1773941891.786603296] [icp_localization]: Scan matching took: 312.258 ms
+[rviz2-15] [INFO] [1773941891.839315262] [rviz2]: Setting estimate pose: Frame:map, Position(1.67986, 22.244, 0), Orientation(0, 0, -0.95883, 0.283981) = Angle: -2.56571
+[icp_localization-16] User set pose to :t:[1.679862, 22.243980, 0.000000] ; q:[0.000000, 0.000000, -0.958830, 0.283981] ; rpy (deg):[0.000000, 0.000000, -147.004108]
+[icp_localization-16] [INFO] [1773941892.095698558] [icp_localization]: Scan matching took: 116.689 ms
+[icp_localization-16] [INFO] [1773941892.758174016] [icp_localization]: Scan matching took: 270.247 ms
+[icp_localization-16] [INFO] [1773941893.280449934] [icp_localization]: Scan matching took: 284.234 ms
+[icp_localization-16] [INFO] [1773941893.774729747] [icp_localization]: Scan matching took: 272.476 ms
+[icp_localization-16] [INFO] [1773941894.318454592] [icp_localization]: Scan matching took: 311.569 ms
+[icp_localization-16] [INFO] [1773941894.793603035] [icp_localization]: Scan matching took: 276.84 ms
+[icp_localization-16] [INFO] [1773941895.272828700] [icp_localization]: Scan matching took: 246.728 ms
+[icp_localization-16] [INFO] [1773941895.816995889] [icp_localization]: Scan matching took: 289.287 ms
+[icp_localization-16] [INFO] [1773941896.367765738] [icp_localization]: Scan matching took: 338.936 ms
+[icp_localization-16] [INFO] [1773941896.830184668] [icp_localization]: Scan matching took: 298.099 ms
+[icp_localization-16] [INFO] [1773941897.283082906] [icp_localization]: Scan matching took: 249.153 ms
+[icp_localization-16] [INFO] [1773941897.744664692] [icp_localization]: Scan matching took: 209.048 ms
+[icp_localization-16] [INFO] [1773941898.251030687] [icp_localization]: Scan matching took: 212.34 ms
+[icp_localization-16] [INFO] [1773941898.646971121] [icp_localization]: Scan matching took: 104.316 ms
+[icp_localization-16] [INFO] [1773941899.223095558] [icp_localization]: Scan matching took: 171.123 ms
+[icp_localization-16] [INFO] [1773941899.671657584] [icp_localization]: Scan matching took: 115.597 ms
+[icp_localization-16] [INFO] [1773941900.196607374] [icp_localization]: Scan matching took: 132.49 ms
+[icp_localization-16] [INFO] [1773941900.838298240] [icp_localization]: Scan matching took: 266.447 ms
+[icp_localization-16] [INFO] [1773941901.387514114] [icp_localization]: Scan matching took: 314.616 ms
+[icp_localization-16] [INFO] [1773941901.856791669] [icp_localization]: Scan matching took: 277.234 ms
+[icp_localization-16] [INFO] [1773941902.340124298] [icp_localization]: Scan matching took: 258.376 ms
+[icp_localization-16] [INFO] [1773941902.855712018] [icp_localization]: Scan matching took: 272.185 ms
+[icp_localization-16] [INFO] [1773941903.235953099] [icp_localization]: Scan matching took: 146.273 ms
+[icp_localization-16] [INFO] [1773941903.731453458] [icp_localization]: Scan matching took: 132.326 ms
+[icp_localization-16] [INFO] [1773941904.214176083] [icp_localization]: Scan matching took: 106.937 ms
+[icp_localization-16] [INFO] [1773941904.751251479] [icp_localization]: Scan matching took: 143.658 ms
+[icp_localization-16] [INFO] [1773941905.245386103] [icp_localization]: Scan matching took: 130.309 ms
+[rviz2-15] Start navigation
+[rviz2-15] [INFO] [1773941905.304580117] [rviz_navigation_dialog_action_client]: NavigateToPose will be called using the BT Navigator's default behavior tree.
+[bt_navigator-10] [INFO] [1773941905.308649629] [bt_navigator]: Begin navigating from current location (1.31, 20.98) to (-7.84, 6.73)
+[controller_server-6] [INFO] [1773941905.463657851] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-6] [WARN] [1773941905.463793663] [controller_server]: No goal checker was specified in parameter 'current_goal_checker'. Server will use only plugin loaded general_goal_checker . This warning will appear once.
+[controller_server-6] [INFO] [1773941905.575416496] [controller_server]: Optimizer reset
+[controller_server-6] [WARN] [1773941905.589395411] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[icp_localization-16] [INFO] [1773941905.757072531] [icp_localization]: Scan matching took: 139.055 ms
+[icp_localization-16] [INFO] [1773941906.265131473] [icp_localization]: Scan matching took: 145.905 ms
+[controller_server-6] [INFO] [1773941906.764888092] [controller_server]: Passing new path to controller.
+[icp_localization-16] [INFO] [1773941906.823692240] [icp_localization]: Scan matching took: 193.489 ms
+[controller_server-6] [ERROR] [1773941906.867286882] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the future.  Requested time 1773941906.765280 but the latest data is at time 1773941906.763597, when looking up transform from frame [map] to frame [base_footprint]
+[controller_server-6] 
+[controller_server-6] [WARN] [1773941906.875658839] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[icp_localization-16] [INFO] [1773941907.378508109] [icp_localization]: Scan matching took: 241.425 ms
+[controller_server-6] [INFO] [1773941907.865577139] [controller_server]: Passing new path to controller.
+[icp_localization-16] [INFO] [1773941907.865918108] [icp_localization]: Scan matching took: 228.022 ms
+[controller_server-6] [ERROR] [1773941907.969180600] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the future.  Requested time 1773941907.865930 but the latest data is at time 1773941907.849171, when looking up transform from frame [map] to frame [base_footprint]
+[controller_server-6] 
+[controller_server-6] [WARN] [1773941907.977888468] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[icp_localization-16] [INFO] [1773941908.463108937] [icp_localization]: Scan matching took: 320.97 ms
+[icp_localization-16] [INFO] [1773941908.790088591] [icp_localization]: Scan matching took: 142.174 ms
+[controller_server-6] [INFO] [1773941909.066129800] [controller_server]: Passing new path to controller.
+[controller_server-6] [ERROR] [1773941909.170995276] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the future.  Requested time 1773941909.066433 but the latest data is at time 1773941909.033429, when looking up transform from frame [map] to frame [base_footprint]
+[controller_server-6] 
+[controller_server-6] [WARN] [1773941909.181152749] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[icp_localization-16] [INFO] [1773941909.502863276] [icp_localization]: Scan matching took: 346.4 ms
+[icp_localization-16] [INFO] [1773941909.826500987] [icp_localization]: Scan matching took: 169.6 ms
+[controller_server-6] [INFO] [1773941910.264778788] [controller_server]: Passing new path to controller.
+[icp_localization-16] [INFO] [1773941910.327033391] [icp_localization]: Scan matching took: 168.387 ms
+[controller_server-6] [ERROR] [1773941910.368362695] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the future.  Requested time 1773941910.265127 but the latest data is at time 1773941910.243582, when looking up transform from frame [map] to frame [base_footprint]
+[controller_server-6] 
+[controller_server-6] [WARN] [1773941910.373970901] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[icp_localization-16] [INFO] [1773941910.902280328] [icp_localization]: Scan matching took: 243.597 ms
+[icp_localization-16] [INFO] [1773941911.362204947] [icp_localization]: Scan matching took: 198.111 ms
+[controller_server-6] [INFO] [1773941911.364811477] [controller_server]: Passing new path to controller.
+[icp_localization-16] [INFO] [1773941911.803020313] [icp_localization]: Scan matching took: 138.601 ms
+[icp_localization-16] [INFO] [1773941912.305172560] [icp_localization]: Scan matching took: 136.823 ms
+[controller_server-6] [INFO] [1773941912.564777123] [controller_server]: Passing new path to controller.
+[icp_localization-16] [INFO] [1773941913.028844372] [icp_localization]: Scan matching took: 358.258 ms
+[icp_localization-16] [INFO] [1773941913.372749949] [icp_localization]: Scan matching took: 199.058 ms
+[controller_server-6] [INFO] [1773941913.664776324] [controller_server]: Passing new path to controller.
+[icp_localization-16] [INFO] [1773941913.813451259] [icp_localization]: Scan matching took: 138.809 ms
+[icp_localization-16] [INFO] [1773941914.336198230] [icp_localization]: Scan matching took: 157.945 ms
+[icp_localization-16] [INFO] [1773941914.804827798] [icp_localization]: Scan matching took: 125.84 ms
+[controller_server-6] [INFO] [1773941914.864895239] [controller_server]: Passing new path to controller.
+[controller_server-6] [WARN] [1773941914.975232210] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[icp_localization-16] Interpolator: 
+[icp_localization-16] Start time: 639095387144133930
+[icp_localization-16] End time: 639095387144234778
+[icp_localization-16] Query time: 639095387149221054
+[icp_localization-16] [INFO] [1773941915.329248824] [icp_localization]: Scan matching took: 142.354 ms
+[icp_localization-16] terminate called after throwing an instance of 'std::runtime_error'
+[icp_localization-16]   what():  transform interpolate:: query time is not between start and end time
+[ERROR] [icp_localization-16]: process has died [pid 85928, exit code -6, cmd '/home/container_user/wheelchair2/install/icp_localization_ros2/lib/icp_localization_ros2/icp_localization --ros-args --params-file /home/container_user/wheelchair2/install/icp_localization_ros2/share/icp_localization_ros2/config/node_params.yaml --params-file /tmp/launch_params__gcmgws4'].
+[controller_server-6] [ERROR] [1773941915.566720310] [controller_server]: Exception in transformPose: Lookup would require extrapolation into the future.  Requested time 1773941915.453415 but the latest data is at time 1773941915.319002, when looking up transform from frame [odom] to frame [map]
+[controller_server-6] [ERROR] [1773941915.566945052] [controller_server]: Unable to transform robot pose into global plan's frame
+[controller_server-6] [WARN] [1773941915.567057631] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[planner_server-8] [INFO] [1773941915.582314977] [global_costmap.global_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1773941915.280 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-6] [INFO] [1773941915.661951330] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[controller_server-6] [INFO] [1773941915.666072011] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-6] [ERROR] [1773941915.869319846] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the future.  Requested time 1773941915.767821 but the latest data is at time 1773941915.319002, when looking up transform from frame [map] to frame [base_footprint]
+[controller_server-6] 
+[controller_server-6] [ERROR] [1773941915.971223835] [controller_server]: Exception in transformPose: Lookup would require extrapolation into the future.  Requested time 1773941915.733888 but the latest data is at time 1773941915.319002, when looking up transform from frame [odom] to frame [map]
+[controller_server-6] [ERROR] [1773941915.974692723] [controller_server]: Unable to transform robot pose into global plan's frame
+[controller_server-6] [WARN] [1773941915.974947577] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[controller_server-6] [INFO] [1773941915.975102141] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-6] [ERROR] [1773941916.076884366] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the future.  Requested time 1773941915.975241 but the latest data is at time 1773941915.319002, when looking up transform from frame [map] to frame [base_footprint]
+[controller_server-6] 
+[controller_server-6] [ERROR] [1773941916.178580957] [controller_server]: Exception in transformPose: Lookup would require extrapolation into the future.  Requested time 1773941915.949262 but the latest data is at time 1773941915.319002, when looking up transform from frame [odom] to frame [map]
+[controller_server-6] [ERROR] [1773941916.178808195] [controller_server]: Unable to transform robot pose into global plan's frame
+[controller_server-6] [WARN] [1773941916.178928614] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[controller_server-6] [INFO] [1773941916.263010551] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[planner_server-8] [INFO] [1773941916.264171957] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[rviz2-15] [INFO] [1773941916.381006179] [rviz2]: Message Filter dropping message: frame 'base_footprint' at time 1773941915.388 for reason 'discarding message because the queue is full'
+[rviz2-15] [INFO] [1773941916.473635724] [rviz2]: Message Filter dropping message: frame 'odom' at time 1773941915.323 for reason 'discarding message because the queue is full'
+[controller_server-6] [INFO] [1773941917.312386816] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-6] [ERROR] [1773941917.415155209] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the future.  Requested time 1773941917.313667 but the latest data is at time 1773941915.319002, when looking up transform from frame [map] to frame [base_footprint]
+[controller_server-6] 
+[controller_server-6] [INFO] [1773941917.417449604] [controller_server]: Optimizer reset
+[controller_server-6] [ERROR] [1773941917.518960045] [controller_server]: Exception in transformPose: Lookup would require extrapolation into the future.  Requested time 1773941917.253404 but the latest data is at time 1773941915.319002, when looking up transform from frame [odom] to frame [map]
+[controller_server-6] [ERROR] [1773941917.519137938] [controller_server]: Unable to transform robot pose into global plan's frame
+[controller_server-6] [WARN] [1773941917.519252725] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[rviz2-15] [INFO] [1773941917.564807702] [rviz2]: Message Filter dropping message: frame 'odom' at time 1773941915.554 for reason 'discarding message because the queue is full'
+[controller_server-6] [INFO] [1773941917.611864445] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[controller_server-6] [INFO] [1773941917.614848457] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-6] [ERROR] [1773941917.868593920] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the future.  Requested time 1773941917.766733 but the latest data is at time 1773941915.319002, when looking up transform from frame [map] to frame [base_footprint]
+[controller_server-6] 
+[controller_server-6] [ERROR] [1773941917.970344496] [controller_server]: Exception in transformPose: Lookup would require extrapolation into the future.  Requested time 1773941917.749784 but the latest data is at time 1773941915.319002, when looking up transform from frame [odom] to frame [map]
+[controller_server-6] [ERROR] [1773941917.972723180] [controller_server]: Unable to transform robot pose into global plan's frame
+[controller_server-6] [WARN] [1773941917.973912842] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[behavior_server-9] [INFO] [1773941918.062482636] [behavior_server]: Running spin
+[behavior_server-9] [INFO] [1773941918.062854549] [behavior_server]: Turning 1.57 for spin behavior.
+[planner_server-8] [INFO] [1773941918.182510986] [global_costmap.global_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1773941917.879 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-15] [INFO] [1773941918.907814399] [rviz2]: Message Filter dropping message: frame 'base_footprint' at time 1773941917.879 for reason 'discarding message because the queue is full'
+[rviz2-15] [INFO] [1773941919.001417120] [rviz2]: Message Filter dropping message: frame 'odom' at time 1773941917.894 for reason 'discarding message because the queue is full'
+[rviz2-15] [INFO] [1773941920.187009422] [rviz2]: Message Filter dropping message: frame 'odom' at time 1773941918.143 for reason 'discarding message because the queue is full'
+[planner_server-8] [INFO] [1773941920.772294885] [global_costmap.global_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1773941920.469 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-15] [INFO] [1773941921.497381673] [rviz2]: Message Filter dropping message: frame 'base_footprint' at time 1773941920.469 for reason 'discarding message because the queue is full'
+[rviz2-15] [INFO] [1773941921.615631768] [rviz2]: Message Filter dropping message: frame 'odom' at time 1773941920.435 for reason 'discarding message because the queue is full'
+[rviz2-15] [INFO] [1773941921.787573685] [rviz2]: Message Filter dropping message: frame 'odom' at time 1773941915.758 for reason 'discarding message because the queue is full'
+[rviz2-15] [INFO] [1773941922.778102157] [rviz2]: Message Filter dropping message: frame 'odom' at time 1773941920.733 for reason 'discarding message because the queue is full'
+[behavior_server-9] [INFO] [1773941922.963364058] [behavior_server]: spin completed successfully
+[controller_server-6] [INFO] [1773941923.212229134] [controller_server]: Received a goal, begin computing control effort.
+[planner_server-8] [INFO] [1773941923.285929045] [global_costmap.global_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1773941922.983 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-6] [ERROR] [1773941923.316331445] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the future.  Requested time 1773941923.213463 but the latest data is at time 1773941915.319002, when looking up transform from frame [map] to frame [base_footprint]
+[controller_server-6] 
+[controller_server-6] [INFO] [1773941923.317926494] [controller_server]: Optimizer reset
+[controller_server-6] [ERROR] [1773941923.423419241] [controller_server]: Exception in transformPose: Lookup would require extrapolation into the future.  Requested time 1773941923.139912 but the latest data is at time 1773941915.319002, when looking up transform from frame [odom] to frame [map]
+[controller_server-6] [ERROR] [1773941923.423602477] [controller_server]: Unable to transform robot pose into global plan's frame
+[controller_server-6] [WARN] [1773941923.423701584] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[controller_server-6] [INFO] [1773941923.511953927] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[controller_server-6] [INFO] [1773941923.513817718] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-6] [ERROR] [1773941923.667081753] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the future.  Requested time 1773941923.564099 but the latest data is at time 1773941915.319002, when looking up transform from frame [map] to frame [base_footprint]
+[controller_server-6] 
+[controller_server-6] [ERROR] [1773941923.768668865] [controller_server]: Exception in transformPose: Lookup would require extrapolation into the future.  Requested time 1773941923.539146 but the latest data is at time 1773941915.319002, when looking up transform from frame [odom] to frame [map]
+[controller_server-6] [ERROR] [1773941923.769038474] [controller_server]: Unable to transform robot pose into global plan's frame
+[controller_server-6] [WARN] [1773941923.769199855] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[behavior_server-9] [INFO] [1773941923.863050195] [behavior_server]: Running wait
+[rviz2-15] [INFO] [1773941924.001969099] [rviz2]: Message Filter dropping message: frame 'base_footprint' at time 1773941922.983 for reason 'discarding message because the queue is full'
+[rviz2-15] [INFO] [1773941924.193706394] [rviz2]: Message Filter dropping message: frame 'odom' at time 1773941923.031 for reason 'discarding message because the queue is full'
+[rviz2-15] [INFO] [1773941924.777481981] [rviz2]: Message Filter dropping message: frame 'odom' at time 1773941918.758 for reason 'discarding message because the queue is full'
+[rviz2-15] [INFO] [1773941925.378049895] [rviz2]: Message Filter dropping message: frame 'odom' at time 1773941923.344 for reason 'discarding message because the queue is full'
+[bt_navigator-10] [ERROR] [1773941925.614963113] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941915.553567, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941925.615235408] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941925.717113631] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941915.553567, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941925.717375557] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941925.820671160] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941915.733888, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941925.820965311] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[planner_server-8] [INFO] [1773941925.875868394] [global_costmap.global_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1773941925.573 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[bt_navigator-10] [ERROR] [1773941925.923877672] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941915.839154, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941925.924200336] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941926.026096383] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941915.949262, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941926.026389478] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941926.128175442] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941915.949262, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941926.129656887] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941926.231609447] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941916.059178, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941926.231844525] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941926.335927602] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941916.253243, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941926.336176377] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941926.439382664] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941916.349210, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941926.439735825] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941926.545842986] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941916.453635, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941926.546129553] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[rviz2-15] [INFO] [1773941926.594510679] [rviz2]: Message Filter dropping message: frame 'base_footprint' at time 1773941925.573 for reason 'discarding message because the queue is full'
+[bt_navigator-10] [ERROR] [1773941926.648855764] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941916.549349, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941926.651020939] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[planner_server-8] [ERROR] [1773941926.733907641] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941916.549349, when looking up transform from frame [base_footprint] to frame [map]
+[planner_server-8] 
+[bt_navigator-10] [ERROR] [1773941926.755776162] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941916.549349, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941926.756090666] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[rviz2-15] [INFO] [1773941926.793172659] [rviz2]: Message Filter dropping message: frame 'odom' at time 1773941925.646 for reason 'discarding message because the queue is full'
+[bt_navigator-10] [ERROR] [1773941926.858873998] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941916.653597, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941926.859142197] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941926.960991298] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941916.949292, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941926.961242409] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941927.068027634] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941916.949292, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941927.068303097] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941927.172087415] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941917.053784, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941927.173275669] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941927.276689353] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941917.153706, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941927.276967472] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941927.380093277] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941917.353347, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941927.380355875] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941927.482801055] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941917.463434, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941927.483075878] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941927.585057398] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941917.463434, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941927.585310172] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941927.686869506] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941917.663615, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941927.687152713] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[planner_server-8] [ERROR] [1773941927.729484694] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941917.663615, when looking up transform from frame [base_footprint] to frame [map]
+[planner_server-8] 
+[rviz2-15] [INFO] [1773941927.778112898] [rviz2]: Message Filter dropping message: frame 'odom' at time 1773941921.759 for reason 'discarding message because the queue is full'
+[bt_navigator-10] [ERROR] [1773941927.788994357] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941917.663615, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941927.789245948] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941927.891380175] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941917.839294, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941927.891641270] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[rviz2-15] [INFO] [1773941927.970929801] [rviz2]: Message Filter dropping message: frame 'odom' at time 1773941925.940 for reason 'discarding message because the queue is full'
+[bt_navigator-10] [ERROR] [1773941927.993826443] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941917.949409, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941927.994064945] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941928.095563316] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941918.053544, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941928.095862460] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941928.197612358] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941918.143486, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941928.197867500] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941928.299576052] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941918.250053, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941928.299875580] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[planner_server-8] [INFO] [1773941928.377477252] [global_costmap.global_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1773941928.074 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[bt_navigator-10] [ERROR] [1773941928.401462881] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941918.250053, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941928.401692583] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941928.503274701] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941918.349153, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941928.503661334] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941928.605597093] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941918.457462, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941928.605859723] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941928.709476324] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941918.549183, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941928.709741547] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[planner_server-8] [ERROR] [1773941928.733588005] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941918.549183, when looking up transform from frame [base_footprint] to frame [map]
+[planner_server-8] 
+[bt_navigator-10] [ERROR] [1773941928.811663641] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941918.749136, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941928.811926719] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[behavior_server-9] [INFO] [1773941928.863347474] [behavior_server]: wait completed successfully
+[bt_navigator-10] [ERROR] [1773941928.914111828] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941918.853969, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941928.914367194] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941929.017806734] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941918.853969, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941929.019063726] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941929.120731573] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941918.953442, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941929.121007484] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[rviz2-15] [INFO] [1773941929.187437353] [rviz2]: Message Filter dropping message: frame 'base_footprint' at time 1773941928.183 for reason 'discarding message because the queue is full'
+[bt_navigator-10] [ERROR] [1773941929.224049254] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941919.159202, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941929.224314124] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941929.326635108] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941919.159202, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941929.326973740] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[rviz2-15] [INFO] [1773941929.347956702] [rviz2]: Message Filter dropping message: frame 'odom' at time 1773941928.223 for reason 'discarding message because the queue is full'
+[bt_navigator-10] [ERROR] [1773941929.428888825] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941919.245802, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941929.429221890] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[planner_server-8] [ERROR] [1773941929.528662160] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941919.369156, when looking up transform from frame [base_footprint] to frame [map]
+[planner_server-8] 
+[planner_server-8] [WARN] [1773941929.528808724] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[bt_navigator-10] [ERROR] [1773941929.532421615] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941919.369156, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941929.532691574] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941929.634134039] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941919.453451, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941929.634383998] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[planner_server-8] [INFO] [1773941929.638336770] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-8] [ERROR] [1773941929.733206301] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941919.653266, when looking up transform from frame [base_footprint] to frame [map]
+[planner_server-8] 
+[bt_navigator-10] [ERROR] [1773941929.753677922] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941919.653266, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941929.753998858] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941929.855796724] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941919.843513, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941929.856040250] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941929.957958311] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941919.843513, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941929.958250223] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941930.059934582] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941919.953758, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941930.060206205] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941930.162322830] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941920.159189, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941930.162613526] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941930.266892798] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941920.159189, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941930.267152709] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941930.374102192] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941920.243451, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941930.374434969] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941930.477986126] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941920.369317, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941930.478239509] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[rviz2-15] [INFO] [1773941930.562503172] [rviz2]: Message Filter dropping message: frame 'odom' at time 1773941928.543 for reason 'discarding message because the queue is full'
+[bt_navigator-10] [ERROR] [1773941930.580764945] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941920.454546, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941930.581030104] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941930.682832705] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941920.643388, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941930.683492242] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[planner_server-8] [ERROR] [1773941930.729602366] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941920.643388, when looking up transform from frame [base_footprint] to frame [map]
+[planner_server-8] 
+[bt_navigator-10] [ERROR] [1773941930.785036021] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941920.733470, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941930.785312636] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[rviz2-15] [INFO] [1773941930.786872036] [rviz2]: Message Filter dropping message: frame 'odom' at time 1773941924.759 for reason 'discarding message because the queue is full'
+[bt_navigator-10] [ERROR] [1773941930.889424192] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941920.850734, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941930.889685095] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[planner_server-8] [INFO] [1773941930.976399540] [global_costmap.global_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1773941930.674 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[bt_navigator-10] [ERROR] [1773941930.996152902] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941920.850734, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941930.996429645] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941931.098060690] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941920.953385, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941931.098311993] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941931.199798842] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941921.045007, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941931.200070913] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941931.302964933] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941921.149598, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941931.303223308] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941931.407092457] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941921.249629, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941931.407341040] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941931.511215565] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941921.443458, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941931.511455987] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941931.613625638] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941921.549265, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941931.613882924] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941931.715387022] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941921.549265, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941931.715648404] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[planner_server-8] [ERROR] [1773941931.733324019] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941921.549265, when looking up transform from frame [base_footprint] to frame [map]
+[planner_server-8] 
+[rviz2-15] [INFO] [1773941931.779095190] [rviz2]: Message Filter dropping message: frame 'base_footprint' at time 1773941930.779 for reason 'discarding message because the queue is full'
+[bt_navigator-10] [ERROR] [1773941931.818489208] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941921.653327, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941931.818718974] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941931.923038822] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941921.839138, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941931.923322894] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[rviz2-15] [INFO] [1773941931.942995806] [rviz2]: Message Filter dropping message: frame 'odom' at time 1773941930.843 for reason 'discarding message because the queue is full'
+[bt_navigator-10] [ERROR] [1773941932.024982643] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941921.973399, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941932.048201629] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941932.151705361] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941921.973399, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941932.151941046] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941932.255307335] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941922.251778, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941932.255572109] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941932.363165928] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941922.251778, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941932.363394670] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941932.469527652] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941922.251778, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941932.469794442] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941932.571655605] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941922.369331, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941932.571915515] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941932.679768604] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941922.633540, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941932.680027875] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[planner_server-8] [ERROR] [1773941932.729477091] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941922.633540, when looking up transform from frame [base_footprint] to frame [map]
+[planner_server-8] 
+[bt_navigator-10] [ERROR] [1773941932.781534532] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941922.743500, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941932.781797451] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941932.883577555] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941922.743500, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941932.883836665] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941932.986435158] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941922.953307, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941932.986704957] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941933.089446461] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941923.053472, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941933.090950979] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[rviz2-15] [INFO] [1773941933.186693074] [rviz2]: Message Filter dropping message: frame 'odom' at time 1773941931.146 for reason 'discarding message because the queue is full'
+[bt_navigator-10] [ERROR] [1773941933.193631105] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941923.053472, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941933.193910568] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941933.295415625] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941923.233360, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941933.295657775] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941933.398992606] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941923.344183, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941933.399284293] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941933.502915771] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941923.459733, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941933.503227651] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[planner_server-8] [INFO] [1773941933.565493062] [global_costmap.global_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1773941933.263 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[bt_navigator-10] [ERROR] [1773941933.604799621] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941923.459733, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941933.605058604] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941933.706932758] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941923.649178, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941933.707186844] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[planner_server-8] [ERROR] [1773941933.728598744] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941923.649178, when looking up transform from frame [base_footprint] to frame [map]
+[planner_server-8] 
+[rviz2-15] [INFO] [1773941933.769045269] [rviz2]: Message Filter dropping message: frame 'odom' at time 1773941927.760 for reason 'discarding message because the queue is full'
+[bt_navigator-10] [ERROR] [1773941933.809036613] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941923.649178, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941933.809321293] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!
+[bt_navigator-10] [ERROR] [1773941933.911899656] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1773941915.319002 but the earliest data is at time 1773941923.753396, when looking up transform from frame [base_footprint] to frame [map]
+[bt_navigator-10] 
+[bt_navigator-10] [WARN] [1773941933.912178223] [BehaviorTreeEngine]: Behavior Tree tick rate 20.00 was exceeded!

@@ -135,7 +135,7 @@ controller_server:
       vx_std: 0.30
       vy_std: 0.30
       wz_std: 0.30
-      vx_max: 0.35
+      vx_max: 0.85 #donkey-kong 
       vx_min: -0.25
       vy_max: 0.35
       wz_max: 0.4
@@ -257,7 +257,7 @@ local_costmap:
       inflation_layer:
         enabled: True
         plugin: "nav2_costmap_2d::InflationLayer"
-        inflation_radius: 0.25
+        inflation_radius: 0.35
         cost_scaling_factor: 10.0 #10 2.58
       lidar_obstacle_layer:
         plugin: "spatio_temporal_voxel_layer/SpatioTemporalVoxelLayer"

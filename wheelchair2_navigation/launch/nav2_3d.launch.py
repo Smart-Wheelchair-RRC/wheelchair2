@@ -18,9 +18,9 @@ def generate_launch_description():
     use_sim_time = LaunchConfiguration("use_sim_time", default="false")
     map_yaml = LaunchConfiguration(
         "map",
-        default=os.path.join(wheelchair_nav_dir, "maps", "rrc", "rrc_lab.yaml"),
-        # default="/home/container_user/wheelchair2/src/change_detection/cartograph/aligned_results/probabilistic_master.yaml"
-        # default=os.path.join(wheelchair_nav_dir, "maps", "ramps", "rrc_outside_himalaya_ramps_fast_cleaned.yaml"),
+        # default="/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/himalaya/with_classroom/himalaya_with_classroom_ICP.yaml"
+        # default=os.path.join(wheelchair_nav_dir, "maps", "rrc", "rrc_lab.yaml"),
+        default=os.path.join(wheelchair_nav_dir, "maps", "ramps", "rrc_outside_himalaya_ramps_fast_cleaned.yaml"),
     )
     params_file = LaunchConfiguration(
         "params_file",
@@ -89,7 +89,7 @@ def generate_launch_description():
             PythonLaunchDescriptionSource(
                 os.path.join(get_package_share_directory('icp_localization_ros2'), 'launch', 'bringup.launch.py')
             ),
-            launch_arguments={'rate': '3.0', 'use_sim_time': use_sim_time}.items()
+            launch_arguments={'rate': '0.5', 'use_sim_time': use_sim_time}.items()
         ),
 
         # Nav2 Stack
