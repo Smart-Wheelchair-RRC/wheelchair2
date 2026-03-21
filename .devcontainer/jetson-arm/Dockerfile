@@ -1,4 +1,4 @@
-FROM ghcr.io/smart-wheelchair-rrc/wheelchair2_base_jetson:v5.0
+FROM ghcr.io/smart-wheelchair-rrc/wheelchair2_base_jetson:dev5.1.3
 
 # Add the following labels
 LABEL org.opencontainers.image.description="Wheelchair2"
@@ -14,9 +14,8 @@ COPY . /home/container_user/wheelchair2/src
 
 WORKDIR /home/container_user/wheelchair2
 
-RUN source /opt/ros/humble/setup.bash \
-    && colcon build --symlink-install \
-    && source install/setup.bash \
-    && cd src/wheelchair2_navigation/shell_scripts \
-    && sudo chmod +x ./navigation.tmux
-
+# RUN source /opt/ros/humble/setup.bash \
+#     && colcon build --symlink-install \
+#     && source install/setup.bash \
+#     && cd src/wheelchair2_navigation/shell_scripts \
+#     && sudo chmod +x ./navigation.tmux

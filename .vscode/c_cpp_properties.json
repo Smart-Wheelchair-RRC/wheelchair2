@@ -1,17 +1,39 @@
 {
-    "configurations": [
-      {
-        "browse": {
-          "databaseFilename": "${default}",
-          "limitSymbolsToIncludedHeaders": false
-        },
-        "includePath": [],
-        "compileCommands": "/home/container_user/wheelchair2/build/compile_commands.json",
-        "name": "ROS",
-        "compilerPath": "/usr/bin/gcc",
-        "cStandard": "gnu11",
-        "cppStandard": "c++17"
-      }
-    ],
-    "version": 4
-  }
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${workspaceFolder}/.vscode/browse.vc.db",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/container_user/wheelchair2/src/install/wheelchair2_gicp/include/**",
+        "/home/container_user/wheelchair2/src/install/wheelchair2_3dbbs/include/**",
+        "/home/container_user/wheelchair2/src/install/fast_lio/include/**",
+        "/home/container_user/wheelchair2/install/wheelchair2_kangaroo_x2_driver/include/**",
+        "/home/container_user/wheelchair2/install/wheelchair2_gicp/include/**",
+        "/home/container_user/wheelchair2/install/wheelchair2_3dbbs/include/**",
+        "/home/container_user/wheelchair2/install/realsense2_camera/include/**",
+        "/home/container_user/wheelchair2/install/realsense2_camera_msgs/include/**",
+        "/home/container_user/wheelchair2/install/pointcloud_to_laserscan/include/**",
+        "/home/container_user/wheelchair2/install/fast_lio/include/**",
+        "/home/container_user/wheelchair2/install/livox_ros_driver2/include/**",
+        "/home/container_user/wheelchair2/install/icp_localization_ros2/include/**",
+        "/opt/ros/humble/include/**",
+        "/home/container_user/wheelchair2/src/RRC-3DLocalization/wheelchair2_3dbbs/include/**",
+        "/home/container_user/wheelchair2/src/RRC-3DLocalization/wheelchair2_gicp/include/**",
+        "/home/container_user/wheelchair2/src/dependencies/FAST_LIO/include/**",
+        "/home/container_user/wheelchair2/src/dependencies/icp_localization_ros2/include/**",
+        "/home/container_user/wheelchair2/src/dependencies/pointcloud_to_laserscan/include/**",
+        "/home/container_user/wheelchair2/src/dependencies/realsense-ros/realsense2_camera/include/**",
+        "/home/container_user/wheelchair2/src/wheelchair2_kangaroo_x2_driver/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ros2",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++17"
+    }
+  ],
+  "version": 4
+}

@@ -1,0 +1,6 @@
+free_thresh: 0.3
+image: himalaya_with_classroom_ICP.png
+negate: 0
+occupied_thresh: 0.6
+origin: [-55.823143005371094, -89.9205093383789, 0.0]
+resolution: 0.05

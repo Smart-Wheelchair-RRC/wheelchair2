@@ -1,9 +1,16 @@
 {
     "name": "Wheelchair2 Development on AMD64/x86 with GPU",
-    "image": "ghcr.io/smart-wheelchair-rrc/wheelchair2_base_cuda:v5.0",
+    "image": "ghcr.io/smart-wheelchair-rrc/wheelchair2_base_cuda:v5.1",
     "privileged": true,
     "workspaceMount": "source=${localWorkspaceFolder},target=/home/container_user/wheelchair2/src,type=bind",
     "workspaceFolder": "/home/container_user/wheelchair2/src",
+
+    "mounts": [
+        "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,consistency=cached",
+        "source=${localEnv:HOME}/.Xauthority,target=/root/.Xauthority,type=bind"
+    ],
+
+    
     "customizations": {
         "vscode": {
             "settings": {
@@ -47,9 +54,12 @@
         // "LIBGL_ALWAYS_SOFTWARE": "1", // Needed for software rendering of opengl ( Comment this off if you face any lag in Gazebo )
         "NVIDIA_DRIVER_CAPABILITIES": "all",
         "NVIDIA_VISIBLE_DEVICES": "all",
-        "ROS_DOMAIN_ID": "79"
+        "ROS_DOMAIN_ID": "27",
+        "__NV_PRIME_RENDER_OFFLOAD": "1",
+        "__GLX_VENDOR_LIBRARY_NAME": "nvidia"
     },
     "runArgs": [
+        "--privileged",
         "--gpus=all", // Comment this off if you don't have a GPU
         "--cap-add=SYS_NICE",
         "--ulimit=rtprio=99",
@@ -62,7 +72,8 @@
         "--volume=/dev:/dev", // Realsense and Motor driver
         "--volume=/media:/media:rw",
         "--net=host",
-        "--ipc=host"
+        "--ipc=host",
+        "--env", "NVIDIA_DRIVER_CAPABILITIES=all"
     ],
     "postStartCommand": "sudo chown -R container_user:container_user /home/container_user/wheelchair2 /run",
     "postCreateCommand": "bash /home/container_user/wheelchair2/src/scripts/post_create.sh",

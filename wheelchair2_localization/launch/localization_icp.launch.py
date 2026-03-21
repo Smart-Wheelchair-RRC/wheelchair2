@@ -36,10 +36,11 @@ DEFAULT_PARAMETERS = {
     'inverted_imu_topic': '/livox/imu_inverted',
     'final_lidar_topic': '/livox/lidar_inverted',
     'final_imu_topic': '/livox/imu_inverted',
-    'input_odom_topic': '/odom',
+    'input_odom_topic': '/Odometry',
 
     # File paths
-    'pcd_map_path': str(NAVIGATION_PACKAGE_DIRECTORY / 'maps' / 'rrc' / 'lab_map_with_outside_corridor.pcd'),
+    # 'pcd_map_path': str(NAVIGATION_PACKAGE_DIRECTORY / 'maps' / 'rrc' / 'lab_map_with_outside_corridor.pcd'),
+    'pcd_map_path': '/home/container_user/wheelchair2/src/lab_map_with_outside_corridor.pcd',
     'icp_config_file': str(ICP_LOCALIZATION_CONFIG_PATH / 'icp.yaml'),
     'icp_node_params_file': str(ICP_LOCALIZATION_CONFIG_PATH / 'node_params.yaml'),
 }
@@ -126,8 +127,8 @@ def create_nodes():
             }
         ],
         remappings=[
-            ('/cloud_registered_body', final_lidar_topic),
-            ('/imu/data', final_imu_topic),
+            ('/livox/lidar_inverted', final_lidar_topic),
+            ('/livox/imu_inverted', final_imu_topic),
             ('/Odometry', input_odom_topic),
         ]
     ))

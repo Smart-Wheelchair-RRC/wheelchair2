@@ -1,9 +1,14 @@
 {
     "name": "Wheelchair2 Development on Jetson",
-    "image": "ghcr.io/smart-wheelchair-rrc/wheelchair2_base_jetson:v5.0",
+    "image": "ghcr.io/smart-wheelchair-rrc/wheelchair2_base_jetson:v5.1",
     "privileged": true,
     "workspaceMount": "source=${localWorkspaceFolder},target=/home/container_user/wheelchair2/src,type=bind",
     "workspaceFolder": "/home/container_user/wheelchair2/src",
+    "updateRemoteUserUID": true,
+    "containerUser": "container_user",
+    "mounts": [
+        "source=${localEnv:HOME}/.config/gh,target=/home/container_user/.config/gh,type=bind"
+    ],
     "customizations": {
         "vscode": {
             "settings": {
@@ -38,31 +43,39 @@
             ]
         }
     },
+    "features": {
+        "ghcr.io/devcontainers/features/github-cli:1": {}
+    },
     "containerEnv": {
-        "DISPLAY": ":1",
+        "DISPLAY": ":0",
+        "NVIDIA_VISIBLE_DEVICES": "all",
+        "NVIDIA_DRIVER_CAPABILITIES": "all",
+        "NVIDIA_DISABLE_REQUIRE": "true",
         "WAYLAND_DISPLAY": "${localEnv:WAYLAND_DISPLAY}",
         "XDG_RUNTIME_DIR": "${localEnv:XDG_RUNTIME_DIR}",
         "PULSE_SERVER": "${localEnv:PULSE_SERVER}",
         "QT_X11_NO_MITSHM": "1",
-        "ROS_DOMAIN_ID": "19" // Adding this will restrict your ROS 2 nodes to communicate only with systems in the network with same ROS_DOMAIN_ID, preventing interference from other ROS 2 nodes on the same network.
+        "ROS_DOMAIN_ID": "27" // Adding this will restrict your ROS 2 nodes to communicate only with systems in the network with same ROS_DOMAIN_ID, preventing interference from other ROS 2 nodes on the same network.
         // "LIBGL_ALWAYS_SOFTWARE": "1"
     },
     "runArgs": [
         "--runtime=nvidia",
         "--cap-add=SYS_NICE",
-        "--ulimit=rtprio=99",
-        "--ulimit=rttime=-1",
-        "--ulimit=memlock=8428281856",
-        "--cap-add=all",
+        // "--ulimit=rtprio=99",
+        // "--ulimit=rttime=-1",
+        // "--ulimit=memlock=8428281856",
+        // "--cap-add=all",
         "--security-opt=seccomp:unconfined",
         "--security-opt=apparmor:unconfined",
         // "--device=/dev/ttyACM0", // Motor driver only
         "--volume=/dev:/dev", // Realsense and Motor driver
         "--volume=/tmp/.X11-unix:/tmp/.X11-unix",
         "--net=host",
-        "--ipc=host"
+        "--ipc=host",
+        "--device=/dev/pts:/dev/pts"
     ],
-    "postStartCommand": "sudo chown -R container_user:container_user /home/container_user/wheelchair2 /run",
+    // "postStartCommand": "sudo chown -R container_user:container_user /home/container_user/wheelchair2 /run",
+    "postStartCommand": "sudo chown -R container_user:container_user /home/container_user/wheelchair2 /run && sudo chmod -R 777 /home/container_user/wheelchair2/src",
     "postCreateCommand": "bash /home/container_user/wheelchair2/src/scripts/post_create.sh",
-    "initializeCommand": "xhost +local:root"
+    // "initializeCommand": "xhost +local:root"
 }
