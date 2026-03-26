@@ -24,7 +24,7 @@ def generate_launch_description():
     )
     params_file = LaunchConfiguration(
         "params_file",
-        default=os.path.join(wheelchair_nav_dir, "config", "nav2_params.yaml"),
+        default=os.path.join(wheelchair_nav_dir, "config", "new_params.yaml"),
     )
     use_keepout_zone = LaunchConfiguration('use_keepout_zone', default='False')
     keepout_params_file = LaunchConfiguration(

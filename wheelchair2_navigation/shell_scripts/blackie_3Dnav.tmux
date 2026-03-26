@@ -21,7 +21,7 @@ tmux send-keys -t $SESSION_NAME "ros2 launch wheelchair2_bringup wheelchair2.lau
 
 # 5. Pane 3: sleep 7s then nav2_3d.launch.py
 tmux split-window -t $SESSION_NAME
-tmux send-keys -t $SESSION_NAME "sleep 7 && ros2 launch wheelchair2_navigation nav2_3d.launch.py | tee output.log" C-m
+tmux send-keys -t $SESSION_NAME "sleep 7 && ros2 launch wheelchair2_navigation nav2_3d.launch.py map:=/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/rrc/hardware_lab_2/hardware_lab_2.yaml | tee output.log" C-m
 
 # 6. Arrange the 4 panes in a tiled layout
 tmux select-layout -t $SESSION_NAME tiled
