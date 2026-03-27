@@ -24,7 +24,7 @@ def generate_launch_description():
     )
     params_file = LaunchConfiguration(
         "params_file",
-        default=os.path.join(wheelchair_nav_dir, "config", "new_params.yaml"),
+        default=os.path.join(wheelchair_nav_dir, "config", "nav2_params.yaml"),
     )
     use_keepout_zone = LaunchConfiguration('use_keepout_zone', default='False')
     keepout_params_file = LaunchConfiguration(
@@ -89,7 +89,7 @@ def generate_launch_description():
             PythonLaunchDescriptionSource(
                 os.path.join(get_package_share_directory('icp_localization_ros2'), 'launch', 'bringup.launch.py')
             ),
-            launch_arguments={'rate': '0.5', 'use_sim_time': use_sim_time}.items()
+            launch_arguments={'rate': '3', 'use_sim_time': use_sim_time}.items()
         ),
 
         # Nav2 Stack
