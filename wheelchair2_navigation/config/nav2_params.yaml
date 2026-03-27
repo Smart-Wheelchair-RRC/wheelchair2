@@ -257,7 +257,7 @@ local_costmap:
       inflation_layer:
         enabled: True
         plugin: "nav2_costmap_2d::InflationLayer"
-        inflation_radius: 0.35
+        inflation_radius: 0.30
         cost_scaling_factor: 10.0 #10 2.58
       lidar_obstacle_layer:
         plugin: "spatio_temporal_voxel_layer/SpatioTemporalVoxelLayer"
