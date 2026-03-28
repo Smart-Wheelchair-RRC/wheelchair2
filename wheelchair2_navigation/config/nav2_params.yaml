@@ -239,8 +239,8 @@ controller_server:
 local_costmap:
   local_costmap:
     ros__parameters:
-      update_frequency: 5.0
-      publish_frequency: 2.0
+      update_frequency: 10.0
+      publish_frequency: 4.0
       global_frame: odom
       robot_base_frame: base_footprint
       use_sim_time: False
@@ -275,6 +275,7 @@ local_costmap:
         mapping_mode: false # default off, saves map not for navigation
         map_save_duration: 60.0 # default 60s, how often to autosave
         observation_sources: lidar1_mark lidar1_clear
+
         lidar1_mark:
           data_type: PointCloud2
           # topic: /livox/lidar_box
@@ -282,7 +283,7 @@ local_costmap:
           marking: true
           clearing: false
           obstacle_range: 5.0 # meters 3
-          min_obstacle_height: 0.1 # default 0, meters
+          min_obstacle_height: 0.05 # default 0, meters
           max_obstacle_height: 1.0 # default 3, meters
           expected_update_rate: 0.0 # default 0, if not updating at this rate at least, remove from buffer
           observation_persistence: 0.0 # default 0, use all measurements taken during now-value, 0=latest
@@ -321,8 +322,8 @@ local_costmap:
 global_costmap:
   global_costmap:
     ros__parameters:
-      update_frequency: 1.0
-      publish_frequency: 1.0
+      update_frequency: 5.0
+      publish_frequency: 2.0
       global_frame: map
       robot_base_frame: base_link
       footprint: "[[-0.30,-0.32],[0.72,-0.32],[0.72,0.32],[-0.30,0.32]]"
@@ -334,7 +335,7 @@ global_costmap:
       stvl_layer:
         plugin: "spatio_temporal_voxel_layer/SpatioTemporalVoxelLayer"
         enabled: true
-        voxel_decay: 1.0
+        voxel_decay: 5.0
         decay_model: 0
         voxel_size: 0.05
         track_unknown_space: true
@@ -345,7 +346,7 @@ global_costmap:
         publish_voxel_map: false
         transform_tolerance: 0.5
         mapping_mode: false
-        observation_sources: livox_mark livox_clear
+        observation_sources: livox_mark # livox_clear
         
         livox_mark:
           data_type: PointCloud2
@@ -362,19 +363,19 @@ global_costmap:
           voxel_min_points: 0
           clear_after_reading: false
 
-        livox_clear:
-          enabled: true
-          data_type: PointCloud2
-          topic: /livox/lidar_box
-          marking: false
-          clearing: true
-          max_z: 8.0
-          min_z: 0.1
-          vertical_fov_angle: 1.02
-          vertical_fov_padding: 0.05
-          horizontal_fov_angle: 6.29
-          decay_acceleration: 5.0
-          model_type: 1
+        # livox_clear:
+        #   enabled: true
+        #   data_type: PointCloud2
+        #   topic: /livox/lidar_box
+        #   marking: false
+        #   clearing: true
+        #   max_z: 8.0
+        #   min_z: 0.1
+        #   vertical_fov_angle: 1.02
+        #   vertical_fov_padding: 0.05
+        #   horizontal_fov_angle: 6.29
+        #   decay_acceleration: 5.0
+        #   model_type: 1
 
       static_layer:
         plugin: "nav2_costmap_2d::StaticLayer"
