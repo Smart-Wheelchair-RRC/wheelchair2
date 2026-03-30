@@ -25,6 +25,10 @@ tmux send-keys -t $SESSION_NAME "ros2 launch wheelchair2_bringup livox.launch.py
 ############## 4. Pane 2: Localisation launch
 tmux split-window -t $SESSION_NAME
 
+# Launch the Click Loc button 
+tmux send-keys -t $SESSION_NAME "python3 /home/container_user/wheelchair2/src/dependencies/3DLocalization/wheelchair2_3dbbs/scripts/click_loc.py &" C-m
+
+
 # (Default) RRC with outside corridor
 tmux send-keys -t $SESSION_NAME "ros2 launch wheelchair2_localization 3d_stack.launch.py pcd_map_path:=$MAP_DIR/rrc/lab_map_with_outside_corridor.pcd nature:=indoor" C-m
 

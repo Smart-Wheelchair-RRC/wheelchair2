@@ -6,9 +6,6 @@
     "workspaceFolder": "/home/container_user/wheelchair2/src",
     "updateRemoteUserUID": true,
     "containerUser": "container_user",
-    "mounts": [
-        "source=${localEnv:HOME}/.config/gh,target=/home/container_user/.config/gh,type=bind"
-    ],
     "customizations": {
         "vscode": {
             "settings": {
@@ -42,9 +39,6 @@
                 "ms-vscode.cmake-tools"
             ]
         }
-    },
-    "features": {
-        "ghcr.io/devcontainers/features/github-cli:1": {}
     },
     "containerEnv": {
         "DISPLAY": ":0",
