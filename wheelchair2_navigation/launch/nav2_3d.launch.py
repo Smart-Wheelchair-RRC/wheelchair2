@@ -1,47 +1,87 @@
-import os
-from ament_index_python.packages import get_package_share_directory
-from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument, GroupAction
-from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import LaunchConfiguration
-from nav2_common.launch import RewrittenYaml
-from launch.conditions import IfCondition
-from launch_ros.actions import Node
+"""
+Launch file for Nav2 stack, decoupled from localization.
+- Enforces mandatory 2D map path from CLI.
+- Runs box_filter immediately.
+- Runs the map server and Nav2 stack (after a 2s delay).
+- Optionally runs RViz for visualization (after a 4s delay).
+"""
+
 from pathlib import Path
 
-def generate_launch_description():
-    # Directories
-    wheelchair_nav_dir = get_package_share_directory("wheelchair2_navigation")
-    nav2_bringup_dir = get_package_share_directory('nav2_bringup')
+import launch
+from ament_index_python.packages import get_package_share_directory
+from launch.actions import (DeclareLaunchArgument, GroupAction,
+                            IncludeLaunchDescription, TimerAction)
+from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch.substitutions import LaunchConfiguration
+from launch_ros.actions import Node
+from nav2_common.launch import RewrittenYaml
 
-    # Launch arguments
-    use_sim_time = LaunchConfiguration("use_sim_time", default="false")
-    map_yaml = LaunchConfiguration(
-        "map",
-        # default="/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/himalaya/with_classroom/himalaya_with_classroom_ICP.yaml"
-        # default=os.path.join(wheelchair_nav_dir, "maps", "rrc", "rrc_lab.yaml"),
-        default=os.path.join(wheelchair_nav_dir, "maps", "ramps", "rrc_outside_himalaya_ramps_fast_cleaned.yaml"),
-    )
-    params_file = LaunchConfiguration(
-        "params_file",
-        default=os.path.join(wheelchair_nav_dir, "config", "nav2_params.yaml"),
-    )
-    use_keepout_zone = LaunchConfiguration('use_keepout_zone', default='False')
-    keepout_params_file = LaunchConfiguration(
-        'keepout_params_file',
-        default=os.path.join(wheelchair_nav_dir, "config", "keepout_params.yaml"),
-    )
-    keepout_mask_file_path = LaunchConfiguration(
-        'keepout_mask_file_path',
-        default=os.path.join(wheelchair_nav_dir, "maps", "rrc", "rrc_lab_mask.yaml"),
-    )
-    rviz_config_file = LaunchConfiguration(
-        'rviz_config_file',
-        default=os.path.join(wheelchair_nav_dir, 'rviz', 'navigation.rviz')
-    )
-    run_rviz = LaunchConfiguration('run_rviz', default='true')
 
-    # RewrittenYaml for keepout zones
+NAVIGATION_PACKAGE_NAME = 'wheelchair2_navigation'
+NAVIGATION_PACKAGE_DIRECTORY = Path(get_package_share_directory(NAVIGATION_PACKAGE_NAME))
+
+DEFAULT_PARAMETERS = {
+    # core functionality parameters
+    'use_navigation': 'true',
+    'use_sim_time': 'false',
+    'use_mapper_server': 'true',
+    'nav2_rviz_required': 'true',
+    'use_keepout_zone': 'false',
+
+    # frames and TFs
+    'main_map_frame': 'map',
+    'main_odom_frame': 'odom',
+
+    # File paths (Note: map is omitted here to make it a mandatory argument)
+    'keepout_mask_file_path': str(NAVIGATION_PACKAGE_DIRECTORY / 'maps' / 'rrc' / 'rrc_lab_mask.yaml'),
+    'nav2_params_file': str(NAVIGATION_PACKAGE_DIRECTORY / 'config' / 'nav2_params.yaml'),
+    'nav2_rviz_config_file': str(NAVIGATION_PACKAGE_DIRECTORY / 'rviz' / 'navigation.rviz'),
+    'keepout_params_file': str(NAVIGATION_PACKAGE_DIRECTORY / 'config' / 'keepout_params.yaml'),
+}
+
+def declare_launch_arguments(param_defaults: dict):
+    """Declare all launch arguments with values from parameters."""
+    launch_args = []
+
+    # 1. Mandatory argument for map (no default value)
+    launch_args.append(DeclareLaunchArgument(
+        'map',
+        description="Mandatory: Full path to the 2D map yaml file to load"
+    ))
+    
+    # 2. Add the rest of the arguments with defaults
+    for param_name, default_value in param_defaults.items():
+        launch_args.append(DeclareLaunchArgument(
+            param_name,
+            default_value=default_value,
+            description=f"Launch argument for {param_name}"
+        ))
+
+    return launch_args
+
+def create_nodes():
+    """Create all the nodes and timed actions needed for the launch."""
+
+    # core
+    use_navigation = LaunchConfiguration('use_navigation')
+    use_sim_time = LaunchConfiguration('use_sim_time')
+    nav2_rviz_required = LaunchConfiguration('nav2_rviz_required')
+    use_mapper_server = LaunchConfiguration('use_mapper_server')
+    use_keepout_zone = LaunchConfiguration('use_keepout_zone')
+
+    # frames and TFs
+    main_map_frame_id = LaunchConfiguration('main_map_frame')
+    main_odom_frame_id = LaunchConfiguration('main_odom_frame')
+
+    # File paths
+    map = LaunchConfiguration('map')
+    nav2_params_file = LaunchConfiguration('nav2_params_file')
+    nav2_rviz_config_file = LaunchConfiguration('nav2_rviz_config_file')
+    keepout_mask_file_path = LaunchConfiguration('keepout_mask_file_path')
+    keepout_params_file = LaunchConfiguration('keepout_params_file')
+
+    # keepout zone parameters
     updated_keepout_params = RewrittenYaml(
         source_file=keepout_params_file,
         param_rewrites={
@@ -51,112 +91,137 @@ def generate_launch_description():
         convert_types=True
     )
 
+    actions_list = []
+
+    # ==========================================
+    # Phase 1: Immediate Startup
+    # ==========================================
+    
+    # Box filter node
+    box_filter_node = Node(
+        package='wheelchair2_bringup',
+        executable='box_filter.py',
+        name='box_filter',
+        output='screen'
+    )
+    actions_list.append(box_filter_node)
+
+
+    # ==========================================
+    # Phase 2: Nav2 Stack (2 Second Delay)
+    # ==========================================
+    
+    nav2_group_actions = []
+
+    # Lifecycle manager for map
+    nav2_group_actions.append(Node(
+        package="nav2_lifecycle_manager",
+        executable="lifecycle_manager",
+        name="lifecycle_manager_map",
+        output="screen",
+        emulate_tty=True,
+        parameters=[{
+            'autostart': True,
+            'node_names': ['map_server'],
+            'use_sim_time': use_sim_time
+        }],
+        condition=launch.conditions.IfCondition(use_mapper_server)
+    ))
+
+    # Lifecycle manager for keepout zones
     lifecycle_nodes_keepout = ['filter_mask_server', 'costmap_filter_info_server']
-    lifecycle_nodes_nav = [
-        'controller_server',
-        'planner_server',
-        'behavior_server',
-        'bt_navigator',
-        'waypoint_follower'
-    ]
+    nav2_group_actions.append(Node(
+        package="nav2_lifecycle_manager",
+        executable="lifecycle_manager",
+        name="lifecycle_manager_keepout",
+        output="screen",
+        emulate_tty=True,
+        parameters=[{
+            'autostart': True,
+            'node_names': lifecycle_nodes_keepout,
+            'use_sim_time': use_sim_time
+        }],
+        condition=launch.conditions.IfCondition(use_keepout_zone)
+    ))
 
-    return LaunchDescription([
-        DeclareLaunchArgument("use_sim_time", default_value="false", description="Use simulation (Gazebo) clock if true"),
-        DeclareLaunchArgument("map", default_value=map_yaml, description="Full path to map file to load"),
-        DeclareLaunchArgument("params_file", default_value=params_file, description="Full path to Nav2 parameters file"),
-        DeclareLaunchArgument('use_keepout_zone', default_value='False', description='Launch with keepout zones'),
-        DeclareLaunchArgument("keepout_params_file", default_value=keepout_params_file, description="Full path to keepout zone parameters file"),
-        DeclareLaunchArgument("keepout_mask_file_path", default_value=keepout_mask_file_path, description="Full path to keepout zone mask file"),
-        DeclareLaunchArgument('rviz_config_file', default_value=rviz_config_file, description='Full path to the RVIZ config file to use'),
-        DeclareLaunchArgument('run_rviz', default_value='true', description='Run RViz'),
+    # Mapper server node
+    nav2_group_actions.append(Node(
+        package="nav2_map_server",
+        executable="map_server",
+        output="screen",
+        parameters=[{
+            'use_sim_time': use_sim_time,
+            'yaml_filename': map,
+            'frame_id': main_map_frame_id,
+        }],
+        condition=launch.conditions.IfCondition(use_mapper_server)
+    ))
 
-        # Odometry (DLIO)
-        IncludeLaunchDescription(
-            PythonLaunchDescriptionSource(
-                os.path.join(get_package_share_directory('direct_lidar_inertial_odometry'), 'launch', 'dlio.launch.py')
-            ),
-            launch_arguments={'rviz': 'false', 'use_sim_time': use_sim_time}.items()
-        ),
+    # Keepout zone filter nodes
+    nav2_group_actions.append(Node(
+        package='nav2_map_server',
+        executable='costmap_filter_info_server',
+        name='costmap_filter_info_server',
+        output='screen',
+        emulate_tty=True,  
+        condition=launch.conditions.IfCondition(use_keepout_zone),
+        parameters=[updated_keepout_params]
+    ))
+    
+    nav2_group_actions.append(Node(
+        package='nav2_map_server',
+        executable='map_server',
+        name='filter_mask_server',
+        output='screen',
+        emulate_tty=True,
+        condition=launch.conditions.IfCondition(use_keepout_zone),
+        parameters=[updated_keepout_params]
+    ))
 
-        # Localization (3D-BBS and ICP)
-        IncludeLaunchDescription(
-            PythonLaunchDescriptionSource(
-                os.path.join(get_package_share_directory('wheelchair2_3dbbs'), 'launch', '3dbbs.launch.py')
-            ),
-            launch_arguments={'use_sim_time': use_sim_time}.items()
+    # Nav2 bringup for navigation
+    nav2_group_actions.append(IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            [get_package_share_directory('nav2_bringup'), '/launch', '/navigation_launch.py']
         ),
-        IncludeLaunchDescription(
-            PythonLaunchDescriptionSource(
-                os.path.join(get_package_share_directory('icp_localization_ros2'), 'launch', 'bringup.launch.py')
-            ),
-            launch_arguments={'rate': '3', 'use_sim_time': use_sim_time}.items()
-        ),
+        launch_arguments={
+            "use_sim_time": use_sim_time,
+            "params_file": nav2_params_file,
+        }.items(),
+        condition=launch.conditions.IfCondition(use_navigation)
+    ))
 
-        # Nav2 Stack
-        Node(
-            package='nav2_map_server',
-            executable='map_server',
-            name='map_server',
-            output='screen',
-            parameters=[{'use_sim_time': use_sim_time}, 
-                        {'yaml_filename': map_yaml}],
-        ),
-        GroupAction(
-            actions=[
-                Node(
-                    package='nav2_map_server',
-                    executable='costmap_filter_info_server',
-                    name='costmap_filter_info_server',
-                    output='screen',
-                    emulate_tty=True,
-                    condition=IfCondition(use_keepout_zone),
-                    parameters=[updated_keepout_params]
-                ),
-                Node(
-                    package='nav2_map_server',
-                    executable='map_server',
-                    name='filter_mask_server',
-                    output='screen',
-                    emulate_tty=True,
-                    condition=IfCondition(use_keepout_zone),
-                    parameters=[updated_keepout_params]
-                ),
-            ]
-        ),
-        IncludeLaunchDescription(
-            PythonLaunchDescriptionSource(os.path.join(nav2_bringup_dir, 'launch', 'navigation_launch.py')),
-            launch_arguments={
-                'use_sim_time': use_sim_time,
-                'params_file': params_file,
-                'autostart': 'True',
-            }.items(),
-        ),
-        Node(
-            package='nav2_lifecycle_manager',
-            executable='lifecycle_manager',
-            name='lifecycle_manager_localization',
-            output='screen',
-            parameters=[{'use_sim_time': use_sim_time},
-                        {'autostart': True},
-                        {'node_names': ['map_server']}]
-        ),
-        Node(
-            package='nav2_lifecycle_manager',
-            executable='lifecycle_manager',
-            name='lifecycle_manager_keepout',
-            output='screen',
-            emulate_tty=True,
-            condition=IfCondition(use_keepout_zone),
-            parameters=[{'autostart': True, 'node_names': lifecycle_nodes_keepout, 'use_sim_time': use_sim_time}]
-        ),
+    # Wrap Nav2 nodes in a 2-second TimerAction
+    actions_list.append(TimerAction(
+        period=2.0,
+        actions=[GroupAction(actions=nav2_group_actions)]
+    ))
 
-        #RViz
-        Node(
-            package='rviz2',
-            executable='rviz2',
-            name='rviz2',
-            arguments=['-d', rviz_config_file],
-            condition=IfCondition(run_rviz),
-            output='screen'
-        ),
-    ])
+
+    # ==========================================
+    # Phase 3: RViz (4 Second Delay)
+    # ==========================================
+    
+    # RViz node for nav2 visualization
+    rviz_node = Node(
+        package='rviz2',
+        executable='rviz2',
+        name='rviz_nav2',
+        arguments=['-d', nav2_rviz_config_file],
+        condition=launch.conditions.IfCondition(nav2_rviz_required)
+    )
+
+    # Wrap RViz in a 4-second TimerAction
+    actions_list.append(TimerAction(
+        period=4.0,
+        actions=[rviz_node]
+    ))
+
+    return actions_list
+
+def generate_launch_description():
+    """Generate the launch description with all components."""
+
+    launch_args = declare_launch_arguments(DEFAULT_PARAMETERS)
+    actions = create_nodes()
+    
+    return launch.LaunchDescription(launch_args + actions)
