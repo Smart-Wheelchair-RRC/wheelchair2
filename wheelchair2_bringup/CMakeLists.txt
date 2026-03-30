@@ -62,6 +62,7 @@ install(PROGRAMS
   scripts/invert_lidar.py
   scripts/ground_detection.py
   scripts/ground_detection_fast.py
+  scripts/box_filter.py
   DESTINATION lib/${PROJECT_NAME}
 )
 
