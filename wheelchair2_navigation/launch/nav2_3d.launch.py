@@ -129,20 +129,20 @@ def create_nodes():
     ))
 
     # Lifecycle manager for keepout zones
-    lifecycle_nodes_keepout = ['filter_mask_server', 'costmap_filter_info_server']
-    nav2_group_actions.append(Node(
-        package="nav2_lifecycle_manager",
-        executable="lifecycle_manager",
-        name="lifecycle_manager_keepout",
-        output="screen",
-        emulate_tty=True,
-        parameters=[{
-            'autostart': True,
-            'node_names': lifecycle_nodes_keepout,
-            'use_sim_time': use_sim_time
-        }],
-        condition=launch.conditions.IfCondition(use_keepout_zone)
-    ))
+    # lifecycle_nodes_keepout = ['filter_mask_server', 'costmap_filter_info_server']
+    # nav2_group_actions.append(Node(
+    #     package="nav2_lifecycle_manager",
+    #     executable="lifecycle_manager",
+    #     name="lifecycle_manager_keepout",
+    #     output="screen",
+    #     emulate_tty=True,
+    #     parameters=[{
+    #         'autostart': True,
+    #         'node_names': lifecycle_nodes_keepout,
+    #         'use_sim_time': use_sim_time
+    #     }],
+    #     condition=launch.conditions.IfCondition(use_keepout_zone)
+    # ))
 
     # Mapper server node
     nav2_group_actions.append(Node(
@@ -195,6 +195,37 @@ def create_nodes():
         period=2.0,
         actions=[GroupAction(actions=nav2_group_actions)]
     ))
+
+
+    # # ==========================================
+    # # Collision Monitor (Safety)
+    # # ==========================================
+    
+    # # 1. The Collision Monitor Node
+    # nav2_group_actions.append(Node(
+    #     package='nav2_collision_monitor',
+    #     executable='collision_monitor',
+    #     name='collision_monitor',
+    #     output='screen',
+    #     emulate_tty=True,
+    #     parameters=[nav2_params_file],
+    #     condition=launch.conditions.IfCondition(use_navigation)
+    # ))
+
+    # # 2. A dedicated Lifecycle Manager to activate the Collision Monitor
+    # nav2_group_actions.append(Node(
+    #     package='nav2_lifecycle_manager',
+    #     executable='lifecycle_manager',
+    #     name='lifecycle_manager_safety',
+    #     output='screen',
+    #     emulate_tty=True,
+    #     parameters=[{
+    #         'autostart': True,
+    #         'node_names': ['collision_monitor'],
+    #         'use_sim_time': use_sim_time
+    #     }],
+    #     condition=launch.conditions.IfCondition(use_navigation)
+    # ))
 
 
     # ==========================================
