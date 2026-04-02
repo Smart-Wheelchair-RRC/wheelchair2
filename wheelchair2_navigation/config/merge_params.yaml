@@ -150,13 +150,11 @@ bt_navigator:
       groot_server_port: 1669
       search_window: 2.0
     
-    bt_search_directories:
-      - $(find-pkg-share nav2_bt_navigator)/behavior_trees
     # 'default_nav_through_poses_bt_xml' and 'default_nav_to_pose_bt_xml' are use defaults:
     # nav2_bt_navigator/navigate_to_pose_w_replanning_and_recovery.xml
     # nav2_bt_navigator/navigate_through_poses_w_replanning_and_recovery.xml
     # They can be set here or via a RewrittenYaml remap from a parent launch file to Nav2.
-    default_nav_to_pose_bt_xml: "$(find-pkg-share nav2_bt_navigator)/behavior_trees/navigate_w_recovery_and_replanning_only_if_path_becomes_invalid.xml"
+    default_nav_to_pose_bt_xml: "$(find-pkg-share wheelchair2_navigation)/config/worky.xml"
     default_nav_through_poses_bt_xml: "$(find-pkg-share nav2_bt_navigator)/behavior_trees/navigate_through_poses_w_replanning_and_recovery.xml"
 
     # plugin_lib_names is used to add custom BT plugins to the executor (vector of strings).
@@ -236,8 +234,6 @@ controller_server:
       TrajectoryVisualizer:
         trajectory_step: 5
         time_step: 3
-      AckermannConstraints:
-        min_turning_r: 0.4
       critics:
         [
           "ConstraintCritic",
@@ -314,8 +310,8 @@ controller_server:
 local_costmap:
   local_costmap:
     ros__parameters:
-      update_frequency: 10.0
-      publish_frequency: 4.0
+      update_frequency: 5.0
+      publish_frequency: 5.0
       static_map: False
       rolling_window: True
       always_send_full_costmap: True
@@ -389,7 +385,7 @@ local_costmap:
       inflation_layer:
         enabled: True
         plugin: "nav2_costmap_2d::InflationLayer"
-        inflation_radius: 0.35
+        inflation_radius: 0.25
         cost_scaling_factor: 10.0 #10 2.58
       
   local_costmap_client:
@@ -408,7 +404,7 @@ global_costmap:
   global_costmap:
     ros__parameters:
       update_frequency: 2.0
-      publish_frequency: 1.0
+      publish_frequency: 2.0
       track_unknown_space: True
       always_send_full_costmap: True
       resolution: 0.1
@@ -494,37 +490,18 @@ global_costmap:
 
 planner_server:
   ros__parameters:
-    use_sim_time: False
     planner_plugins: ["GridBased"]
 
     GridBased:
-      plugin: "nav2_smac_planner/SmacPlannerHybrid" # Changed from 2D to Hybrid
-      downsample_costmap: true 
-      downsampling_factor: 2 
-      tolerance: 0.5 
-      allow_unknown: true 
-      max_iterations: 1000000 
-      max_on_approach_iterations: 1000 
-      max_planning_time: 5.0 
-      
-      # --- HYBRID SPECIFIC SETTINGS FOR DIFF-DRIVE ---
-      motion_model_for_search: "REEDS_SHEPP" # Crucial: Allows both forward and reverse planning
-      minimum_turning_radius: 0.10 # Set very low (10cm) because diff-drives can spin in place, but keeping it slightly above 0.0 forces smoother curves.
-      angle_quantization_bins: 72 
-      analytic_expansion_ratio: 3.5 
-      analytic_expansion_max_length: 3.0 
-      
-      # --- PENALTIES ---
-      reverse_penalty: 2.0 # Higher penalty to discourage driving backward unless strictly necessary
-      change_penalty: 0.1  # Slight penalty for changing direction (forward to reverse)
-      non_straight_penalty: 1.2 
-      cost_penalty: 2.0 # Drives the robot towards the center of hallways
-      retrospective_penalty: 0.015
-      
-      lookup_table_size: 8.0 
-      cache_obstacle_heuristic: false 
-      allow_primitive_interpolation: false
-      smooth_path: True 
+      plugin: "nav2_smac_planner/SmacPlanner2D"
+      downsample_costmap: false # whether or not to downsample the map
+      downsampling_factor: 1 # multiplier for the resolution of the costmap layer (e.g. 2 on a 5cm costmap would be 10cm)
+      tolerance: 0.75 #5                 # dist-to-goal heuristic cost (distance) for valid tolerance endpoints if exact goal cannot be found.
+      allow_unknown: false # allow traveling in unknown space
+      max_iterations: 1000000 # maximum total iterations to search for before failing (in case unreachable), set to -1 to disable
+      max_on_approach_iterations: 1000 # Maximum number of iterations after within tolerances to continue to try to find exact solution
+      max_planning_time: 5.0 # max time in s for planner to plan, smooth
+      smooth_path: True # If true, does a simple and quick smoothing post-processing to the path
 
       smoother:
         max_iterations: 1000
@@ -532,7 +509,7 @@ planner_server:
         w_data: 0.2
         tolerance: 1.0e-10
         do_refinement: true
-        refinement_num: 2
+        refinement_num: 2 # Whether to recursively run the smoother 3 times on the results from prior runs to refine the results further
 
 
 
@@ -556,31 +533,45 @@ waypoint_follower:
 collision_monitor:
   ros__parameters:
     enabled: true
+    use_sim_time: false
     base_frame_id: "base_footprint"
     odom_frame_id: "odom"
-    cmd_vel_in_topic: "cmd_vel_smoothed"
-    cmd_vel_out_topic: "cmd_vel"
+    
+    # Intercept the command from Nav2, output the safe command to the wheels
+    cmd_vel_in_topic: "cmd_vel_smoothed" 
+    cmd_vel_out_topic: "cmd_vel" 
+    
     state_topic: "collision_monitor_state"
     transform_tolerance: 0.2
     source_timeout: 1.0
-    base_shift_correction: true
     stop_pub_timeout: 2.0
-    # Polygons represent zone around the robot for "stop", "slowdown" and "limit" action types,
-    # and robot footprint for "approach" action type.
-    polygons: ["FootprintApproach"]
-    FootprintApproach:
+    
+    # Define our safety zones
+    polygons: ["HardStopZone"]
+    
+    HardStopZone:
       type: "polygon"
-      action_type: "approach"
-      footprint_topic: "local_costmap/published_footprint"
-      time_before_collision: 1.2
-      simulation_time_step: 0.1
-      min_points: 6
-      visualize: false
+      action_type: "stop" # THIS IS THE HARD STOP
+      # Define a rectangular box immediately in front of the wheelchair.
+      # Coordinates are [X, Y] in meters relative to base_footprint.
+      # This example creates a box extending from the front edge of your 
+      # wheelchair (0.72m) out to 1.2m ahead, and slightly wider than the chair.
+      points: [0.72, 0.40, 1.20, 0.40, 1.20, -0.40, 0.72, -0.40]
+      visualize: true # Set to true so you can see the red box in RViz!
       enabled: true
-    observation_sources: ["scan"]
-    scan:
-      type: "scan"
-      topic: "scan"
-      min_height: 0.15
-      max_height: 2.0
+
+    # Look at the raw LiDAR, not the costmap, for instantaneous reaction
+    observation_sources: ["pointcloud"] 
+
+    pointcloud:
+      type: "pointcloud"
+      topic: "/points_nonground" # Matches your STVL source
+      min_height: 0.01 # Ignore the floor
+      max_height: 1.7 # Height of the wheelchair
       enabled: true
+
+    # OPTIONAL: If you prefer the costmap (slower, but accounts for inflation/memory)
+    # local_costmap:
+    #   type: "costmap"
+    #   topic: "local_costmap/costmap_raw"
+    #   enabled: true

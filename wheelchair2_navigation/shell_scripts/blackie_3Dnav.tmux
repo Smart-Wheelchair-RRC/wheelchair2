@@ -1,5 +1,6 @@
 #!/bin/bash
 
+export DISPLAY=:1
 sudo chmod 777 /dev/ttyACM0
 sleep 2
 
@@ -26,7 +27,7 @@ tmux send-keys -t $SESSION_NAME "ros2 launch wheelchair2_bringup livox.launch.py
 tmux split-window -t $SESSION_NAME
 
 # Launch the Click Loc button 
-tmux send-keys -t $SESSION_NAME "python3 /home/container_user/wheelchair2/src/dependencies/3DLocalization/wheelchair2_3dbbs/scripts/click_loc.py &" C-m
+# tmux send-keys -t $SESSION_NAME "python3 /home/container_user/wheelchair2/src/dependencies/3DLocalization/wheelchair2_3dbbs/scripts/click_loc.py &" C-m
 
 
 # (Default) RRC with outside corridor
@@ -47,7 +48,7 @@ tmux split-window -t $SESSION_NAME
 # tmux send-keys -t $SESSION_NAME "ros2 launch wheelchair2_navigation nav2_3d.launch.py map:=$MAP_DIR/rrc/rrc_lab.yaml nav2_params_file:=/home/container_user/wheelchair2/src/wheelchair2_navigation/config/merge_params.yaml | tee /home/container_user/wheelchair2/src/output.log" C-m
 
 # RRC with mech lab and outside corridor
-tmux send-keys -t $SESSION_NAME "ros2 launch wheelchair2_navigation nav2_3d.launch.py map:=$MAP_DIR/rrc/hardware_lab_2/hardware_lab_2.yaml nav2_params_file:=/home/container_user/wheelchair2/src/wheelchair2_navigation/config/nav2_params.yaml | tee /home/container_user/wheelchair2/src/output.log" C-m
+tmux send-keys -t $SESSION_NAME "ros2 launch wheelchair2_navigation nav2_3d.launch.py map:=$MAP_DIR/rrc/hardware_lab_2/hardware_lab_2.yaml nav2_params_file:=/home/container_user/wheelchair2/src/wheelchair2_navigation/config/merge_params.yaml | tee /home/container_user/wheelchair2/src/output.log" C-m
 
 # Himalaya with ramps
 # tmux send-keys -t $SESSION_NAME "ros2 launch wheelchair2_navigation nav2_3d.launch.py map:=$MAP_DIR/himalaya/rrc_outside_himalaya_ramps_fast_cleaned.yaml | tee output.log" C-m

@@ -1,0 +1,20 @@
+<root main_tree_to_execute="MainTree">
+  <BehaviorTree ID="MainTree">
+    <RecoveryNode number_of_retries="600" name="NavigateRecovery">
+      
+      <ReactiveSequence name="MonitorAndDrive">
+        
+        <ComputePathToPose goal="{goal}" path="{path}" planner_id="GridBased"/>
+        
+        <FollowPath path="{path}" controller_id="FollowPath"/>
+        
+      </ReactiveSequence>
+
+      <ReactiveFallback name="WaitRecovery">
+        <GoalUpdated/>
+        <Wait wait_duration="2.0"/>
+      </ReactiveFallback>
+
+    </RecoveryNode>
+  </BehaviorTree>
+</root>
