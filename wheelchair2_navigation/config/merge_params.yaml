@@ -268,11 +268,16 @@ controller_server:
       ObstaclesCritic:
         enabled: true
         cost_power: 1
-        repulsion_weight: 5.0
-        critical_weight: 10.0
+        # Kept at 5.0 so it doesn't push the robot away from the doorframes
+        repulsion_weight: 5.0 
+        # Kept at 10.0 to balance safety with the need to squeeze through
+        critical_weight: 10.0 
         consider_footprint: true
         collision_cost: 100000.0
-        collision_margin_distance: 0.03
+        # The magic number: 10 cm. 
+        # Gives a safety buffer, but leaves 5-10cm of "free space" 
+        # in the doorway so MPPI knows it can fit.
+        collision_margin_distance: 0.10 
         near_goal_distance: 0.5
       PathAlignCritic:
         enabled: true
@@ -319,7 +324,7 @@ local_costmap:
       
       width: 6 #5
       height: 6 #5
-      resolution: 0.1
+      resolution: 0.05
 
       global_frame: odom
       robot_base_frame: base_footprint
@@ -530,48 +535,52 @@ waypoint_follower:
 
 ######################## Collision checker
 
+
 collision_monitor:
   ros__parameters:
     enabled: true
     use_sim_time: false
     base_frame_id: "base_footprint"
     odom_frame_id: "odom"
-    
-    # Intercept the command from Nav2, output the safe command to the wheels
     cmd_vel_in_topic: "cmd_vel_smoothed" 
     cmd_vel_out_topic: "cmd_vel" 
-    
     state_topic: "collision_monitor_state"
     transform_tolerance: 0.2
     source_timeout: 1.0
     stop_pub_timeout: 2.0
     
-    # Define our safety zones
-    polygons: ["HardStopZone"]
+    # We use two zones: A dynamic braking zone, and a static hard-stop
+    polygons: ["DynamicBrakingZone", "HardStopZone"]
     
+    DynamicBrakingZone:
+      type: "footprint" # <--- THIS IS THE MAGIC WORD FOR HUMBLE
+      action_type: "approach" 
+      # Subscribe to the local costmap to get the exact wheelchair shape
+      footprint_topic: "/local_costmap/published_footprint"
+      
+      # 2.5 seconds of look-ahead. 
+      # At 0.8 m/s, it starts braking 2 meters away from the closed door.
+      # When rotating at 0 m/s forward, this projection mathematically shrinks to 0.
+      time_before_collision: 2.5
+      simulate_ahead_time: 2.5
+      min_points: 6
+      enabled: true
+      visualize: false # Keep false. Dynamic footprints cause severe RViz flickering.
+
     HardStopZone:
       type: "polygon"
-      action_type: "stop" # THIS IS THE HARD STOP
-      # Define a rectangular box immediately in front of the wheelchair.
-      # Coordinates are [X, Y] in meters relative to base_footprint.
-      # This example creates a box extending from the front edge of your 
-      # wheelchair (0.72m) out to 1.2m ahead, and slightly wider than the chair.
-      points: [0.72, 0.40, 1.20, 0.40, 1.20, -0.40, 0.72, -0.40]
-      visualize: true # Set to true so you can see the red box in RViz!
+      action_type: "stop" 
+      # The absolute safety bubble. If the dynamic zone slows the robot down to a crawl,
+      # this static zone acts as the final "brick wall" so it doesn't touch the door.
+      points: [0.75, 0.40, 1.30, 0.40, 1.30, -0.40, 0.75, -0.40]
+      visualize: true 
       enabled: true
 
-    # Look at the raw LiDAR, not the costmap, for instantaneous reaction
     observation_sources: ["pointcloud"] 
 
     pointcloud:
       type: "pointcloud"
-      topic: "/points_nonground" # Matches your STVL source
-      min_height: 0.01 # Ignore the floor
-      max_height: 1.7 # Height of the wheelchair
+      topic: "/points_nonground" 
+      min_height: 0.01 
+      max_height: 1.7 
       enabled: true
-
-    # OPTIONAL: If you prefer the costmap (slower, but accounts for inflation/memory)
-    # local_costmap:
-    #   type: "costmap"
-    #   topic: "local_costmap/costmap_raw"
-    #   enabled: true

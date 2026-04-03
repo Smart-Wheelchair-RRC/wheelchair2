@@ -41,7 +41,7 @@
         }
     },
     "containerEnv": {
-        "DISPLAY": ":0",
+        "DISPLAY": "${localEnv:DISPLAY}",
         "NVIDIA_VISIBLE_DEVICES": "all",
         "NVIDIA_DRIVER_CAPABILITIES": "all",
         "NVIDIA_DISABLE_REQUIRE": "true",
@@ -49,7 +49,7 @@
         "XDG_RUNTIME_DIR": "${localEnv:XDG_RUNTIME_DIR}",
         "PULSE_SERVER": "${localEnv:PULSE_SERVER}",
         "QT_X11_NO_MITSHM": "1",
-        "ROS_DOMAIN_ID": "27" // Adding this will restrict your ROS 2 nodes to communicate only with systems in the network with same ROS_DOMAIN_ID, preventing interference from other ROS 2 nodes on the same network.
+        "ROS_DOMAIN_ID": "5" // Adding this will restrict your ROS 2 nodes to communicate only with systems in the network with same ROS_DOMAIN_ID, preventing interference from other ROS 2 nodes on the same network.
         // "LIBGL_ALWAYS_SOFTWARE": "1"
     },
     "runArgs": [

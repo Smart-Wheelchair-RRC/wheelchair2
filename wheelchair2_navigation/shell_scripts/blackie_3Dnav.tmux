@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export DISPLAY=:1
+export DISPLAY=:2
 sudo chmod 777 /dev/ttyACM0
 sleep 2
 

@@ -181,7 +181,7 @@ def create_nodes():
     # Nav2 bringup for navigation
     nav2_group_actions.append(IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            [get_package_share_directory('nav2_bringup'), '/launch', '/navigation_launch.py']
+            [NAVIGATION_PACKAGE_DIRECTORY, '/launch', '/navigation_launch.py']
         ),
         launch_arguments={
             "use_sim_time": use_sim_time,

@@ -1,20 +1,46 @@
 <root main_tree_to_execute="MainTree">
   <BehaviorTree ID="MainTree">
-    <RecoveryNode number_of_retries="600" name="NavigateRecovery">
+    <RecoveryNode number_of_retries="4" name="NavigateRecovery">
       
-      <ReactiveSequence name="MonitorAndDrive">
+      <PipelineSequence name="NavigateWithReplanning">
         
-        <ComputePathToPose goal="{goal}" path="{path}" planner_id="GridBased"/>
+        <RateController hz="0.5">
+          <RecoveryNode number_of_retries="1" name="ComputePathToPose">
+            <ComputePathToPose goal="{goal}" path="{path}" planner_id="GridBased"/>
+            <ClearEntireCostmap name="ClearGlobalCostmap-Context" service_name="global_costmap/clear_entirely_global_costmap"/>
+          </RecoveryNode>
+        </RateController>
         
-        <FollowPath path="{path}" controller_id="FollowPath"/>
-        
-      </ReactiveSequence>
+        <RecoveryNode number_of_retries="1" name="FollowPathRecovery">
+          <FollowPath path="{path}" controller_id="FollowPath"/>
+          
+          <Sequence name="ClearAndWait">
+            <ClearEntireCostmap name="ClearLocalCostmap-Context" service_name="local_costmap/clear_entirely_local_costmap"/>
+            <Wait wait_duration="0.5"/> </Sequence>
+          
+        </RecoveryNode>
+      </PipelineSequence>
 
-      <ReactiveFallback name="WaitRecovery">
+      <ReactiveFallback name="RecoveryFallback">
         <GoalUpdated/>
-        <Wait wait_duration="2.0"/>
-      </ReactiveFallback>
+        <RoundRobin name="RecoveryActions">
+          
+          <Sequence name="ClearingActions">
+            <ClearEntireCostmap name="ClearLocalCostmap-Subtree" service_name="local_costmap/clear_entirely_local_costmap"/>
+            <ClearEntireCostmap name="ClearGlobalCostmap-Subtree" service_name="global_costmap/clear_entirely_global_costmap"/>
+            <Wait wait_duration="1.0"/>
+          </Sequence>
+          
+          <Wait wait_duration="4.0"/>
+          
+          <Sequence name="BackUpAction">
+            <BackUp backup_dist="0.4" backup_speed="0.15"/>
+            <Wait wait_duration="1.0"/>
+          </Sequence>
 
+        </RoundRobin>
+      </ReactiveFallback>
+      
     </RecoveryNode>
   </BehaviorTree>
 </root>
