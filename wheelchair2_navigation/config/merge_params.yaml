@@ -154,8 +154,8 @@ bt_navigator:
     # nav2_bt_navigator/navigate_to_pose_w_replanning_and_recovery.xml
     # nav2_bt_navigator/navigate_through_poses_w_replanning_and_recovery.xml
     # They can be set here or via a RewrittenYaml remap from a parent launch file to Nav2.
-    default_nav_to_pose_bt_xml: "$(find-pkg-share wheelchair2_navigation)/config/worky.xml"
-    default_nav_through_poses_bt_xml: "$(find-pkg-share nav2_bt_navigator)/behavior_trees/navigate_through_poses_w_replanning_and_recovery.xml"
+    # default_nav_to_pose_bt_xml: "$(find-pkg-share wheelchair2_navigation)/config/worky.xml"
+    # default_nav_through_poses_bt_xml: "$(find-pkg-share nav2_bt_navigator)/behavior_trees/navigate_through_poses_w_replanning_and_recovery.xml"
 
     # plugin_lib_names is used to add custom BT plugins to the executor (vector of strings).
     # Built-in plugins are added automatically
@@ -269,7 +269,7 @@ controller_server:
         enabled: true
         cost_power: 1
         # Kept at 5.0 so it doesn't push the robot away from the doorframes
-        repulsion_weight: 5.0 
+        repulsion_weight: 3.5 
         # Kept at 10.0 to balance safety with the need to squeeze through
         critical_weight: 10.0 
         consider_footprint: true
@@ -277,7 +277,7 @@ controller_server:
         # The magic number: 10 cm. 
         # Gives a safety buffer, but leaves 5-10cm of "free space" 
         # in the doorway so MPPI knows it can fit.
-        collision_margin_distance: 0.10 
+        collision_margin_distance: 0.10
         near_goal_distance: 0.5
       PathAlignCritic:
         enabled: true
@@ -329,6 +329,7 @@ local_costmap:
       global_frame: odom
       robot_base_frame: base_footprint
       footprint: "[[-0.30,-0.32],[0.72,-0.32],[0.72,0.32],[-0.30,0.32]]"
+      footprint_padding: 0.02
       # robot_radius: 0.50
       # footprint: "[[-0.30,-0.32],[0.80,-0.32],[0.80,0.32],[-0.30,0.32]]"
       
@@ -364,8 +365,8 @@ local_costmap:
           marking: true
           clearing: false
           obstacle_range: 5.0 # meters 3
-          min_obstacle_height: 0.01 # default 0, meters
-          max_obstacle_height: 1.0 # default 3, meters
+          min_obstacle_height: 0.2 # default 0, meters
+          max_obstacle_height: 1.7 # default 3, meters
           expected_update_rate: 0.0 # default 0, if not updating at this rate at least, remove from buffer
           observation_persistence: 0.0 # default 0, use all measurements taken during now-value, 0=latest
           inf_is_valid: false # default false, for laser scans
@@ -379,10 +380,10 @@ local_costmap:
           topic: /points_nonground
           marking: false
           clearing: true
-          max_z: 0.2 # default 0, meters
-          min_z: 1.0 # default 10, meters
+          max_z: 2.0 # default 0, meters
+          min_z: 0.0 # default 10, meters
           vertical_fov_angle: 1.02 # default 0.7, radians. For 3D lidars it's the symmetric FOV about the planar axis.
-          vertical_fov_padding: 0.01 # 3D Lidar only. Default 0, in meters
+          vertical_fov_padding: 0.05 # 3D Lidar only. Default 0, in meters
           horizontal_fov_angle: 6.29 # 3D lidar scanners like the VLP16 have 360 deg horizontal FOV.
           decay_acceleration: 5.0 # default 0, 1/s^2.
           model_type: 1 # default 0, model type for frustum. 0=depth camera, 1=3d lidar like VLP16 or similar
@@ -390,8 +391,8 @@ local_costmap:
       inflation_layer:
         enabled: True
         plugin: "nav2_costmap_2d::InflationLayer"
-        inflation_radius: 0.50
-        cost_scaling_factor: 2.0 #10 2.58
+        inflation_radius: 0.35
+        cost_scaling_factor: 4.0 #10 2.58
       
   local_costmap_client:
     ros__parameters:
@@ -408,8 +409,8 @@ local_costmap:
 global_costmap:
   global_costmap:
     ros__parameters:
-      update_frequency: 2.0
-      publish_frequency: 2.0
+      update_frequency: 1.0
+      publish_frequency: 1.0
       track_unknown_space: True
       always_send_full_costmap: True
       resolution: 0.1
@@ -417,6 +418,7 @@ global_costmap:
       global_frame: map
       robot_base_frame: base_footprint
       footprint: "[[-0.30,-0.32],[0.72,-0.32],[0.72,0.32],[-0.30,0.32]]"
+      footprint_padding: 0.02
 
       filters: ["keepout_filter"]
       
@@ -432,7 +434,7 @@ global_costmap:
         enabled: true
         voxel_decay: 5.0
         decay_model: 0
-        voxel_size: 0.05
+        voxel_size: 0.1
         track_unknown_space: true
         mark_threshold: 0
         update_footprint_enabled: true
@@ -448,8 +450,8 @@ global_costmap:
           topic: /points_nonground
           marking: true
           clearing: true
-          obstacle_range: 10.0
-          min_obstacle_height: 0.2
+          obstacle_range: 5.0
+          min_obstacle_height: 0.5
           max_obstacle_height: 1.7
           expected_update_rate: 0.0
           observation_persistence: 0.0
@@ -478,8 +480,8 @@ global_costmap:
         
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
-        cost_scaling_factor: 1.0
-        inflation_radius: 2.50
+        cost_scaling_factor: 1.5
+        inflation_radius: 1.85
         
 
   global_costmap_client:
@@ -538,7 +540,7 @@ waypoint_follower:
 
 collision_monitor:
   ros__parameters:
-    enabled: true
+    enabled: False
     use_sim_time: false
     base_frame_id: "base_footprint"
     odom_frame_id: "odom"
@@ -550,10 +552,10 @@ collision_monitor:
     stop_pub_timeout: 2.0
     
     # We use two zones: A dynamic braking zone, and a static hard-stop
-    polygons: ["DynamicBrakingZone", "HardStopZone"]
+    polygons: ["DynamicBrakingZone"]
     
     DynamicBrakingZone:
-      type: "footprint" # <--- THIS IS THE MAGIC WORD FOR HUMBLE
+      type: "polygon" # <--- THIS IS THE MAGIC WORD FOR HUMBLE
       action_type: "approach" 
       # Subscribe to the local costmap to get the exact wheelchair shape
       footprint_topic: "/local_costmap/published_footprint"
@@ -573,7 +575,7 @@ collision_monitor:
       # The absolute safety bubble. If the dynamic zone slows the robot down to a crawl,
       # this static zone acts as the final "brick wall" so it doesn't touch the door.
       points: [0.75, 0.40, 1.30, 0.40, 1.30, -0.40, 0.75, -0.40]
-      visualize: true 
+      visualize: false 
       enabled: true
 
     observation_sources: ["pointcloud"] 
