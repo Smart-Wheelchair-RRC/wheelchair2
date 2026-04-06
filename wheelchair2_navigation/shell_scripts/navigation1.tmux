@@ -35,7 +35,6 @@ tmux send-keys -t $SESSION:3 "ros2 launch rplidar_ros rplidar_s2_launch.py" C-m
 sleep 5
 
 # Window 4: Robot Localization (EKF)
-# This merges your IMU and Odometry
 tmux new-window -t $SESSION -n "localization"
 tmux send-keys -t $SESSION:4 "ros2 launch wheelchair2_localization robot_localization_launch.py" C-m
 
@@ -43,14 +42,21 @@ sleep 2
 
 # Window 5: Nav2 (AMCL)
 tmux new-window -t $SESSION -n "nav2"
-tmux send-keys -t $SESSION:5 "ros2 launch wheelchair2_navigation nav2_amcl.launch.py use_sim_time:=False map:=$MAP_DIR/rrc/rrc_lab.yaml" C-m
+# tmux send-keys -t $SESSION:5 "ros2 launch wheelchair2_navigation nav2_amcl.launch.py use_sim_time:=False map:=$MAP_DIR/himalaya/himalaya_with_classroom.yaml" C-m
 
-# Window 6: Teleop
-# tmux new-window -t $SESSION -n "teleop"
-# tmux send-keys -t $SESSION:6 "ros2 run wheelchair2_control keyboard_teleop_constant.py" C-m
-# Window 6: GUI
-tmux new-window -t $SESSION -n "gui"
+tmux send-keys -t $SESSION:5 "ros2 launch wheelchair2_navigation nav2_amcl.launch.py use_sim_time:=False map:=$MAP_DIR/rrc/rrc_4th_floor.yaml" C-m
+
+sleep 5
+
+# Window 6: Rosbridge 
+tmux new-window -t $SESSION -n "rosbridge"
 tmux send-keys -t $SESSION:6 "ros2 launch rosbridge_server rosbridge_websocket_launch.xml" C-m
+
+sleep 2
+
+# Window 7: GUI 
+tmux new-window -t $SESSION -n "gui_controller"
+tmux send-keys -t $SESSION:7 "ros2 run wheelchair_gui wheelchair_gui" C-m
 
 # Attach to session
 tmux attach -t $SESSION

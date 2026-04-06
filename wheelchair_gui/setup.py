@@ -20,6 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'wheelchair_gui=wheelchair_gui.controller:main'
         ],
     },
 )

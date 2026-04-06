@@ -1,5 +1,5 @@
 free_thresh: 0.3
-image: himalaya_with_classroom.jpeg
+image: himalaya_with_classroom.png
 negate: 0
 occupied_thresh: 0.6
 origin: [-38.363956451416016, -63.38187026977539, 0.0]
