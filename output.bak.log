@@ -1,0 +1,590 @@
+[INFO] [launch]: All log files can be found below /home/container_user/.ros/log/2026-04-07-12-19-51-995609-blackie-54295
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [box_filter.py-1]: process started with pid [54322]
+[box_filter.py-1] [INFO] [1775544592.781733136] [box_filter]: Livox Box Filter with Visualizer started
+[INFO] [lifecycle_manager-2]: process started with pid [54453]
+[INFO] [map_server-3]: process started with pid [54455]
+[INFO] [controller_server-4]: process started with pid [54457]
+[INFO] [smoother_server-5]: process started with pid [54459]
+[INFO] [planner_server-6]: process started with pid [54461]
+[INFO] [behavior_server-7]: process started with pid [54463]
+[INFO] [bt_navigator-8]: process started with pid [54465]
+[INFO] [waypoint_follower-9]: process started with pid [54480]
+[INFO] [velocity_smoother-10]: process started with pid [54495]
+[INFO] [lifecycle_manager-11]: process started with pid [54504]
+[planner_server-6] [INFO] [1775544594.523373765] [planner_server]: 
+[planner_server-6] 	planner_server lifecycle node launched. 
+[planner_server-6] 	Waiting on external lifecycle transitions to activate
+[planner_server-6] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[bt_navigator-8] [INFO] [1775544594.563208567] [bt_navigator]: 
+[bt_navigator-8] 	bt_navigator lifecycle node launched. 
+[bt_navigator-8] 	Waiting on external lifecycle transitions to activate
+[bt_navigator-8] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[bt_navigator-8] [INFO] [1775544594.563523321] [bt_navigator]: Creating
+[lifecycle_manager-2] [0m[INFO] [1775544594.613395823] [lifecycle_manager_map]: Creating[0m
+[smoother_server-5] [INFO] [1775544594.614128340] [smoother_server]: 
+[smoother_server-5] 	smoother_server lifecycle node launched. 
+[smoother_server-5] 	Waiting on external lifecycle transitions to activate
+[smoother_server-5] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-6] [INFO] [1775544594.617760109] [planner_server]: Creating
+[lifecycle_manager-2] [0m[INFO] [1775544594.640526057] [lifecycle_manager_map]: [34m[1mCreating and initializing lifecycle service clients[0m[0m[0m
+[smoother_server-5] [INFO] [1775544594.725717714] [smoother_server]: Creating smoother server
+[controller_server-4] [INFO] [1775544594.747529672] [controller_server]: 
+[controller_server-4] 	controller_server lifecycle node launched. 
+[controller_server-4] 	Waiting on external lifecycle transitions to activate
+[controller_server-4] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-4] [INFO] [1775544594.885174361] [controller_server]: Creating controller server
+[waypoint_follower-9] [INFO] [1775544594.920571948] [waypoint_follower]: 
+[waypoint_follower-9] 	waypoint_follower lifecycle node launched. 
+[waypoint_follower-9] 	Waiting on external lifecycle transitions to activate
+[waypoint_follower-9] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[waypoint_follower-9] [INFO] [1775544594.947248228] [waypoint_follower]: Creating
+[planner_server-6] [INFO] [1775544595.079277033] [global_costmap.global_costmap]: 
+[planner_server-6] 	global_costmap lifecycle node launched. 
+[planner_server-6] 	Waiting on external lifecycle transitions to activate
+[planner_server-6] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-6] [INFO] [1775544595.086441402] [global_costmap.global_costmap]: Creating Costmap
+[velocity_smoother-10] [INFO] [1775544595.204353884] [velocity_smoother]: 
+[velocity_smoother-10] 	velocity_smoother lifecycle node launched. 
+[velocity_smoother-10] 	Waiting on external lifecycle transitions to activate
+[velocity_smoother-10] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[lifecycle_manager-11] [INFO] [1775544595.407173696] [lifecycle_manager_navigation]: Creating
+[map_server-3] [INFO] [1775544595.446648109] [map_server]: 
+[map_server-3] 	map_server lifecycle node launched. 
+[map_server-3] 	Waiting on external lifecycle transitions to activate
+[map_server-3] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[map_server-3] [INFO] [1775544595.446914126] [map_server]: Creating
+[behavior_server-7] [INFO] [1775544595.479376011] [behavior_server]: 
+[behavior_server-7] 	behavior_server lifecycle node launched. 
+[behavior_server-7] 	Waiting on external lifecycle transitions to activate
+[behavior_server-7] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[lifecycle_manager-11] [INFO] [1775544595.517933746] [lifecycle_manager_navigation]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[INFO] [rviz2-12]: process started with pid [54657]
+[controller_server-4] [INFO] [1775544596.374055642] [local_costmap.local_costmap]: 
+[controller_server-4] 	local_costmap lifecycle node launched. 
+[controller_server-4] 	Waiting on external lifecycle transitions to activate
+[controller_server-4] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-4] [INFO] [1775544596.375847494] [local_costmap.local_costmap]: Creating Costmap
+[lifecycle_manager-2] [0m[INFO] [1775544596.394013568] [lifecycle_manager_map]: [34m[1mStarting managed nodes bringup...[0m[0m[0m
+[lifecycle_manager-2] [0m[INFO] [1775544596.394163169] [lifecycle_manager_map]: [34m[1mConfiguring map_server[0m[0m[0m
+[map_server-3] [INFO] [1775544596.394853190] [map_server]: Configuring
+[map_server-3] [INFO] [1775544596.394974471] [map_io]: Loading yaml file: /home/container_user/wheelchair2/src/wheelchair2_navigation/maps/rrc/hardware_lab_2/hardware_lab_2.yaml
+[map_server-3] [INFO] [1775544596.395441546] [map_io]: resolution: 0.05
+[map_server-3] [INFO] [1775544596.395462282] [map_io]: origin[0]: -30.9006
+[map_server-3] [INFO] [1775544596.395469514] [map_io]: origin[1]: -7.37814
+[map_server-3] [INFO] [1775544596.395474858] [map_io]: origin[2]: 0
+[map_server-3] [INFO] [1775544596.395480554] [map_io]: free_thresh: 0.3
+[map_server-3] [INFO] [1775544596.395485738] [map_io]: occupied_thresh: 0.6
+[map_server-3] [INFO] [1775544596.395492170] [map_io]: mode: trinary
+[map_server-3] [INFO] [1775544596.395499690] [map_io]: negate: 0
+[map_server-3] [INFO] [1775544596.395796556] [map_io]: Loading image_file: /home/container_user/wheelchair2/src/wheelchair2_navigation/maps/rrc/hardware_lab_2/hardware_lab_2.png
+[lifecycle_manager-11] [INFO] [1775544596.700693715] [lifecycle_manager_navigation]: [34m[1mStarting managed nodes bringup...[0m[0m
+[lifecycle_manager-11] [INFO] [1775544596.701663706] [lifecycle_manager_navigation]: [34m[1mConfiguring controller_server[0m[0m
+[controller_server-4] [INFO] [1775544596.702846850] [controller_server]: Configuring controller interface
+[controller_server-4] [INFO] [1775544596.703211268] [controller_server]: getting goal checker plugins..
+[controller_server-4] [INFO] [1775544596.703333637] [controller_server]: Controller frequency set to 10.0000Hz
+[controller_server-4] [INFO] [1775544596.703394085] [local_costmap.local_costmap]: Configuring
+[controller_server-4] [INFO] [1775544596.730047065] [local_costmap.local_costmap]: Using plugin "lidar_obstacle_layer"
+[controller_server-4] [INFO] [1775544596.799578189] [local_costmap.local_costmap]: lidar_obstacle_layer being initialized as SpatioTemporalVoxelLayer!
+[controller_server-4] [INFO] [1775544596.800984823] [local_costmap.local_costmap]: lidar_obstacle_layer's global frame is odom.
+[controller_server-4] [INFO] [1775544596.805775447] [local_costmap.local_costmap]: lidar_obstacle_layer loaded parameters from parameter server.
+[controller_server-4] [INFO] [1775544596.816429407] [local_costmap.local_costmap]: lidar_obstacle_layer created underlying voxel grid.
+[controller_server-4] [INFO] [1775544596.825263162] [local_costmap.local_costmap]: Voxel filter activated.
+[controller_server-4] [INFO] [1775544596.858583931] [local_costmap.local_costmap]: Passthough filter activated.
+[controller_server-4] [INFO] [1775544596.881793303] [local_costmap.local_costmap]: lidar_obstacle_layer initialization complete!
+[controller_server-4] [INFO] [1775544596.883842437] [local_costmap.local_costmap]: Initialized plugin "lidar_obstacle_layer"
+[controller_server-4] [INFO] [1775544596.884932845] [local_costmap.local_costmap]: Using plugin "inflation_layer"
+[controller_server-4] [INFO] [1775544596.895348691] [local_costmap.local_costmap]: Initialized plugin "inflation_layer"
+[map_server-3] [INFO] [1775544596.922100615] [map_io]: Read map /home/container_user/wheelchair2/src/wheelchair2_navigation/maps/rrc/hardware_lab_2/hardware_lab_2.png: 1590 X 1094 map @ 0.05 m/cell
+[controller_server-4] [INFO] [1775544596.959619108] [controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[controller_server-4] [INFO] [1775544596.968233886] [controller_server]: Created goal checker : general_goal_checker of type nav2_controller::SimpleGoalChecker
+[controller_server-4] [INFO] [1775544596.970411917] [controller_server]: Controller Server has general_goal_checker  goal checkers available.
+[lifecycle_manager-2] [0m[INFO] [1775544596.978527395] [lifecycle_manager_map]: [34m[1mActivating map_server[0m[0m[0m
+[map_server-3] [INFO] [1775544596.980307119] [map_server]: Activating
+[map_server-3] [INFO] [1775544596.983189955] [map_server]: Creating bond (map_server) to lifecycle manager.
+[controller_server-4] [INFO] [1775544596.990026801] [controller_server]: Created controller : FollowPath of type nav2_rotation_shim_controller::RotationShimController
+[controller_server-4] [INFO] [1775544597.009247314] [controller_server]: Created internal controller for rotation shimming: FollowPath of type nav2_mppi_controller::MPPIController
+[controller_server-4] [INFO] [1775544597.025447582] [controller_server]: Controller period is equal to model dt. Control sequence shifting is ON
+[controller_server-4] [INFO] [1775544597.031783432] [controller_server]: ConstraintCritic instantiated with 1 power and 4.000000 weight.
+[controller_server-4] [INFO] [1775544597.031883721] [controller_server]: Critic loaded : mppi::critics::ConstraintCritic
+[controller_server-4] [INFO] [1775544597.038243028] [controller_server]: ObstaclesCritic instantiated with 1 power and 10.000000 / 2.500000 weights. Critic will collision check based on footprint cost.
+[controller_server-4] [INFO] [1775544597.038341076] [controller_server]: Critic loaded : mppi::critics::ObstaclesCritic
+[controller_server-4] [INFO] [1775544597.041060838] [controller_server]: GoalCritic instantiated with 1 power and 5.000000 weight.
+[controller_server-4] [INFO] [1775544597.041145159] [controller_server]: Critic loaded : mppi::critics::GoalCritic
+[controller_server-4] [INFO] [1775544597.044525374] [controller_server]: GoalAngleCritic instantiated with 1 power, 3.000000 weight, and 0.500000 angular threshold.
+[controller_server-4] [INFO] [1775544597.044606910] [controller_server]: Critic loaded : mppi::critics::GoalAngleCritic
+[controller_server-4] [INFO] [1775544597.050067203] [controller_server]: ReferenceTrajectoryCritic instantiated with 1 power and 8.000000 weight
+[controller_server-4] [INFO] [1775544597.050150019] [controller_server]: Critic loaded : mppi::critics::PathAlignCritic
+[controller_server-4] [INFO] [1775544597.065307816] [controller_server]: Critic loaded : mppi::critics::PathFollowCritic
+[controller_server-4] [INFO] [1775544597.074337893] [controller_server]: PathAngleCritic instantiated with 1 power and 2.000000 weight. Reversing allowed.
+[controller_server-4] [INFO] [1775544597.074466757] [controller_server]: Critic loaded : mppi::critics::PathAngleCritic
+[controller_server-4] [INFO] [1775544597.083449921] [controller_server]: PreferForwardCritic instantiated with 1 power and 5.000000 weight.
+[controller_server-4] [INFO] [1775544597.083545154] [controller_server]: Critic loaded : mppi::critics::PreferForwardCritic
+[controller_server-4] [INFO] [1775544597.088655140] [controller_server]: VelocityDeadbandCritic instantiated with 1 power, 35 weight, deadband_velocity [0,0,0]
+[controller_server-4] [INFO] [1775544597.088769349] [controller_server]: Critic loaded : mppi::critics::VelocityDeadbandCritic
+[controller_server-4] [INFO] [1775544597.092048027] [controller_server]: TwirlingCritic instantiated with 1 power and 10.000000 weight.
+[controller_server-4] [INFO] [1775544597.092152507] [controller_server]: Critic loaded : mppi::critics::TwirlingCritic
+[controller_server-4] [INFO] [1775544597.097450943] [controller_server]: Optimizer reset
+[lifecycle_manager-2] [0m[INFO] [1775544597.116259164] [lifecycle_manager_map]: Server map_server connected with bond.[0m
+[lifecycle_manager-2] [0m[INFO] [1775544597.116364253] [lifecycle_manager_map]: [34m[1mManaged nodes are active[0m[0m[0m
+[lifecycle_manager-2] [0m[INFO] [1775544597.116392477] [lifecycle_manager_map]: [34m[1mCreating bond timer...[0m[0m[0m
+[controller_server-4] [INFO] [1775544597.110999097] [MPPIController]: Configured MPPI Controller: FollowPath
+[controller_server-4] [INFO] [1775544597.111066810] [controller_server]: Controller Server has FollowPath  controllers available.
+[lifecycle_manager-11] [INFO] [1775544597.151488968] [lifecycle_manager_navigation]: [34m[1mConfiguring smoother_server[0m[0m
+[smoother_server-5] [INFO] [1775544597.152727632] [smoother_server]: Configuring smoother server
+[smoother_server-5] [INFO] [1775544597.190849486] [smoother_server]: Created smoother : simple_smoother of type nav2_smoother::SimpleSmoother
+[smoother_server-5] [INFO] [1775544597.197820125] [smoother_server]: Smoother Server has simple_smoother  smoothers available.
+[lifecycle_manager-11] [INFO] [1775544597.250615741] [lifecycle_manager_navigation]: [34m[1mConfiguring planner_server[0m[0m
+[planner_server-6] [INFO] [1775544597.251143745] [planner_server]: Configuring
+[planner_server-6] [INFO] [1775544597.251224193] [global_costmap.global_costmap]: Configuring
+[planner_server-6] [INFO] [1775544597.281603980] [global_costmap.global_costmap]: Using plugin "static_layer"
+[planner_server-6] [INFO] [1775544597.300790924] [global_costmap.global_costmap]: Subscribing to the map topic (/map) with transient local durability
+[planner_server-6] [INFO] [1775544597.307706810] [global_costmap.global_costmap]: Initialized plugin "static_layer"
+[planner_server-6] [INFO] [1775544597.307785371] [global_costmap.global_costmap]: Using plugin "obstacle_layer"
+[planner_server-6] [INFO] [1775544597.315053867] [global_costmap.global_costmap]: Subscribed to Topics: scan
+[planner_server-6] [INFO] [1775544597.360382938] [global_costmap.global_costmap]: Initialized plugin "obstacle_layer"
+[planner_server-6] [INFO] [1775544597.360465082] [global_costmap.global_costmap]: Using plugin "inflation_layer"
+[planner_server-6] [INFO] [1775544597.373402705] [global_costmap.global_costmap]: Initialized plugin "inflation_layer"
+[planner_server-6] [INFO] [1775544597.457488482] [global_costmap.global_costmap]: StaticLayer: Resizing costmap to 1590 X 1094 at 0.050000 m/pix
+[planner_server-6] [INFO] [1775544597.470988412] [planner_server]: Created global planner plugin GridBased of type nav2_smac_planner/SmacPlanner2D
+[planner_server-6] [INFO] [1775544597.471083517] [planner_server]: Configuring GridBased of type SmacPlanner2D
+[planner_server-6] [INFO] [1775544597.491620742] [planner_server]: Configured plugin GridBased of type SmacPlanner2D with tolerance 0.75, maximum iterations 1000000, max on approach iterations 1000, and not allowing unknown traversal.
+[planner_server-6] [INFO] [1775544597.491716423] [planner_server]: Planner Server has GridBased  planners available.
+[lifecycle_manager-11] [INFO] [1775544597.563885160] [lifecycle_manager_navigation]: [34m[1mConfiguring behavior_server[0m[0m
+[behavior_server-7] [INFO] [1775544597.564351179] [behavior_server]: Configuring
+[behavior_server-7] [INFO] [1775544597.608504978] [behavior_server]: Creating behavior plugin spin of type nav2_behaviors/Spin
+[behavior_server-7] [INFO] [1775544597.611394278] [behavior_server]: Configuring spin
+[behavior_server-7] [INFO] [1775544597.662064184] [behavior_server]: Creating behavior plugin backup of type nav2_behaviors/BackUp
+[behavior_server-7] [INFO] [1775544597.663877380] [behavior_server]: Configuring backup
+[behavior_server-7] [INFO] [1775544597.698337386] [behavior_server]: Creating behavior plugin drive_on_heading of type nav2_behaviors/DriveOnHeading
+[behavior_server-7] [INFO] [1775544597.700069109] [behavior_server]: Configuring drive_on_heading
+[behavior_server-7] [INFO] [1775544597.735843652] [behavior_server]: Creating behavior plugin wait of type nav2_behaviors/Wait
+[behavior_server-7] [INFO] [1775544597.737406767] [behavior_server]: Configuring wait
+[lifecycle_manager-11] [INFO] [1775544597.771305969] [lifecycle_manager_navigation]: [34m[1mConfiguring bt_navigator[0m[0m
+[bt_navigator-8] [INFO] [1775544597.771767508] [bt_navigator]: Configuring
+[rviz2-12] [INFO] [1775544597.866037609] [rviz2]: Stereo is NOT SUPPORTED
+[rviz2-12] [INFO] [1775544597.866233547] [rviz2]: OpenGl version: 4.6 (GLSL 4.6)
+[rviz2-12] [INFO] [1775544597.935416888] [rviz2]: Stereo is NOT SUPPORTED
+[lifecycle_manager-11] [INFO] [1775544598.214378001] [lifecycle_manager_navigation]: [34m[1mConfiguring waypoint_follower[0m[0m
+[waypoint_follower-9] [INFO] [1775544598.217508646] [waypoint_follower]: Configuring
+[waypoint_follower-9] [INFO] [1775544598.356933024] [waypoint_follower]: Created waypoint_task_executor : wait_at_waypoint of type nav2_waypoint_follower::WaitAtWaypoint
+[lifecycle_manager-11] [INFO] [1775544598.365713306] [lifecycle_manager_navigation]: [34m[1mConfiguring velocity_smoother[0m[0m
+[velocity_smoother-10] [INFO] [1775544598.366433023] [velocity_smoother]: Configuring velocity smoother
+[lifecycle_manager-11] [INFO] [1775544598.410039359] [lifecycle_manager_navigation]: [34m[1mActivating controller_server[0m[0m
+[controller_server-4] [INFO] [1775544598.410672291] [controller_server]: Activating
+[controller_server-4] [INFO] [1775544598.410767300] [local_costmap.local_costmap]: Activating
+[controller_server-4] [INFO] [1775544598.410798468] [local_costmap.local_costmap]: Checking transform
+[controller_server-4] [INFO] [1775544598.411001861] [local_costmap.local_costmap]: start
+[controller_server-4] [INFO] [1775544598.411037478] [local_costmap.local_costmap]: lidar_obstacle_layer was activated.
+[controller_server-4] [INFO] [1775544598.664544082] [controller_server]: Activating controller: FollowPath of type nav2_rotation_shim_controller::RotationShimController
+[controller_server-4] [WARN] [1775544598.664652178] [controller_server]: Parameter controller_server.verbose not found
+[controller_server-4] [INFO] [1775544598.666381662] [controller_server]: Optimizer reset
+[controller_server-4] [INFO] [1775544598.667735911] [MPPIController]: Activated MPPI Controller: FollowPath
+[controller_server-4] [INFO] [1775544598.667797159] [controller_server]: Creating bond (controller_server) to lifecycle manager.
+[lifecycle_manager-11] [INFO] [1775544598.814646514] [lifecycle_manager_navigation]: Server controller_server connected with bond.
+[lifecycle_manager-11] [INFO] [1775544598.814728979] [lifecycle_manager_navigation]: [34m[1mActivating smoother_server[0m[0m
+[smoother_server-5] [INFO] [1775544598.816198332] [smoother_server]: Activating
+[smoother_server-5] [INFO] [1775544598.816283325] [smoother_server]: Creating bond (smoother_server) to lifecycle manager.
+[lifecycle_manager-11] [INFO] [1775544598.923746788] [lifecycle_manager_navigation]: Server smoother_server connected with bond.
+[lifecycle_manager-11] [INFO] [1775544598.923827236] [lifecycle_manager_navigation]: [34m[1mActivating planner_server[0m[0m
+[planner_server-6] [INFO] [1775544598.925129165] [planner_server]: Activating
+[planner_server-6] [INFO] [1775544598.925228429] [global_costmap.global_costmap]: Activating
+[planner_server-6] [INFO] [1775544598.925253550] [global_costmap.global_costmap]: Checking transform
+[planner_server-6] [INFO] [1775544598.925418799] [global_costmap.global_costmap]: start
+[rviz2-12] [INFO] [1775544599.483888733] [rviz2]: Trying to create a map of size 1590 x 1094 using 1 swatches
+[rviz2-12] [INFO] [1775544599.502067156] [rviz2]: Trying to create a map of size 60 x 60 using 1 swatches
+[planner_server-6] [INFO] [1775544599.977729663] [planner_server]: Activating plugin GridBased of type SmacPlanner2D
+[planner_server-6] [INFO] [1775544599.983052258] [planner_server]: Creating bond (planner_server) to lifecycle manager.
+[rviz2-12] [INFO] [1775544600.027854854] [rviz2]: Trying to create a map of size 1590 x 1094 using 1 swatches
+[lifecycle_manager-11] [INFO] [1775544600.108574385] [lifecycle_manager_navigation]: Server planner_server connected with bond.
+[lifecycle_manager-11] [INFO] [1775544600.109176309] [lifecycle_manager_navigation]: [34m[1mActivating behavior_server[0m[0m
+[behavior_server-7] [INFO] [1775544600.109916058] [behavior_server]: Activating
+[behavior_server-7] [INFO] [1775544600.109978683] [behavior_server]: Activating spin
+[behavior_server-7] [INFO] [1775544600.110004859] [behavior_server]: Activating backup
+[behavior_server-7] [INFO] [1775544600.110020603] [behavior_server]: Activating drive_on_heading
+[behavior_server-7] [INFO] [1775544600.110033531] [behavior_server]: Activating wait
+[behavior_server-7] [INFO] [1775544600.110053531] [behavior_server]: Creating bond (behavior_server) to lifecycle manager.
+[lifecycle_manager-11] [INFO] [1775544600.220860266] [lifecycle_manager_navigation]: Server behavior_server connected with bond.
+[lifecycle_manager-11] [INFO] [1775544600.220955114] [lifecycle_manager_navigation]: [34m[1mActivating bt_navigator[0m[0m
+[bt_navigator-8] [INFO] [1775544600.221658607] [bt_navigator]: Activating
+[bt_navigator-8] [INFO] [1775544600.609292129] [bt_navigator]: Creating bond (bt_navigator) to lifecycle manager.
+[lifecycle_manager-11] [INFO] [1775544600.739017066] [lifecycle_manager_navigation]: Server bt_navigator connected with bond.
+[lifecycle_manager-11] [INFO] [1775544600.739112395] [lifecycle_manager_navigation]: [34m[1mActivating waypoint_follower[0m[0m
+[waypoint_follower-9] [INFO] [1775544600.739802608] [waypoint_follower]: Activating
+[waypoint_follower-9] [INFO] [1775544600.739890736] [waypoint_follower]: Creating bond (waypoint_follower) to lifecycle manager.
+[lifecycle_manager-11] [INFO] [1775544600.845576222] [lifecycle_manager_navigation]: Server waypoint_follower connected with bond.
+[lifecycle_manager-11] [INFO] [1775544600.845664478] [lifecycle_manager_navigation]: [34m[1mActivating velocity_smoother[0m[0m
+[velocity_smoother-10] [INFO] [1775544600.846304834] [velocity_smoother]: Activating
+[velocity_smoother-10] [INFO] [1775544600.846416931] [velocity_smoother]: Creating bond (velocity_smoother) to lifecycle manager.
+[lifecycle_manager-11] [INFO] [1775544600.955154052] [lifecycle_manager_navigation]: Server velocity_smoother connected with bond.
+[lifecycle_manager-11] [INFO] [1775544600.955246277] [lifecycle_manager_navigation]: [34m[1mManaged nodes are active[0m[0m
+[lifecycle_manager-11] [INFO] [1775544600.955268517] [lifecycle_manager_navigation]: [34m[1mCreating bond timer...[0m[0m
+[rviz2-12] [INFO] [1775544609.048077182] [rviz_nav2]: Message Filter dropping message: frame 'base_footprint' at time 1775544598.997 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-6] [INFO] [1775544810.019957535] [global_costmap.global_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544809.710 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-4] [INFO] [1775544814.175512233] [local_costmap.local_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544813.975 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-6] [INFO] [1775544814.209890384] [global_costmap.global_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544813.906 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-4] [INFO] [1775544819.988149879] [local_costmap.local_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544819.787 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-4] [INFO] [1775544823.059357305] [local_costmap.local_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544822.852 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-4] [INFO] [1775544829.173982890] [local_costmap.local_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544828.972 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-6] [INFO] [1775544829.202163190] [global_costmap.global_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544828.899 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-4] [INFO] [1775544838.295610266] [local_costmap.local_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544838.094 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-6] [INFO] [1775544838.310738377] [global_costmap.global_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544838.006 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-4] [INFO] [1775544841.176160728] [local_costmap.local_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544840.975 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-6] [INFO] [1775544841.246270064] [global_costmap.global_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544840.936 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-4] [INFO] [1775544843.956626043] [local_costmap.local_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544843.748 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-4] [INFO] [1775544847.352827070] [local_costmap.local_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544847.149 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-4] [INFO] [1775544857.951797827] [local_costmap.local_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544857.751 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-6] [INFO] [1775544858.019947400] [global_costmap.global_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544857.717 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-12] [INFO] [1775544859.634059268] [rviz_navigation_dialog_action_client]: NavigateToPose will be called using the BT Navigator's default behavior tree.
+[bt_navigator-8] [INFO] [1775544859.637152569] [bt_navigator]: Begin navigating from current location (12.50, 2.89) to (3.85, 17.85)
+[controller_server-4] [INFO] [1775544859.792314071] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-4] [WARN] [1775544859.794791086] [controller_server]: No goal checker was specified in parameter 'current_goal_checker'. Server will use only plugin loaded general_goal_checker . This warning will appear once.
+[controller_server-4] [ERROR] [1775544859.901374753] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the future.  Requested time 1775544859.795832 but the latest data is at time 1775544859.737219, when looking up transform from frame [map] to frame [base_footprint]
+[controller_server-4] 
+[controller_server-4] [INFO] [1775544859.903229594] [controller_server]: Optimizer reset
+[controller_server-4] [WARN] [1775544859.913134677] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[controller_server-4] [INFO] [1775544860.995788703] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544862.095954410] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544863.085416769] [local_costmap.local_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544862.884 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-4] [INFO] [1775544863.195790140] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544864.395796498] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544865.495788459] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544866.695794693] [controller_server]: Passing new path to controller.
+[controller_server-4] [ERROR] [1775544866.799051508] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the future.  Requested time 1775544866.696163 but the latest data is at time 1775544866.641814, when looking up transform from frame [map] to frame [base_footprint]
+[controller_server-4] 
+[controller_server-4] [WARN] [1775544866.810253225] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[controller_server-4] [INFO] [1775544866.900541962] [local_costmap.local_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544866.698 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-4] [INFO] [1775544867.795787558] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544868.500393213] [controller_server]: Optimizer reset
+[controller_server-4] [INFO] [1775544868.504874348] [controller_server]: Optimizer reset
+[controller_server-4] [ERROR] [1775544868.505128875] [controller_server]: Optimizer fail to compute path
+[controller_server-4] [WARN] [1775544868.505297066] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[controller_server-4] [INFO] [1775544868.591135257] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[controller_server-4] [INFO] [1775544868.594267693] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-4] [INFO] [1775544868.994585002] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544869.300956944] [controller_server]: Optimizer reset
+[controller_server-4] [INFO] [1775544869.306635834] [controller_server]: Optimizer reset
+[controller_server-4] [ERROR] [1775544869.306768762] [controller_server]: Optimizer fail to compute path
+[controller_server-4] [WARN] [1775544869.307213400] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[controller_server-4] [INFO] [1775544869.391212588] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[planner_server-6] [INFO] [1775544869.394614079] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[controller_server-4] [INFO] [1775544870.142261109] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-4] [WARN] [1775544870.259308964] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[controller_server-4] [INFO] [1775544870.852627857] [controller_server]: Optimizer reset
+[controller_server-4] [INFO] [1775544870.864381635] [controller_server]: Optimizer reset
+[controller_server-4] [ERROR] [1775544870.864544962] [controller_server]: Optimizer fail to compute path
+[controller_server-4] [WARN] [1775544870.864782785] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[controller_server-4] [INFO] [1775544870.941306641] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[controller_server-4] [INFO] [1775544870.953302754] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-4] [WARN] [1775544871.075359772] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[controller_server-4] [INFO] [1775544871.353516870] [controller_server]: Passing new path to controller.
+[controller_server-4] [ERROR] [1775544871.455703854] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the future.  Requested time 1775544871.353841 but the latest data is at time 1775544871.341640, when looking up transform from frame [map] to frame [base_footprint]
+[controller_server-4] 
+[controller_server-4] [WARN] [1775544871.462982513] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[controller_server-4] [INFO] [1775544871.582672659] [local_costmap.local_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544871.382 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-6] [INFO] [1775544871.608429421] [global_costmap.global_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544871.303 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-4] [INFO] [1775544872.453531574] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544873.653510874] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544874.753521332] [controller_server]: Passing new path to controller.
+[controller_server-4] [ERROR] [1775544874.857511919] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the future.  Requested time 1775544874.753927 but the latest data is at time 1775544874.541630, when looking up transform from frame [map] to frame [base_footprint]
+[controller_server-4] 
+[controller_server-4] [WARN] [1775544874.861447743] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[controller_server-4] [INFO] [1775544875.953525981] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544877.053533633] [controller_server]: Passing new path to controller.
+[controller_server-4] [WARN] [1775544877.158640752] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[controller_server-4] [INFO] [1775544878.253518477] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544879.353528251] [controller_server]: Passing new path to controller.
+[controller_server-4] [WARN] [1775544879.655225619] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[controller_server-4] [WARN] [1775544879.958212038] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[controller_server-4] [WARN] [1775544880.060470620] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[controller_server-4] [ERROR] [1775544880.162030803] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the future.  Requested time 1775544880.060592 but the latest data is at time 1775544880.051417, when looking up transform from frame [map] to frame [base_footprint]
+[controller_server-4] 
+[controller_server-4] [WARN] [1775544880.165496996] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[controller_server-4] [INFO] [1775544880.272633732] [local_costmap.local_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544880.058 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-4] [INFO] [1775544880.553582253] [controller_server]: Passing new path to controller.
+[controller_server-4] [WARN] [1775544880.659165012] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[controller_server-4] [INFO] [1775544881.653581447] [controller_server]: Passing new path to controller.
+[controller_server-4] [WARN] [1775544881.759148939] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[planner_server-6] [WARN] [1775544882.696803671] [planner_server]: GridBased: failed to create plan, no valid path found.
+[planner_server-6] [WARN] [1775544882.696945302] [planner_server]: Planning algorithm GridBased failed to generate a valid path to (3.85, 17.85)
+[planner_server-6] [WARN] [1775544882.696982134] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1775544882.791177128] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[controller_server-4] [INFO] [1775544883.153700810] [controller_server]: Passing new path to controller.
+[controller_server-4] [WARN] [1775544883.258956139] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[planner_server-6] [WARN] [1775544884.170401194] [planner_server]: GridBased: failed to create plan, no valid path found.
+[planner_server-6] [WARN] [1775544884.170523850] [planner_server]: Planning algorithm GridBased failed to generate a valid path to (3.85, 17.85)
+[planner_server-6] [WARN] [1775544884.170564265] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1775544884.241164028] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1775544885.042991487] [planner_server]: GridBased: failed to create plan, no valid path found.
+[planner_server-6] [WARN] [1775544885.045424533] [planner_server]: Planning algorithm GridBased failed to generate a valid path to (3.85, 17.85)
+[planner_server-6] [WARN] [1775544885.047130189] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[controller_server-4] [INFO] [1775544885.156748407] [controller_server]: Goal was canceled. Stopping the robot.
+[controller_server-4] [INFO] [1775544885.156877431] [controller_server]: [follow_path] [ActionServer] Client requested to cancel the goal. Cancelling.
+[behavior_server-7] [INFO] [1775544885.158331441] [behavior_server]: Running spin
+[behavior_server-7] [INFO] [1775544885.158662895] [behavior_server]: Turning 1.57 for spin behavior.
+[controller_server-4] [INFO] [1775544886.471608586] [local_costmap.local_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544886.271 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[behavior_server-7] [WARN] [1775544886.959052470] [behavior_server]: Collision Ahead - Exiting Spin
+[behavior_server-7] [WARN] [1775544886.959134550] [behavior_server]: spin failed
+[behavior_server-7] [WARN] [1775544886.959160310] [behavior_server]: [spin] [ActionServer] Aborting handle.
+[behavior_server-7] [INFO] [1775544887.091617914] [behavior_server]: Running wait
+[behavior_server-7] [INFO] [1775544892.091921759] [behavior_server]: wait completed successfully
+[controller_server-4] [INFO] [1775544892.146741741] [local_costmap.local_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544891.943 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-6] [WARN] [1775544892.269800460] [planner_server]: GridBased: failed to create plan, no valid path found.
+[planner_server-6] [WARN] [1775544892.270660296] [planner_server]: Planning algorithm GridBased failed to generate a valid path to (3.85, 17.85)
+[planner_server-6] [WARN] [1775544892.270704296] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1775544892.343106567] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[controller_server-4] [INFO] [1775544893.091689330] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-4] [INFO] [1775544893.148435574] [controller_server]: Optimizer reset
+[planner_server-6] [WARN] [1775544894.174824477] [planner_server]: GridBased: failed to create plan, no valid path found.
+[planner_server-6] [WARN] [1775544894.174936028] [planner_server]: Planning algorithm GridBased failed to generate a valid path to (3.85, 17.85)
+[planner_server-6] [WARN] [1775544894.174969372] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1775544894.241064341] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[controller_server-4] [INFO] [1775544895.194609452] [controller_server]: Passing new path to controller.
+[planner_server-6] [WARN] [1775544896.217860024] [planner_server]: GridBased: failed to create plan, no valid path found.
+[planner_server-6] [WARN] [1775544896.219627216] [planner_server]: Planning algorithm GridBased failed to generate a valid path to (3.85, 17.85)
+[planner_server-6] [WARN] [1775544896.219674671] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1775544896.291175501] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-6] [WARN] [1775544897.019915224] [planner_server]: GridBased: failed to create plan, no valid path found.
+[planner_server-6] [WARN] [1775544897.021166898] [planner_server]: Planning algorithm GridBased failed to generate a valid path to (3.85, 17.85)
+[planner_server-6] [WARN] [1775544897.022390061] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[controller_server-4] [INFO] [1775544897.094606374] [controller_server]: Goal was canceled. Stopping the robot.
+[controller_server-4] [INFO] [1775544897.094712357] [controller_server]: [follow_path] [ActionServer] Client requested to cancel the goal. Cancelling.
+[behavior_server-7] [INFO] [1775544897.096148639] [behavior_server]: Running backup
+[behavior_server-7] [INFO] [1775544897.098664723] [behavior_server]: DriveOnHeading: no acceleration or deceleration limits set
+[controller_server-4] [INFO] [1775544905.653243109] [local_costmap.local_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544905.452 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[behavior_server-7] [WARN] [1775544907.096442057] [behavior_server]: Exceeded time allowance before reaching the DriveOnHeading goal - Exiting DriveOnHeading
+[behavior_server-7] [WARN] [1775544907.096527657] [behavior_server]: backup failed
+[behavior_server-7] [WARN] [1775544907.096555017] [behavior_server]: [backup] [ActionServer] Aborting handle.
+[controller_server-4] [INFO] [1775544907.191105482] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[planner_server-6] [INFO] [1775544907.192198853] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[controller_server-4] [INFO] [1775544908.091661070] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-4] [INFO] [1775544908.147647845] [controller_server]: Optimizer reset
+[controller_server-4] [INFO] [1775544908.657352790] [local_costmap.local_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544908.452 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-4] [INFO] [1775544909.291903857] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544910.391893337] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544911.469696949] [local_costmap.local_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544911.269 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-4] [INFO] [1775544911.591868651] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544912.691892900] [controller_server]: Passing new path to controller.
+[planner_server-6] [INFO] [1775544913.318678677] [global_costmap.global_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544913.014 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-4] [INFO] [1775544913.891900484] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544914.991897871] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544916.191998201] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544917.291903829] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544918.491902159] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544919.027110307] [local_costmap.local_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544918.824 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-6] [INFO] [1775544919.128324335] [global_costmap.global_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544918.824 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-4] [INFO] [1775544919.591893469] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544920.791907557] [controller_server]: Passing new path to controller.
+[controller_server-4] [ERROR] [1775544920.894236778] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the future.  Requested time 1775544920.792863 but the latest data is at time 1775544920.734521, when looking up transform from frame [map] to frame [base_footprint]
+[controller_server-4] 
+[controller_server-4] [WARN] [1775544920.901264679] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[controller_server-4] [INFO] [1775544921.891886983] [controller_server]: Passing new path to controller.
+[controller_server-4] [ERROR] [1775544921.993845900] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the future.  Requested time 1775544921.892200 but the latest data is at time 1775544921.790253, when looking up transform from frame [map] to frame [base_footprint]
+[controller_server-4] 
+[controller_server-4] [WARN] [1775544922.001887779] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[controller_server-4] [INFO] [1775544922.027334564] [local_costmap.local_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544921.825 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-4] [INFO] [1775544923.091893342] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544924.193976198] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544925.391905238] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544926.491896701] [controller_server]: Passing new path to controller.
+[controller_server-4] [ERROR] [1775544926.600015066] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the future.  Requested time 1775544926.492255 but the latest data is at time 1775544926.440147, when looking up transform from frame [map] to frame [base_footprint]
+[controller_server-4] 
+[controller_server-4] [WARN] [1775544926.603914342] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[controller_server-4] [INFO] [1775544927.691900915] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544927.768788268] [local_costmap.local_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544927.568 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-4] [ERROR] [1775544927.794195627] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the future.  Requested time 1775544927.692259 but the latest data is at time 1775544927.544829, when looking up transform from frame [map] to frame [base_footprint]
+[controller_server-4] 
+[controller_server-4] [WARN] [1775544927.799329073] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[controller_server-4] [INFO] [1775544928.791911278] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544929.891884565] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544930.396146650] [controller_server]: Optimizer reset
+[controller_server-4] [INFO] [1775544930.399313001] [controller_server]: Optimizer reset
+[controller_server-4] [ERROR] [1775544930.399439849] [controller_server]: Optimizer fail to compute path
+[controller_server-4] [WARN] [1775544930.399594792] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[controller_server-4] [INFO] [1775544930.491183026] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[controller_server-4] [INFO] [1775544930.492604042] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-4] [WARN] [1775544930.654087885] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[controller_server-4] [WARN] [1775544930.748169290] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[controller_server-4] [WARN] [1775544930.850213470] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[controller_server-4] [ERROR] [1775544930.952094867] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the future.  Requested time 1775544930.850788 but the latest data is at time 1775544930.844579, when looking up transform from frame [map] to frame [base_footprint]
+[controller_server-4] 
+[controller_server-4] [WARN] [1775544930.955863968] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[controller_server-4] [INFO] [1775544931.092936862] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544932.192793337] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544933.166051375] [local_costmap.local_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544932.965 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-6] [INFO] [1775544933.203632972] [global_costmap.global_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544932.900 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-4] [INFO] [1775544933.392798647] [controller_server]: Passing new path to controller.
+[controller_server-4] [ERROR] [1775544934.495067258] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the future.  Requested time 1775544934.392881 but the latest data is at time 1775544934.351207, when looking up transform from frame [map] to frame [base_footprint]
+[controller_server-4] 
+[controller_server-4] [INFO] [1775544934.496250068] [controller_server]: Optimizer reset
+[controller_server-4] [WARN] [1775544934.503460783] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[controller_server-4] [INFO] [1775544934.505027783] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544935.692791383] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544936.792788572] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544937.992805311] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544939.092790008] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544940.292797323] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544941.392795706] [controller_server]: Passing new path to controller.
+[controller_server-4] [ERROR] [1775544941.495027290] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the future.  Requested time 1775544941.393149 but the latest data is at time 1775544941.339806, when looking up transform from frame [map] to frame [base_footprint]
+[controller_server-4] 
+[controller_server-4] [WARN] [1775544941.505965312] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[controller_server-4] [INFO] [1775544942.592798944] [controller_server]: Passing new path to controller.
+[controller_server-4] [ERROR] [1775544943.094476489] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the future.  Requested time 1775544942.992953 but the latest data is at time 1775544942.963884, when looking up transform from frame [map] to frame [base_footprint]
+[controller_server-4] 
+[controller_server-4] [WARN] [1775544943.098517812] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[controller_server-4] [INFO] [1775544943.692791846] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544944.792791385] [controller_server]: Passing new path to controller.
+[controller_server-4] [ERROR] [1775544944.894449239] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the future.  Requested time 1775544944.793175 but the latest data is at time 1775544944.740441, when looking up transform from frame [map] to frame [base_footprint]
+[controller_server-4] 
+[controller_server-4] [WARN] [1775544944.907092947] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[planner_server-6] [INFO] [1775544945.011416707] [global_costmap.global_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544944.708 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-4] [INFO] [1775544945.992788798] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544947.092795878] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544948.292807996] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544949.300197396] [controller_server]: Reached the goal!
+[controller_server-4] [INFO] [1775544949.391880417] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-4] [INFO] [1775544949.400475506] [controller_server]: Reached the goal!
+[bt_navigator-8] [INFO] [1775544949.591076163] [bt_navigator]: Goal succeeded
+[controller_server-4] [INFO] [1775544951.446337509] [local_costmap.local_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544951.241 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-6] [INFO] [1775544952.201044537] [global_costmap.global_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544951.898 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-4] [INFO] [1775544958.019424758] [local_costmap.local_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544957.819 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-4] [INFO] [1775544961.054271003] [local_costmap.local_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544960.853 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-6] [INFO] [1775544961.120737572] [global_costmap.global_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544960.818 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-4] [INFO] [1775544969.662779535] [local_costmap.local_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544969.462 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[rviz2-12] [INFO] [1775544972.861612233] [rviz_navigation_dialog_action_client]: NavigateToPose will be called using the BT Navigator's default behavior tree.
+[bt_navigator-8] [INFO] [1775544972.862489508] [bt_navigator]: Begin navigating from current location (4.36, 17.29) to (11.75, 3.73)
+[planner_server-6] [WARN] [1775544972.914821013] [planner_server]: GridBased: failed to create plan, no valid path found.
+[planner_server-6] [WARN] [1775544972.917787843] [planner_server]: Planning algorithm GridBased failed to generate a valid path to (11.75, 3.73)
+[planner_server-6] [WARN] [1775544972.917839363] [planner_server]: [compute_path_to_pose] [ActionServer] Aborting handle.
+[planner_server-6] [INFO] [1775544973.013233721] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[controller_server-4] [INFO] [1775544973.565371406] [local_costmap.local_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544973.365 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-6] [INFO] [1775544973.614949677] [global_costmap.global_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544973.312 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[planner_server-6] [WARN] [1775544974.023684579] [planner_server]: Planner loop missed its desired rate of 1.0000 Hz. Current loop rate is 0.9974 Hz
+[controller_server-4] [INFO] [1775544974.113889813] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-4] [INFO] [1775544974.148609419] [controller_server]: Optimizer reset
+[controller_server-4] [INFO] [1775544975.315194676] [controller_server]: Passing new path to controller.
+[controller_server-4] [ERROR] [1775544975.416915937] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the future.  Requested time 1775544975.315616 but the latest data is at time 1775544975.149061, when looking up transform from frame [map] to frame [base_footprint]
+[controller_server-4] 
+[controller_server-4] [WARN] [1775544975.424279286] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[controller_server-4] [INFO] [1775544976.415178895] [controller_server]: Passing new path to controller.
+[controller_server-4] [ERROR] [1775544976.717175941] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the future.  Requested time 1775544976.615272 but the latest data is at time 1775544976.538755, when looking up transform from frame [map] to frame [base_footprint]
+[controller_server-4] 
+[controller_server-4] [WARN] [1775544976.720665233] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[controller_server-4] [INFO] [1775544976.774060728] [local_costmap.local_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544976.573 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-4] [INFO] [1775544977.515260633] [controller_server]: Passing new path to controller.
+[planner_server-6] [INFO] [1775544978.318338695] [global_costmap.global_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544978.015 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-4] [INFO] [1775544978.715188582] [controller_server]: Passing new path to controller.
+[controller_server-4] [ERROR] [1775544978.919353267] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the future.  Requested time 1775544978.817552 but the latest data is at time 1775544978.743074, when looking up transform from frame [map] to frame [base_footprint]
+[controller_server-4] 
+[controller_server-4] [WARN] [1775544978.922875711] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[controller_server-4] [INFO] [1775544979.915193534] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544980.259691561] [local_costmap.local_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544980.058 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-4] [INFO] [1775544981.015193714] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544982.115194643] [controller_server]: Passing new path to controller.
+[controller_server-4] [ERROR] [1775544982.216970518] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the future.  Requested time 1775544982.115563 but the latest data is at time 1775544981.948877, when looking up transform from frame [map] to frame [base_footprint]
+[controller_server-4] 
+[controller_server-4] [WARN] [1775544982.221423708] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[planner_server-6] [INFO] [1775544982.238686741] [global_costmap.global_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544981.932 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-4] [INFO] [1775544983.315191536] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544984.415192143] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544985.615191430] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544986.715192162] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544987.915188403] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544989.015233036] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544990.215202550] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544991.315187756] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544992.515186801] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544993.615186116] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544994.815196005] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544995.915191031] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544997.115221458] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544997.420577244] [controller_server]: Optimizer reset
+[controller_server-4] [INFO] [1775544997.424530851] [controller_server]: Optimizer reset
+[controller_server-4] [ERROR] [1775544997.424677795] [controller_server]: Optimizer fail to compute path
+[controller_server-4] [WARN] [1775544997.425104608] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[controller_server-4] [INFO] [1775544997.441533755] [local_costmap.local_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775544997.240 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[controller_server-4] [INFO] [1775544997.513217762] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[controller_server-4] [INFO] [1775544997.515626643] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-4] [WARN] [1775544997.660293913] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[controller_server-4] [WARN] [1775544997.752098277] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[controller_server-4] [WARN] [1775544997.844501196] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[controller_server-4] [ERROR] [1775544997.948154607] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the future.  Requested time 1775544997.846169 but the latest data is at time 1775544997.842509, when looking up transform from frame [map] to frame [base_footprint]
+[controller_server-4] 
+[controller_server-4] [WARN] [1775544997.955633313] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[controller_server-4] [INFO] [1775544998.216829784] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775544999.416825902] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775545000.422415717] [controller_server]: Optimizer reset
+[controller_server-4] [INFO] [1775545000.429642232] [controller_server]: Optimizer reset
+[controller_server-4] [ERROR] [1775545000.429806263] [controller_server]: Optimizer fail to compute path
+[controller_server-4] [WARN] [1775545000.434751416] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[behavior_server-7] [INFO] [1775545000.514005550] [behavior_server]: Running spin
+[behavior_server-7] [INFO] [1775545000.515518052] [behavior_server]: Turning 1.57 for spin behavior.
+[behavior_server-7] [WARN] [1775545001.216866444] [behavior_server]: Collision Ahead - Exiting Spin
+[behavior_server-7] [WARN] [1775545001.216947339] [behavior_server]: spin failed
+[behavior_server-7] [WARN] [1775545001.216968075] [behavior_server]: [spin] [ActionServer] Aborting handle.
+[behavior_server-7] [INFO] [1775545001.370288884] [behavior_server]: Running wait
+[controller_server-4] [INFO] [1775545003.239575222] [local_costmap.local_costmap]: Message Filter dropping message: frame 'base_footprint' at time 1775545003.038 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[behavior_server-7] [INFO] [1775545006.370552049] [behavior_server]: wait completed successfully
+[controller_server-4] [INFO] [1775545006.614806454] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-4] [INFO] [1775545006.648191493] [controller_server]: Optimizer reset
+[controller_server-4] [INFO] [1775545006.656719887] [controller_server]: Optimizer reset
+[controller_server-4] [INFO] [1775545006.661260755] [controller_server]: Optimizer reset
+[controller_server-4] [ERROR] [1775545006.662875081] [controller_server]: Optimizer fail to compute path
+[controller_server-4] [WARN] [1775545006.663029192] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[controller_server-4] [INFO] [1775545006.663390790] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-4] [INFO] [1775545006.748980013] [controller_server]: Optimizer reset
+[controller_server-4] [INFO] [1775545006.753856559] [controller_server]: Optimizer reset
+[controller_server-4] [ERROR] [1775545006.753983310] [controller_server]: Optimizer fail to compute path
+[controller_server-4] [WARN] [1775545006.754132237] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[controller_server-4] [INFO] [1775545006.863201057] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[controller_server-4] [INFO] [1775545006.876905995] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-4] [WARN] [1775545007.052650685] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[controller_server-4] [INFO] [1775545007.778544270] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775545008.978712752] [controller_server]: Passing new path to controller.
+[controller_server-4] [ERROR] [1775545009.080428751] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the future.  Requested time 1775545008.979085 but the latest data is at time 1775545008.942082, when looking up transform from frame [map] to frame [base_footprint]
+[controller_server-4] 
+[controller_server-4] [WARN] [1775545009.084815923] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[controller_server-4] [INFO] [1775545010.078544792] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775545011.278547126] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775545012.378538365] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775545013.578540505] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775545014.678550689] [controller_server]: Passing new path to controller.
+[controller_server-4] [ERROR] [1775545014.780450680] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the future.  Requested time 1775545014.678956 but the latest data is at time 1775545014.641967, when looking up transform from frame [map] to frame [base_footprint]
+[controller_server-4] 
+[controller_server-4] [WARN] [1775545014.785431704] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[controller_server-4] [INFO] [1775545015.878551035] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775545016.978543812] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775545018.178546684] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775545019.278542917] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775545020.478544027] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775545021.578540069] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775545022.778542875] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775545023.878540167] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775545025.078553371] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775545026.178543305] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775545027.378540699] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775545027.782750317] [controller_server]: Optimizer reset
+[controller_server-4] [INFO] [1775545027.787100145] [controller_server]: Optimizer reset
+[controller_server-4] [ERROR] [1775545027.787230128] [controller_server]: Optimizer fail to compute path
+[controller_server-4] [WARN] [1775545027.788034539] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[behavior_server-7] [INFO] [1775545027.864823670] [behavior_server]: Running backup
+[behavior_server-7] [WARN] [1775545034.265448417] [behavior_server]: Collision Ahead - Exiting DriveOnHeading
+[behavior_server-7] [WARN] [1775545034.265536672] [behavior_server]: backup failed
+[behavior_server-7] [WARN] [1775545034.265556864] [behavior_server]: [backup] [ActionServer] Aborting handle.
+[controller_server-4] [INFO] [1775545034.413132945] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[planner_server-6] [INFO] [1775545034.416254332] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[controller_server-4] [INFO] [1775545035.063403944] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-4] [INFO] [1775545035.147155965] [controller_server]: Optimizer reset
+[controller_server-4] [INFO] [1775545036.264706581] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775545037.364699828] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775545038.564702412] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775545039.664691982] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775545040.864944838] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775545041.964708334] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775545043.164705031] [controller_server]: Passing new path to controller.
+[controller_server-4] [INFO] [1775545044.264694161] [controller_server]: Passing new path to controller.
+[controller_server-4] [WARN] [1775545044.365785353] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[controller_server-4] [INFO] [1775545045.464702092] [controller_server]: Passing new path to controller.
+[controller_server-4] [WARN] [1775545045.578857067] [controller_server]: Control loop missed its desired rate of 10.0000Hz
+[controller_server-4] [INFO] [1775545045.671122814] [controller_server]: Reached the goal!
+[bt_navigator-8] [INFO] [1775545045.863004691] [bt_navigator]: Goal succeeded
