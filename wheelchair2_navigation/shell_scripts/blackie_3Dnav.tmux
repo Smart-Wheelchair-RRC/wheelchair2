@@ -5,7 +5,7 @@ sudo chmod 777 /dev/ttyACM0
 sleep 2
 
 SESSION_NAME="wheelchair_navigation"
-NAV_PARAMS="breaking_point.yaml"
+NAV_PARAMS="merge_params.yaml"
 
 
 ############## 1. Create a new tmux session in detached mode (This creates Pane 0)
@@ -35,13 +35,13 @@ tmux split-window -t $SESSION_NAME
 # tmux send-keys -t $SESSION_NAME "ros2 launch wheelchair2_localization 3d_stack.launch.py pcd_map_path:=$MAP_DIR/rrc/lab_map_with_outside_corridor.pcd nature:=indoor" C-m
 
 # RRC with mech lab and outside corridor
-tmux send-keys -t $SESSION_NAME "ros2 launch wheelchair2_localization 3d_stack.launch.py pcd_map_path:=$MAP_DIR/rrc/hardware_lab_2/hardware_lab_2.pcd nature:=indoor" C-m
+# tmux send-keys -t $SESSION_NAME "ros2 launch wheelchair2_localization 3d_stack.launch.py pcd_map_path:=$MAP_DIR/rrc/hardware_lab_2/hardware_lab_2.pcd nature:=indoor" C-m
 
 # Himalaya with ramps
 # tmux send-keys -t $SESSION_NAME "ros2 launch wheelchair2_localization 3d_stack.launch.py pcd_map_path:=$MAP_DIR/ramps/rrc_outside_himalaya_ramps.pcd nature:=outdoor" C-m
 
 # RRC 4th floor
-# tmux send-keys -t $SESSION_NAME "ros2 launch wheelchair2_localization 3d_stack.launch.py pcd_map_path:=/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/rrc/4th_floor_apr2026/2026_04_06.pcd nature:=indoor" C-m
+tmux send-keys -t $SESSION_NAME "ros2 launch wheelchair2_localization 3d_stack.launch.py pcd_map_path:=/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/rrc/4th_floor_apr2026/2026_04_06.pcd nature:=indoor" C-m
 ##############
 
 
@@ -49,16 +49,16 @@ tmux send-keys -t $SESSION_NAME "ros2 launch wheelchair2_localization 3d_stack.l
 tmux split-window -t $SESSION_NAME
 
 # (Default) RRC with outside corridor
-# tmux send-keys -t $SESSION_NAME "ros2 launch wheelchair2_navigation nav2_3d.launch.py map:=$MAP_DIR/rrc/rrc_lab.yaml nav2_params_file:=/home/container_user/wheelchair2/src/wheelchair2_navigation/config/$NAV_PARAMS | tee /home/container_user/wheelchair2/src/output.log" C-m
+# tmux send-keys -t $SESSION_NAME "sleep 7 && ros2 launch wheelchair2_navigation nav2_3d.launch.py map:=$MAP_DIR/rrc/rrc_lab.yaml nav2_params_file:=/home/container_user/wheelchair2/src/wheelchair2_navigation/config/$NAV_PARAMS | tee /home/container_user/wheelchair2/src/output.log" C-m
 
 # RRC with mech lab and outside corridor
-tmux send-keys -t $SESSION_NAME "ros2 launch wheelchair2_navigation nav2_3d.launch.py map:=$MAP_DIR/rrc/hardware_lab_2/hardware_lab_2.yaml nav2_params_file:=/home/container_user/wheelchair2/src/wheelchair2_navigation/config/$NAV_PARAMS | tee /home/container_user/wheelchair2/src/output.log" C-m
+# tmux send-keys -t $SESSION_NAME "sleep 7 && ros2 launch wheelchair2_navigation nav2_3d.launch.py map:=$MAP_DIR/rrc/hardware_lab_2/hardware_lab_2.yaml nav2_params_file:=/home/container_user/wheelchair2/src/wheelchair2_navigation/config/$NAV_PARAMS | tee /home/container_user/wheelchair2/src/output.log" C-m
 
 # Himalaya with ramps
-# tmux send-keys -t $SESSION_NAME "ros2 launch wheelchair2_navigation nav2_3d.launch.py map:=$MAP_DIR/ramps/rrc_outside_himalaya_ramps_fast_cleaned.yaml nav2_params_file:=/home/container_user/wheelchair2/src/wheelchair2_navigation/config/$NAV_PARAMS | tee /home/container_user/wheelchair2/src/output.log" C-m
+# tmux send-keys -t $SESSION_NAME "sleep 7 && ros2 launch wheelchair2_navigation nav2_3d.launch.py map:=$MAP_DIR/ramps/rrc_outside_himalaya_ramps_fast_cleaned.yaml nav2_params_file:=/home/container_user/wheelchair2/src/wheelchair2_navigation/config/$NAV_PARAMS | tee /home/container_user/wheelchair2/src/output.log" C-m
 
 # RRC 4th floor
-# tmux send-keys -t $SESSION_NAME "ros2 launch wheelchair2_navigation nav2_3d.launch.py map:=/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/rrc/4th_floor_apr2026/2026_04_06.yaml nav2_params_file:=/home/container_user/wheelchair2/src/wheelchair2_navigation/config/$NAV_PARAMS | tee /home/container_user/wheelchair2/src/output.log" C-m
+tmux send-keys -t $SESSION_NAME "sleep 7 && ros2 launch wheelchair2_navigation nav2_3d.launch.py map:=/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/rrc/4th_floor_apr2026/2026_04_06.yaml nav2_params_file:=/home/container_user/wheelchair2/src/wheelchair2_navigation/config/$NAV_PARAMS | tee /home/container_user/wheelchair2/src/output.log" C-m
 
 ##############
 
