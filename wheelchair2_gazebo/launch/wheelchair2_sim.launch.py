@@ -52,7 +52,8 @@ def generate_launch_description():
                         [
                             FindPackageShare("wheelchair2_description"),
                             "urdf",
-                            "wheelchair2_core.urdf.xacro",
+                            "wheelchairs",
+                            "blacky.urdf.xacro",
                         ]
                     ),
                     " use_sim_time:=",
@@ -98,7 +99,7 @@ def generate_launch_description():
     default_world = os.path.join(
         get_package_share_directory('wheelchair2_gazebo'),
         'worlds',
-        'obstacles.world'
+        'rrc.world'
         )    
     
     world = LaunchConfiguration('world')
