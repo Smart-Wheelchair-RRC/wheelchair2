@@ -69,7 +69,7 @@ tmux send-keys -t $SESSION_NAME:0.4 "ros2 launch rplidar_ros rplidar_s2_launch.p
 ############## 7. Rosbridge + GUI Launch
 tmux split-window -t $SESSION_NAME
 tmux select-layout -t $SESSION_NAME tiled
-tmux send-keys -t $SESSION_NAME:0.5 "sleep 5 && ros2 launch wheelchair_gui wheelchair_gui.launch.py" C-m
+tmux send-keys -t $SESSION_NAME:0.5 "sleep 2 && ros2 launch wheelchair2_gui wheelchair_gui.launch.py" C-m
 ##############
 
 tmux select-layout -t $SESSION_NAME tiled

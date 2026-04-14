@@ -3,7 +3,7 @@ from glob import glob
 from setuptools import find_packages, setup
 import os
 
-package_name = 'wheelchair_gui'
+package_name = 'wheelchair2_gui'
 
 setup(
     name=package_name,
@@ -24,7 +24,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'wheelchair_gui=wheelchair_gui.controller:main'
+            'wheelchair2_gui=wheelchair2_gui.controller:main'
         ],
     },
 )

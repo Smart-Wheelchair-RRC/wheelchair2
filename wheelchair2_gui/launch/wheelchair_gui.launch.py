@@ -19,9 +19,9 @@ def generate_launch_description():
 
     # 3. Wheelchair GUI Node
     gui_node = Node(
-        package='wheelchair_gui',
-        executable='wheelchair_gui',
-        name='wheelchair_gui',
+        package='wheelchair2_gui',
+        executable='wheelchair2_gui',
+        name='wheelchair2_gui',
         output='screen'
     )
 
