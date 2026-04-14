@@ -39,7 +39,7 @@ tmux send-keys -t $SESSION_NAME:0.2 "python3 /home/container_user/wheelchair2/sr
 # tmux send-keys -t $SESSION_NAME:0.2 "ros2 launch wheelchair2_localization 3d_stack.launch.py pcd_map_path:=$PCD_PATH nature:=indoor | tee ii.log" C-m 
 
 # RRC with mech lab and outside corridor
-tmux send-keys -t $SESSION_NAME:0.2 "ros2 launch wheelchair2_localization 3d_stack.launch.py pcd_map_path:=$MAP_DIR/rrc/4th_floor_apr2026/2026_04_06.pcd nature:=indoor" C-m
+tmux send-keys -t $SESSION_NAME:0.2 "ros2 launch wheelchair2_localization 3d_stack.launch.py pcd_map_path:=$MAP_DIR/rrc/4th_floor_apr2026/2026_04_06.pcd nature:=indoor use_imu:=true" C-m
 
 # Himalaya with ramps
 # tmux send-keys -t $SESSION_NAME:0.2 "ros2 launch wheelchair2_localization 3d_stack.launch.py pcd_map_path:=$MAP_DIR/himalaya/himalaya_with_classroom_ICP.pcd nature:=outdoor" C-m
