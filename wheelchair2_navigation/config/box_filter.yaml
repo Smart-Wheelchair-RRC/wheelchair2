@@ -1,0 +1,14 @@
+laser_filter:
+  ros__parameters:
+    filter1:
+      name: box_filter
+      type: laser_filters/LaserScanBoxFilter
+      params:
+        box_frame: laser
+        max_x: 0.56
+        min_x: -0.40
+        max_y: 0.38
+        min_y: -0.38
+        max_z: 2.0
+        min_z: -2.0 
+        invert: false # activate to remove all points outside of the box

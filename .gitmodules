@@ -26,3 +26,6 @@
 	path = dependencies/3DLocalization
 	url = https://github.com/Smart-Wheelchair-RRC/RRC-3DLocalization.git
 	branch = main
+[submodule "dependencies/rplidar_ros"]
+	path = dependencies/rplidar_ros
+	url = https://github.com/Slamtec/rplidar_ros.git

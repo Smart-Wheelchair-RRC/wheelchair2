@@ -38,6 +38,9 @@ DEFAULT_PARAMETERS = {
     'nav2_params_file': str(NAVIGATION_PACKAGE_DIRECTORY / 'config' / 'nav2_params.yaml'),
     'nav2_rviz_config_file': str(NAVIGATION_PACKAGE_DIRECTORY / 'rviz' / 'navigation.rviz'),
     'keepout_params_file': str(NAVIGATION_PACKAGE_DIRECTORY / 'config' / 'keepout_params.yaml'),
+
+    'box_filter_config': str(NAVIGATION_PACKAGE_DIRECTORY / 'config' / 'box_filter.yaml'),
+    'box_filter_config_2': str(NAVIGATION_PACKAGE_DIRECTORY / 'config' / 'box_filter_2.yaml'),
 }
 
 def declare_launch_arguments(param_defaults: dict):
@@ -80,8 +83,10 @@ def create_nodes():
     nav2_rviz_config_file = LaunchConfiguration('nav2_rviz_config_file')
     keepout_mask_file_path = LaunchConfiguration('keepout_mask_file_path')
     keepout_params_file = LaunchConfiguration('keepout_params_file')
+    
+    box_filter_config = LaunchConfiguration('box_filter_config')
+    box_filter_config_2 = LaunchConfiguration('box_filter_config_2')
 
-    # keepout zone parameters
     updated_keepout_params = RewrittenYaml(
         source_file=keepout_params_file,
         param_rewrites={
@@ -105,6 +110,33 @@ def create_nodes():
         output='screen'
     )
     actions_list.append(box_filter_node)
+
+
+    laser_filter_node = Node(
+        package='laser_filters',
+        executable='scan_to_scan_filter_chain',
+        name='laser_filter',
+        parameters=[box_filter_config, {'use_sim_time': use_sim_time}],
+        remappings=[
+            ('scan', 'scan_rp'),       
+            ('scan_filtered', 'scan_rp_filtered_1') 
+        ],
+        output='screen'
+    )
+    actions_list.append(laser_filter_node)
+
+    laser_filter_node_1 = Node(
+        package='laser_filters',
+        executable='scan_to_scan_filter_chain',
+        name='laser_filter_1',
+        parameters=[box_filter_config_2, {'use_sim_time': use_sim_time}],
+        remappings=[
+            ('scan', 'scan_rp_filtered_1'),       
+            ('scan_filtered', 'scan_rp_filtered')    
+        ],
+        output='screen'
+    )
+    actions_list.append(laser_filter_node_1)
 
 
     # ==========================================
