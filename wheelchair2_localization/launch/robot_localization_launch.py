@@ -25,7 +25,7 @@ def generate_launch_description():
 
     imu_node = Node(
         package='wheelchair2_localization',
-        executable='adafruit_imu.py',
+        executable='adafruit_imu',
         name='adafruit_imu_node',
         output='screen'
     )
