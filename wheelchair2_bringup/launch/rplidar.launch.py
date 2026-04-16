@@ -1,40 +1,21 @@
+import os
+from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription
+from launch.actions import IncludeLaunchDescription, GroupAction
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import PathJoinSubstitution
-from launch_ros.actions import Node
-from launch_ros.substitutions import FindPackageShare
-
+from launch_ros.actions import SetRemap
 
 def generate_launch_description():
-    sllidar_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            PathJoinSubstitution(
-                [FindPackageShare("sllidar_ros2"), "launch", "sllidar_a3_launch.py"]
-            ),
-        ),
-        launch_arguments={"frame_id": "laser_frame"}.items(),
+    s2_launch = os.path.join(
+        get_package_share_directory('rplidar_ros'),
+        'launch', 'rplidar_s2_launch.py'
     )
 
-    angle_range_filter_node = Node(
-        package="laser_filters",
-        executable="scan_to_scan_filter_chain",
-        parameters=[
-            PathJoinSubstitution(
-                [
-                    FindPackageShare("wheelchair2_navigation"),
-                    "config",
-                    "angle_range_filter.yaml",
-                ]
-            )
-        ],
-        remappings=[("scan", "/scan_raw"), ("scan_filtered", "/scan")],
-    )
-    
-
-    return LaunchDescription(
-        [
-            sllidar_launch,
-            angle_range_filter_node,
-        ]
-    )
+    return LaunchDescription([
+        GroupAction(
+            actions=[
+                SetRemap(src='/scan', dst='/scan_rp'),
+                IncludeLaunchDescription(PythonLaunchDescriptionSource(s2_launch))
+            ]
+        )
+    ])
