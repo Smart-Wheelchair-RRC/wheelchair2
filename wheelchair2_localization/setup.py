@@ -12,6 +12,7 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
+        (os.path.join('share', package_name, 'config'), glob('config/*.yaml')),
         (
             os.path.join("share", package_name, "launch"),
             glob(os.path.join("launch", "*launch.[pxy][yma]*")),
@@ -28,7 +29,7 @@ setup(
         'console_scripts': [
             'invert_livox_data = wheelchair2_localization.invert_livox_data:main',
             'vizualize_pcd_map = wheelchair2_localization.vizualize_pcd_map:main',
-            'adafruit_imu=wheelchair2_localization.adafruit_imu:main'
+            'adafruit_imu = wheelchair2_localization.adafruit_imu:main'
         ],
     },
 )

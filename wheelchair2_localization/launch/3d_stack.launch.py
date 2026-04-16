@@ -5,7 +5,6 @@ from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch.conditions import IfCondition, UnlessCondition
-from launch_ros.actions import Node
 
 def generate_launch_description():
     # Directories
@@ -13,26 +12,48 @@ def generate_launch_description():
 
     # Launch Configurations
     use_sim_time = LaunchConfiguration("use_sim_time")
-    rviz_config_file = LaunchConfiguration('rviz_config_file')
-    run_rviz = LaunchConfiguration('run_rviz')
     use_imu = LaunchConfiguration("use_imu")
 
     return LaunchDescription([
-        DeclareLaunchArgument("use_sim_time", default_value="false", description="Use simulation (Gazebo) clock if true"),
+        DeclareLaunchArgument(
+            "use_sim_time", 
+            default_value="false", 
+            description="Use simulation (Gazebo) clock if true"
+        ),
         
-        DeclareLaunchArgument("use_imu", default_value="false", description="True: EKF/IMU mode, False: 3D-BBS mode"),
+        DeclareLaunchArgument(
+            "use_imu", 
+            default_value="false", 
+            description="True: Only IMU/EKF mode. False: Only 3D-BBS/ICP/DLIO mode."
+        ),
         
-        # --- Globally Inherited Arguments ---
-        # These do not need to be explicitly passed to IncludeLaunchDescription.
-        # As long as they are provided via CLI, the child launch files will pick them up.
-        DeclareLaunchArgument('pcd_map_path', description='Mandatory: Absolute path to the pointcloud map file (.pcd)'),
-        DeclareLaunchArgument('nature', description='Mandatory: set to "indoor" or "outdoor"'),
+        DeclareLaunchArgument(
+            'pcd_map_path', 
+            default_value='',
+            description='Mandatory: Absolute path to the pointcloud map file (.pcd)'
+        ),
+        
+        DeclareLaunchArgument(
+            'nature', 
+            default_value='indoor',
+            description='Mandatory: set to "indoor" or "outdoor"'
+        ),
+
+
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(
+                os.path.join(loc_dir, 'launch', 'robot_localization_launch.py')
+            ),
+            condition=IfCondition(use_imu)
+        ),
+
 
         # Odometry (DLIO)
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
                 os.path.join(get_package_share_directory('direct_lidar_inertial_odometry'), 'launch', 'dlio.launch.py')
             ),
+            condition=UnlessCondition(use_imu), 
             launch_arguments={'rviz': 'false', 'use_sim_time': use_sim_time}.items()
         ),
 
@@ -45,8 +66,8 @@ def generate_launch_description():
             launch_arguments={
                 'use_sim_time': use_sim_time,
                 'rviz': 'false',
-                'nature': LaunchConfiguration('nature'),             # Explicitly pass
-                'pcd_map_path': LaunchConfiguration('pcd_map_path')  # Explicitly pass
+                'nature': LaunchConfiguration('nature'),
+                'pcd_map_path': LaunchConfiguration('pcd_map_path')
             }.items()
         ),
 
@@ -59,14 +80,7 @@ def generate_launch_description():
             launch_arguments={
                 'use_sim_time': use_sim_time,
                 'period': '2.0',
-                'pcd_map_path': LaunchConfiguration('pcd_map_path')  # Explicitly pass
+                'pcd_map_path': LaunchConfiguration('pcd_map_path')
             }.items()
-        ),
-
-        IncludeLaunchDescription(
-            PythonLaunchDescriptionSource(
-                os.path.join(loc_dir, 'launch', 'robot_localization_launch.py')
-            ),
-            condition=IfCondition(use_imu)
         ),
     ])
