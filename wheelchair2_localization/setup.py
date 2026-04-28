@@ -28,6 +28,7 @@ setup(
         'console_scripts': [
             'invert_livox_data = wheelchair2_localization.invert_livox_data:main',
             'vizualize_pcd_map = wheelchair2_localization.vizualize_pcd_map:main',
+            'elevator_floor_detection = wheelchair2_localization.elevator_floor_detection:main',
         ],
     },
 )
