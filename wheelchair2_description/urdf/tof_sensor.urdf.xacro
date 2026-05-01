@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    
+    <xacro:macro name="tof_sensor" params="name parent xyz rpy index">
+        <!-- The joint connecting the TOF to the robot -->
+        <joint name="${name}_joint" type="fixed">
+            <parent link="${parent}" />
+            <child link="${name}_link" />
+            <origin xyz="${xyz}" rpy="${rpy}" />
+        </joint>
+
+        <!-- The actual TOF link -->
+        <link name="${name}_link">
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0" />
+                <geometry>
+                    <!-- A small black box to represent the VL53L0X -->
+                    <box size="0.01 0.02 0.005" />
+                </geometry>
+                <material name="black" />
+            </visual>
+            <!-- Custom tag for index reference, if needed by custom URDF parsers -->
+            <sensor_index>${index}</sensor_index>
+        </link>
+    </xacro:macro>
+
+</robot>
