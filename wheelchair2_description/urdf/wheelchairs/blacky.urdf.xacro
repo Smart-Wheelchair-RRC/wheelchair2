@@ -113,13 +113,13 @@
     </joint> -->
 
     <!-- Instantiate the TOF sensors -->
-    <!-- index 0: Front Left -->
-    <xacro:tof_sensor name="tof_front_left" parent="base_footprint" 
-                      xyz="0.45 0.25 0.3" rpy="0 0 0" index="0" />
+    <!-- index 0: side Right -->
+    <xacro:tof_sensor name="tof_side_right" parent="base_footprint" 
+                      xyz="0.34 -0.215 0.30" rpy="0 0 -1.57" index="1" />
+    <!-- index 0: side Left -->
+    <xacro:tof_sensor name="tof_side_left" parent="base_footprint" 
+                      xyz="0.34 0.215 0.30" rpy="0 0 1.57" index="1" />
 
-    <!-- index 1: Front Right -->
-    <xacro:tof_sensor name="tof_front_right" parent="base_footprint" 
-                      xyz="0.45 -0.25 0.3" rpy="0 0 0" index="1" />
 
     <xacro:kangaroo_x2_driver name="kangaroo_ros2_control" prefix="" use_sim_time="$(arg use_sim_time)"></xacro:kangaroo_x2_driver>
 
