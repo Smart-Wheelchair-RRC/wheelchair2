@@ -21,12 +21,6 @@ def generate_launch_description():
                 IncludeLaunchDescription(PythonLaunchDescriptionSource(s2_launch))
             ]
         ),
-        Node(
-            package='wheelchair2_bringup',
-            executable='box_filter.py',
-            name='box_filter',
-            output='screen'
-        ),
 
         Node(
             package='laser_filters',

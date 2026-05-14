@@ -95,6 +95,13 @@ def create_nodes():
 
     actions_list = []
 
+    box_filter_node = Node(
+        package='wheelchair2_bringup',
+        executable='box_filter.py',
+        name='box_filter',
+        output='screen'
+    )
+    actions_list.append(box_filter_node)
     # ==========================================
     # Phase 1 : Nav2 Stack (2 Second Delay)
     # ==========================================
