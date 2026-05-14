@@ -96,10 +96,7 @@ def create_nodes():
     actions_list = []
 
     # ==========================================
-    # Phase 1: Immediate Startup
-    # ==========================================
-    # ==========================================
-    # Phase 2: Nav2 Stack (2 Second Delay)
+    # Phase 1 : Nav2 Stack (2 Second Delay)
     # ==========================================
     
     nav2_group_actions = []
@@ -189,7 +186,7 @@ def create_nodes():
 
 
     # ==========================================
-    # Phase 3: RViz (4 Second Delay)
+    # Phase 2: RViz (4 Second Delay)
     # ==========================================
     
     # RViz node for nav2 visualization
