@@ -83,9 +83,6 @@ def create_nodes():
     nav2_rviz_config_file = LaunchConfiguration('nav2_rviz_config_file')
     keepout_mask_file_path = LaunchConfiguration('keepout_mask_file_path')
     keepout_params_file = LaunchConfiguration('keepout_params_file')
-    
-    box_filter_config = LaunchConfiguration('box_filter_config')
-    box_filter_config_2 = LaunchConfiguration('box_filter_config_2')
 
     updated_keepout_params = RewrittenYaml(
         source_file=keepout_params_file,
@@ -101,44 +98,6 @@ def create_nodes():
     # ==========================================
     # Phase 1: Immediate Startup
     # ==========================================
-    
-    # Box filter node
-    box_filter_node = Node(
-        package='wheelchair2_bringup',
-        executable='box_filter.py',
-        name='box_filter',
-        output='screen'
-    )
-    actions_list.append(box_filter_node)
-
-
-    laser_filter_node = Node(
-        package='laser_filters',
-        executable='scan_to_scan_filter_chain',
-        name='laser_filter',
-        parameters=[box_filter_config, {'use_sim_time': use_sim_time}],
-        remappings=[
-            ('scan', 'scan_rp'),       
-            ('scan_filtered', 'scan_rp_filtered_1') 
-        ],
-        output='screen'
-    )
-    actions_list.append(laser_filter_node)
-
-    laser_filter_node_1 = Node(
-        package='laser_filters',
-        executable='scan_to_scan_filter_chain',
-        name='laser_filter_1',
-        parameters=[box_filter_config_2, {'use_sim_time': use_sim_time}],
-        remappings=[
-            ('scan', 'scan_rp_filtered_1'),       
-            ('scan_filtered', 'scan_rp_filtered')    
-        ],
-        output='screen'
-    )
-    actions_list.append(laser_filter_node_1)
-
-
     # ==========================================
     # Phase 2: Nav2 Stack (2 Second Delay)
     # ==========================================
