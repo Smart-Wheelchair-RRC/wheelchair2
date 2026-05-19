@@ -1,6 +1,5 @@
 from glob import glob
-
-from setuptools import find_packages, setup
+from setuptools import setup
 import os
 
 package_name = 'wheelchair2_gui'
@@ -8,7 +7,7 @@ package_name = 'wheelchair2_gui'
 setup(
     name=package_name,
     version='0.0.0',
-    packages=find_packages(exclude=['test']),
+    packages=[package_name],
     data_files=[
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
