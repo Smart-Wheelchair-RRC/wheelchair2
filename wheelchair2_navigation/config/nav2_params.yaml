@@ -342,6 +342,7 @@ local_costmap:
         filter_info_topic: "/costmap_filter_info"
 
       plugins: ["lidar_obstacle_layer", "range_layer", "inflation_layer"]
+      # plugins: ["range_layer", "inflation_layer"]
 
       range_layer:
         plugin: "nav2_costmap_2d::RangeSensorLayer"
