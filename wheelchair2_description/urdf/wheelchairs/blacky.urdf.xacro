@@ -12,6 +12,7 @@
     <xacro:include filename="$(find wheelchair2_description)/urdf/links_joints.urdf.xacro" />
     <xacro:include filename="$(find wheelchair2_description)/urdf/kangaroo_ros2_control.urdf.xacro" />
     <xacro:include filename="$(find wheelchair2_description)/urdf/realsense.urdf.xacro" />
+    <xacro:include filename="$(find wheelchair2_description)/urdf/tof_sensor.urdf.xacro" />
 
     <link name="base_footprint" />
 
@@ -110,6 +111,15 @@
         <origin xyz="-0.064156 0 -0.064846" rpy="-${pi} -0.0131 0" />
         <axis xyz="0 0 0" />
     </joint> -->
+
+    <!-- Instantiate the TOF sensors -->
+    <!-- index 0: side Right -->
+    <xacro:tof_sensor name="tof_side_right" parent="base_footprint" 
+                      xyz="0.34 -0.215 0.30" rpy="0 0 -1.57" index="1" />
+    <!-- index 0: side Left -->
+    <xacro:tof_sensor name="tof_side_left" parent="base_footprint" 
+                      xyz="0.34 0.215 0.30" rpy="0 0 1.57" index="1" />
+
 
     <xacro:kangaroo_x2_driver name="kangaroo_ros2_control" prefix="" use_sim_time="$(arg use_sim_time)"></xacro:kangaroo_x2_driver>
 

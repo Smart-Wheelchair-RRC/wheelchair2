@@ -341,7 +341,24 @@ local_costmap:
         enabled: True
         filter_info_topic: "/costmap_filter_info"
 
-      plugins: ["lidar_obstacle_layer", "inflation_layer"]
+      plugins: ["lidar_obstacle_layer", "range_layer", "inflation_layer"]
+      # plugins: ["range_layer", "inflation_layer"]
+
+      range_layer:
+        plugin: "nav2_costmap_2d::RangeSensorLayer"
+        enabled: true
+        
+        # Range layer takes a simple list of topics, not nested observation sources
+        topics: ["/sensors/tof_side_left_link", "/sensors/tof_side_right_link"]
+        
+        # Crucial for ToF sensors: 
+        # If the sensor sees nothing and outputs max_range or infinity, 
+        # this tells Nav2 to clear the costmap out to the max range.
+        clear_on_max_reading: true
+        
+        # Optional tuning (defaults are usually fine):
+        clear_threshold: 0.2
+        mark_threshold: 0.8
       
       lidar_obstacle_layer:
         plugin: "spatio_temporal_voxel_layer/SpatioTemporalVoxelLayer"
