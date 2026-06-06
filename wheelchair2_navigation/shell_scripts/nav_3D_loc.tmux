@@ -30,6 +30,11 @@ NATURE=indoor
 # YAML_PATH=$MAP_DIR/rrc/4th_floor_apr2026/2026_04_06.yaml
 # NATURE=indoor
 
+## classroom with ramps
+# PCD_PATH=$MAP_DIR/classroom_with_ramp/classroom_with_ramp.pcd
+# YAML_PATH=$MAP_DIR/classroom_with_ramp/lidarmap2d.yaml
+# NATURE=indoor
+
 
 # Start detached session
 tmux new-session -d -s $SESSION_NAME -n "bringup" -x 200 -y 100
@@ -43,10 +48,10 @@ tmux split-window -h -t $SESSION_NAME:0
 tmux send-keys -t $SESSION_NAME:0 "sudo chmod 777 /dev/ttyACM0 && sleep 2 && ros2 launch wheelchair2_bringup wheelchair2.launch.py robot_name:=$WHEELCHAIR_NAME use_sim_time:=False" C-m
 
 # Pane 0.2: 2D LiDAR
-tmux split-window -v -t $SESSION_NAME:0.1
-tmux send-keys -t $SESSION_NAME:0 "sudo chmod 777 /dev/ttyUSB0 && sleep 2 && ros2 launch wheelchair2_bringup rplidar.launch.py use_sim_time:=False" C-m
+# tmux split-window -v -t $SESSION_NAME:0.1
+# tmux send-keys -t $SESSION_NAME:0 "sudo chmod 777 /dev/ttyUSB0 && sleep 2 && ros2 launch wheelchair2_bringup rplidar.launch.py use_sim_time:=False" C-m
 
-tmux select-layout -t $SESSION_NAME:0 tiled
+# tmux select-layout -t $SESSION_NAME:0 tiled
 
 
 ################## 3. WINDOW 1: LOCALIZATION AND NAVIGATION
@@ -67,14 +72,14 @@ tmux select-layout -t $SESSION_NAME:1 tiled
 
 
 ################## 4. WINDOW 2: APP AND GUI
-tmux new-window -t $SESSION_NAME -n "app"
+# tmux new-window -t $SESSION_NAME -n "app"
 
-# Pane 2.0: ROS Bridge / GUI
-tmux send-keys -t $SESSION_NAME:2 "ros2 launch wheelchair2_gui wheelchair_gui.launch.py | tee gui.log" C-m
+# # Pane 2.0: ROS Bridge / GUI
+# tmux send-keys -t $SESSION_NAME:2 "ros2 launch wheelchair2_gui wheelchair_gui.launch.py | tee gui.log" C-m
 
-# Pane 2.1: Extra (e.g., Teleop or Monitoring)
-tmux split-window -h -t $SESSION_NAME:2
-tmux send-keys -t $SESSION_NAME:2 "ros2 run wheelchair2_control keyboard_teleop_constant.py"
+# # Pane 2.1: Extra (e.g., Teleop or Monitoring)
+# tmux split-window -h -t $SESSION_NAME:2
+# tmux send-keys -t $SESSION_NAME:2 "ros2 run wheelchair2_control keyboard_teleop_constant.py"
 
 tmux select-layout -t $SESSION_NAME:2 tiled
 

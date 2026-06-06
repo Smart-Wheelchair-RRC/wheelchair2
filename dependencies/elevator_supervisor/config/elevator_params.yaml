@@ -1,0 +1,41 @@
+# elevator_params.yaml
+#
+# How to measure wait and inside poses in RViz:
+#   1. Launch your system with the floor's PCD map loaded
+#   2. Use the "Publish Point" tool (click on the map)
+#   3. Read x, y from the terminal
+#   4. yaw: 0.0 = facing +X. Adjust so the robot faces into the elevator.
+#      Since the robot moves straight in and straight out, entry yaw = exit yaw.
+#
+# wait_pose  = P1/P4: outside the elevator, camera watches from here
+# inside_pose = P2:   inside the elevator, robot drives straight to here
+
+elevator_supervisor:
+  ros__parameters:
+
+    current_floor: 1
+    num_floors: 2
+
+    # ── Floor 1 ──────────────────────────────────────────────────────────────
+    floors.0.id:          1
+    floors.0.pcd_path:    "/maps/floor1.pcd"  # update to your actual path
+
+    floors.0.wait.x:      5.00   # P1: outside lift on floor 1
+    floors.0.wait.y:     -2.00
+    floors.0.wait.yaw:    0.0    # radians
+
+    floors.0.inside.x:    3.20   # P2: inside lift (floor 1 map coords)
+    floors.0.inside.y:   -1.10
+    floors.0.inside.yaw:  0.0    # same heading as wait — straight in
+
+    # ── Floor 4 ──────────────────────────────────────────────────────────────
+    floors.1.id:          4
+    floors.1.pcd_path:    "/maps/floor4.pcd"  # update to your actual path
+
+    floors.1.wait.x:      5.00   # P4: outside lift on floor 4 (floor 4 map coords)
+    floors.1.wait.y:     -2.00
+    floors.1.wait.yaw:    0.0
+
+    floors.1.inside.x:    3.20   # not used for exit — robot exits straight to wait_pose
+    floors.1.inside.y:   -1.10
+    floors.1.inside.yaw:  0.0

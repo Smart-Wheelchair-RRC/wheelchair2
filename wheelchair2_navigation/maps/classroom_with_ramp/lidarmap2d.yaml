@@ -1,0 +1,6 @@
+free_thresh: 0.25
+image: lidarmap2d.png
+negate: 0
+occupied_thresh: 0.65
+origin: [-93.35601806640625, -71.42425537109375, 0.0]
+resolution: 0.05
