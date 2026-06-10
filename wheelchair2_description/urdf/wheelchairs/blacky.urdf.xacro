@@ -115,8 +115,8 @@
     <!-- Instantiate the TOF sensors -->
     <!-- index 0: side Right -->
     <xacro:tof_sensor name="tof_side_right" parent="base_footprint" 
-                      xyz="0.34 -0.215 0.30" rpy="0 0 -1.57" index="1" />
-    <!-- index 0: side Left -->
+                      xyz="0.34 -0.215 0.30" rpy="0 0 -1.57" index="0" />
+    <!-- index 1: side Left -->
     <xacro:tof_sensor name="tof_side_left" parent="base_footprint" 
                       xyz="0.34 0.215 0.30" rpy="0 0 1.57" index="1" />
 
