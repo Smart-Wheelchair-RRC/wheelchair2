@@ -1,6 +1,0 @@
-free_thresh: 0.3
-image: hardware_lab_2.png
-negate: 0
-occupied_thresh: 0.6
-origin: [-30.900569915771484, -7.378138542175293, 0.0]
-resolution: 0.05
