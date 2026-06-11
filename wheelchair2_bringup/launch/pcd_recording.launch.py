@@ -183,7 +183,7 @@ def launch_setup(context, *args, **kwargs):
     # ======================================================================
     crop_lidar_node = Node(
         package='wheelchair2_bringup',
-        executable='croplidar_data.py',
+        executable='crop_lidar.py',
         name='lidar_crop_node',
         output='screen',
         parameters=[{'use_sim_time': use_sim_time_s.lower() == 'true'}],
@@ -198,7 +198,7 @@ def launch_setup(context, *args, **kwargs):
             'use_sim_time': use_sim_time_s,
             'rviz': rviz_arg,
             'config_file': config_file,
-            'lid_topic': '/livox/lidar_box_cropped',
+            'lid_topic': '/livox/lidar_cropped',
             'dense_publish_en': 'true',
             'map_file_path': map_save_path,
         }.items(),
