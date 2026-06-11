@@ -6,7 +6,7 @@ Plays a rosbag through a crop-lidar filter into FastLIO, then saves the PCD map.
 
 Required:
   bag_dir        - recording folder name OR full path to the rosbag directory
-  map_save_path  - full path (with filename) for the output PCD
+  map_save_path  - full path (with filename) for the output PCD (must end with .pcd)
 
 Usage:
   # Using recording folder name (resolved under RECORDS_ROOT):
@@ -115,6 +115,9 @@ def resolve_bag_dir(bag_dir_arg: str, records_root: str):
 # Launch setup
 # ---------------------------------------------------------------------------
 def launch_setup(context, *args, **kwargs):
+    # Flag to track if the shutdown was manually triggered via Ctrl+C keyboard listener
+    ctrl_c_pressed = False
+
     # -- Resolve arguments --------------------------------------------------
     bag_dir_arg    = LaunchConfiguration('bag_dir').perform(context)
     map_save_path  = LaunchConfiguration('map_save_path').perform(context)
@@ -135,10 +138,12 @@ def launch_setup(context, *args, **kwargs):
         errors.append('  bag_dir        : not set')
     if not map_save_path:
         errors.append('  map_save_path  : not set')
+    elif not map_save_path.lower().endswith('.pcd'):
+        errors.append('  map_save_path  : path does not end with ".pcd" extension!')
 
     if errors:
         print('')
-        print('[pcd_recording] ERROR: required arguments missing:')
+        print('[pcd_recording] ERROR: required arguments missing or invalid:')
         for e in errors:
             print(f'[pcd_recording] {e}')
         print('')
@@ -224,6 +229,7 @@ def launch_setup(context, *args, **kwargs):
     # ======================================================================
     max_info = f'/{int(max_time)}s' if max_time > 0 else ''
     timer_script = (
+        'elapsed_timer_process_marker=1; '
         'trap "exit 0" INT TERM; '
         'echo "[pcd_recording] Playback started. Note the time if you see something unwanted."; '
         'echo "[pcd_recording] Re-run with max_time:=<seconds> to trim there."; '
@@ -243,7 +249,7 @@ def launch_setup(context, *args, **kwargs):
     )
 
     # ======================================================================
-    # 5. On rosbag exit -> call save service
+    # 5. On rosbag exit -> call save service (if not manually stopped via Ctrl+C)
     # ======================================================================
     save_map_action = ExecuteProcess(
         cmd=['ros2', 'service', 'call', save_svc_name, save_svc_type, '{}'],
@@ -251,13 +257,20 @@ def launch_setup(context, *args, **kwargs):
         name='save_map_service',
     )
 
+    def on_rosbag_exit_cb(event, context):
+        nonlocal ctrl_c_pressed
+        if ctrl_c_pressed:
+            # Bypassed because keyboard listener handles the manual saving/exit
+            return []
+        return [
+            LogInfo(msg='[pcd_recording] Rosbag finished naturally. Calling ' + save_svc_name + ' ...'),
+            save_map_action,
+        ]
+
     on_rosbag_exit = RegisterEventHandler(
         OnProcessExit(
             target_action=rosbag_play,
-            on_exit=[
-                LogInfo(msg='[pcd_recording] Rosbag finished. Calling ' + save_svc_name + ' ...'),
-                save_map_action,
-            ],
+            on_exit=on_rosbag_exit_cb,
         )
     )
 
@@ -318,6 +331,7 @@ def launch_setup(context, *args, **kwargs):
         atexit.register(termios.tcsetattr, fd, termios.TCSADRAIN, old_settings)
 
         def run_listener():
+            nonlocal ctrl_c_pressed
             try:
                 # Set terminal to cbreak mode
                 tty.setcbreak(fd)
@@ -338,6 +352,13 @@ def launch_setup(context, *args, **kwargs):
                         key = sys.stdin.read(1)
                         # \x03 is Ctrl+C
                         if key == '\x03':
+                            # Mark that we stopped via Ctrl+C to bypass automatic exit handler
+                            ctrl_c_pressed = True
+                            
+                            # Immediately terminate the rosbag playback process and the elapsed timer
+                            subprocess.run(['pkill', '-INT', '-f', 'ros2 bag play'])
+                            subprocess.run(['pkill', '-INT', '-f', 'elapsed_timer_process_marker'])
+
                             sys.stdout.write(f"\n[pcd_recording] Do you want to save the map to {map_save_path}? [y/n]: ")
                             sys.stdout.flush()
 
@@ -351,9 +372,15 @@ def launch_setup(context, *args, **kwargs):
                                 time.sleep(0.05)
 
                             if ans == 'y':
-                                sys.stdout.write("y\n[pcd_recording] Gracefully stopping rosbag and saving map...\n")
+                                sys.stdout.write("y\n[pcd_recording] Saving map...\n")
                                 sys.stdout.flush()
-                                subprocess.run(['pkill', '-INT', '-f', 'ros2 bag play'])
+                                # Call the save service manually while FAST-LIO remains active
+                                subprocess.run(['ros2', 'service', 'call', save_svc_name, save_svc_type, '{}'])
+                                sys.stdout.write("[pcd_recording] Map saved. Exiting...\n")
+                                sys.stdout.flush()
+                                # Restore terminal and send SIGINT to self to trigger shutdown
+                                termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+                                os.kill(os.getpid(), signal.SIGINT)
                                 break
                             else:
                                 if ans == '\x03':
