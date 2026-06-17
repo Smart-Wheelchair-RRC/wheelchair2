@@ -341,70 +341,100 @@ local_costmap:
         enabled: True
         filter_info_topic: "/costmap_filter_info"
 
-      plugins: ["lidar_obstacle_layer", "range_layer", "inflation_layer"]
-      # plugins: ["range_layer", "inflation_layer"]
+      plugins: ["lidar_obstacle_layer", "inflation_layer"]
 
-      range_layer:
-        plugin: "nav2_costmap_2d::RangeSensorLayer"
-        enabled: true
-        
-        # Range layer takes a simple list of topics, not nested observation sources
-        topics: ["/sensors/tof_side_left_link", "/sensors/tof_side_right_link"]
-        
-        # Crucial for ToF sensors: 
-        # If the sensor sees nothing and outputs max_range or infinity, 
-        # this tells Nav2 to clear the costmap out to the max range.
-        clear_on_max_reading: true
-        
-        # Optional tuning (defaults are usually fine):
-        clear_threshold: 0.2
-        mark_threshold: 0.8
-      
       lidar_obstacle_layer:
         plugin: "spatio_temporal_voxel_layer/SpatioTemporalVoxelLayer"
         enabled: true
-        voxel_decay: 1.0 # seconds if linear, e^n if exponential 5
-        decay_model: 0 # 0=linear, 1=exponential, -1=persistent
-        voxel_size: 0.05 # meters
-        track_unknown_space: true # default space is known
-        mark_threshold: 0 # voxel height
+        voxel_decay: 1.0 # The magic bullet that solves the flashlight effect
+        decay_model: 0 
+        voxel_size: 0.05 
+        track_unknown_space: true 
+        mark_threshold: 0 
         update_footprint_enabled: true
-        combination_method: 1 # 1=max, 0=override
-        origin_z: 0.0 # meters
-        publish_voxel_map: false # default off
-        transform_tolerance: 0.2 # seconds
-        mapping_mode: false # default off, saves map not for navigation
-        map_save_duration: 60.0 # default 60s, how often to autosave
-        observation_sources: lidar1_mark lidar1_clear
+        combination_method: 1 
+        origin_z: 0.0 
+        publish_voxel_map: false 
+        transform_tolerance: 0.2 
+        mapping_mode: false 
+        map_save_duration: 60.0 
+        
+        # Add the ToF marks and clears alongside the Livox
+        # observation_sources: lidar1_mark lidar1_clear tof_left_mark tof_left_clear tof_right_mark tof_right_clear
+        observation_sources: tof_left_mark tof_left_clear tof_right_mark tof_right_clear
 
+        # --- LIVOX SOURCES ---
         lidar1_mark:
           data_type: PointCloud2
           topic: /points_nonground
           marking: true
           clearing: false
-          obstacle_range: 5.0 # meters 3
-          min_obstacle_height: 0.2 # default 0, meters
-          max_obstacle_height: 1.7 # default 3, meters
-          expected_update_rate: 0.0 # default 0, if not updating at this rate at least, remove from buffer
-          observation_persistence: 0.0 # default 0, use all measurements taken during now-value, 0=latest
-          inf_is_valid: false # default false, for laser scans
-          filter: "voxel" # default passthrough, apply "voxel", "passthrough", or no filter to sensor data, recommend on
-          voxel_min_points: 0          # default 0, minimum points per voxel for voxel filter
-
-          clear_after_reading: true # default false, clear the buffer after the layer gets readings from it
+          obstacle_range: 5.0 
+          min_obstacle_height: 0.2 
+          max_obstacle_height: 1.7 
+          inf_is_valid: false 
+          filter: "voxel" 
+          voxel_min_points: 0          
         lidar1_clear:
-          enabled: true #default true, can be toggled on/off with associated service call
+          enabled: true 
           data_type: PointCloud2
           topic: /points_nonground
           marking: false
           clearing: true
-          max_z: 2.0 # default 0, meters
-          min_z: 0.0 # default 10, meters
-          vertical_fov_angle: 1.02 # default 0.7, radians. For 3D lidars it's the symmetric FOV about the planar axis.
-          vertical_fov_padding: 0.05 # 3D Lidar only. Default 0, in meters
-          horizontal_fov_angle: 6.29 # 3D lidar scanners like the VLP16 have 360 deg horizontal FOV.
-          decay_acceleration: 5.0 # default 0, 1/s^2.
-          model_type: 1 # default 0, model type for frustum. 0=depth camera, 1=3d lidar like VLP16 or similar
+          max_z: 2.0 
+          min_z: 0.0 
+          vertical_fov_angle: 1.02 
+          horizontal_fov_angle: 6.29 
+          decay_acceleration: 5.0 
+          model_type: 1 
+
+        # --- LEFT TOF SOURCES ---
+        tof_left_mark:
+          data_type: PointCloud2
+          topic: /sensors/tof_side_left_link/pointcloud
+          marking: true
+          clearing: false
+          obstacle_range: 3.0 # Only mark within local costmap window
+          min_obstacle_height: 0.0 
+          max_obstacle_height: 1.7 
+          inf_is_valid: false 
+          filter: "passthrough" # Single point, no need to voxel filter
+        tof_left_clear:
+          enabled: true 
+          data_type: PointCloud2
+          topic: /sensors/tof_side_left_link/pointcloud
+          marking: false
+          clearing: true
+          max_z: 8.0 # Clear all the way out to the node's max_range setting
+          min_z: 0.0 
+          vertical_fov_angle: 0.436 # Match hardware FOV
+          horizontal_fov_angle: 0.436 # Match hardware FOV
+          decay_acceleration: 5.0 
+          model_type: 1 # Project a 3D Cone to clear the space
+
+        # --- RIGHT TOF SOURCES ---
+        tof_right_mark:
+          data_type: PointCloud2
+          topic: /sensors/tof_side_right_link/pointcloud
+          marking: true
+          clearing: false
+          obstacle_range: 3.0
+          min_obstacle_height: 0.0 
+          max_obstacle_height: 1.7 
+          inf_is_valid: false 
+          filter: "passthrough"
+        tof_right_clear:
+          enabled: true 
+          data_type: PointCloud2
+          topic: /sensors/tof_side_right_link/pointcloud
+          marking: false
+          clearing: true
+          max_z: 8.0 
+          min_z: 0.0 
+          vertical_fov_angle: 0.436
+          horizontal_fov_angle: 0.436
+          decay_acceleration: 5.0 
+          model_type: 1
   
       inflation_layer:
         enabled: True
