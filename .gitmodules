@@ -29,3 +29,6 @@
 [submodule "dependencies/rplidar_ros"]
 	path = dependencies/rplidar_ros
 	url = https://github.com/Slamtec/rplidar_ros.git
+[submodule "dependencies/elevator_supervisor"]
+	path = dependencies/elevator_supervisor
+	url = https://github.com/Smart-Wheelchair-RRC/elevator_supervisor.git
