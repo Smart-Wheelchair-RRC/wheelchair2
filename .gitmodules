@@ -32,3 +32,6 @@
 [submodule "dependencies/TEASER-plusplus"]
 	path = dependencies/TEASER-plusplus
 	url = https://github.com/MIT-SPARK/TEASER-plusplus.git
+[submodule "dependencies/wheelchair2_quatro"]
+	path = dependencies/wheelchair2_quatro
+	url = https://github.com/Smart-Wheelchair-RRC/wheelchair2_quatro.git
