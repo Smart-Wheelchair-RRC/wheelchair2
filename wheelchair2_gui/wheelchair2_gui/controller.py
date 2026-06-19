@@ -1,82 +1,274 @@
 #!/usr/bin/env python3
 import rclpy
 from rclpy.node import Node
-from geometry_msgs.msg import Twist, PoseStamped
+from geometry_msgs.msg import Twist, PoseStamped, PoseWithCovarianceStamped
 from std_srvs.srv import Trigger
-from std_msgs.msg import String
+from std_msgs.msg import String, Bool, Int32
 from action_msgs.msg import GoalStatusArray
 from nav2_msgs.action import NavigateToPose
 from action_msgs.srv import CancelGoal 
+from tf2_ros import TransformListener, Buffer
 import math
 import json
+import os
+import subprocess
+import time
 
 class DuckyMissionController(Node):
     def __init__(self):
         super().__init__('ducky_mission_controller')
 
-        # --- . Map Coordinates ---
-        self.locations = {
-            "ENTRANCE":   {"x": -20.4,  "y": -3.79,  "yaw": -2.43},
-            "BODH 101":   {"x": 40.14,  "y": -9.46,  "yaw": -1.02},
-            "iHUB ADMIN": {"x": 32.89,  "y": 5.59,  "yaw": 3.13},
-            "H102":       {"x": -4.89,  "y": 2.17,  "yaw": 1.39},
-            "H103":       {"x": -11.32,  "y": -12.2,  "yaw": -0.89},
+        # --- Dynamic Storage File Configuration ---
+        self.json_path = "/home/container_user/wheelchair2/src/wheelchair2_gui/wheelchair2_gui/robot_targets.json"
+        self.locations = {}
+        self.load_locations_from_disk()
+
+        # --- Map Paths Database ---
+        self.maps_db = {
+            "GROUND": {
+                "yaml": "/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/rrc/hardware_lab_2.yaml",
+                "pcd": "/home/container_user/wheelchair2/src/hardware_lab_2.pcd",
+                "init_x": 0.0,
+                "init_y": 0.0,
+                "init_z": 0.0,
+                "init_w": 1.0
+            },
+            "FLOOR_4": {
+                "yaml": "/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/rrc/4th_floor_apr2026/2026_04_06.yaml",
+                "pcd": "/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/rrc/4th_floor_apr2026/2026_04_06.pcd",
+                "init_x": -20.24,
+                "init_y": -2.96,
+                "init_z": -0.01999,
+                "init_w": 0.99979
+            }
         }
+
+        # --- State Tracking Flags for LiftMux Handshake ---
+        self.waiting_for_score = False
+        self.active_target_layer = None
+
+        # --- TF Setup for Real-time Pose Capture ---
+        self.tf_buffer = Buffer()
+        self.tf_listener = TransformListener(self.tf_buffer, self)
 
         # --- Publishers & Subscribers ---
         self.cmd_vel_pub = self.create_publisher(Twist, 'cmd_vel', 10)
         self.goal_pub = self.create_publisher(PoseStamped, 'goal_pose', 10)
         self.app_status_pub = self.create_publisher(String, '/navigation_status', 10)
         self.nav_feedback_pub = self.create_publisher(String, '/nav_feedback', 10)
+        self.targets_update_pub = self.create_publisher(String, '/targets_updated', 10)
         
+        # Native Handshake Allocation Endpoints 
+        self.initial_pose_pub = self.create_publisher(PoseWithCovarianceStamped, '/initialpose', 10)
+        self.click_loc_pub = self.create_publisher(Bool, '/click_loc', 10)
+
+        # Lift Interface Pipelines
+        self.lift_feedback_pub = self.create_publisher(String, '/lift_map_switch_feedback', 10)
+        self.create_subscription(String, '/lift_map_switch_trigger', self.lift_map_switch_callback, 10)
+        
+        # Native Score Subscription Pipeline
+        self.create_subscription(Int32, '/score', self.score_topic_callback, 10)
+
+        # Topic Ingestion Endpoints
+        self.create_subscription(String, '/save_target_trigger', self.save_target_topic_callback, 10)
+        self.create_subscription(String, '/delete_target_trigger', self.delete_target_topic_callback, 10)
+        self.create_subscription(String, '/go_to_dynamic_target_trigger', self.navigate_topic_callback, 10)
+
+        # Nav2 Pipeline Subscriptions
         self.create_subscription(GoalStatusArray, '/navigate_to_pose/_action/status', self.nav_status_callback, 10)
         self.create_subscription(GoalStatusArray, '/wait/_action/status', self.wait_action_status_callback, 10)
-        
-
-        self.create_subscription(
-            NavigateToPose.Impl.FeedbackMessage, 
-            '/navigate_to_pose/_action/feedback', 
-            self.nav2_feedback_callback, 
-            10
-        )
+        self.create_subscription(NavigateToPose.Impl.FeedbackMessage, '/navigate_to_pose/_action/feedback', self.nav2_feedback_callback, 10)
 
         self.cancel_client = self.create_client(CancelGoal, '/navigate_to_pose/_action/cancel_goal')
 
-        # --- State ---
+        # Control States
         self.last_goal = None
         self.nav_state = "IDLE" 
         self.is_arrived_notified = False
 
-        # --- Services ---
-        self.create_service(Trigger, 'go_to_ihub', lambda r, p: self.nav_to("iHUB ADMIN", r, p))
-        self.create_service(Trigger, 'go_to_bodh101', lambda r, p: self.nav_to("BODH 101", r, p))
-        self.create_service(Trigger, 'go_to_h102', lambda r, p: self.nav_to("H102", r, p))
-        self.create_service(Trigger, 'go_to_h103', lambda r, p: self.nav_to("H103", r, p))
-        self.create_service(Trigger, 'go_to_entrance', lambda r, p: self.nav_to("ENTRANCE", r, p))
-        
+        # Core Navigation Controls Services
         self.create_service(Trigger, 'pause_robot', self.pause_callback)
         self.create_service(Trigger, 'resume_robot', self.resume_callback)
         self.create_service(Trigger, 'stop_robot', self.stop_callback)
+        self.create_service(Trigger, 'get_current_pose', self.get_current_pose_callback)
+        self.create_service(Trigger, 'get_stored_targets', self.get_stored_targets_callback)
 
-        self.get_logger().info('DUCKY MISSION CONTROL: ONLINE. Ready for goals.')
+        # Heartbeat loop initialization
+        self.publish_targets_heartbeat()
+        self.create_timer(1.0, self.publish_targets_heartbeat)
 
-    def nav_to(self, room_id, request, response):
-        """Dispatches a goal and logs the exact coordinates."""
-        if room_id in self.locations:
-            loc = self.locations[room_id]
+        self.get_logger().info('⚡ DUCKY BACKEND INTEGRATION ENGINE ONLINE: Multi-floor metadata parsing ready.')
+
+    def lift_map_switch_callback(self, msg):
+        target_layer = msg.data.upper().strip()
+        if target_layer not in ["GROUND", "FLOOR_4"]:
+            self.get_logger().error(f"Invalid floor signature dropped: {target_layer}")
+            return
+
+        self.get_logger().info(f" [LIFT MUX ENGAGED] Starting lightning map migration sequence to: {target_layer}")
+        
+     
+        self.lift_feedback_pub.publish(String(data='{"data": "MAP_LOADING"}'))
+        
+        layer_data = self.maps_db[target_layer]
+        yaml_path = layer_data["yaml"]
+        pcd_path = layer_data["pcd"]
+
+        self.get_logger().info("Blasting Nav2 map parameters asynchronously...")
+        try:
+            cmd_map = f"ros2 service call /map_server/load_map nav2_msgs/srv/LoadMap \"{{map_url: '{yaml_path}'}}\" > /dev/null 2>&1 &"
+            subprocess.Popen(cmd_map, shell=True)
             
-            # --- LOGGING THE ATTEMPT ---
-            self.get_logger().info(f"--- NEW GOAL REQUESTED ---")
-            self.get_logger().info(f"Target: {room_id}")
-            self.get_logger().info(f"Coordinates: X={loc['x']}, Y={loc['y']}, Yaw={loc['yaw']}")
+            subprocess.Popen("ros2 service call /global_costmap/clear_entirely_global_costmap nav2_msgs/srv/ClearEntireCostmap \"{}\" > /dev/null 2>&1 &", shell=True)
+            subprocess.Popen("ros2 service call /local_costmap/clear_entirely_local_costmap nav2_msgs/srv/ClearEntireCostmap \"{}\" > /dev/null 2>&1 &", shell=True)
+        except Exception as e:
+            self.get_logger().error(f"Nav2 map infrastructure background swap failure: {str(e)}")
 
+        self.get_logger().info("Recycling 3D point cloud localization nodes inside tmux session window...")
+        try:
+            subprocess.run(["tmux", "send-keys", "-t", "wheelchair_navigation:1.0", "C-c"], stdout=subprocess.DEVNULL)
+            time.sleep(0.5) 
+            launch_str = f"ros2 launch wheelchair2_localization 3d_stack.launch.py pcd_map_path:={pcd_path} nature:=indoor"
+            subprocess.run(["tmux", "send-keys", "-t", "wheelchair_navigation:1.0", launch_str, "C-m"], stdout=subprocess.DEVNULL)
+        except Exception as e:
+            self.get_logger().error(f"Tmux navigation stack execution tracking fault: {str(e)}")
+
+        self.active_target_layer = target_layer
+        self.waiting_for_score = True
+        self.get_logger().info("Awaiting geometric score convergence matching node signal...")
+
+    def score_topic_callback(self, msg):
+        if not self.waiting_for_score or self.active_target_layer is None:
+            return
+
+        captured_score = msg.data
+        if captured_score > 0:
+            self.get_logger().info(f" [NATIVE SIGNAL RECEIVED] Score converged at: {captured_score}. Loading parameters...")
+            
+            self.waiting_for_score = False
+            layer_data = self.maps_db[self.active_target_layer]
+
+            try:
+                pose_msg = PoseWithCovarianceStamped()
+                pose_msg.header.frame_id = 'map'
+                pose_msg.header.stamp = self.get_clock().now().to_msg()
+                
+                pose_msg.pose.pose.position.x = float(layer_data["init_x"])
+                pose_msg.pose.pose.position.y = float(layer_data["init_y"])
+                pose_msg.pose.pose.position.z = 0.0
+                
+                pose_msg.pose.pose.orientation.z = float(layer_data["init_z"])
+                pose_msg.pose.pose.orientation.w = float(layer_data["init_w"])
+                
+                self.initial_pose_pub.publish(pose_msg)
+                
+                click_msg = Bool()
+                click_msg.data = True
+                self.click_loc_pub.publish(click_msg)
+                self.get_logger().info("Initial pose positioning vectors successfully synchronized.")
+            except Exception as e:
+                self.get_logger().error(f"Localization pipeline frame alignment error: {str(e)}")
+
+           
+            feedback_signal = "SUCCESS_FLOOR_G" if self.active_target_layer == "GROUND" else "SUCCESS_FLOOR_4"
+            json_payload = f'{{"data": "{feedback_signal}"}}'
+            
+            self.lift_feedback_pub.publish(String(data=json_payload))
+            self.get_logger().info(f"🎉 [HANDOVER FINISHED] Layout {self.active_target_layer} actively targeted.")
+            self.active_target_layer = None
+
+    def load_locations_from_disk(self):
+        if os.path.exists(self.json_path):
+            try:
+                with open(self.json_path, 'r') as f:
+                    self.locations = json.load(f)
+            except Exception as e:
+                self.get_logger().error(f"Failed to read location schema database: {str(e)}")
+        else:
+            self.locations = {}
+            self.write_locations_to_disk()
+
+    def write_locations_to_disk(self):
+        try:
+            with open(self.json_path, 'w') as f:
+                json.dump(self.locations, f, indent=2)
+            self.publish_targets_heartbeat()
+        except Exception as e:
+            self.get_logger().error(f"Disk write failure: {str(e)}")
+
+    def publish_targets_heartbeat(self):
+        msg = String()
+        msg.data = json.dumps(self.locations)
+        self.targets_update_pub.publish(msg)
+
+    def get_stored_targets_callback(self, request, response):
+        try:
+            self.load_locations_from_disk() 
+            response.success = True
+            response.message = json.dumps(self.locations)
+        except Exception as e:
+            response.success = False
+            response.message = str(e)
+        return response
+
+    def get_current_pose_callback(self, request, response):
+        try:
+            now = rclpy.time.Time()
+            trans = self.tf_buffer.lookup_transform('map', 'base_link', now, timeout=rclpy.duration.Duration(seconds=0.3))
+            x = round(trans.transform.translation.x, 3)
+            y = round(trans.transform.translation.y, 3)
+            
+            q = trans.transform.rotation
+            siny_cosp = 2 * (q.w * q.z + q.x * q.y)
+            cosy_cosp = 1 - 2 * (q.y * q.y + q.z * q.z)
+            yaw = round(math.atan2(siny_cosp, cosy_cosp), 3)
+
+            response.success = True
+            response.message = json.dumps({"x": x, "y": y, "yaw": yaw})
+        except Exception as e:
+            response.success = False
+            response.message = f"TF Failure: {str(e)}"
+        return response
+
+    def save_target_topic_callback(self, msg):
+        try:
+            data = json.loads(msg.data)
+            name = data['name'].upper().strip()
+            coords = data['coords']
+            floor_assignment = data.get('floor', 'GROUND').upper().strip()
+            
+
+            self.locations[name] = {
+                "x": coords["x"],
+                "y": coords["y"],
+                "yaw": coords["yaw"],
+                "floor": floor_assignment
+            }
+            self.write_locations_to_disk()
+            self.get_logger().info(f"⚡ REGISTERED CONTEXTUAL TARGET: [{name}] mapped on layer => [{floor_assignment}]")
+        except Exception as e:
+            self.get_logger().error(f"Save multi-floor parameter parser error: {str(e)}")
+
+    def delete_target_topic_callback(self, msg):
+        try:
+            target_name = msg.data.upper().strip()
+            if target_name in self.locations:
+                del self.locations[target_name]
+                self.write_locations_to_disk()
+                self.get_logger().info(f" DELETED TARGET NODE: [{target_name}] from disk memory context footprint.")
+        except Exception as e:
+            self.get_logger().error(f"Delete parsing execution error: {str(e)}")
+
+    def navigate_topic_callback(self, msg):
+        target_name = msg.data.upper().strip()
+        if target_name in self.locations:
+            loc = self.locations[target_name]
+            
             goal = PoseStamped()
             goal.header.frame_id = 'map'
             goal.header.stamp = self.get_clock().now().to_msg()
             goal.pose.position.x = float(loc['x'])
             goal.pose.position.y = float(loc['y'])
-            
-            # Quaternions
             goal.pose.orientation.z = math.sin(loc['yaw'] / 2.0)
             goal.pose.orientation.w = math.cos(loc['yaw'] / 2.0)
             
@@ -84,53 +276,30 @@ class DuckyMissionController(Node):
             self.nav_state = "ACTIVE"
             self.is_arrived_notified = False
             
-            # Publish to Nav2
             self.goal_pub.publish(goal)
             self.app_status_pub.publish(String(data="ACTIVE"))
-            
-            response.success = True
-            response.message = f"Successfully dispatched goal to {room_id}"
-            return response
-        
-        self.get_logger().error(f"GOAL FAILED: {room_id} not found in map dictionary.")
-        response.success = False
-        return response
+            self.get_logger().info(f" Tracking vector dispatched pathing node to: {target_name}")
 
     def nav_status_callback(self, msg):
-        """Detailed logging for Nav2 status changes."""
-        if not msg.status_list: 
-            return
-            
+        if not msg.status_list: return
         last_status = msg.status_list[-1].status
-        
-        status_map = {1: "ACCEPTED", 2: "EXECUTING", 4: "SUCCEEDED", 6: "ABORTED", 5: "CANCELED"}
-        status_name = status_map.get(last_status, f"UNKNOWN({last_status})")
-
         if last_status == 4 and not self.is_arrived_notified:
-            self.get_logger().info("GOAL REACHED: Robot arrived at destination.")
             self.nav_state = "IDLE"
             self.app_status_pub.publish(String(data="REACHED"))
             self.is_arrived_notified = True
         elif last_status == 6:
-            self.get_logger().error("GOAL ABORTED: Nav2 failed to reach the goal.")
             self.nav_state = "IDLE"
             self.app_status_pub.publish(String(data="ABORTED"))
-        elif last_status == 2 and self.nav_state != "ACTIVE":
-            self.get_logger().info(f"NAV STATUS UPDATE: {status_name}")
 
     def wait_action_status_callback(self, msg):
         if not msg.status_list: return
-        current_status = msg.status_list[-1].status
-        if current_status == 2:
-            if self.nav_state != "WAITING":
-                self.nav_state = "WAITING"
-                self.get_logger().warn("OBSTACLE DETECTED: Behavior Tree Recovery 'WAIT' is active.")
-                self.app_status_pub.publish(String(data="WAITING"))
+        if msg.status_list[-1].status == 2 and self.nav_state != "WAITING":
+            self.nav_state = "WAITING"
+            self.app_status_pub.publish(String(data="WAITING"))
 
     def nav2_feedback_callback(self, msg):
         try:
             distance = msg.feedback.distance_remaining
-            # if int(distance) % 5 == 0: self.get_logger().info(f"Dist left: {distance:.2f}m")
             feedback_dict = {"distance": round(float(distance), 2), "eta_sec": int(msg.feedback.estimated_time_remaining.sec)}
             self.nav_feedback_pub.publish(String(data=json.dumps(feedback_dict)))
         except Exception: pass
@@ -140,7 +309,6 @@ class DuckyMissionController(Node):
             self.cancel_client.call_async(CancelGoal.Request())
 
     def pause_callback(self, request, response):
-        self.get_logger().info("ACTION: Pausing navigation.")
         self.trigger_nav2_cancel()
         self.nav_state = "PAUSED"
         self.app_status_pub.publish(String(data="PAUSED"))
@@ -149,19 +317,16 @@ class DuckyMissionController(Node):
 
     def resume_callback(self, request, response):
         if self.last_goal:
-            self.get_logger().info("ACTION: Resuming last goal coordinates.")
             self.last_goal.header.stamp = self.get_clock().now().to_msg()
             self.goal_pub.publish(self.last_goal)
             self.nav_state = "ACTIVE"
             self.app_status_pub.publish(String(data="ACTIVE"))
             response.success = True
         else:
-            self.get_logger().warn("RESUME FAILED: No previous goal exists.")
             response.success = False
         return response
 
     def stop_callback(self, request, response):
-        self.get_logger().info("ACTION: Full Stop/Clear Goal.")
         self.trigger_nav2_cancel()
         self.last_goal = None
         self.nav_state = "IDLE"
