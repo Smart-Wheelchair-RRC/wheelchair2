@@ -177,7 +177,7 @@ Starts the odometry node. Publishes `/Odometry` and `odom → base_footprint` TF
 
 2. **`Permission denied` on `/dev/ttyACM0` or `/dev/ttyUSB0`**
    → *Cause:* serial device perms not set.
-   → *Fix:* `sudo chmod 777 /dev/ttyACM0` (motor controller) / `/dev/ttyUSB0` (RPLidar)
+   → *Fix:* `sudo chmod 777 /dev/ttyACM0` (motor controller)
    before bringup — the tmux scripts already do this.
 
 3. **DLIO drifts vertically / odd pitch on ramps**
