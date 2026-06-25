@@ -5,10 +5,6 @@ odometry + navigation** stack. It covers the three forked upstream modules
 (ICP Localization, 3D-BBS, DLIO), their changes from upstream, their ROS 2 interfaces,
 and how they feed Nav2.
 
-> **Scope note.** Topics, frames, parameters, and commands below are sourced from the
-> actual launch/config/source files in this repository. Anything that could not be
-> verified from source is explicitly marked `⚠️ NEEDS VERIFICATION`.
-
 ---
 
 ## 1. Architecture Overview
