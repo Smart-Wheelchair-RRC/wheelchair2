@@ -32,6 +32,3 @@ re-baseline an upstream module:
    `#icp-changes-from-upstream`, `#dlio-changes-from-upstream`, `#3d-bbs-changes-from-upstream`.
    If you add/remove a fork change, add/remove the corresponding `[DOCS]` comment and keep the
    anchor text identical on both ends.
-
-> Anything that could not be verified directly from source/config in these docs is marked
-> `⚠️ NEEDS VERIFICATION` — resolve those before relying on the affected detail.
