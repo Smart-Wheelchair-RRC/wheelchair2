@@ -66,10 +66,10 @@ public:
         // [FEATURE: New Parameters for Stair/Drop-off Detection]
         // [WHY: Allows tuning of the geometric heuristics based on building codes and sensor characteristics.]
         this->declare_parameter("stair_detection", true);           // Master toggle
-        this->declare_parameter("stair_drop_threshold", 0.15);      // Min height drop (150mm standard riser)
+        this->declare_parameter("stair_drop_threshold", 0.05);      // Min height drop (150mm standard riser)
         this->declare_parameter("stair_min_width", 0.5);            // Min lateral width to ignore noise
-        this->declare_parameter("stair_max_width", 3.0);            // Max lateral width (ignores terrain shifts)
-        this->declare_parameter("stair_detection_range", 3.0);      // Max range to search (due to occlusion)
+        this->declare_parameter("stair_max_width", 4.0);            // Max lateral width (ignores terrain shifts)
+        this->declare_parameter("stair_detection_range", 30.0);      // Max range to search (due to occlusion)
         this->declare_parameter("stair_forward_only", true);        // Restrict search space to +x hemisphere
 
         tf_buffer_ = std::make_unique<tf2_ros::Buffer>(this->get_clock());
