@@ -200,7 +200,7 @@ Starts the odometry node. Publishes `/Odometry` and `odom → base_footprint` TF
    → *Cause:* STVL layers subscribe to `/points_nonground`, which must be published by the
    ground-segmentation/box-filter node.
    → *Fix:* Confirm that topic is live (`ros2 topic hz /points_nonground`).
-   ⚠️ NEEDS VERIFICATION: exact node that publishes `/points_nonground`.
+   -> /points_nonground and Staircase nodes are published by the ```ground_detection_resuse_planes.cpp``` node in wheelchair2_bringup package.
 
 7. **Frame mismatch (`base_link` vs `base_footprint`)**
    → *Cause:* DLIO/Nav2 use `base_footprint`; a node still configured for upstream `base_link`
