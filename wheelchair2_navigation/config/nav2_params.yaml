@@ -360,8 +360,9 @@ local_costmap:
         map_save_duration: 60.0 
         
         # Add the ToF marks and clears alongside the Livox
-        # observation_sources: lidar1_mark lidar1_clear tof_left_mark tof_left_clear tof_right_mark tof_right_clear
-        observation_sources: tof_left_mark tof_left_clear tof_right_mark tof_right_clear
+        # observation_sources: lidar1_mark lidar1_clear
+        # observation_sources: tof_left_mark tof_left_clear tof_right_mark tof_right_clear
+        observation_sources: us_left_mark us_left_clear us_right_mark us_right_clear us_center_mark us_center_clear
 
         # --- LIVOX SOURCES ---
         lidar1_mark:
@@ -433,6 +434,78 @@ local_costmap:
           min_z: 0.0 
           vertical_fov_angle: 0.436
           horizontal_fov_angle: 0.436
+          decay_acceleration: 5.0 
+          model_type: 1
+
+        # --- FRONT LEFT TOP ULTRASONIC ---
+        us_left_mark:
+          data_type: PointCloud2
+          topic: /sensors/us_front_left_top_link/pointcloud
+          marking: true
+          clearing: false
+          obstacle_range: 3.5 
+          min_obstacle_height: 0.0 
+          max_obstacle_height: 2.0 # Increased to see the 1.5m mounted sensors
+          inf_is_valid: false 
+          filter: "passthrough"
+        us_left_clear:
+          enabled: true 
+          data_type: PointCloud2
+          topic: /sensors/us_front_left_top_link/pointcloud
+          marking: false
+          clearing: true
+          max_z: 4.0 # Match ultrasonic max_range
+          min_z: 0.0 
+          vertical_fov_angle: 0.26
+          horizontal_fov_angle: 0.26
+          decay_acceleration: 5.0 
+          model_type: 1 
+
+        # --- FRONT RIGHT TOP ULTRASONIC ---
+        us_right_mark:
+          data_type: PointCloud2
+          topic: /sensors/us_front_right_top_link/pointcloud
+          marking: true
+          clearing: false
+          obstacle_range: 3.5
+          min_obstacle_height: 0.0 
+          max_obstacle_height: 2.0 
+          inf_is_valid: false 
+          filter: "passthrough"
+        us_right_clear:
+          enabled: true 
+          data_type: PointCloud2
+          topic: /sensors/us_front_right_top_link/pointcloud
+          marking: false
+          clearing: true
+          max_z: 4.0 
+          min_z: 0.0 
+          vertical_fov_angle: 0.26
+          horizontal_fov_angle: 0.26
+          decay_acceleration: 5.0 
+          model_type: 1
+
+        # --- FRONT CENTER TOP ULTRASONIC ---
+        us_center_mark:
+          data_type: PointCloud2
+          topic: /sensors/us_front_center_top_link/pointcloud
+          marking: true
+          clearing: false
+          obstacle_range: 3.5
+          min_obstacle_height: 0.0 
+          max_obstacle_height: 2.0 
+          inf_is_valid: false 
+          filter: "passthrough"
+        us_center_clear:
+          enabled: true 
+          data_type: PointCloud2
+          topic: /sensors/us_front_center_top_link/pointcloud
+          marking: false
+          clearing: true
+          max_z: 4.0 
+          min_z: 0.0 
+          vertical_fov_angle: 0.26
+          horizontal_fov_angle: 0.26
           decay_acceleration: 5.0 
           model_type: 1
   

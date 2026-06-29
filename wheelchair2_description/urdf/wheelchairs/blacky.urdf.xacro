@@ -13,6 +13,7 @@
     <xacro:include filename="$(find wheelchair2_description)/urdf/kangaroo_ros2_control.urdf.xacro" />
     <xacro:include filename="$(find wheelchair2_description)/urdf/realsense.urdf.xacro" />
     <xacro:include filename="$(find wheelchair2_description)/urdf/tof_sensor.urdf.xacro" />
+    <xacro:include filename="$(find wheelchair2_description)/urdf/ultrasonic_sensor.urdf.xacro" />
 
     <link name="base_footprint" />
 
@@ -113,12 +114,21 @@
     </joint> -->
 
     <!-- Instantiate the TOF sensors -->
-    <!-- index 0: side Right -->
     <xacro:tof_sensor name="tof_side_right" parent="base_footprint" 
                       xyz="0.34 -0.215 0.30" rpy="0 0 -1.57" index="0" />
-    <!-- index 1: side Left -->
     <xacro:tof_sensor name="tof_side_left" parent="base_footprint" 
                       xyz="0.34 0.215 0.30" rpy="0 0 1.57" index="1" />
+
+    
+    <!-- Instantiate the ultrasonic sensors -->
+    <xacro:ultrasonic_sensor name="us_front_left_top" parent="base_link" 
+                             xyz="0.25 0.0 1.50" rpy="0 0 0.7854" />
+
+    <xacro:ultrasonic_sensor name="us_front_right_top" parent="base_link" 
+                             xyz="0.25 0.0 1.50" rpy="0 0 -0.7854" />
+
+    <xacro:ultrasonic_sensor name="us_front_center_top" parent="base_link" 
+                             xyz="0.25 0.0 1.50" rpy="0 0 0" />
 
 
     <xacro:kangaroo_x2_driver name="kangaroo_ros2_control" prefix="" use_sim_time="$(arg use_sim_time)"></xacro:kangaroo_x2_driver>
