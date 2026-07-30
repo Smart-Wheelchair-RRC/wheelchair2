@@ -8,14 +8,21 @@ LABEL org.opencontainers.image.source="https://github.com/Smart-Wheelchair-RRC/w
 LABEL maintainer="tarun.ramak@gmail.com"
 LABEL org.opencontainers.image.licenses="MIT"
 
-# handle default shell
-SHELL ["/bin/bash", "-c"]
-COPY . /home/container_user/wheelchair2/src
+# 1. Install required packages as root
+USER root
+RUN apt-get update && apt-get install -y \
+    ros-humble-rmw-cyclonedds-cpp \
+    libserial-dev \
+    tmux \
+    && rm -rf /var/lib/apt/lists/*
+
+# 2. Switch to container_user
+USER container_user
+
+# 3. Copy files with ownership set to container_user to prevent permission errors
+COPY --chown=container_user:container_user . /home/container_user/wheelchair2/src
 
 WORKDIR /home/container_user/wheelchair2
 
-# RUN source /opt/ros/humble/setup.bash \
-#     && colcon build --symlink-install \
-#     && source install/setup.bash \
-#     && cd src/wheelchair2_navigation/shell_scripts \
-#     && sudo chmod +x ./navigation.tmux
+# 4. Make shell scripts executable
+RUN chmod +x src/wheelchair2_navigation/shell_scripts/*.tmux src/wheelchair2_navigation/shell_scripts/*.sh 2>/dev/null || true

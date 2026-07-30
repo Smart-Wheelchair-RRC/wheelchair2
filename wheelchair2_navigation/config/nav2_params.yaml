@@ -114,7 +114,7 @@ behavior_server:
     local_frame: odom
     global_frame: map
     robot_base_frame: base_footprint
-    transform_tolerance: 0.3
+    transform_tolerance: 1.0
     simulate_ahead_time: 2.0
     max_rotational_vel: 1.0
     min_rotational_vel: 0.4
@@ -188,7 +188,7 @@ controller_server:
     min_y_velocity_threshold: 0.5
     min_theta_velocity_threshold: 0.001
     failure_tolerance: 1.0
-    transform_tolerance: 0.3
+    transform_tolerance: 1.0
     progress_checker_plugins: ["progress_checker"]
     goal_checker_plugins: ["general_goal_checker"]
     controller_plugins: ["FollowPath"]
@@ -227,7 +227,7 @@ controller_server:
       wz_max: 0.4     # Safe margin below hardware max of 1.0
       iteration_count: 1
       prune_distance: 1.7
-      transform_tolerance: 0.3
+      transform_tolerance: 1.0
       temperature: 0.3
       gamma: 0.015
       motion_model: "DiffDrive"
@@ -329,7 +329,7 @@ local_costmap:
 
       global_frame: odom
       robot_base_frame: base_footprint
-      footprint: "[[-0.30,-0.32],[0.72,-0.32],[0.72,0.32],[-0.30,0.32]]"
+      footprint: "[ [0.78, 0.33], [0.78, -0.33], [-0.35, -0.33], [-0.35, 0.33] ]" #"[[-0.30,-0.32],[0.72,-0.32],[0.72,0.32],[-0.30,0.32]]"
       footprint_padding: 0.02
       # robot_radius: 0.50
       # footprint: "[[-0.30,-0.32],[0.80,-0.32],[0.80,0.32],[-0.30,0.32]]"
@@ -355,7 +355,7 @@ local_costmap:
         combination_method: 1 # 1=max, 0=override
         origin_z: 0.0 # meters
         publish_voxel_map: false # default off
-        transform_tolerance: 0.2 # seconds
+        transform_tolerance: 1.0 # seconds
         mapping_mode: false # default off, saves map not for navigation
         map_save_duration: 60.0 # default 60s, how often to autosave
         observation_sources: lidar1_mark lidar1_clear
@@ -549,7 +549,7 @@ collision_monitor:
     cmd_vel_in_topic: "cmd_vel_smoothed" 
     cmd_vel_out_topic: "cmd_vel" 
     state_topic: "collision_monitor_state"
-    transform_tolerance: 0.2
+    transform_tolerance: 1.0
     source_timeout: 1.0
     stop_pub_timeout: 2.0
     
