@@ -19,7 +19,7 @@
         <Peer address="10.42.0.1" />
       </Peers>
       <ParticipantIndex>auto</ParticipantIndex>
-      <MaxParticipantIndex>100</MaxParticipantIndex>
+      <MaxAutoParticipantIndex>100</MaxAutoParticipantIndex>
     </Discovery>
   </Domain>
 </CycloneDDS>
