@@ -26,3 +26,6 @@ WORKDIR /home/container_user/wheelchair2
 
 # 4. Make shell scripts executable
 RUN chmod +x src/wheelchair2_navigation/shell_scripts/*.tmux src/wheelchair2_navigation/shell_scripts/*.sh 2>/dev/null || true
+
+# 5. Build workspace inside the image
+RUN /bin/bash -c "source /opt/ros/humble/setup.bash && colcon build --symlink-install --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
