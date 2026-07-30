@@ -15,6 +15,7 @@
     </Internal>
     <Discovery>
       <Peers>
+        <Peer address="10.42.0.85" />
         <Peer address="10.42.0.1" />
       </Peers>
       <ParticipantIndex>auto</ParticipantIndex>
