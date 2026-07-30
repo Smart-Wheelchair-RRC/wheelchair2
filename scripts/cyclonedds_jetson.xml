@@ -5,7 +5,7 @@
       <Interfaces>
         <NetworkInterface name="wlxb01921369c85" />
       </Interfaces>
-      <AllowMulticast>true</AllowMulticast>
+      <AllowMulticast>false</AllowMulticast>
       <MaxMessageSize>65500B</MaxMessageSize>
       <FragmentSize>4000B</FragmentSize>
     </General>
@@ -13,5 +13,11 @@
       <SocketReceiveBufferSize min="10MB" />
       <SocketSendBufferSize min="10MB" />
     </Internal>
+    <Discovery>
+      <Peers>
+        <Peer address="10.42.0.85" />
+      </Peers>
+      <ParticipantIndex>auto</ParticipantIndex>
+    </Discovery>
   </Domain>
 </CycloneDDS>
