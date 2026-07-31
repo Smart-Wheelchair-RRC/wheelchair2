@@ -24,7 +24,7 @@ Before starting the container, ensure:
 
 CycloneDDS requires large UDP socket buffers (10 MB) to handle 3D PointCloud data without packet loss. The Linux default (`208 KB`) is far too small and will cause **all ROS 2 nodes to crash on startup**.
 
-Run the following on **both the Jetson host and the laptop**:
+Run the following on **both the Jetson host and the remote host**:
 
 ```bash
 # Apply immediately
@@ -35,6 +35,8 @@ sudo sysctl -w net.core.wmem_max=10485760
 echo "net.core.rmem_max=10485760" | sudo tee -a /etc/sysctl.conf
 echo "net.core.wmem_max=10485760" | sudo tee -a /etc/sysctl.conf
 ```
+
+> **TIP?** To check what your operating system's baseline limit is currently, run (`cat /proc/sys/net/core/rmem_max`)
 
 > **Why?** CycloneDDS requests 10 MB socket buffers at initialization. If the OS kernel cap (`rmem_max`) is lower than the requested size, CycloneDDS throws a hard error and refuses to create any DDS participant — killing every ROS 2 node before it starts.
 
@@ -151,12 +153,43 @@ Key settings in both files:
 
 ### Changing Wi-Fi Interface Names or IPs
 
-If the wireless adapter changes (e.g., different USB dongle, different laptop):
+If the wireless adapter changes (e.g., different USB dongle, different laptop), you need to update the CycloneDDS XML files with the new interface name and IP address.
 
-1. Run `ip addr` on the device to find the new interface name and IP.
-2. Edit the corresponding XML file (`cyclonedds_jetson.xml` or `cyclonedds_laptop.xml`):
-   - Update `<NetworkInterface name="..." />` with the new interface name.
-   - Update `<Peer address="..." />` entries with the new IPs.
+#### How to Find Your Interface Name and IP
+
+Run `ip addr` on the device. Example output from the laptop:
+
+```
+1: lo: <LOOPBACK,UP,LOWER_UP> ...           ← Ignore (loopback, internal only)
+    inet 127.0.0.1/8 ...
+
+2: eno1: <NO-CARRIER,...> state DOWN ...     ← Ignore (ethernet, cable unplugged)
+    link/ether 60:cf:84:b8:71:ec ...
+
+3: wlp3s0: <BROADCAST,...> state UP ...      ← ✅ This is the Wi-Fi interface
+    inet 10.42.0.85/24 ...                   ← ✅ This is the IP to use
+
+4: docker0: <NO-CARRIER,...> state DOWN ...  ← Ignore (Docker bridge, internal)
+    inet 172.17.0.1/16 ...
+```
+
+**Rules to identify the correct entry:**
+1. Look for an interface with **state `UP`** (not `DOWN`).
+2. Ignore `lo` (loopback), `docker0` / `br-*` (Docker bridges), and any `veth*` (virtual interfaces).
+3. The Wi-Fi interface is typically named `wlp*`, `wlan*`, or `wlx*` (USB dongles).
+4. The **`inet` line** under that interface shows the IP address (e.g., `10.42.0.85`).
+5. The **interface name** itself (e.g., `wlp3s0`) goes into `<NetworkInterface name="..." />`.
+
+#### Where to Update
+
+| What to change | File | XML tag |
+|---|---|---|
+| Jetson Wi-Fi interface name | `scripts/cyclonedds_jetson.xml` | `<NetworkInterface name="wlxb01921369c85" />` |
+| Laptop Wi-Fi interface name | `scripts/cyclonedds_laptop.xml` | `<NetworkInterface name="wlp3s0" />` |
+| Jetson IP address | Both XML files | `<Peer address="10.42.0.1" />` |
+| Laptop IP address | Both XML files | `<Peer address="10.42.0.85" />` |
+
+> **Important:** The `<Peers>` section must list **both** IP addresses (Jetson and laptop) in **both** XML files. This is because CycloneDDS needs to discover nodes running on the local machine as well as the remote peer.
 
 ---
 
