@@ -3,9 +3,10 @@ from rclpy.node import Node
 from sensor_msgs.msg import Imu, Image, LaserScan
 from nav_msgs.msg import Odometry
 from geometry_msgs.msg import PoseWithCovarianceStamped
+from rcl_interfaces.srv import SetParameters
+from rcl_interfaces.msg import Parameter, ParameterType, ParameterValue
 from std_msgs.msg import String, Int32
-from std_srvs.srv import SetBool, Empty
-from example_interfaces.srv import SetString
+from std_srvs.srv import SetBool, Empty, Trigger # ◄ UPDATED: Brought in Trigger types
 from nav2_msgs.srv import ClearEntireCostmap
 from cv_bridge import CvBridge
 import cv2
@@ -27,7 +28,7 @@ class ElevatorFloorDetection(Node):
         self.JOLT_DURATION_REQ = 0.3
         
         # Absolute path base where floor assets are kept
-        self.MAPS_BASE_DIR = "/home/wheelchair/maps"
+        self.MAPS_BASE_DIR = "/home/container_user/wheelchair2/src/config"  # Update path matching system deployment layout
 
         self.imu_buffer = []
         self.buffer_size = 15
@@ -47,11 +48,17 @@ class ElevatorFloorDetection(Node):
         
         self.pause_loc_cli = self.create_client(SetBool, 'pause_localization')
         self.reset_loc_cli = self.create_client(Empty, 'reset_localization')
-        self.load_map_cli = self.create_client(SetString, 'load_map')
+        
+        # ◄ UPDATED: Swapped out SetString configurations for standard Trigger instances
+        self.load_map_cli = self.create_client(Trigger, 'load_map')
         
         self.pause_bbs_cli = self.create_client(SetBool, 'pause_3dbbs')
         self.reset_bbs_cli = self.create_client(Empty, 'reset_3dbbs')
-        self.load_bbs_cli = self.create_client(SetString, 'load_3dbbs_config')
+        self.load_bbs_cli = self.create_client(Trigger, 'load_3dbbs_config')
+
+        # ◄ ADDED: Direct Node Param Client hooks to update configuration values over the parameter space
+        self.icp_param_cli = self.create_client(SetParameters, '/icp_localization/set_parameters')
+        self.bbs_param_cli = self.create_client(SetParameters, '/gpu_ros2_test_rviz2/set_parameters')
 
         # Nav2 lifecycle costmap clear clients
         self.clear_global_costmap_cli = self.create_client(ClearEntireCostmap, '/global_costmap/clear_entirely_global_costmap')
@@ -100,24 +107,39 @@ class ElevatorFloorDetection(Node):
         # 3. Wipe 3D-BBS input scan point buffers 
         self.call_service_async(self.reset_bbs_cli, req_empty)
 
-        # 4. Swap files contexts programmatically for ICP and 3D-BBS
+        # 4. Update file parameters and invoke our updated Trigger interfaces
         floor_dir = os.path.join(self.MAPS_BASE_DIR, f"floor_{target_floor}")
         pcd_path = os.path.join(floor_dir, "map.pcd")
         yaml_path = os.path.join(floor_dir, "ros2_test.yaml")
 
-        req_string = SetString.Request()
-        
+        # Set ICP Node config parameter path state wrapper
         if os.path.exists(pcd_path):
-            req_string.data = pcd_path
-            self.call_service_async(self.load_map_cli, req_string)
+            param_req = SetParameters.Request()
+            param = Parameter()
+            param.name = "config"
+            param.value.type = ParameterType.PARAMETER_STRING
+            param.value.string_value = pcd_path
+            param_req.parameters.append(param)
+            self.call_service_async(self.icp_param_cli, param_req)
         else:
-            self.get_logger().error(f"Map file missing: {pcd_path}")
+            self.get_logger().error(f"PCD file missing on disk: {pcd_path}")
 
+        # Set 3D-BBS Node config parameter path state wrapper
         if os.path.exists(yaml_path):
-            req_string.data = yaml_path
-            self.call_service_async(self.load_bbs_cli, req_string)
+            param_req = SetParameters.Request()
+            param = Parameter()
+            param.name = "config"
+            param.value.type = ParameterType.PARAMETER_STRING
+            param.value.string_value = yaml_path
+            param_req.parameters.append(param)
+            self.call_service_async(self.bbs_param_cli, param_req)
         else:
-            self.get_logger().error(f"Config path missing: {yaml_path}")
+            self.get_logger().error(f"YAML configuration path missing on disk: {yaml_path}")
+
+        # Trigger clean pipeline update sequences using clean Trigger requests
+        req_trigger = Trigger.Request()
+        self.create_timer(0.2, lambda: self.call_service_async(self.load_map_cli, req_trigger))
+        self.create_timer(0.2, lambda: self.call_service_async(self.load_bbs_cli, req_trigger))
 
     def trigger_elevator_exit_resume(self):
         self.get_logger().info("Exiting lift: Activating tracking frames...")
@@ -201,10 +223,8 @@ class ElevatorFloorDetection(Node):
             
         frame = self.bridge.imgmsg_to_cv2(msg, "bgr8")
         aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_4X4_50)
-        try:
-            parameters = cv2.aruco.DetectorParameters_create()
-        except AttributeError:
-            parameters = cv2.aruco.DetectorParameters()
+        
+        parameters = cv2.aruco.DetectorParameters()
 
         corners, ids, rejected = cv2.aruco.detectMarkers(frame, aruco_dict, parameters=parameters)
 

@@ -1,0 +1,31 @@
+system:
+  base_dir: "/home/container_user/wheelchair2/src/wheelchair2_navigation/maps"
+
+buildings:
+  D-block:
+    floors:
+      0:
+        name: "Ground_Floor"
+        maps:
+          occupancy: "ramps/rrc_outside_himalaya_ramps_fast_cleaned.yaml"
+          pcd: "ramps/rrc_outside_himalaya_ramps.pcd"
+        elevators:
+          Left_Elevator:
+            approach_pose: [3.99945, 11.3015, -0.101182]
+            exit_initial_pose: [3.99945, 11.3015, 3.07539]
+          # Right_Elevator:
+          #   approach_pose: [40.0, 5.0, 0.0]
+          #   exit_initial_pose: [40.0, 5.0, -1.57]
+
+      4:
+        name: "Fourth_Floor"
+        maps:
+          occupancy: "main_hq/second/occ_map.yaml"
+          pcd: "main_hq/second/3d_map.pcd"
+        elevators:
+          Left_Elevator:
+            approach_pose: [10.0, 5.0, 0.0]
+            exit_initial_pose: [10.0, 5.0, 1.57]
+          # Right_Elevator:
+          #   approach_pose: [40.0, 5.0, 0.0]
+          #   exit_initial_pose: [40.0, 5.0, 1.57]

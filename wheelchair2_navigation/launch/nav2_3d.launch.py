@@ -112,31 +112,31 @@ def create_nodes():
     actions_list.append(box_filter_node)
 
 
-    laser_filter_node = Node(
-        package='laser_filters',
-        executable='scan_to_scan_filter_chain',
-        name='laser_filter',
-        parameters=[box_filter_config, {'use_sim_time': use_sim_time}],
-        remappings=[
-            ('scan', 'scan_rp'),       
-            ('scan_filtered', 'scan_rp_filtered_1') 
-        ],
-        output='screen'
-    )
-    actions_list.append(laser_filter_node)
+    # laser_filter_node = Node(
+    #     package='laser_filters',
+    #     executable='scan_to_scan_filter_chain',
+    #     name='laser_filter',
+    #     parameters=[box_filter_config, {'use_sim_time': use_sim_time}],
+    #     remappings=[
+    #         ('scan', 'scan_rp'),       
+    #         ('scan_filtered', 'scan_rp_filtered_1') 
+    #     ],
+    #     output='screen'
+    # )
+    # actions_list.append(laser_filter_node)
 
-    laser_filter_node_1 = Node(
-        package='laser_filters',
-        executable='scan_to_scan_filter_chain',
-        name='laser_filter_1',
-        parameters=[box_filter_config_2, {'use_sim_time': use_sim_time}],
-        remappings=[
-            ('scan', 'scan_rp_filtered_1'),       
-            ('scan_filtered', 'scan_rp_filtered')    
-        ],
-        output='screen'
-    )
-    actions_list.append(laser_filter_node_1)
+    # laser_filter_node_1 = Node(
+    #     package='laser_filters',
+    #     executable='scan_to_scan_filter_chain',
+    #     name='laser_filter_1',
+    #     parameters=[box_filter_config_2, {'use_sim_time': use_sim_time}],
+    #     remappings=[
+    #         ('scan', 'scan_rp_filtered_1'),       
+    #         ('scan_filtered', 'scan_rp_filtered')    
+    #     ],
+    #     output='screen'
+    # )
+    # actions_list.append(laser_filter_node_1)
 
 
     # ==========================================
