@@ -10,7 +10,8 @@ YAML_PATH="/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/rrc/
 NATURE="indoor"
 
 # CycloneDDS security environment setup string
-SEC_ENV="source /opt/ros/humble/setup.bash && source /home/container_user/wheelchair2/install/setup.bash && export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp && export ROS_SECURITY_ENABLE=true && export ROS_SECURITY_STRATEGY=Enforce && export ROS_SECURITY_KEYSTORE=/home/container_user/wheelchair2/src/wheelchair_keystore_unified && export ROS_SECURITY_ENCLAVE=/wheelchair && export ROS_DOMAIN_ID=56 && export CYCLONEDDS_URI=file:///home/container_user/wheelchair2/src/scripts/cyclonedds_jetson.xml"
+SEC_ENV="source /opt/ros/humble/setup.bash && source /home/container_user/wheelchair2/install/setup.bash && export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp && export ROS_SECURITY_ENABLE=true && export ROS_SECURITY_STRATEGY=Enforce && export ROS_SECURITY_KEYSTORE=/home/container_user/.ros/sros2/keystore && export ROS_SECURITY_ENCLAVE=/wheelchair && export ROS_DOMAIN_ID=56 && export CYCLONEDDS_URI=file:///home/container_user/wheelchair2/src/scripts/cyclonedds_jetson.xml"
+
 
 # Start detached session
 tmux new-session -d -s $SESSION_NAME -n "bringup" -x 200 -y 100

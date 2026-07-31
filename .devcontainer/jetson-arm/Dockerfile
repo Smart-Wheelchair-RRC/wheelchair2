@@ -29,3 +29,7 @@ RUN chmod +x src/wheelchair2_navigation/shell_scripts/*.tmux src/wheelchair2_nav
 
 # 5. Build workspace inside the image
 RUN /bin/bash -c "source /opt/ros/humble/setup.bash && colcon build --symlink-install --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
+
+# 6. Generate SROS2 keystore automatically during image build
+RUN /bin/bash -c "source /opt/ros/humble/setup.bash && source install/setup.bash && ros2 run robot_security generate_keystore"
+

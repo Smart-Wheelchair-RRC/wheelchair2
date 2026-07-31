@@ -29,3 +29,6 @@
 [submodule "dependencies/rplidar_ros"]
 	path = dependencies/rplidar_ros
 	url = https://github.com/Slamtec/rplidar_ros.git
+[submodule "dependencies/robot_security"]
+	path = dependencies/robot_security
+	url = https://github.com/ShivXShakti/robot_security.git
