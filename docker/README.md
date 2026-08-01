@@ -166,8 +166,8 @@ Run `ip addr` on the device. Example output from the laptop:
 2: eno1: <NO-CARRIER,...> state DOWN ...     ← Ignore (ethernet, cable unplugged)
     link/ether 60:cf:84:b8:71:ec ...
 
-3: wlp3s0: <BROADCAST,...> state UP ...      ← ✅ This is the Wi-Fi interface
-    inet 10.42.0.85/24 ...                   ← ✅ This is the IP to use
+3: wlp3s0: <BROADCAST,...> state UP ...      ← This is the Wi-Fi interface
+    inet 10.42.0.85/24 ...                   ← This is the IP to use
 
 4: docker0: <NO-CARRIER,...> state DOWN ...  ← Ignore (Docker bridge, internal)
     inet 172.17.0.1/16 ...

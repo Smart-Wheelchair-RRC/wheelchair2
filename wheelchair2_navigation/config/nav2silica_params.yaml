@@ -1,0 +1,650 @@
+################## sim time configs
+
+amcl_map_client:
+  ros__parameters:
+    use_sim_time: False
+
+amcl_rclcpp_node:
+  ros__parameters:
+    use_sim_time: False
+
+bt_navigator_rclcpp_node:
+  ros__parameters:
+    use_sim_time: False
+
+planner_server_rclcpp_node:
+  ros__parameters:
+    use_sim_time: False
+
+robot_state_publisher:
+  ros__parameters:
+    use_sim_time: False
+
+
+
+################### AMCL localization
+
+amcl:
+  ros__parameters:
+    use_sim_time: False
+    alpha1: 0.2
+    alpha2: 0.2
+    alpha3: 0.2
+    alpha4: 0.2
+    alpha5: 0.2
+    base_frame_id: "base_footprint"
+    beam_skip_distance: 0.8 #0.5
+    beam_skip_error_threshold: 1.5 #0.9 1.5
+    beam_skip_threshold: 0.8 #0.3 0.7
+    do_beamskip: false
+    global_frame_id: "map"
+    lambda_short: 0.1
+    laser_likelihood_max_dist: 1.5 #2.0
+    laser_max_range: 30.0
+    laser_min_range: 0.2
+    laser_model_type: "likelihood_field_prob" #likelihood_field
+    max_beams: 60
+    max_particles: 5000
+    min_particles: 1000
+    odom_frame_id: "odom"
+    pf_err: 0.05
+    pf_z: 0.99
+    recovery_alpha_fast: 0.1
+    recovery_alpha_slow: 0.001
+    resample_interval: 1
+    robot_model_type: "nav2_amcl::DifferentialMotionModel"
+    save_pose_rate: 0.5
+    sigma_hit: 0.2 #0.2
+    tf_broadcast: true
+    transform_tolerance: 1.0
+    update_min_a: 0.1 #0.05 #0.2
+    update_min_d: 0.1 #0.05 #0.25
+    z_hit: 0.5 #0.3
+    z_max: 0.05
+    z_rand: 0.5 #0.5
+    z_short: 0.05
+    scan_topic: scan
+
+
+
+#################### Map
+
+map_server:
+  ros__parameters:
+    use_sim_time: False
+    yaml_filename: "map.yaml"
+
+map_saver:
+  ros__parameters:
+    use_sim_time: False
+    save_map_timeout: 5.0
+    free_thresh_default: 0.25
+    occupied_thresh_default: 0.65
+    map_subscribe_transient_local: True
+
+
+
+###################### Behavior server
+
+behavior_server:
+  ros__parameters:
+    local_costmap_topic: local_costmap/costmap_raw
+    global_costmap_topic: global_costmap/costmap_raw
+    local_footprint_topic: local_costmap/published_footprint
+    global_footprint_topic: global_costmap/published_footprint
+    cycle_frequency: 10.0
+    behavior_plugins:
+      ["spin", "backup", "drive_on_heading", "assisted_teleop", "wait"]
+    spin:
+      plugin: "nav2_behaviors/Spin"
+    backup:
+      plugin: "nav2_behaviors/BackUp"
+      acceleration_limit: 2.5
+      deceleration_limit: -2.5
+      minimum_speed: 0.10
+    drive_on_heading:
+      plugin: "nav2_behaviors/DriveOnHeading"
+      acceleration_limit: 2.5
+      deceleration_limit: -2.5
+      minimum_speed: 0.10
+    wait:
+      plugin: "nav2_behaviors/Wait"
+    assisted_teleop:
+      plugin: "nav2_behaviors/AssistedTeleop"
+    local_frame: odom
+    global_frame: map
+    robot_base_frame: base_footprint
+    transform_tolerance: 1.0
+    simulate_ahead_time: 2.0
+    max_rotational_vel: 1.0
+    min_rotational_vel: 0.4
+    rotational_acc_lim: 3.2
+
+
+
+#################### BT navigator
+
+bt_navigator:
+  ros__parameters:
+    global_frame: map
+    robot_base_frame: base_footprint
+    odom_topic: odom
+    bt_loop_duration: 50
+    filter_duration: 0.3
+    default_server_timeout: 20
+    default_cancel_timeout: 50
+    wait_for_service_timeout: 1000
+    introspection_mode: "disabled"
+    
+    navigators: ["navigate_to_pose", "navigate_through_poses"]
+    
+    navigate_to_pose:
+      plugin: "nav2_bt_navigator::NavigateToPoseNavigator"
+      enable_groot_monitoring: false
+      groot_server_port: 1667
+      search_window: 2.0
+    
+    navigate_through_poses:
+      plugin: "nav2_bt_navigator::NavigateThroughPosesNavigator"
+      enable_groot_monitoring: false
+      groot_server_port: 1669
+      search_window: 2.0
+    
+    # 'default_nav_through_poses_bt_xml' and 'default_nav_to_pose_bt_xml' are use defaults:
+    # nav2_bt_navigator/navigate_to_pose_w_replanning_and_recovery.xml
+    # nav2_bt_navigator/navigate_through_poses_w_replanning_and_recovery.xml
+    # They can be set here or via a RewrittenYaml remap from a parent launch file to Nav2.
+    # default_nav_to_pose_bt_xml: "$(find-pkg-share wheelchair2_navigation)/config/worky.xml"
+    # default_nav_through_poses_bt_xml: "$(find-pkg-share nav2_bt_navigator)/behavior_trees/navigate_through_poses_w_replanning_and_recovery.xml"
+
+    # plugin_lib_names is used to add custom BT plugins to the executor (vector of strings).
+    # Built-in plugins are added automatically
+    # plugin_lib_names: []
+
+    error_code_name_prefixes:
+      - assisted_teleop
+      - backup
+      - compute_path
+      - dock_robot
+      - drive_on_heading
+      - follow_object
+      - follow_path
+      - nav_thru_poses
+      - nav_to_pose
+      - route
+      - spin
+      - smoother
+      - undock_robot
+      - wait
+
+
+
+##################### Contrller server (MPPI)
+
+controller_server:
+  ros__parameters:
+    controller_frequency: 10.0
+    min_x_velocity_threshold: 0.001
+    min_y_velocity_threshold: 0.5
+    min_theta_velocity_threshold: 0.001
+    failure_tolerance: 1.0
+    transform_tolerance: 1.0
+    progress_checker_plugins: ["progress_checker"]
+    goal_checker_plugins: ["general_goal_checker"]
+    controller_plugins: ["FollowPath"]
+
+    progress_checker:
+      plugin: "nav2_controller::SimpleProgressChecker"
+      required_movement_radius: 0.2
+      movement_time_allowance: 15.0
+
+    general_goal_checker:
+      stateful: True
+      plugin: "nav2_controller::SimpleGoalChecker"
+      xy_goal_tolerance: 0.35
+      yaw_goal_tolerance: 0.25
+
+    FollowPath:
+      plugin: "nav2_rotation_shim_controller::RotationShimController"
+      primary_controller: "nav2_mppi_controller::MPPIController"
+      angular_dist_threshold: 0.5
+      forward_sampling_distance: 0.3
+      rotate_to_heading_angular_vel: 0.4 
+      max_angular_accel: 3.2  # Synced to diff_drive_controller angular.z.max_acceleration
+      simulate_ahead_time: 1.0
+      rotate_to_goal_heading: false
+      
+      # MPPI Parameters below
+      time_steps: 40
+      model_dt: 0.1
+      batch_size: 800
+      vx_std: 0.30
+      vy_std: 0.0     # Diff drive doesn't have Y velocity
+      wz_std: 0.30
+      vx_max: 0.85    # Safe margin below hardware max of 1.0
+      vx_min: -0.25
+      vy_max: 0.0     # Diff drive doesn't have Y velocity
+      wz_max: 0.4     # Safe margin below hardware max of 1.0
+      iteration_count: 1
+      prune_distance: 1.7
+      transform_tolerance: 1.0
+      temperature: 0.3
+      gamma: 0.015
+      motion_model: "DiffDrive"
+      visualize: false
+      TrajectoryVisualizer:
+        trajectory_step: 5
+        time_step: 3
+      critics:
+        [
+          "ConstraintCritic",
+          "ObstaclesCritic",
+          "GoalCritic",
+          "GoalAngleCritic",
+          "PathAlignCritic",
+          "PathFollowCritic",
+          "PathAngleCritic",
+          "PreferForwardCritic",
+          "TwirlingCritic",
+        ]
+      ConstraintCritic:
+        enabled: true
+        cost_power: 1
+        cost_weight: 4.0
+      GoalCritic:
+        enabled: true
+        cost_power: 1
+        cost_weight: 5.0
+        threshold_to_consider: 1.4
+      GoalAngleCritic:
+        enabled: true
+        cost_power: 1
+        cost_weight: 3.0
+        threshold_to_consider: 0.5
+      PreferForwardCritic:
+        enabled: true
+        cost_power: 1
+        cost_weight: 5.0
+        threshold_to_consider: 0.5
+      ObstaclesCritic:
+        enabled: true
+        cost_power: 1
+        # Kept at 5.0 so it doesn't push the robot away from the doorframes
+        repulsion_weight: 3.5 
+        # Kept at 10.0 to balance safety with the need to squeeze through
+        critical_weight: 10.0 
+        consider_footprint: true
+        collision_cost: 100000.0
+        # The magic number: 10 cm. 
+        # Gives a safety buffer, but leaves 5-10cm of "free space" 
+        # in the doorway so MPPI knows it can fit.
+        collision_margin_distance: 0.05
+        near_goal_distance: 0.5
+      PathAlignCritic:
+        enabled: true
+        cost_power: 1
+        cost_weight: 8.0
+        max_path_occupancy_ratio: 0.1
+        trajectory_point_step: 4
+        threshold_to_consider: 0.5
+        offset_from_furthest: 50
+        use_path_orientations: false
+      PathFollowCritic:
+        enabled: true
+        cost_power: 1
+        cost_weight: 5.0
+        offset_from_furthest: 17
+        threshold_to_consider: 0.5
+      PathAngleCritic:
+        enabled: true
+        cost_power: 1
+        cost_weight: 2.0
+        offset_from_furthest: 4
+        threshold_to_consider: 0.8
+        max_angle_to_furthest: 1.0
+        forward_preference: true
+        mode: 2
+      TwirlingCritic:
+        enabled: true
+        twirling_cost_power: 1
+        twirling_cost_weight: 10.0
+
+
+
+##################### Local costmap (STVL)
+
+local_costmap:
+  local_costmap:
+    ros__parameters:
+      update_frequency: 5.0
+      publish_frequency: 5.0
+      static_map: False
+      rolling_window: True
+      always_send_full_costmap: True
+      use_sim_time: False
+      
+      width: 6 #5
+      height: 6 #5
+      resolution: 0.05
+
+      global_frame: odom
+      robot_base_frame: base_footprint
+      footprint: "[ [0.78, 0.33], [0.78, -0.33], [-0.35, -0.33], [-0.35, 0.33] ]" #"[[-0.30,-0.32],[0.72,-0.32],[0.72,0.32],[-0.30,0.32]]"
+      footprint_padding: 0.02
+      # robot_radius: 0.50
+      # footprint: "[[-0.30,-0.32],[0.80,-0.32],[0.80,0.32],[-0.30,0.32]]"
+      
+      # filters: ["keepout_filter"]  # Uncomment when use_keepout_zone is True
+      
+      keepout_filter:
+        plugin: "nav2_costmap_2d::KeepoutFilter"
+        enabled: True
+        filter_info_topic: "/costmap_filter_info"
+
+      plugins: ["lidar_obstacle_layer", "inflation_layer"]
+      
+      lidar_obstacle_layer:
+        plugin: "spatio_temporal_voxel_layer/SpatioTemporalVoxelLayer"
+        enabled: true
+        voxel_decay: 1.0 # seconds if linear, e^n if exponential 5
+        decay_model: 0 # 0=linear, 1=exponential, -1=persistent
+        voxel_size: 0.05 # meters
+        track_unknown_space: true # default space is known
+        mark_threshold: 0 # voxel height
+        update_footprint_enabled: true
+        combination_method: 1 # 1=max, 0=override
+        origin_z: 0.0 # meters
+        publish_voxel_map: false # default off
+        transform_tolerance: 1.0 # seconds
+        mapping_mode: false # default off, saves map not for navigation
+        map_save_duration: 60.0 # default 60s, how often to autosave
+        observation_sources: lidar1_mark lidar1_clear glass_mark glass_clear rs_mark rs_clear
+
+        lidar1_mark:
+          data_type: PointCloud2
+          topic: /points_nonground
+          marking: true
+          clearing: false
+          obstacle_range: 5.0 # meters 3
+          min_obstacle_height: 0.2 # default 0, meters
+          max_obstacle_height: 1.7 # default 3, meters
+          expected_update_rate: 0.0 # default 0, if not updating at this rate at least, remove from buffer
+          observation_persistence: 0.0 # default 0, use all measurements taken during now-value, 0=latest
+          inf_is_valid: false # default false, for laser scans
+          filter: "voxel" # default passthrough, apply "voxel", "passthrough", or no filter to sensor data, recommend on
+          voxel_min_points: 0          # default 0, minimum points per voxel for voxel filter
+
+          clear_after_reading: true # default false, clear the buffer after the layer gets readings from it
+        lidar1_clear:
+          enabled: true #default true, can be toggled on/off with associated service call
+          data_type: PointCloud2
+          topic: /points_nonground
+          marking: false
+          clearing: true
+          max_z: 2.0 # default 0, meters
+          min_z: 0.0 # default 10, meters
+          vertical_fov_angle: 1.02 # default 0.7, radians. For 3D lidars it's the symmetric FOV about the planar axis.
+          vertical_fov_padding: 0.05 # 3D Lidar only. Default 0, in meters
+          horizontal_fov_angle: 6.29 # 3D lidar scanners like the VLP16 have 360 deg horizontal FOV.
+          decay_acceleration: 5.0 # default 0, 1/s^2.
+          model_type: 1 # default 0, model type for frustum. 0=depth camera, 1=3d lidar like VLP16 or similar
+
+        rs_mark:
+          data_type: PointCloud2
+          topic: /camera1/camera1/depth/color/points # Replace with your PointCloud2 topic
+          marking: true
+          clearing: false
+          obstacle_range: 5.0
+          min_obstacle_height: 0.5
+          max_obstacle_height: 2.0
+          expected_update_rate: 0.0
+          observation_persistence: 0.0
+          inf_is_valid: false
+          filter: "voxel"
+          voxel_min_points: 0
+          clear_after_reading: true
+          model_type: 0 # 0=depth camera
+
+        rs_clear:
+          enabled: true
+          data_type: PointCloud2
+          topic: /camera1/camera1/depth/color/points # Replace with your PointCloud2 topic
+          marking: false
+          clearing: true
+          max_z: 5.0
+          min_z: 0.05
+          vertical_fov_angle: 1.01
+          vertical_fov_padding: 0.0
+          horizontal_fov_angle: 1.51
+          decay_acceleration: 5.0
+          model_type: 0
+
+        glass_mark:
+          data_type: PointCloud2
+          topic: /glass_aware/depth/color/points # Replace with your PointCloud2 topic
+          marking: true
+          clearing: false
+          obstacle_range: 5.0
+          min_obstacle_height: 0.5
+          max_obstacle_height: 2.0
+          expected_update_rate: 0.0
+          observation_persistence: 0.0
+          inf_is_valid: false
+          filter: "voxel"
+          voxel_min_points: 0
+          clear_after_reading: false
+          model_type: 0 # 0=depth camera
+
+        glass_clear:
+          enabled: true
+          data_type: PointCloud2
+          topic: /glass_aware/depth/color/points # Replace with your PointCloud2 topic
+          marking: false
+          clearing: true
+          max_z: 5.0
+          min_z: 0.05
+          vertical_fov_angle: 1.01
+          vertical_fov_padding: 0.0
+          horizontal_fov_angle: 1.51
+          decay_acceleration: 5.0
+          model_type: 0
+  
+      inflation_layer:
+        enabled: True
+        plugin: "nav2_costmap_2d::InflationLayer"
+        inflation_radius: 0.30
+        cost_scaling_factor: 10.0 #10 2.58
+      
+  local_costmap_client:
+    ros__parameters:
+      use_sim_time: False
+  
+  local_costmap_rclcpp_node:
+    ros__parameters:
+      use_sim_time: False
+
+
+
+###################### Global costmap (STVL)
+
+global_costmap:
+  global_costmap:
+    ros__parameters:
+      update_frequency: 1.0
+      publish_frequency: 1.0
+      track_unknown_space: True
+      always_send_full_costmap: True
+      resolution: 0.1
+
+      global_frame: map
+      robot_base_frame: base_footprint
+      footprint: "[[-0.30,-0.32],[0.72,-0.32],[0.72,0.32],[-0.30,0.32]]"
+      footprint_padding: 0.02
+      # robot_radius: 0.30
+
+      filters: ["keepout_filter"]
+      
+      keepout_filter:
+        plugin: "nav2_costmap_2d::KeepoutFilter"
+        enabled: True
+        filter_info_topic: "/costmap_filter_info"
+      
+      plugins: ["static_layer", "stvl_layer", "inflation_layer"]
+      
+      stvl_layer:
+        plugin: "spatio_temporal_voxel_layer/SpatioTemporalVoxelLayer"
+        enabled: true
+        voxel_decay: 5.0
+        decay_model: 0
+        voxel_size: 0.1
+        track_unknown_space: true
+        mark_threshold: 0
+        update_footprint_enabled: true
+        combination_method: 1
+        origin_z: 0.0
+        publish_voxel_map: false
+        transform_tolerance: 0.5
+        mapping_mode: false
+        observation_sources: livox_mark livox_clear
+        
+        livox_mark:
+          data_type: PointCloud2
+          topic: /points_nonground
+          marking: true
+          clearing: true
+          obstacle_range: 5.0
+          min_obstacle_height: 0.5
+          max_obstacle_height: 1.7
+          expected_update_rate: 0.0
+          observation_persistence: 0.0
+          inf_is_valid: false
+          filter: "voxel"
+          voxel_min_points: 0
+          clear_after_reading: true
+
+        livox_clear:
+          enabled: true
+          data_type: PointCloud2
+          topic: /points_nonground
+          marking: false
+          clearing: true
+          max_z: 8.0
+          min_z: 0.1
+          vertical_fov_angle: 1.02
+          vertical_fov_padding: 0.05
+          horizontal_fov_angle: 6.29
+          decay_acceleration: 5.0
+          model_type: 1
+
+      static_layer:
+        plugin: "nav2_costmap_2d::StaticLayer"
+        map_subscribe_transient_local: True
+        
+      inflation_layer:
+        plugin: "nav2_costmap_2d::InflationLayer"
+        cost_scaling_factor: 2.0
+        inflation_radius: 2.0
+        
+
+  global_costmap_client:
+    ros__parameters:
+      use_sim_time: False
+  global_costmap_rclcpp_node:
+    ros__parameters:
+      use_sim_time: False
+
+
+
+##################### Global planner (SmacPlanner2D)
+
+planner_server:
+  ros__parameters:
+    planner_plugins: ["GridBased"]
+
+    GridBased:
+      plugin: "nav2_smac_planner/SmacPlanner2D"
+      downsample_costmap: false # whether or not to downsample the map
+      downsampling_factor: 1 # multiplier for the resolution of the costmap layer (e.g. 2 on a 5cm costmap would be 10cm)
+      tolerance: 0.75 #5                 # dist-to-goal heuristic cost (distance) for valid tolerance endpoints if exact goal cannot be found.
+      allow_unknown: false # allow traveling in unknown space
+      max_iterations: 1000000 # maximum total iterations to search for before failing (in case unreachable), set to -1 to disable
+      max_on_approach_iterations: 1000 # Maximum number of iterations after within tolerances to continue to try to find exact solution
+      max_planning_time: 5.0 # max time in s for planner to plan, smooth
+      smooth_path: True # If true, does a simple and quick smoothing post-processing to the path
+
+      smoother:
+        max_iterations: 1000
+        w_smooth: 0.3
+        w_data: 0.2
+        tolerance: 1.0e-10
+        do_refinement: true
+        refinement_num: 2 # Whether to recursively run the smoother 3 times on the results from prior runs to refine the results further
+
+
+
+####################### Waypoint follower
+
+waypoint_follower:
+  ros__parameters:
+    loop_rate: 20
+    stop_on_failure: false
+    introspection_mode: "disabled"
+    waypoint_task_executor_plugin: "wait_at_waypoint"
+    wait_at_waypoint:
+      plugin: "nav2_waypoint_follower::WaitAtWaypoint"
+      enabled: true
+      waypoint_pause_duration: 200
+
+
+
+######################## Collision checker
+
+
+collision_monitor:
+  ros__parameters:
+    enabled: False
+    use_sim_time: false
+    base_frame_id: "base_footprint"
+    odom_frame_id: "odom"
+    cmd_vel_in_topic: "cmd_vel_smoothed" 
+    cmd_vel_out_topic: "cmd_vel" 
+    state_topic: "collision_monitor_state"
+    transform_tolerance: 1.0
+    source_timeout: 1.0
+    stop_pub_timeout: 2.0
+    
+    # We use two zones: A dynamic braking zone, and a static hard-stop
+    polygons: ["DynamicBrakingZone"]
+    
+    DynamicBrakingZone:
+      type: "polygon" # <--- THIS IS THE MAGIC WORD FOR HUMBLE
+      action_type: "approach" 
+      # Subscribe to the local costmap to get the exact wheelchair shape
+      footprint_topic: "/local_costmap/published_footprint"
+      
+      # 2.5 seconds of look-ahead. 
+      # At 0.8 m/s, it starts braking 2 meters away from the closed door.
+      # When rotating at 0 m/s forward, this projection mathematically shrinks to 0.
+      time_before_collision: 2.5
+      simulate_ahead_time: 2.5
+      min_points: 6
+      enabled: true
+      visualize: false # Keep false. Dynamic footprints cause severe RViz flickering.
+
+    HardStopZone:
+      type: "polygon"
+      action_type: "stop" 
+      # The absolute safety bubble. If the dynamic zone slows the robot down to a crawl,
+      # this static zone acts as the final "brick wall" so it doesn't touch the door.
+      points: [0.75, 0.40, 1.30, 0.40, 1.30, -0.40, 0.75, -0.40]
+      visualize: false 
+      enabled: true
+
+    observation_sources: ["pointcloud"] 
+
+    pointcloud:
+      type: "pointcloud"
+      topic: "/points_nonground" 
+      min_height: 0.01 
+      max_height: 1.7 
+      enabled: true
