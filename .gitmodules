@@ -32,3 +32,4 @@
 [submodule "dependencies/robot_security"]
 	path = dependencies/robot_security
 	url = https://github.com/ShivXShakti/robot_security.git
+	branch = development
