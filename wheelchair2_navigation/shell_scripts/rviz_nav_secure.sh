@@ -10,7 +10,7 @@ source install/setup.bash
 # Enable SROS2 Security
 export ROS_SECURITY_ENABLE=true
 export ROS_SECURITY_STRATEGY=Enforce
-export ROS_SECURITY_KEYSTORE=/home/robot/.ros/sros2/keystore
+export ROS_SECURITY_KEYSTORE=/home/robot/.ros/sros2/wheelchair_keystore
 export ROS_SECURITY_ENCLAVE=/wheelchair
 export ROS_DOMAIN_ID=56
 

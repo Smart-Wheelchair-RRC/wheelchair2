@@ -1,6 +1,15 @@
 # Wheelchair2
 ROS2 Humble and Gazebo Harmonic packages to operate the RRC wheelchair
 
+## Quick Start
+- Follow Quickstart section of [README.md](docker/README.md).
+- Navigation without security
+```bash
+cd ~/wheelchair_ws/wheelchair2
+./src/wheelchair2_navigation/shell_scripts/nav_3D_loc.tmux
+```
+- Navigation with security: Follow [wheelchair security](dependencies/robot_security/docs/wheelchair_security.md) and run Terminal 1: Launch Secure Navigation stack
+
 ## Prerequisites
 
 - **Ubuntu** (tested on 22.04)
