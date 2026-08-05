@@ -43,6 +43,12 @@ tmux send-keys -t $SESSION_NAME:1 "sleep 7 && ros2 launch wheelchair2_navigation
 tmux select-layout -t $SESSION_NAME:1 tiled
 
 
+################## 4. WINDOW 2: SILICA GLASS DETECTION
+tmux new-window -t $SESSION_NAME -n "silica"
+tmux send-keys -t $SESSION_NAME:2 "$ENV_SETUP" C-m
+tmux send-keys -t $SESSION_NAME:2 "ros2 launch silica_ros align_metric.launch.py" C-m
+
+
 ################## ATTACH
 # Start the user on the Bringup window
 tmux select-window -t $SESSION_NAME:0
