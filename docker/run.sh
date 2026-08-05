@@ -85,7 +85,7 @@ fi
 # Function to run post-start setup
 run_post_start_setup() {
     echo "Running post-start permissions setup..."
-    docker exec -u root "${CONTAINER_NAME}" chown -R container_user:container_user /home/container_user/wheelchair2 /run
+    docker exec -u root "${CONTAINER_NAME}" bash -c "mkdir -p /home/container_user/.ros && chown -R container_user:container_user /home/container_user/wheelchair2 /run /home/container_user/.ros"
     
     echo "Running post-create configuration script..."
     docker exec -u container_user "${CONTAINER_NAME}" bash /home/container_user/wheelchair2/src/scripts/post_create.sh
@@ -126,6 +126,7 @@ else
             --security-opt=apparmor:unconfined
             -v /dev:/dev
             -v /tmp/.X11-unix:/tmp/.X11-unix
+            -v "/home/ducky/.ros/sros2:/home/container_user/.ros/sros2"
             --net=host
             --ipc=host
             -v /dev/pts:/dev/pts
