@@ -51,6 +51,12 @@ tmux send-keys -t $SESSION_NAME:2 "$SEC_ENV" C-m
 tmux send-keys -t $SESSION_NAME:2 "ros2 launch silica_ros align_metric.launch.py" C-m
 
 
+################## 5. WINDOW 3: FASTAPI BACKEND
+tmux new-window -t $SESSION_NAME -n "backend"
+tmux send-keys -t $SESSION_NAME:3 "$SEC_ENV" C-m
+tmux send-keys -t $SESSION_NAME:3 "cd /wheelchair_ws/google_quant/wheelchair_intelligence/development/ui && uvicorn cmu_whisper_llama_backend_v4:app --host 0.0.0.0 --port 8443 --ssl-keyfile ../certs/key.pem --ssl-certfile ../certs/cert.pem" C-m
+
+
 ################## ATTACH
 # Start the user on the Bringup window
 tmux select-window -t $SESSION_NAME:0

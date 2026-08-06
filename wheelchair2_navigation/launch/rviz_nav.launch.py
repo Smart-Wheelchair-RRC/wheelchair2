@@ -11,7 +11,7 @@ def generate_launch_description():
     pkg_description = get_package_share_directory('wheelchair2_navigation')
     
    
-    rviz_config_file = os.path.join(pkg_description, 'rviz', 'navigation.rviz')
+    rviz_config_file = os.path.join(pkg_description, 'rviz', 'rviz_dep.rviz')
 
     rviz_node = Node(
         package="rviz2",

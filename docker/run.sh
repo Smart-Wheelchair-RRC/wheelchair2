@@ -127,6 +127,7 @@ else
             -v /dev:/dev
             -v /tmp/.X11-unix:/tmp/.X11-unix
             -v "/home/ducky/.ros/sros2:/home/container_user/.ros/sros2"
+            -v "/home/ducky/wheelchair_ws:/wheelchair_ws"
             --net=host
             --ipc=host
             -v /dev/pts:/dev/pts

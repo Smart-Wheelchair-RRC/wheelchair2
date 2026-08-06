@@ -22,6 +22,10 @@ if [ -f "/home/container_user/wheelchair2/install/setup.bash" ]; then
     source /home/container_user/wheelchair2/install/setup.bash
 fi
 
+# Install backend dependencies and SSH tools
+sudo apt-get update && sudo apt-get install -y sshpass openssh-client python3-pip
+sudo pip3 install fastapi uvicorn httpx pyyaml
+
 cd /home/container_user/wheelchair2
 
 # Generate SROS2 keystore automatically on startup
