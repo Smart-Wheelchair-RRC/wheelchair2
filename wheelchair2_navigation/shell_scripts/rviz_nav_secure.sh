@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Build navigation package on laptop
-colcon build --symlink-install --packages-select wheelchair2_navigation wheelchair_intelligence_ros2
+colcon build --symlink-install --packages-select wheelchair2_navigation
 
 # Source setup paths
 source /opt/ros/humble/setup.bash

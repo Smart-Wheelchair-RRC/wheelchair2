@@ -1,6 +1,13 @@
 #!/bin/bash
 
 SESSION_NAME="wheelchair_navigation"
+
+tmux has-session -t $SESSION_NAME 2>/dev/null
+if [ $? -eq 0 ]; then
+    echo "Session $SESSION_NAME already exists. Exiting to prevent duplicate nodes."
+    exit 0
+fi
+
 WHEELCHAIR_NAME="ducky"  # ducky
 export DISPLAY=:1001
 
@@ -60,4 +67,4 @@ tmux send-keys -t $SESSION_NAME:3 "if [ -d /wheelchair_ws/wheelchair_intelligenc
 ################## ATTACH
 # Start the user on the Bringup window
 tmux select-window -t $SESSION_NAME:0
-tmux attach-session -t $SESSION_NAME
+# tmux attach-session -t $SESSION_NAME

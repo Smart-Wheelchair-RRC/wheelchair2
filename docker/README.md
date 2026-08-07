@@ -210,6 +210,68 @@ docker compose -f docker/docker-compose.yml down
 
 ---
 
+## SROS2 Security & Stability Configuration
+
+To secure communication between the Jetson and laptop without crashing the system under high-bandwidth sensor streams, the following configurations were implemented:
+
+### 1. SROS2 Payload Encryption Bypass (Governance Tuning)
+* **Problem**: Originally, all data payloads (including the high-bandwidth 3D PointCloud messages like `/livox/lidar`) were encrypted using OpenSSL (`data_protection_kind = ENCRYPT`). When a laptop connected and subscribed to these point clouds, the massive encryption overhead on the Jetson Orin Nano caused OpenSSL buffer overflows/alignment corruptions inside CycloneDDS, crashing `dlio_odom_node` with a `free(): invalid next size (normal)` error.
+* **Solution**: We updated `governance.xml` (re-signed to `governance.p7s`) to set:
+  * `<data_protection_kind>NONE</data_protection_kind>`
+  * `<metadata_protection_kind>SIGN</metadata_protection_kind>`
+* **Why it works**: Disabling encryption on raw data payloads prevents memory corruption and reduces CPU usage, keeping the localization stable. However, because discovery is fully encrypted and all headers are cryptographically **signed**, the system remains 100% secure: unauthorized nodes cannot spoof, eavesdrop on node discovery, or inject malicious commands (like `/cmd_vel` or `/goal_pose`).
+
+### 2. Multi-Machine Enclave Separation
+* **Problem**: The laptop client originally used the same `/wheelchair` enclave certificate as the Jetson nodes. CycloneDDS flagged this as a duplicate identity/replay clash, causing handshake rejections and heap corruption crashes.
+* **Solution**: The laptop command script (`send_goal_secure.sh`) was updated to use the root `/` enclave instead of `/wheelchair`. Since both enclaves have full permissions in `wheelchair_policy.xml` but use unique keys in the keystore, this permits clean, concurrent multi-machine communication.
+
+### 3. TMUX Session Guard & Detached Execution
+* **Problem**: Pressing launch buttons repeatedly or starting the tmux script manually while a session was already active spawned duplicate tmux windows and duplicate ROS 2 nodes, leading to port conflicts and hangs. SIGHUP/SIGINT terminal signals (when closing tmux client shells) also terminated child ROS 2 nodes, leaving them as zombie `<defunct>` processes.
+* **Solution**:
+  * Added a **TMUX session guard** to the top of `nav_3D_loc_silica_secure.tmux` that checks if the session exists and exits immediately if it does.
+  * Commented out `tmux attach-session` at the end of the script, allowing the tmux server and ROS 2 nodes to run detached in the background without being affected by terminal disconnection signals.
+  * Updated the backend endpoints (`/start_navigation` and `/start_intelligence`) to verify if the tmux session or container is already active before triggering a restart.
+
+### 4. ICP Localization Race Condition Fix
+* **Problem**: The `icp_localization` node was crashing with a Segmentation Fault (Exit Code -11) after just a few seconds of execution. Because it died, it stopped publishing the `/tf` transform (`map -> odom`), which caused the navigation stack to time out with `Invalid frame ID "map" - frame does not exist`.
+* **Root Cause**: A multithreading race condition was present in `RangeDataAccumulator.cpp`. The ROS callback thread (updating LiDAR data) writes to the pointcloud buffer `accumulatedRangeData_` under a mutex lock, while the processing worker thread retrieves this buffer by calling `popAccumulatedRangeData()`. However, `popAccumulatedRangeData()` returned a `const &` (reference) to the buffer. Once the function returned, the mutex lock was released, and the worker thread copied the buffer to its local variable outside the lock. When timing aligned just right, the callback thread overwrote the buffer while the worker thread was copying it, causing memory corruption inside Eigen/PointMatcher and a segfault.
+* **Solution**: Modified `RangeDataAccumulator.hpp` and `RangeDataAccumulator.cpp` to return the pointcloud buffers by value instead of by reference, and wrapped the read operations in mutex locks. This guarantees the copy constructor runs while the lock is held, completely preventing the segmentation fault.
+* **Exact Code Changes**:
+
+  #### `dependencies/icp_localization_ros2/include/icp_localization_ros2/RangeDataAccumulator.hpp` (Lines 39-41):
+  ```diff
+  -  const TimedRangeData &getAccumulatedRangeData() const;
+  -  const TimedRangeData &popAccumulatedRangeData() const;
+  -  const Time &getAccumulatedRangeDataTimestamp() const;
+  +  TimedRangeData getAccumulatedRangeData() const;
+  +  TimedRangeData popAccumulatedRangeData() const;
+  +  Time getAccumulatedRangeDataTimestamp() const;
+  ```
+
+  #### `dependencies/icp_localization_ros2/src/RangeDataAccumulator.cpp` (Lines 30-80):
+  ```diff
+  -const Time &RangeDataAccumulator::getAccumulatedRangeDataTimestamp() const {
+  +Time RangeDataAccumulator::getAccumulatedRangeDataTimestamp() const {
+  +  std::lock_guard<std::mutex> lck(accumulatedDataMutex_);
+     return accumulatedRangeData_.timestamp_;
+   }
+
+  -const TimedRangeData &RangeDataAccumulator::popAccumulatedRangeData() const {
+  +TimedRangeData RangeDataAccumulator::popAccumulatedRangeData() const {
+     std::lock_guard<std::mutex> lck(accumulatedDataMutex_);
+     isRangeDataReady_ = false;
+     return accumulatedRangeData_;
+   }
+
+  -const TimedRangeData &RangeDataAccumulator::getAccumulatedRangeData() const {
+  +TimedRangeData RangeDataAccumulator::getAccumulatedRangeData() const {
+  +  std::lock_guard<std::mutex> lck(accumulatedDataMutex_);
+     return accumulatedRangeData_;
+   }
+  ```
+
+---
+
 ## Troubleshooting
 
 ### All ROS 2 nodes crash with `failed to increase socket receive buffer size`
