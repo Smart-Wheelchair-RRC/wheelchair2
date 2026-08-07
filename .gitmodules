@@ -36,3 +36,7 @@
 [submodule "dependencies/silica_ros"]
 	path = dependencies/silica_ros
 	url = https://github.com/GlassDetection/silica_ros
+[submodule "dependencies/wheelchair_intelligence_ros2"]
+	path = dependencies/wheelchair_intelligence_ros2
+	url = https://github.com/ShivXShakti/wheelchair_intelligence_ros2.git
+	branch = main
