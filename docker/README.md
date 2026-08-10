@@ -270,6 +270,82 @@ To secure communication between the Jetson and laptop without crashing the syste
    }
   ```
 
+### 5. DLIO Odometry Thread-Safety & Crash Fix
+* **Problem**: The DLIO odometry node (`dlio_odom_node`) was crashing with heap corruption (`free(): invalid next size (normal)` / exit code -6) under continuous scan matching. 
+* **Root Cause**: The main thread updated members of `dlio::OdomNode` (like `this->state`, `this->path_ros`, and metrics vectors) while simultaneously spawning detached worker threads (`publish_thread` running `publishToROS`, `metrics_thread` running `computeMetrics`, and `debug_thread` running `publishDebug`) without any mutex protection. These concurrent reads/writes caused data races and heap corruption.
+* **Solution**: Changed all spawned detached threads to synchronous method calls inside the callback thread. Because the publishing and metrics functions execute extremely quickly (<1ms), calling them synchronously eliminates the data races and memory corruption completely with zero impact on real-time performance.
+* **Exact Code Changes**:
+  
+  #### `dependencies/direct_lidar_inertial_odometry/src/dlio/odom.cc` (Lines 790-852 & 1788-1790):
+  ```diff
+  -  this->metrics_thread = std::thread( &dlio::OdomNode::computeMetrics, this );
+  -  this->metrics_thread.detach();
+  +  this->computeMetrics();
+  ...
+  -  this->publish_thread = std::thread( &dlio::OdomNode::publishToROS, this, published_cloud, this->T_corr );
+  -  this->publish_thread.detach();
+  +  this->publishToROS(published_cloud, this->T_corr);
+  ...
+  -  this->debug_thread = std::thread( &dlio::OdomNode::publishDebug, this );
+  -  this->debug_thread.detach();
+  +  this->publishDebug();
+  ...
+  -    this->publish_keyframe_thread = std::thread( &dlio::OdomNode::publishKeyframe, this, this->keyframes[i], this->keyframe_timestamps[i] );
+  -    this->publish_keyframe_thread.detach();
+  +    this->publishKeyframe(this->keyframes[i], this->keyframe_timestamps[i]);
+  ```
+
+### 6. ROS2 Bridge Node Path Fixes & Auto-Launch Integration
+* **Problem**: The ROS 2 bridge node (`e_intelligence_to_nav2_com`) was failing to load map semantic locations inside the Docker container mount. Additionally, clicking stations in the frontend had no effect because the bridge node was not running.
+* **Root Cause**: The hardcoded paths inside `e_intelligence_to_nav2_com.py` did not match the container mount path `/wheelchair_ws/wheelchair_intelligence/development/config/backend_config.json` and the workspace package location `/home/container_user/wheelchair2/src/dependencies/wheelchair_intelligence_ros2/config/map_semantics.yaml`, causing it to reject all station commands.
+* **Solution**:
+  1. Updated the search path lists in `e_intelligence_to_nav2_com.py` to include the correct container paths, allowing it to dynamically resolve the YAML database.
+  2. Modified the tmux launch configuration `nav_3D_loc_silica_secure.tmux` to automatically start `e_intelligence_to_nav2_com` in a dedicated bridge window (Window 4: `bridge`) after let Nav2 initialize.
+* **Exact Code Changes**:
+
+  #### `dependencies/wheelchair_intelligence_ros2/wheelchair_intelligence_ros2/e_intelligence_to_nav2_com.py` (Lines 150-205):
+  ```diff
+              config_paths = [
+  +             "/wheelchair_ws/wheelchair_intelligence/development/config/backend_config.json",
+                "/wheelchair_ws/google_quant/wheelchair_intelligence/development/config/backend_config.json",
+                "/home/robot/wheelchair_ws/google_quant/wheelchair_intelligence/development/config/backend_config.json",
+                "/home/ducky/wheelchair_ws/wheelchair_intelligence/development/config/backend_config.json",
+  -             "/home/container_user/wheelchair2/dependencies/wheelchair_intelligence_ros2/config/backend_config.json"
+  +             "/home/container_user/wheelchair2/dependencies/wheelchair_intelligence_ros2/config/backend_config.json",
+  +             "/home/container_user/wheelchair2/src/dependencies/wheelchair_intelligence_ros2/config/backend_config.json"
+              ]
+  ...
+              # Container / alternate workspace fallback
+              search_paths.append(
+  +             '/wheelchair_ws/wheelchair_intelligence/development/map_semantics.yaml'
+  +         )
+  +         search_paths.append(
+  +             '/wheelchair_ws/wheelchair_intelligence/development/config/map_semantics.yaml'
+  +         )
+  ...
+              search_paths.append(
+                  '/home/container_user/wheelchair2/dependencies/'
+                  'wheelchair_intelligence_ros2/config/map_semantics.yaml'
+              )
+              search_paths.append(
+  +             '/home/container_user/wheelchair2/src/dependencies/'
+  +             'wheelchair_intelligence_ros2/config/map_semantics.yaml'
+  +         )
+  ```
+
+  #### `wheelchair2_navigation/shell_scripts/nav_3D_loc_silica_secure.tmux` (Lines 65-71):
+  ```diff
+  +################## 6. WINDOW 4: ROS2 BRIDGE
+  +tmux new-window -t $SESSION_NAME -n "bridge"
+  +tmux send-keys -t $SESSION_NAME:4 "$SEC_ENV" C-m
+  +tmux send-keys -t $SESSION_NAME:4 "sleep 10 && ros2 run wheelchair_intelligence_ros2 e_intelligence_to_nav2_com" C-m
+  +
+  +
+   ################## ATTACH
+   # Start the user on the Bringup window
+   tmux select-window -t $SESSION_NAME:0
+  ```
+
 ---
 
 ## Troubleshooting

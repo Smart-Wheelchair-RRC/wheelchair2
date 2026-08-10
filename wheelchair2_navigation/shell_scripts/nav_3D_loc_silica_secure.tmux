@@ -64,6 +64,12 @@ tmux send-keys -t $SESSION_NAME:3 "$SEC_ENV" C-m
 tmux send-keys -t $SESSION_NAME:3 "if [ -d /wheelchair_ws/wheelchair_intelligence/development/ui ]; then cd /wheelchair_ws/wheelchair_intelligence/development/ui; else cd /wheelchair_ws/google_quant/wheelchair_intelligence/development/ui; fi && uvicorn cmu_whisper_llama_backend_v4:app --host 0.0.0.0 --port 8443 --ssl-keyfile ../certs/key.pem --ssl-certfile ../certs/cert.pem" C-m
 
 
+################## 6. WINDOW 4: ROS2 BRIDGE
+tmux new-window -t $SESSION_NAME -n "bridge"
+tmux send-keys -t $SESSION_NAME:4 "$SEC_ENV" C-m
+tmux send-keys -t $SESSION_NAME:4 "sleep 10 && ros2 run wheelchair_intelligence_ros2 e_intelligence_to_nav2_com" C-m
+
+
 ################## ATTACH
 # Start the user on the Bringup window
 tmux select-window -t $SESSION_NAME:0
