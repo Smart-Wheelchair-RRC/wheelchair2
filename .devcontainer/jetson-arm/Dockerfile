@@ -14,7 +14,13 @@ RUN apt-get update && apt-get install -y \
     ros-humble-rmw-cyclonedds-cpp \
     libserial-dev \
     tmux \
+    sshpass \
+    openssh-client \
+    python3-pip \
+    ros-humble-web-video-server \
     && rm -rf /var/lib/apt/lists/*
+
+RUN pip3 install --no-cache-dir fastapi uvicorn httpx pyyaml python-multipart
 
 # 2. Switch to container_user
 USER container_user
