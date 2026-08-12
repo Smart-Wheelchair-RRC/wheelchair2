@@ -346,6 +346,78 @@ To secure communication between the Jetson and laptop without crashing the syste
    tmux select-window -t $SESSION_NAME:0
   ```
 
+### Backend Autostart & Navigation Shutdown Integration (Aug 12)
+
+* **Goal**: Enable the wheelchair frontend interface to be online persistently on boot, and support starting/stopping the heavy navigation stack (drivers, localization, path planning) directly via the frontend web interface.
+* **Solution**:
+  1. **Persistent Backend**: Configured the FastAPI backend to run outside of the temporary tmux session using a host-level systemd service `wheelchair_backend.service`. This service automatically ensures the `wheelchair_nav` container is started and runs uvicorn under the secure DDS env variables.
+  2. **Refactored Tmux Script**: Removed the backend launch window from `nav_3D_loc_silica_secure.tmux` (avoiding port 8443 binding conflicts) and shifted the ROS 2 Bridge to Window 3.
+  3. **Frontend Actions**: Added a "Navigation Shutdown" button to the toolbar in `App.jsx`. Triggering it makes a POST request to a new `/shutdown_navigation` backend route which kills the navigation tmux session and stops the `wheelchair_intelligence` container on the host to free memory/GPU resources.
+* **Exact Code Changes**:
+
+  #### [NEW] `docker/wheelchair_backend.service`:
+  ```ini
+  [Unit]
+  Description=Wheelchair FastAPI Backend Service
+  Requires=docker.service
+  After=docker.service
+
+  [Service]
+  Type=simple
+  ExecStartPre=-/usr/bin/docker start wheelchair_nav
+  ExecStart=/usr/bin/docker exec -u container_user wheelchair_nav bash -c "\
+      source /opt/ros/humble/setup.bash && \
+      source /home/container_user/wheelchair2/install/setup.bash && \
+      export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp && \
+      export ROS_SECURITY_ENABLE=true && \
+      export ROS_SECURITY_STRATEGY=Enforce && \
+      export ROS_SECURITY_KEYSTORE=/home/container_user/.ros/sros2/wheelchair_keystore && \
+      export ROS_SECURITY_ENCLAVE=/wheelchair && \
+      export ROS_DOMAIN_ID=56 && \
+      export CYCLONEDDS_URI=file:///home/container_user/wheelchair2/src/scripts/cyclonedds_jetson.xml && \
+      if [ -d /wheelchair_ws/wheelchair_intelligence/development/ui ]; then \
+          cd /wheelchair_ws/wheelchair_intelligence/development/ui; \
+      else \
+          cd /wheelchair_ws/google_quant/wheelchair_intelligence/development/ui; \
+      fi && \
+      exec uvicorn cmu_whisper_llama_backend_v4:app --host 0.0.0.0 --port 8443 --ssl-keyfile ../certs/key.pem --ssl-certfile ../certs/cert.pem"
+  Restart=always
+  RestartSec=5
+
+  [Install]
+  WantedBy=multi-user.target
+  ```
+
+  #### `wheelchair_frontend/src/App.jsx` (Navigation Shutdown Handler):
+  ```javascript
+  const shutdownNavigation = async () => {
+    const confirmShutdown = window.confirm("Are you sure you want to completely shutdown the navigation system? This will stop all sensors and return to the welcome screen.");
+    if (!confirmShutdown) return;
+
+    try {
+      setCurrentScreen('welcome');
+      await fetch(`${config.API_BASE_URL}/shutdown_navigation`, { method: 'POST' });
+    } catch (err) {
+      console.error("Failed to shutdown navigation stack:", err);
+    }
+  };
+  ```
+
+  #### `cmu_whisper_llama_backend_v4.py` (POST /shutdown_navigation Endpoint):
+  ```python
+  @app.post("/shutdown_navigation")
+  async def shutdown_navigation():
+      print("[BACKEND] Request to shutdown navigation stack...")
+      subprocess.run(["tmux", "kill-session", "-t", "wheelchair_navigation"])
+      ssh_cmd = [
+          "sshpass", "-p", "duck", 
+          "ssh", "-o", "StrictHostKeyChecking=no", "ducky@127.0.0.1",
+          "docker stop wheelchair_intelligence || true"
+      ]
+      subprocess.run(ssh_cmd, capture_output=True)
+      return {"status": "stopped", "message": "Navigation stack has been shut down."}
+  ```
+
 ---
 
 ## Troubleshooting
