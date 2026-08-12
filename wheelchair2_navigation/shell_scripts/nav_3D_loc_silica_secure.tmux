@@ -58,10 +58,19 @@ tmux send-keys -t $SESSION_NAME:2 "$SEC_ENV" C-m
 tmux send-keys -t $SESSION_NAME:2 "ros2 launch silica_ros align_metric.launch.py" C-m
 
 
-################## 5. WINDOW 3: ROS2 BRIDGE
+################## 5. WINDOW 3: ROS2 BRIDGE & VIDEO SERVER
 tmux new-window -t $SESSION_NAME -n "bridge"
+
+# Pane 3.0: Bridge
 tmux send-keys -t $SESSION_NAME:3 "$SEC_ENV" C-m
 tmux send-keys -t $SESSION_NAME:3 "sleep 10 && ros2 run wheelchair_intelligence_ros2 e_intelligence_to_nav2_com" C-m
+
+# Pane 3.1: Web Video Server
+tmux split-window -h -t $SESSION_NAME:3
+tmux send-keys -t $SESSION_NAME:3 "$SEC_ENV" C-m
+tmux send-keys -t $SESSION_NAME:3 "sleep 5 && ros2 run web_video_server web_video_server" C-m
+
+tmux select-layout -t $SESSION_NAME:3 tiled
 
 
 ################## ATTACH
