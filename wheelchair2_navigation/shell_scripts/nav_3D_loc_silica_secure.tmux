@@ -58,16 +58,10 @@ tmux send-keys -t $SESSION_NAME:2 "$SEC_ENV" C-m
 tmux send-keys -t $SESSION_NAME:2 "ros2 launch silica_ros align_metric.launch.py" C-m
 
 
-################## 5. WINDOW 3: FASTAPI BACKEND
-tmux new-window -t $SESSION_NAME -n "backend"
-tmux send-keys -t $SESSION_NAME:3 "$SEC_ENV" C-m
-tmux send-keys -t $SESSION_NAME:3 "if [ -d /wheelchair_ws/wheelchair_intelligence/development/ui ]; then cd /wheelchair_ws/wheelchair_intelligence/development/ui; else cd /wheelchair_ws/google_quant/wheelchair_intelligence/development/ui; fi && uvicorn cmu_whisper_llama_backend_v4:app --host 0.0.0.0 --port 8443 --ssl-keyfile ../certs/key.pem --ssl-certfile ../certs/cert.pem" C-m
-
-
-################## 6. WINDOW 4: ROS2 BRIDGE
+################## 5. WINDOW 3: ROS2 BRIDGE
 tmux new-window -t $SESSION_NAME -n "bridge"
-tmux send-keys -t $SESSION_NAME:4 "$SEC_ENV" C-m
-tmux send-keys -t $SESSION_NAME:4 "sleep 10 && ros2 run wheelchair_intelligence_ros2 e_intelligence_to_nav2_com" C-m
+tmux send-keys -t $SESSION_NAME:3 "$SEC_ENV" C-m
+tmux send-keys -t $SESSION_NAME:3 "sleep 10 && ros2 run wheelchair_intelligence_ros2 e_intelligence_to_nav2_com" C-m
 
 
 ################## ATTACH

@@ -1,0 +1,29 @@
+[Unit]
+Description=Wheelchair FastAPI Backend Service
+Requires=docker.service
+After=docker.service
+
+[Service]
+Type=simple
+ExecStartPre=-/usr/bin/docker start wheelchair_nav
+ExecStart=/usr/bin/docker exec -u container_user wheelchair_nav bash -c "\
+    source /opt/ros/humble/setup.bash && \
+    source /home/container_user/wheelchair2/install/setup.bash && \
+    export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp && \
+    export ROS_SECURITY_ENABLE=true && \
+    export ROS_SECURITY_STRATEGY=Enforce && \
+    export ROS_SECURITY_KEYSTORE=/home/container_user/.ros/sros2/wheelchair_keystore && \
+    export ROS_SECURITY_ENCLAVE=/wheelchair && \
+    export ROS_DOMAIN_ID=56 && \
+    export CYCLONEDDS_URI=file:///home/container_user/wheelchair2/src/scripts/cyclonedds_jetson.xml && \
+    if [ -d /wheelchair_ws/wheelchair_intelligence/development/ui ]; then \
+        cd /wheelchair_ws/wheelchair_intelligence/development/ui; \
+    else \
+        cd /wheelchair_ws/google_quant/wheelchair_intelligence/development/ui; \
+    fi && \
+    exec uvicorn cmu_whisper_llama_backend_v4:app --host 0.0.0.0 --port 8443 --ssl-keyfile ../certs/key.pem --ssl-certfile ../certs/cert.pem"
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
