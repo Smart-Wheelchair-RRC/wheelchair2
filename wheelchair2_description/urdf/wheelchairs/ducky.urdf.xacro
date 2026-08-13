@@ -2,6 +2,7 @@
 <robot name="wheelchair2" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
     <xacro:include filename="$(find wheelchair2_description)/urdf/kangaroo_ros2_control.urdf.xacro" />
+    <xacro:include filename="$(find wheelchair2_description)/urdf/realsense_base.urdf.xacro" />
 
     <link name="base_footprint" />
 
@@ -86,6 +87,17 @@
         <child link="livox_frame" />
         <origin xyz="0 0 1.44" rpy="0 0 0" />
     </joint>
+
+    <link name="camera_mount_link"/>
+    <joint name="camera_mount" type="fixed">
+        <parent link="livox_frame" />
+        <child link="camera_mount_link" />
+        <origin xyz="0.08 0.0 0.05" rpy="0.0 0.52 0.0" />
+        <axis xyz="0 0 0" /> 
+    </joint>
+    <xacro:realsense name="camera1" topics_ns="camera1" parent="camera_mount_link" use_sim_time="$(arg use_sim_time)">
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </xacro:realsense>
 
     <link name="imu_link"/>
     <joint name="base_to_imu" type="fixed">

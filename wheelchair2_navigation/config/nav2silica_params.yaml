@@ -478,7 +478,7 @@ global_costmap:
 
       global_frame: map
       robot_base_frame: base_footprint
-      footprint: "[[-0.30,-0.32],[0.72,-0.32],[0.72,0.32],[-0.30,0.32]]"
+      footprint: "[ [0.78, 0.33], [0.78, -0.33], [-0.35, -0.33], [-0.35, 0.33] ]" #"[[-0.30,-0.32],[0.72,-0.32],[0.72,0.32],[-0.30,0.32]]"
       footprint_padding: 0.02
       # robot_radius: 0.30
 
