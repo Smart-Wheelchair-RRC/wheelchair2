@@ -392,7 +392,7 @@ local_costmap:
       glass_obstacle_layer:
         plugin: "spatio_temporal_voxel_layer/SpatioTemporalVoxelLayer"
         enabled: true
-        voxel_decay: 8.0 # High decay time (8 seconds) so glass stays persistent even if inference pauses
+        voxel_decay: 2.0 # 2-second decay so open doors clear quickly
         decay_model: 0
         voxel_size: 0.05
         track_unknown_space: true
@@ -403,15 +403,15 @@ local_costmap:
         publish_voxel_map: false
         transform_tolerance: 1.0
         mapping_mode: false
-        observation_sources: glass_mark
+        observation_sources: glass_mark glass_clear
 
         glass_mark:
           data_type: PointCloud2
           topic: /glass_aware/depth/color/points
           marking: true
-          clearing: false # Disable clearing so close-range reflections don't wipe out marked glass
+          clearing: false
           obstacle_range: 5.0
-          min_obstacle_height: 0.05 # Catch glass near floor (down to 5cm)
+          min_obstacle_height: 0.1 # Catch glass panels down to 10cm
           max_obstacle_height: 2.0
           expected_update_rate: 0.0
           observation_persistence: 0.0
@@ -419,6 +419,20 @@ local_costmap:
           filter: "voxel"
           voxel_min_points: 0
           clear_after_reading: false
+
+        glass_clear:
+          enabled: true
+          data_type: PointCloud2
+          topic: /glass_aware/depth/color/points
+          marking: false
+          clearing: true
+          max_z: 5.0
+          min_z: 0.05
+          vertical_fov_angle: 1.01
+          vertical_fov_padding: 0.0
+          horizontal_fov_angle: 1.51
+          decay_acceleration: 5.0
+          model_type: 0 # 0=depth camera
 
       inflation_layer:
         enabled: True
@@ -429,8 +443,8 @@ local_costmap:
       glass_inflation_layer:
         enabled: True
         plugin: "nav2_costmap_2d::InflationLayer"
-        inflation_radius: 0.65 # Dedicated larger inflation specifically for glass
-        cost_scaling_factor: 3.0
+        inflation_radius: 0.35 # 0.35m inflation keeps glass safe while fitting through 0.85m doorways
+        cost_scaling_factor: 6.0
       
   local_costmap_client:
     ros__parameters:
