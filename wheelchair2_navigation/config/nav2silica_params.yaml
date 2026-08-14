@@ -341,7 +341,7 @@ local_costmap:
         enabled: True
         filter_info_topic: "/costmap_filter_info"
 
-      plugins: ["lidar_obstacle_layer", "inflation_layer"]
+      plugins: ["lidar_obstacle_layer", "glass_obstacle_layer", "inflation_layer", "glass_inflation_layer"]
       
       lidar_obstacle_layer:
         plugin: "spatio_temporal_voxel_layer/SpatioTemporalVoxelLayer"
@@ -358,7 +358,7 @@ local_costmap:
         transform_tolerance: 1.0 # seconds
         mapping_mode: false # default off, saves map not for navigation
         map_save_duration: 60.0 # default 60s, how often to autosave
-        observation_sources: lidar1_mark lidar1_clear glass_mark glass_clear rs_mark rs_clear
+        observation_sources: lidar1_mark lidar1_clear
 
         lidar1_mark:
           data_type: PointCloud2
@@ -373,8 +373,8 @@ local_costmap:
           inf_is_valid: false # default false, for laser scans
           filter: "voxel" # default passthrough, apply "voxel", "passthrough", or no filter to sensor data, recommend on
           voxel_min_points: 0          # default 0, minimum points per voxel for voxel filter
-
           clear_after_reading: true # default false, clear the buffer after the layer gets readings from it
+
         lidar1_clear:
           enabled: true #default true, can be toggled on/off with associated service call
           data_type: PointCloud2
@@ -389,43 +389,29 @@ local_costmap:
           decay_acceleration: 5.0 # default 0, 1/s^2.
           model_type: 1 # default 0, model type for frustum. 0=depth camera, 1=3d lidar like VLP16 or similar
 
-        rs_mark:
-          data_type: PointCloud2
-          topic: /camera1/camera1/depth/color/points # Replace with your PointCloud2 topic
-          marking: true
-          clearing: false
-          obstacle_range: 5.0
-          min_obstacle_height: 0.5
-          max_obstacle_height: 2.0
-          expected_update_rate: 0.0
-          observation_persistence: 0.0
-          inf_is_valid: false
-          filter: "voxel"
-          voxel_min_points: 0
-          clear_after_reading: true
-          model_type: 0 # 0=depth camera
-
-        rs_clear:
-          enabled: true
-          data_type: PointCloud2
-          topic: /camera1/camera1/depth/color/points # Replace with your PointCloud2 topic
-          marking: false
-          clearing: true
-          max_z: 5.0
-          min_z: 0.05
-          vertical_fov_angle: 1.01
-          vertical_fov_padding: 0.0
-          horizontal_fov_angle: 1.51
-          decay_acceleration: 5.0
-          model_type: 0
+      glass_obstacle_layer:
+        plugin: "spatio_temporal_voxel_layer/SpatioTemporalVoxelLayer"
+        enabled: true
+        voxel_decay: 8.0 # High decay time (8 seconds) so glass stays persistent even if inference pauses
+        decay_model: 0
+        voxel_size: 0.05
+        track_unknown_space: true
+        mark_threshold: 0
+        update_footprint_enabled: true
+        combination_method: 1
+        origin_z: 0.0
+        publish_voxel_map: false
+        transform_tolerance: 1.0
+        mapping_mode: false
+        observation_sources: glass_mark
 
         glass_mark:
           data_type: PointCloud2
-          topic: /glass_aware/depth/color/points # Replace with your PointCloud2 topic
+          topic: /glass_aware/depth/color/points
           marking: true
-          clearing: false
+          clearing: false # Disable clearing so close-range reflections don't wipe out marked glass
           obstacle_range: 5.0
-          min_obstacle_height: 0.5
+          min_obstacle_height: 0.05 # Catch glass near floor (down to 5cm)
           max_obstacle_height: 2.0
           expected_update_rate: 0.0
           observation_persistence: 0.0
@@ -433,27 +419,18 @@ local_costmap:
           filter: "voxel"
           voxel_min_points: 0
           clear_after_reading: false
-          model_type: 0 # 0=depth camera
 
-        glass_clear:
-          enabled: true
-          data_type: PointCloud2
-          topic: /glass_aware/depth/color/points # Replace with your PointCloud2 topic
-          marking: false
-          clearing: true
-          max_z: 5.0
-          min_z: 0.05
-          vertical_fov_angle: 1.01
-          vertical_fov_padding: 0.0
-          horizontal_fov_angle: 1.51
-          decay_acceleration: 5.0
-          model_type: 0
-  
       inflation_layer:
         enabled: True
         plugin: "nav2_costmap_2d::InflationLayer"
         inflation_radius: 0.30
         cost_scaling_factor: 10.0 #10 2.58
+
+      glass_inflation_layer:
+        enabled: True
+        plugin: "nav2_costmap_2d::InflationLayer"
+        inflation_radius: 0.65 # Dedicated larger inflation specifically for glass
+        cost_scaling_factor: 3.0
       
   local_costmap_client:
     ros__parameters:
