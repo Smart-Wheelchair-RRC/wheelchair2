@@ -32,7 +32,7 @@
 [submodule "dependencies/robot_security"]
 	path = dependencies/robot_security
 	url = https://github.com/ShivXShakti/robot_security.git
-	branch = deployment
+	branch = development
 [submodule "dependencies/silica_ros"]
 	path = dependencies/silica_ros
 	url = https://github.com/Smart-Wheelchair-RRC/silica_ros.git
@@ -40,4 +40,4 @@
 [submodule "dependencies/wheelchair_intelligence_ros2"]
 	path = dependencies/wheelchair_intelligence_ros2
 	url = https://github.com/ShivXShakti/wheelchair_intelligence_ros2.git
-	branch = deployment
+	branch = development
