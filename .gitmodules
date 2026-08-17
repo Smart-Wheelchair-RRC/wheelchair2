@@ -40,4 +40,4 @@
 [submodule "dependencies/wheelchair_intelligence_ros2"]
 	path = dependencies/wheelchair_intelligence_ros2
 	url = https://github.com/ShivXShakti/wheelchair_intelligence_ros2.git
-	branch = development
+	branch = main
