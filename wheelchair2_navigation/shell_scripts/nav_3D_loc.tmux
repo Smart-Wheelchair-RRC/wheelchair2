@@ -11,8 +11,8 @@ export DISPLAY=:1
 
 
 ## RRC with outside corridor
-PCD_PATH=$MAP_DIR/rrc/lab_map_with_outside_corridor.pcd
-YAML_PATH=$MAP_DIR/rrc/rrc_lab.yaml
+PCD_PATH=$MAP_DIR/rrc/ground_floor/lab_map_with_outside_corridor.pcd
+YAML_PATH=$MAP_DIR/rrc/ground_floor/rrc_lab.yaml
 NATURE=indoor
 
 ## RRC with mech lab and outside corridor
@@ -30,6 +30,10 @@ NATURE=indoor
 # YAML_PATH=$MAP_DIR/rrc/4th_floor_apr2026/2026_04_06.yaml
 # NATURE=indoor
 
+## 4th floor RRC
+# PCD_PATH=$MAP_DIR/rrc/rrc_4th_floor/rrc_4th_floor_old.pcd
+# YAML_PATH=$MAP_DIR/rrc/rrc_4th_floor/rrc_4th_floor_old.yaml
+# NATURE=indoor
 
 # Start detached session
 tmux new-session -d -s $SESSION_NAME -n "bringup" -x 200 -y 100

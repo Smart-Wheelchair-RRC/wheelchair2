@@ -1,9 +1,11 @@
 #!/bin/bash
 
 # Use provided arguments, or default to the RRC Lab paths if none are provided
-PCD_PATH=${1:-"/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/rrc/lab_map_with_outside_corridor.pcd"}
+# PCD_PATH=${1:-"/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/rrc/rrc_4th_floor/rrc_4th_floor_old.pcd"}
+PCD_PATH=${1:-"/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/rrc/ground_floor/lab_map_with_outside_corridor.pcd"}
 BASE_BBS_YAML=${2:-"/home/container_user/wheelchair2/src/dependencies/3DLocalization/wheelchair2_3dbbs/config/ros2_test.yaml"}
-NAV2_YAML_PATH=${3:-"/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/rrc/rrc_lab.yaml"}
+NAV2_YAML_PATH=${3:-"/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/rrc/ground_floor/rrc_lab.yaml"}
+# NAV2_YAML_PATH=${3:-"/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/rrc/rrc_4th_floor/rrc_4th_floor_old.yaml"}
 
 echo "⚙️  PREPARATION: Updating Node Parameters..."
 

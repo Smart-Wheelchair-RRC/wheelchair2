@@ -12,10 +12,13 @@ class ElevatorFloorDetectionTerminal(Node):
         super().__init__('elevator_floor_detection_terminal')
         
         # --- Config ---
-        self.TARGET_FLOOR = 4
         self.LIFT_INTERIOR_LIMIT = 1.6
         self.EXIT_DIST = 1.2
+        
+        # NOTE: Ensure your Livox IMU outputs in 'g's (1.0). 
+        # Standard ROS 2 REP-145 dictates m/s^2 (~9.81). Adjust this if your sensor uses 9.81!
         self.IMU_GRAVITY = 1.0
+        
         self.Z_THRESHOLD = 0.05
         self.JOLT_DURATION_REQ = 0.3
 
@@ -103,7 +106,6 @@ class ElevatorFloorDetectionTerminal(Node):
     def terminal_prompt_thread(self):
         print("\n" + "="*50)
         print("  ROBOT EXITED ELEVATOR THRESHOLD")
-        print(f"  Expected target floor: {self.TARGET_FLOOR}")
         print("="*50)
         
         while self.prompt_thread_active and self.state == "SEARCHING":
@@ -116,12 +118,11 @@ class ElevatorFloorDetectionTerminal(Node):
                     break
                 
                 entered_floor = int(user_input)
-                # We accept ANY integer floor and let the State Manager validate if it's correct/wrong
                 self.get_logger().info(f"User confirmed exit on Floor {entered_floor}.")
                 self.finalize_detection(entered_floor)
                 break
             except ValueError:
-                print("Invalid input. Please enter a numerical integer (e.g., 3, 4) or 'q'.")
+                print("Invalid input. Please enter a numerical integer (e.g., 0, 4) or 'q'.")
             except EOFError:
                 break
 
@@ -132,10 +133,11 @@ class ElevatorFloorDetectionTerminal(Node):
             fid_msg.data = floor_num
             self.floor_id_pub.publish(fid_msg)
             self.get_logger().info(f"Published Floor ID '{floor_num}' to /detected_floor_id.")
-            self.reset("DONE")
         else:
             self.get_logger().warn("Exited without floor confirmation.")
-            self.reset("IDLE")
+            
+        # FIX: Must reset to IDLE so the node can handle subsequent elevator rides!
+        self.reset("IDLE")
 
     def reset(self, next_state):
         self.state = next_state

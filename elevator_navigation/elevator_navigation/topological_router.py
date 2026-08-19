@@ -91,21 +91,45 @@ class TopologicalGraphRouter:
                     "pose": next_node_data['approach'],
                     "description": f"Drive to {next_node_data['elev_name']} on Floor {start_floor}"
                 })
+            
             elif edge_data['action'] == "elevator":
+                
+                # 1. Command to interact with elevator and enter
                 sequence.append({
-                    "action": "wait_for_elevator",
+                    "action": "wait_and_enter_elevator",
                     "shaft_name": next_node_data['elev_name'],
                     "target_floor": next_node_data['floor_id']
                 })
-                target_floor_yaml = self.config['buildings'][target_bldg]['floors'][next_node_data['floor_id']]
+                
+                # 2. Safely pause pipelines and clear buffers BEFORE motion begins
                 sequence.append({
-                    "action": "swap_map_and_initialize",
+                    "action": "pause_and_wipe_navigation",
+                    "description": "Executes master_pause_and_wipe.sh to prevent Odometry/ICP corruption during vertical travel."
+                })
+
+                # (The executor running this sequence will wait for elevator arrival here)
+                
+                # Safely grab the target building dynamically (in case of skybridges)
+                target_floor_yaml = self.config['buildings'][next_node_data['bldg_name']]['floors'][next_node_data['floor_id']]
+                
+                # 3. Reload parameters, load maps to VRAM, and trigger 3D-BBS 
+                sequence.append({
+                    "action": "reload_and_resume_navigation",
                     "new_floor_id": next_node_data['floor_id'],
                     "new_occupancy": target_floor_yaml['maps']['occupancy'],
                     "new_pcd": target_floor_yaml['maps']['pcd'],
-                    "initial_pose": next_node_data['exit'],
-                    "description": f"Load maps for Floor {next_node_data['floor_id']} and set initial pose"
+                    "base_bbs_yaml": self.config.get('base_bbs_yaml', ''), # Make sure this is defined at the root of your YAML config!
+                    "description": f"Executes master_reload_and_resume.sh for Floor {next_node_data['floor_id']}"
                 })
+
+                # 4. Drive out of the elevator
+                # 3D-BBS just localized the robot, now tell Nav2 to move out of the shaft
+                sequence.append({
+                    "action": "navigate",
+                    "pose": next_node_data['exit'],
+                    "description": f"Drive out of {next_node_data['elev_name']} on Floor {next_node_data['floor_id']} into the hallway."
+                })
+            
             elif edge_data['action'] == "navigate_to_goal":
                 sequence.append({
                     "action": "navigate",
