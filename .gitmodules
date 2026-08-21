@@ -41,3 +41,12 @@
 	path = dependencies/wheelchair_intelligence_ros2
 	url = https://github.com/ShivXShakti/wheelchair_intelligence_ros2.git
 	branch = development
+
+[submodule "dependencies/BotSpeak"]
+	path = dependencies/BotSpeak
+	url = https://github.com/eccentricOrange/BotSpeak
+	branch = main
+[submodule "dependencies/wheelchair2_clearance_sensors"]
+	path = dependencies/wheelchair2_clearance_sensors
+	url = https://github.com/Smart-Wheelchair-RRC/wheelchair2_clearance_sensors
+	branch = feature/battery-sensor
