@@ -73,6 +73,12 @@ tmux send-keys -t $SESSION_NAME:3 "sleep 5 && ros2 run web_video_server web_vide
 tmux select-layout -t $SESSION_NAME:3 tiled
 
 
+################## 6. WINDOW 4: BATTERY STATUS AND CLEARENCE SENSORS
+tmux new-window -t $SESSION_NAME -n "sensors"
+tmux send-keys -t $SESSION_NAME:4 "$SEC_ENV" C-m
+tmux send-keys -t $SESSION_NAME:4 "sudo chmod 777 /dev/ttyUSB* && sleep 2 && ros2 launch clearance_sensors unified.launch.py " C-m
+
+
 ################## ATTACH
 # Start the user on the Bringup window
 tmux select-window -t $SESSION_NAME:0
