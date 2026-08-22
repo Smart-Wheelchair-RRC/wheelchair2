@@ -24,7 +24,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'elevator_nav_node = elevator_navigation.state_manager_node:main',
+            'state_manager_node = elevator_navigation.state_manager_node:main',
             'elevator_floor_detection_manual = elevator_navigation.elevator_floor_detection_manual:main',
         ],
     },
