@@ -4,8 +4,10 @@
     <General>
       <Interfaces>
         <NetworkInterface name="wlp3s0" />
-      </Interfaces>
-      <AllowMulticast>false</AllowMulticast>
+        <NetworkInterface name="wlan0" />
+        <NetworkInterface name="wlo1" />
+      </Interfaces> 
+      <AllowMulticast>true</AllowMulticast>
       <MaxMessageSize>65500B</MaxMessageSize>
       <FragmentSize>4000B</FragmentSize>
     </General>
@@ -15,6 +17,7 @@
     </Internal>
     <Discovery>
       <Peers>
+        <Peer address="10.2.129.47" />
         <Peer address="10.42.0.85" />
         <Peer address="10.42.0.1" />
       </Peers>

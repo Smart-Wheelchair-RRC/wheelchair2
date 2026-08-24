@@ -3,9 +3,11 @@
   <Domain Id="any">
     <General>
       <Interfaces>
-        <NetworkInterface name="wlxb01921369c85" />
+        <NetworkInterface name="lo" />
+        <NetworkInterface name="wlP1p1s0" />
+        <NetworkInterface name="wlan0" />
       </Interfaces>
-      <AllowMulticast>false</AllowMulticast>
+      <AllowMulticast>true</AllowMulticast>
       <MaxMessageSize>65500B</MaxMessageSize>
       <FragmentSize>4000B</FragmentSize>
     </General>
@@ -15,8 +17,7 @@
     </Internal>
     <Discovery>
       <Peers>
-        <Peer address="10.42.0.1" />
-        <Peer address="10.42.0.85" />
+        <Peer address="127.0.0.1" />
       </Peers>
       <ParticipantIndex>auto</ParticipantIndex>
       <MaxAutoParticipantIndex>100</MaxAutoParticipantIndex>
