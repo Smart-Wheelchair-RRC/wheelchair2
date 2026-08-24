@@ -5,6 +5,7 @@
       <Interfaces>
         <NetworkInterface name="lo" />
         <NetworkInterface name="wlP1p1s0" />
+        <NetworkInterface name="wlxb01921369c85" />
         <NetworkInterface name="wlan0" />
       </Interfaces>
       <AllowMulticast>true</AllowMulticast>
@@ -18,6 +19,7 @@
     <Discovery>
       <Peers>
         <Peer address="127.0.0.1" />
+        <Peer address="10.2.129.47" />
       </Peers>
       <ParticipantIndex>auto</ParticipantIndex>
       <MaxAutoParticipantIndex>100</MaxAutoParticipantIndex>
