@@ -11,9 +11,14 @@ fi
 WHEELCHAIR_NAME="ducky"  # ducky
 export DISPLAY=:1001
 
+# # RRC with mech lab and outside corridor
+# PCD_PATH="/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/rpn_fastlio/20260416_175736.pcd"
+# YAML_PATH="/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/rpn_fastlio/20260416_175736.yaml"
+# NATURE="indoor"
+
 # RRC with mech lab and outside corridor
-PCD_PATH="/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/rpn_fastlio/20260416_175736.pcd"
-YAML_PATH="/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/rpn_fastlio/20260416_175736.yaml"
+PCD_PATH="/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/rrc/hardware_lab_2/hardware_lab_2.pcd"
+YAML_PATH="/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/rrc/hardware_lab_2/hardware_lab_2.yaml"
 NATURE="indoor"
 
 # CycloneDDS security environment setup string
