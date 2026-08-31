@@ -12,14 +12,14 @@ WHEELCHAIR_NAME="ducky"  # ducky
 export DISPLAY=:1001
 
 # # RRC with mech lab and outside corridor
-# PCD_PATH="/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/rpn_fastlio/20260416_175736.pcd"
-# YAML_PATH="/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/rpn_fastlio/20260416_175736.yaml"
-# NATURE="indoor"
-
-# RRC with mech lab and outside corridor
-PCD_PATH="/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/rrc/hardware_lab_2/hardware_lab_2.pcd"
-YAML_PATH="/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/rrc/hardware_lab_2/hardware_lab_2.yaml"
+PCD_PATH="/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/rpn_fastlio/20260416_175736.pcd"
+YAML_PATH="/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/rpn_fastlio/20260416_175736.yaml"
 NATURE="indoor"
+
+# # RRC with mech lab and outside corridor
+# PCD_PATH="/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/rrc/hardware_lab_2/hardware_lab_2.pcd"
+# YAML_PATH="/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/rrc/hardware_lab_2/hardware_lab_2.yaml"
+# NATURE="indoor"
 
 # CycloneDDS security environment setup string
 SEC_ENV="source /opt/ros/humble/setup.bash && source /home/container_user/wheelchair2/install/setup.bash && export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp && export ROS_SECURITY_ENABLE=true && export ROS_SECURITY_STRATEGY=Enforce && export ROS_SECURITY_KEYSTORE=/home/container_user/.ros/sros2/wheelchair_keystore && export ROS_SECURITY_ENCLAVE=/wheelchair && export ROS_DOMAIN_ID=56 && export CYCLONEDDS_URI=file:///home/container_user/wheelchair2/src/scripts/cyclonedds_jetson.xml"
@@ -76,6 +76,11 @@ tmux send-keys -t $SESSION_NAME:3 "$SEC_ENV" C-m
 tmux send-keys -t $SESSION_NAME:3 "sleep 5 && ros2 run web_video_server web_video_server" C-m
 
 tmux select-layout -t $SESSION_NAME:3 tiled
+
+################## 6. WINDOW 4: BATTERY STATUS AND CLEARENCE SENSORS
+tmux new-window -t $SESSION_NAME -n "sensors"
+tmux send-keys -t $SESSION_NAME:4 "$SEC_ENV" C-m
+tmux send-keys -t $SESSION_NAME:4 "/home/container_user/wheelchair2/src/wheelchair2_navigation/shell_scripts/reset_usb.sh && ros2 launch clearance_sensors unified.launch.py" C-m
 
 
 ################## ATTACH
