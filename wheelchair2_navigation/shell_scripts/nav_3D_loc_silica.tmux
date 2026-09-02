@@ -19,6 +19,22 @@ NATURE="indoor"
 # Non-secure CycloneDDS environment setup string (explicitly unsetting security)
 NONSEC_ENV="source /opt/ros/humble/setup.bash && source /home/container_user/wheelchair2/install/setup.bash && export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp && unset ROS_SECURITY_ENABLE ROS_SECURITY_STRATEGY ROS_SECURITY_KEYSTORE ROS_SECURITY_ENCLAVE && export ROS_SECURITY_ENABLE=false && export ROS_DOMAIN_ID=56 && export CYCLONEDDS_URI=file:///home/container_user/wheelchair2/src/scripts/cyclonedds_jetson.xml"
 
+# Parse silica_ros_f and video_web_server_f flags from backend_config.json
+CONFIG_FILE="/home/ducky/wheelchair_ws/wheelchair_intelligence/development/config/backend_config.json"
+if [ ! -f "$CONFIG_FILE" ]; then
+    CONFIG_FILE="/home/container_user/wheelchair_ws/google_quant/wheelchair_intelligence/development/config/backend_config.json"
+fi
+if [ ! -f "$CONFIG_FILE" ]; then
+    CONFIG_FILE="/home/container_user/wheelchair2/src/dependencies/google_quant/wheelchair_intelligence/development/config/backend_config.json"
+fi
+
+if [ -f "$CONFIG_FILE" ]; then
+    SILICA_ROS_F=$(python3 -c "import json; print(str(json.load(open('$CONFIG_FILE')).get('silica_ros_f', False)).lower())" 2>/dev/null || echo "false")
+    VIDEO_WEB_SERVER_F=$(python3 -c "import json; print(str(json.load(open('$CONFIG_FILE')).get('video_web_server_f', False)).lower())" 2>/dev/null || echo "false")
+else
+    SILICA_ROS_F="false"
+    VIDEO_WEB_SERVER_F="false"
+fi
 
 
 # Start detached session
@@ -55,7 +71,11 @@ tmux select-layout -t $SESSION_NAME:1 tiled
 ################## 4. WINDOW 2: SILICA GLASS DETECTION
 tmux new-window -t $SESSION_NAME -n "silica"
 tmux send-keys -t $SESSION_NAME:2 "$NONSEC_ENV" C-m
-tmux send-keys -t $SESSION_NAME:2 "ros2 launch silica_ros align_metric.launch.py" C-m
+if [ "$SILICA_ROS_F" = "true" ]; then
+    tmux send-keys -t $SESSION_NAME:2 "ros2 launch silica_ros align_metric.launch.py" C-m
+else
+    tmux send-keys -t $SESSION_NAME:2 "echo 'silica_ros_f is false (default). Skipping silica_ros launch.'" C-m
+fi
 
 
 ################## 5. WINDOW 3: ROS2 BRIDGE & VIDEO SERVER
@@ -68,7 +88,11 @@ tmux send-keys -t $SESSION_NAME:3 "sleep 10 && ros2 run wheelchair_intelligence_
 # Pane 3.1: Web Video Server
 tmux split-window -h -t $SESSION_NAME:3
 tmux send-keys -t $SESSION_NAME:3 "$NONSEC_ENV" C-m
-tmux send-keys -t $SESSION_NAME:3 "sleep 5 && ros2 run web_video_server web_video_server" C-m
+if [ "$VIDEO_WEB_SERVER_F" = "true" ]; then
+    tmux send-keys -t $SESSION_NAME:3 "sleep 5 && ros2 run web_video_server web_video_server" C-m
+else
+    tmux send-keys -t $SESSION_NAME:3 "echo 'video_web_server_f is false (default). Skipping web_video_server launch.'" C-m
+fi
 
 tmux select-layout -t $SESSION_NAME:3 tiled
 
