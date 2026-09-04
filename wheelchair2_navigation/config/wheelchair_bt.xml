@@ -1,0 +1,55 @@
+<root main_tree_to_execute="MainTree">
+  <BehaviorTree ID="MainTree">
+    <RecoveryNode number_of_retries="20" name="WheelchairSafeNavigate">
+      
+      <ReactiveSequence name="SafeNavigationSequence">
+        <CheckBatteryCondition min_battery="0.30"/>
+
+        <!-- ========================================================================= -->
+        <!-- [FUTURE APP INTEGRATION]: Uncomment when connecting approval UI/App
+        <Sequence name="AskPermissionAndDockFuture">
+          <DockApprovalAction topic_name="/wheelchair/dock_approval"/>
+        </Sequence>
+        -->
+        <!-- ========================================================================= -->
+
+        <PipelineSequence name="NavigateWithReplanning">
+          
+          <RateController hz="1.0">
+            <RecoveryNode number_of_retries="5" name="SafePlanningRecovery">
+              <ComputePathToPose goal="{goal}" path="{path}" planner_id="GridBased"/>
+              
+              <Sequence name="PlannerWaitRecovery">
+                <ClearEntireCostmap name="ClearGlobalCostmap-Retry" service_name="global_costmap/clear_entirely_global_costmap"/>
+                <Wait wait_duration="2.0"/>
+              </Sequence>
+            </RecoveryNode>
+          </RateController>
+
+          <RecoveryNode number_of_retries="5" name="SafeFollowingRecovery">
+            <FollowPath path="{path}" controller_id="FollowPath"/>
+            
+            <Sequence name="ControllerWaitRecovery">
+              <ClearEntireCostmap name="ClearLocalCostmap-Retry" service_name="local_costmap/clear_entirely_local_costmap"/>
+              <Wait wait_duration="2.0"/>
+            </Sequence>
+          </RecoveryNode>
+
+        </PipelineSequence>
+        
+      </ReactiveSequence>
+
+
+      <ReactiveFallback name="PassiveSafetyFallback">
+        <GoalUpdated/>
+        
+        <Sequence name="StandStillAndWait">
+          <ClearEntireCostmap name="ClearLocalCostmap-Standby" service_name="local_costmap/clear_entirely_local_costmap"/>
+          <ClearEntireCostmap name="ClearGlobalCostmap-Standby" service_name="global_costmap/clear_entirely_global_costmap"/>
+          <Wait wait_duration="3.0"/>
+        </Sequence>
+      </ReactiveFallback>
+
+    </RecoveryNode>
+  </BehaviorTree>
+</root>
