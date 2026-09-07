@@ -325,11 +325,12 @@ local_costmap:
       
       width: 6 #5
       height: 6 #5
-      resolution: 0.05
+      height: 6 #5
 
+      resolution: 0.05
       global_frame: odom
       robot_base_frame: base_footprint
-      footprint: "[ [0.78, 0.33], [0.78, -0.33], [-0.35, -0.33], [-0.35, 0.33] ]" #"[[-0.30,-0.32],[0.72,-0.32],[0.72,0.32],[-0.30,0.32]]"
+      footprint: "[ [0.78, 0.33], [0.78, -0.33], [-0.35, -0.33], [-0.35, 0.33] ]"
       footprint_padding: 0.02
       # robot_radius: 0.50
       # footprint: "[[-0.30,-0.32],[0.80,-0.32],[0.80,0.32],[-0.30,0.32]]"
@@ -340,8 +341,7 @@ local_costmap:
         plugin: "nav2_costmap_2d::KeepoutFilter"
         enabled: True
         filter_info_topic: "/costmap_filter_info"
-
-      plugins: ["lidar_obstacle_layer", "glass_obstacle_layer", "inflation_layer", "glass_inflation_layer"]
+      plugins: ["lidar_obstacle_layer", "tof_layer", "ultrasonic_layer", "glass_obstacle_layer", "inflation_layer", "glass_inflation_layer"]
       
       lidar_obstacle_layer:
         plugin: "spatio_temporal_voxel_layer/SpatioTemporalVoxelLayer"
@@ -389,6 +389,376 @@ local_costmap:
           decay_acceleration: 5.0 # default 0, 1/s^2.
           model_type: 1 # default 0, model type for frustum. 0=depth camera, 1=3d lidar like VLP16 or similar
 
+      tof_layer:
+        plugin: "spatio_temporal_voxel_layer/SpatioTemporalVoxelLayer"
+        enabled: true
+        voxel_decay: 1.0
+        decay_model: 0
+        voxel_size: 0.05
+        track_unknown_space: true
+        mark_threshold: 0
+        update_footprint_enabled: true
+        combination_method: 1
+        origin_z: 0.0
+        publish_voxel_map: false
+        transform_tolerance: 1.0
+        mapping_mode: false
+        map_save_duration: 60.0
+        observation_sources: tof_left_mark tof_left_clear tof_right_mark tof_right_clear tof_front_right_mark tof_front_right_clear tof_front_right_side_mark tof_front_right_side_clear tof_front_left_mark tof_front_left_clear tof_front_left_side_mark tof_front_left_side_clear tof_back_middle_mark tof_back_middle_clear tof_back_down_mark tof_back_down_clear
+
+        tof_left_mark:
+          data_type: PointCloud2
+          topic: /sensors/tof_side_left_link/pointcloud
+          marking: true
+          clearing: false
+          obstacle_range: 3.0 
+          min_obstacle_height: 0.0 
+          max_obstacle_height: 1.7 
+          inf_is_valid: false 
+          filter: "passthrough" 
+
+        tof_left_clear:
+          enabled: true 
+          data_type: PointCloud2
+          topic: /sensors/tof_side_left_link/pointcloud
+          marking: false
+          clearing: true
+          max_z: 8.0
+          min_z: 0.0 
+          vertical_fov_angle: 0.436
+          horizontal_fov_angle: 0.436
+          decay_acceleration: 5.0 
+          model_type: 1
+
+        tof_right_mark:
+          data_type: PointCloud2
+          topic: /sensors/tof_side_right_link/pointcloud
+          marking: true
+          clearing: false
+          obstacle_range: 3.0
+          min_obstacle_height: 0.0 
+          max_obstacle_height: 1.7 
+          inf_is_valid: false 
+          filter: "passthrough"
+
+        tof_right_clear:
+          enabled: true 
+          data_type: PointCloud2
+          topic: /sensors/tof_side_right_link/pointcloud
+          marking: false
+          clearing: true
+          max_z: 8.0 
+          min_z: 0.0 
+          vertical_fov_angle: 0.436
+          horizontal_fov_angle: 0.436
+          decay_acceleration: 5.0 
+          model_type: 1
+
+        tof_front_right_mark:
+          data_type: PointCloud2
+          topic: /sensors/tof_front_right_link/pointcloud
+          marking: true
+          clearing: false
+          obstacle_range: 3.0
+          min_obstacle_height: 0.0
+          max_obstacle_height: 1.7
+          inf_is_valid: false
+          filter: "passthrough"
+
+        tof_front_right_clear:
+          enabled: true
+          data_type: PointCloud2
+          topic: /sensors/tof_front_right_link/pointcloud
+          marking: false
+          clearing: true
+          max_z: 8.0
+          min_z: 0.0
+          vertical_fov_angle: 0.436
+          horizontal_fov_angle: 0.436
+          decay_acceleration: 5.0
+          model_type: 1
+
+        tof_front_right_side_mark:
+          data_type: PointCloud2
+          topic: /sensors/tof_front_right_side_link/pointcloud
+          marking: true
+          clearing: false
+          obstacle_range: 3.0
+          min_obstacle_height: 0.0
+          max_obstacle_height: 1.7
+          inf_is_valid: false
+          filter: "passthrough"
+
+        tof_front_right_side_clear:
+          enabled: true
+          data_type: PointCloud2
+          topic: /sensors/tof_front_right_side_link/pointcloud
+          marking: false
+          clearing: true
+          max_z: 8.0
+          min_z: 0.0
+          vertical_fov_angle: 0.436
+          horizontal_fov_angle: 0.436
+          decay_acceleration: 5.0
+          model_type: 1
+
+        tof_front_left_mark:
+          data_type: PointCloud2
+          topic: /sensors/tof_front_left_link/pointcloud
+          marking: true
+          clearing: false
+          obstacle_range: 3.0
+          min_obstacle_height: 0.0
+          max_obstacle_height: 1.7
+          inf_is_valid: false
+          filter: "passthrough"
+
+        tof_front_left_clear:
+          enabled: true
+          data_type: PointCloud2
+          topic: /sensors/tof_front_left_link/pointcloud
+          marking: false
+          clearing: true
+          max_z: 8.0
+          min_z: 0.0
+          vertical_fov_angle: 0.436
+          horizontal_fov_angle: 0.436
+          decay_acceleration: 5.0
+          model_type: 1
+
+        tof_front_left_side_mark:
+          data_type: PointCloud2
+          topic: /sensors/tof_front_left_side_link/pointcloud
+          marking: true
+          clearing: false
+          obstacle_range: 3.0
+          min_obstacle_height: 0.0
+          max_obstacle_height: 1.7
+          inf_is_valid: false
+          filter: "passthrough"
+
+        tof_front_left_side_clear:
+          enabled: true
+          data_type: PointCloud2
+          topic: /sensors/tof_front_left_side_link/pointcloud
+          marking: false
+          clearing: true
+          max_z: 8.0
+          min_z: 0.0
+          vertical_fov_angle: 0.436
+          horizontal_fov_angle: 0.436
+          decay_acceleration: 5.0
+          model_type: 1
+
+        tof_back_middle_mark:
+          data_type: PointCloud2
+          topic: /sensors/tof_back_middle_link/pointcloud
+          marking: true
+          clearing: false
+          obstacle_range: 3.0
+          min_obstacle_height: 0.0
+          max_obstacle_height: 1.7
+          inf_is_valid: false
+          filter: "passthrough"
+
+        tof_back_middle_clear:
+          enabled: true
+          data_type: PointCloud2
+          topic: /sensors/tof_back_middle_link/pointcloud
+          marking: false
+          clearing: true
+          max_z: 8.0
+          min_z: 0.0
+          vertical_fov_angle: 0.436
+          horizontal_fov_angle: 0.436
+          decay_acceleration: 5.0
+          model_type: 1
+
+        tof_back_down_mark:
+          data_type: PointCloud2
+          topic: /sensors/tof_back_down_link/pointcloud
+          marking: true
+          clearing: false
+          obstacle_range: 3.0
+          min_obstacle_height: 0.04
+          max_obstacle_height: 0.5
+          inf_is_valid: false
+          filter: "passthrough"
+
+        tof_back_down_clear:
+          enabled: true
+          data_type: PointCloud2
+          topic: /sensors/tof_back_down_link/pointcloud
+          marking: false
+          clearing: true
+          max_z: 8.0
+          min_z: 0.04
+          vertical_fov_angle: 0.436
+          horizontal_fov_angle: 0.436
+          decay_acceleration: 5.0
+          model_type: 1
+
+      ultrasonic_layer:
+        plugin: "spatio_temporal_voxel_layer/SpatioTemporalVoxelLayer"
+        enabled: true
+        voxel_decay: 1.0
+        decay_model: 0
+        voxel_size: 0.05
+        track_unknown_space: true
+        mark_threshold: 0
+        update_footprint_enabled: true
+        combination_method: 1
+        origin_z: 0.0
+        publish_voxel_map: false
+        transform_tolerance: 1.0
+        mapping_mode: false
+        map_save_duration: 60.0
+        observation_sources: us_side_right_mark us_side_right_clear us_side_left_mark us_side_left_clear us_back_middle_mark us_back_middle_clear us_up_right_mark us_up_right_clear us_up_middle_mark us_up_middle_clear us_up_left_mark us_up_left_clear
+
+        us_side_right_mark:
+          data_type: PointCloud2
+          topic: /sensors/us_side_right_link/pointcloud
+          marking: true
+          clearing: false
+          obstacle_range: 3.0
+          min_obstacle_height: 0.0
+          max_obstacle_height: 1.7
+          inf_is_valid: false
+          filter: "passthrough"
+
+        us_side_right_clear:
+          enabled: true
+          data_type: PointCloud2
+          topic: /sensors/us_side_right_link/pointcloud
+          marking: false
+          clearing: true
+          max_z: 4.0
+          min_z: 0.0
+          vertical_fov_angle: 0.26
+          horizontal_fov_angle: 0.26
+          decay_acceleration: 5.0
+          model_type: 1
+
+        us_side_left_mark:
+          data_type: PointCloud2
+          topic: /sensors/us_side_left_link/pointcloud
+          marking: true
+          clearing: false
+          obstacle_range: 3.0
+          min_obstacle_height: 0.0
+          max_obstacle_height: 1.7
+          inf_is_valid: false
+          filter: "passthrough"
+
+        us_side_left_clear:
+          enabled: true
+          data_type: PointCloud2
+          topic: /sensors/us_side_left_link/pointcloud
+          marking: false
+          clearing: true
+          max_z: 4.0
+          min_z: 0.0
+          vertical_fov_angle: 0.26
+          horizontal_fov_angle: 0.26
+          decay_acceleration: 5.0
+          model_type: 1
+
+        us_back_middle_mark:
+          data_type: PointCloud2
+          topic: /sensors/us_back_middle_link/pointcloud
+          marking: true
+          clearing: false
+          obstacle_range: 3.0
+          min_obstacle_height: 0.0
+          max_obstacle_height: 1.7
+          inf_is_valid: false
+          filter: "passthrough"
+
+        us_back_middle_clear:
+          enabled: true
+          data_type: PointCloud2
+          topic: /sensors/us_back_middle_link/pointcloud
+          marking: false
+          clearing: true
+          max_z: 4.0
+          min_z: 0.0
+          vertical_fov_angle: 0.26
+          horizontal_fov_angle: 0.26
+          decay_acceleration: 5.0
+          model_type: 1
+
+        us_up_right_mark:
+          data_type: PointCloud2
+          topic: /sensors/us_up_right_link/pointcloud
+          marking: true
+          clearing: false
+          obstacle_range: 3.0
+          min_obstacle_height: 0.0
+          max_obstacle_height: 2.0
+          inf_is_valid: false
+          filter: "passthrough"
+
+        us_up_right_clear:
+          enabled: true
+          data_type: PointCloud2
+          topic: /sensors/us_up_right_link/pointcloud
+          marking: false
+          clearing: true
+          max_z: 4.0
+          min_z: 0.0
+          vertical_fov_angle: 0.26
+          horizontal_fov_angle: 0.26
+          decay_acceleration: 5.0
+          model_type: 1
+
+        us_up_middle_mark:
+          data_type: PointCloud2
+          topic: /sensors/us_up_middle_link/pointcloud
+          marking: true
+          clearing: false
+          obstacle_range: 3.0
+          min_obstacle_height: 0.0
+          max_obstacle_height: 2.0
+          inf_is_valid: false
+          filter: "passthrough"
+
+        us_up_middle_clear:
+          enabled: true
+          data_type: PointCloud2
+          topic: /sensors/us_up_middle_link/pointcloud
+          marking: false
+          clearing: true
+          max_z: 4.0
+          min_z: 0.0
+          vertical_fov_angle: 0.26
+          horizontal_fov_angle: 0.26
+          decay_acceleration: 5.0
+          model_type: 1
+
+        us_up_left_mark:
+          data_type: PointCloud2
+          topic: /sensors/us_up_left_link/pointcloud
+          marking: true
+          clearing: false
+          obstacle_range: 3.0
+          min_obstacle_height: 0.0
+          max_obstacle_height: 2.0
+          inf_is_valid: false
+          filter: "passthrough"
+
+        us_up_left_clear:
+          enabled: true
+          data_type: PointCloud2
+          topic: /sensors/us_up_left_link/pointcloud
+          marking: false
+          clearing: true
+          max_z: 4.0
+          min_z: 0.0
+          vertical_fov_angle: 0.26
+          horizontal_fov_angle: 0.26
+          decay_acceleration: 5.0
+          model_type: 1
+  
       glass_obstacle_layer:
         plugin: "spatio_temporal_voxel_layer/SpatioTemporalVoxelLayer"
         enabled: true
@@ -480,7 +850,7 @@ global_costmap:
         enabled: True
         filter_info_topic: "/costmap_filter_info"
       
-      plugins: ["static_layer", "stvl_layer", "inflation_layer"]
+      plugins: ["static_layer", "stvl_layer", "tof_layer", "ultrasonic_layer", "inflation_layer"]
       
       stvl_layer:
         plugin: "spatio_temporal_voxel_layer/SpatioTemporalVoxelLayer"
@@ -524,6 +894,374 @@ global_costmap:
           vertical_fov_angle: 1.02
           vertical_fov_padding: 0.05
           horizontal_fov_angle: 6.29
+          decay_acceleration: 5.0
+          model_type: 1
+
+      tof_layer:
+        plugin: "spatio_temporal_voxel_layer/SpatioTemporalVoxelLayer"
+        enabled: true
+        voxel_decay: 5.0
+        decay_model: 0
+        voxel_size: 0.1
+        track_unknown_space: true
+        mark_threshold: 0
+        update_footprint_enabled: true
+        combination_method: 1
+        origin_z: 0.0
+        publish_voxel_map: false
+        transform_tolerance: 0.5
+        mapping_mode: false
+        observation_sources: tof_left_mark tof_left_clear tof_right_mark tof_right_clear tof_front_right_mark tof_front_right_clear tof_front_right_side_mark tof_front_right_side_clear tof_front_left_mark tof_front_left_clear tof_front_left_side_mark tof_front_left_side_clear tof_back_middle_mark tof_back_middle_clear tof_back_down_mark tof_back_down_clear
+
+        tof_left_mark:
+          data_type: PointCloud2
+          topic: /sensors/tof_side_left_link/pointcloud
+          marking: true
+          clearing: false
+          obstacle_range: 3.0
+          min_obstacle_height: 0.0 
+          max_obstacle_height: 1.7 
+          inf_is_valid: false 
+          filter: "passthrough"
+
+        tof_left_clear:
+          enabled: true 
+          data_type: PointCloud2
+          topic: /sensors/tof_side_left_link/pointcloud
+          marking: false
+          clearing: true
+          max_z: 8.0
+          min_z: 0.0 
+          vertical_fov_angle: 0.436
+          horizontal_fov_angle: 0.436
+          decay_acceleration: 5.0 
+          model_type: 1
+
+        tof_right_mark:
+          data_type: PointCloud2
+          topic: /sensors/tof_side_right_link/pointcloud
+          marking: true
+          clearing: false
+          obstacle_range: 3.0
+          min_obstacle_height: 0.0 
+          max_obstacle_height: 1.7 
+          inf_is_valid: false 
+          filter: "passthrough"
+
+        tof_right_clear:
+          enabled: true 
+          data_type: PointCloud2
+          topic: /sensors/tof_side_right_link/pointcloud
+          marking: false
+          clearing: true
+          max_z: 8.0 
+          min_z: 0.0 
+          vertical_fov_angle: 0.436
+          horizontal_fov_angle: 0.436
+          decay_acceleration: 5.0 
+          model_type: 1
+
+        tof_front_right_mark:
+          data_type: PointCloud2
+          topic: /sensors/tof_front_right_link/pointcloud
+          marking: true
+          clearing: false
+          obstacle_range: 3.0
+          min_obstacle_height: 0.0
+          max_obstacle_height: 1.7
+          inf_is_valid: false
+          filter: "passthrough"
+
+        tof_front_right_clear:
+          enabled: true
+          data_type: PointCloud2
+          topic: /sensors/tof_front_right_link/pointcloud
+          marking: false
+          clearing: true
+          max_z: 8.0
+          min_z: 0.0
+          vertical_fov_angle: 0.436
+          horizontal_fov_angle: 0.436
+          decay_acceleration: 5.0
+          model_type: 1
+
+        tof_front_right_side_mark:
+          data_type: PointCloud2
+          topic: /sensors/tof_front_right_side_link/pointcloud
+          marking: true
+          clearing: false
+          obstacle_range: 3.0
+          min_obstacle_height: 0.0
+          max_obstacle_height: 1.7
+          inf_is_valid: false
+          filter: "passthrough"
+
+        tof_front_right_side_clear:
+          enabled: true
+          data_type: PointCloud2
+          topic: /sensors/tof_front_right_side_link/pointcloud
+          marking: false
+          clearing: true
+          max_z: 8.0
+          min_z: 0.0
+          vertical_fov_angle: 0.436
+          horizontal_fov_angle: 0.436
+          decay_acceleration: 5.0
+          model_type: 1
+
+        tof_front_left_mark:
+          data_type: PointCloud2
+          topic: /sensors/tof_front_left_link/pointcloud
+          marking: true
+          clearing: false
+          obstacle_range: 3.0
+          min_obstacle_height: 0.0
+          max_obstacle_height: 1.7
+          inf_is_valid: false
+          filter: "passthrough"
+
+        tof_front_left_clear:
+          enabled: true
+          data_type: PointCloud2
+          topic: /sensors/tof_front_left_link/pointcloud
+          marking: false
+          clearing: true
+          max_z: 8.0
+          min_z: 0.0
+          vertical_fov_angle: 0.436
+          horizontal_fov_angle: 0.436
+          decay_acceleration: 5.0
+          model_type: 1
+
+        tof_front_left_side_mark:
+          data_type: PointCloud2
+          topic: /sensors/tof_front_left_side_link/pointcloud
+          marking: true
+          clearing: false
+          obstacle_range: 3.0
+          min_obstacle_height: 0.0
+          max_obstacle_height: 1.7
+          inf_is_valid: false
+          filter: "passthrough"
+
+        tof_front_left_side_clear:
+          enabled: true
+          data_type: PointCloud2
+          topic: /sensors/tof_front_left_side_link/pointcloud
+          marking: false
+          clearing: true
+          max_z: 8.0
+          min_z: 0.0
+          vertical_fov_angle: 0.436
+          horizontal_fov_angle: 0.436
+          decay_acceleration: 5.0
+          model_type: 1
+
+        tof_back_middle_mark:
+          data_type: PointCloud2
+          topic: /sensors/tof_back_middle_link/pointcloud
+          marking: true
+          clearing: false
+          obstacle_range: 3.0
+          min_obstacle_height: 0.0
+          max_obstacle_height: 1.7
+          inf_is_valid: false
+          filter: "passthrough"
+
+        tof_back_middle_clear:
+          enabled: true
+          data_type: PointCloud2
+          topic: /sensors/tof_back_middle_link/pointcloud
+          marking: false
+          clearing: true
+          max_z: 8.0
+          min_z: 0.0
+          vertical_fov_angle: 0.436
+          horizontal_fov_angle: 0.436
+          decay_acceleration: 5.0
+          model_type: 1
+
+        tof_back_down_mark:
+          data_type: PointCloud2
+          topic: /sensors/tof_back_down_link/pointcloud
+          marking: true
+          clearing: false
+          obstacle_range: 3.0
+          min_obstacle_height: 0.04
+          max_obstacle_height: 0.5
+          inf_is_valid: false
+          filter: "passthrough"
+
+        tof_back_down_clear:
+          enabled: true
+          data_type: PointCloud2
+          topic: /sensors/tof_back_down_link/pointcloud
+          marking: false
+          clearing: true
+          max_z: 8.0
+          min_z: 0.04
+          vertical_fov_angle: 0.436
+          horizontal_fov_angle: 0.436
+          decay_acceleration: 5.0
+          model_type: 1
+
+      ultrasonic_layer:
+        plugin: "spatio_temporal_voxel_layer/SpatioTemporalVoxelLayer"
+        enabled: true
+        voxel_decay: 5.0
+        decay_model: 0
+        voxel_size: 0.1
+        track_unknown_space: true
+        mark_threshold: 0
+        update_footprint_enabled: true
+        combination_method: 1
+        origin_z: 0.0
+        publish_voxel_map: false
+        transform_tolerance: 0.5
+        mapping_mode: false
+        observation_sources: us_side_right_mark us_side_right_clear us_side_left_mark us_side_left_clear us_back_middle_mark us_back_middle_clear us_up_right_mark us_up_right_clear us_up_middle_mark us_up_middle_clear us_up_left_mark us_up_left_clear
+
+        us_side_right_mark:
+          data_type: PointCloud2
+          topic: /sensors/us_side_right_link/pointcloud
+          marking: true
+          clearing: false
+          obstacle_range: 3.0
+          min_obstacle_height: 0.0
+          max_obstacle_height: 1.7
+          inf_is_valid: false
+          filter: "passthrough"
+
+        us_side_right_clear:
+          enabled: true
+          data_type: PointCloud2
+          topic: /sensors/us_side_right_link/pointcloud
+          marking: false
+          clearing: true
+          max_z: 4.0
+          min_z: 0.0
+          vertical_fov_angle: 0.26
+          horizontal_fov_angle: 0.26
+          decay_acceleration: 5.0
+          model_type: 1
+
+        us_side_left_mark:
+          data_type: PointCloud2
+          topic: /sensors/us_side_left_link/pointcloud
+          marking: true
+          clearing: false
+          obstacle_range: 3.0
+          min_obstacle_height: 0.0
+          max_obstacle_height: 1.7
+          inf_is_valid: false
+          filter: "passthrough"
+
+        us_side_left_clear:
+          enabled: true
+          data_type: PointCloud2
+          topic: /sensors/us_side_left_link/pointcloud
+          marking: false
+          clearing: true
+          max_z: 4.0
+          min_z: 0.0
+          vertical_fov_angle: 0.26
+          horizontal_fov_angle: 0.26
+          decay_acceleration: 5.0
+          model_type: 1
+
+        us_back_middle_mark:
+          data_type: PointCloud2
+          topic: /sensors/us_back_middle_link/pointcloud
+          marking: true
+          clearing: false
+          obstacle_range: 3.0
+          min_obstacle_height: 0.0
+          max_obstacle_height: 1.7
+          inf_is_valid: false
+          filter: "passthrough"
+
+        us_back_middle_clear:
+          enabled: true
+          data_type: PointCloud2
+          topic: /sensors/us_back_middle_link/pointcloud
+          marking: false
+          clearing: true
+          max_z: 4.0
+          min_z: 0.0
+          vertical_fov_angle: 0.26
+          horizontal_fov_angle: 0.26
+          decay_acceleration: 5.0
+          model_type: 1
+
+        us_up_right_mark:
+          data_type: PointCloud2
+          topic: /sensors/us_up_right_link/pointcloud
+          marking: true
+          clearing: false
+          obstacle_range: 3.0
+          min_obstacle_height: 0.0
+          max_obstacle_height: 2.0
+          inf_is_valid: false
+          filter: "passthrough"
+
+        us_up_right_clear:
+          enabled: true
+          data_type: PointCloud2
+          topic: /sensors/us_up_right_link/pointcloud
+          marking: false
+          clearing: true
+          max_z: 4.0
+          min_z: 0.0
+          vertical_fov_angle: 0.26
+          horizontal_fov_angle: 0.26
+          decay_acceleration: 5.0
+          model_type: 1
+
+        us_up_middle_mark:
+          data_type: PointCloud2
+          topic: /sensors/us_up_middle_link/pointcloud
+          marking: true
+          clearing: false
+          obstacle_range: 3.0
+          min_obstacle_height: 0.0
+          max_obstacle_height: 2.0
+          inf_is_valid: false
+          filter: "passthrough"
+
+        us_up_middle_clear:
+          enabled: true
+          data_type: PointCloud2
+          topic: /sensors/us_up_middle_link/pointcloud
+          marking: false
+          clearing: true
+          max_z: 4.0
+          min_z: 0.0
+          vertical_fov_angle: 0.26
+          horizontal_fov_angle: 0.26
+          decay_acceleration: 5.0
+          model_type: 1
+
+        us_up_left_mark:
+          data_type: PointCloud2
+          topic: /sensors/us_up_left_link/pointcloud
+          marking: true
+          clearing: false
+          obstacle_range: 3.0
+          min_obstacle_height: 0.0
+          max_obstacle_height: 2.0
+          inf_is_valid: false
+          filter: "passthrough"
+
+        us_up_left_clear:
+          enabled: true
+          data_type: PointCloud2
+          topic: /sensors/us_up_left_link/pointcloud
+          marking: false
+          clearing: true
+          max_z: 4.0
+          min_z: 0.0
+          vertical_fov_angle: 0.26
+          horizontal_fov_angle: 0.26
           decay_acceleration: 5.0
           model_type: 1
 
