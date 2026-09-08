@@ -2,6 +2,8 @@
 <robot name="wheelchair2" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
     <xacro:include filename="$(find wheelchair2_description)/urdf/kangaroo_ros2_control.urdf.xacro" />
+    <xacro:include filename="$(find wheelchair2_description)/urdf/tof_sensor.urdf.xacro" />
+    <xacro:include filename="$(find wheelchair2_description)/urdf/ultrasonic_sensor.urdf.xacro" />
 
     <link name="base_footprint" />
 
@@ -73,13 +75,6 @@
         <origin xyz="0.49 -0.2775 -0.06" rpy="0 0 0"/>
     </joint>
 
-    <link name="laser"/>
-    <joint name="base_to_laser" type="fixed">
-        <parent link="base_link" />
-        <child link="laser" />
-        <origin xyz="0.21 0.0057 -0.068" rpy="0 3.14 0" />
-    </joint>
-
     <link name="livox_frame"/>
     <joint name="base_to_livox" type="fixed">
         <parent link="base_link" />
@@ -87,12 +82,36 @@
         <origin xyz="0 0 1.44" rpy="0 0 0" />
     </joint>
 
-    <link name="imu_link"/>
-    <joint name="base_to_imu" type="fixed">
-        <parent link="base_link" />
-        <child link="imu_link" />
-        <origin xyz="0.37 0 0" rpy="0 0 0" />
-    </joint>
+
+    <xacro:tof_sensor name="tof_front_right" parent="base_link" xyz="0.50 -0.275 0.14" rpy="0 0 0" index="2" />
+
+    <xacro:tof_sensor name="tof_front_right_side" parent="base_link" xyz="0.465 -0.305 0.16" rpy="0 0 -1.570796" index="3" />
+
+    <xacro:tof_sensor name="tof_side_right" parent="base_link" xyz="0.205 -0.24 0.065" rpy="0 0 -1.570796" index="4" />
+
+    <xacro:tof_sensor name="tof_front_left" parent="base_link" xyz="0.50 0.275 0.14" rpy="0 0 0" index="1" />
+
+    <xacro:tof_sensor name="tof_front_left_side" parent="base_link" xyz="0.465 0.305 0.16" rpy="0 0 1.5708" index="0" />
+
+    <xacro:tof_sensor name="tof_side_left" parent="base_link" xyz="0.205 0.24 0.065" rpy="0 0 1.570796" index="6" />
+
+    <xacro:tof_sensor name="tof_back_middle" parent="base_link" xyz="-0.245 -0.03 0.40" rpy="0 0 3.141592" index="7" />
+
+    <xacro:tof_sensor name="tof_back_down" parent="base_link" xyz="-0.245 0.0 -0.01" rpy="0 0 3.141592" index="5" />
+
+
+    <xacro:ultrasonic_sensor name="us_side_right" parent="base_link" xyz="0.22 -0.23 0.05" rpy="0 0 -1.570796" />
+
+    <xacro:ultrasonic_sensor name="us_side_left" parent="base_link" xyz="0.22 0.23 0.055" rpy="0 0 1.570796" />
+
+    <xacro:ultrasonic_sensor name="us_back_middle" parent="base_link" xyz="-0.245 0.0 0.37" rpy="0 0 3.141592" />
+
+    <xacro:ultrasonic_sensor name="us_up_right" parent="base_link" xyz="0.08 -0.09 1.52" rpy="0 0 -0.7854" />
+
+    <xacro:ultrasonic_sensor name="us_up_middle" parent="base_link" xyz="0.13 0.0 1.555" rpy="0 0 0" />
+
+    <xacro:ultrasonic_sensor name="us_up_left" parent="base_link" xyz="0.08 0.09 1.52" rpy="0 0 0.7854" />
+
 
     <xacro:kangaroo_x2_driver name="kangaroo_ros2_control" prefix="" use_sim_time="false"/>
 
