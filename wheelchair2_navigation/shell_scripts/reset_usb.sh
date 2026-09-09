@@ -1,6 +1,6 @@
 #!/bin/bash
-echo '1-2' | sudo tee /sys/bus/usb/drivers/usb/unbind
-sleep 1
-echo '1-2' | sudo tee /sys/bus/usb/drivers/usb/bind
-sleep 4
-sudo chmod 666 /dev/ttyUSB0 /dev/ttyUSB1 /dev/ttyUSB2
+# echo '1-2' | sudo tee /sys/bus/usb/drivers/usb/unbind
+# sleep 1
+# echo '1-2' | sudo tee /sys/bus/usb/drivers/usb/bind
+# sleep 5
+sudo chmod 777 /dev/ttyUSB*

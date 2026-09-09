@@ -57,5 +57,6 @@ tmux send-keys -t $SESSION_NAME:3 "if [ -d /wheelchair_ws/wheelchair_intelligenc
 
 ################## ATTACH
 # Start the user on the Bringup window
-tmux select-window -t $SESSION_NAME:0
-tmux attach-session -t $SESSION_NAME
+tmux new-window -t $SESSION_NAME -n "sensors"
+tmux send-keys -t $SESSION_NAME:4 "$SEC_ENV" C-m
+tmux send-keys -t $SESSION_NAME:4 "/home/container_user/wheelchair2/src/wheelchair2_navigation/shell_scripts/reset_usb.sh && ros2 launch clearance_sensors unified.launch.py" C-m

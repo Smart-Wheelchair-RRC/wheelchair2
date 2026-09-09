@@ -390,7 +390,7 @@ local_costmap:
       tof_layer:
         plugin: "spatio_temporal_voxel_layer/SpatioTemporalVoxelLayer"
         enabled: true
-        voxel_decay: 1.0
+        voxel_decay: 0.5
         decay_model: 0
         voxel_size: 0.05
         track_unknown_space: true
@@ -409,8 +409,8 @@ local_costmap:
           topic: /sensors/tof_side_left_link/pointcloud
           marking: true
           clearing: false
-          obstacle_range: 3.0 
-          min_obstacle_height: 0.0 
+          obstacle_range: 0.5 
+          min_obstacle_height: 0.1 
           max_obstacle_height: 1.7 
           inf_is_valid: false 
           filter: "passthrough" 
@@ -433,8 +433,8 @@ local_costmap:
           topic: /sensors/tof_side_right_link/pointcloud
           marking: true
           clearing: false
-          obstacle_range: 3.0
-          min_obstacle_height: 0.0 
+          obstacle_range: 0.5
+          min_obstacle_height: 0.1 
           max_obstacle_height: 1.7 
           inf_is_valid: false 
           filter: "passthrough"
@@ -457,8 +457,8 @@ local_costmap:
           topic: /sensors/tof_front_right_link/pointcloud
           marking: true
           clearing: false
-          obstacle_range: 3.0
-          min_obstacle_height: 0.0
+          obstacle_range: 0.5
+          min_obstacle_height: 0.1
           max_obstacle_height: 1.7
           inf_is_valid: false
           filter: "passthrough"
@@ -481,8 +481,8 @@ local_costmap:
           topic: /sensors/tof_front_right_side_link/pointcloud
           marking: true
           clearing: false
-          obstacle_range: 3.0
-          min_obstacle_height: 0.0
+          obstacle_range: 0.5
+          min_obstacle_height: 0.1
           max_obstacle_height: 1.7
           inf_is_valid: false
           filter: "passthrough"
@@ -505,8 +505,8 @@ local_costmap:
           topic: /sensors/tof_front_left_link/pointcloud
           marking: true
           clearing: false
-          obstacle_range: 3.0
-          min_obstacle_height: 0.0
+          obstacle_range: 0.5
+          min_obstacle_height: 0.1
           max_obstacle_height: 1.7
           inf_is_valid: false
           filter: "passthrough"
@@ -529,8 +529,8 @@ local_costmap:
           topic: /sensors/tof_front_left_side_link/pointcloud
           marking: true
           clearing: false
-          obstacle_range: 3.0
-          min_obstacle_height: 0.0
+          obstacle_range: 0.5
+          min_obstacle_height: 0.1
           max_obstacle_height: 1.7
           inf_is_valid: false
           filter: "passthrough"
@@ -553,8 +553,8 @@ local_costmap:
           topic: /sensors/tof_back_middle_link/pointcloud
           marking: true
           clearing: false
-          obstacle_range: 3.0
-          min_obstacle_height: 0.0
+          obstacle_range: 0.5
+          min_obstacle_height: 0.1
           max_obstacle_height: 1.7
           inf_is_valid: false
           filter: "passthrough"
@@ -577,8 +577,8 @@ local_costmap:
           topic: /sensors/tof_back_down_link/pointcloud
           marking: true
           clearing: false
-          obstacle_range: 3.0
-          min_obstacle_height: 0.04
+          obstacle_range: 0.5
+          min_obstacle_height: 0.14
           max_obstacle_height: 0.5
           inf_is_valid: false
           filter: "passthrough"
@@ -618,8 +618,8 @@ local_costmap:
           topic: /sensors/us_side_right_link/pointcloud
           marking: true
           clearing: false
-          obstacle_range: 3.0
-          min_obstacle_height: 0.0
+          obstacle_range: 0.5
+          min_obstacle_height: 0.1
           max_obstacle_height: 1.7
           inf_is_valid: false
           filter: "passthrough"
@@ -642,8 +642,8 @@ local_costmap:
           topic: /sensors/us_side_left_link/pointcloud
           marking: true
           clearing: false
-          obstacle_range: 3.0
-          min_obstacle_height: 0.0
+          obstacle_range: 0.5
+          min_obstacle_height: 0.1
           max_obstacle_height: 1.7
           inf_is_valid: false
           filter: "passthrough"
@@ -666,8 +666,8 @@ local_costmap:
           topic: /sensors/us_back_middle_link/pointcloud
           marking: true
           clearing: false
-          obstacle_range: 3.0
-          min_obstacle_height: 0.0
+          obstacle_range: 0.5
+          min_obstacle_height: 0.1
           max_obstacle_height: 1.7
           inf_is_valid: false
           filter: "passthrough"
@@ -690,8 +690,8 @@ local_costmap:
           topic: /sensors/us_up_right_link/pointcloud
           marking: true
           clearing: false
-          obstacle_range: 3.0
-          min_obstacle_height: 0.0
+          obstacle_range: 0.5
+          min_obstacle_height: 0.1
           max_obstacle_height: 2.0
           inf_is_valid: false
           filter: "passthrough"
@@ -714,8 +714,8 @@ local_costmap:
           topic: /sensors/us_up_middle_link/pointcloud
           marking: true
           clearing: false
-          obstacle_range: 3.0
-          min_obstacle_height: 0.0
+          obstacle_range: 0.5
+          min_obstacle_height: 0.1
           max_obstacle_height: 2.0
           inf_is_valid: false
           filter: "passthrough"
@@ -738,8 +738,8 @@ local_costmap:
           topic: /sensors/us_up_left_link/pointcloud
           marking: true
           clearing: false
-          obstacle_range: 3.0
-          min_obstacle_height: 0.0
+          obstacle_range: 0.5
+          min_obstacle_height: 0.1
           max_obstacle_height: 2.0
           inf_is_valid: false
           filter: "passthrough"
@@ -916,8 +916,8 @@ global_costmap:
           topic: /sensors/tof_side_left_link/pointcloud
           marking: true
           clearing: false
-          obstacle_range: 3.0
-          min_obstacle_height: 0.0 
+          obstacle_range: 0.5
+          min_obstacle_height: 0.1 
           max_obstacle_height: 1.7 
           inf_is_valid: false 
           filter: "passthrough"
@@ -940,8 +940,8 @@ global_costmap:
           topic: /sensors/tof_side_right_link/pointcloud
           marking: true
           clearing: false
-          obstacle_range: 3.0
-          min_obstacle_height: 0.0 
+          obstacle_range: 0.5
+          min_obstacle_height: 0.1 
           max_obstacle_height: 1.7 
           inf_is_valid: false 
           filter: "passthrough"
@@ -964,8 +964,8 @@ global_costmap:
           topic: /sensors/tof_front_right_link/pointcloud
           marking: true
           clearing: false
-          obstacle_range: 3.0
-          min_obstacle_height: 0.0
+          obstacle_range: 0.5
+          min_obstacle_height: 0.1
           max_obstacle_height: 1.7
           inf_is_valid: false
           filter: "passthrough"
@@ -988,8 +988,8 @@ global_costmap:
           topic: /sensors/tof_front_right_side_link/pointcloud
           marking: true
           clearing: false
-          obstacle_range: 3.0
-          min_obstacle_height: 0.0
+          obstacle_range: 0.5
+          min_obstacle_height: 0.1
           max_obstacle_height: 1.7
           inf_is_valid: false
           filter: "passthrough"
@@ -1012,8 +1012,8 @@ global_costmap:
           topic: /sensors/tof_front_left_link/pointcloud
           marking: true
           clearing: false
-          obstacle_range: 3.0
-          min_obstacle_height: 0.0
+          obstacle_range: 0.5
+          min_obstacle_height: 0.1
           max_obstacle_height: 1.7
           inf_is_valid: false
           filter: "passthrough"
@@ -1036,8 +1036,8 @@ global_costmap:
           topic: /sensors/tof_front_left_side_link/pointcloud
           marking: true
           clearing: false
-          obstacle_range: 3.0
-          min_obstacle_height: 0.0
+          obstacle_range: 0.5
+          min_obstacle_height: 0.1
           max_obstacle_height: 1.7
           inf_is_valid: false
           filter: "passthrough"
@@ -1060,8 +1060,8 @@ global_costmap:
           topic: /sensors/tof_back_middle_link/pointcloud
           marking: true
           clearing: false
-          obstacle_range: 3.0
-          min_obstacle_height: 0.0
+          obstacle_range: 0.5
+          min_obstacle_height: 0.1
           max_obstacle_height: 1.7
           inf_is_valid: false
           filter: "passthrough"
@@ -1084,8 +1084,8 @@ global_costmap:
           topic: /sensors/tof_back_down_link/pointcloud
           marking: true
           clearing: false
-          obstacle_range: 3.0
-          min_obstacle_height: 0.04
+          obstacle_range: 0.5
+          min_obstacle_height: 0.14
           max_obstacle_height: 0.5
           inf_is_valid: false
           filter: "passthrough"
@@ -1124,8 +1124,8 @@ global_costmap:
           topic: /sensors/us_side_right_link/pointcloud
           marking: true
           clearing: false
-          obstacle_range: 3.0
-          min_obstacle_height: 0.0
+          obstacle_range: 0.5
+          min_obstacle_height: 0.1
           max_obstacle_height: 1.7
           inf_is_valid: false
           filter: "passthrough"
@@ -1148,8 +1148,8 @@ global_costmap:
           topic: /sensors/us_side_left_link/pointcloud
           marking: true
           clearing: false
-          obstacle_range: 3.0
-          min_obstacle_height: 0.0
+          obstacle_range: 0.5
+          min_obstacle_height: 0.1
           max_obstacle_height: 1.7
           inf_is_valid: false
           filter: "passthrough"
@@ -1172,8 +1172,8 @@ global_costmap:
           topic: /sensors/us_back_middle_link/pointcloud
           marking: true
           clearing: false
-          obstacle_range: 3.0
-          min_obstacle_height: 0.0
+          obstacle_range: 0.5
+          min_obstacle_height: 0.1
           max_obstacle_height: 1.7
           inf_is_valid: false
           filter: "passthrough"
@@ -1196,8 +1196,8 @@ global_costmap:
           topic: /sensors/us_up_right_link/pointcloud
           marking: true
           clearing: false
-          obstacle_range: 3.0
-          min_obstacle_height: 0.0
+          obstacle_range: 0.5
+          min_obstacle_height: 0.1
           max_obstacle_height: 2.0
           inf_is_valid: false
           filter: "passthrough"
@@ -1220,8 +1220,8 @@ global_costmap:
           topic: /sensors/us_up_middle_link/pointcloud
           marking: true
           clearing: false
-          obstacle_range: 3.0
-          min_obstacle_height: 0.0
+          obstacle_range: 0.5
+          min_obstacle_height: 0.1
           max_obstacle_height: 2.0
           inf_is_valid: false
           filter: "passthrough"
@@ -1244,8 +1244,8 @@ global_costmap:
           topic: /sensors/us_up_left_link/pointcloud
           marking: true
           clearing: false
-          obstacle_range: 3.0
-          min_obstacle_height: 0.0
+          obstacle_range: 0.5
+          min_obstacle_height: 0.1
           max_obstacle_height: 2.0
           inf_is_valid: false
           filter: "passthrough"
