@@ -11,12 +11,22 @@ fi
 WHEELCHAIR_NAME="ducky"  # ducky
 export DISPLAY=:1001
 
-# # RRC with mech lab and outside corridor
-# PCD_PATH="/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/rpn_fastlio/20260416_175736.pcd"
-# YAML_PATH="/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/rpn_fastlio/20260416_175736.yaml"
+######### HIMALAYA GROUND FLOOR F0 ############
+# PCD_PATH="/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/ihub_to_lab/ihub_lab_full.pcd"
+# YAML_PATH="/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/ihub_to_lab/ihub_lab_full.yaml"
 # NATURE="indoor"
 
-# # RRC with mech lab and outside corridor
+# ######### HIMALAYA FIRST FLOOR F1 ############
+# PCD_PATH="/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/himalaya_f1/second_floor_himalaya_cleaned.pcd"
+# YAML_PATH="/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/himalaya_f1/second_floor_himalaya_cleaned.yaml"
+# NATURE="indoor"
+
+######### HIMALAYA SECOND FLOOR F2 ############
+# PCD_PATH="/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/himalaya_f2/third_floor_him_cleaned.pcd"
+# YAML_PATH="/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/himalaya_f2/third_floor_him_cleaned.yaml"
+# NATURE="indoor"
+
+######### RRC LAB ############
 PCD_PATH="/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/rrc/hardware_lab_2/hardware_lab_2.pcd"
 YAML_PATH="/home/container_user/wheelchair2/src/wheelchair2_navigation/maps/rrc/hardware_lab_2/hardware_lab_2.yaml"
 NATURE="indoor"
@@ -34,10 +44,10 @@ if [ ! -f "$CONFIG_FILE" ]; then
 fi
 
 if [ -f "$CONFIG_FILE" ]; then
-    SILICA_ROS_F=$(python3 -c "import json; print(str(json.load(open('$CONFIG_FILE')).get('silica_ros_f', False)).lower())" 2>/dev/null || echo "false")
+    SILICA_ROS_F=$(python3 -c "import json; print(str(json.load(open('$CONFIG_FILE')).get('silica_ros_f', True)).lower())" 2>/dev/null || echo "true")
     VIDEO_WEB_SERVER_F=$(python3 -c "import json; print(str(json.load(open('$CONFIG_FILE')).get('video_web_server_f', False)).lower())" 2>/dev/null || echo "false")
 else
-    SILICA_ROS_F="false"
+    SILICA_ROS_F="true"
     VIDEO_WEB_SERVER_F="false"
 fi
 

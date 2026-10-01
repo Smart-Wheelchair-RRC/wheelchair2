@@ -35,10 +35,10 @@ if [ ! -f "$CONFIG_FILE" ]; then
 fi
 
 if [ -f "$CONFIG_FILE" ]; then
-    SILICA_ROS_F=$(python3 -c "import json; print(str(json.load(open('$CONFIG_FILE')).get('silica_ros_f', False)).lower())" 2>/dev/null || echo "false")
+    SILICA_ROS_F=$(python3 -c "import json; print(str(json.load(open('$CONFIG_FILE')).get('silica_ros_f', True)).lower())" 2>/dev/null || echo "true")
     VIDEO_WEB_SERVER_F=$(python3 -c "import json; print(str(json.load(open('$CONFIG_FILE')).get('video_web_server_f', False)).lower())" 2>/dev/null || echo "false")
 else
-    SILICA_ROS_F="false"
+    SILICA_ROS_F="true"
     VIDEO_WEB_SERVER_F="false"
 fi
 

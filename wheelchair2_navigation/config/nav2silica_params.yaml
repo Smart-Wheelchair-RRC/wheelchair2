@@ -340,6 +340,7 @@ local_costmap:
         enabled: True
         filter_info_topic: "/costmap_filter_info"
       plugins: ["lidar_obstacle_layer", "tof_layer", "ultrasonic_layer", "glass_obstacle_layer", "inflation_layer", "glass_inflation_layer"]
+      # plugins: ["lidar_obstacle_layer", "glass_obstacle_layer", "inflation_layer", "glass_inflation_layer"]
       
       lidar_obstacle_layer:
         plugin: "spatio_temporal_voxel_layer/SpatioTemporalVoxelLayer"
@@ -387,6 +388,7 @@ local_costmap:
           decay_acceleration: 5.0 # default 0, 1/s^2.
           model_type: 1 # default 0, model type for frustum. 0=depth camera, 1=3d lidar like VLP16 or similar
 
+      ##################### TOF &ULTSND END ##############################
       tof_layer:
         plugin: "spatio_temporal_voxel_layer/SpatioTemporalVoxelLayer"
         enabled: true
@@ -756,6 +758,7 @@ local_costmap:
           horizontal_fov_angle: 0.26
           decay_acceleration: 5.0
           model_type: 1
+      ################### TOF &ULTSND END ############################
   
       glass_obstacle_layer:
         plugin: "spatio_temporal_voxel_layer/SpatioTemporalVoxelLayer"
@@ -805,7 +808,7 @@ local_costmap:
       inflation_layer:
         enabled: True
         plugin: "nav2_costmap_2d::InflationLayer"
-        inflation_radius: 0.30
+        inflation_radius: 0.50
         cost_scaling_factor: 10.0 #10 2.58
 
       glass_inflation_layer:
@@ -849,6 +852,7 @@ global_costmap:
         filter_info_topic: "/costmap_filter_info"
       
       plugins: ["static_layer", "stvl_layer", "tof_layer", "ultrasonic_layer", "inflation_layer"]
+      # plugins: ["static_layer", "stvl_layer", "inflation_layer"]
       
       stvl_layer:
         plugin: "spatio_temporal_voxel_layer/SpatioTemporalVoxelLayer"
@@ -895,6 +899,7 @@ global_costmap:
           decay_acceleration: 5.0
           model_type: 1
 
+      ################### TOF & ULTSND ###################
       tof_layer:
         plugin: "spatio_temporal_voxel_layer/SpatioTemporalVoxelLayer"
         enabled: true
@@ -1262,6 +1267,8 @@ global_costmap:
           horizontal_fov_angle: 0.26
           decay_acceleration: 5.0
           model_type: 1
+
+      ######################### TOF END ###################
 
       static_layer:
         plugin: "nav2_costmap_2d::StaticLayer"
