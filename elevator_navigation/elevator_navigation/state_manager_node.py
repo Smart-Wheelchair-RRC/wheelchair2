@@ -51,6 +51,7 @@ class NavigationStateManager(Node):
         self.current_pose = [0.0, 0.0, 0.0]
         self.active_goal_request = None
         self.detected_floor_from_terminal = None
+        self.current_goal_handle = None
 
         # --- ROS 2 SERVICE CLIENTS ---
         self.pause_odom_cli = self.create_client(SetBool, 'pause_odom', callback_group=self.cb_group)
@@ -93,18 +94,30 @@ class NavigationStateManager(Node):
             self.get_logger().error(f"Error processing goal: {e}\n{traceback.format_exc()}")
 
     def floor_detection_cb(self, msg):
-        self.detected_floor_from_terminal = int(msg.data)
-        self.get_logger().info(f"Received confirmed floor ID from terminal: Floor {self.detected_floor_from_terminal}")
+        new_floor = int(msg.data)
+        self.detected_floor_from_terminal = new_floor
+        self.get_logger().info(f"Received floor ID update: Floor {new_floor}")
 
-        # Manual Teleoperation Transition Trap
-        if self.robot_status == "IDLE" and self.active_goal_request is None:
-            new_floor = self.detected_floor_from_terminal
-            if new_floor == self.current_floor:
-                self.get_logger().info("Floor unchanged. Map reload skipped.")
-                return
+        # Ignore redundant publications
+        if new_floor == self.current_floor and self.robot_status not in ["IN_ELEVATOR"]:
+            self.get_logger().info("Floor unchanged. Map reload skipped.")
+            return
 
-            self.get_logger().info(f"🕹️ Manual teleop floor transition detected! Loading Floor {new_floor}...")
+        # Manual Teleop or Override Transition
+        if self.robot_status in ["IDLE", "NAVIGATING"] and self.active_goal_request is None:
+            if self.robot_status == "NAVIGATING":
+                self.get_logger().warn("🚨 Manual floor override received while navigating! Cancelling active goal...")
+                self.cancel_current_nav_goal()
+
+            self.get_logger().info(f"🕹️ Floor transition/override detected -> Loading Floor {new_floor}...")
             self.handle_manual_floor_transition(new_floor)
+
+    def cancel_current_nav_goal(self):
+        if self.current_goal_handle:
+            try:
+                self.current_goal_handle.cancel_goal_async()
+            except Exception as e:
+                self.get_logger().warn(f"Failed to cancel nav goal: {e}")
 
     def handle_manual_floor_transition(self, new_floor):
         self.robot_status = "PAUSED"
@@ -117,7 +130,6 @@ class NavigationStateManager(Node):
             
         floor_data = floor_dict[new_floor]
         
-        # Extract default exit pose for this floor
         exit_pose = None
         elevators = floor_data.get('elevators', {})
         if self.current_elevator and self.current_elevator in elevators:
@@ -138,7 +150,7 @@ class NavigationStateManager(Node):
         self.current_floor = new_floor
         self.current_elevator = None
         self.robot_status = "IDLE"
-        self.get_logger().info("✅ Manual map swap & global localization complete. Ready to drive.")
+        self.get_logger().info("✅ Map swap & global localization complete. Ready to drive.")
 
     def call_service_async(self, client, request):
         if not client.wait_for_service(timeout_sec=1.0):
@@ -170,7 +182,6 @@ class NavigationStateManager(Node):
         self.get_logger().info("✅ Navigation paused and memory wiped.")
 
     def inject_initial_pose(self, pose_xy_yaw):
-        """Publishes the exact elevator exit pose to /initialpose to anchor ICP localization."""
         if pose_xy_yaw is None:
             return
 
@@ -189,7 +200,6 @@ class NavigationStateManager(Node):
         msg.pose.pose.orientation.z = sy
         msg.pose.pose.orientation.w = cy
 
-        # Standard initialpose covariance
         msg.pose.covariance[0] = 0.25
         msg.pose.covariance[7] = 0.25
         msg.pose.covariance[14] = 0.25
@@ -270,13 +280,12 @@ class NavigationStateManager(Node):
         self.call_service_async(self.map_server_load_cli, map_req)
         time.sleep(1.5)
         
-        # Trigger ICP reload with updated parameter
         self.call_service_async(self.load_map_cli, req_trigger)
         time.sleep(1.5)
         self.call_service_async(self.pause_loc_cli, req_unpause)
         time.sleep(1.5)
 
-        # STEP 4: Fallback Initial Pose Injection (Anchors ICP to Elevator Exit)
+        # STEP 4: Fallback Initial Pose Injection
         if exit_pose is not None:
             self.get_logger().info("📍 Overriding initial pose with known exit coordinates from config...")
             self.inject_initial_pose(exit_pose)
@@ -325,7 +334,6 @@ class NavigationStateManager(Node):
                 self.pause_and_wipe()
 
             elif step['action'] == 'reload_and_resume_navigation':
-                # Retrieve exit pose from step dict or lookup from config
                 exit_pose = step.get('exit_pose', None)
                 if exit_pose is None and self.current_elevator:
                     try:
@@ -408,7 +416,6 @@ class NavigationStateManager(Node):
             return False
 
     def ros_navigate_to_pose(self, pose):
-        """Dispatches an action goal to Nav2 and waits using multi-threaded execution."""
         if not self.nav_to_pose_client.wait_for_server(timeout_sec=5.0):
             self.get_logger().error("Nav2 action server (/navigate_to_pose) unavailable!")
             return False
@@ -431,7 +438,6 @@ class NavigationStateManager(Node):
         self.get_logger().info(f"Sending goal to Nav2: [x={pose[0]:.2f}, y={pose[1]:.2f}, yaw={yaw:.2f}]")
         send_goal_future = self.nav_to_pose_client.send_goal_async(goal_msg)
 
-        # Wait for acceptance (handled cleanly by MultiThreadedExecutor)
         while rclpy.ok() and not send_goal_future.done():
             time.sleep(0.1)
 
@@ -440,10 +446,10 @@ class NavigationStateManager(Node):
             self.get_logger().error("Nav2 rejected the goal request!")
             return False
 
+        self.current_goal_handle = goal_handle
         self.get_logger().info("Nav2 accepted goal. Driving to target...")
         result_future = goal_handle.get_result_async()
 
-        # Wait until goal finishes
         while rclpy.ok() and not result_future.done():
             time.sleep(0.2)
 
@@ -451,6 +457,8 @@ class NavigationStateManager(Node):
             return False
 
         status = result_future.result().status
+        self.current_goal_handle = None
+
         if status == GoalStatus.STATUS_SUCCEEDED:
             self.get_logger().info("✅ Successfully arrived at navigation waypoint.")
             return True
@@ -474,8 +482,6 @@ class NavigationStateManager(Node):
 def main(args=None):
     rclpy.init(args=args)
     node = NavigationStateManager()
-    
-    # Use MultiThreadedExecutor so callbacks and action clients run on separate threads without deadlock
     executor = MultiThreadedExecutor(num_threads=4)
     executor.add_node(node)
     

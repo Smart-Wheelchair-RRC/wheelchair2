@@ -26,6 +26,7 @@ setup(
         'console_scripts': [
             'state_manager_node = elevator_navigation.state_manager_node:main',
             'elevator_floor_detection_manual = elevator_navigation.elevator_floor_detection_manual:main',
+            'elevator_floor_detection_aruco = elevator_navigation.elevator_floor_detection_aruco:main',
         ],
     },
 )

@@ -17,8 +17,7 @@ class ElevatorFloorDetectionTerminal(Node):
         self.odom_topic = self.get_parameter('odom_topic').get_parameter_value().string_value
 
         self.CAB_MAX_RADIUS = 2.0         # Robot enclosed inside elevator (m)
-        self.DOOR_OPEN_DIST = 1.4         # Single-side ray confirming door open (m)
-        self.HALLWAY_CLEARANCE_DIST = 2.2 # Reading confirming robot has driven into open hallway (m)
+        self.DOOR_OPEN_DIST = 1.35        # Single-side ray confirming door open (m)
         self.EXIT_DIST_THRESHOLD = 0.45   # Distance driven (m) after door opens to trigger prompt
         self.Z_THRESHOLD = 0.020          # Vertical deviation (g's)
         self.JOLT_DURATION_REQ = 0.35     # Sustained acceleration duration (s)
@@ -34,12 +33,11 @@ class ElevatorFloorDetectionTerminal(Node):
         self.current_horizontal_speed = 0.0
 
         # --- STATE MACHINE ---
-        # IDLE -> IN_TRANSIT -> DOORS_OPEN -> PROMPTING
+        # IDLE -> IN_TRANSIT -> DOORS_OPEN -> (Auto resets to IDLE on exit)
         self.state = "IDLE"
         self.jolt_candidate_time = None
-        self.door_opened_time = None
         self.start_odom = None
-        self.prompt_active = False
+        self.is_exiting = False
 
         # --- ROS 2 INTERFACES ---
         self.imu_sub = self.create_subscription(Imu, '/livox/imu', self.imu_cb, 10)
@@ -47,7 +45,7 @@ class ElevatorFloorDetectionTerminal(Node):
         self.odom_sub = self.create_subscription(Odometry, self.odom_topic, self.odom_cb, 10)
         self.floor_id_pub = self.create_publisher(Int32, '/detected_floor_id', 10)
 
-        self.get_logger().info(f"🛗 Elevator Floor Detector online. Odom: '{self.odom_topic}'")
+        self.get_logger().info(f"🛗 Non-blocking Manual Elevator Detector Online. Odom: '{self.odom_topic}'")
 
     def imu_cb(self, msg):
         accel_z = msg.linear_acceleration.z
@@ -64,8 +62,8 @@ class ElevatorFloorDetectionTerminal(Node):
         if len(self.imu_buffer) < self.imu_buffer.maxlen:
             return
 
-        # 2. Enclosure & Speed Guard
-        if self.state in ["IDLE", "IN_CAB_READY", "DOORS_OPEN"]:
+        # 2. Enclosure & Speed Guard (Only trigger new ride if stationary)
+        if self.state in ["IDLE", "DOORS_OPEN"]:
             if not self.is_enclosed_in_cab:
                 self.jolt_candidate_time = None
                 return
@@ -82,12 +80,12 @@ class ElevatorFloorDetectionTerminal(Node):
             if self.jolt_candidate_time is None:
                 self.jolt_candidate_time = time.time()
             elif (time.time() - self.jolt_candidate_time) > self.JOLT_DURATION_REQ:
-                if self.state in ["IDLE", "IN_CAB_READY", "DOORS_OPEN"]:
+                if self.state in ["IDLE", "DOORS_OPEN"]:
                     direction = "UP" if accel_diff > 0 else "DOWN"
                     self.get_logger().info(f"🚀 Sustained Motion: {direction} (Δ={accel_diff:+.3f}g). IN_TRANSIT.")
                     self.state = "IN_TRANSIT"
                     self.start_odom = None
-                    self.door_opened_time = None
+                    self.is_exiting = False
         else:
             self.jolt_candidate_time = None
 
@@ -124,83 +122,61 @@ class ElevatorFloorDetectionTerminal(Node):
         else:
             self.is_enclosed_in_cab = False
 
-        if self.prompt_active:
-            return
-
         front_med = sorted(front_pts)[len(front_pts)//2] if front_pts else 0.0
         back_med = sorted(back_pts)[len(back_pts)//2] if back_pts else 0.0
         doors_are_open = (front_med > self.DOOR_OPEN_DIST or back_med > self.DOOR_OPEN_DIST)
 
-        # Transition 1: In Transit -> Doors Open
-        if self.state == "IN_TRANSIT":
-            if doors_are_open:
-                self.state = "DOORS_OPEN"
-                self.door_opened_time = time.time()
-                self.get_logger().info(f"🚪 Doors Opened (Front: {front_med:.2f}m, Back: {back_med:.2f}m). Drive out or stay inside.")
-
-        # Transition 2: When doors are open, check if user exited or stayed inside
-        elif self.state == "DOORS_OPEN":
-            # Fallback A: Either side shows substantial hallway clearance
-            if (front_med > self.HALLWAY_CLEARANCE_DIST and back_med > self.HALLWAY_CLEARANCE_DIST) or \
-               (front_med > 3.0 or back_med > 3.0):
-                self.get_logger().info(f"📍 Clear hallway detected (Front: {front_med:.2f}m, Back: {back_med:.2f}m). Triggering prompt.")
-                self.trigger_prompt()
-                return
-
-            # Fallback B: If doors closed AND we waited at least 5 seconds without moving out
-            if not doors_are_open and self.is_enclosed_in_cab:
-                if self.door_opened_time and (time.time() - self.door_opened_time > 5.0):
-                    self.state = "IN_CAB_READY"
-                    self.start_odom = None
-                    self.get_logger().info("🔒 Doors Closed. Still inside cab. Waiting for next movement...")
+        # Transition: In Transit -> Doors Open
+        if self.state == "IN_TRANSIT" and doors_are_open:
+            self.state = "DOORS_OPEN"
+            self.start_odom = None  # Reset odom anchor so exit distance starts counting now
+            self.get_logger().info(f"🚪 Doors Opened (Front: {front_med:.2f}m, Back: {back_med:.2f}m). Awaiting drive-out...")
 
     def odom_cb(self, msg):
         vx = msg.twist.twist.linear.x
         vy = msg.twist.twist.linear.y
         self.current_horizontal_speed = math.hypot(vx, vy)
 
-        if self.state != "DOORS_OPEN" or self.prompt_active:
+        if self.state != "DOORS_OPEN" or self.is_exiting:
             return
 
         pos = msg.pose.pose.position
 
-        # Anchor odom starting position at door opening
+        # Anchor starting position at door opening
         if self.start_odom is None:
             self.start_odom = (pos.x, pos.y)
             return
 
         dist = math.hypot(pos.x - self.start_odom[0], pos.y - self.start_odom[1])
         if dist > self.EXIT_DIST_THRESHOLD:
+            self.is_exiting = True
             self.get_logger().info(f"📍 Wheelchair drove {dist:.2f}m out of elevator cab.")
-            self.trigger_prompt()
-
-    def trigger_prompt(self):
-        if self.prompt_active:
-            return
-        self.prompt_active = True
-        self.state = "PROMPTING"
-        threading.Thread(target=self.terminal_prompt_thread, daemon=True).start()
+            
+            # Immediately release state to IDLE so subsequent elevator transit is tracked
+            self.reset_detector_state()
+            
+            # Spawn background terminal prompt
+            threading.Thread(target=self.terminal_prompt_thread, daemon=True).start()
 
     def terminal_prompt_thread(self):
         print("\n" + "="*50)
         print("  🛗 ROBOT EXITED ELEVATOR CAB")
         print("="*50)
 
-        while self.prompt_active:
+        while True:
             try:
                 user_input = input(">>> Enter Current Floor Number [0-9 or 'q']: ").strip()
                 if user_input.lower() == 'q':
-                    self.get_logger().warn("Cancelled by user.")
-                    self.finalize(None)
+                    self.get_logger().warn("Floor entry cancelled by user.")
                     break
 
-                entered_floor = int(user_input)
-                self.get_logger().info(f"Confirmed arrival on Floor {entered_floor}.")
-                self.finalize(entered_floor)
-                break
-            except ValueError:
-                print("Invalid integer. Please enter e.g. 0, 4 or 'q'.")
-            except EOFError:
+                if user_input.isdigit():
+                    entered_floor = int(user_input)
+                    self.finalize(entered_floor)
+                    break
+                else:
+                    print("Invalid integer. Please enter e.g. 0, 4 or 'q'.")
+            except (ValueError, EOFError):
                 break
 
     def finalize(self, floor_num):
@@ -210,14 +186,13 @@ class ElevatorFloorDetectionTerminal(Node):
             self.floor_id_pub.publish(fid_msg)
             self.get_logger().info(f"📢 Published Floor ID '{floor_num}' to /detected_floor_id.")
 
-        # Reset state machine
+    def reset_detector_state(self):
         self.state = "IDLE"
         self.start_odom = None
-        self.door_opened_time = None
-        self.prompt_active = False
         self.jolt_candidate_time = None
+        self.is_exiting = False
         self.imu_buffer.clear()
-        self.get_logger().info("Detector returned to IDLE. Ready for next elevator cycle.")
+        self.get_logger().info("Detector state returned to IDLE. Ready for next elevator cycle.")
 
 def main(args=None):
     rclpy.init(args=args)
