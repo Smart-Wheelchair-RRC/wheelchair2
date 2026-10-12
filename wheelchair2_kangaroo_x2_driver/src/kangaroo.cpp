@@ -110,12 +110,21 @@ namespace wheelchair2_kangaroo_x2_driver
     void Kangaroo::close_connection()
     {
         RCLCPP_INFO(rclcpp::get_logger("Kangaroo"), "Closing connection...");
-        ::close(termios_file_descriptor_);
+        if (termios_file_descriptor_ >= 0)
+        {
+            ::close(termios_file_descriptor_);
+            termios_file_descriptor_ = -1;
+        }
         RCLCPP_INFO(rclcpp::get_logger("Kangaroo"), "Connection closed.");
     }
 
     bool Kangaroo::send_start_signals(unsigned char address)
     {
+        if (!is_connection_open())
+        {
+            return false;
+        }
+
         unsigned char buffer[7];
 
         size_t bytes_written_to_channel_3 = write_kangaroo_start_command(address, channel_1_, buffer);
@@ -179,6 +188,7 @@ namespace wheelchair2_kangaroo_x2_driver
         if (::write(termios_file_descriptor_, buffer, num_of_bytes) < 0)
         {
             RCLCPP_ERROR(rclcpp::get_logger("Kangaroo"), "Failed to send get request");
+            close_connection();
             return false;
         }
 
@@ -245,13 +255,14 @@ namespace wheelchair2_kangaroo_x2_driver
             if (bits_read < 0)
             {
                 RCLCPP_ERROR(rclcpp::get_logger("Kangaroo"), "Reading from serial failed: %s", strerror(errno));
-                // close();
+                close_connection();
                 ok = false;
                 return 0;
             }
             if (bits_read == 0)
             {
                 RCLCPP_ERROR(rclcpp::get_logger("Kangaroo"), "Reading from serial failed: %s", strerror(errno));
+                close_connection();
                 ok = false;
                 return 0;
             }
@@ -473,14 +484,9 @@ namespace wheelchair2_kangaroo_x2_driver
     {
         RCLCPP_INFO(rclcpp::get_logger("Kangaroo"), "Activating...");
 
-        if (!is_connection_open())
+        if (is_connection_open())
         {
-            return hardware_interface::CallbackReturn::ERROR;
-        }
-
-        if (!send_start_signals((unsigned char)128))
-        {
-            return hardware_interface::CallbackReturn::ERROR;
+            send_start_signals((unsigned char)128);
         }
 
         RCLCPP_INFO(rclcpp::get_logger("Kangaroo"), "Activated");
@@ -497,11 +503,23 @@ namespace wheelchair2_kangaroo_x2_driver
 
     hardware_interface::return_type Kangaroo::read(const rclcpp::Time &, const rclcpp::Duration &)
     {
-        // RCLCPP_INFO(rclcpp::get_logger("Kangaroo"), "Reading...");
-
+        // Auto-reconnect if port is closed (e.g. E-stop cut power)
         if (!is_connection_open())
         {
-            return hardware_interface::return_type::ERROR;
+            static auto last_reconnect = std::chrono::steady_clock::now();
+            auto now = std::chrono::steady_clock::now();
+            if (std::chrono::duration_cast<std::chrono::milliseconds>(now - last_reconnect).count() >= 1000)
+            {
+                last_reconnect = now;
+                if (open_connection())
+                {
+                    send_start_signals((unsigned char)128);
+                }
+            }
+
+            left_wheel_.velocity = 0.0;
+            right_wheel_.velocity = 0.0;
+            return hardware_interface::return_type::OK;
         }
 
         try{
@@ -530,10 +548,13 @@ namespace wheelchair2_kangaroo_x2_driver
                 right_wheel_.velocity = encoder_lines_to_radians(get_parameter((unsigned char)128, channel_2_, (unsigned char)2));
             }
         }
-        catch (std::string error)
+        catch (const std::exception &error)
         {
-            RCLCPP_ERROR(rclcpp::get_logger("Kangaroo"), "Error: %s", error.c_str());
-            return hardware_interface::return_type::ERROR;
+            RCLCPP_ERROR(rclcpp::get_logger("Kangaroo"), "Error: %s", error.what());
+            close_connection();
+            left_wheel_.velocity = 0.0;
+            right_wheel_.velocity = 0.0;
+            return hardware_interface::return_type::OK;
         }
 
         // RCLCPP_INFO(rclcpp::get_logger("Kangaroo"), "Read: %s %s %s %s", std::to_string(left_wheel_.position).c_str(), std::to_string(left_wheel_.velocity).c_str(), std::to_string(right_wheel_.position).c_str(), std::to_string(right_wheel_.velocity).c_str());
@@ -546,7 +567,7 @@ namespace wheelchair2_kangaroo_x2_driver
 
         if (!is_connection_open())
         {
-            return hardware_interface::return_type::ERROR;
+            return hardware_interface::return_type::OK;
         }
 
         tcflush(termios_file_descriptor_, TCOFLUSH);
