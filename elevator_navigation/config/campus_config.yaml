@@ -1,0 +1,29 @@
+system:
+  base_dir: "/home/container_user/wheelchair2/src/wheelchair2_navigation/maps"
+  # Add the absolute path to your template 3D-BBS config
+  base_bbs_yaml: "/home/container_user/wheelchair2/src/dependencies/3DLocalization/wheelchair2_3dbbs/config/ros2_test.yaml"
+
+buildings:
+  D-Block:
+    floors:
+      0:
+        name: "Ground_Floor"
+        maps:
+          # occupancy: "ramps/rrc_outside_himalaya_ramps_fast_cleaned.yaml"
+          # pcd: "ramps/rrc_outside_himalaya_ramps.pcd"
+          occupancy: "ground_floor/rrc_lab.yaml"
+          pcd: "ground_floor/lab_map_with_outside_corridor.pcd"
+        elevators:
+          Left_Elevator:
+            approach_pose: [2.9641, 11.0742, 0.0115551]
+            exit_initial_pose: [2.9641, 11.0742, 0.0115551]
+
+      4:
+        name: "Fourth_Floor"
+        maps:
+          occupancy: "rrc/rrc_4th_floor/rrc_4th_floor_old.yaml"
+          pcd: "rrc/rrc_4th_floor/rrc_4th_floor_old.pcd"
+        elevators:
+          Left_Elevator:
+            approach_pose: [-6.13087, 18.142, 0.195863]
+            exit_initial_pose: [-6.13087, 18.142, 0.195863]
