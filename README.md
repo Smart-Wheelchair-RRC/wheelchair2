@@ -1,5 +1,13 @@
-# Wheelchair2
-ROS2 Humble and Gazebo Harmonic packages to operate the RRC wheelchair
+# Smart Wheelchair2
+
+ROS 2 Humble and Gazebo Harmonic packages to operate the RRC wheelchair.
+
+[![YouTube](https://img.shields.io/badge/YouTube-Watch%20Demo-red?logo=youtube&logoColor=white)](https://www.youtube.com/@Smart-Wheelchair-RRC/videos)
+[![Docker](https://img.shields.io/badge/Docker-Repository-2496ED?logo=docker&logoColor=white)](https://github.com/Smart-Wheelchair-RRC/DockerForDevelopment)
+
+## Current System Architecture
+
+![Wheelchair2 Architecture](docs/images/arch.jpg)
 
 ## Prerequisites
 
