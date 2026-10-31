@@ -11,9 +11,9 @@ export DISPLAY=:1
 
 
 ## RRC with outside corridor
-PCD_PATH=$MAP_DIR/rrc/lab_map_with_outside_corridor.pcd
-YAML_PATH=$MAP_DIR/rrc/rrc_lab.yaml
-NATURE=indoor
+# PCD_PATH=$MAP_DIR/rrc/lab_map_with_outside_corridor.pcd
+# YAML_PATH=$MAP_DIR/rrc/rrc_lab.yaml
+# NATURE=indoor
 
 ## RRC with mech lab and outside corridor
 # PCD_PATH=$MAP_DIR/rrc/hardware_lab_2/hardware_lab_2.pcd
@@ -26,9 +26,9 @@ NATURE=indoor
 # NATURE=outdoor
 
 ## 4th floor RRC
-# PCD_PATH=$MAP_DIR/rrc/4th_floor_apr2026/2026_04_06.pcd
-# YAML_PATH=$MAP_DIR/rrc/4th_floor_apr2026/2026_04_06.yaml
-# NATURE=indoor
+PCD_PATH=$MAP_DIR/rrc/4th_floor_apr2026/2026_04_06.pcd
+YAML_PATH=$MAP_DIR/rrc/4th_floor_apr2026/2026_04_06.yaml
+NATURE=indoor
 
 
 # Start detached session
@@ -44,7 +44,10 @@ tmux send-keys -t $SESSION_NAME:0 "sudo chmod 777 /dev/ttyACM0 && sleep 2 && ros
 
 # Pane 0.2: 2D LiDAR
 tmux split-window -v -t $SESSION_NAME:0.1
-tmux send-keys -t $SESSION_NAME:0 "sudo chmod 777 /dev/ttyUSB0 && sleep 2 && ros2 launch wheelchair2_bringup rplidar.launch.py use_sim_time:=False" C-m
+tmux send-keys -t $SESSION_NAME:0 "sudo chmod 777 /dev/ttyUSB0 && sleep 2 && ros2 launch clearance_sensors tof.launch.py" C-m
+
+# tmux split-window -v -t $SESSION_NAME:0.1
+# tmux send-keys -t $SESSION_NAME:0 "sudo chmod 777 /dev/ttyUSB0 && sleep 2 && ros2 launch wheelchair2_bringup rplidar.launch.py use_sim_time:=False" C-m
 
 tmux select-layout -t $SESSION_NAME:0 tiled
 
@@ -67,16 +70,16 @@ tmux select-layout -t $SESSION_NAME:1 tiled
 
 
 ################## 4. WINDOW 2: APP AND GUI
-tmux new-window -t $SESSION_NAME -n "app"
+# tmux new-window -t $SESSION_NAME -n "app"
 
-# Pane 2.0: ROS Bridge / GUI
-tmux send-keys -t $SESSION_NAME:2 "ros2 launch wheelchair2_gui wheelchair_gui.launch.py | tee gui.log" C-m
+# # Pane 2.0: ROS Bridge / GUI
+# tmux send-keys -t $SESSION_NAME:2 "ros2 launch wheelchair2_gui wheelchair_gui.launch.py | tee gui.log" C-m
 
-# Pane 2.1: Extra (e.g., Teleop or Monitoring)
-tmux split-window -h -t $SESSION_NAME:2
-tmux send-keys -t $SESSION_NAME:2 "ros2 run wheelchair2_control keyboard_teleop_constant.py"
+# # Pane 2.1: Extra (e.g., Teleop or Monitoring)
+# tmux split-window -h -t $SESSION_NAME:2
+# tmux send-keys -t $SESSION_NAME:2 "ros2 run wheelchair2_control keyboard_teleop_constant.py"
 
-tmux select-layout -t $SESSION_NAME:2 tiled
+# tmux select-layout -t $SESSION_NAME:2 tiled
 
 
 ################## ATTACH
