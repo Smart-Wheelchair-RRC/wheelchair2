@@ -7,7 +7,8 @@
 
     "mounts": [
         "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,consistency=cached",
-        "source=${localEnv:HOME}/.Xauthority,target=/root/.Xauthority,type=bind"
+        "source=${localEnv:HOME}/.Xauthority,target=/root/.Xauthority,type=bind",
+        "source=/share_dir/maps,target=/home/container_user/wheelchair2_navigation/maps,type=bind"
     ],
 
     

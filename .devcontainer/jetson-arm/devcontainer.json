@@ -6,6 +6,9 @@
     "workspaceFolder": "/home/container_user/wheelchair2/src",
     "updateRemoteUserUID": true,
     "containerUser": "container_user",
+    "mounts": [
+        "source=/share_dir/maps,target=/home/container_user/wheelchair2_navigation/maps,type=bind"
+    ],
     "customizations": {
         "vscode": {
             "settings": {

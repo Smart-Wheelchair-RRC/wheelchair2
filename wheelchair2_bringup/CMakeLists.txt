@@ -63,6 +63,7 @@ install(PROGRAMS
   scripts/ground_detection.py
   scripts/ground_detection_fast.py
   scripts/box_filter.py
+  scripts/crop_lidar.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

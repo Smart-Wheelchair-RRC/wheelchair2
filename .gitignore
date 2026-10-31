@@ -12,3 +12,4 @@ dependencies/change_detection
 dependencies/rtabmap_ros
 dependencies/patchworkpp
 *.log
+wheelchair2_navigation/maps
